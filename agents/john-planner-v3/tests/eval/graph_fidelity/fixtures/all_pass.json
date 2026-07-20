@@ -1,0 +1,17 @@
+{
+  "summary": {
+    "total_tests": 4,
+    "passed": 4,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "xfailed": 0,
+    "xpassed": 0
+  },
+  "error_breakdown": {},
+  "failed_tests": [],
+  "error_tests": [],
+  "raw_output": "",
+  "returncode": 0,
+  "parse_method": "junit_xml"
+}

@@ -1,0 +1,167 @@
+agent:
+  model:
+    name: deepseek/deepseek-chat
+    per_instance_call_limit: 15
+  templates:
+    system_template: |-
+      You are an expert DevOps engineer specialized in repository environment setup and configuration.
+      Your role is to analyze project dependencies, install packages, and ensure the repository is ready to run tests.
+      You should focus on environment setup and avoid modifying application code unless absolutely necessary for configuration purposes.
+    instance_template: |-
+      <uploaded_files>
+      {{working_dir}}
+      </uploaded_files>
+      I have uploaded a Python repository in {{working_dir}}.
+
+      <setup_requirements>
+      {{problem_statement}}
+      </setup_requirements>
+
+      Your task is to configure this repository so it can run and pass all tests.
+
+      ## Workflow
+      1. **Explore Repository**: Understand the project structure, identify key files and entry points
+      2. **Analyze Dependencies**: Locate and examine dependency files (requirements.txt, setup.py, pyproject.toml, etc.)
+      3. **Install Dependencies**: Use pip or other package managers to install all required libraries
+      4. **Verify Installation**: Check that critical packages are available (e.g., try importing key modules)
+      5. **Fix Environment Issues**: If you encounter ModuleNotFoundError or ImportError, install missing packages
+      6. **Validate Setup**: Ensure the environment is ready to run tests (but do not run the full test suite yourself)
+
+      ## Code Modification Policy
+      AVOID modifying code whenever possible. Only make changes if absolutely necessary for environment setup:
+      - Create missing configuration files (e.g., __init__.py for package recognition)
+      - Fix critical import path errors that prevent basic functionality
+      - Make minimal adjustments only when no other solution exists
+
+      NEVER modify:
+      - Test files or test logic
+      - Core application behavior or business logic
+      - Code to make failing tests pass (fix environment issues only)
+
+      ## Important Notes
+      - Focus on installing dependencies and configuring the environment
+      - Prioritize fixing ModuleNotFoundError and ImportError through package installation
+      - Make minimal, conservative changes when code modification is unavoidable
+      - Document your reasoning for any code changes you make
+
+      Be thorough in your analysis and reasoning.
+    problem_statement_template: |-
+      This is a {{language}} repository that requires environment setup and configuration.
+
+      ## Objective
+      Configure the repository to be ready for running tests successfully.
+
+      ## Detailed Steps
+
+      ### 1. Repository Analysis
+      - Explore the project structure and identify main components
+      - Locate documentation files (README.md, CONTRIBUTING.md, docs/)
+      - Identify the package manager (pip, poetry, pipenv, etc.)
+      - Find dependency files (requirements.txt, setup.py, pyproject.toml, Pipfile, etc.)
+      - Understand the recommended installation method from documentation
+
+      ### 2. Dependency Installation
+      - Read all dependency files to understand what needs to be installed
+      - Install dependencies using the appropriate package manager (pip install, poetry install, etc.)
+      - Handle both production and development dependencies
+      - Resolve any version conflicts that may arise
+      - Install test framework dependencies (pytest, pytest-cov, etc.)
+
+      ### 3. Environment Configuration
+      - Set any required environment variables
+      - Create necessary configuration files if missing
+      - Initialize any required resources (databases, caches, etc.) if applicable
+      - Set up proper file permissions or directory structures
+
+      ### 4. Installation Verification
+      - Verify that critical packages are installed correctly
+      - Test basic imports to ensure modules are accessible
+      - Check that pytest can be invoked
+
+      ### 5. Troubleshooting
+      - If you encounter ModuleNotFoundError: install the missing package
+      - If you encounter ImportError: check import paths and package structure
+      - If configuration files are missing: create them based on documentation or examples
+      - If there are version conflicts: try compatible versions or update dependencies
+
+      ## Success Criteria
+      The repository is considered properly configured when:
+      - All dependencies are installed successfully
+      - The environment is properly set up (config files, env vars, etc.)
+      - pytest can be invoked without ImportError or ModuleNotFoundError
+      - The test framework can discover tests (even if some tests fail due to bugs)
+
+      ## Constraints
+      - Do NOT run the full test suite yourself - only verify that the environment is ready
+      - Do NOT modify test files or test logic
+      - Do NOT change application code to make tests pass
+      - Focus exclusively on environment setup and dependency installation
+    next_step_template: |-
+      Observation:
+      {{observation}}
+    next_step_no_output_template: |-
+      Your command ran successfully, but produced no output.
+  tools:
+    env_variables:
+      PAGER: cat
+      MANPAGER: cat
+      LESS: -R
+      PIP_PROGRESS_BAR: 'off'
+      TQDM_DISABLE: '1'
+      GIT_PAGER: cat
+    bundles:
+      - path: tools/registry
+      - path: tools/edit_anthropic
+      - path: tools/review_on_submit_m
+    registry_variables:
+      USE_FILEMAP: 'true'
+      SUBMIT_REVIEW_MESSAGES:
+        - |
+          Thank you for setting up this repository environment.
+
+          Before submitting, please verify your configuration is complete and appropriate.
+
+          ## Pre-Submission Checklist
+
+          - **Dependencies Installed**: All required packages are installed successfully
+          - **Environment Ready**: Configuration files are in place, environment variables set (if needed)
+          - **No Import Errors**: Critical modules can be imported without ModuleNotFoundError
+          - **Minimal Changes**: Only necessary modifications were made (ideally none)
+
+          ## Review Your Changes
+
+          Below is a summary of all your changes. Please ensure they follow the guidelines:
+
+          ### Acceptable Changes (if necessary):
+          - Installed packages (may appear in lock files)
+          - New configuration files (__init__.py, config files, etc.)
+          - Fixed import paths (only if absolutely required)
+
+          ### Unacceptable Changes (must be reverted):
+          - Modifications to test files (test_*.py, *_test.py, tests/ directory)
+          - Changes to core application logic
+          - Code modifications made to force tests to pass
+
+          <diff>
+          {{diff}}
+          </diff>
+
+          ## Action Required
+          - If you see test file modifications, revert them: `git checkout -- <test_file_path>`
+          - If you see unnecessary code changes, revert them: `git checkout -- <file_path>`
+          - If all changes are environment-related and minimal, run the submit command again to confirm
+    enable_bash_tool: true
+    parse_function:
+      type: function_calling
+  history_processors:
+    - type: cache_control
+      last_n_messages: 2
+env:
+  deployment:
+    type: docker
+    image: python:3.10-slim
+    remove_container: false  # Do not auto-remove container
+    remove_images: false     # Do not remove images (optional)
+  repo:
+    type: local
+    path: ./my-repo

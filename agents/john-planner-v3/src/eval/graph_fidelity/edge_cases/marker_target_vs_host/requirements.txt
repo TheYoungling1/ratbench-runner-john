@@ -1,0 +1,2 @@
+pyinotify; sys_platform == "linux"
+tomli; python_version < "3.11"

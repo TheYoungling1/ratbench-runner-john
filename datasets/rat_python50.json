@@ -1,0 +1,1448 @@
+[
+ {
+  "full_name": "tinygrad/tinygrad",
+  "clone_url": "https://github.com/tinygrad/tinygrad.git",
+  "default_branch": "master",
+  "stargazers_count": 31198,
+  "language": "Python",
+  "description": "You like pytorch? You like micrograd? You love tinygrad! \u2764\ufe0f ",
+  "html_url": "https://github.com/tinygrad/tinygrad",
+  "forks_count": 3840,
+  "topics": [],
+  "total_bytes": 24002458,
+  "code_bytes": 21989381,
+  "language_breakdown": {
+   "Python": 62.28,
+   "C": 27.09,
+   "Cuda": 4.26,
+   "Assembly": 2.19,
+   "Metal": 1.87,
+   "C++": 1.15,
+   "Rust": 0.8,
+   "JavaScript": 0.22
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "PostHog/posthog",
+  "clone_url": "https://github.com/PostHog/posthog.git",
+  "default_branch": "master",
+  "stargazers_count": 30941,
+  "language": "Python",
+  "description": "\ud83e\udd94 PostHog is an all-in-one developer platform for building successful products. We offer product analytics, web analytics, session replay, error tracking, feature flags, experimentation, surveys, data warehouse, a CDP, and an AI product assistant to help debug your code, ship features faster, and keep all your usage and customer data in one stack.",
+  "html_url": "https://github.com/PostHog/posthog",
+  "forks_count": 2222,
+  "topics": [
+   "ab-testing",
+   "ai-analytics",
+   "analytics",
+   "cdp",
+   "data-warehouse",
+   "experiments",
+   "feature-flags",
+   "javascript",
+   "product-analytics",
+   "python",
+   "react",
+   "session-replay",
+   "surveys",
+   "typescript",
+   "web-analytics"
+  ],
+  "total_bytes": 92411405,
+  "code_bytes": 91619990,
+  "language_breakdown": {
+   "Python": 49.35,
+   "TypeScript": 41.52,
+   "Rust": 6.04,
+   "JavaScript": 0.93,
+   "C++": 0.86,
+   "SCSS": 0.42,
+   "HTML": 0.28,
+   "Shell": 0.22,
+   "Go": 0.19
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "mlflow/mlflow",
+  "clone_url": "https://github.com/mlflow/mlflow.git",
+  "default_branch": "master",
+  "stargazers_count": 23792,
+  "language": "Python",
+  "description": "The open source developer platform to build AI agents and models with confidence. Enhance your AI applications with end-to-end tracking, observability, and evaluations, all in one integrated platform.",
+  "html_url": "https://github.com/mlflow/mlflow",
+  "forks_count": 5185,
+  "topics": [
+   "agentops",
+   "agents",
+   "ai",
+   "ai-governance",
+   "apache-spark",
+   "evaluation",
+   "langchain",
+   "llm-evaluation",
+   "llmops",
+   "machine-learning",
+   "ml",
+   "mlflow",
+   "mlops",
+   "model-management",
+   "observability",
+   "open-source",
+   "openai",
+   "prompt-engineering"
+  ],
+  "total_bytes": 33944477,
+  "code_bytes": 33807564,
+  "language_breakdown": {
+   "Python": 61.76,
+   "TypeScript": 26.98,
+   "JavaScript": 9.32,
+   "Java": 0.65,
+   "R": 0.64,
+   "CSS": 0.2,
+   "HTML": 0.2,
+   "Scala": 0.13,
+   "Shell": 0.12
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "polarsource/polar",
+  "clone_url": "https://github.com/polarsource/polar.git",
+  "default_branch": "main",
+  "stargazers_count": 9309,
+  "language": "Python",
+  "description": "Turn your software into a business.",
+  "html_url": "https://github.com/polarsource/polar",
+  "forks_count": 646,
+  "topics": [
+   "digital-products",
+   "fastapi",
+   "merchant-of-record",
+   "nextjs",
+   "payments",
+   "polar",
+   "python",
+   "react",
+   "saas",
+   "subscriptions",
+   "turborepo",
+   "typescript"
+  ],
+  "total_bytes": 11936237,
+  "code_bytes": 11719473,
+  "language_breakdown": {
+   "Python": 59.34,
+   "TypeScript": 37.35,
+   "HCL": 0.99,
+   "JavaScript": 0.97,
+   "MDX": 0.71,
+   "Swift": 0.33,
+   "Shell": 0.19
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "unit8co/darts",
+  "clone_url": "https://github.com/unit8co/darts.git",
+  "default_branch": "master",
+  "stargazers_count": 9157,
+  "language": "Python",
+  "description": "A python library for user-friendly forecasting and anomaly detection on time series.",
+  "html_url": "https://github.com/unit8co/darts",
+  "forks_count": 979,
+  "topics": [
+   "anomaly-detection",
+   "data-science",
+   "deep-learning",
+   "forecasting",
+   "machine-learning",
+   "python",
+   "time-series"
+  ],
+  "total_bytes": 5483219,
+  "code_bytes": 5482455,
+  "language_breakdown": {
+   "Python": 99.98
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "Qiskit/qiskit",
+  "clone_url": "https://github.com/Qiskit/qiskit.git",
+  "default_branch": "main",
+  "stargazers_count": 6956,
+  "language": "Python",
+  "description": "Qiskit is an open-source SDK for working with quantum computers at the level of extended quantum circuits, operators, and primitives.",
+  "html_url": "https://github.com/Qiskit/qiskit",
+  "forks_count": 2745,
+  "topics": [
+   "python",
+   "qiskit",
+   "quantum",
+   "quantum-circuit",
+   "quantum-computing",
+   "quantum-programming-language",
+   "sdk"
+  ],
+  "total_bytes": 17745137,
+  "code_bytes": 17712501,
+  "language_breakdown": {
+   "Python": 71.97,
+   "Rust": 26.22,
+   "C": 1.54,
+   "OpenQASM": 0.13
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "feast-dev/feast",
+  "clone_url": "https://github.com/feast-dev/feast.git",
+  "default_branch": "master",
+  "stargazers_count": 6641,
+  "language": "Python",
+  "description": "The Open Source Feature Store for AI/ML",
+  "html_url": "https://github.com/feast-dev/feast",
+  "forks_count": 1198,
+  "topics": [
+   "big-data",
+   "data-engineering",
+   "data-quality",
+   "data-science",
+   "feature-store",
+   "features",
+   "machine-learning",
+   "ml",
+   "mlops",
+   "python"
+  ],
+  "total_bytes": 7123669,
+  "code_bytes": 6960251,
+  "language_breakdown": {
+   "Python": 74.25,
+   "Go": 12.82,
+   "TypeScript": 5.68,
+   "Java": 3.33,
+   "JavaScript": 1.09,
+   "Makefile": 0.73,
+   "Shell": 0.55,
+   "HCL": 0.47,
+   "Astro": 0.45,
+   "CSS": 0.3,
+   "Dockerfile": 0.11,
+   "HTML": 0.11
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "Azure/azure-cli",
+  "clone_url": "https://github.com/Azure/azure-cli.git",
+  "default_branch": "dev",
+  "stargazers_count": 4417,
+  "language": "Python",
+  "description": "Azure Command-Line Interface",
+  "html_url": "https://github.com/Azure/azure-cli",
+  "forks_count": 3321,
+  "topics": [
+   "azure",
+   "azure-cli",
+   "cloud"
+  ],
+  "total_bytes": 105503595,
+  "code_bytes": 105445756,
+  "language_breakdown": {
+   "Python": 99.82
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "baserow/baserow",
+  "clone_url": "https://github.com/baserow/baserow.git",
+  "default_branch": "develop",
+  "stargazers_count": 3833,
+  "language": "Python",
+  "description": "Build databases, automations, apps & agents with AI \u2014 no code.  Open source platform available on cloud and self-hosted. GDPR, HIPAA, SOC 2 compliant. Best Airtable alternative.",
+  "html_url": "https://github.com/baserow/baserow",
+  "forks_count": 490,
+  "topics": [
+   "airtable",
+   "airtable-alternative",
+   "airtable-replacement",
+   "application-builder",
+   "automations",
+   "dashboards",
+   "database",
+   "low-code",
+   "no-code",
+   "no-code-database",
+   "no-code-platform",
+   "online-database",
+   "postgresql",
+   "restful-api",
+   "self-hosted",
+   "spreadsheet"
+  ],
+  "total_bytes": 28778580,
+  "code_bytes": 27747162,
+  "language_breakdown": {
+   "Python": 69.85,
+   "JavaScript": 13.07,
+   "Vue": 12.84,
+   "SCSS": 1.72,
+   "HTML": 1.29,
+   "Shell": 0.36,
+   "Just": 0.32,
+   "TypeScript": 0.31,
+   "Dockerfile": 0.16
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "pretix/pretix",
+  "clone_url": "https://github.com/pretix/pretix.git",
+  "default_branch": "master",
+  "stargazers_count": 2311,
+  "language": "Python",
+  "description": "Ticket shop application for conferences, festivals, concerts, tech events, shows, exhibitions, workshops, barcamps, etc.",
+  "html_url": "https://github.com/pretix/pretix",
+  "forks_count": 591,
+  "topics": [
+   "conferences",
+   "django",
+   "events",
+   "html",
+   "javascript",
+   "pretix",
+   "python",
+   "shop",
+   "tickets",
+   "web"
+  ],
+  "total_bytes": 14425223,
+  "code_bytes": 12064234,
+  "language_breakdown": {
+   "Python": 77.94,
+   "HTML": 12.89,
+   "JavaScript": 5.15,
+   "SCSS": 3.41,
+   "Vue": 0.53
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "Checkmk/checkmk",
+  "clone_url": "https://github.com/Checkmk/checkmk.git",
+  "default_branch": "master",
+  "stargazers_count": 2151,
+  "language": "Python",
+  "description": "Checkmk - Best-in-class infrastructure & application monitoring",
+  "html_url": "https://github.com/Checkmk/checkmk",
+  "forks_count": 528,
+  "topics": [
+   "monitoring"
+  ],
+  "total_bytes": 64560277,
+  "code_bytes": 62925525,
+  "language_breakdown": {
+   "Python": 79.95,
+   "C++": 5.05,
+   "TypeScript": 3.04,
+   "Vue": 2.99,
+   "Shell": 2.19,
+   "Rust": 1.93,
+   "JavaScript": 0.81,
+   "PowerShell": 0.77,
+   "Starlark": 0.72,
+   "CSS": 0.63,
+   "Groovy": 0.58,
+   "SCSS": 0.47,
+   "VBScript": 0.19,
+   "Batchfile": 0.13,
+   "Makefile": 0.13,
+   "Dockerfile": 0.11
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "GoogleCloudPlatform/PerfKitBenchmarker",
+  "clone_url": "https://github.com/GoogleCloudPlatform/PerfKitBenchmarker.git",
+  "default_branch": "master",
+  "stargazers_count": 1992,
+  "language": "Python",
+  "description": "PerfKit Benchmarker (PKB) contains a set of benchmarks to measure and compare cloud offerings. The benchmarks use default settings to reflect what most users will see. PerfKit Benchmarker is licensed under the Apache 2 license terms. Please make sure to read, understand and agree to the terms of the LICENSE and CONTRIBUTING files before proceeding.",
+  "html_url": "https://github.com/GoogleCloudPlatform/PerfKitBenchmarker",
+  "forks_count": 543,
+  "topics": [],
+  "total_bytes": 9119725,
+  "code_bytes": 8835657,
+  "language_breakdown": {
+   "Python": 94.7,
+   "Jinja": 1.5,
+   "HTML": 1.24,
+   "Lua": 0.91,
+   "Shell": 0.86,
+   "PowerShell": 0.33,
+   "Tcl": 0.19,
+   "Dockerfile": 0.18
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "ArchipelagoMW/Archipelago",
+  "clone_url": "https://github.com/ArchipelagoMW/Archipelago.git",
+  "default_branch": "main",
+  "stargazers_count": 1145,
+  "language": "Python",
+  "description": "Archipelago Multi-Game Randomizer and Server",
+  "html_url": "https://github.com/ArchipelagoMW/Archipelago",
+  "forks_count": 1405,
+  "topics": [
+   "alttp",
+   "archipelago",
+   "factorio",
+   "minecraft",
+   "multiworld",
+   "randomizer"
+  ],
+  "total_bytes": 33691830,
+  "code_bytes": 32313512,
+  "language_breakdown": {
+   "Python": 94.79,
+   "Assembly": 1.74,
+   "HTML": 1.53,
+   "Lua": 0.76,
+   "CSS": 0.59,
+   "C": 0.14,
+   "JavaScript": 0.14
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "mozilla/addons-server",
+  "clone_url": "https://github.com/mozilla/addons-server.git",
+  "default_branch": "master",
+  "stargazers_count": 890,
+  "language": "Python",
+  "description": "\ud83d\udd76 addons.mozilla.org Django app and API \ud83c\udf89",
+  "html_url": "https://github.com/mozilla/addons-server",
+  "forks_count": 550,
+  "topics": [],
+  "total_bytes": 10614430,
+  "code_bytes": 9838839,
+  "language_breakdown": {
+   "Python": 85.29,
+   "JavaScript": 7.22,
+   "HTML": 2.86,
+   "CSS": 2.34,
+   "Less": 2.02,
+   "TypeScript": 0.1
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "aiidateam/aiida-core",
+  "clone_url": "https://github.com/aiidateam/aiida-core.git",
+  "default_branch": "main",
+  "stargazers_count": 526,
+  "language": "Python",
+  "description": "The official repository for the AiiDA code",
+  "html_url": "https://github.com/aiidateam/aiida-core",
+  "forks_count": 243,
+  "topics": [
+   "aiida",
+   "computational-science",
+   "data-provenance",
+   "database",
+   "provenance",
+   "scheduler",
+   "ssh",
+   "workflow",
+   "workflow-engine",
+   "workflows"
+  ],
+  "total_bytes": 7660969,
+  "code_bytes": 7642849,
+  "language_breakdown": {
+   "Python": 99.62,
+   "Shell": 0.15,
+   "Dockerfile": 0.11
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "OpenCTI-Platform/connectors",
+  "clone_url": "https://github.com/OpenCTI-Platform/connectors.git",
+  "default_branch": "master",
+  "stargazers_count": 507,
+  "language": "Python",
+  "description": "OpenCTI Connectors",
+  "html_url": "https://github.com/OpenCTI-Platform/connectors",
+  "forks_count": 538,
+  "topics": [
+   "cti",
+   "cybersecurity",
+   "misp",
+   "mitre-attack",
+   "threat-intelligence"
+  ],
+  "total_bytes": 11814436,
+  "code_bytes": 11625632,
+  "language_breakdown": {
+   "Python": 97.7,
+   "Dockerfile": 0.99,
+   "HTML": 0.54,
+   "Shell": 0.45,
+   "PowerShell": 0.25
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "frappe/press",
+  "clone_url": "https://github.com/frappe/press.git",
+  "default_branch": "develop",
+  "stargazers_count": 457,
+  "language": "Python",
+  "description": "Full service cloud hosting for the Frappe stack - powers Frappe Cloud",
+  "html_url": "https://github.com/frappe/press",
+  "forks_count": 334,
+  "topics": [
+   "cloud",
+   "docker",
+   "erpnext",
+   "frappe",
+   "hosting",
+   "saas"
+  ],
+  "total_bytes": 6023577,
+  "code_bytes": 5842120,
+  "language_breakdown": {
+   "Python": 61.2,
+   "Vue": 25.33,
+   "JavaScript": 6.47,
+   "HTML": 2.38,
+   "Go": 2.19,
+   "TypeScript": 1.48,
+   "Dockerfile": 0.31,
+   "Jinja": 0.23,
+   "Shell": 0.2,
+   "C": 0.11
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "xuwei95/ezdata",
+  "clone_url": "https://github.com/xuwei95/ezdata.git",
+  "default_branch": "master",
+  "stargazers_count": 266,
+  "language": "Python",
+  "description": "\u57fa\u4e8epython\u548cllm\u5927\u6a21\u578b\u5f00\u53d1\u7684\u6570\u636e\u5904\u7406\u548c\u4efb\u52a1\u8c03\u5ea6\u7cfb\u7edf\u3002 \u652f\u6301\u6570\u636e\u6e90\u7ba1\u7406\uff0c\u6570\u636e\u6a21\u578b\u7ba1\u7406\uff0c\u6570\u636e\u96c6\u6210\uff0c\u6570\u636e\u67e5\u8be2API\u63a5\u53e3\uff0c\u4f4e\u4ee3\u7801\u81ea\u5b9a\u4e49\u6570\u636e\u5904\u7406\u4efb\u52a1\u6a21\u7248\uff0c\u5355\u4efb\u52a1\u53cadag\u4efb\u52a1\u5de5\u4f5c\u6d41\u8c03\u5ea6\u7b49\u529f\u80fd\u3002\u96c6\u6210\u4e86llm\u6a21\u5757\u5b9e\u73b0rag\u77e5\u8bc6\u5e93\u95ee\u7b54\uff0c\u94fe\u63a5\u5404\u6570\u636e\u6e90\u6570\u636e\u8fdb\u884c\u6570\u636e\u5bf9\u8bdd\u95ee\u7b54\uff0c\u4ea4\u4e92\u5f0f\u6570\u636e\u5206\u6790\u529f\u80fd\u3002",
+  "html_url": "https://github.com/xuwei95/ezdata",
+  "forks_count": 56,
+  "topics": [
+   "chatdata",
+   "etl",
+   "llm",
+   "python",
+   "rag",
+   "scheduler",
+   "text2sql"
+  ],
+  "total_bytes": 13519395,
+  "code_bytes": 13319414,
+  "language_breakdown": {
+   "Python": 71.57,
+   "Vue": 25.74,
+   "Less": 1.37,
+   "TypeScript": 0.62,
+   "JavaScript": 0.56
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "tgoai/tgo",
+  "clone_url": "https://github.com/tgoai/tgo.git",
+  "default_branch": "main",
+  "stargazers_count": 265,
+  "language": "Python",
+  "description": "Open-source AI Agent Customer Service Platform. Build AI agent teams with LLM orchestration, RAG knowledge base, multi-channel support, and human collaboration.",
+  "html_url": "https://github.com/tgoai/tgo",
+  "forks_count": 51,
+  "topics": [
+   "ai-agent",
+   "artificial-intelligence",
+   "chatbot",
+   "customer-service",
+   "customer-support",
+   "llm",
+   "rag"
+  ],
+  "total_bytes": 7720640,
+  "code_bytes": 7541690,
+  "language_breakdown": {
+   "Python": 48.38,
+   "TypeScript": 46.57,
+   "Shell": 2.16,
+   "Jupyter Notebook": 1.06,
+   "JavaScript": 0.58,
+   "CSS": 0.5,
+   "Dockerfile": 0.27,
+   "Makefile": 0.27,
+   "HTML": 0.14
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "wecode-ai/Wegent",
+  "clone_url": "https://github.com/wecode-ai/Wegent.git",
+  "default_branch": "main",
+  "stargazers_count": 172,
+  "language": "Python",
+  "description": "An open-source AI-native operating system to define, organize, and run intelligent agent teams",
+  "html_url": "https://github.com/wecode-ai/Wegent",
+  "forks_count": 26,
+  "topics": [
+   "agent",
+   "ai",
+   "chatbot",
+   "chatgpt",
+   "claude-code",
+   "gemini",
+   "llm",
+   "notebooklm"
+  ],
+  "total_bytes": 11334178,
+  "code_bytes": 11295993,
+  "language_breakdown": {
+   "Python": 58.46,
+   "TypeScript": 38.99,
+   "Shell": 1.75,
+   "JavaScript": 0.46,
+   "CSS": 0.24
+  },
+  "size": "large"
+ },
+ {
+  "full_name": "fastapi/typer",
+  "clone_url": "https://github.com/fastapi/typer.git",
+  "default_branch": "master",
+  "stargazers_count": 18677,
+  "language": "Python",
+  "description": "Typer, build great CLIs. Easy to code. Based on Python type hints.",
+  "html_url": "https://github.com/fastapi/typer",
+  "forks_count": 826,
+  "topics": [
+   "cli",
+   "click",
+   "python",
+   "python3",
+   "shell",
+   "terminal",
+   "typehints",
+   "typer"
+  ],
+  "total_bytes": 615318,
+  "code_bytes": 614423,
+  "language_breakdown": {
+   "Python": 99.65,
+   "Shell": 0.21,
+   "Dockerfile": 0.15
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "pre-commit/pre-commit",
+  "clone_url": "https://github.com/pre-commit/pre-commit.git",
+  "default_branch": "main",
+  "stargazers_count": 14840,
+  "language": "Python",
+  "description": "A framework for managing and maintaining multi-language pre-commit hooks.",
+  "html_url": "https://github.com/pre-commit/pre-commit",
+  "forks_count": 914,
+  "topics": [
+   "git",
+   "linter",
+   "pre-commit",
+   "python",
+   "refactoring"
+  ],
+  "total_bytes": 607429,
+  "code_bytes": 607023,
+  "language_breakdown": {
+   "Python": 97.35,
+   "R": 1.98,
+   "Shell": 0.51
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "mvt-project/mvt",
+  "clone_url": "https://github.com/mvt-project/mvt.git",
+  "default_branch": "main",
+  "stargazers_count": 12045,
+  "language": "Python",
+  "description": "MVT (Mobile Verification Toolkit) helps with conducting forensics of mobile devices in order to find signs of a potential compromise.",
+  "html_url": "https://github.com/mvt-project/mvt",
+  "forks_count": 1178,
+  "topics": [
+   "android",
+   "forensics",
+   "forensics-tools",
+   "ios",
+   "mobile",
+   "security"
+  ],
+  "total_bytes": 624115,
+  "code_bytes": 618143,
+  "language_breakdown": {
+   "Python": 99.04,
+   "Dockerfile": 0.84,
+   "Makefile": 0.12
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "BeehiveInnovations/pal-mcp-server",
+  "clone_url": "https://github.com/BeehiveInnovations/pal-mcp-server.git",
+  "default_branch": "main",
+  "stargazers_count": 10927,
+  "language": "Python",
+  "description": "The power of Claude Code / GeminiCLI / CodexCLI + [Gemini / OpenAI / OpenRouter / Azure / Grok / Ollama / Custom Model / All Of The Above] working as one.",
+  "html_url": "https://github.com/BeehiveInnovations/pal-mcp-server",
+  "forks_count": 925,
+  "topics": [],
+  "total_bytes": 3241405,
+  "code_bytes": 3238779,
+  "language_breakdown": {
+   "Python": 93.66,
+   "Shell": 3.16,
+   "PowerShell": 3.11
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "rq/rq",
+  "clone_url": "https://github.com/rq/rq.git",
+  "default_branch": "master",
+  "stargazers_count": 10554,
+  "language": "Python",
+  "description": "Simple job queues for Python",
+  "html_url": "https://github.com/rq/rq",
+  "forks_count": 1458,
+  "topics": [
+   "async",
+   "background-jobs",
+   "delayed-jobs",
+   "delayed-tasks",
+   "job-queue",
+   "python",
+   "redis",
+   "rq",
+   "task",
+   "task-queue",
+   "workers"
+  ],
+  "total_bytes": 868387,
+  "code_bytes": 866402,
+  "language_breakdown": {
+   "Python": 99.77,
+   "Dockerfile": 0.15
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "D4Vinci/Scrapling",
+  "clone_url": "https://github.com/D4Vinci/Scrapling.git",
+  "default_branch": "main",
+  "stargazers_count": 8839,
+  "language": "Python",
+  "description": "\ud83d\udd77\ufe0f An undetectable, powerful, flexible, high-performance Python library to make Web Scraping Easy and Effortless as it should be!",
+  "html_url": "https://github.com/D4Vinci/Scrapling",
+  "forks_count": 537,
+  "topics": [
+   "ai",
+   "ai-scraping",
+   "automation",
+   "crawler",
+   "crawling",
+   "crawling-python",
+   "data",
+   "data-extraction",
+   "mcp",
+   "mcp-server",
+   "playwright",
+   "python",
+   "scraping",
+   "selectors",
+   "stealth",
+   "web-scraper",
+   "web-scraping",
+   "web-scraping-python",
+   "webscraping",
+   "xpath"
+  ],
+  "total_bytes": 518161,
+  "code_bytes": 517076,
+  "language_breakdown": {
+   "Python": 97.72,
+   "JavaScript": 2.07,
+   "Dockerfile": 0.21
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "crytic/slither",
+  "clone_url": "https://github.com/crytic/slither.git",
+  "default_branch": "master",
+  "stargazers_count": 6100,
+  "language": "Python",
+  "description": "Static Analyzer for Solidity and Vyper",
+  "html_url": "https://github.com/crytic/slither",
+  "forks_count": 1087,
+  "topics": [
+   "ethereum",
+   "solidity",
+   "static-analysis",
+   "vyper"
+  ],
+  "total_bytes": 3808706,
+  "code_bytes": 2997406,
+  "language_breakdown": {
+   "Python": 78.25,
+   "Solidity": 21.01,
+   "Shell": 0.45,
+   "Vyper": 0.18
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "containers/podman-compose",
+  "clone_url": "https://github.com/containers/podman-compose.git",
+  "default_branch": "main",
+  "stargazers_count": 5920,
+  "language": "Python",
+  "description": "a script to run docker-compose.yml using podman",
+  "html_url": "https://github.com/containers/podman-compose",
+  "forks_count": 565,
+  "topics": [
+   "docker-compose",
+   "linux-containers",
+   "podman",
+   "rootless-containers"
+  ],
+  "total_bytes": 523381,
+  "code_bytes": 520003,
+  "language_breakdown": {
+   "Python": 98.65,
+   "Shell": 0.71,
+   "Dockerfile": 0.44,
+   "Jinja": 0.13
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "python-websockets/websockets",
+  "clone_url": "https://github.com/python-websockets/websockets.git",
+  "default_branch": "main",
+  "stargazers_count": 5620,
+  "language": "Python",
+  "description": "Library for building WebSocket servers and clients in Python",
+  "html_url": "https://github.com/python-websockets/websockets",
+  "forks_count": 581,
+  "topics": [
+   "python",
+   "python3",
+   "websocket",
+   "websocket-client",
+   "websocket-library",
+   "websocket-server",
+   "websockets"
+  ],
+  "total_bytes": 1471138,
+  "code_bytes": 1460314,
+  "language_breakdown": {
+   "Python": 97.95,
+   "JavaScript": 0.91,
+   "HTML": 0.45,
+   "C": 0.4,
+   "CSS": 0.2
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "NewFuture/DDNS",
+  "clone_url": "https://github.com/NewFuture/DDNS.git",
+  "default_branch": "master",
+  "stargazers_count": 4641,
+  "language": "Python",
+  "description": "\ud83c\udf10\u81ea\u52a8\u66f4\u65b0\u57df\u540d\u89e3\u6790\u5230\u672c\u673aIP(\u652f\u6301dnspod,\u963f\u91ccDNS,CloudFlare,\u534e\u4e3a\u4e91,DNSCOM...)",
+  "html_url": "https://github.com/NewFuture/DDNS",
+  "forks_count": 684,
+  "topics": [
+   "alidns",
+   "cdn",
+   "cloudflare",
+   "ddns",
+   "dns",
+   "dnscom",
+   "dnspod",
+   "dynamic-dns",
+   "edge-proxy",
+   "ipv4",
+   "ipv6"
+  ],
+  "total_bytes": 917298,
+  "code_bytes": 908371,
+  "language_breakdown": {
+   "Python": 96.66,
+   "Shell": 2.36,
+   "Batchfile": 0.51,
+   "Dockerfile": 0.47
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "sooperset/mcp-atlassian",
+  "clone_url": "https://github.com/sooperset/mcp-atlassian.git",
+  "default_branch": "main",
+  "stargazers_count": 4057,
+  "language": "Python",
+  "description": "MCP server for Atlassian tools (Confluence, Jira)",
+  "html_url": "https://github.com/sooperset/mcp-atlassian",
+  "forks_count": 864,
+  "topics": [
+   "atlassian",
+   "confluence",
+   "jira",
+   "mcp"
+  ],
+  "total_bytes": 2119939,
+  "code_bytes": 2117868,
+  "language_breakdown": {
+   "Python": 99.62,
+   "Shell": 0.28
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "mckinsey/vizro",
+  "clone_url": "https://github.com/mckinsey/vizro.git",
+  "default_branch": "main",
+  "stargazers_count": 3560,
+  "language": "Python",
+  "description": "Vizro is a low-code toolkit for building high-quality data visualization apps.",
+  "html_url": "https://github.com/mckinsey/vizro",
+  "forks_count": 243,
+  "topics": [
+   "dashboard",
+   "data-visualization",
+   "plotly",
+   "plotly-dash",
+   "pydantic",
+   "python",
+   "visualization"
+  ],
+  "total_bytes": 2223317,
+  "code_bytes": 2031697,
+  "language_breakdown": {
+   "Python": 86.86,
+   "JavaScript": 4.02,
+   "HTML": 3.01,
+   "CSS": 2.9,
+   "Jupyter Notebook": 2.62,
+   "Shell": 0.5
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "bruin-data/ingestr",
+  "clone_url": "https://github.com/bruin-data/ingestr.git",
+  "default_branch": "main",
+  "stargazers_count": 3369,
+  "language": "Python",
+  "description": "ingestr is a CLI tool to copy data between any databases with a single command seamlessly.",
+  "html_url": "https://github.com/bruin-data/ingestr",
+  "forks_count": 113,
+  "topics": [
+   "bigquery",
+   "copy-database",
+   "data-ingestion",
+   "data-integration",
+   "data-pipeline",
+   "duckdb",
+   "ingestion-pipeline",
+   "mssql",
+   "postgresql",
+   "snowflake"
+  ],
+  "total_bytes": 2325062,
+  "code_bytes": 2320929,
+  "language_breakdown": {
+   "Python": 99.8
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "django-oauth/django-oauth-toolkit",
+  "clone_url": "https://github.com/django-oauth/django-oauth-toolkit.git",
+  "default_branch": "master",
+  "stargazers_count": 3301,
+  "language": "Python",
+  "description": "OAuth2 goodies for the Djangonauts!",
+  "html_url": "https://github.com/django-oauth/django-oauth-toolkit",
+  "forks_count": 828,
+  "topics": [
+   "django",
+   "oauth2",
+   "python"
+  ],
+  "total_bytes": 760174,
+  "code_bytes": 743041,
+  "language_breakdown": {
+   "Python": 95.6,
+   "Svelte": 2.07,
+   "HTML": 1.9,
+   "Dockerfile": 0.35
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "copier-org/copier",
+  "clone_url": "https://github.com/copier-org/copier.git",
+  "default_branch": "master",
+  "stargazers_count": 3073,
+  "language": "Python",
+  "description": "Library and command-line utility for rendering projects templates.",
+  "html_url": "https://github.com/copier-org/copier",
+  "forks_count": 240,
+  "topics": [
+   "cookiecutter",
+   "copier-template",
+   "hacktoberfest",
+   "project-template",
+   "python",
+   "scaffolding"
+  ],
+  "total_bytes": 589176,
+  "code_bytes": 588005,
+  "language_breakdown": {
+   "Python": 99.76
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "anthropics/anthropic-sdk-python",
+  "clone_url": "https://github.com/anthropics/anthropic-sdk-python.git",
+  "default_branch": "main",
+  "stargazers_count": 2649,
+  "language": "Python",
+  "description": null,
+  "html_url": "https://github.com/anthropics/anthropic-sdk-python",
+  "forks_count": 433,
+  "topics": [],
+  "total_bytes": 1767264,
+  "code_bytes": 1767011,
+  "language_breakdown": {
+   "Python": 99.61,
+   "Shell": 0.37
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "supabase/supabase-py",
+  "clone_url": "https://github.com/supabase/supabase-py.git",
+  "default_branch": "main",
+  "stargazers_count": 2423,
+  "language": "Python",
+  "description": "Python Client for Supabase. Query Postgres from Flask, Django, FastAPI. Python user authentication, security policies, edge functions, file storage, and realtime data streaming. Good first issue.",
+  "html_url": "https://github.com/supabase/supabase-py",
+  "forks_count": 426,
+  "topics": [
+   "auth",
+   "authentication",
+   "authorization",
+   "community",
+   "data-science",
+   "databases",
+   "django",
+   "fastapi",
+   "flask",
+   "good-first-issue",
+   "machine-learning",
+   "postgres",
+   "postgresql",
+   "python",
+   "supabase"
+  ],
+  "total_bytes": 873195,
+  "code_bytes": 849077,
+  "language_breakdown": {
+   "Python": 97.24,
+   "Makefile": 1.44,
+   "Dockerfile": 0.47,
+   "PLpgSQL": 0.36,
+   "Nix": 0.31,
+   "Batchfile": 0.18
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "hitsz-ids/synthetic-data-generator",
+  "clone_url": "https://github.com/hitsz-ids/synthetic-data-generator.git",
+  "default_branch": "main",
+  "stargazers_count": 2404,
+  "language": "Python",
+  "description": "SDG is a specialized framework designed to generate high-quality structured tabular data.",
+  "html_url": "https://github.com/hitsz-ids/synthetic-data-generator",
+  "forks_count": 386,
+  "topics": [
+   "agent",
+   "data-generator",
+   "deep-learning",
+   "gan",
+   "generative-ai",
+   "llm",
+   "machine-learning",
+   "privacy",
+   "synthetic-data",
+   "tabular-data"
+  ],
+  "total_bytes": 1640562,
+  "code_bytes": 970633,
+  "language_breakdown": {
+   "Python": 59.15,
+   "Jupyter Notebook": 40.82
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "testcontainers/testcontainers-python",
+  "clone_url": "https://github.com/testcontainers/testcontainers-python.git",
+  "default_branch": "main",
+  "stargazers_count": 2103,
+  "language": "Python",
+  "description": "Testcontainers is a Python library that providing a friendly API to run Docker container. It is designed to create runtime environment to use during your automatic tests.",
+  "html_url": "https://github.com/testcontainers/testcontainers-python",
+  "forks_count": 358,
+  "topics": [
+   "database",
+   "python",
+   "python3",
+   "selenium",
+   "testcontainers",
+   "testing"
+  ],
+  "total_bytes": 681567,
+  "code_bytes": 675367,
+  "language_breakdown": {
+   "Python": 99.08,
+   "Makefile": 0.51,
+   "Dockerfile": 0.4
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "Donkie/Spoolman",
+  "clone_url": "https://github.com/Donkie/Spoolman.git",
+  "default_branch": "master",
+  "stargazers_count": 2099,
+  "language": "Python",
+  "description": "Keep track of your inventory of 3D-printer filament spools.",
+  "html_url": "https://github.com/Donkie/Spoolman",
+  "forks_count": 198,
+  "topics": [
+   "3d-printing",
+   "database",
+   "inventory",
+   "service"
+  ],
+  "total_bytes": 655967,
+  "code_bytes": 650286,
+  "language_breakdown": {
+   "Python": 49.33,
+   "TypeScript": 48.04,
+   "Shell": 1.36,
+   "JavaScript": 0.41,
+   "Dockerfile": 0.38,
+   "CSS": 0.29,
+   "HTML": 0.11
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "pycontribs/jira",
+  "clone_url": "https://github.com/pycontribs/jira.git",
+  "default_branch": "main",
+  "stargazers_count": 2089,
+  "language": "Python",
+  "description": "Python Jira library. Development chat available on https://matrix.to/#/#pycontribs:matrix.org",
+  "html_url": "https://github.com/pycontribs/jira",
+  "forks_count": 898,
+  "topics": [
+   "jira",
+   "python",
+   "python3-only"
+  ],
+  "total_bytes": 508412,
+  "code_bytes": 507912,
+  "language_breakdown": {
+   "Python": 99.49,
+   "Shell": 0.41
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "Cloud-CV/EvalAI",
+  "clone_url": "https://github.com/Cloud-CV/EvalAI.git",
+  "default_branch": "master",
+  "stargazers_count": 1984,
+  "language": "Python",
+  "description": ":cloud: :rocket: :bar_chart: :chart_with_upwards_trend: Evaluating state of the art in AI",
+  "html_url": "https://github.com/Cloud-CV/EvalAI",
+  "forks_count": 981,
+  "topics": [
+   "ai",
+   "ai-challenges",
+   "angularjs",
+   "artificial-intelligence",
+   "challenge",
+   "codecov",
+   "coveralls",
+   "django",
+   "docker",
+   "evalai",
+   "evaluation",
+   "leaderboard",
+   "machine-learning",
+   "python",
+   "reproducibility",
+   "reproducible-research",
+   "travis-ci"
+  ],
+  "total_bytes": 3613639,
+  "code_bytes": 3096955,
+  "language_breakdown": {
+   "Python": 63.46,
+   "JavaScript": 21.18,
+   "HTML": 10.32,
+   "SCSS": 1.7,
+   "Dockerfile": 1.26,
+   "Shell": 1.06,
+   "CSS": 0.99
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "crystaldba/postgres-mcp",
+  "clone_url": "https://github.com/crystaldba/postgres-mcp.git",
+  "default_branch": "main",
+  "stargazers_count": 1881,
+  "language": "Python",
+  "description": "Postgres MCP Pro provides configurable read/write access and performance analysis for you and your AI agents.",
+  "html_url": "https://github.com/crystaldba/postgres-mcp",
+  "forks_count": 201,
+  "topics": [],
+  "total_bytes": 526037,
+  "code_bytes": 520508,
+  "language_breakdown": {
+   "Python": 98.37,
+   "Shell": 0.58,
+   "Dockerfile": 0.42,
+   "Nix": 0.4,
+   "Just": 0.23
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "karlicoss/promnesia",
+  "clone_url": "https://github.com/karlicoss/promnesia.git",
+  "default_branch": "master",
+  "stargazers_count": 1855,
+  "language": "Python",
+  "description": "Another piece of your extended mind",
+  "html_url": "https://github.com/karlicoss/promnesia",
+  "forks_count": 78,
+  "topics": [
+   "browser-history",
+   "extended-mind",
+   "memex",
+   "memory",
+   "mind",
+   "personal-knowledge-database",
+   "pkm"
+  ],
+  "total_bytes": 661622,
+  "code_bytes": 630990,
+  "language_breakdown": {
+   "Python": 62.19,
+   "TypeScript": 22.35,
+   "JavaScript": 10.2,
+   "HTML": 2.85,
+   "CSS": 1.71,
+   "Shell": 0.63
+  },
+  "size": "medium"
+ },
+ {
+  "full_name": "microsoft/markitdown",
+  "clone_url": "https://github.com/microsoft/markitdown.git",
+  "default_branch": "main",
+  "stargazers_count": 85589,
+  "language": "Python",
+  "description": "Python tool for converting files and office documents to Markdown.",
+  "html_url": "https://github.com/microsoft/markitdown",
+  "forks_count": 4951,
+  "topics": [
+   "autogen",
+   "autogen-extension",
+   "langchain",
+   "markdown",
+   "microsoft-office",
+   "openai",
+   "pdf"
+  ],
+  "total_bytes": 275036,
+  "code_bytes": 273782,
+  "language_breakdown": {
+   "Python": 99.54,
+   "Dockerfile": 0.46
+  },
+  "size": "small"
+ },
+ {
+  "full_name": "trailofbits/algo",
+  "clone_url": "https://github.com/trailofbits/algo.git",
+  "default_branch": "master",
+  "stargazers_count": 30272,
+  "language": "Python",
+  "description": "Set up a personal VPN in the cloud",
+  "html_url": "https://github.com/trailofbits/algo",
+  "forks_count": 2360,
+  "topics": [
+   "ansible",
+   "encryption",
+   "ikev2",
+   "ipsec",
+   "security",
+   "ssh-tunnel",
+   "strongswan",
+   "vpn",
+   "vpn-client",
+   "vpn-server",
+   "wireguard"
+  ],
+  "total_bytes": 355872,
+  "code_bytes": 296231,
+  "language_breakdown": {
+   "Python": 66.31,
+   "Jinja": 16.17,
+   "Shell": 15.35,
+   "PowerShell": 1.59,
+   "Dockerfile": 0.59
+  },
+  "size": "small"
+ },
+ {
+  "full_name": "jhao104/proxy_pool",
+  "clone_url": "https://github.com/jhao104/proxy_pool.git",
+  "default_branch": "master",
+  "stargazers_count": 23103,
+  "language": "Python",
+  "description": "Python ProxyPool for web spider",
+  "html_url": "https://github.com/jhao104/proxy_pool",
+  "forks_count": 5378,
+  "topics": [
+   "crawler",
+   "http",
+   "proxy",
+   "redis",
+   "spider"
+  ],
+  "total_bytes": 72454,
+  "code_bytes": 71930,
+  "language_breakdown": {
+   "Python": 99.17,
+   "Dockerfile": 0.72,
+   "Shell": 0.11
+  },
+  "size": "small"
+ },
+ {
+  "full_name": "nginx-proxy/nginx-proxy",
+  "clone_url": "https://github.com/nginx-proxy/nginx-proxy.git",
+  "default_branch": "main",
+  "stargazers_count": 19727,
+  "language": "Python",
+  "description": "Automated nginx proxy for Docker containers using docker-gen",
+  "html_url": "https://github.com/nginx-proxy/nginx-proxy",
+  "forks_count": 3077,
+  "topics": [
+   "docker",
+   "docker-gen",
+   "nginx",
+   "reverse-proxy"
+  ],
+  "total_bytes": 211599,
+  "code_bytes": 152666,
+  "language_breakdown": {
+   "Python": 67.02,
+   "Go Template": 27.1,
+   "Shell": 5.13,
+   "Makefile": 0.28,
+   "HTML": 0.23,
+   "Dockerfile": 0.14
+  },
+  "size": "small"
+ },
+ {
+  "full_name": "idank/explainshell",
+  "clone_url": "https://github.com/idank/explainshell.git",
+  "default_branch": "master",
+  "stargazers_count": 13925,
+  "language": "Python",
+  "description": "match command-line arguments to their help text",
+  "html_url": "https://github.com/idank/explainshell",
+  "forks_count": 832,
+  "topics": [],
+  "total_bytes": 279885,
+  "code_bytes": 252350,
+  "language_breakdown": {
+   "Python": 57.23,
+   "JavaScript": 30.44,
+   "HTML": 8.41,
+   "Perl": 2.11,
+   "CSS": 1.18,
+   "Shell": 0.38,
+   "Dockerfile": 0.21
+  },
+  "size": "small"
+ },
+ {
+  "full_name": "coderamp-labs/gitingest",
+  "clone_url": "https://github.com/coderamp-labs/gitingest.git",
+  "default_branch": "main",
+  "stargazers_count": 13746,
+  "language": "Python",
+  "description": "Replace 'hub' with 'ingest' in any GitHub URL to get a prompt-friendly extract of a codebase ",
+  "html_url": "https://github.com/coderamp-labs/gitingest",
+  "forks_count": 1034,
+  "topics": [
+   "ai",
+   "code",
+   "developer-tool",
+   "ingestion"
+  ],
+  "total_bytes": 308862,
+  "code_bytes": 275272,
+  "language_breakdown": {
+   "Python": 81.47,
+   "Jinja": 9.97,
+   "JavaScript": 7.26,
+   "Dockerfile": 0.48,
+   "HTML": 0.43,
+   "Shell": 0.39
+  },
+  "size": "small"
+ }
+]

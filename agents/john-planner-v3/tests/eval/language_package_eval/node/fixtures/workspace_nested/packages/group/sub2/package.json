@@ -1,0 +1,1 @@
+{ "name": "sub2", "version": "1.0.0", "dependencies": { "sub1": "1.0.0", "ansi-styles": "4.3.0" } }

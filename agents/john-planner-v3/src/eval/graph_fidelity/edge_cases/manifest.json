@@ -1,0 +1,111 @@
+{
+  "soname_opencv": {
+    "isolates": "soname->apt (the recurring non-convergence)",
+    "import_smoke": "cv2",
+    "expected": {
+      "SYSTEM_LIB": ["libgl1", "libglib2.0-0"],
+      "TOOL": [],
+      "RUNTIME": null,
+      "PACKAGE": ["opencv-python==4.9.0.80"],
+      "SERVICE": []
+    },
+    "notes": "opencv-python's compiled cv2 extension links against the soname libGL.so.1 (and transitively libglib2.0). A correct graph must map that soname to the apt package libgl1 (+ libglib2.0-0) via a HARD edge from the PACKAGE node -- a graph that only resolves PyPI metadata and ignores compiled .so dependencies will install cleanly but fail `import cv2` at runtime with `ImportError: libGL.so.1: cannot open shared object file`."
+  },
+  "pgconfig_psycopg2": {
+    "isolates": "build-time header/tool syslib",
+    "import_smoke": "psycopg2",
+    "expected": {
+      "SYSTEM_LIB": ["libpq-dev"],
+      "TOOL": ["pg_config"],
+      "RUNTIME": null,
+      "PACKAGE": ["psycopg2==2.9.9"],
+      "SERVICE": []
+    },
+    "notes": "psycopg2 (source dist, NOT psycopg2-binary) needs the pg_config binary (TOOL) plus libpq headers/shared lib (SYSTEM_LIB) present BEFORE the pip build step runs. A correct graph must schedule libpq-dev's HARD edge ahead of the pip build; a graph that only reacts to the pip build failure after the fact, or omits the TOOL node entirely, misses the ordering constraint."
+  },
+  "nowheel_buildessential": {
+    "isolates": "no-wheel->sdist->compiler (cluster 1a)",
+    "import_smoke": "numpy",
+    "expected": {
+      "SYSTEM_LIB": [],
+      "TOOL": ["build-essential"],
+      "RUNTIME": "3.12",
+      "PACKAGE": ["numpy==1.21.0"],
+      "SERVICE": []
+    },
+    "notes": "numpy==1.21.0 predates Python 3.11/3.12 and has no manylinux wheel for the pinned target runtime (.python-version = 3.12), so pip must build the sdist -- requiring a C toolchain. A correct graph must seed build-essential from the wheel-oracle prior (cluster 1a: no compatible wheel => sdist => compiler => build-essential), not merely react to a build failure."
+  },
+  "marker_target_vs_host": {
+    "isolates": "platform / py markers evaluated against TARGET not host",
+    "import_smoke": ["pyinotify", "tomli"],
+    "expected": {
+      "SYSTEM_LIB": [],
+      "TOOL": [],
+      "RUNTIME": "3.10",
+      "PACKAGE": ["pyinotify", "tomli"],
+      "SERVICE": []
+    },
+    "notes": "pyinotify is gated by `sys_platform == 'linux'`; tomli is gated by `python_version < '3.11'`. The pinned target (.python-version = 3.10) runs in a linux container, so BOTH markers evaluate true and BOTH packages are required. A graph that evaluates markers against the HOST (typically macOS, `sys_platform == 'darwin'`, and often a newer host Python) would wrongly drop one or both packages -- the defining bug this case isolates."
+  },
+  "extras_closure": {
+    "isolates": "extras expansion",
+    "import_smoke": ["requests", "socks"],
+    "expected": {
+      "SYSTEM_LIB": [],
+      "TOOL": [],
+      "RUNTIME": null,
+      "PACKAGE": ["requests==2.31.0", "PySocks"],
+      "SERVICE": []
+    },
+    "notes": "requests[socks] declares the `socks` extra, whose closure pulls in the separate PySocks distribution (import name `socks`). A correct graph must expand the extra's transitive dependency and pin it; a graph that resolves only the base `requests==2.31.0` and drops the bracketed extra under-produces the PACKAGE tier and fails `import socks` at runtime."
+  },
+  "requirespy_floor": {
+    "isolates": "requires-python floor-trap",
+    "import_smoke": "tomllib",
+    "expected": {
+      "SYSTEM_LIB": [],
+      "TOOL": [],
+      "RUNTIME": "3.12",
+      "PACKAGE": [],
+      "SERVICE": []
+    },
+    "notes": "requires-python>=3.9 in pyproject.toml declares only a compatibility FLOOR; .python-version = 3.12 pins the actual development/CI target. A correct graph must select the PIN (3.12), not the floor (3.9) -- picking the floor would produce a runtime where `import tomllib` (stdlib only since 3.11) does not exist."
+  },
+  "subprocess_cli_tools": {
+    "isolates": "subprocess CLI tools (finding C) — external programs the repo shells out to",
+    "import_smoke": "subprocess_cli_tools",
+    "expected": {
+      "SYSTEM_LIB": [],
+      "TOOL": ["adb", "git", "sqlite3"],
+      "RUNTIME": null,
+      "PACKAGE": [],
+      "SERVICE": []
+    },
+    "notes": "The package's own code calls subprocess.run(['adb', ...]), subprocess.run(['git', ...]) and subprocess.check_output(['sqlite3', ...]). None of these are Python packages, linked shared libraries (ldd), or pip build tools -- so a graph built from pip metadata + ldd alone omits them entirely and the code fails at runtime with FileNotFoundError. A correct graph must scan the repo's source for subprocess/os.system invocations and emit adb/git/sqlite3 as TOOL nodes with apt fixes (adb->adb, git->git, sqlite3->sqlite3), keyed by tool name."
+  },
+  "srclayout_editable": {
+    "isolates": "editable install of the repo-under-test (finding A; src-layout)",
+    "import_smoke": "srclayout_editable",
+    "editable_required": true,
+    "expected": {
+      "SYSTEM_LIB": [],
+      "TOOL": [],
+      "RUNTIME": null,
+      "PACKAGE": ["click"],
+      "SERVICE": []
+    },
+    "notes": "The package lives under src/srclayout_editable/, so `import srclayout_editable` succeeds ONLY after the repo is installed editable (`pip install -e .`). A correct graph must render the project's own editable install as the FINAL pip step, after its dependency closure (click); a graph that installs only the resolved closure and never the repo itself (finding A) installs cleanly but fails `import srclayout_editable` with ModuleNotFoundError. The `editable_required` flag records this known-answer: render_fidelity.editable_last must be true for this repo's graph."
+  },
+  "pil_pillow": {
+    "isolates": "import-name -> dist-name",
+    "import_smoke": "PIL",
+    "expected": {
+      "SYSTEM_LIB": [],
+      "TOOL": [],
+      "RUNTIME": null,
+      "PACKAGE": ["Pillow==10.3.0"],
+      "SERVICE": []
+    },
+    "notes": "The source imports `PIL`, but the installable PyPI distribution name is `Pillow` (different string, case-sensitive). A correct graph must go through an import-name -> dist-name mapping; a graph that resolves import names literally (searching for a package named `PIL` or `image`) will fail to find the correct pip dependency."
+  }
+}

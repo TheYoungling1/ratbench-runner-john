@@ -1,0 +1,362 @@
+{
+  "_provenance": {
+    "source_dataset": "/opt/runs/rat_python50.json",
+    "run_dir": "/opt/runs/baselines/rat_python50_m3nothink_corrected",
+    "run": "rat_python50_m3nothink_corrected (MiniMax-M3 thinking-OFF, authoritative/corrected)",
+    "note": "SHAs were NOT pinned in the dataset; the run shallow-cloned each repo's default_branch HEAD. These commits were recovered via `git rev-parse HEAD` on the preserved input/repo checkouts (the exact code the run executed).",
+    "resolved": 50,
+    "total": 50
+  },
+  "repos": [
+    {
+      "full_name": "tinygrad/tinygrad",
+      "clone_url": "https://github.com/tinygrad/tinygrad.git",
+      "default_branch": "master",
+      "size": "large",
+      "commit": "96b94bbf1d86203076e47b60e2dadc260f4caa0e"
+    },
+    {
+      "full_name": "PostHog/posthog",
+      "clone_url": "https://github.com/PostHog/posthog.git",
+      "default_branch": "master",
+      "size": "large",
+      "commit": "682044c77671509a4cbe30b5adfe352678e5a332"
+    },
+    {
+      "full_name": "mlflow/mlflow",
+      "clone_url": "https://github.com/mlflow/mlflow.git",
+      "default_branch": "master",
+      "size": "large",
+      "commit": "6dcba5418220557ca2256ac4252cb6b58aad89b3"
+    },
+    {
+      "full_name": "polarsource/polar",
+      "clone_url": "https://github.com/polarsource/polar.git",
+      "default_branch": "main",
+      "size": "large",
+      "commit": "97e9430901a4197876318672cdd4fae99fc49a2b"
+    },
+    {
+      "full_name": "unit8co/darts",
+      "clone_url": "https://github.com/unit8co/darts.git",
+      "default_branch": "master",
+      "size": "large",
+      "commit": "4d5a9a81166a087ad671df766b8f3c0a584df04a"
+    },
+    {
+      "full_name": "Qiskit/qiskit",
+      "clone_url": "https://github.com/Qiskit/qiskit.git",
+      "default_branch": "main",
+      "size": "large",
+      "commit": "655dfbbdf359ce9e2588f736131f7dd567ef6def"
+    },
+    {
+      "full_name": "feast-dev/feast",
+      "clone_url": "https://github.com/feast-dev/feast.git",
+      "default_branch": "master",
+      "size": "large",
+      "commit": "f296d4ba14c5d512429219b2b7845673e0fe524d"
+    },
+    {
+      "full_name": "Azure/azure-cli",
+      "clone_url": "https://github.com/Azure/azure-cli.git",
+      "default_branch": "dev",
+      "size": "large",
+      "commit": "889dcca377e61d8df0e5920069e0602cb6c0bb17"
+    },
+    {
+      "full_name": "baserow/baserow",
+      "clone_url": "https://github.com/baserow/baserow.git",
+      "default_branch": "develop",
+      "size": "large",
+      "commit": "0621bcde8f27cc08765147d19e20c42611de51fa"
+    },
+    {
+      "full_name": "pretix/pretix",
+      "clone_url": "https://github.com/pretix/pretix.git",
+      "default_branch": "master",
+      "size": "large",
+      "commit": "943b319557c1ebcd6af0c192b1a12260f8ca7e1a"
+    },
+    {
+      "full_name": "Checkmk/checkmk",
+      "clone_url": "https://github.com/Checkmk/checkmk.git",
+      "default_branch": "master",
+      "size": "large",
+      "commit": "a92883fd5653abb36e0866777777ce3a98c79ff1"
+    },
+    {
+      "full_name": "GoogleCloudPlatform/PerfKitBenchmarker",
+      "clone_url": "https://github.com/GoogleCloudPlatform/PerfKitBenchmarker.git",
+      "default_branch": "master",
+      "size": "large",
+      "commit": "bd08f2d554778bd908182b5d59069bb9f764306a"
+    },
+    {
+      "full_name": "ArchipelagoMW/Archipelago",
+      "clone_url": "https://github.com/ArchipelagoMW/Archipelago.git",
+      "default_branch": "main",
+      "size": "large",
+      "commit": "e6e0bc30420d13085f6f86b29ffa7e1594a8c46a"
+    },
+    {
+      "full_name": "mozilla/addons-server",
+      "clone_url": "https://github.com/mozilla/addons-server.git",
+      "default_branch": "master",
+      "size": "large",
+      "commit": "6ff48bc803ba4f9e8a0e7ace9d0ad88f8e8292ad"
+    },
+    {
+      "full_name": "aiidateam/aiida-core",
+      "clone_url": "https://github.com/aiidateam/aiida-core.git",
+      "default_branch": "main",
+      "size": "large",
+      "commit": "9cff5ffee0278ff4ac9b37b3dfa4ea443ec5a21d"
+    },
+    {
+      "full_name": "OpenCTI-Platform/connectors",
+      "clone_url": "https://github.com/OpenCTI-Platform/connectors.git",
+      "default_branch": "master",
+      "size": "large",
+      "commit": "0de8b827849a5357746cd0656ddf366bdeaeab8f"
+    },
+    {
+      "full_name": "frappe/press",
+      "clone_url": "https://github.com/frappe/press.git",
+      "default_branch": "develop",
+      "size": "large",
+      "commit": "73a2a4117e16ec70eb18ee360c1f7db4ceb19508"
+    },
+    {
+      "full_name": "xuwei95/ezdata",
+      "clone_url": "https://github.com/xuwei95/ezdata.git",
+      "default_branch": "master",
+      "size": "large",
+      "commit": "97243ea00fac6a091eb9342bbb4f43ba560426b6"
+    },
+    {
+      "full_name": "tgoai/tgo",
+      "clone_url": "https://github.com/tgoai/tgo.git",
+      "default_branch": "main",
+      "size": "large",
+      "commit": "995da4577f6f91edb87d0f56fc9ea4c129f1a4eb"
+    },
+    {
+      "full_name": "wecode-ai/Wegent",
+      "clone_url": "https://github.com/wecode-ai/Wegent.git",
+      "default_branch": "main",
+      "size": "large",
+      "commit": "f296d38818500b5250032c5dd3fea7472022da0e"
+    },
+    {
+      "full_name": "fastapi/typer",
+      "clone_url": "https://github.com/fastapi/typer.git",
+      "default_branch": "master",
+      "size": "medium",
+      "commit": "7fb978fbf44c776ca7d9441b47c5e64b00740b40"
+    },
+    {
+      "full_name": "pre-commit/pre-commit",
+      "clone_url": "https://github.com/pre-commit/pre-commit.git",
+      "default_branch": "main",
+      "size": "medium",
+      "commit": "1553b465fd7ea42321ae0d04d1b41e706b89ae45"
+    },
+    {
+      "full_name": "mvt-project/mvt",
+      "clone_url": "https://github.com/mvt-project/mvt.git",
+      "default_branch": "main",
+      "size": "medium",
+      "commit": "f5b0a3cd914ef3e924d3c185e6e92d3878b28380"
+    },
+    {
+      "full_name": "BeehiveInnovations/pal-mcp-server",
+      "clone_url": "https://github.com/BeehiveInnovations/pal-mcp-server.git",
+      "default_branch": "main",
+      "size": "medium",
+      "commit": "7afc7c1cc96e23992c8f105f960132c657883bb1"
+    },
+    {
+      "full_name": "rq/rq",
+      "clone_url": "https://github.com/rq/rq.git",
+      "default_branch": "master",
+      "size": "medium",
+      "commit": "eacec8ff910994bd472e7cc0279ca041803b86e9"
+    },
+    {
+      "full_name": "D4Vinci/Scrapling",
+      "clone_url": "https://github.com/D4Vinci/Scrapling.git",
+      "default_branch": "main",
+      "size": "medium",
+      "commit": "8e7bc99ebc05f0e38f7c1426ca6ff861da6cad36"
+    },
+    {
+      "full_name": "crytic/slither",
+      "clone_url": "https://github.com/crytic/slither.git",
+      "default_branch": "master",
+      "size": "medium",
+      "commit": "5e78b88c0235885aa0a3f0ac3124d5eace3f1c40"
+    },
+    {
+      "full_name": "containers/podman-compose",
+      "clone_url": "https://github.com/containers/podman-compose.git",
+      "default_branch": "main",
+      "size": "medium",
+      "commit": "8156ab4bc9fc90a10f81242c81136155973e165a"
+    },
+    {
+      "full_name": "python-websockets/websockets",
+      "clone_url": "https://github.com/python-websockets/websockets.git",
+      "default_branch": "main",
+      "size": "medium",
+      "commit": "ff4869ba468129f3e85b08c2a8a03ec45cf26537"
+    },
+    {
+      "full_name": "NewFuture/DDNS",
+      "clone_url": "https://github.com/NewFuture/DDNS.git",
+      "default_branch": "master",
+      "size": "medium",
+      "commit": "e2e055ef6e05a0acce90491cc3a5b81429107a0e"
+    },
+    {
+      "full_name": "sooperset/mcp-atlassian",
+      "clone_url": "https://github.com/sooperset/mcp-atlassian.git",
+      "default_branch": "main",
+      "size": "medium",
+      "commit": "562f925bc68859cbeab3617c790745bfe012c2ef"
+    },
+    {
+      "full_name": "mckinsey/vizro",
+      "clone_url": "https://github.com/mckinsey/vizro.git",
+      "default_branch": "main",
+      "size": "medium",
+      "commit": "1926878ad5ec87fc70b175d7ed0ca2e31b1c99ed"
+    },
+    {
+      "full_name": "bruin-data/ingestr",
+      "clone_url": "https://github.com/bruin-data/ingestr.git",
+      "default_branch": "main",
+      "size": "medium",
+      "commit": "1a980e3752c5807be01801758887f8ff1518c56f"
+    },
+    {
+      "full_name": "django-oauth/django-oauth-toolkit",
+      "clone_url": "https://github.com/django-oauth/django-oauth-toolkit.git",
+      "default_branch": "master",
+      "size": "medium",
+      "commit": "74b10062939ba9edc8f6414c887fff7630372d26"
+    },
+    {
+      "full_name": "copier-org/copier",
+      "clone_url": "https://github.com/copier-org/copier.git",
+      "default_branch": "master",
+      "size": "medium",
+      "commit": "454ec4244132bce478e60c4707ee418312ca8922"
+    },
+    {
+      "full_name": "anthropics/anthropic-sdk-python",
+      "clone_url": "https://github.com/anthropics/anthropic-sdk-python.git",
+      "default_branch": "main",
+      "size": "medium",
+      "commit": "d2f6543ee7995adcae74666a5d37b3d9743debfe"
+    },
+    {
+      "full_name": "supabase/supabase-py",
+      "clone_url": "https://github.com/supabase/supabase-py.git",
+      "default_branch": "main",
+      "size": "medium",
+      "commit": "6f522d35aa94e4a6171cf84931d13e0bbae2ffba"
+    },
+    {
+      "full_name": "hitsz-ids/synthetic-data-generator",
+      "clone_url": "https://github.com/hitsz-ids/synthetic-data-generator.git",
+      "default_branch": "main",
+      "size": "medium",
+      "commit": "f3684582b2f490f50f85f8ffc8d619a7777aed67"
+    },
+    {
+      "full_name": "testcontainers/testcontainers-python",
+      "clone_url": "https://github.com/testcontainers/testcontainers-python.git",
+      "default_branch": "main",
+      "size": "medium",
+      "commit": "1571ff2a5e9786eb8d3ec03483b4c90ac9b67ed6"
+    },
+    {
+      "full_name": "Donkie/Spoolman",
+      "clone_url": "https://github.com/Donkie/Spoolman.git",
+      "default_branch": "master",
+      "size": "medium",
+      "commit": "eafbc64937b30993a0d9cc790820eb1db9e44d51"
+    },
+    {
+      "full_name": "pycontribs/jira",
+      "clone_url": "https://github.com/pycontribs/jira.git",
+      "default_branch": "main",
+      "size": "medium",
+      "commit": "bf7306b8b3905c91f97401eaae61d04827e1c309"
+    },
+    {
+      "full_name": "Cloud-CV/EvalAI",
+      "clone_url": "https://github.com/Cloud-CV/EvalAI.git",
+      "default_branch": "master",
+      "size": "medium",
+      "commit": "1c596071d00932434d7827b5af2c18039101903a"
+    },
+    {
+      "full_name": "crystaldba/postgres-mcp",
+      "clone_url": "https://github.com/crystaldba/postgres-mcp.git",
+      "default_branch": "main",
+      "size": "medium",
+      "commit": "07eb329c8c48e49640e0d1b5b35465d4d024c3ee"
+    },
+    {
+      "full_name": "karlicoss/promnesia",
+      "clone_url": "https://github.com/karlicoss/promnesia.git",
+      "default_branch": "master",
+      "size": "medium",
+      "commit": "5136f0aa3e7a726da477a976644faa0be2509dc1"
+    },
+    {
+      "full_name": "microsoft/markitdown",
+      "clone_url": "https://github.com/microsoft/markitdown.git",
+      "default_branch": "main",
+      "size": "small",
+      "commit": "e144e0a2be95b34df17433bac904e635f2c5e551"
+    },
+    {
+      "full_name": "trailofbits/algo",
+      "clone_url": "https://github.com/trailofbits/algo.git",
+      "default_branch": "master",
+      "size": "small",
+      "commit": "f6931db17043545b03b602b038f746b66594b1e7"
+    },
+    {
+      "full_name": "jhao104/proxy_pool",
+      "clone_url": "https://github.com/jhao104/proxy_pool.git",
+      "default_branch": "master",
+      "size": "small",
+      "commit": "9cc0cad4c47e84e34aaec2eead099421960dcd07"
+    },
+    {
+      "full_name": "nginx-proxy/nginx-proxy",
+      "clone_url": "https://github.com/nginx-proxy/nginx-proxy.git",
+      "default_branch": "main",
+      "size": "small",
+      "commit": "a64c037f893b22489607661f2534d0ed15c7a8f5"
+    },
+    {
+      "full_name": "idank/explainshell",
+      "clone_url": "https://github.com/idank/explainshell.git",
+      "default_branch": "master",
+      "size": "small",
+      "commit": "e961c8763a472139c9c5d22e62071946af9bdb48"
+    },
+    {
+      "full_name": "coderamp-labs/gitingest",
+      "clone_url": "https://github.com/coderamp-labs/gitingest.git",
+      "default_branch": "main",
+      "size": "small",
+      "commit": "4e259a02fe72115bee538271622f1234a81c8e1a"
+    }
+  ]
+}

@@ -1,0 +1,348 @@
+{
+ "_comment": "Medium+Large Python subset (15), every repo test-verified (GitHub trees API). MEDIUM tier is now 100% FRESH (no repo previously measured in the full-50) to avoid contamination, matched in difficulty to the dropped proven_winnable repos (pure-Python, winnable, self-contained/mocked tests, no external keys). LARGE tier allows only self-hostable services (Postgres/Redis/etc.); repos needing external creds/cloud/model-servers/signing are excluded. A 0 is an honest agent setup-failure.",
+ "_source": "RATBench python_repos_all.json (fresh) + rat_python_hard_subset.json (reuse)",
+ "_total": 15,
+ "_verify_method": "github_trees_api test-module file count (test_*.py / *_test.py)",
+ "_size_counts": {
+  "large": 8,
+  "medium": 7
+ },
+ "_tier_counts": {
+  "smoke": 5,
+  "extended": 10
+ },
+ "_origin_counts": {
+  "reuse": 4,
+  "fresh": 11
+ },
+ "_categories": "self_contained | winnable_large | local_services | fresh_winnable | winnable_lib | native_dep",
+ "repos": [
+  {
+   "full_name": "MemTensor/MemOS",
+   "clone_url": "https://github.com/MemTensor/MemOS.git",
+   "default_branch": "main",
+   "size": "large",
+   "stargazers_count": 4571,
+   "code_bytes": 5797330,
+   "language_breakdown": {
+    "Python": 75.93,
+    "TypeScript": 23.08
+   },
+   "_category": "winnable_large",
+   "_tier": "smoke",
+   "_why": "Proven 543/641; local neo4j/qdrant, core tests pass.",
+   "_origin": "reuse",
+   "_test_modules": 98,
+   "_test_dir_py": 121,
+   "_services": "neo4j,qdrant (local)",
+   "commit": "a4f1b5be94b3ed1b78438375176320b04fa3cc44"
+  },
+  {
+   "full_name": "unit8co/darts",
+   "clone_url": "https://github.com/unit8co/darts.git",
+   "default_branch": "master",
+   "size": "large",
+   "stargazers_count": 9157,
+   "code_bytes": 5482455,
+   "language_breakdown": {
+    "Python": 99.98
+   },
+   "_category": "self_contained",
+   "_tier": "extended",
+   "_why": "Pure-Python forecasting lib; CPU tests, no services.",
+   "_origin": "reuse",
+   "_test_modules": 99,
+   "_test_dir_py": 120,
+   "_services": "none",
+   "commit": "372da48fc5df77a37bc691854dfb474135e11c06"
+  },
+  {
+   "full_name": "Qiskit/qiskit",
+   "clone_url": "https://github.com/Qiskit/qiskit.git",
+   "default_branch": "main",
+   "size": "large",
+   "stargazers_count": 6956,
+   "code_bytes": 17712501,
+   "language_breakdown": {
+    "Python": 71.97,
+    "Rust": 26.22,
+    "C": 1.54,
+    "OpenQASM": 0.13
+   },
+   "_category": "self_contained",
+   "_tier": "extended",
+   "_why": "Quantum SDK; in-process simulators, no services.",
+   "_origin": "fresh",
+   "_test_modules": 358,
+   "_test_dir_py": 439,
+   "_services": "none",
+   "commit": "fb576bfa8a41e0ce095f08ae71acf8642f45baa5"
+  },
+  {
+   "full_name": "aiidateam/aiida-core",
+   "clone_url": "https://github.com/aiidateam/aiida-core.git",
+   "default_branch": "main",
+   "size": "large",
+   "stargazers_count": 526,
+   "code_bytes": 7642849,
+   "language_breakdown": {
+    "Python": 99.62
+   },
+   "_category": "local_services",
+   "_tier": "extended",
+   "_why": "Scientific engine; needs Postgres+RabbitMQ (self-hostable, no keys).",
+   "_origin": "reuse",
+   "_test_modules": 297,
+   "_test_dir_py": 377,
+   "_services": "postgres,rabbitmq",
+   "commit": "cd9024c783ab781fd205a6bc32d6e7c8149aa8ce"
+  },
+  {
+   "full_name": "feast-dev/feast",
+   "clone_url": "https://github.com/feast-dev/feast.git",
+   "default_branch": "master",
+   "size": "large",
+   "stargazers_count": 6641,
+   "code_bytes": 6960251,
+   "language_breakdown": {
+    "Python": 74.25,
+    "Go": 12.82,
+    "TypeScript": 5.68,
+    "Java": 3.33
+   },
+   "_category": "local_services",
+   "_tier": "extended",
+   "_why": "Feature store; heavy but key-free local stack (redis/minio/milvus/etcd/pgvector).",
+   "_origin": "reuse",
+   "_test_modules": 215,
+   "_test_dir_py": 337,
+   "_services": "redis,minio,milvus,etcd,pgvector (all local)",
+   "commit": "7946018c40f482bd82efb9a1c555d47dba5d4e54"
+  },
+  {
+   "full_name": "pretix/pretix",
+   "clone_url": "https://github.com/pretix/pretix.git",
+   "default_branch": "master",
+   "size": "large",
+   "stargazers_count": 2311,
+   "code_bytes": 12064234,
+   "language_breakdown": {
+    "Python": 77.94,
+    "HTML": 12.89,
+    "JavaScript": 5.15,
+    "SCSS": 3.41,
+    "Vue": 0.53
+   },
+   "_category": "local_services",
+   "_tier": "extended",
+   "_why": "Django ticketing; needs Postgres (self-hostable, no keys). Payment providers mocked in tests.",
+   "_origin": "fresh",
+   "_test_modules": 181,
+   "_test_dir_py": 226,
+   "_services": "postgres",
+   "commit": "1f5fe1b237a69a92adcb68544f5b51045e7e3d9b"
+  },
+  {
+   "full_name": "fastapi/typer",
+   "clone_url": "https://github.com/fastapi/typer.git",
+   "default_branch": "master",
+   "size": "medium",
+   "stargazers_count": 18677,
+   "code_bytes": 614423,
+   "language_breakdown": {
+    "Python": 99.65,
+    "Shell": 0.21,
+    "Dockerfile": 0.15
+   },
+   "_category": "winnable_lib",
+   "_tier": "smoke",
+   "_why": "18k-star CLI lib, pure-python, large clean suite.",
+   "_origin": "fresh",
+   "_test_modules": 212,
+   "_test_dir_py": 308,
+   "commit": "b210c0e2376d99344f79f11fab3ad34cf890cc20"
+  },
+  {
+   "full_name": "mckinsey/vizro",
+   "clone_url": "https://github.com/mckinsey/vizro.git",
+   "default_branch": "main",
+   "size": "medium",
+   "stargazers_count": 3560,
+   "code_bytes": 2031697,
+   "language_breakdown": {
+    "Python": 86.86,
+    "JavaScript": 4.02,
+    "HTML": 3.01,
+    "CSS": 2.9,
+    "Jupyter Notebook": 2.62,
+    "Shell": 0.5
+   },
+   "_category": "winnable_lib",
+   "_tier": "smoke",
+   "_why": "Low-code dashboards, pure-python, well-tested.",
+   "_origin": "fresh",
+   "_test_modules": 108,
+   "_test_dir_py": 202,
+   "commit": "2280402e42e9b61baee2983ddc9d1419a2b5f3a4"
+  },
+  {
+   "full_name": "crytic/slither",
+   "clone_url": "https://github.com/crytic/slither.git",
+   "default_branch": "master",
+   "size": "medium",
+   "stargazers_count": 6100,
+   "code_bytes": 2997406,
+   "language_breakdown": {
+    "Python": 78.25,
+    "Solidity": 21.01,
+    "Shell": 0.45,
+    "Vyper": 0.18
+   },
+   "_category": "native_dep",
+   "_tier": "extended",
+   "_why": "Solidity analyzer; tests need solc toolchain (native dep).",
+   "_origin": "fresh",
+   "_test_modules": 56,
+   "_test_dir_py": 75,
+   "commit": "5e78b88c0235885aa0a3f0ac3124d5eace3f1c40"
+  },
+  {
+   "full_name": "ArchipelagoMW/Archipelago",
+   "clone_url": "https://github.com/ArchipelagoMW/Archipelago.git",
+   "default_branch": "main",
+   "size": "large",
+   "stargazers_count": 1145,
+   "code_bytes": 32313512,
+   "language_breakdown": {
+    "Python": 94.79,
+    "Assembly": 1.74,
+    "HTML": 1.53,
+    "Lua": 0.76,
+    "CSS": 0.59,
+    "C": 0.14,
+    "JavaScript": 0.14
+   },
+   "_category": "self_contained",
+   "_tier": "extended",
+   "_why": "Multi-game randomizer; CI runs plain unittest, zero services, no creds.",
+   "_origin": "fresh",
+   "_services": "none",
+   "_test_modules": 172,
+   "_test_dir_py": null,
+   "commit": "e6e0bc30420d13085f6f86b29ffa7e1594a8c46a"
+  },
+  {
+   "full_name": "baserow/baserow",
+   "clone_url": "https://github.com/baserow/baserow.git",
+   "default_branch": "develop",
+   "size": "large",
+   "stargazers_count": 3833,
+   "code_bytes": 27747162,
+   "language_breakdown": {
+    "Python": 69.85,
+    "JavaScript": 13.07,
+    "Vue": 12.84,
+    "SCSS": 1.72,
+    "HTML": 1.29,
+    "Shell": 0.36,
+    "Just": 0.32,
+    "TypeScript": 0.31,
+    "Dockerfile": 0.16
+   },
+   "_category": "local_services",
+   "_tier": "extended",
+   "_why": "No-code DB platform; tests use Postgres+Redis+local s3mock (self-hostable, no real keys).",
+   "_origin": "fresh",
+   "_services": "postgres,redis,s3mock (all local)",
+   "_test_modules": 644,
+   "_test_dir_py": null,
+   "commit": "2b7608fb06d8406aadfacd85f6cf14c6cc3ee214"
+  },
+  {
+   "full_name": "anthropics/anthropic-sdk-python",
+   "clone_url": "https://github.com/anthropics/anthropic-sdk-python.git",
+   "default_branch": "main",
+   "size": "medium",
+   "stargazers_count": 2649,
+   "code_bytes": 1767011,
+   "language_breakdown": {
+    "Python": 99.61,
+    "Shell": 0.37
+   },
+   "_category": "fresh_winnable",
+   "_tier": "smoke",
+   "_why": "REST API SDK; respx-mocked tests with a dummy key, self-contained. Fresh analog of nba_api.",
+   "_origin": "fresh",
+   "_services": "none",
+   "_test_modules": 74,
+   "_test_dir_py": null,
+   "commit": "c986624e451a640040ac9bdfd87054372456af0b"
+  },
+  {
+   "full_name": "mvt-project/mvt",
+   "clone_url": "https://github.com/mvt-project/mvt.git",
+   "default_branch": "main",
+   "size": "medium",
+   "stargazers_count": 12045,
+   "code_bytes": 618143,
+   "language_breakdown": {
+    "Python": 99.04,
+    "Dockerfile": 0.84,
+    "Makefile": 0.12
+   },
+   "_category": "fresh_winnable",
+   "_tier": "smoke",
+   "_why": "Mobile-forensics CLI; self-contained tests, no services. Fresh analog of a DNS/tool repo.",
+   "_origin": "fresh",
+   "_services": "none",
+   "_test_modules": 48,
+   "_test_dir_py": null,
+   "commit": "638937e838e9707c73cfafa76bc383226616d1e7"
+  },
+  {
+   "full_name": "python-semantic-release/python-semantic-release",
+   "clone_url": "https://github.com/python-semantic-release/python-semantic-release.git",
+   "default_branch": "master",
+   "size": "medium",
+   "stargazers_count": 1006,
+   "code_bytes": 1523966,
+   "language_breakdown": {
+    "Python": 92.9,
+    "Jinja": 4.89,
+    "Shell": 2.11
+   },
+   "_category": "fresh_winnable",
+   "_tier": "extended",
+   "_why": "Release-automation CLI; git-based self-contained tests, no services. Fresh analog of DDNS.",
+   "_origin": "fresh",
+   "_services": "none",
+   "_test_modules": 66,
+   "_test_dir_py": null,
+   "commit": "95ce7ecdbab0fc0986d1fcf442cd8cf99a4b6e4f"
+  },
+  {
+   "full_name": "crystaldba/postgres-mcp",
+   "clone_url": "https://github.com/crystaldba/postgres-mcp.git",
+   "default_branch": "main",
+   "size": "medium",
+   "stargazers_count": 1881,
+   "code_bytes": 520508,
+   "language_breakdown": {
+    "Python": 98.37,
+    "Shell": 0.58,
+    "Dockerfile": 0.42,
+    "Nix": 0.4,
+    "Just": 0.23
+   },
+   "_category": "fresh_winnable",
+   "_tier": "extended",
+   "_why": "Postgres MCP server; CI declares no DB service (mocked/embedded). Fresh analog of mcp-atlassian.",
+   "_origin": "fresh",
+   "_services": "postgres (likely mocked/embedded)",
+   "_test_modules": 17,
+   "_test_dir_py": null,
+   "commit": "07eb329c8c48e49640e0d1b5b35465d4d024c3ee"
+  }
+ ],
+ "_pinned_commits": "default_branch HEAD frozen 2026-06-27 (reproducibility record); see `commit` per repo"
+}

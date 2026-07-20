@@ -1,0 +1,167 @@
+agent:
+  model:
+    name: deepseek/deepseek-chat
+    per_instance_call_limit: 15
+  templates:
+    system_template: |-
+      You are an expert DevOps engineer specialized in repository environment setup and configuration.
+      Your role is to analyze project dependencies, install packages, and ensure the repository is ready to run tests.
+      You should focus on environment setup and avoid modifying application code unless absolutely necessary for configuration purposes.
+    instance_template: |-
+      <uploaded_files>
+      {{working_dir}}
+      </uploaded_files>
+      I have uploaded a Java repository in {{working_dir}}.
+
+      <setup_requirements>
+      {{problem_statement}}
+      </setup_requirements>
+
+      Your task is to configure this repository so it can run and pass all tests.
+
+      ## Workflow
+      1. **Explore Repository**: Understand the project structure, identify key files and entry points
+      2. **Analyze Dependencies**: Locate and examine dependency files (pom.xml, build.gradle, build.gradle.kts, etc.)
+      3. **Install Dependencies**: Use Maven, Gradle, or other build tools to download and install required libraries
+      4. **Verify Installation**: Check that the build system can resolve dependencies
+      5. **Fix Environment Issues**: If you encounter compilation or dependency resolution errors, address them
+      6. **Validate Setup**: Ensure the environment is ready to run tests (but do not run the full test suite yourself)
+
+      ## Code Modification Policy
+      AVOID modifying code whenever possible. Only make changes if absolutely necessary for environment setup:
+      - Create missing configuration files (e.g., gradle.properties, settings.xml)
+      - Fix critical build configuration issues that prevent basic functionality
+      -  Make minimal adjustments only when no other solution exists
+
+      NEVER modify:
+      - Test files or test logic
+      - Core application behavior or business logic
+      - Code to make failing tests pass (fix environment issues only)
+
+      ## Important Notes
+      - Focus on configuring the build system and installing dependencies
+      - Prioritize fixing dependency resolution errors and compilation issues
+      - Make minimal, conservative changes when code modification is unavoidable
+      - Document your reasoning for any code changes you make
+
+      Be thorough in your analysis and reasoning.
+    problem_statement_template: |-
+      This is a {{language}} repository that requires environment setup and configuration.
+
+      ## Objective
+      Configure the repository to be ready for running tests successfully.
+
+      ## Detailed Steps
+
+      ### 1. Repository Analysis
+      - Explore the project structure and identify main components
+      - Locate documentation files (README.md, CONTRIBUTING.md, docs/)
+      - Identify the build system (Maven, Gradle, Ant, etc.)
+      - Find dependency files (pom.xml, build.gradle, build.gradle.kts, settings.gradle, etc.)
+      - Understand the recommended build method from documentation
+
+      ### 2. Dependency Installation
+      - Read build files to understand project dependencies
+      - Install dependencies using the appropriate build tool:
+        - Maven: `mvn clean install` or `mvn dependency:resolve`
+        - Gradle: `./gradlew build` or `gradle dependencies`
+      - Handle both compile and test dependencies
+      - Resolve any version conflicts or dependency issues
+      - Install test framework dependencies (JUnit, TestNG, etc.)
+
+      ### 3. Environment Configuration
+      - Set any required environment variables (JAVA_HOME, etc.)
+      - Create necessary configuration files if missing (application.properties, etc.)
+      - Configure build tool settings (Maven settings.xml, Gradle properties)
+      - Set up proper directory structures if needed
+
+      ### 4. Installation Verification
+      - Verify that dependencies are resolved correctly
+      - Check that the project compiles without errors
+      - Ensure test framework can be invoked
+
+      ### 5. Troubleshooting
+      - If you encounter ClassNotFoundException: check dependency declarations
+      - If you encounter compilation errors: check Java version compatibility
+      - If configuration files are missing: create them based on documentation or examples
+      - If there are dependency conflicts: try dependency exclusions or version alignment
+
+      ## Success Criteria
+      The repository is considered properly configured when:
+      - All dependencies are resolved successfully
+      - The project compiles without errors
+      - Build tool can execute without configuration errors
+      - Test framework can be invoked (even if some tests fail due to bugs)
+
+      ## Constraints
+      - Do NOT run the full test suite yourself - only verify that the environment is ready
+      - Do NOT modify test files or test logic
+      - Do NOT change application code to make tests pass
+      - Focus exclusively on environment setup and dependency resolution
+    next_step_template: |-
+      Observation:
+      {{observation}}
+    next_step_no_output_template: |-
+      Your command ran successfully, but produced no output.
+  tools:
+    env_variables:
+      PAGER: cat
+      MANPAGER: cat
+      LESS: -R
+      GIT_PAGER: cat
+    bundles:
+      - path: tools/registry
+      - path: tools/edit_anthropic
+      - path: tools/review_on_submit_m
+    registry_variables:
+      USE_FILEMAP: 'true'
+      SUBMIT_REVIEW_MESSAGES:
+        - |
+          Thank you for setting up this repository environment.
+
+          Before submitting, please verify your configuration is complete and appropriate.
+
+          ## Pre-Submission Checklist
+
+          - **Dependencies Resolved**: All required libraries are downloaded and resolved
+          - **Project Compiles**: The project builds without compilation errors
+          - **Environment Ready**: Configuration files are in place, environment variables set (if needed)
+          - **Minimal Changes**: Only necessary modifications were made (ideally none)
+
+          ## Review Your Changes
+
+          Below is a summary of all your changes. Please ensure they follow the guidelines:
+
+          ### Acceptable Changes (if necessary):
+          - New configuration files (gradle.properties, settings.xml, application.properties)
+          - Modified build configurations (only if required for environment setup)
+          - Dependency version adjustments (only to resolve conflicts)
+
+          ### Unacceptable Changes (must be reverted):
+          - Modifications to test files (*Test.java, *Tests.java, test/ directory)
+          - Changes to core application logic
+          - Code modifications made to force tests to pass
+
+          <diff>
+          {{diff}}
+          </diff>
+
+          ## Action Required
+          - If you see test file modifications, revert them: `git checkout -- <test_file_path>`
+          - If you see unnecessary code changes, revert them: `git checkout -- <file_path>`
+          - If all changes are environment-related and minimal, run the submit command again to confirm
+    enable_bash_tool: true
+    parse_function:
+      type: function_calling
+  history_processors:
+    - type: cache_control
+      last_n_messages: 2
+env:
+  deployment:
+    type: docker
+    image: eclipse-temurin:17
+    remove_container: false  # Do not auto-remove container
+    remove_images: false     # Do not remove images (optional)
+  repo:
+    type: local
+    path: ./my-repo

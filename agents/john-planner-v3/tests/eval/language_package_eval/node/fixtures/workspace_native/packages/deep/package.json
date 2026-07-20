@@ -1,0 +1,1 @@
+{ "name": "deep-member", "version": "1.0.0", "dependencies": { "chalk": "4.1.2", "esbuild": "0.21.5" } }

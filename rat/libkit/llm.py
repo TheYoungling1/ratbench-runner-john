@@ -1,0 +1,76 @@
+import os
+import time
+from datetime import datetime
+
+from openai import OpenAI
+
+from libkit.config import config
+
+
+def _is_openrouter(base_url: str, model: str) -> bool:
+    """Return True only when actually talking to OpenRouter. Keyed on the endpoint
+    (base_url) so MiniMax/other providers never receive OpenRouter's provider-pin
+    extra_body even if LLM_API_PROVIDER is left misconfigured."""
+    return "openrouter" in (base_url or "")
+
+
+def _openrouter_extra_body(existing: dict | None = None) -> dict:
+    """Build (or merge into) an extra_body dict with the provider-pin block."""
+    providers = [
+        p.strip()
+        for p in os.getenv("OPENROUTER_PROVIDER", "Alibaba").split(",")
+        if p.strip()
+    ]
+    body = dict(existing) if existing else {}
+    body.setdefault("provider", {}).update(
+        {"order": providers, "allow_fallbacks": False}
+    )
+    return body
+
+
+class LLMChat:
+    def __init__(self, model: str):
+        self.model = model
+
+        model_config = config.get_llm_config(self.model)
+        self._base_url = model_config.get("base_url", "")
+        self.client = OpenAI(
+            base_url=self._base_url, api_key=model_config["key"]
+        )
+
+    def chat(self, messages, temperature=0.0, n=1, max_tokens=4096):
+        temperature = 0.0  # FORCED: deterministic (temp=0) for every agent LLM call
+        if os.getenv("LLM_DEBUG"):
+            print(f"[llm-debug] model={self.model} base_url={self._base_url} temperature={temperature}", flush=True)
+        max_retry = 5
+        count = 0
+        while count < max_retry:
+            try:
+                kwargs: dict = dict(
+                    model=self.model,
+                    messages=messages,
+                    temperature=temperature,
+                    n=n,
+                    max_tokens=max_tokens,
+                )
+                if _is_openrouter(self._base_url, self.model):
+                    kwargs["extra_body"] = _openrouter_extra_body(
+                        kwargs.get("extra_body")
+                    )
+                if "minimaxi" in (self._base_url or ""):
+                    # M2.x: thinking is always-on and non-tunable (reasoning_effort is
+                    # silently ignored). M3: thinking can be disabled via extra_body
+                    # {"thinking": {"type": "disabled"}}. Gate on MINIMAX_THINKING env
+                    # (disabled|adaptive|enabled); unset => leave model default.
+                    _mode = os.getenv("MINIMAX_THINKING", "").strip().lower()
+                    if _mode in ("disabled", "adaptive", "enabled"):
+                        eb = dict(kwargs.get("extra_body") or {})
+                        eb.setdefault("thinking", {"type": _mode})
+                        kwargs["extra_body"] = eb
+                response = self.client.chat.completions.create(**kwargs)
+                return response.choices[0].message.content, response.usage
+            except Exception as e:
+                print(f"Error: {e}")
+                count += 1
+                time.sleep(3)
+        return None, None

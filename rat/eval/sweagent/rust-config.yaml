@@ -1,0 +1,168 @@
+agent:
+  model:
+    name: deepseek/deepseek-chat
+    per_instance_call_limit: 15
+  templates:
+    system_template: |-
+      You are an expert DevOps engineer specialized in repository environment setup and configuration.
+      Your role is to analyze project dependencies, install packages, and ensure the repository is ready to run tests.
+      You should focus on environment setup and avoid modifying application code unless absolutely necessary for configuration purposes.
+    instance_template: |-
+      <uploaded_files>
+      {{working_dir}}
+      </uploaded_files>
+      I have uploaded a Rust repository in {{working_dir}}.
+
+      <setup_requirements>
+      {{problem_statement}}
+      </setup_requirements>
+
+      Your task is to configure this repository so it can run and pass all tests.
+
+      ## Workflow
+      1. **Explore Repository**: Understand the project structure, identify key files and entry points
+      2. **Analyze Dependencies**: Locate and examine dependency files (Cargo.toml, Cargo.lock)
+      3. **Install Dependencies**: Use cargo to build and download all required crates
+      4. **Verify Installation**: Check that the project compiles and dependencies are resolved
+      5. **Fix Environment Issues**: If you encounter compilation or dependency errors, address them
+      6. **Validate Setup**: Ensure the environment is ready to run tests (but do not run the full test suite yourself)
+
+      ## Code Modification Policy
+      AVOID modifying code whenever possible. Only make changes if absolutely necessary for environment setup:
+      - Create missing configuration files (e.g., .cargo/config.toml)
+      - Fix critical build configuration issues that prevent basic functionality
+      - Make minimal adjustments only when no other solution exists
+      
+      NEVER modify:
+      - Test files or test logic
+      - Core application behavior or business logic
+      - Code to make failing tests pass (fix environment issues only)
+      
+      ## Important Notes
+      - Focus on building the project and resolving dependencies
+      - Prioritize fixing compilation errors and dependency resolution issues
+      - Make minimal, conservative changes when code modification is unavoidable
+      - Document your reasoning for any code changes you make
+      
+      Be thorough in your analysis and reasoning.
+    problem_statement_template: |-
+      This is a {{language}} repository that requires environment setup and configuration.
+
+      ## Objective
+      Configure the repository to be ready for running tests successfully.
+
+      ## Detailed Steps
+
+      ### 1. Repository Analysis
+      - Explore the project structure and identify main components
+      - Locate documentation files (README.md, CONTRIBUTING.md, docs/)
+      - Identify the build system (cargo)
+      - Find dependency files (Cargo.toml, Cargo.lock)
+      - Understand the recommended build method from documentation
+
+      ### 2. Dependency Installation
+      - Read Cargo.toml to understand project dependencies
+      - Build the project to download and compile dependencies:
+        - `cargo build` - build in debug mode
+      - Handle both dependencies and dev-dependencies
+      - Resolve any version conflicts or incompatible crate versions
+      - Ensure test dependencies are available
+
+      ### 3. Environment Configuration
+      - Set any required environment variables (RUST_BACKTRACE, etc.)
+      - Create necessary configuration files if missing (.cargo/config.toml)
+      - Configure cargo settings (registry, build options)
+      - Set up proper directory structures if needed
+
+      ### 4. Installation Verification
+      - Verify that the project compiles successfully
+      - Check that all dependencies are resolved and downloaded
+      - Ensure cargo test can be invoked
+
+      ### 5. Troubleshooting
+      - If you encounter compilation errors: check Rust version compatibility
+      - If you encounter dependency resolution errors: check version constraints in Cargo.toml
+      - If configuration files are missing: create them based on documentation or examples
+      - If there are feature conflicts: adjust feature flags in Cargo.toml
+
+      ## Success Criteria
+      The repository is considered properly configured when:
+      - All dependencies are downloaded and compiled successfully
+      - The project builds without compilation errors
+      - Cargo operations complete without errors
+      - Test framework can be invoked (even if some tests fail due to bugs)
+
+      ## Constraints
+      - Do NOT run the full test suite yourself - only verify that the environment is ready
+      - Do NOT modify test files or test logic
+      - Do NOT change application code to make tests pass
+      - Focus exclusively on environment setup and dependency resolution
+    next_step_template: |-
+      Observation:
+      {{observation}}
+    next_step_no_output_template: |-
+      Your command ran successfully, but produced no output.
+  tools:
+    env_variables:
+      PAGER: cat
+      MANPAGER: cat
+      LESS: -R
+      GIT_PAGER: cat
+      CARGO_TERM_PROGRESS_WHEN: never
+      CARGO_TERM_QUIET: 'false'
+    bundles:
+      - path: tools/registry
+      - path: tools/edit_anthropic
+      - path: tools/review_on_submit_m
+    registry_variables:
+      USE_FILEMAP: 'true'
+      SUBMIT_REVIEW_MESSAGES:
+        - |
+          Thank you for setting up this repository environment.
+
+          Before submitting, please verify your configuration is complete and appropriate.
+
+          ## Pre-Submission Checklist
+
+          - **Dependencies Compiled**: All required crates are downloaded and compiled
+          - **Project Builds**: The project compiles without errors
+          - **Environment Ready**: Configuration files are in place, environment variables set (if needed)
+          - **Minimal Changes**: Only necessary modifications were made (ideally none)
+
+          ## Review Your Changes
+
+          Below is a summary of all your changes. Please ensure they follow the guidelines:
+
+          ### Acceptable Changes (if necessary):
+          - Cargo.lock updated (dependency resolution)
+          - New configuration files (.cargo/config.toml, etc.)
+          - Modified Cargo.toml (only if required for environment setup)
+
+          ### Unacceptable Changes (must be reverted):
+          - Modifications to test files (tests/ directory, #[test] functions)
+          - Changes to core application logic
+          - Code modifications made to force tests to pass
+
+          <diff>
+          {{diff}}
+          </diff>
+
+          ## Action Required
+          - If you see test file modifications, revert them: `git checkout -- <test_file_path>`
+          - If you see unnecessary code changes, revert them: `git checkout -- <file_path>`
+          - If all changes are environment-related and minimal, run the submit command again to confirm
+    enable_bash_tool: true
+    parse_function:
+      type: function_calling
+  history_processors:
+    - type: cache_control
+      last_n_messages: 2
+env:
+  deployment:
+    type: docker
+    image: rust:1.75-slim
+    remove_container: false  # Do not auto-remove container
+    remove_images: false     # Do not remove images (optional)
+  repo:
+    type: local
+    path: ./my-repo

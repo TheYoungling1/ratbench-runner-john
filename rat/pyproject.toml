@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rat"
+version = "0.1.0"
+description = "RAT: RunAnyThing via Fully Automated Environment Configuration"
+authors = [{name = "RAT"}]
+readme = "README.md"
+license = {text = "Proprietary"}
+dependencies = [
+  "docker==7.1.0",
+  "pexpect==4.9.0",
+  "openpyxl==3.1.4",
+  "pandas==2.2.2",
+  "openai>=1.65.2,<2.0.0",
+  "requests>=2.0.0",
+  "aiohttp>=3.10",
+  "python-dotenv>=1.0.0",
+  "streamlit>=1.28.0",
+]
+requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = [
+  "build_agent",
+  "build_agent.*",
+  "build_dataset",
+  "build_dataset.*",
+  "eval",
+  "eval.*",
+  "libkit",
+  "libkit.*",
+]
+exclude = ["input", "utils", "tests*", "Repo2Run", "installamatic"]
+
+[tool.ruff.lint]
+ignore = ["E722", "F541"]
+
+[tool.uv.sources]
+installamatic = { path = "../installamatic", editable = true }
+
+[project.scripts]
+docker-agent = "build_dataset.docker_agent:main"
+fetch-python-docker-repos = "build_dataset.fetch_python_docker_repos:main"

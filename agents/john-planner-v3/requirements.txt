@@ -1,0 +1,10 @@
+docker
+openai
+python-dotenv
+pypdf
+sentence-transformers>=3.0.0
+packaging
+requests
+z3-solver
+pyelftools   # depgraph/wheel_inspect.py — DT_NEEDED soname reading (imported at module load)
+tomli ; python_version < "3.11"   # tomllib backport — pyproject parsing on the 3.10 benchmark box

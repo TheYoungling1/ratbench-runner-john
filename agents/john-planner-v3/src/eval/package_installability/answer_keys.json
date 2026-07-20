@@ -1,0 +1,20 @@
+[
+  {"name": "psycopg2", "version": "2.9.9", "mode": "forced_sdist", "base_image": "python:3.11-slim",
+   "required_apt": ["build-essential", "libpq-dev"], "gate_level": "deep_import",
+   "superset": ["build-essential", "libpq-dev", "libpq5"],
+   "derived_at": "2026-07-05", "notes": "seeded; build-essential toolchain + libpq-dev; re-derive via --derive"},
+  {"name": "requests", "version": "2.32.3", "mode": "natural", "base_image": "python:3.11-slim",
+   "required_apt": [], "gate_level": "deep_import", "superset": [],
+   "derived_at": "2026-07-05", "notes": "pure-wheel control; S* == {}"},
+  {"name": "pycurl", "version": "7.45.3", "mode": "forced_sdist", "base_image": "python:3.11-slim",
+   "required_apt": ["build-essential", "libcurl4-openssl-dev"], "gate_level": "deep_import",
+   "superset": ["build-essential", "libcurl4-openssl-dev", "libcurl4-gnutls-dev", "libssl-dev"],
+   "derived_at": "2026-07-05", "notes": "seeded; build-essential toolchain + openssl backend is the forced flavor"},
+  {"name": "Pillow", "version": "10.3.0", "mode": "natural", "base_image": "python:3.11-slim",
+   "required_apt": [], "gate_level": "deep_import", "superset": [],
+   "derived_at": "2026-07-05", "notes": "seeded; ships manylinux wheel => S* == {}"},
+  {"name": "Pillow", "version": "10.3.0", "mode": "forced_sdist", "base_image": "python:3.11-slim",
+   "required_apt": ["build-essential", "libjpeg-dev", "zlib1g-dev"], "gate_level": "deep_import",
+   "superset": ["build-essential", "libjpeg-dev", "zlib1g-dev", "libtiff-dev"],
+   "derived_at": "2026-07-05", "notes": "seeded; build-essential toolchain + known apt deps; re-derive via --derive"}
+]

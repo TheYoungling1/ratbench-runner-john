@@ -1,0 +1,14 @@
+# secrets & local env
+.env
+.venv/
+
+# run outputs (regenerated per run)
+/runs/
+**/workplace/
+
+# python / os cruft
+**/__pycache__/
+*.pyc
+*.log
+*.pid
+.DS_Store

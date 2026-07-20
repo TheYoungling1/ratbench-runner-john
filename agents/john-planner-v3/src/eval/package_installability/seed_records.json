@@ -1,0 +1,18 @@
+[
+  {"name": "psycopg2", "version": "2.9.9", "mode": "forced_sdist", "stratum": "S1",
+   "predicted_apt": ["libpq-dev"], "answer_apt": ["libpq-dev"], "install_rc": 0,
+   "gate_ok": true, "tail_gate_ok": null, "status": "pass", "branch_pred": "sdist", "branch_real": null},
+  {"name": "requests", "version": "2.32.3", "mode": "natural", "stratum": "S6",
+   "predicted_apt": [], "answer_apt": [], "install_rc": 0, "gate_ok": true,
+   "tail_gate_ok": null, "status": "pass", "branch_pred": "wheel", "branch_real": "wheel"},
+  {"name": "pycurl", "version": "7.45.3", "mode": "forced_sdist", "stratum": "S2",
+   "predicted_apt": ["libcurl4-gnutls-dev"], "answer_apt": ["libcurl4-openssl-dev"],
+   "install_rc": 100, "gate_ok": false, "tail_gate_ok": null, "status": "fail",
+   "branch_pred": "sdist", "branch_real": null},
+  {"name": "opencv-python", "version": "4.9.0.80", "mode": "natural", "stratum": "S4",
+   "predicted_apt": [], "answer_apt": ["libgl1"], "install_rc": 0, "gate_ok": false,
+   "tail_gate_ok": false, "status": "fail", "branch_pred": "wheel", "branch_real": "wheel"},
+  {"name": "lxml", "version": "5.2.2", "mode": "natural", "stratum": "branch",
+   "predicted_apt": [], "answer_apt": [], "install_rc": 1, "gate_ok": false,
+   "tail_gate_ok": null, "status": "error", "branch_pred": "sdist", "branch_real": "wheel"}
+]

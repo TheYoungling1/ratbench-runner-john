@@ -1,0 +1,28 @@
+# varieties.toml — the benchmark "methods".
+#
+# In this self-contained repo, agent varieties run from vendored snapshots under
+# agents/<name>/ (run_bench.sh sets SKIP_PROVISION=1, which disables the harness's
+# git fetch/reset). Baselines (rat, repo2run, sweagent) have no branch and run
+# from the harness itself.
+#
+# `llm` is the model slug forwarded to the runner; override per-run with `--llm`.
+# Add another agent: vendor its code under agents/<name>/ and add a block here.
+
+# --- vendored agent (graph-scheduled environment constructor) ---
+[variety.john-planner-v3]
+branch = "v3-core"
+model  = "dockeragent"
+llm    = "deepseek/deepseek-v4-flash"
+
+# --- baselines (no agent branch; run from the harness) ---
+[variety.rat]
+model = "rat"
+llm   = "deepseek/deepseek-v4-flash"
+
+[variety.repo2run]
+model = "repo2run"
+llm   = "deepseek/deepseek-v4-flash"
+
+[variety.sweagent]
+model = "sweagent"
+llm   = "openrouter/deepseek/deepseek-v4-flash"

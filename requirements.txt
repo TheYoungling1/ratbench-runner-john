@@ -1,0 +1,25 @@
+# env-bench dependencies (union of the harness + RAT-framework requirements).
+# Python 3.10+.
+
+# --- core runtime: every variety + the measure stage need these ---
+docker==7.1.0
+python-dotenv>=1.0.0
+openai>=1.65.2,<2.0.0
+requests>=2.0.0
+pexpect==4.9.0
+
+# --- RAT eval framework (scorers, dataset loading, Weave harness) ---
+pandas==2.2.2
+openpyxl==3.1.4
+aiohttp>=3.10
+datasets>=2.14.0
+huggingface_hub>=1.2.3
+weave
+
+# --- harness extras ---
+pypdf
+sentence-transformers>=3.0.0     # heavy (pulls torch); only needed if the agent uses embeddings
+
+# --- baselines (optional: only the 'sweagent' variety needs these) ---
+sweagent>=1.0.0
+streamlit>=1.28.0

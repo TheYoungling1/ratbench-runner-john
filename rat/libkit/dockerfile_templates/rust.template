@@ -1,0 +1,15 @@
+FROM {BASE_IMAGE_WITH_VERSION}
+
+RUN apt-get update && apt-get install -y python3 python3-pip curl git python-is-python3 && rm -rf /var/lib/apt/lists/*
+
+RUN rm -f /usr/lib/python3.*/EXTERNALLY-MANAGED 2>/dev/null || true
+
+RUN mkdir -p ~/.pip && echo "[global]" > ~/.pip/pip.conf && echo "index-url = https://mirrors.aliyun.com/pypi/simple/" >> ~/.pip/pip.conf && echo "trusted-host = mirrors.aliyun.com" >> ~/.pip/pip.conf
+
+RUN pip install --no-cache-dir openai
+
+RUN mkdir -p ~/.cargo && echo '[source.crates-io]' > ~/.cargo/config.toml && echo 'replace-with = "rsproxy"' >> ~/.cargo/config.toml && echo '' >> ~/.cargo/config.toml && echo '[source.rsproxy]' >> ~/.cargo/config.toml && echo 'registry = "sparse+https://rsproxy.cn/index/"' >> ~/.cargo/config.toml
+
+RUN git config --global --add safe.directory /repo
+
+WORKDIR /repo
