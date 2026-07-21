@@ -37,10 +37,15 @@ def get(name: str, **kw):
 
 # Concrete producers self-register here (one import + register per producer).
 from producers.dockeragent import DockerAgentProducer  # noqa: E402
+from producers.claudecode_dockerfile import ClaudeCodeDockerfileProducer  # noqa: E402
+from producers.repo2run import Repo2RunProducer  # noqa: E402
 
 register(DockerAgentProducer)
+register(ClaudeCodeDockerfileProducer)
+register(Repo2RunProducer)
 
 __all__ = [
     "CONTRACT_VERSION", "ProduceContext", "ProducedEnv", "Producer", "write_env_packet",
     "PRODUCERS", "register", "get", "DockerAgentProducer",
+    "ClaudeCodeDockerfileProducer", "Repo2RunProducer",
 ]

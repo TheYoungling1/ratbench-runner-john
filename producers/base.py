@@ -67,6 +67,40 @@ class Producer(Protocol):
     def produce(self, repo: RepoSpec, ctx: ProduceContext) -> ProducedEnv: ...
 
 
+def ensure_rat_on_path() -> str:
+    """Prepend the RAT framework root (the dir that CONTAINS libkit/ and eval/) to sys.path.
+
+    The live-only producer runners (producers/{repo2run,claudecode_dockerfile}.py) lazily import
+    libkit/eval; from an env-bench checkout those live under <repo>/rat/, which is NOT on the path
+    by default (the *models* set their own path up; standalone producers must too). First valid
+    candidate wins: $RAT_ROOT, dirs derived from $AGENTS_ROOT/$DOCKERAGENT_ROOT, then <repo>/rat
+    (env-bench) and <repo> (a /opt-style layout where the RAT root IS the repo root). Raises a
+    clear error if libkit/command.py is nowhere — a loud failure beats a silent wrong path."""
+    seen, cands = set(), []
+
+    def _add(p):
+        if p and p not in seen:
+            seen.add(p)
+            cands.append(p)
+
+    _add(os.environ.get("RAT_ROOT"))
+    for var in ("AGENTS_ROOT", "DOCKERAGENT_ROOT"):
+        v = (os.environ.get(var) or "").rstrip("/")
+        if v:
+            _add(v)
+            _add(os.path.join(v, "rat"))
+    _add(os.path.join(_REPO_ROOT, "rat"))    # env-bench: <repo>/rat holds libkit/ + eval/
+    _add(_REPO_ROOT)                          # /opt-style: RAT root == repo root
+    for root in cands:
+        if os.path.isfile(os.path.join(root, "libkit", "command.py")):
+            if root not in sys.path:
+                sys.path.insert(0, root)
+            return root
+    raise RuntimeError(
+        "cannot locate the RAT framework root (libkit/command.py). Set RAT_ROOT to the directory "
+        f"that contains libkit/ and eval/. Tried: {cands}")
+
+
 def _atomic_write(path: str, content: str) -> None:
     """Write `content` to `path` atomically (write to a temp sibling, then os.replace)."""
     d = os.path.dirname(path) or "."
