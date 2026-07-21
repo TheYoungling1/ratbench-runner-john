@@ -1,20 +1,41 @@
-# varieties.toml — the benchmark "methods".
+# varieties.toml
+# Variety identifiers match their GitHub branch names, so run buckets
+# (/opt/runs/<variety>) and agent checkouts (/opt/agents/<variety>) are
+# self-documenting. Baselines (rat/repo2run) have no branch.
 #
-# In this self-contained repo, agent varieties run from vendored snapshots under
-# agents/<name>/ (run_bench.sh sets SKIP_PROVISION=1, which disables the harness's
-# git fetch/reset). Baselines (rat, repo2run, sweagent) have no branch and run
-# from the harness itself.
-#
-# `llm` is the model slug forwarded to the runner; override per-run with `--llm`.
-# Add another agent: vendor its code under agents/<name>/ and add a block here.
+# `llm` pins the model slug bench forwards to the runner. It must be served by
+# the pinned OpenRouter provider (currently Alibaba). Omit it to fall back to
+# the runner's own default. An explicit `bench --llm ...` overrides this.
+[variety.radical]
+branch = "radical"
+model  = "dockeragent"
+venv   = "/opt/rat_venv"
+llm    = "deepseek/deepseek-v4-flash"
 
-# --- vendored agent (graph-scheduled environment constructor) ---
+[variety.john-planner-v1]
+branch = "john-planner-v1"
+model  = "dockeragent"
+venv   = "/opt/rat_venv"
+llm    = "deepseek/deepseek-v4-flash"
+
+[variety.Jayint-Planer]
+branch = "Jayint-Planer"
+model  = "dockeragent"
+venv   = "/opt/jp_venv"
+llm    = "deepseek/deepseek-v4-flash"
+
 [variety.john-planner-v3]
 branch = "v3-core"
 model  = "dockeragent"
+venv   = "/opt/rat_venv"
 llm    = "deepseek/deepseek-v4-flash"
 
-# --- baselines (no agent branch; run from the harness) ---
+[variety.john-v3-multi-lang]
+branch = "john-v3-multi-lang"
+model  = "dockeragent"
+venv   = "/opt/rat_venv"
+llm    = "deepseek/deepseek-v4-flash"
+
 [variety.rat]
 model = "rat"
 llm   = "deepseek/deepseek-v4-flash"
@@ -23,6 +44,19 @@ llm   = "deepseek/deepseek-v4-flash"
 model = "repo2run"
 llm   = "deepseek/deepseek-v4-flash"
 
+# General coding agents (no agent branch => baselines). `llm` is the model slug
+# forwarded to the runner; override per-run with `bench --llm ...`.
 [variety.sweagent]
 model = "sweagent"
+# Same model + key as the DockerAgent baselines: routed through OpenRouter
+# (OPENROUTER_API_KEY) as a LiteLLM slug. SWE-agent needs the openrouter/ prefix; its
+# cost is registered in scripts/sweagent_runner.py since LiteLLM doesn't ship this model.
 llm   = "openrouter/deepseek/deepseek-v4-flash"
+
+[variety.claudecode]
+model = "claudecode"
+llm   = "sonnet"                   # Claude Code CLI --model alias
+
+[variety.claudecode-dockerfile]
+model = "claudecode-dockerfile"
+llm   = "sonnet"                   # Claude Code CLI --model alias
