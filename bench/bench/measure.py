@@ -20,6 +20,17 @@ _MEASURABLE = ("ok", "legacy_ok", "produced")
 
 _COLLECT_ERR = re.compile(r"((?:[A-Za-z_][\w.]*)?(?:Error|Exception|Warning)):")
 
+_XML_DECL = re.compile(r"<\?xml[^>]*\?>")
+_TESTSUITES_TAG = re.compile(r"</?testsuites[^>]*>")
+
+
+def _merge_junit(raw: str) -> str:
+    """Combine many JUnit files (Surefire/Gradle emit one per class) into ONE parseable document:
+    drop each file's <?xml?> declaration and any per-file <testsuites> wrapper, then wrap all the
+    <testsuite> blocks in a single <testsuites> root. parse_junit iterates <testsuite> elements."""
+    body = _TESTSUITES_TAG.sub("", _XML_DECL.sub("", raw or "")).strip()
+    return f"<testsuites>{body}</testsuites>" if body else ""
+
 
 def _node_id(tc: ET.Element) -> str:
     cls = tc.get("classname") or ""
@@ -248,7 +259,11 @@ def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeou
         t1 = time.time()
         _, _, timed_out = docker.exec(name, _sh(run), timeout=test_timeout)
         test_s = round(time.time() - t1, 2)
-        _, junit_xml, _ = docker.exec(name, _sh(f"cat {lang.junit_glob(W)} 2>/dev/null || true"))
+        junit_spec = lang.junit_glob(W)
+        _, junit_raw, _ = docker.exec(name, _sh(f"cat {junit_spec} 2>/dev/null || true"))
+        # Multi-file ecosystems (Java Surefire/Gradle) return a glob/space-separated spec -> merge the
+        # concatenated files into one document. Single-file specs (python/go/node/rust) are unchanged.
+        junit_xml = _merge_junit(junit_raw) if ("*" in junit_spec or " " in junit_spec) else junit_raw
         pkg_cmd = lang.pkg_count_cmd(W)
         if pkg_cmd:
             _, pkgs_out, _ = docker.exec(name, _sh(pkg_cmd))
