@@ -108,7 +108,9 @@ Run any with `./run_bench.sh <variety> …`. Override the LLM with `--llm <slug>
 
 `datasets/` holds the repo lists (`--repos-json`), pinned to commits where noted:
 - `rat_python50.json` — the 50-repo Python set (default flavour).
-- `rat_python50_pinned_m3nothink.json` — the same 50 with per-repo `commit` pins (reproducible).
+- `rat_python50_pinned_m3nothink.json` — the same 50 repos, each stamped with the `commit` SHA it was at
+  during the M3-thinking-off baseline. NOTE: the pin is provenance only — the current clone path takes
+  the live HEAD (`git clone --depth=1`) and does not `checkout` the recorded commit.
 - `rat_python_hard_subset.json` (the built-in default), `rat_python_medlarge15.json`,
   `rat_python50_large.json`, `rat_node50.json`.
 
