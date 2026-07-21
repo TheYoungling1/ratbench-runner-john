@@ -202,7 +202,9 @@ your adapter's imports resolve. See `agents/john-planner-v3/multi_docker_eval_ad
 
 ```toml
 [variety.my-agent]
-branch  = "my-agent"                     # your pushed branch; provisioned to /opt/agents/my-agent
+branch  = "my-agent"                     # your branch name; must be NON-EMPTY (empty => a no-agent
+                                         #   baseline). Used only for provisioning + provenance; for a
+                                         #   local clone into agents/my-agent it can be any non-empty label.
 model   = "dockeragent"                  # routes to _ProducerModel → your adapter
 venv    = "/opt/rat_venv"                # (optional) venv your agent runs under
 llm     = "deepseek/deepseek-v4-flash"   # forwarded to your adapter as `model=`
@@ -212,15 +214,28 @@ measure = "conforming"                   # your Dockerfile homes the repo at /te
 The variety **name** is also the run bucket (`runs/my-agent`) and the checkout dir
 (`agents/my-agent` / `/opt/agents/my-agent`) — keep it equal to your branch.
 
-### 3. Provisioning
+### 3. Get your checkout into `agents/` — for local runs, just `git clone` it
 
-`provision_agent` runs `git fetch origin <branch> && git reset --hard FETCH_HEAD` in the checkout dir
-(never `git clean` — it preserves your `workplace/`). So **push your branch**, and the first time clone
-it into the checkout dir once (fetch needs an existing git repo there). `SKIP_PROVISION=1` skips the
-fetch/reset — use it to run **local uncommitted WIP** in a vendored checkout (this is what `run_bench.sh`
-does).
+**The quickest path (local): `git clone` your agent branch straight into `agents/<variety>/` and run — no
+push, no provisioning step.** `run_bench.sh` exports `SKIP_PROVISION=1`, so the runner uses the checkout
+as-is (it never fetches or resets) and loads your adapter from `agents/<variety>/multi_docker_eval_adapter.py`:
 
-Then: `./run_bench.sh my-agent --only owner/repo`.
+```bash
+git clone --branch my-agent <your-repo-url> agents/my-agent   # root must hold multi_docker_eval_adapter.py
+./run_bench.sh my-agent --only owner/repo
+```
+
+That's the whole setup — verified end to end: the runner puts `agents/my-agent/` on `sys.path` (so your
+adapter's own imports resolve), loads your `MultiDockerEvalAdapter`, and measures the Dockerfile it emits.
+Two requirements: the clone's **folder name must equal the variety name** (the runner looks for exactly
+`agents/<variety>/`), and the `[variety.my-agent]` block must have a **non-empty `branch`** (an empty
+branch marks a no-agent baseline, which is routed elsewhere — the value itself is only used for
+provisioning + provenance under `SKIP_PROVISION`).
+
+**The provisioning path (e.g. the shared VM), for when you push instead of vendoring:** without
+`SKIP_PROVISION`, `provision_agent` runs `git fetch origin <branch> && git reset --hard FETCH_HEAD` in the
+checkout (never `git clean` — it preserves your `workplace/`), so the checkout must already be a git repo
+with that branch pushed to `origin`. Use it to keep a deployed checkout in sync with your branch.
 
 ### Escape hatch — a first-class producer
 
