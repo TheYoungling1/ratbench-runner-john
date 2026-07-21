@@ -2,9 +2,11 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import subprocess
 import sys
+import tempfile
 import time
 
 from .registry import load_registry, resolve_variety
@@ -48,6 +50,68 @@ def preflight() -> None:
             raise FileNotFoundError(f"glue not provisioned in rat_root: {p}")
 
 
+def _is_native_lane(model: str, declared_measure) -> bool:
+    """True => the EFFECTIVE method has no rebuildable artifact (skip harvest, write live_scores).
+    Source of truth is the producer's `measurable` flag (design §4); falls back to the variety's
+    `measure` tag ('none') only when `model` has no registered producer. Best-effort: any import
+    failure degrades to the declared-measure check so the hook never crashes the run."""
+    try:
+        _root = os.environ.get("PRODUCERS_ROOT") or os.path.dirname(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # <repo> (env-bench) / /opt (VM)
+        if _root not in sys.path:
+            sys.path.insert(0, _root)
+        import producers
+        prod = producers.PRODUCERS.get(model)
+        if prod is not None:
+            return not prod.measurable
+    except Exception:
+        pass
+    return declared_measure == "none"
+
+
+def _write_live_scores(out: str, spec, model: str) -> None:
+    """Native-lane methods have no rebuildable artifact. Capture the method's native inline score
+    (the same numbers the runner prints) to live_scores.json instead of harvesting a non-existent
+    Dockerfile into a false EBSR-0. Non-fatal: any failure => score=None + a note. `model` is the
+    EFFECTIVE method (spec.model, or --model override) — recorded so the marker names what ran."""
+    summary = None
+    try:
+        scripts_dir = os.path.join(HARNESS_ROOT, "scripts")
+        if scripts_dir not in sys.path:
+            sys.path.insert(0, scripts_dir)
+        from compute_essr import score_agent
+        r = score_agent(out)
+        keys = ("n", "n_exec", "coverage", "n_ebsr", "EBSR_build_execute", "n_agent_goal",
+                "agent_goal_rate", "ESSR_avg_pass_rate_official", "pass_rate_over_all",
+                "n_collect_success", "collect_success_all")
+        summary = {k: r.get(k) for k in keys}
+    except Exception as exc:                       # noqa: BLE001 — non-fatal capture
+        print(f"[bench] live-score capture failed (non-fatal): {exc}", flush=True)
+    payload = {"variety": spec.name, "method": model, "measure": "none",
+               "source": "inline", "note": "native-lane method; no rebuildable artifact; "
+               "excluded from fresh-container EBSR/ESSR", "score": summary}
+    path = os.path.join(out, "live_scores.json")
+    tmp = None
+    try:
+        # Atomic write: a truncated live_scores.json is a false marker, so write a temp sibling
+        # then os.replace (all-or-nothing).
+        fd, tmp = tempfile.mkstemp(dir=out, prefix=".live_scores-", suffix=".part")
+        with os.fdopen(fd, "w") as f:
+            json.dump(payload, f, indent=2)
+        os.replace(tmp, path)
+        tmp = None
+        print(f"[bench] measure=none -> wrote live_scores.json (inline score preserved); "
+              f"skipped fresh-container harvest for {spec.name}", flush=True)
+    except Exception as exc:                       # noqa: BLE001 — non-fatal
+        print(f"[bench] could not write live_scores.json (non-fatal): {exc}", flush=True)
+    finally:
+        if tmp and os.path.exists(tmp):            # os.replace didn't run — clean up the temp
+            try:
+                os.remove(tmp)
+            except OSError:
+                pass
+
+
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(prog="bench")
     p.add_argument("variety")
@@ -75,6 +139,10 @@ def main(argv=None) -> int:
     registry = load_registry(os.path.join(HARNESS_ROOT, "varieties.toml"))
     spec = resolve_variety(registry, args.variety)
     model = args.model or spec.model
+    # Measure lane is derived from the EFFECTIVE model's producer (--model overrides spec.model),
+    # so `bench radical --model rat` correctly skips the harvest. Falls back to the variety's
+    # `measure` tag only when the model has no registered producer (design §4 / FIX 1).
+    native = _is_native_lane(model, spec.measure)
     # LLM precedence: explicit --llm > variety's pinned llm > (None => runner's own default).
     # Resolve by None-check (not truthiness) so an explicit value always wins, then treat a
     # blank value from either source as unset so we never forward an empty model id.
@@ -132,14 +200,20 @@ def main(argv=None) -> int:
     # pytest for reproducible EBSR/ESSR, distinct from the runner's live inline scoring.
     # Non-fatal: a measure failure never changes the run's own exit status.
     if rc == 0 and not os.environ.get("BENCH_SKIP_MEASURE"):
-        try:
-            subprocess.run(
-                [sys.executable, "-m", "bench.unified_bench",
-                 "--harvest", f"{spec.name}={os.path.join(out, 'output')}",
-                 "--out", os.path.join(out, "measure"),
-                 "--concurrency", str(args.concurrency or 4)],
-                cwd=BENCH_ROOT, env=env, check=False)
-        except Exception as exc:
-            print(f"[bench] measure stage failed (non-fatal): {exc}", flush=True)
+        if native:
+            # Native-lane method (rat/sweagent/live-claude): no rebuildable Dockerfile. Skip the
+            # fresh-container harvest (it would emit a shadowing EBSR-0 that buries the real score)
+            # and record the method's OWN inline score to live_scores.json. (design §3 methods 5-6.)
+            _write_live_scores(out, spec, model)
+        else:
+            try:
+                subprocess.run(
+                    [sys.executable, "-m", "bench.unified_bench",
+                     "--harvest", f"{spec.name}={os.path.join(out, 'output')}",
+                     "--out", os.path.join(out, "measure"),
+                     "--concurrency", str(args.concurrency or 4)],
+                    cwd=BENCH_ROOT, env=env, check=False)
+            except Exception as exc:
+                print(f"[bench] measure stage failed (non-fatal): {exc}", flush=True)
     manifest.update_status(out, "done" if rc == 0 else "failed")
     return rc

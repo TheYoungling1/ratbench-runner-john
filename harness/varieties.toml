@@ -6,43 +6,56 @@
 # `llm` pins the model slug bench forwards to the runner. It must be served by
 # the pinned OpenRouter provider (currently Alibaba). Omit it to fall back to
 # the runner's own default. An explicit `bench --llm ...` overrides this.
+#
+# `measure` tells the measure hook how to score the variety:
+#   conforming = harvest the Dockerfile & run the /testbed guard (native, already at /testbed);
+#   rehome     = same (repo2run re-homes to /testbed inside its producer);
+#   none       = NO rebuildable artifact -> skip the fresh-container harvest and record the
+#                native inline score to live_scores.json (never a shadowing EBSR-0).
 [variety.radical]
 branch = "radical"
 model  = "dockeragent"
 venv   = "/opt/rat_venv"
 llm    = "deepseek/deepseek-v4-flash"
+measure = "conforming"
 
 [variety.john-planner-v1]
 branch = "john-planner-v1"
 model  = "dockeragent"
 venv   = "/opt/rat_venv"
 llm    = "deepseek/deepseek-v4-flash"
+measure = "conforming"
 
 [variety.Jayint-Planer]
 branch = "Jayint-Planer"
 model  = "dockeragent"
 venv   = "/opt/jp_venv"
 llm    = "deepseek/deepseek-v4-flash"
+measure = "conforming"
 
 [variety.john-planner-v3]
 branch = "v3-core"
 model  = "dockeragent"
 venv   = "/opt/rat_venv"
 llm    = "deepseek/deepseek-v4-flash"
+measure = "conforming"
 
 [variety.john-v3-multi-lang]
 branch = "john-v3-multi-lang"
 model  = "dockeragent"
 venv   = "/opt/rat_venv"
 llm    = "deepseek/deepseek-v4-flash"
+measure = "conforming"
 
 [variety.rat]
 model = "rat"
 llm   = "deepseek/deepseek-v4-flash"
+measure = "none"                   # LOCKED inline-only (no rebuildable artifact; design §3 open call)
 
 [variety.repo2run]
 model = "repo2run"
 llm   = "deepseek/deepseek-v4-flash"
+measure = "rehome"
 
 # General coding agents (no agent branch => baselines). `llm` is the model slug
 # forwarded to the runner; override per-run with `bench --llm ...`.
@@ -52,11 +65,14 @@ model = "sweagent"
 # (OPENROUTER_API_KEY) as a LiteLLM slug. SWE-agent needs the openrouter/ prefix; its
 # cost is registered in scripts/sweagent_runner.py since LiteLLM doesn't ship this model.
 llm   = "openrouter/deepseek/deepseek-v4-flash"
+measure = "none"                   # only run_pytest JSONs, no Dockerfile artifact
 
 [variety.claudecode]
 model = "claudecode"
 llm   = "sonnet"                   # Claude Code CLI --model alias
+measure = "none"                   # live in-place mutation, no static artifact
 
 [variety.claudecode-dockerfile]
 model = "claudecode-dockerfile"
 llm   = "sonnet"                   # Claude Code CLI --model alias
+measure = "conforming"
