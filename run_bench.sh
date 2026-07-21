@@ -8,7 +8,9 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 
-export HARNESS_ROOT="$ROOT/harness"
+export RUNNER_ROOT="$ROOT/runner"
+export REPO_ROOT="$ROOT"
+export PYTHONPATH="$ROOT:${PYTHONPATH:-}"
 export RAT_ROOT="$ROOT/rat"
 export AGENTS_ROOT="$ROOT/agents"
 export BENCH_ROOT="$ROOT/bench"
@@ -25,7 +27,7 @@ if [ ! -x "$PY" ]; then
 fi
 if [ $# -eq 0 ]; then
   echo "usage: ./run_bench.sh <variety> [bench args...]" >&2
-  echo "varieties: $(grep -oE '^\[variety\.[^]]+' "$HARNESS_ROOT/varieties.toml" | sed 's/\[variety\.//' | tr '\n' ' ')" >&2
+  echo "varieties: $(grep -oE '^\[variety\.[^]]+' "$ROOT/varieties.toml" | sed 's/\[variety\.//' | tr '\n' ' ')" >&2
   exit 2
 fi
-exec "$PY" "$HARNESS_ROOT/bench" "$@"
+exec "$PY" -m runner.cli "$@"

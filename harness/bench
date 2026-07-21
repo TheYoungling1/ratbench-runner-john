@@ -1,5 +1,0 @@
-#!/usr/bin/env python3
-import sys
-from harness_cli.run import main
-
-sys.exit(main())

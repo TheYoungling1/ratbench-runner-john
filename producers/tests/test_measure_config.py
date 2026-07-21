@@ -18,13 +18,12 @@ import producers
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 _REPO_ROOT = os.path.dirname(os.path.dirname(_HERE))          # producers/tests -> producers -> repo root
-_HARNESS_DIR = os.path.join(_REPO_ROOT, "harness")
-_VARIETIES_TOML = os.path.join(_HARNESS_DIR, "varieties.toml")
+_VARIETIES_TOML = os.path.join(_REPO_ROOT, "varieties.toml")
 
-# registry lives at <repo>/harness/harness_cli/registry.py — put `harness` on the path.
-if _HARNESS_DIR not in sys.path:
-    sys.path.insert(0, _HARNESS_DIR)
-from harness_cli.registry import load_registry, resolve_variety  # noqa: E402
+# registry lives at <repo>/runner/registry.py — put the repo root on the path so `runner` imports.
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
+from runner.registry import load_registry, resolve_variety  # noqa: E402
 
 _VALID_MEASURE = {"conforming", "rehome", "none"}
 

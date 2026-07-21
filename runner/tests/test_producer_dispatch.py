@@ -3,14 +3,13 @@
 No LLM, no docker. This is the acceptance gate for wiring the producer registry
 DIRECTLY into the runner (the three produce-only wrappers under runner/models/ were
 deleted; _ProducerModel re-homes their produce -> write_env_packet -> run_produced.json
-duties into harness/run_rat_benchmark.py).
+duties into runner/benchmark.py).
 
-IMPORT STRATEGY (documented, per task): we load harness/run_rat_benchmark.py BY PATH
-via importlib rather than `import harness.run_rat_benchmark`. harness/ is NOT an
-importable package (no __init__.py), and the module's own top-level code sets up
-sys.path (RAT_ROOT / <repo> / <repo>/bench) exactly as a real run does — loading it by
-path exercises that self-configuration and makes `import producers`, `from bench.schema
-import RepoSpec`, etc. resolve without the test having to replicate the path shim.
+IMPORT STRATEGY (documented, per task): we load runner/benchmark.py BY PATH
+via importlib rather than `import runner.benchmark`. Loading it by path exercises the
+module's own top-level code, which sets up sys.path (RAT_ROOT / <repo> / <repo>/bench)
+exactly as a real run does — making `import producers`, `from bench.schema import
+RepoSpec`, etc. resolve without the test having to replicate the path shim.
 
 Covers:
   1. _make_model dispatches the 3 produce-able names -> _ProducerModel, and the 3
@@ -24,12 +23,12 @@ import importlib.util
 import json
 import os
 
-_HARNESS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # <repo>/harness
-_RRB_PATH = os.path.join(_HARNESS_DIR, "run_rat_benchmark.py")
+_RUNNER_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # <repo>/runner
+_RRB_PATH = os.path.join(_RUNNER_DIR, "benchmark.py")
 
 
 def _load_rrb():
-    """Load run_rat_benchmark.py by path; its module-level code sets up sys.path."""
+    """Load benchmark.py by path; its module-level code sets up sys.path."""
     spec = importlib.util.spec_from_file_location("rrb_under_test", _RRB_PATH)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)

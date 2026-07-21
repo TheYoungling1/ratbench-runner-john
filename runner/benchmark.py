@@ -254,9 +254,9 @@ def _persist_agent_summary(out_dir: str, full_name: str, since_ts: float = 0.0) 
     dst = os.path.join(out_dir, "agent_run_summary.json")
     if os.path.exists(dst):
         return
-    # The agent writes ./workplace relative to the runner's cwd (the harness root) — NOT under
+    # The agent writes ./workplace relative to the runner's cwd — NOT under
     # DOCKERAGENT_ROOT, which for agent varieties points at the agent checkout (/opt/agents/<v>).
-    src = os.path.join(_THIS_DIR, "workplace",
+    src = os.path.join(os.getcwd(), "workplace",
                        "multi_docker_eval_" + full_name.replace("/", "__"),
                        "agent_run_summary.json")
     if not os.path.exists(src):
@@ -936,7 +936,7 @@ def parallel_main(repos_json: str, root_path: str, limit: Optional[int], offset:
 def _build_argparser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Run RAT benchmark offline with DockerAgentModel.")
     parser.add_argument("--repos-json",
-                        default=os.path.join(_THIS_DIR, "datasets", "rat_python_hard_subset.json"),
+                        default=os.path.join(_REPO_ROOT, "datasets", "rat_python_hard_subset.json"),
                         help="Path to repos JSON (bare list or {\"repos\":[...]} dict). "
                              "Defaults to the dataset shipped in this repo.")
     parser.add_argument("--root-path", default="./rat_run",

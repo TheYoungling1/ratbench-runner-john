@@ -1,6 +1,6 @@
 # producers/tests/test_run_gating.py — the runtime measure-lane gate + live-score fallback (FIX 4).
 #
-# Two helper-level surfaces from harness_cli.run, proven WITHOUT mocking run.main() (provision /
+# Two helper-level surfaces from runner.cli, proven WITHOUT mocking run.main() (provision /
 # staging symlinks / subprocess would make that brittle):
 #   * _is_native_lane(model, declared_measure) — derives "no rebuildable artifact" from the
 #     EFFECTIVE model's producer.measurable (design §4), falling back to the declared `measure`
@@ -15,12 +15,11 @@ import pytest
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 _REPO_ROOT = os.path.dirname(os.path.dirname(_HERE))          # producers/tests -> producers -> repo root
-_HARNESS_DIR = os.path.join(_REPO_ROOT, "harness")
 
-# harness_cli lives under <repo>/harness; put it on the path (mirrors test_measure_config.py).
-if _HARNESS_DIR not in sys.path:
-    sys.path.insert(0, _HARNESS_DIR)
-from harness_cli import run  # noqa: E402
+# runner is a package at <repo>/runner; put the repo root on the path so it imports.
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
+from runner import cli as run  # noqa: E402
 
 
 class _Spec:

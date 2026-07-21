@@ -1,4 +1,4 @@
-# harness_cli/run.py
+# runner/cli.py
 from __future__ import annotations
 
 import argparse
@@ -13,7 +13,8 @@ from .registry import load_registry, resolve_variety
 from .provision import provision_agent, git_commit
 from . import manifest
 
-HARNESS_ROOT = os.environ.get("HARNESS_ROOT", "/opt/harness")
+RUNNER_ROOT = os.environ.get("RUNNER_ROOT", "/opt/runner")
+REPO_ROOT = os.environ.get("REPO_ROOT") or os.path.dirname(RUNNER_ROOT)
 RAT_ROOT = os.environ.get("RAT_ROOT", "/opt/rat_root")
 AGENTS_ROOT = os.environ.get("AGENTS_ROOT", "/opt/agents")
 RUNS_ROOT = os.environ.get("RUNS_ROOT", "/opt/runs")
@@ -29,7 +30,7 @@ def output_dir(variety: str, run_name: str, now: float) -> str:
 def build_env(spec, agent_root: str, harness_commit: str, agent_commit: str) -> dict:
     env = dict(os.environ)                       # creds (OPENAI_API_KEY, ...) flow through here
     env["RAT_ROOT"] = RAT_ROOT
-    env["DOCKERAGENT_ROOT"] = HARNESS_ROOT if spec.is_baseline else agent_root
+    env["DOCKERAGENT_ROOT"] = RUNNER_ROOT if spec.is_baseline else agent_root
     env["HARNESS_COMMIT"] = harness_commit
     env["AGENT_COMMIT"] = agent_commit
     env["RUN_VARIETY"] = spec.name
@@ -46,7 +47,7 @@ def _is_native_lane(model: str, declared_measure) -> bool:
     failure degrades to the declared-measure check so the hook never crashes the run."""
     try:
         _root = os.environ.get("PRODUCERS_ROOT") or os.path.dirname(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # <repo> (env-bench) / /opt (VM)
+            os.path.dirname(os.path.abspath(__file__)))  # runner/cli.py -> <repo> (env-bench) / /opt (VM)
         if _root not in sys.path:
             sys.path.insert(0, _root)
         import producers
@@ -124,7 +125,7 @@ def main(argv=None) -> int:
                    help="forwarded to the runner; unset = runner's default (runner)")
     args = p.parse_args(argv)
 
-    registry = load_registry(os.path.join(HARNESS_ROOT, "varieties.toml"))
+    registry = load_registry(os.path.join(REPO_ROOT, "varieties.toml"))
     spec = resolve_variety(registry, args.variety)
     model = args.model or spec.model
     # Measure lane is derived from the EFFECTIVE model's producer (--model overrides spec.model),
@@ -138,9 +139,9 @@ def main(argv=None) -> int:
     if llm is not None:
         llm = llm.strip() or None
 
-    harness_commit = git_commit(HARNESS_ROOT)
+    harness_commit = git_commit(REPO_ROOT)
     if spec.is_baseline:
-        agent_root, agent_commit = HARNESS_ROOT, harness_commit
+        agent_root, agent_commit = RUNNER_ROOT, harness_commit
     else:
         agent_root = os.path.join(AGENTS_ROOT, spec.name)
         agent_commit = provision_agent(agent_root, spec.branch)
@@ -161,7 +162,7 @@ def main(argv=None) -> int:
         model=model, tier=args.tier, num_turn=args.num_turn,
         concurrency=args.concurrency, status="running"))
 
-    cmd = [sys.executable, os.path.join(HARNESS_ROOT, "run_rat_benchmark.py"),
+    cmd = [sys.executable, os.path.join(RUNNER_ROOT, "benchmark.py"),
            "--model", model, "--tier", args.tier, "--root-path", out]
     if args.concurrency is not None:
         cmd += ["--concurrency", str(args.concurrency)]
@@ -201,3 +202,8 @@ def main(argv=None) -> int:
                 print(f"[bench] measure stage failed (non-fatal): {exc}", flush=True)
     manifest.update_status(out, "done" if rc == 0 else "failed")
     return rc
+
+
+if __name__ == "__main__":
+    import sys
+    sys.exit(main())
