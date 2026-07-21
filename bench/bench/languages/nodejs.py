@@ -25,10 +25,15 @@ class NodeLanguage:
         return ""
 
     def run_cmd(self, W: str, junit_out: str) -> str:
-        # jest via jest-junit (env-driven output path); fall through to mocha's junit reporter
-        return (f"cd {W} && export JEST_JUNIT_OUTPUT={junit_out} && "
-                "(npx --no-install jest --ci --reporters=default --reporters=jest-junit "
-                f"|| npx --no-install mocha --reporter mocha-junit-reporter "
+        # jest via jest-junit — modern jest-junit reads JEST_JUNIT_OUTPUT_DIR/_NAME; the older
+        # single-path JEST_JUNIT_OUTPUT is silently ignored (writes to cwd instead). jest exits
+        # non-zero when a test fails, so guard the mocha fallback on junit ABSENCE — otherwise a
+        # legitimately-failing jest run would trigger mocha and overwrite the report with an empty one.
+        return (f'cd {W} && mkdir -p "$(dirname {junit_out})" && '
+                f'export JEST_JUNIT_OUTPUT_DIR="$(dirname {junit_out})" && '
+                f'export JEST_JUNIT_OUTPUT_NAME="$(basename {junit_out})" && '
+                "(npx --no-install jest --ci --reporters=default --reporters=jest-junit; "
+                f"[ -f {junit_out} ] || npx --no-install mocha --reporter mocha-junit-reporter "
                 f"--reporter-options mochaFile={junit_out}) 2>/dev/null || true")
 
     def junit_glob(self, W: str) -> str:
