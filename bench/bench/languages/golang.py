@@ -1,8 +1,12 @@
 # bench/languages/golang.py
 """The Go Language. EBSR gate = the module compiles (`go build ./...`). Tests run via gotestsum,
 which emits JUnit XML (one file, possibly many <testsuite> per package — parse_junit handles that).
-gotestsum is installed to /usr/local/bin (already on PATH) so run_cmd needs no PATH juggling."""
+gotestsum installs to /usr/local/bin (on PATH); each command prepends /usr/local/go/bin because
+measure()'s login shell (`bash -lc`) sources /etc/profile, which resets PATH and would otherwise
+drop the go toolchain the base image put there."""
 from __future__ import annotations
+
+_GO_PATH = "export PATH=$PATH:/usr/local/go/bin"
 
 
 class GoLanguage:
@@ -10,12 +14,10 @@ class GoLanguage:
     short_circuit_gate = True   # if `go build` fails, gotestsum cannot run — skip it
 
     def ensure_cmd(self, W: str) -> str:
-        # Install the JUnit reporter at measure time (host-owned, untimed, before the gate). GOBIN
-        # forces a standard PATH location so run_cmd finds it regardless of GOPATH/GOBIN config.
-        return "GOBIN=/usr/local/bin go install gotest.tools/gotestsum@latest 2>/dev/null || true"
+        return f"{_GO_PATH} && GOBIN=/usr/local/bin go install gotest.tools/gotestsum@latest 2>/dev/null || true"
 
     def gate_cmd(self, W: str) -> str:
-        return f"cd {W} && go build ./..."
+        return f"{_GO_PATH} && cd {W} && go build ./..."
 
     def gate_pass(self, rc: int) -> bool:
         return rc == 0
@@ -24,7 +26,7 @@ class GoLanguage:
         return ""   # node-ids come straight from the JUnit <testcase> elements
 
     def run_cmd(self, W: str, junit_out: str) -> str:
-        return f"cd {W} && gotestsum --junitfile {junit_out} --format standard-quiet -- ./..."
+        return f"{_GO_PATH} && cd {W} && gotestsum --junitfile {junit_out} --format standard-quiet -- ./..."
 
     def junit_glob(self, W: str) -> str:
         return f"{W}/logs/junit.xml"
