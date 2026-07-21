@@ -50,7 +50,10 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
     from libkit.command import download_repo, init_output_and_repo  # noqa: E402
 
     dockerfile_base = os.environ.get("CLAUDE_DOCKERFILE_BASE", "python:3.11")
-    base_image = os.environ.get("CLAUDE_BASE_IMAGE", "python:3.11")
+    # FIX 3: the CONTAINER image must be the claude-runner image (has the `agent` user + claude
+    # CLI), mirroring the deleted wrapper. The generated Dockerfile's FROM is a SEPARATE thing
+    # (dockerfile_base, above) and stays vanilla python:3.11 — only the container image was wrong.
+    base_image = os.environ.get("CLAUDE_RUNNER_IMAGE", "claude-runner:latest")
     auth = {k: os.environ[k] for k in AUTH_KEYS if os.environ.get(k)}
     if not auth:
         raise RuntimeError("set CLAUDE_CODE_OAUTH_TOKEN or ANTHROPIC_API_KEY")

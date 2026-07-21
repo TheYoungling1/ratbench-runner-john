@@ -96,7 +96,6 @@ sys.path[:0] = [os.environ["RAT_ROOT"],               # RAT repo: eval.common (l
                 _REPO_ROOT,                           # runner.*, producers.*
                 os.path.join(_REPO_ROOT, "bench")]    # the `bench` package lives at <repo>/bench/bench
 from bench.rat_scorers import success_scorer, pytest_pass_rate_scorer, pytest_collect_scorer
-from runner.models.dockeragent_model import DockerAgentModel   # reuse the SAME predict()
 
 PY = sys.executable  # same interpreter for child subprocesses
 
@@ -105,24 +104,84 @@ PY = sys.executable  # same interpreter for child subprocesses
 # Model factory
 # ─────────────────────────────────────────────────────────────────────────────
 
+# Produce-able methods (measurable=True): model name == producer registry key. These no longer
+# have a runner/models wrapper — the runner drives the producer registry directly (see
+# _ProducerModel). The remaining names (rat/sweagent/claudecode) are native-lane, measurable=False
+# live models under runner/live/.
+_PRODUCE_ABLE = {"dockeragent", "repo2run", "claudecode-dockerfile"}
+
+
+class _ProducerModel:
+    """Runner-side adapter that drives the producer registry directly (env-bench M4.5b).
+
+    Replaces the three deleted produce-only wrappers (runner/models/{dockeragent,repo2run,
+    claudecode_dockerfile}_model.py). Their only job was: build the producer → produce() →
+    write_env_packet() → write run_produced.json → return an out-dict. That is re-homed here,
+    keyed off the producer registry (model name == registry key). Behavior on disk is equivalent
+    to the wrappers: eval_build/Dockerfile + _meta.json{status:"produced", economy} on success
+    (via the shared producers.base.write_env_packet contract) + a run_produced.json resume marker;
+    on error/unmeasurable, NO run_produced.json so _run_one writes _collect_meta and scores it.
+
+    Carries .llm/.root_path/.timeout/.num_turn (the runner-side repair loop probes model.llm).
+    """
+
+    def __init__(self, name: str, root_path: str, timeout: int, llm: str, num_turn: int):
+        self.name = name
+        self.root_path = root_path
+        self.timeout = timeout
+        self.llm = llm
+        self.num_turn = num_turn
+
+    def predict(self, full_name: str) -> dict:
+        import json, os
+        import producers
+        from producers.base import ProduceContext, write_env_packet
+        from bench.schema import RepoSpec
+        repo = RepoSpec(full_name, f"https://github.com/{full_name}")
+        kw = {"llm": self.llm}
+        if self.name == "dockeragent":
+            kw.update(num_turn=self.num_turn, base_image="auto")
+        elif self.name == "repo2run":
+            kw.update(num_turn=self.num_turn)
+        # claudecode-dockerfile: llm only
+        prod = producers.get(self.name, **kw)
+        agent_root = os.environ.get("DOCKERAGENT_ROOT")   # set by run.py to the agent checkout
+        ctx = ProduceContext(llm=self.llm, workdir=self.root_path, num_turn=self.num_turn,
+                             timeout=self.timeout, agent_root=agent_root)
+        env = prod.produce(repo, ctx)                     # producer is anti-vanish (never raises)
+        write_env_packet(os.path.join(self.root_path, "output"), env)
+        out_dir = os.path.join(self.root_path, "output", full_name)
+        ok = {"root_path": self.root_path, "full_name": full_name,
+              "requested_model": self.llm, "base_image": env.base_image,
+              "head_sha": env.head_sha or ""}
+        if env.status == "produced" and env.dockerfile:
+            with open(os.path.join(out_dir, "run_produced.json"), "w") as f:
+                json.dump({"status": "produced", "conformance": env.conformance,
+                           "base_image": env.base_image,
+                           "produce_s": (env.economy or {}).get("produce_s")}, f, indent=2)
+            return {"status": "success", "produced": True, **ok}
+        # error / unmeasurable: no run_produced.json (so _run_one writes _collect_meta + scores it)
+        return {"status": "error", "failure_reason": "repo_error",
+                "error": env.note, **ok}
+
+
 def _make_model(model_name: str, root_path: str, timeout: int, llm: str, num_turn: int):
     """Return the correct model instance for *model_name*.
 
-    dockeragent  → DockerAgentModel (imported at module level; tests monkeypatch this)
-    rat          → RATModel         (lazy import)
-    repo2run     → Repo2RunModel    (lazy import)
-    sweagent     → SWEAgentModel    (lazy import; RAT tree + `sweagent` pkg required)
-    claudecode   → ClaudeCodeModel  (lazy import; Claude Code CLI base image required)
+    Produce-able (measurable=True; model name == producer registry key) →
+        _ProducerModel driving producers.get(name) directly (no runner/models wrapper):
+        dockeragent, repo2run, claudecode-dockerfile.
+    Native-lane (measurable=False) → the live models under runner/live/ (lazy import):
+        rat        → RATModel
+        sweagent   → SweAgentSubprocessModel (RAT tree + `sweagent` pkg required)
+        claudecode → ClaudeCodeModel         (Claude Code CLI base image required)
     """
-    if model_name == "dockeragent":
-        return DockerAgentModel(root_path=root_path, timeout=timeout, llm=llm, num_turn=num_turn)
+    if model_name in _PRODUCE_ABLE:
+        return _ProducerModel(model_name, root_path, timeout, llm, num_turn)
     elif model_name == "rat":
         from runner.live.rat import RATModel
         return RATModel(root_path=root_path, timeout=timeout, llm=llm, num_turn=num_turn,
                         save_mode="none")
-    elif model_name == "repo2run":
-        from runner.models.repo2run_model import Repo2RunModel
-        return Repo2RunModel(root_path=root_path, timeout=timeout, llm=llm, num_turn=num_turn)
     elif model_name == "sweagent":
         # SWE-agent requires Python >=3.11 but the runner is 3.10, so this model
         # subprocesses the official SWEAgentModel under /opt/sweagent_venv.
@@ -135,12 +194,6 @@ def _make_model(model_name: str, root_path: str, timeout: int, llm: str, num_tur
         from runner.live.claudecode import ClaudeCodeModel
         return ClaudeCodeModel(root_path=root_path, timeout=timeout, llm=llm, num_turn=num_turn,
                                base_image=os.environ.get("CLAUDE_RUNNER_IMAGE", "claude-runner:latest"))
-    elif model_name == "claudecode-dockerfile":
-        # Agentic verify in a live container + emit a Dockerfile, built fresh and scored.
-        from runner.models.claudecode_dockerfile_model import ClaudeCodeDockerfileModel
-        return ClaudeCodeDockerfileModel(
-            root_path=root_path, timeout=timeout, llm=llm, num_turn=num_turn,
-            base_image=os.environ.get("CLAUDE_RUNNER_IMAGE", "claude-runner:latest"))
     else:
         raise ValueError(f"Unknown model name: {model_name!r}. "
                          "Choose one of: dockeragent, rat, repo2run, sweagent, claudecode, "

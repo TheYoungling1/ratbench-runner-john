@@ -10,7 +10,7 @@ import re
 import sys
 import time
 
-from producers.base import ProduceContext, ProducedEnv
+from producers.base import ProduceContext, ProducedEnv, ensure_rat_on_path
 
 # bench.schema is on the path via producers.base's shim (imported above).
 from bench.schema import RepoSpec  # noqa: E402
@@ -82,13 +82,25 @@ class DockerAgentProducer:
             instance_id = repo.full_name.replace("/", "__")
             llm = ctx.llm or self.llm
             num_turn = ctx.num_turn if ctx.num_turn is not None else self.num_turn
+            # FIX 2(a): the adapter's output_dir is the PER-REPO dir (matching the deleted wrapper's
+            # f"{root_path}/output/{full_name}"), NOT the shared run root ctx.workdir. Passing the
+            # shared root let concurrent repos race on the agent's shared adapter files (v3_src,
+            # setup.sh) and land the agent's artifacts in the wrong dir.
+            out_dir = os.path.join(ctx.workdir, "output", repo.full_name)
             # Resolve the checkout that owns this branch's adapter: prefer the per-repo
             # ctx.agent_root, else $DOCKERAGENT_ROOT (both handled by the loader). Skipped
             # entirely when a stub adapter_cls is injected (tests).
             agent_root = ctx.agent_root or os.environ.get("DOCKERAGENT_ROOT")
+            # FIX 2(b): on the REAL path only (no injected stub) mirror the wrapper's pre-run setup —
+            # scaffold the run's output/input dirs under ctx.workdir before the agent runs. Gated on
+            # `self._adapter_cls is None` so tests (stub injected) NEVER import the RAT tree/libkit.
+            if self._adapter_cls is None:
+                ensure_rat_on_path()
+                from libkit.command import init_output_and_repo  # lazy: real path only
+                init_output_and_repo(ctx.workdir, repo.full_name, renew=True)
             adapter_cls = self._adapter_cls or _load_adapter_cls(agent_root)
 
-            res = adapter_cls(output_dir=ctx.workdir).process_single_instance(
+            res = adapter_cls(output_dir=out_dir).process_single_instance(
                 {"instance_id": instance_id, "repo_url": repo.repo_url, "language": repo.language},
                 base_image=self.base_image, model=llm, max_steps=num_turn,
                 enable_artifact_preflight=False)   # bench scores it; skip our own preflight

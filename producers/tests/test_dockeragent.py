@@ -38,6 +38,24 @@ def test_produce_success(tmp_path):
     assert env.economy["produce_s"] is not None
 
 
+def test_produce_passes_per_repo_output_dir(tmp_path):
+    # FIX 2(a): the adapter must receive the PER-REPO output_dir (…/output/o/r), NOT the shared run
+    # root ctx.workdir — otherwise concurrent repos race on the agent's shared adapter files. The
+    # stub adapter records the output_dir it was constructed with (adapter_cls injected => the real
+    # ensure_rat_on_path/libkit path of FIX 2(b) is never touched).
+    captured = {}
+
+    class _CapturingAdapter(_StubAdapter):
+        def __init__(self, output_dir=None):
+            super().__init__(output_dir=output_dir)
+            captured["output_dir"] = output_dir
+
+    p = DockerAgentProducer(adapter_cls=_CapturingAdapter)
+    env = p.produce(RepoSpec("o/r", "https://github.com/o/r"), _ctx(tmp_path))
+    assert env.status == "produced"
+    assert captured["output_dir"].endswith(os.path.join("output", "o", "r"))
+
+
 def test_produce_no_dockerfile_is_error(tmp_path):
     class _NoDockerfile(_StubAdapter):
         result = {"setup_scripts": {}, "logs": {"error": "boom"}}

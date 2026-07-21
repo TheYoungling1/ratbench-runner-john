@@ -204,6 +204,24 @@ class Repo2RunProducer:
                                    producer_name=self.name, economy=economy, inline=inline)
 
             rehomed = rehome_dockerfile(raw, self.repo_dest)
+            # FIX 1 (false-green): repo2run wrote the RAW /repo-homed Dockerfile at
+            # output/<full_name>/Dockerfile. bench.harvest._find_dockerfile checks that path BEFORE
+            # eval_build/Dockerfile, so a surviving raw file shadows the re-homed one → harvest
+            # measures an empty /testbed (false green). Remove it (mirroring the deleted wrapper's
+            # _finish_produce_only); if it stubbornly survives, fail safe with status="error".
+            raw_path = os.path.join(ctx.workdir, "output", repo.full_name, "Dockerfile")
+            try:
+                os.remove(raw_path)
+            except OSError:
+                pass
+            if os.path.exists(raw_path):
+                return ProducedEnv(repo=repo, dockerfile=None, status="error",
+                                   note="raw repo2run Dockerfile still present; harvest would "
+                                        "measure the /repo-homed raw instead of the re-homed one",
+                                   base_image=res.get("base_image"),
+                                   head_sha=res.get("head_sha") or "",
+                                   conformance="rehomed", producer_name=self.name,
+                                   economy=economy, inline=inline)
             return ProducedEnv(repo=repo, dockerfile=rehomed,
                                base_image=res.get("base_image"),
                                head_sha=res.get("head_sha") or "",

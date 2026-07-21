@@ -89,6 +89,28 @@ def test_producer_produce_success_is_rehomed(tmp_path):
     assert env.economy["produce_s"] is not None
 
 
+def test_producer_removes_raw_repo_homed_dockerfile(tmp_path):
+    # FIX 1 (false-green): the repo2run tool writes the RAW /repo-homed Dockerfile at
+    # output/<full_name>/Dockerfile. bench.harvest._find_dockerfile checks that path BEFORE
+    # eval_build/Dockerfile, so it MUST be removed or harvest measures an empty /testbed. The stub
+    # simulates the tool writing that raw file as a side effect; produce() must delete it and still
+    # return status="produced" with the re-homed Dockerfile.
+    full_name = "o/r"
+    raw_path = os.path.join(str(tmp_path), "output", full_name, "Dockerfile")
+
+    def _stub(repo, ctx, **kw):
+        os.makedirs(os.path.dirname(raw_path), exist_ok=True)
+        with open(raw_path, "w") as f:
+            f.write(_R2R_DF)                              # the surviving RAW /repo Dockerfile
+        return {"dockerfile": _R2R_DF, "base_image": "python:3.10", "head_sha": "abc123"}
+
+    env = Repo2RunProducer(runner=_stub).produce(
+        RepoSpec(full_name, "https://github.com/o/r"), _ctx(tmp_path))
+    assert env.status == "produced"
+    assert "RUN mv /repo /testbed" in env.dockerfile     # the re-home was applied
+    assert not os.path.exists(raw_path)                  # FIX 1: raw /repo-homed file removed
+
+
 def test_producer_no_dockerfile_is_error(tmp_path):
     def _stub(repo, ctx, **kw):
         return {"dockerfile": None, "base_image": "python:3.10"}
