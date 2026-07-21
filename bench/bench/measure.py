@@ -1,6 +1,7 @@
 # bench/measure.py
 from __future__ import annotations
 
+import json
 import os
 import re
 import shutil
@@ -89,6 +90,71 @@ def _sh(cmd: str) -> list:
     return ["bash", "-lc", cmd]
 
 
+_COPY_RE = re.compile(r"^\s*COPY\s+(.+)$", re.MULTILINE)
+
+
+def _truncate_after_setup(dockerfile: str, setup_basename: str = "setup.sh") -> str | None:
+    """Return `dockerfile` truncated to end right AFTER the `RUN` step that executes the
+    construction setup script, or None if that step can't be located.
+
+    Purpose: on a FAILED monolithic build, isolate setup.sh's own exit code from neighbouring
+    steps (the `git clone` before it, the `pip install pytest` after it). Building this truncated
+    copy is docker-cache-optimal — it shares every layer with the full build, so setup.sh only
+    re-runs when it was NOT already a cached success."""
+    if not dockerfile:
+        return None
+    # 1) destination(s) the setup script is COPY'd to (mirrors harvest._copy_sources parsing).
+    dests = []
+    for m in _COPY_RE.finditer(dockerfile):
+        args = m.group(1).strip()
+        if args.startswith("["):
+            try:
+                parts = json.loads(args)
+            except (json.JSONDecodeError, ValueError):
+                continue
+        else:
+            parts = args.split()
+        parts = [p for p in parts if not p.startswith("--")]   # drop --chown=, --from=, ...
+        if len(parts) >= 2 and any(os.path.basename(p) == setup_basename for p in parts[:-1]):
+            dests.append(parts[-1])
+    if not dests:
+        return None
+    # 2) the RUN instruction that invokes a dest; keep through its `\`-continuation lines.
+    lines = dockerfile.splitlines()
+    end = None
+    for i, ln in enumerate(lines):
+        if ln.lstrip().startswith("RUN") and any(d in ln for d in dests):
+            j = i
+            while lines[j].rstrip().endswith("\\") and j + 1 < len(lines):
+                j += 1
+            end = j
+            break
+    if end is None:
+        return None
+    return "\n".join(lines[: end + 1]) + "\n"
+
+
+def _probe_setup_compile(docker, env: HarvestedEnv, probe_tag: str, *, timeout: int) -> bool:
+    """A full build FAILED — rebuild only THROUGH the setup.sh step to learn whether setup.sh
+    itself ran rc 0 (the failure was a later step) or not. Returns False when the setup step
+    can't be isolated (conservative: a failed build with an unlocatable setup step)."""
+    trunc = _truncate_after_setup(env.dockerfile or "")
+    if trunc is None:
+        return False
+    ctx = tempfile.mkdtemp(prefix="benchsetup-")
+    try:
+        with open(os.path.join(ctx, "Dockerfile"), "w") as f:
+            f.write(trunc)
+        for fname, content in (env.setup_scripts or {}).items():
+            with open(os.path.join(ctx, fname), "w") as f:
+                f.write(content)
+        prc, _ = docker.build(probe_tag, ctx, timeout=timeout)
+        return prc == 0
+    finally:
+        shutil.rmtree(ctx, ignore_errors=True)
+        docker.rm(probe_tag, probe_tag)   # untag the (cache-shared) probe image; no container
+
+
 def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeout: int = 1800) -> MeasureRow:
     agent, repo, m = env.agent, env.repo.full_name, env.meta
     lang = get_language(env.repo.language)
@@ -114,6 +180,14 @@ def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeou
     build_rc, build_log = docker.build(tag, ctx, timeout=build_timeout)
     build_s = round(time.time() - t0, 2)
     shutil.rmtree(ctx, ignore_errors=True)
+
+    # setup.sh execution-success (additive; never affects EBSR/ESSR). A passing build proves the
+    # setup.sh fatal layer ran rc 0; a failing build gets a cache-optimal truncated re-build so the
+    # signal isn't conflated with a clone / pytest-install failure around it.
+    base_row["setup_compile_ok"] = (
+        True if build_rc == 0
+        else _probe_setup_compile(docker, env, f"{tag}-setupprobe", timeout=build_timeout))
+
     if build_rc != 0:
         return MeasureRow(build_ok=False, build_log_tail=build_log[-2000:], build_s=build_s,
                           executed=False, ebsr=False, status="build_fail", **base_row)

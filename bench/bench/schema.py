@@ -32,6 +32,10 @@ class MeasureRow:
     repo: str
     env_status: str                   # LEGACY alias ("ok" | "missing"); kept for back-compat
     build_ok: bool
+    # Did the initial construction setup.sh run to rc 0? True whenever build_ok (setup.sh is a fatal
+    # build layer); on a failed build, derived from a truncated re-build through the setup step so it
+    # is NOT conflated with a clone/pytest-install failure. Feeds `setup_compile_rate` in metrics.
+    setup_compile_ok: bool = False
     build_log_tail: str = ""
     # Failure taxonomy (design §2.2): exactly one status per measured env. One of
     # {unmeasurable, error, missing, measure_error, build_fail, non_conforming, empty_testbed,

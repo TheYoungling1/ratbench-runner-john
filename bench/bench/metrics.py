@@ -88,6 +88,7 @@ def compute_metrics(rows: list[MeasureRow], gold: dict | None = None) -> dict:
     tok_rows = [r for r in prod if r.tokens_in is not None and r.tokens_out is not None]
     tok_total = sum(r.tokens_in + r.tokens_out for r in tok_rows)
     n_build_ok = sum(1 for r in prod if r.build_ok)
+    n_setup_compile = sum(1 for r in prod if r.setup_compile_ok)
     n_unreplayed = sum(1 for r in prod if r.meta.get("unreplayed"))
 
     out.update({
@@ -104,6 +105,10 @@ def compute_metrics(rows: list[MeasureRow], gold: dict | None = None) -> dict:
             if n_real else None),
         "n_token_reporting": len(tok_rows),
         "rebuild_ok_rate": _div(n_build_ok, n),
+        # setup.sh execution-success rate: fraction of produced repos whose initial construction
+        # setup.sh ran to rc 0 (>= rebuild_ok_rate; credits builds that only failed a later step).
+        "setup_compile_rate": _div(n_setup_compile, n),
+        "n_setup_compile": n_setup_compile,
         "unreplayed_rate": _div(n_unreplayed, n),
     })
     return out
