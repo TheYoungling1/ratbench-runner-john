@@ -6,7 +6,7 @@ measure()'s login shell (`bash -lc`) sources /etc/profile, which resets PATH and
 drop the go toolchain the base image put there."""
 from __future__ import annotations
 
-_GO_PATH = "export PATH=$PATH:/usr/local/go/bin"
+_GO_PATH = "export PATH=/usr/local/go/bin:$PATH"
 
 
 class GoLanguage:

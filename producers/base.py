@@ -282,6 +282,7 @@ def write_env_packet(out_root: str, env: ProducedEnv) -> str:
         "head_sha": env.head_sha,
         "full_name": env.repo.full_name,
         "repo_url": env.repo.repo_url,
+        "language": env.repo.language,
         "tokens_in": economy.get("tokens_in"),
         "tokens_out": economy.get("tokens_out"),
         "llm_calls": economy.get("llm_calls"),

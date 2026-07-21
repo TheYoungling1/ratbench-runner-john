@@ -80,3 +80,23 @@ def test_copy_json_array_form(tmp_path):
            scripts={"run.sh": "echo run"})
     e = discover({"v3": str(root)})[0]
     assert e.setup_scripts["run.sh"] == "echo run"
+
+
+def test_discover_threads_language_from_meta(tmp_path):
+    root = tmp_path / "agentX"
+    repo = root / "o" / "gorepo"
+    (repo / "eval_build").mkdir(parents=True)
+    (repo / "eval_build" / "Dockerfile").write_text("FROM golang:1.22\n")
+    (repo / "_meta.json").write_text(json.dumps({"status": "produced", "language": "golang"}))
+    envs = discover({"agentX": str(root)})
+    assert len(envs) == 1 and envs[0].repo.language == "golang"
+
+
+def test_discover_defaults_language_to_python_when_absent(tmp_path):
+    root = tmp_path / "agentY"
+    repo = root / "o" / "pyrepo"
+    (repo / "eval_build").mkdir(parents=True)
+    (repo / "eval_build" / "Dockerfile").write_text("FROM python:3.13-slim\n")
+    (repo / "_meta.json").write_text(json.dumps({"status": "produced"}))
+    envs = discover({"agentY": str(root)})
+    assert len(envs) == 1 and envs[0].repo.language == "python"

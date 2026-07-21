@@ -7,9 +7,11 @@ from bench.languages.base import Language
 from bench.languages.python import PythonLanguage
 from bench.languages.golang import GoLanguage
 
+_go = GoLanguage()
 _REGISTRY = {
     "python": PythonLanguage(),
-    "golang": GoLanguage(),
+    "golang": _go,
+    "go": _go,
 }
 
 

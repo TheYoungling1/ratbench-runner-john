@@ -67,8 +67,9 @@ def discover(agent_roots: dict) -> list:
             if not os.path.isdir(repo_dir):
                 continue
             full_name = "/".join(repo_dir.split(os.sep)[-2:])
-            repo = RepoSpec(full_name, f"https://github.com/{full_name}")
             meta = _load_meta(repo_dir)
+            repo = RepoSpec(full_name, f"https://github.com/{full_name}",
+                            language=meta.get("language") or "python")
             df_path = _find_dockerfile(repo_dir)
             # Status resolution (design §2.5): a producer-written _meta.status wins; otherwise this is
             # a legacy (pre-contract) run — legacy_ok if a Dockerfile is on disk, else legacy_missing
