@@ -157,7 +157,9 @@ def _probe_setup_compile(docker, env: HarvestedEnv, probe_tag: str, *, timeout: 
         with open(os.path.join(ctx, "Dockerfile"), "w") as f:
             f.write(trunc)
         for fname, content in (env.setup_scripts or {}).items():
-            with open(os.path.join(ctx, fname), "w") as f:
+            dest = os.path.join(ctx, fname)
+            os.makedirs(os.path.dirname(dest), exist_ok=True)   # nested keys (e.g. src/lib.rs) need their parent dir
+            with open(dest, "w") as f:
                 f.write(content)
         prc, _ = docker.build(probe_tag, ctx, timeout=timeout)
         return prc == 0
@@ -184,7 +186,9 @@ def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeou
     with open(os.path.join(ctx, "Dockerfile"), "w") as f:
         f.write(env.dockerfile)
     for fname, content in (env.setup_scripts or {}).items():
-        with open(os.path.join(ctx, fname), "w") as f:
+        dest = os.path.join(ctx, fname)
+        os.makedirs(os.path.dirname(dest), exist_ok=True)   # nested keys (e.g. src/lib.rs) need their parent dir
+        with open(dest, "w") as f:
             f.write(content)
 
     t0 = time.time()
