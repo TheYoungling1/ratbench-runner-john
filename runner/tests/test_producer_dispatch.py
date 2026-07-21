@@ -84,6 +84,18 @@ _ERROR_ADAPTER = (
     "        return {'dockerfile': None, 'logs': {}}\n"
 )
 
+# Emits a /testbed clone line so the commit pin has somewhere to inject.
+_CLONE_ADAPTER = (
+    "class MultiDockerEvalAdapter:\n"
+    "    def __init__(self, output_dir=None, **kw):\n"
+    "        self.output_dir = output_dir\n"
+    "    def process_single_instance(self, inst, **kw):\n"
+    "        return {\n"
+    "            'dockerfile': 'FROM python:3.11\\nRUN git clone --depth=1 https://github.com/o/r /testbed\\n',\n"
+    "            'base_image': 'python:3.11', 'head_sha': 'deadbeef', 'logs': {},\n"
+    "        }\n"
+)
+
 
 def _write_fake_agent_root(dir_path, source):
     os.makedirs(dir_path, exist_ok=True)
@@ -140,3 +152,34 @@ def test_producer_predict_error_writes_no_marker(tmp_path, monkeypatch):
 
     meta = json.loads((out_repo / "_meta.json").read_text())
     assert meta["status"] == "error"
+
+
+# ── 3. Commit-pin threading — _ProducerModel.predict(commit=...) -> emitted Dockerfile ───
+def test_producer_predict_threads_commit_into_dockerfile(tmp_path, monkeypatch):
+    agent_root = tmp_path / "agent_pin"
+    _write_fake_agent_root(str(agent_root), _CLONE_ADAPTER)
+    monkeypatch.setenv("DOCKERAGENT_ROOT", str(agent_root))
+
+    run_dir = tmp_path / "run_pin"
+    m = rrb._make_model("dockeragent", root_path=str(run_dir), timeout=60, llm="x/y", num_turn=3)
+    out = m.predict("o/r", commit="cafef00d")
+    assert out["status"] == "success"
+
+    df = (run_dir / "output" / "o" / "r" / "eval_build" / "Dockerfile").read_text()
+    # The dataset commit was threaded RepoSpec -> produce -> injected after the /testbed clone.
+    assert "checkout --detach cafef00d" in df
+
+
+def test_producer_predict_default_commit_is_none(tmp_path, monkeypatch):
+    # predict() with no commit leaves the emitted Dockerfile unpinned (live HEAD, unchanged behavior).
+    agent_root = tmp_path / "agent_nopin"
+    _write_fake_agent_root(str(agent_root), _CLONE_ADAPTER)
+    monkeypatch.setenv("DOCKERAGENT_ROOT", str(agent_root))
+
+    run_dir = tmp_path / "run_nopin"
+    m = rrb._make_model("dockeragent", root_path=str(run_dir), timeout=60, llm="x/y", num_turn=3)
+    out = m.predict("o/r")
+    assert out["status"] == "success"
+
+    df = (run_dir / "output" / "o" / "r" / "eval_build" / "Dockerfile").read_text()
+    assert "checkout --detach" not in df

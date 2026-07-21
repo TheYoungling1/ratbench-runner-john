@@ -10,7 +10,7 @@ import re
 import sys
 import time
 
-from producers.base import ProduceContext, ProducedEnv, ensure_rat_on_path
+from producers.base import ProduceContext, ProducedEnv, ensure_rat_on_path, inject_clone_pin
 
 # bench.schema is on the path via producers.base's shim (imported above).
 from bench.schema import RepoSpec  # noqa: E402
@@ -101,7 +101,8 @@ class DockerAgentProducer:
             adapter_cls = self._adapter_cls or _load_adapter_cls(agent_root)
 
             res = adapter_cls(output_dir=out_dir).process_single_instance(
-                {"instance_id": instance_id, "repo_url": repo.repo_url, "language": repo.language},
+                {"instance_id": instance_id, "repo_url": repo.repo_url,
+                 "language": repo.language, "commit": repo.commit},
                 base_image=self.base_image, model=llm, max_steps=num_turn,
                 enable_artifact_preflight=False)   # bench scores it; skip our own preflight
 
@@ -125,11 +126,21 @@ class DockerAgentProducer:
             if not re.search(r"\bpytest\b", dockerfile):
                 dockerfile = dockerfile.rstrip() + "\nRUN pip install --no-cache-dir pytest\n"
 
+            # Commit pin: bench measures the clone the emitted Dockerfile performs at BUILD time, so
+            # inject a checkout to the dataset SHA right after that clone. A miss (no git-clone RUN
+            # to pin) is surfaced on note + economy so it is NEVER silent.
+            note = ""
+            if repo.commit:
+                dockerfile, injected = inject_clone_pin(dockerfile, repo.commit, repo.repo_url)
+                if not injected:
+                    note = "no git clone instruction to pin"
+                    economy["pin_warning"] = note
+
             return ProducedEnv(repo=repo, dockerfile=dockerfile,
                                setup_scripts=(res.get("setup_scripts") or {}),
                                base_image=base_image, head_sha=res.get("head_sha") or "",
                                status="produced", conformance="native",
-                               producer_name=self.name, economy=economy)
+                               producer_name=self.name, economy=economy, note=note)
         except Exception as exc:                    # noqa: BLE001 — boundary guard, never propagate
             return ProducedEnv(repo=repo, dockerfile=None, status="error",
                                note=repr(exc), base_image=self.base_image,

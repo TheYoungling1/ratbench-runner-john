@@ -37,12 +37,14 @@ class SWEAgentModel(BaseEvalModel):
     swe_agent_cost_limit: float
 
     @weave.op
-    def predict(self, full_name: str) -> dict:
+    def predict(self, full_name: str, commit: str = None) -> dict:
         """
         Process a single repository and return its status.
 
         Args:
-            repo: Repository info {"full_name": "...", "clone_url": "...", ...}
+            full_name: Repository full name (owner/repo)
+            commit: Optional dataset-pinned SHA. When set, the local clone is checked out at it
+                and passed through as SWE-agent's env.repo.base_commit (reproducible runs).
 
         Returns:
             {"status": "success" | "error" | "timeout", "language": "..."}
@@ -78,6 +80,7 @@ class SWEAgentModel(BaseEvalModel):
                     full_name,
                     has_issue=False,
                     use_repo_dockerfile=True,
+                    commit=commit,
                 )
 
                 # Step 4: Detect language (fast, no LLM)
@@ -103,6 +106,7 @@ class SWEAgentModel(BaseEvalModel):
                     timeout=self.timeout
                     - int(time.time() - start_time),  # Remaining time
                     per_instance_cost_limit=self.swe_agent_cost_limit,
+                    base_commit=commit,  # dataset pin -> SWE-agent env.repo.base_commit
                 )
 
                 # Run SWE-agent and keep container running

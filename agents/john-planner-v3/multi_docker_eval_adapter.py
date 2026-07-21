@@ -81,6 +81,7 @@ class MultiDockerEvalAdapter:
         ``no_dockerfile`` failure rather than a crash)."""
         instance_id = instance.get("instance_id", "unknown")
         repo_url = instance.get("repo_url") or ""
+        commit = instance.get("commit")
         result: Dict[str, Any] = {
             "dockerfile": None,
             "setup_scripts": {},
@@ -88,7 +89,9 @@ class MultiDockerEvalAdapter:
             "logs": {},
         }
         try:
-            src_dir = self._clone(repo_url)
+            # Pass commit only when present so the single-arg _clone(repo_url) contract (relied on
+            # by the offline contract tests, which stub _clone) stays byte-compatible.
+            src_dir = self._clone(repo_url, commit) if commit else self._clone(repo_url)
             head_sha = self._head_sha(src_dir)
             setup_sh, resolved_base = self._run_v3(src_dir, base_image, model)
             setup_sh = _APP_WORKDIR_RE.sub("/testbed", setup_sh)
@@ -104,8 +107,11 @@ class MultiDockerEvalAdapter:
         return {instance_id: result}
 
     # ── steps (individually overridable/mockable) ─────────────────────────────
-    def _clone(self, repo_url: str) -> Path:
-        """Fresh shallow checkout for run_v3 to analyze. Idempotent per output_dir."""
+    def _clone(self, repo_url: str, commit: str | None = None) -> Path:
+        """Fresh shallow checkout for run_v3 to analyze. Idempotent per output_dir.
+
+        When ``commit`` is set, pin the checkout to that exact SHA so run_v3 analyzes the
+        dataset-pinned commit rather than the live default-branch HEAD (falsy => HEAD)."""
         if not repo_url:
             raise ValueError("instance has no repo_url")
         dst = self.output_dir / "v3_src"
@@ -115,6 +121,15 @@ class MultiDockerEvalAdapter:
             ["git", "clone", "--depth=1", repo_url, str(dst)],
             check=True, capture_output=True, text=True, timeout=_CLONE_TIMEOUT,
         )
+        if commit:
+            subprocess.run(
+                ["git", "-C", str(dst), "fetch", "--depth", "1", "origin", commit],
+                check=True, capture_output=True, text=True, timeout=_CLONE_TIMEOUT,
+            )
+            subprocess.run(
+                ["git", "-C", str(dst), "checkout", "--detach", commit],
+                check=True, capture_output=True, text=True, timeout=60,
+            )
         return dst
 
     def _head_sha(self, src_dir: Path) -> str:

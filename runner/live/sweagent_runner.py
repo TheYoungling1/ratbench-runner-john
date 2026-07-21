@@ -172,6 +172,9 @@ def main() -> int:
     ap.add_argument("--num-turn", type=int, default=15)
     ap.add_argument("--timeout", type=int, default=1800)
     ap.add_argument("--cost-limit", type=float, default=2.0)
+    ap.add_argument("--commit", default=None,
+                    help="Dataset-pinned SHA; pins the local clone SWE-agent copies + sets "
+                         "env.repo.base_commit so the measured run is at this commit.")
     a = ap.parse_args()
     rat_root = os.environ.get("RAT_ROOT", "/opt/rat_root")
     _ensure_sweagent_config(a.root_path, rat_root)
@@ -182,7 +185,20 @@ def main() -> int:
         model = SWEAgentModel(root_path=a.root_path, timeout=a.timeout, llm=a.llm,
                               num_turn=a.num_turn, save_mode="none",
                               swe_agent_cost_limit=a.cost_limit)
-        out = model.predict(a.full_name)
+        # Inspect the signature rather than catch TypeError from the call — a broad except would
+        # also swallow a TypeError raised DEEP inside predict() (a real bug) and silently re-run
+        # unpinned. An older deployed rat tree whose SWEAgentModel.predict lacks `commit` is made
+        # LOUD (never a silent HEAD measurement); otherwise the pin flows through.
+        import inspect
+        _supports_commit = "commit" in inspect.signature(model.predict).parameters
+        if _supports_commit:
+            out = model.predict(a.full_name, commit=a.commit)
+        else:
+            if a.commit:
+                print(f"[sweagent] WARNING: internal clone NOT pinned to {a.commit}; "
+                      "measures current HEAD (deployed SWEAgentModel lacks commit support)",
+                      flush=True)
+            out = model.predict(a.full_name)
     except Exception as e:
         import traceback
         traceback.print_exc()

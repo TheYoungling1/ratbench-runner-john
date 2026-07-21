@@ -278,7 +278,8 @@ def save_trajectory(root_path, full_name, trajectory):
 
 
 def download_repo(
-    root_path, full_name, has_issue=True, use_repo_dockerfile=False, use_pipreqs=False
+    root_path, full_name, has_issue=True, use_repo_dockerfile=False, use_pipreqs=False,
+    commit=None,
 ):
     """
     Download a repository with git clone; if it already exists, reset to a clean state.
@@ -289,10 +290,13 @@ def download_repo(
         has_issue: Whether to download issues
         use_repo_dockerfile: Whether to use the repo-provided Dockerfile (False means delete repo Dockerfile and use a generated one)
         use_pipreqs: Whether to analyze dependencies via pipreqs
+        commit: Optional dataset-pinned SHA. When set, the shared clone is fetched + checked out
+            at that exact commit (reproducible runs); when falsy, behavior is unchanged (HEAD).
 
     Behavior:
         - First download: git clone --depth=1
         - If already exists: git reset --hard HEAD + git clean -fdx (no pull)
+        - When `commit` is set: fetch --depth 1 + checkout --detach that SHA (both branches)
     """
     if len(full_name.split("/")) != 2:
         raise Exception("full_name Wrong!!!")
@@ -320,6 +324,19 @@ def download_repo(
         print(f"📋 Running command: {clone_cmd}")
         subprocess.run(clone_cmd, shell=True, check=True)
         print(f"✅ Successfully cloned repo {owner}/{repo}")
+
+    # Commit pin (both the fresh-clone and reset branches leave the repo on disk here): check out
+    # the exact dataset SHA so runs are reproducible instead of drifting with the live HEAD. A
+    # failed pin is LOUD (check=True) — never a silent fall-back to HEAD. Falsy commit => no-op,
+    # so existing callers that pass no commit are byte-unchanged.
+    if commit:
+        print(f"📌 Pinning {owner}/{repo} to commit {commit}")
+        subprocess.run(
+            f"git fetch --depth 1 origin {commit}", cwd=repo_dir, shell=True, check=True
+        )
+        subprocess.run(
+            f"git checkout --detach {commit}", cwd=repo_dir, shell=True, check=True
+        )
 
     # Download issues
     if has_issue:

@@ -47,12 +47,13 @@ class RATModel(BaseEvalModel):
     save_mode: str
 
     @weave.op
-    def predict(self, full_name: str) -> dict:
+    def predict(self, full_name: str, commit: str | None = None) -> dict:
         """
         Process a single repository and return its status.
 
         Args:
-            repo: Repository info {"full_name": "...", "clone_url": "...", ...}
+            full_name: Repository full name (owner/repo)
+            commit: Optional dataset-pinned SHA; when set the shared clone is checked out at it.
 
         Returns:
             {"status": "success" | "error" | "timeout", "language": "..."}
@@ -82,6 +83,7 @@ class RATModel(BaseEvalModel):
                     full_name,
                     use_repo_dockerfile=False,
                     use_pipreqs=True,
+                    commit=commit,
                 )
 
                 # Step 4: Run SetupAgent to analyze environment

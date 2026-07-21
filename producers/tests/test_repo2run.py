@@ -111,6 +111,43 @@ def test_producer_removes_raw_repo_homed_dockerfile(tmp_path):
     assert not os.path.exists(raw_path)                  # FIX 1: raw /repo-homed file removed
 
 
+def test_producer_pins_raw_clone_before_cp_and_rehome(tmp_path):
+    # Fix #2: the RAW repo2run Dockerfile clones at HEAD (standalone `RUN git clone <url>.git` to
+    # /<basename>), then a separate `cp -r /<basename>/. /repo`, then the re-home moves /repo ->
+    # /testbed. Pinning must land right after the clone and BEFORE the cp so the measured /testbed
+    # carries the pinned tree.
+    raw = ("FROM python:3.10\n"
+           "RUN git clone https://github.com/o/r.git\n"
+           "RUN mkdir /repo && cp -r /r/. /repo\n"
+           "WORKDIR /repo\n")
+
+    def _stub(repo, ctx, **kw):
+        return {"dockerfile": raw, "base_image": "python:3.10", "head_sha": "abc123"}
+
+    env = Repo2RunProducer(runner=_stub).produce(
+        RepoSpec("o/r", "https://github.com/o/r", commit="c0ffee"), _ctx(tmp_path))
+    assert env.status == "produced"
+    df = env.dockerfile
+    assert "git -C /r checkout --detach c0ffee" in df
+    assert df.index("checkout --detach") < df.index("cp -r /r/. /repo")   # pin BEFORE the cp
+    assert df.index("checkout --detach") < df.index("mv /repo /testbed")  # pin BEFORE the re-home
+    assert "RUN mv /repo /testbed" in df                                  # re-home still applied
+    assert env.note == ""
+
+
+def test_producer_no_commit_leaves_raw_unpinned(tmp_path):
+    raw = ("FROM python:3.10\nRUN git clone https://github.com/o/r.git\n"
+           "RUN mkdir /repo && cp -r /r/. /repo\nWORKDIR /repo\n")
+
+    def _stub(repo, ctx, **kw):
+        return {"dockerfile": raw, "base_image": "python:3.10", "head_sha": "abc123"}
+
+    env = Repo2RunProducer(runner=_stub).produce(
+        RepoSpec("o/r", "https://github.com/o/r"), _ctx(tmp_path))
+    assert env.status == "produced"
+    assert "checkout --detach" not in env.dockerfile
+
+
 def test_producer_no_dockerfile_is_error(tmp_path):
     def _stub(repo, ctx, **kw):
         return {"dockerfile": None, "base_image": "python:3.10"}

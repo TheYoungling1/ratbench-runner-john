@@ -16,7 +16,7 @@ import re
 import subprocess
 import time
 
-from producers.base import ProduceContext, ProducedEnv, ensure_rat_on_path
+from producers.base import ProduceContext, ProducedEnv, ensure_rat_on_path, inject_clone_pin
 
 # bench.schema is on the path via producers.base's shim (imported above).
 from bench.schema import RepoSpec  # noqa: E402
@@ -140,6 +140,13 @@ def run_repo2run(repo: RepoSpec, ctx: ProduceContext, *, llm: str | None, num_tu
 
     init_output_and_repo(root_path, full_name, renew=True)
     subprocess.run(f"git clone --depth=1 {repo.repo_url}.git {repo_path}", shell=True, check=True)
+    # Commit pin BEFORE reading the SHA so `git rev-parse HEAD` reports the pinned commit and
+    # repo2run runs its tool on the pinned checkout. Falsy commit => unchanged (HEAD).
+    if repo.commit:
+        subprocess.run(f"git fetch --depth 1 origin {repo.commit}", cwd=repo_path,
+                       shell=True, check=True)
+        subprocess.run(f"git checkout --detach {repo.commit}", cwd=repo_path,
+                       shell=True, check=True)
     sha = subprocess.run("git rev-parse HEAD", cwd=repo_path, shell=True, check=True,
                          capture_output=True, text=True).stdout.strip()
 
@@ -203,6 +210,17 @@ class Repo2RunProducer:
                                    base_image=res.get("base_image"), conformance="rehomed",
                                    producer_name=self.name, economy=economy, inline=inline)
 
+            # Fix #2: repo2run's RAW Dockerfile clones at HEAD (`git clone <url>.git` -> /<basename>)
+            # then `cp -r /<basename>/. /repo` and installs; the re-home later moves /repo -> /testbed.
+            # So the MEASURED build clones HEAD. Pin the clone BEFORE re-home (and before repo2run's
+            # cp/install) so the checkout runs right after the clone. Surface a pin_warning on miss.
+            pin_note = ""
+            if repo.commit:
+                raw, injected = inject_clone_pin(raw, repo.commit, repo.repo_url)
+                if not injected:
+                    pin_note = "no git clone instruction to pin"
+                    economy["pin_warning"] = pin_note
+
             rehomed = rehome_dockerfile(raw, self.repo_dest)
             # FIX 1 (false-green): repo2run wrote the RAW /repo-homed Dockerfile at
             # output/<full_name>/Dockerfile. bench.harvest._find_dockerfile checks that path BEFORE
@@ -226,7 +244,8 @@ class Repo2RunProducer:
                                base_image=res.get("base_image"),
                                head_sha=res.get("head_sha") or "",
                                status="produced", conformance="rehomed",
-                               producer_name=self.name, economy=economy, inline=inline)
+                               producer_name=self.name, economy=economy, inline=inline,
+                               note=pin_note)
         except Exception as exc:                    # noqa: BLE001 — boundary guard, never propagate
             return ProducedEnv(repo=repo, dockerfile=None, status="error",
                                note=repr(exc), conformance="rehomed",

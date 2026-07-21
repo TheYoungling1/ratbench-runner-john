@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import time
 
-from producers.base import ProduceContext, ProducedEnv, ensure_rat_on_path
+from producers.base import ProduceContext, ProducedEnv, ensure_rat_on_path, inject_clone_pin
 
 # bench.schema is on the path via producers.base's shim (imported above).
 from bench.schema import RepoSpec  # noqa: E402
@@ -66,7 +66,8 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
     gen_dst = f"{out_dir}/eval_build/Dockerfile.gen"
     try:
         init_output_and_repo(root_path, full_name, renew=True)
-        download_repo(root_path, full_name, has_issue=False, use_repo_dockerfile=False)
+        download_repo(root_path, full_name, has_issue=False, use_repo_dockerfile=False,
+                      commit=repo.commit)
         repo_src = f"{root_path}/input/repo/{full_name}"
         os.makedirs(os.path.dirname(gen_dst), exist_ok=True)
 
@@ -136,11 +137,20 @@ class ClaudeCodeDockerfileProducer:
                                    producer_name=self.name, economy=economy)
 
             dockerfile = _ensure_pytest(dockerfile)
+            # Fix #1: the agent's emitted Dockerfile does a plain `git clone … /testbed` (its prompt
+            # requires it) so the MEASURED build runs at HEAD. Pin its clone to the dataset SHA;
+            # surface a pin_warning on miss so the drift is never silent. (Mirrors dockeragent.)
+            note = ""
+            if repo.commit:
+                dockerfile, injected = inject_clone_pin(dockerfile, repo.commit, repo.repo_url)
+                if not injected:
+                    note = "no git clone instruction to pin"
+                    economy["pin_warning"] = note
             return ProducedEnv(repo=repo, dockerfile=dockerfile,
                                base_image=res.get("base_image"),
                                head_sha=res.get("head_sha") or "",
                                status="produced", conformance="native",
-                               producer_name=self.name, economy=economy)
+                               producer_name=self.name, economy=economy, note=note)
         except Exception as exc:                    # noqa: BLE001 — boundary guard, never propagate
             return ProducedEnv(repo=repo, dockerfile=None, status="error",
                                note=repr(exc), conformance="native",

@@ -35,13 +35,19 @@ class SweAgentSubprocessModel(BaseEvalModel):
     cost_limit: float = 2.0
 
     @weave.op
-    def predict(self, full_name: str) -> dict:
+    def predict(self, full_name: str, commit: str | None = None) -> dict:
         ok = {"root_path": self.root_path, "full_name": full_name}
         meta = {"requested_model": self.llm}
+        # Fix #3: SWE-agent copies the LOCAL clone (root_path/input/repo/<full_name>) into its
+        # deployment container and resets to env.repo.base_commit. Reachable hook: pass --commit to
+        # the py3.11 runner, which pins that local clone (download_repo commit=) AND sets
+        # base_commit=<commit> so SWE-agent checks out the pin — no vendored `sweagent` package edit.
         cmd = [SWEAGENT_VENV_PY, SWEAGENT_RUNNER,
                "--full-name", full_name, "--root-path", self.root_path,
                "--llm", self.llm, "--num-turn", str(self.num_turn),
                "--timeout", str(self.timeout), "--cost-limit", str(self.cost_limit)]
+        if commit:
+            cmd += ["--commit", commit]
         env = dict(os.environ, RAT_ROOT=RAT_ROOT)
         try:
             proc = subprocess.run(cmd, capture_output=True, text=True,

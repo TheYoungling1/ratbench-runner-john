@@ -154,7 +154,7 @@ class ClaudeCodeModel(BaseEvalModel):
     base_image: str = "claude-runner:latest"
 
     @weave.op
-    def predict(self, full_name: str) -> dict:
+    def predict(self, full_name: str, commit: str | None = None) -> dict:
         start = time.time()
         slug = full_name.lower().replace("/", "-")
         container = f"claudecode-{slug}"
@@ -171,7 +171,7 @@ class ClaudeCodeModel(BaseEvalModel):
             try:
                 init_output_and_repo(self.root_path, full_name, renew=True)
                 download_repo(self.root_path, full_name, has_issue=False,
-                              use_repo_dockerfile=False)
+                              use_repo_dockerfile=False, commit=commit)
                 repo_src = f"{self.root_path}/input/repo/{full_name}"
                 os.makedirs(out_dir, exist_ok=True)
                 self._check_timeout(start, "clone")

@@ -132,12 +132,13 @@ class _ProducerModel:
         self.llm = llm
         self.num_turn = num_turn
 
-    def predict(self, full_name: str) -> dict:
+    def predict(self, full_name: str, commit: str | None = None) -> dict:
         import json, os
         import producers
         from producers.base import ProduceContext, write_env_packet
         from bench.schema import RepoSpec
-        repo = RepoSpec(full_name, f"https://github.com/{full_name}")
+        # commit pins every downstream clone (producer + emitted Dockerfile) to the dataset SHA.
+        repo = RepoSpec(full_name, f"https://github.com/{full_name}", commit=commit)
         kw = {"llm": self.llm}
         if self.name == "dockeragent":
             kw.update(num_turn=self.num_turn, base_image="auto")
@@ -281,6 +282,7 @@ def _run_one(
     category: str,
     repair_mode: str = "runner",
     repair_rounds: int = 2,
+    commit: str | None = None,
 ) -> dict:
     """Run a single repo through predict(), score it, and write per-repo JSON files.
 
@@ -324,7 +326,7 @@ def _run_one(
         # ── Run predict() ────────────────────────────────────────────────────
         print(f"[start ] {full_name}", flush=True)
         try:
-            out = model.predict(full_name)
+            out = model.predict(full_name, commit=commit)
         except Exception as exc:
             out = {
                 "status": "error",
@@ -831,19 +833,23 @@ def worker_main(full_name: str, root_path: str, llm: str, timeout: int, num_turn
     """--only <full_name>: run exactly one repo and exit.  Does NOT write rat_results.json."""
     os.makedirs(root_path, exist_ok=True)
 
-    # Resolve category from the repos JSON (best-effort; "?" if not found).
+    # Resolve category + pinned commit from the repos JSON (best-effort; "?"/None if not found).
+    # In parallel/scheduler mode this worker is the child process, so grabbing the commit here is
+    # what threads the dataset pin through the fan-out path (parallel_main -> scheduler -> --only).
     category = "?"
+    commit = None
     try:
         for r in load_repos(repos_json):
             if r.get("full_name") == full_name:
                 category = r.get("_category", "?")
+                commit = r.get("commit")
                 break
     except Exception:
         pass
 
     model = _make_model(model_name, root_path, timeout, llm, num_turn)
     _run_one(full_name, model, root_path, category,
-             repair_mode=repair_mode, repair_rounds=repair_rounds)
+             repair_mode=repair_mode, repair_rounds=repair_rounds, commit=commit)
 
 
 def _consolidate_run(root_path, model_name=None, llm=None, repos_json=None):
@@ -886,7 +892,8 @@ def sequential_main(repos_json: str, root_path: str, limit: Optional[int], offse
     model = _make_model(model_name, root_path, timeout, llm, num_turn)
     for r in repos:
         _run_one(r["full_name"], model, root_path, r.get("_category", "?"),
-                 repair_mode=repair_mode, repair_rounds=repair_rounds)
+                 repair_mode=repair_mode, repair_rounds=repair_rounds,
+                 commit=r.get("commit"))
 
     aggregate(root_path)
     _consolidate_run(root_path, model_name, llm, repos_json)
@@ -936,7 +943,7 @@ def parallel_main(repos_json: str, root_path: str, limit: Optional[int], offset:
 def _build_argparser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Run RAT benchmark offline with DockerAgentModel.")
     parser.add_argument("--repos-json",
-                        default=os.path.join(_REPO_ROOT, "datasets", "rat_python_hard_subset.json"),
+                        default=os.path.join(_REPO_ROOT, "datasets", "rat_python50.json"),
                         help="Path to repos JSON (bare list or {\"repos\":[...]} dict). "
                              "Defaults to the dataset shipped in this repo.")
     parser.add_argument("--root-path", default="./rat_run",

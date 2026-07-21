@@ -30,6 +30,7 @@ class SWEAgentWrapper:
         max_turns: int = 30,
         timeout: int = 900,
         per_instance_cost_limit: float = 2.0,
+        base_commit: str = None,
     ):
         """
         Initialize SWE-agent wrapper.
@@ -50,6 +51,9 @@ class SWEAgentWrapper:
         self.max_turns = max_turns
         self.timeout = timeout
         self.per_instance_cost_limit = per_instance_cost_limit
+        # Dataset-pinned SHA. When set, env.repo.base_commit is overridden so SWE-agent resets the
+        # copied local clone to this commit (reproducible runs); None => the config default (HEAD).
+        self.base_commit = base_commit
 
         # Paths
         self.repo_path = self.root_path / "input" / "repo" / full_name
@@ -175,6 +179,11 @@ class SWEAgentWrapper:
                 self.per_instance_cost_limit
             )
             config_dict["env"]["repo"]["path"] = str(self.repo_path)
+            # Commit pin: SWE-agent copies the local repo into the deployment container and resets
+            # to base_commit. The local clone was already fetched at this SHA (download_repo
+            # commit=), so setting it here makes the checkout explicit + reproducible. Falsy => HEAD.
+            if self.base_commit:
+                config_dict["env"]["repo"]["base_commit"] = self.base_commit
             config_dict["output_dir"] = str(trajectory_dir)
 
             # Important: Don't auto-remove container if we want to keep it

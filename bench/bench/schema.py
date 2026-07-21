@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import Optional
 
 
 @dataclass(frozen=True)
@@ -9,6 +10,7 @@ class RepoSpec:
     full_name: str            # "owner/repo"
     repo_url: str             # https://github.com/owner/repo
     language: str = "python"
+    commit: Optional[str] = None   # dataset-pinned SHA to check out; None => live default-branch HEAD
 
 
 @dataclass(frozen=True)

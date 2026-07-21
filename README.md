@@ -106,16 +106,23 @@ Run any with `./run_bench.sh <variety> …`. Override the LLM with `--llm <slug>
 
 ## Datasets
 
-`datasets/` holds the repo lists (`--repos-json`), pinned to commits where noted:
-- `rat_python50.json` — the 50-repo Python set (default flavour).
-- `rat_python50_pinned_m3nothink.json` — the same 50 repos, each stamped with the `commit` SHA it was at
-  during the M3-thinking-off baseline. NOTE: the pin is provenance only — the current clone path takes
-  the live HEAD (`git clone --depth=1`) and does not `checkout` the recorded commit.
-- `rat_python_hard_subset.json` (the built-in default), `rat_python_medlarge15.json`,
-  `rat_python50_large.json`, `rat_node50.json`.
+`datasets/` holds the repo lists (`--repos-json`):
+- `rat_python50.json` — **the authoritative Python set** (the default): 50 repos, each pinned to a
+  `commit` SHA. Every clone path checks out that commit (see **Commit pinning** below), so runs are
+  reproducible instead of drifting with each repo's live HEAD.
+- `rat_node50.json` — the 50-repo Node set.
 
 Pick one with `--repos-json datasets/<file>`. Filter/limit with `--limit N`, `--only owner/repo`,
 `--tier all|smoke|extended`.
+
+### Commit pinning
+
+Each row's `commit` field is **enforced** at every clone site — `git clone --depth=1`, then
+`git fetch --depth 1 origin <sha> && git checkout --detach <sha>`. This covers the framework clones
+(`repo2run`, and the shared `download_repo` used by `rat` / `claudecode` / `claudecode-dockerfile`) AND
+the build-time `git clone … /testbed` inside a `dockeragent`'s emitted Dockerfile — `producers/dockeragent.py`
+injects the checkout into that Dockerfile, so the **measured** build is pinned for *every* dockeragent
+branch without touching agent code. A row with no `commit` clones the live HEAD (unchanged behavior).
 
 ## Scoring
 
@@ -131,6 +138,15 @@ Pick one with `--repos-json datasets/<file>`. Filter/limit with `--limit N`, `--
   ```
 
 ## Adding your own agent
+
+> ⚠️ **Honor the commit pin in your adapter — read this first.** The authoritative dataset pins every
+> repo to a `commit` SHA, passed to your adapter as `instance["commit"]`. The framework already injects
+> a checkout of that commit into the `/testbed` clone of a dockeragent's emitted Dockerfile, so the
+> **measured** build is pinned for you. But your adapter's OWN clone — the repo your agent reads to
+> decide the setup — must ALSO honor `instance["commit"]`: after cloning, run
+> `git fetch --depth 1 origin <commit> && git checkout --detach <commit>`. Otherwise your agent
+> *analyzes* the live HEAD while the *build* runs the pinned commit, and the setup it generates may not
+> match. See `agents/john-planner-v3/multi_docker_eval_adapter.py::_clone` for the one-liner.
 
 For the common case you touch **two things** and change **no framework code**: your agent ships a
 `multi_docker_eval_adapter.py`, and you register a variety. Every `dockeragent`-family agent uses the
@@ -151,11 +167,13 @@ class MultiDockerEvalAdapter:
         enable_artifact_preflight=False, **_ignored,
     ) -> dict:
         # instance = {"instance_id": "owner__repo", "repo_url": "https://github.com/owner/repo",
-        #             "language": "python"};  model = the llm slug from varieties.toml
+        #             "language": "python", "commit": "<sha>|None"};  model = the llm slug
         iid = instance["instance_id"]
         result = {"dockerfile": None, "setup_scripts": {}, "base_image": None, "logs": {}}
         try:
-            # --- YOUR AGENT: clone repo_url, analyze, decide base image + install steps ---
+            # --- YOUR AGENT: clone repo_url, THEN pin: if instance["commit"], run
+            #     `git fetch --depth 1 origin <commit> && git checkout --detach <commit>`
+            #     so you analyze the pinned commit; then decide base image + install steps ---
             result["dockerfile"] = (
                 "FROM python:3.13-slim\nWORKDIR /testbed\n"
                 "RUN apt-get update && apt-get install -y --no-install-recommends git\n"

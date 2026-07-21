@@ -56,6 +56,34 @@ def test_produce_agent_error_is_error_not_raise(tmp_path):
     assert "agent exploded" in env.note
 
 
+def test_produce_pins_clone_when_commit(tmp_path):
+    # Fix #1: the agent's Dockerfile clones into /testbed at HEAD -> the MEASURED build must be
+    # pinned. A commit on the RepoSpec injects a checkout right after the clone.
+    def _stub(repo, ctx, **kw):
+        return {"dockerfile": "FROM python:3.11\nRUN git clone https://github.com/o/r /testbed\n"
+                              "RUN pip install pytest",
+                "base_image": "python:3.11"}
+
+    env = ClaudeCodeDockerfileProducer(runner=_stub).produce(
+        RepoSpec("o/r", "https://github.com/o/r", commit="c0ffee"), _ctx(tmp_path))
+    assert env.status == "produced"
+    assert "git -C /testbed checkout --detach c0ffee" in env.dockerfile
+    assert env.dockerfile.index("git clone") < env.dockerfile.index("checkout --detach")
+    assert env.note == ""
+
+
+def test_produce_no_commit_leaves_clone_unpinned(tmp_path):
+    def _stub(repo, ctx, **kw):
+        return {"dockerfile": "FROM python:3.11\nRUN git clone https://github.com/o/r /testbed\n"
+                              "RUN pip install pytest",
+                "base_image": "python:3.11"}
+
+    env = ClaudeCodeDockerfileProducer(runner=_stub).produce(
+        RepoSpec("o/r", "https://github.com/o/r"), _ctx(tmp_path))
+    assert env.status == "produced"
+    assert "checkout --detach" not in env.dockerfile
+
+
 def test_producer_is_registered():
     from producers import PRODUCERS
     assert PRODUCERS["claudecode-dockerfile"] is ClaudeCodeDockerfileProducer

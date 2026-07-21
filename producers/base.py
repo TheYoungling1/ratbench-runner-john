@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import os
+import re as _re
 import shutil
 import sys
 import tempfile
@@ -29,6 +30,135 @@ if _BENCH_DIR not in sys.path:
 from bench.schema import RepoSpec  # noqa: E402  (import after the sys.path shim above)
 
 CONTRACT_VERSION = 1
+
+
+# ── Commit-pin injection for EMITTED Dockerfiles ─────────────────────────────────────────────
+#
+# bench REBUILDS the Dockerfile a producer emits and measures THAT build. If the Dockerfile's own
+# `git clone` runs at the live default-branch HEAD, the measured environment silently drifts off
+# the dataset SHA. `inject_clone_pin` rewrites the clone's checkout to the pinned commit — used by
+# every producer whose emitted Dockerfile clones the repo at build time (dockeragent /
+# claudecode-dockerfile / repo2run). This is the ONE robust place that shell-line-continuations,
+# clone flags, and dest-vs-basename are handled correctly.
+
+# Shell control operators that terminate the `git clone` argument list (tokens after them belong
+# to a separate command, not to clone). Whitespace-tokenized, so only exact tokens match.
+_SHELL_SEPARATORS = frozenset({"&&", "||", ";", "|", "&", ">", ">>", "<", "2>", "2>&1"})
+# `git clone` flags whose VALUE is the NEXT token (space form). The `=` form (e.g. `--depth=1`) is
+# a single token starting with '-' and is dropped by the generic flag rule below.
+_VALUE_FLAGS = frozenset({"--depth", "-b", "--branch", "-o", "--origin", "-j", "--jobs"})
+
+
+def _clone_dest(after_clone: str) -> Optional[str]:
+    """Given the substring AFTER ``git clone``, return the clone DESTINATION path (or None if the
+    URL can't be identified). An explicit dest token following the URL wins (e.g. ``/testbed``);
+    otherwise the dest is the URL basename without ``.git`` (and without any ``?query``/``#frag``),
+    rooted at ``/`` — repo2run clones at WORKDIR ``/`` so ``https://github.com/o/r.git`` -> ``/r``."""
+    tokens: list = []
+    for t in after_clone.split():
+        if t in _SHELL_SEPARATORS:
+            break
+        tokens.append(t)
+    # Drop flags, plus the space-form value that follows a value-taking flag.
+    positional: list = []
+    i = 0
+    while i < len(tokens):
+        t = tokens[i]
+        if t.startswith("-"):
+            i += 2 if t in _VALUE_FLAGS else 1
+            continue
+        positional.append(t)
+        i += 1
+    url_idx = next((k for k, t in enumerate(positional)
+                    if "://" in t or t.endswith(".git") or "github.com" in t), None)
+    if url_idx is None:
+        return None
+    if url_idx + 1 < len(positional):
+        return positional[url_idx + 1]           # explicit destination (e.g. /testbed)
+    base = positional[url_idx].rstrip("/").rsplit("/", 1)[-1]
+    base = base.split("?", 1)[0].split("#", 1)[0]   # drop ?query / #fragment before the basename
+    if base.endswith(".git"):
+        base = base[: -len(".git")]
+    return "/" + base                            # basename, rooted at WORKDIR /
+
+
+def _repo_slug(repo_url: Optional[str]) -> Optional[str]:
+    """`owner/repo` (lowercased, `.git`/query stripped) from a clone URL, or None if unparseable.
+    Used to pin the clone of the TARGET repo specifically, not an unrelated helper-tool clone."""
+    if not repo_url:
+        return None
+    s = repo_url.strip().rstrip("/").split("://", 1)[-1].split("@", 1)[-1]   # drop scheme + user@
+    parts = s.replace(":", "/").split("/")                                   # host[:/]owner/repo
+    if len(parts) < 3:
+        return None
+    slug = "/".join(parts[-2:]).split("?", 1)[0].split("#", 1)[0]
+    if slug.endswith(".git"):
+        slug = slug[: -len(".git")]
+    return slug.lower()
+
+
+# A clone RUN that ALSO copies/moves/removes the clone dir is unsafe to pin AFTER (the dir may be
+# gone / the install already ran on HEAD). Refuse it (visible miss) rather than emit a false pin.
+_MUTATES_CLONE = _re.compile(r"(?:^|\s)(?:rm|mv|cp)\s")
+
+
+def inject_clone_pin(dockerfile: str, commit: str, repo_url: Optional[str] = None) -> tuple:
+    """Pin the TARGET repo's ``RUN ... git clone ...`` instruction to ``commit``.
+
+    Finds the git-clone RUN for ``repo_url`` (matched by its ``owner/repo`` slug; falls back to the
+    first git-clone RUN when ``repo_url`` is None), following backslash line-continuations so a
+    multi-physical-line ``RUN`` is treated as ONE instruction, and inserts ``RUN git -C <dest> fetch
+    --depth 1 origin <commit> && git -C <dest> checkout --detach <commit>`` right AFTER the
+    instruction's LAST physical line (never mid-instruction — that corrupts the build). Only real
+    ``RUN`` instructions match (comments / non-RUN lines are skipped). Returns
+    ``(new_dockerfile, True)`` on inject, or ``(dockerfile, False)`` — a VISIBLE miss the caller
+    surfaces — when there is no matching clone RUN, the URL can't be parsed, or the clone RUN also
+    cp/mv/rm's the clone (pinning after it would be wrong). The pin is never silently dropped.
+    Trailing newline preserved."""
+    target = _repo_slug(repo_url)
+    lines = dockerfile.split("\n")
+
+    def _continued(s: str) -> bool:
+        return s.rstrip().endswith("\\")
+
+    i, n = 0, len(lines)
+    while i < n:
+        start = i
+        # Extend across backslash continuations to the instruction's last physical line.
+        while i < n - 1 and _continued(lines[i]):
+            i += 1
+        end = i  # inclusive
+        parts = []
+        for j in range(start, end + 1):
+            s = lines[j].rstrip()
+            if s.endswith("\\"):
+                s = s[:-1]
+            parts.append(s)
+        joined = " ".join(parts)
+        stripped = joined.lstrip()
+        # Only pin real `RUN` shell instructions — never a comment (`# ... git clone ...`) or a
+        # non-RUN line that merely mentions the words.
+        if not stripped.upper().startswith("RUN ") or stripped.startswith("#"):
+            i = end + 1
+            continue
+        gc = joined.find("git clone")
+        if gc == -1:
+            i = end + 1
+            continue
+        after = joined[gc + len("git clone"):]
+        # When we know the target repo, only pin the clone of THAT repo (skip helper-tool clones).
+        if target is not None and target not in joined.lower():
+            i = end + 1
+            continue
+        if _MUTATES_CLONE.search(after):
+            return dockerfile, False              # compound clone+cp/mv/rm — refuse, surface a miss
+        dest = _clone_dest(after)
+        if dest is None:
+            return dockerfile, False
+        pin = (f"RUN git -C {dest} fetch --depth 1 origin {commit} "
+               f"&& git -C {dest} checkout --detach {commit}")
+        return "\n".join(lines[: end + 1] + [pin] + lines[end + 1:]), True
+    return dockerfile, False
 
 
 @dataclass(frozen=True)
