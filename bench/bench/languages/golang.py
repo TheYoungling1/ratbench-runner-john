@@ -14,7 +14,16 @@ class GoLanguage:
     short_circuit_gate = True   # if `go build` fails, gotestsum cannot run — skip it
 
     def ensure_cmd(self, W: str) -> str:
-        return f"{_GO_PATH} && GOBIN=/usr/local/bin go install gotest.tools/gotestsum@latest 2>/dev/null || true"
+        # Install a PREBUILT gotestsum binary to /usr/local/bin (on PATH). We do NOT use
+        # `go install ...@latest`: latest gotestsum needs go>=1.24, which fails to build on older
+        # base images (e.g. golang:1.22). The prebuilt static binary is decoupled from the
+        # container's go version. Arch-detected for amd64/arm64.
+        return (
+            'ARCH=$(uname -m | sed "s/x86_64/amd64/;s/aarch64/arm64/"); '
+            'curl -sSL "https://github.com/gotestyourself/gotestsum/releases/download/'
+            'v1.12.0/gotestsum_1.12.0_linux_${ARCH}.tar.gz" '
+            '| tar -xz -C /usr/local/bin gotestsum 2>/dev/null || true'
+        )
 
     def gate_cmd(self, W: str) -> str:
         return f"{_GO_PATH} && cd {W} && go build ./..."
