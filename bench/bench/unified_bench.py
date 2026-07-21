@@ -29,7 +29,8 @@ def run_one(env, out_root: str, *, docker) -> str:
         row = measure(env, docker=docker)
     except Exception as e:                             # anti-vanish: infra crash still yields a row
         row = MeasureRow(agent=env.agent, repo=env.repo.full_name, env_status=env.status,
-                         build_ok=False, executed=False, ebsr=False, meta={"error": repr(e)})
+                         build_ok=False, executed=False, ebsr=False, status="measure_error",
+                         meta={"error": repr(e)})
     tmp = out + ".tmp"
     with open(tmp, "w") as f:
         json.dump(asdict(row), f, indent=2, default=list)
@@ -44,6 +45,11 @@ def aggregate(out_root: str, gold: dict | None = None) -> dict:
             d = json.load(f)
         agent = os.path.relpath(p, out_root).split(os.sep)[0]
         d.pop("agent", None)
+        # Legacy row.json (pre-taxonomy) lacks `status`/`py_test_files`. Default `status` safely so an
+        # old run re-aggregates without crashing and isn't force-fit into a credited/denied bucket
+        # (design §2.5): legacy_ok if it shows a build/execution signal, else missing.
+        if "status" not in d:
+            d["status"] = "legacy_ok" if (d.get("build_ok") or d.get("executed")) else "missing"
         row = MeasureRow(agent=agent, **{k: (tuple(v) if isinstance(v, list) else v)
                                          for k, v in d.items()})
         by_agent.setdefault(agent, []).append(row)

@@ -70,11 +70,20 @@ def discover(agent_roots: dict) -> list:
             repo = RepoSpec(full_name, f"https://github.com/{full_name}")
             meta = _load_meta(repo_dir)
             df_path = _find_dockerfile(repo_dir)
+            # Status resolution (design §2.5): a producer-written _meta.status wins; otherwise this is
+            # a legacy (pre-contract) run — legacy_ok if a Dockerfile is on disk, else legacy_missing
+            # (NOT "missing", which would force a pre-contract non-producer into a counted EBSR-0).
+            if "status" in meta:
+                status = meta["status"]
+            elif df_path is not None:
+                status = "legacy_ok"
+            else:
+                status = "legacy_missing"
             if df_path is None:
-                envs.append(HarvestedEnv(agent, repo, None, {}, meta.get("base_image"), "missing", meta))
+                envs.append(HarvestedEnv(agent, repo, None, {}, meta.get("base_image"), status, meta))
                 continue
             with open(df_path) as f:
                 df = f.read()
             scripts = _sibling_scripts(os.path.dirname(df_path), df)
-            envs.append(HarvestedEnv(agent, repo, df, scripts, meta.get("base_image"), "ok", meta))
+            envs.append(HarvestedEnv(agent, repo, df, scripts, meta.get("base_image"), status, meta))
     return envs

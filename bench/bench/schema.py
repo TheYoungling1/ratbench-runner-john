@@ -18,7 +18,9 @@ class HarvestedEnv:
     dockerfile: str | None            # None => no Dockerfile found (status="missing")
     setup_scripts: dict = field(default_factory=dict)   # sibling files the Dockerfile COPYs
     base_image: str | None = None
-    status: str = "ok"                # "ok" | "missing"
+    # harvest resolution (design §2.5): _meta.status if present, else legacy_ok (Dockerfile found)
+    # / legacy_missing (none). Producers may also set produced|unmeasurable|error.
+    status: str = "ok"
     meta: dict = field(default_factory=dict)   # from bench_meta.json (cost keys None if absent)
 
 
@@ -26,9 +28,14 @@ class HarvestedEnv:
 class MeasureRow:
     agent: str
     repo: str
-    env_status: str                   # "ok" | "missing"
+    env_status: str                   # LEGACY alias ("ok" | "missing"); kept for back-compat
     build_ok: bool
     build_log_tail: str = ""
+    # Failure taxonomy (design §2.2): exactly one status per measured env. One of
+    # {unmeasurable, error, missing, measure_error, build_fail, non_conforming, empty_testbed,
+    #  no_tests_collected, collect_error, timed_out, executed}; "legacy_ok"/"ok" for legacy rows.
+    status: str = "ok"
+    py_test_files: int | None = None  # C3 diagnostic: python test files under /testbed (never gates)
     collect_rc: int | None = None
     collect_clean: bool = False
     collect_errors: tuple = ()

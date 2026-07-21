@@ -11,14 +11,17 @@ def _row(**kw):
 
 def test_gates_over_full_denominator():
     rows = [
-        _row(repo="r1", ebsr=True, pass_rate=1.0, collect_clean=True, total=10, passed=10),
-        _row(repo="r2", ebsr=True, pass_rate=0.5, collect_clean=False, total=10, passed=5),
-        _row(repo="r3", build_ok=False, executed=False, ebsr=False, pass_rate=0.0),
+        _row(repo="r1", status="executed", ebsr=True, pass_rate=1.0, collect_clean=True,
+             collect_rc=0, total=10, passed=10),
+        _row(repo="r2", status="collect_error", ebsr=True, pass_rate=0.5, collect_clean=False,
+             collect_rc=2, total=10, passed=5),
+        _row(repo="r3", status="build_fail", build_ok=False, executed=False, ebsr=False, pass_rate=0.0),
     ]
     m = compute_metrics(rows)
     assert m["n"] == 3
-    # EBSR = collect-only exit 0 (Repo2Run-style): only r1 is collect_clean -> 1/3
-    assert m["n_collect_clean"] == 1 and m["EBSR"] == round(1 / 3, 4)
+    # EBSR = conforming AND Repo2Run collect gate (rc in {0,5}): only r1 qualifies -> 1/3
+    assert m["n_ebsr"] == 1 and m["EBSR"] == round(1 / 3, 4)
+    assert m["n_collect_clean"] == 1
     assert m["ESSR_all"] == round((1.0 + 0.5 + 0.0) / 3, 4)
     # ESSR (RAT-official headline) = mean pass_rate over the 2 executed repos
     assert m["ESSR"] == round((1.0 + 0.5) / 2, 4)

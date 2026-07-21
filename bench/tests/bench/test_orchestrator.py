@@ -13,7 +13,8 @@ def _env(agent="v3", repo="o/r"):
 
 def _fake_measure(env, *, docker, **kw):
     return MeasureRow(agent=env.agent, repo=env.repo.full_name, env_status="ok", build_ok=True,
-                      executed=True, ebsr=True, pass_rate=1.0, total=3, passed=3, collect_clean=True)
+                      status="executed", executed=True, ebsr=True, pass_rate=1.0, total=3, passed=3,
+                      collect_clean=True, collect_rc=0)
 
 
 def test_run_one_writes_row_and_resumes(tmp_path, monkeypatch):
@@ -34,6 +35,7 @@ def test_run_one_writes_antivanish_row_on_measure_crash(tmp_path, monkeypatch):
     with open(p) as f:
         d = json.load(f)
     assert d["executed"] is False and d["ebsr"] is False and d["build_ok"] is False
+    assert d["status"] == "measure_error"
     assert "docker daemon died" in d["meta"]["error"]
 
 

@@ -21,11 +21,13 @@ def test_efficiency_means_skip_none():
 
 
 def test_tokens_per_success_use_success_denominators():
-    # tokens_per_ebsr denominator is now EBSR-success = collect_clean (collect-only exit 0)
-    rows = [_row(repo="r1", ebsr=True, collect_clean=True, pass_rate=1.0, tokens_in=50, tokens_out=150),
-            _row(repo="r2", ebsr=True, collect_clean=True, pass_rate=0.5, tokens_in=100, tokens_out=100)]
+    # tokens_per_ebsr denominator is the GATED EBSR count n_ebsr (conforming AND collect_rc in {0,5}).
+    rows = [_row(repo="r1", status="executed", ebsr=True, collect_rc=0, collect_clean=True,
+                 pass_rate=1.0, tokens_in=50, tokens_out=150),
+            _row(repo="r2", status="executed", ebsr=True, collect_rc=0, collect_clean=True,
+                 pass_rate=0.5, tokens_in=100, tokens_out=100)]
     m = compute_metrics(rows)
-    assert m["tokens_per_ebsr"] == round(400 / 2, 4)
+    assert m["n_ebsr"] == 2 and m["tokens_per_ebsr"] == round(400 / 2, 4)
     assert m["tokens_per_real_success"] == round(400 / 1, 4)
 
 

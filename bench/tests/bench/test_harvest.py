@@ -23,7 +23,8 @@ def test_discovers_dockerfile_and_meta(tmp_path):
     envs = discover({"v3": str(root)})
     assert len(envs) == 1
     e = envs[0]
-    assert e.agent == "v3" and e.repo.full_name == "o/r1" and e.status == "ok"
+    # legacy _meta (no `status` key) + Dockerfile present -> legacy_ok (design §2.5)
+    assert e.agent == "v3" and e.repo.full_name == "o/r1" and e.status == "legacy_ok"
     assert e.dockerfile.startswith("FROM x") and e.setup_scripts["setup.sh"] == "echo hi"
     assert e.base_image == "python:3.13-slim" and e.meta["tokens_in"] == 10
 
@@ -33,14 +34,16 @@ def test_eval_build_subdir_layout(tmp_path):
     _write(root, "o/r2", dockerfile="FROM y", subdir="eval_build",
            meta={"base_image": "python:3.12-slim"})
     envs = discover({"v3": str(root)})
-    assert len(envs) == 1 and envs[0].dockerfile == "FROM y" and envs[0].status == "ok"
+    assert len(envs) == 1 and envs[0].dockerfile == "FROM y" and envs[0].status == "legacy_ok"
 
 
-def test_missing_dockerfile_is_status_missing(tmp_path):
+def test_missing_dockerfile_is_status_legacy_missing(tmp_path):
     root = tmp_path / "v3run"
     _write(root, "o/r3", dockerfile=None, meta={"tokens_in": 5})
     envs = discover({"v3": str(root)})
-    assert len(envs) == 1 and envs[0].status == "missing" and envs[0].dockerfile is None
+    # legacy _meta (no `status`) + no Dockerfile -> legacy_missing (NOT "missing"): a pre-contract
+    # non-producer must not be forced into a counted EBSR-0 (design §2.5).
+    assert len(envs) == 1 and envs[0].status == "legacy_missing" and envs[0].dockerfile is None
     assert envs[0].meta["tokens_in"] == 5
 
 
@@ -48,7 +51,17 @@ def test_no_meta_gives_empty_meta(tmp_path):
     root = tmp_path / "v3run"
     _write(root, "o/r4", dockerfile="FROM z", meta=None)
     envs = discover({"v3": str(root)})
-    assert envs[0].meta == {} and envs[0].status == "ok"
+    assert envs[0].meta == {} and envs[0].status == "legacy_ok"
+
+
+def test_meta_status_is_passed_through(tmp_path):
+    # A producer-written _meta.status wins over the legacy fallback.
+    root = tmp_path / "v3run"
+    _write(root, "o/r7", dockerfile=None, meta={"status": "unmeasurable"})
+    _write(root, "o/r8", dockerfile="FROM p", meta={"status": "produced"})
+    envs = {e.repo.full_name: e for e in discover({"v3": str(root)})}
+    assert envs["o/r7"].status == "unmeasurable" and envs["o/r7"].dockerfile is None
+    assert envs["o/r8"].status == "produced" and envs["o/r8"].dockerfile == "FROM p"
 
 
 def test_copy_with_chown_and_multisource(tmp_path):

@@ -1,8 +1,19 @@
 # bench/metrics.py
 from __future__ import annotations
 
+from collections import Counter
+
 # from bench.gold import gold_coverage  # golden-set calc disabled for now (no gold JSON)
 from bench.schema import MeasureRow
+
+# Statuses that DISQUALIFY a row from EBSR credit (design §2.4). A row is "conforming" (repo genuinely
+# present at /testbed, build ok) iff its status is NOT one of these. `unmeasurable` is handled
+# separately — excluded from the denominator entirely, never a 0 for a method.
+_DISQUALIFIED = ("non_conforming", "empty_testbed", "build_fail", "missing", "measure_error", "error")
+
+
+def _conforming(r: MeasureRow) -> bool:
+    return r.status not in _DISQUALIFIED
 
 
 def _r(x: float) -> float:
@@ -19,29 +30,48 @@ def _mean_opt(vals: list) -> float | None:
 
 
 def compute_metrics(rows: list[MeasureRow], gold: dict | None = None) -> dict:
-    n = len(rows)
-    ex = [r for r in rows if r.executed]
+    # `unmeasurable` (non-producers: live-claude, sweagent) and `legacy_missing` (pre-contract runs
+    # with no Dockerfile) are excluded from EVERY denominator — neither must emit an EBSR-0 that
+    # shadows a method's real score (design §2.4/§2.5).
+    prod = [r for r in rows if r.status not in ("unmeasurable", "legacy_missing")]
+    n = len(prod)
+    n_unmeasurable = sum(1 for r in rows if r.status == "unmeasurable")
+    n_legacy_missing = sum(1 for r in rows if r.status == "legacy_missing")
+    ex = [r for r in prod if r.executed]
     n_exec = len(ex)
-    n_collect_clean = sum(1 for r in rows if r.collect_clean)   # collect-only exit code == 0
-    n_real = sum(1 for r in rows if r.ebsr and r.pass_rate >= 0.8)
+    n_collect_clean = sum(1 for r in prod if r.collect_clean)   # collect-only exit code in {0,5}
+    n_real = sum(1 for r in prod if r.ebsr and r.pass_rate >= 0.8)
     micro_passed = sum(r.passed for r in ex)
     micro_total = sum(max(r.total - r.skipped, 0) for r in ex)
 
+    # EBSR — option (a), minimal: the EXACT Repo2Run collect gate (rc in {0,5}), credited ONLY when
+    # the repo is genuinely at /testbed (C1 & C2 held). This is byte-comparable to prior runs for
+    # conforming repos; the only rows that lose credit are non_conforming / empty_testbed.
+    n_ebsr = sum(1 for r in prod if _conforming(r) and r.collect_rc in (0, 5))
+    # Diagnostic: the OLD ungated gate (what M3/paper reported). The delta is the removed false-green.
+    n_raw = sum(1 for r in prod if r.collect_rc in (0, 5))
+
     out = {
         "n": n, "n_exec": n_exec, "n_collect_clean": n_collect_clean,
-        "n_real_success": n_real,
-        # EBSR (Repo2Run-style): fraction of repos where `pytest --collect-only` exits 0.
-        "EBSR": _div(n_collect_clean, n),
-        # EBSR collection diagnostics: tests collected + collection errors (over all repos).
-        "total_collected": sum(len(r.collected_node_ids) for r in rows),
-        "mean_collected": _div(sum(len(r.collected_node_ids) for r in rows), n),
-        "total_collect_errors": sum(r.collect_error_count for r in rows),
-        "mean_collect_errors": _div(sum(r.collect_error_count for r in rows), n),
+        "n_real_success": n_real, "n_unmeasurable": n_unmeasurable,
+        "n_legacy_missing": n_legacy_missing,
+        # EBSR (option (a)): conforming AND Repo2Run collect gate (rc in {0,5}).
+        "EBSR": _div(n_ebsr, n), "n_ebsr": n_ebsr,
+        # Audit diagnostics: the ungated Repo2Run gate + the false-green removed by the /testbed guard.
+        "EBSR_repo2run_raw": _div(n_raw, n), "n_raw": n_raw,
+        "false_green_removed": _div(n_raw - n_ebsr, n),
+        # Every disqualified reason named, over the FULL row set (incl. unmeasurable).
+        "status_census": dict(Counter(r.status for r in rows)),
+        # EBSR collection diagnostics: tests collected + collection errors (over measured repos).
+        "total_collected": sum(len(r.collected_node_ids) for r in prod),
+        "mean_collected": _div(sum(len(r.collected_node_ids) for r in prod), n),
+        "total_collect_errors": sum(r.collect_error_count for r in prod),
+        "mean_collect_errors": _div(sum(r.collect_error_count for r in prod), n),
         # ESSR (RAT-official headline): mean pass_rate over EXECUTED repos, where
         # pass_rate = passed / (total - skipped) — errors kept IN the denominator (RAT parity).
         "ESSR": _div(sum(r.pass_rate for r in ex), n_exec),
-        # ÷all coverage-penalized variant (mean over ALL repos, build-fails count as 0).
-        "ESSR_all": _div(sum(r.pass_rate for r in rows), n),
+        # ÷all coverage-penalized variant (mean over ALL measured repos, build-fails count as 0).
+        "ESSR_all": _div(sum(r.pass_rate for r in prod), n),
         "real_success": _div(n_real, n),
         "micro": _div(micro_passed, micro_total),
         "full_pass_repos": sum(1 for r in ex if r.pass_rate >= 0.999),
@@ -54,22 +84,23 @@ def compute_metrics(rows: list[MeasureRow], gold: dict | None = None) -> dict:
     # if gold:
     #     out.update(gold_coverage(rows, gold))
 
-    tok_rows = [r for r in rows if r.tokens_in is not None and r.tokens_out is not None]
+    # Economy metrics are computed over `prod` too (unmeasurable rows carry no rebuildable env).
+    tok_rows = [r for r in prod if r.tokens_in is not None and r.tokens_out is not None]
     tok_total = sum(r.tokens_in + r.tokens_out for r in tok_rows)
-    n_build_ok = sum(1 for r in rows if r.build_ok)
-    n_unreplayed = sum(1 for r in rows if r.meta.get("unreplayed"))
+    n_build_ok = sum(1 for r in prod if r.build_ok)
+    n_unreplayed = sum(1 for r in prod if r.meta.get("unreplayed"))
 
     out.update({
-        "mean_image_delta_mb": _mean_opt([r.image_delta_mb for r in rows]),
-        "mean_installed_pkgs": _mean_opt([r.installed_pkg_count for r in rows]),
+        "mean_image_delta_mb": _mean_opt([r.image_delta_mb for r in prod]),
+        "mean_installed_pkgs": _mean_opt([r.installed_pkg_count for r in prod]),
         "mean_tokens": _r(tok_total / len(tok_rows)) if tok_rows else None,
         "mean_tokens_out": _mean_opt([r.tokens_out for r in tok_rows]) if tok_rows else None,
-        "tokens_per_ebsr": _r(tok_total / n_collect_clean) if (tok_rows and n_collect_clean) else None,
+        "tokens_per_ebsr": _r(tok_total / n_ebsr) if (tok_rows and n_ebsr) else None,
         "tokens_per_real_success": _r(tok_total / n_real) if (tok_rows and n_real) else None,
-        "mean_turns": _mean_opt([r.turns_used for r in rows]),
-        "mean_produce_s": _mean_opt([r.produce_s for r in rows]),
+        "mean_turns": _mean_opt([r.turns_used for r in prod]),
+        "mean_produce_s": _mean_opt([r.produce_s for r in prod]),
         "wall_s_per_real_success": (
-            _r(sum((r.produce_s or 0) + (r.build_s or 0) + (r.test_s or 0) for r in rows) / n_real)
+            _r(sum((r.produce_s or 0) + (r.build_s or 0) + (r.test_s or 0) for r in prod) / n_real)
             if n_real else None),
         "n_token_reporting": len(tok_rows),
         "rebuild_ok_rate": _div(n_build_ok, n),

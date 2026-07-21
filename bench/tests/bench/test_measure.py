@@ -21,6 +21,7 @@ class FakeDocker:
     def __init__(self, build_rc=0, size_mb=250.0, script=None, junit=_JUNIT_OK):
         self.build_rc, self.size_mb, self.script, self.junit = build_rc, size_mb, script or {}, junit
         self.last_ctx = None
+        self.calls = []                # every exec cmd, for asserting the short-circuit ladder
 
     def build(self, tag, ctx, timeout=None):
         self.last_ctx = ctx
@@ -34,8 +35,17 @@ class FakeDocker:
 
     def exec(self, name, argv, timeout=None):
         cmd = " ".join(argv)
+        self.calls.append(cmd)
         if "cat" in cmd and "junit.xml" in cmd:
             return 0, self.junit, False
+        # The /testbed contract probe (bench/contract.py). Answer conforming by default so the
+        # existing happy-path measure() tests reach the collect/pytest ladder. A test can override
+        # via `script={"py_test_files": (0, "STATUS=empty_testbed py_test_files=0", False)}`.
+        if "py_test_files" in cmd:
+            for needle, resp in self.script.items():
+                if needle in cmd:
+                    return resp
+            return 0, "STATUS=conforming py_test_files=1", False
         for needle, resp in self.script.items():
             if needle in cmd:
                 return resp
@@ -48,7 +58,7 @@ class FakeDocker:
 def test_build_failure_non_ebsr_still_a_row():
     row = measure(_env(), docker=FakeDocker(build_rc=1))
     assert row.build_ok is False and row.ebsr is False and row.executed is False
-    assert row.env_status == "ok"
+    assert row.env_status == "ok" and row.status == "build_fail"
 
 
 def test_collect_rc2_does_not_block_test_run():
@@ -58,11 +68,35 @@ def test_collect_rc2_does_not_block_test_run():
     row = measure(_env(), docker=FakeDocker(script=script))
     assert row.collect_clean is False and row.executed is True and row.ebsr is True
     assert row.total == 2 and row.passed == 2 and row.pass_rate == 1.0
+    assert row.status == "collect_error"      # conforming build, but collect rc not in {0,5}
 
 
 def test_env_missing_short_circuits():
     row = measure(_env(dockerfile=None, status="missing"), docker=FakeDocker())
     assert row.env_status == "missing" and row.build_ok is False and row.executed is False
+    assert row.status == "missing"
+
+
+def test_conforming_probe_records_py_test_files_and_executed_status():
+    row = measure(_env(), docker=FakeDocker())
+    assert row.status == "executed" and row.py_test_files == 1
+
+
+def test_probe_non_conforming_denies_ebsr_but_records_collect_for_audit():
+    # A built image whose /testbed is empty must NOT receive EBSR credit (the false-green fix), but we
+    # STILL run the cheap collect gate so EBSR_repo2run_raw faithfully reproduces the old rc-5 credit
+    # (that delta is `false_green_removed`). The EXPENSIVE full pytest run is skipped.
+    script = {"py_test_files": (0, "STATUS=empty_testbed py_test_files=0", False),
+              "--disable-warnings": (5, "no tests ran", False)}   # empty /testbed -> collect rc 5
+    d = FakeDocker(script=script)
+    row = measure(_env(), docker=d)
+    assert row.build_ok is True and row.status == "empty_testbed"
+    assert row.ebsr is False and row.executed is False
+    # collect DID run and is recorded (rc 5 is Repo2Run-clean -> feeds the raw diagnostic)...
+    assert row.collect_rc == 5 and row.collect_clean is True
+    assert any("--collect-only" in c for c in d.calls)
+    # ...but the expensive full pytest run was skipped for the non-conforming image.
+    assert not any("--junit-xml" in c for c in d.calls)
 
 
 def test_tokens_propagated_from_meta():
