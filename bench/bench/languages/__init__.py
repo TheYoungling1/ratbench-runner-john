@@ -5,9 +5,11 @@ from __future__ import annotations
 
 from bench.languages.base import Language
 from bench.languages.python import PythonLanguage
+from bench.languages.golang import GoLanguage
 
 _REGISTRY = {
     "python": PythonLanguage(),
+    "golang": GoLanguage(),
 }
 
 
