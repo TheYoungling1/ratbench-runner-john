@@ -154,7 +154,7 @@ class ClaudeCodeModel(BaseEvalModel):
     base_image: str = "claude-runner:latest"
 
     @weave.op
-    def predict(self, full_name: str, commit: str | None = None) -> dict:
+    def predict(self, full_name: str, commit: str | None = None, language: str | None = None) -> dict:
         start = time.time()
         slug = full_name.lower().replace("/", "-")
         container = f"claudecode-{slug}"

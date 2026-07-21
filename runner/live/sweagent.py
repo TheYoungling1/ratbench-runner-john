@@ -35,7 +35,7 @@ class SweAgentSubprocessModel(BaseEvalModel):
     cost_limit: float = 2.0
 
     @weave.op
-    def predict(self, full_name: str, commit: str | None = None) -> dict:
+    def predict(self, full_name: str, commit: str | None = None, language: str | None = None) -> dict:
         ok = {"root_path": self.root_path, "full_name": full_name}
         meta = {"requested_model": self.llm}
         # Fix #3: SWE-agent copies the LOCAL clone (root_path/input/repo/<full_name>) into its

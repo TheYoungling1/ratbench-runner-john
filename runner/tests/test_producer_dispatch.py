@@ -18,6 +18,11 @@ Covers:
      (no LLM, no docker): success path lands eval_build/Dockerfile + _meta.json{produced}
      + run_produced.json; error path (adapter returns no Dockerfile) lands _meta.json{error}
      with NO eval_build/ and NO run_produced.json.
+  3. Commit-pin threading — _ProducerModel.predict(commit=...) reaches the emitted Dockerfile.
+  4. Language threading (fix-language-threading) — _ProducerModel.predict(language=...)
+     reaches RepoSpec -> _meta.json["language"], lower-cased; the no-language default
+     stays "python" for byte-identity with pre-fix Python runs.
+  5. _run_one forwards its `language` param into the single model.predict(...) call site.
 """
 import importlib.util
 import json
@@ -183,3 +188,65 @@ def test_producer_predict_default_commit_is_none(tmp_path, monkeypatch):
 
     df = (run_dir / "output" / "o" / "r" / "eval_build" / "Dockerfile").read_text()
     assert "checkout --detach" not in df
+
+
+# ── 4. Language threading — _ProducerModel.predict(language=...) -> RepoSpec -> _meta.json ───
+# This is the Critical bug's exact seam: predict() used to hardcode RepoSpec's default
+# language="python" no matter what the dataset said, so every Node/Rust/Java repo's _meta.json
+# recorded "language":"python" and harvest -> get_language() ran PythonLanguage on it (0 tests
+# collected, silent EBSR-0). Without the fix this call raises TypeError (predict() didn't
+# accept a `language` kwarg at all) -- the strongest possible RED.
+def test_producer_predict_threads_language_into_meta(tmp_path, monkeypatch):
+    agent_root = tmp_path / "agent_lang"
+    _write_fake_agent_root(str(agent_root), _CLONE_ADAPTER)
+    monkeypatch.setenv("DOCKERAGENT_ROOT", str(agent_root))
+
+    run_dir = tmp_path / "run_lang"
+    m = rrb._make_model("dockeragent", root_path=str(run_dir), timeout=60, llm="x/y", num_turn=3)
+    out = m.predict("o/r", language="JavaScript")
+    assert out["status"] == "success"
+
+    meta = json.loads((run_dir / "output" / "o" / "r" / "_meta.json").read_text())
+    # dataset's capitalized "JavaScript" must reach _meta.json lower-cased, so downstream
+    # harvest -> get_language("javascript") resolves to NodeLanguage, not the Python default.
+    assert meta["language"] == "javascript"
+
+
+def test_producer_predict_default_language_is_python(tmp_path, monkeypatch):
+    # predict() with no language keeps the historical default -- Python _meta.json/MeasureRow
+    # stay byte-identical to pre-fix behavior (datasets/rat_python50.json rows, or any row
+    # lacking a "language" key, both resolve to "python" here exactly as before).
+    agent_root = tmp_path / "agent_lang_default"
+    _write_fake_agent_root(str(agent_root), _CLONE_ADAPTER)
+    monkeypatch.setenv("DOCKERAGENT_ROOT", str(agent_root))
+
+    run_dir = tmp_path / "run_lang_default"
+    m = rrb._make_model("dockeragent", root_path=str(run_dir), timeout=60, llm="x/y", num_turn=3)
+    out = m.predict("o/r")
+    assert out["status"] == "success"
+
+    meta = json.loads((run_dir / "output" / "o" / "r" / "_meta.json").read_text())
+    assert meta["language"] == "python"
+
+
+# ── 5. _run_one forwards `language` through to model.predict (the dataset-row -> predict seam) ──
+# Covers the OTHER half of the threading chain that test 4 doesn't reach: _run_one's own
+# `language` param and its single `model.predict(...)` call site. A stub model records the
+# kwargs it was called with -- no docker, no producer registry.
+class _RecordingModel:
+    llm = "x/y"
+
+    def __init__(self):
+        self.calls = []
+
+    def predict(self, full_name, commit=None, language=None):
+        self.calls.append({"full_name": full_name, "commit": commit, "language": language})
+        return {"status": "success", "root_path": "/tmp/unused", "full_name": full_name}
+
+
+def test_run_one_forwards_language_to_predict(tmp_path):
+    stub = _RecordingModel()
+    rrb._run_one("o/r", stub, str(tmp_path), "cat", language="JavaScript")
+
+    assert len(stub.calls) == 1
+    assert stub.calls[0]["language"] == "JavaScript"

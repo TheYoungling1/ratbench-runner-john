@@ -47,7 +47,7 @@ class RATModel(BaseEvalModel):
     save_mode: str
 
     @weave.op
-    def predict(self, full_name: str, commit: str | None = None) -> dict:
+    def predict(self, full_name: str, commit: str | None = None, language: str | None = None) -> dict:
         """
         Process a single repository and return its status.
 

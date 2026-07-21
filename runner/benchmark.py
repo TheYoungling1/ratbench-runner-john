@@ -132,13 +132,17 @@ class _ProducerModel:
         self.llm = llm
         self.num_turn = num_turn
 
-    def predict(self, full_name: str, commit: str | None = None) -> dict:
+    def predict(self, full_name: str, commit: str | None = None, language: str | None = None) -> dict:
         import json, os
         import producers
         from producers.base import ProduceContext, write_env_packet
         from bench.schema import RepoSpec
         # commit pins every downstream clone (producer + emitted Dockerfile) to the dataset SHA.
-        repo = RepoSpec(full_name, f"https://github.com/{full_name}", commit=commit)
+        # language routes measure() to the right Language strategy; lower() so the dataset's
+        # capitalized field ("Python"/"JavaScript"/"Rust"/"Java"/"Go") matches the lowercase
+        # get_language registry. Default "python" keeps language-less datasets byte-identical.
+        repo = RepoSpec(full_name, f"https://github.com/{full_name}",
+                        commit=commit, language=(language or "python").lower())
         kw = {"llm": self.llm}
         if self.name == "dockeragent":
             kw.update(num_turn=self.num_turn, base_image="auto")
@@ -283,6 +287,7 @@ def _run_one(
     repair_mode: str = "runner",
     repair_rounds: int = 2,
     commit: str | None = None,
+    language: str | None = None,
 ) -> dict:
     """Run a single repo through predict(), score it, and write per-repo JSON files.
 
@@ -326,7 +331,7 @@ def _run_one(
         # ── Run predict() ────────────────────────────────────────────────────
         print(f"[start ] {full_name}", flush=True)
         try:
-            out = model.predict(full_name, commit=commit)
+            out = model.predict(full_name, commit=commit, language=language)
         except Exception as exc:
             out = {
                 "status": "error",
@@ -838,18 +843,21 @@ def worker_main(full_name: str, root_path: str, llm: str, timeout: int, num_turn
     # what threads the dataset pin through the fan-out path (parallel_main -> scheduler -> --only).
     category = "?"
     commit = None
+    language = None
     try:
         for r in load_repos(repos_json):
             if r.get("full_name") == full_name:
                 category = r.get("_category", "?")
                 commit = r.get("commit")
+                language = r.get("language")
                 break
     except Exception:
         pass
 
     model = _make_model(model_name, root_path, timeout, llm, num_turn)
     _run_one(full_name, model, root_path, category,
-             repair_mode=repair_mode, repair_rounds=repair_rounds, commit=commit)
+             repair_mode=repair_mode, repair_rounds=repair_rounds, commit=commit,
+             language=language)
 
 
 def _consolidate_run(root_path, model_name=None, llm=None, repos_json=None):
@@ -893,7 +901,7 @@ def sequential_main(repos_json: str, root_path: str, limit: Optional[int], offse
     for r in repos:
         _run_one(r["full_name"], model, root_path, r.get("_category", "?"),
                  repair_mode=repair_mode, repair_rounds=repair_rounds,
-                 commit=r.get("commit"))
+                 commit=r.get("commit"), language=r.get("language"))
 
     aggregate(root_path)
     _consolidate_run(root_path, model_name, llm, repos_json)
