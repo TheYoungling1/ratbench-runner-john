@@ -10,6 +10,7 @@
 # The transform is PURE + unit-tested; running the actual repo2run tool is a live-only wrapper.
 from __future__ import annotations
 
+import json
 import os
 import re
 import subprocess
@@ -78,6 +79,48 @@ def rehome_dockerfile(dockerfile: str, repo_dest: str = "/repo") -> str:
     return dockerfile.rstrip() + "\n" + _REHOME_STANZA.format(dest=dest)
 
 
+# ── Pure telemetry harvest (unit-tested; the old runner/models/repo2run_model.py wrapper used to
+# fold these into agent_run_summary.json — M4.5a moves the harvest into the producer so a
+# produce-only run still carries repo2run's token total + its own live pytest score) ──────────
+def _harvest_total_tokens(output_dir: str) -> int | None:
+    """repo2run's cumulative token total from output/<full_name>/track.json (a LIST; the last
+    entry with a NUMERIC `cost_tokens` holds the running total — repo2run keeps ONE total, no
+    in/out split). Anti-vanish: a missing/malformed track.json OR a non-numeric cost_tokens yields
+    None (never a raise, and never a bogus non-int `tok` that would suppress the summary fallback)."""
+    try:
+        with open(os.path.join(output_dir, "track.json")) as fh:
+            track = json.load(fh)
+        # Only accept a genuine number (int/float, NOT bool, which is an int subclass) — a
+        # non-numeric cost_tokens is skipped so we fall through to None, not persist junk.
+        return next((e["cost_tokens"] for e in reversed(track)
+                     if isinstance(e, dict)
+                     and isinstance(e.get("cost_tokens"), (int, float))
+                     and not isinstance(e.get("cost_tokens"), bool)), None)
+    except Exception:                                   # noqa: BLE001 — anti-vanish, never propagate
+        return None
+
+
+def _harvest_inline(output_dir: str) -> dict | None:
+    """repo2run's own in-container pytest score from output/<full_name>/run_pytest_results.json,
+    as `{command, success, pass_rate}` (the delta between the method's live score and the bench
+    replay). Uses the SAME arithmetic the old repo2run_model wrapper used. Anti-vanish: an absent
+    or malformed file yields None, never a raise."""
+    try:
+        with open(os.path.join(output_dir, "run_pytest_results.json")) as fh:
+            summary = json.load(fh).get("summary") or {}
+        total = summary.get("total_tests", 0) or 0
+        passed = summary.get("passed", 0) or 0
+        skipped = summary.get("skipped", 0) or 0
+        failed = summary.get("failed", 0) or 0
+        errors = summary.get("errors", 0) or 0
+        eff = total - skipped
+        pass_rate = (passed / eff) if eff > 0 else ((passed / total) if total > 0 else None)
+        success = (passed > 0) and (failed == 0) and (errors == 0)
+        return {"command": "pytest", "success": bool(success), "pass_rate": pass_rate}
+    except Exception:                                   # noqa: BLE001 — anti-vanish, never propagate
+        return None
+
+
 # ── The live-only real runner (lazily touches the RAT tree; never reached by unit tests) ──────
 def run_repo2run(repo: RepoSpec, ctx: ProduceContext, *, llm: str | None, num_turn: int) -> dict:
     """LIVE-ONLY: run the repo2run tool and return its RAW (pre-re-home) Dockerfile + metadata.
@@ -115,8 +158,15 @@ def run_repo2run(repo: RepoSpec, ctx: ProduceContext, *, llm: str | None, num_tu
     with open(dockerfile_path) as fh:
         dockerfile = fh.read()
     base = re.search(r"^\s*FROM\s+(\S+)", dockerfile, re.MULTILINE)
+
+    # M4.5a: harvest repo2run's own telemetry from output/<full_name>/ (never raise — anti-vanish).
+    total_tokens = _harvest_total_tokens(output_dir)
+    economy: dict = {}
+    if total_tokens is not None:
+        economy["total_tokens"] = total_tokens
+    inline = _harvest_inline(output_dir)
     return {"dockerfile": dockerfile, "base_image": (base.group(1) if base else None),
-            "head_sha": sha, "economy": {}}
+            "head_sha": sha, "economy": economy, "inline": inline}
 
 
 class Repo2RunProducer:
@@ -146,18 +196,19 @@ class Repo2RunProducer:
             raw = res.get("dockerfile")
             economy = dict(res.get("economy") or {})
             economy.setdefault("produce_s", round(time.time() - start, 2))
+            inline = res.get("inline")
             if not raw:
                 return ProducedEnv(repo=repo, dockerfile=None, status="error",
                                    note="repo2run produced no Dockerfile",
                                    base_image=res.get("base_image"), conformance="rehomed",
-                                   producer_name=self.name, economy=economy)
+                                   producer_name=self.name, economy=economy, inline=inline)
 
             rehomed = rehome_dockerfile(raw, self.repo_dest)
             return ProducedEnv(repo=repo, dockerfile=rehomed,
                                base_image=res.get("base_image"),
                                head_sha=res.get("head_sha") or "",
                                status="produced", conformance="rehomed",
-                               producer_name=self.name, economy=economy)
+                               producer_name=self.name, economy=economy, inline=inline)
         except Exception as exc:                    # noqa: BLE001 — boundary guard, never propagate
             return ProducedEnv(repo=repo, dockerfile=None, status="error",
                                note=repr(exc), conformance="rehomed",

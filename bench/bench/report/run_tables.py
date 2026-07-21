@@ -48,6 +48,20 @@ def _summary(run_dir, full_name):
         return {}
 
 
+def _meta(run_dir, full_name):
+    """_meta.json for a repo — the produce-side economy packet (M4.5a). Mirrors _summary: read the
+    run's own persisted copy; return {} on any error. When it carries real economy (a produce-only
+    run writes total_tokens/inline), bench prefers it over agent_run_summary.json; a FROZEN run's
+    _meta predates the economy fields, so every meta lookup below yields None and we fall back to
+    the summary — the byte-identity guarantee for historical run dirs."""
+    p = os.path.join(run_dir, "output", full_name, "_meta.json")
+    try:
+        with open(p) as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
 def _in_build(summ):
     """(success, pass_rate_or_None, command) — a REAL in-sandbox pass, not a collect-only check."""
     best = summ.get("best_in_sandbox_test_result") or {}
@@ -56,10 +70,33 @@ def _in_build(summ):
     return success, (best.get("pass_rate") if success else None), cmd
 
 
+def _meta_in_build(meta):
+    """(success, pass_rate_or_None, command) from _meta.json's `inline` dict (the method's own live
+    score), using _in_build's exact arithmetic. Returns None when _meta has no inline dict (every
+    FROZEN run) so the caller falls back to the summary's best_in_sandbox_test_result."""
+    inline = meta.get("inline")
+    if not isinstance(inline, dict):
+        return None
+    cmd = inline.get("command") or ""
+    success = bool(inline.get("success")) and _COLLECT not in cmd
+    return success, (inline.get("pass_rate") if success else None), cmd
+
+
 def _tokens(summ):
     tu = summ.get("token_usage") or {}
     tot = tu.get("total")
     return tot.get("total_tokens") if isinstance(tot, dict) else tu.get("total_tokens")
+
+
+def _meta_tokens(meta):
+    """Total agent-loop tokens from _meta.json economy: a producer `total_tokens` (repo2run's single
+    running total) first, else tokens_in+tokens_out (dockeragent's split). Returns None when _meta
+    carries no usable token economy (every FROZEN run) so the caller falls back to _tokens(summ)."""
+    mt = meta.get("total_tokens")
+    if mt is None:
+        ti, to = meta.get("tokens_in"), meta.get("tokens_out")
+        mt = (ti or 0) + (to or 0) if (ti is not None or to is not None) else None
+    return mt
 
 
 def build(run_dir):
@@ -73,8 +110,15 @@ def build(run_dir):
         ex = bool(r.get("executed"))
         pr = r.get("pass_rate")
         summ = _summary(run_dir, fn)
-        ib_ok, ib, cmd = _in_build(summ)
-        per_repo.append({"full": fn, "ib": ib, "cr": (pr if ex else None), "tok": _tokens(summ)})
+        meta = _meta(run_dir, fn)
+        # _meta-first precedence (M4.5a): a produce-only run's economy wins; a FROZEN run's _meta
+        # has neither an inline dict nor token economy, so both helpers return None and we fall
+        # back to agent_run_summary.json — byte-identical to the pre-M4.5a tables.
+        mib = _meta_in_build(meta)
+        ib_ok, ib, cmd = mib if mib is not None else _in_build(summ)
+        mt = _meta_tokens(meta)
+        tok = mt if mt is not None else _tokens(summ)
+        per_repo.append({"full": fn, "ib": ib, "cr": (pr if ex else None), "tok": tok})
         row = {"full_name": fn, "executed": ex, "pass_rate": pr or 0.0,
                "passed": r.get("passed") or 0, "eff_total": r.get("eff_total") or 0,
                "in_build_success": ib_ok}

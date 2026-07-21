@@ -157,5 +157,6 @@ def write_env_packet(out_root: str, env: ProducedEnv) -> str:
         "llm_calls": economy.get("llm_calls"),
         "turns_used": economy.get("turns_used"),
         "produce_s": economy.get("produce_s"),
+        "total_tokens": economy.get("total_tokens"),
     }, indent=2))
     return repo_dir
