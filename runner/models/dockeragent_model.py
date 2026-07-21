@@ -10,7 +10,10 @@ for the RAT scorers to consume.
 import os, re, sys, time, json, subprocess, weave
 
 # Two repo roots — DISTINCT (this was the original draft's bug):
-RAT_ROOT   = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # RAT: libkit/, eval/
+# RAT tree (libkit/, eval/) is <repo>/rat; from runner/models/ the repo root is two dirs
+# up. The runner also sets RAT_ROOT and puts it on sys.path before importing this module.
+RAT_ROOT   = os.environ.get("RAT_ROOT") or os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "rat")  # RAT: libkit/, eval/
 AGENT_ROOT = os.environ["DOCKERAGENT_ROOT"]            # OUR repo, e.g. /Users/john/rat-bench-integration
 sys.path[:0] = [RAT_ROOT, AGENT_ROOT]
 
@@ -55,8 +58,8 @@ def _resolve_producers_root() -> str:
             _add(v)
             _add(os.path.dirname(v))
             _add(os.path.dirname(os.path.dirname(v)))
-    real = os.path.realpath(__file__)                     # harness/eval/models/<file> -> repo root
-    _add(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(real)))))
+    real = os.path.realpath(__file__)                     # runner/models/<file> -> repo root
+    _add(os.path.dirname(os.path.dirname(os.path.dirname(real))))
     for root in cands:
         if os.path.isfile(os.path.join(root, "producers", "base.py")):
             return root

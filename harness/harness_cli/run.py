@@ -10,7 +10,7 @@ import tempfile
 import time
 
 from .registry import load_registry, resolve_variety
-from .provision import provision_agent, git_commit, symlink_glue
+from .provision import provision_agent, git_commit
 from . import manifest
 
 HARNESS_ROOT = os.environ.get("HARNESS_ROOT", "/opt/harness")
@@ -18,9 +18,6 @@ RAT_ROOT = os.environ.get("RAT_ROOT", "/opt/rat_root")
 AGENTS_ROOT = os.environ.get("AGENTS_ROOT", "/opt/agents")
 RUNS_ROOT = os.environ.get("RUNS_ROOT", "/opt/runs")
 BENCH_ROOT = os.environ.get("BENCH_ROOT", "/opt/bench")
-GLUE_FILES = ["dockeragent_model.py", "rat_model.py", "repo2run_model.py",
-              "claudecode_model.py", "sweagent_subprocess_model.py",
-              "claudecode_dockerfile_model.py", "_claudecode_dockerfile_helpers.py"]
 
 
 def output_dir(variety: str, run_name: str, now: float) -> str:
@@ -40,14 +37,6 @@ def build_env(spec, agent_root: str, harness_commit: str, agent_commit: str) -> 
     if spec.venv:
         env["PATH"] = os.path.join(spec.venv, "bin") + os.pathsep + env["PATH"]
     return env
-
-
-def preflight() -> None:
-    models = os.path.join(RAT_ROOT, "eval", "models")
-    for name in GLUE_FILES:
-        p = os.path.join(models, name)
-        if not os.path.exists(p):     # follows symlink; catches a broken/missing link
-            raise FileNotFoundError(f"glue not provisioned in rat_root: {p}")
 
 
 def _is_native_lane(model: str, declared_measure) -> bool:
@@ -148,10 +137,6 @@ def main(argv=None) -> int:
     llm = args.llm if args.llm is not None else spec.llm
     if llm is not None:
         llm = llm.strip() or None
-
-    symlink_glue(os.path.join(HARNESS_ROOT, "eval", "models"),
-                 os.path.join(RAT_ROOT, "eval", "models"), GLUE_FILES)
-    preflight()
 
     harness_commit = git_commit(HARNESS_ROOT)
     if spec.is_baseline:

@@ -14,12 +14,12 @@ import subprocess
 
 import weave
 
-from eval.models.claudecode_model import (
+from runner.live.claudecode import (
     ClaudeCodeModel, RP, RPC, PYTEST_TIMEOUT, W, AUTH_KEYS,
     _normalize_model, _as_text, init_output_and_repo, download_repo,
 )
 from eval.common.utils import TimeoutException
-from eval.models._claudecode_dockerfile_helpers import (
+from runner.models._claudecode_dockerfile_helpers import (
     build_prompt, parse_inbuild, write_instance_json, ensure_pytest, DOCKERFILE_GEN_PATH,
 )
 
@@ -60,8 +60,8 @@ def _resolve_producers_root() -> str:
             _add(v)
             _add(os.path.dirname(v))
             _add(os.path.dirname(os.path.dirname(v)))
-    real = os.path.realpath(__file__)                     # harness/eval/models/<file> -> repo root
-    _add(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(real)))))
+    real = os.path.realpath(__file__)                     # runner/models/<file> -> repo root
+    _add(os.path.dirname(os.path.dirname(os.path.dirname(real))))
     for root in cands:
         if os.path.isfile(os.path.join(root, "producers", "base.py")):
             return root

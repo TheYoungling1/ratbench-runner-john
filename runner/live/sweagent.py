@@ -14,17 +14,18 @@ import sys
 
 import weave
 
-RAT_ROOT = os.environ.get("RAT_ROOT") or os.path.dirname(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+_HERE = os.path.dirname(os.path.abspath(__file__))          # runner/live
+_REPO_ROOT = os.path.dirname(os.path.dirname(_HERE))        # <repo>
+RAT_ROOT = os.environ.get("RAT_ROOT") or os.path.join(_REPO_ROOT, "rat")
 sys.path[:0] = [RAT_ROOT]
 
 from eval.common.base_model import BaseEvalModel  # noqa: E402
 
 SWEAGENT_VENV_PY = os.environ.get("SWEAGENT_VENV_PY", "/opt/sweagent_venv/bin/python")
-HARNESS_ROOT = os.environ.get("DOCKERAGENT_ROOT") or os.path.dirname(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+HARNESS_ROOT = os.environ.get("DOCKERAGENT_ROOT") or _REPO_ROOT
+# sweagent_runner.py now lives beside this file (runner/live/); default to it directly.
 SWEAGENT_RUNNER = os.environ.get(
-    "SWEAGENT_RUNNER", os.path.join(HARNESS_ROOT, "scripts", "sweagent_runner.py"))
+    "SWEAGENT_RUNNER", os.path.join(_HERE, "sweagent_runner.py"))
 RESULT_MARK = "__SWEAGENT_RESULT__"
 
 

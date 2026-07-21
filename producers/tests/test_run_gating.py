@@ -1,7 +1,7 @@
 # producers/tests/test_run_gating.py — the runtime measure-lane gate + live-score fallback (FIX 4).
 #
 # Two helper-level surfaces from harness_cli.run, proven WITHOUT mocking run.main() (provision /
-# symlink_glue / subprocess would make that brittle):
+# staging symlinks / subprocess would make that brittle):
 #   * _is_native_lane(model, declared_measure) — derives "no rebuildable artifact" from the
 #     EFFECTIVE model's producer.measurable (design §4), falling back to the declared `measure`
 #     tag only when the model is unregistered.

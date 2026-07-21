@@ -10,9 +10,11 @@ import time
 
 import weave
 
-sys.path.insert(
-    0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-)
+# RAT tree (libkit/, eval/) is <repo>/rat; from runner/models/ the repo root is two dirs
+# up. The runner also sets RAT_ROOT and puts it on sys.path before importing this module.
+sys.path.insert(0, os.environ.get("RAT_ROOT") or os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "rat"
+))
 
 from libkit.command import init_output_and_repo
 
@@ -50,8 +52,8 @@ def _resolve_producers_root() -> str:
             _add(v)
             _add(os.path.dirname(v))
             _add(os.path.dirname(os.path.dirname(v)))
-    real = os.path.realpath(__file__)                     # harness/eval/models/<file> -> repo root
-    _add(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(real)))))
+    real = os.path.realpath(__file__)                     # runner/models/<file> -> repo root
+    _add(os.path.dirname(os.path.dirname(os.path.dirname(real))))
     for root in cands:
         if os.path.isfile(os.path.join(root, "producers", "base.py")):
             return root

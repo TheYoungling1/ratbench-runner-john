@@ -91,9 +91,12 @@ os.environ.setdefault("RAT_ROOT", _default_rat_root(_THIS_DIR))
 # ── Load .env so API keys are available for all model paths ──────────────────
 from dotenv import load_dotenv; load_dotenv()
 
-sys.path[:0] = [os.environ["RAT_ROOT"]]               # RAT repo: scorers + the model file
-from eval.common.scorers import success_scorer, pytest_pass_rate_scorer, pytest_collect_scorer
-from eval.models.dockeragent_model import DockerAgentModel   # reuse the SAME predict()
+_REPO_ROOT = os.path.dirname(_THIS_DIR)               # <repo> holds runner/, producers/, bench/
+sys.path[:0] = [os.environ["RAT_ROOT"],               # RAT repo: eval.common (libkit etc.)
+                _REPO_ROOT,                           # runner.*, producers.*
+                os.path.join(_REPO_ROOT, "bench")]    # the `bench` package lives at <repo>/bench/bench
+from bench.rat_scorers import success_scorer, pytest_pass_rate_scorer, pytest_collect_scorer
+from runner.models.dockeragent_model import DockerAgentModel   # reuse the SAME predict()
 
 PY = sys.executable  # same interpreter for child subprocesses
 
@@ -114,29 +117,27 @@ def _make_model(model_name: str, root_path: str, timeout: int, llm: str, num_tur
     if model_name == "dockeragent":
         return DockerAgentModel(root_path=root_path, timeout=timeout, llm=llm, num_turn=num_turn)
     elif model_name == "rat":
-        from eval.models.rat_model import RATModel
+        from runner.live.rat import RATModel
         return RATModel(root_path=root_path, timeout=timeout, llm=llm, num_turn=num_turn,
                         save_mode="none")
     elif model_name == "repo2run":
-        from eval.models.repo2run_model import Repo2RunModel
+        from runner.models.repo2run_model import Repo2RunModel
         return Repo2RunModel(root_path=root_path, timeout=timeout, llm=llm, num_turn=num_turn)
     elif model_name == "sweagent":
         # SWE-agent requires Python >=3.11 but the runner is 3.10, so this model
         # subprocesses the official SWEAgentModel under /opt/sweagent_venv.
-        from eval.models.sweagent_subprocess_model import SweAgentSubprocessModel
+        from runner.live.sweagent import SweAgentSubprocessModel
         return SweAgentSubprocessModel(root_path=root_path, timeout=timeout, llm=llm,
                                        num_turn=num_turn,
                                        cost_limit=float(os.environ.get("SWEAGENT_COST_LIMIT", "2.0")))
     elif model_name == "claudecode":
-        # Requires eval/models/claudecode_model.py symlinked into RAT_ROOT (bench does
-        # this via symlink_glue; for a direct `--model claudecode` run, run bench once
-        # first or create the symlink).
-        from eval.models.claudecode_model import ClaudeCodeModel
+        # Live agentic env-setup inside a claude-runner container, scored in-place.
+        from runner.live.claudecode import ClaudeCodeModel
         return ClaudeCodeModel(root_path=root_path, timeout=timeout, llm=llm, num_turn=num_turn,
                                base_image=os.environ.get("CLAUDE_RUNNER_IMAGE", "claude-runner:latest"))
     elif model_name == "claudecode-dockerfile":
         # Agentic verify in a live container + emit a Dockerfile, built fresh and scored.
-        from eval.models.claudecode_dockerfile_model import ClaudeCodeDockerfileModel
+        from runner.models.claudecode_dockerfile_model import ClaudeCodeDockerfileModel
         return ClaudeCodeDockerfileModel(
             root_path=root_path, timeout=timeout, llm=llm, num_turn=num_turn,
             base_image=os.environ.get("CLAUDE_RUNNER_IMAGE", "claude-runner:latest"))

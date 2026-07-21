@@ -1,1 +1,0 @@
-/opt/harness/eval/models/claudecode_dockerfile_model.py

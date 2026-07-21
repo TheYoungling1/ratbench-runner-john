@@ -9,9 +9,13 @@ import os
 
 import weave
 
-sys.path.insert(
-    0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# RAT_ROOT is set by the runner (which also puts it on sys.path before importing this
+# module). Fallback for standalone use: the RAT tree at <repo>/rat, resolved from this
+# file's home at runner/live/ (repo root is two dirs up).
+RAT_ROOT = os.environ.get("RAT_ROOT") or os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "rat"
 )
+sys.path.insert(0, RAT_ROOT)
 
 from libkit.codeagent import CodeAgent
 from libkit.command import (

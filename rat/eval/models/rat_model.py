@@ -1,1 +1,0 @@
-/opt/harness/eval/models/rat_model.py

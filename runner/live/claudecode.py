@@ -18,12 +18,11 @@ import subprocess
 
 import weave
 
-# RAT_ROOT is set by bench, the runner, and the tests. The fallback below is only
-# correct when this file is imported via its symlink inside the RAT tree
-# (.../rat_root/eval/models/); loaded from the harness dir it would resolve to the
-# harness root, so production always sets RAT_ROOT explicitly.
-RAT_ROOT = os.environ.get("RAT_ROOT") or os.path.dirname(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# RAT_ROOT is set by bench, the runner, and the tests (the runner also puts it on
+# sys.path before importing this module). The fallback resolves the RAT tree at
+# <repo>/rat from this file's home at runner/live/ (repo root is two dirs up).
+RAT_ROOT = os.environ.get("RAT_ROOT") or os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "rat"
 )
 sys.path[:0] = [RAT_ROOT]
 

@@ -5,23 +5,6 @@ import os
 import subprocess
 
 
-def symlink_glue(src_dir: str, dest_dir: str, filenames: list[str]) -> list[str]:
-    """Symlink our model files from the harness checkout into the RAT eval/models
-    tree. Idempotent. Leaves any other (third-party) files in dest untouched.
-    Returns the created link paths."""
-    created: list[str] = []
-    for name in filenames:
-        src = os.path.join(src_dir, name)
-        dst = os.path.join(dest_dir, name)
-        if not os.path.exists(src):
-            raise FileNotFoundError(f"glue source missing: {src}")
-        if os.path.islink(dst) or os.path.exists(dst):
-            os.remove(dst)
-        os.symlink(src, dst)
-        created.append(dst)
-    return created
-
-
 def git_commit(path: str) -> str:
     """Short HEAD commit of a checkout."""
     out = subprocess.run(

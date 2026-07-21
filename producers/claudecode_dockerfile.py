@@ -38,14 +38,16 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
     import os
     import subprocess
 
-    # Lazy: only touch the RAT tree / docker on the live path.
-    ensure_rat_on_path()   # FIX C: add <repo>/rat to sys.path BEFORE the lazy eval.* imports
-    from eval.models.claudecode_model import (  # noqa: E402
-        W, AUTH_KEYS, _normalize_model, _as_text, download_repo, init_output_and_repo,
+    # Pure, RAT-tree-free helpers folded into producers/ so this producer never imports the
+    # runner package or RAT model modules (dependency direction: producers must not depend
+    # on the runner).
+    from producers._claudecode_helpers import (
+        W, AUTH_KEYS, _normalize_model, _as_text, build_prompt, DOCKERFILE_GEN_PATH,
     )
-    from eval.models._claudecode_dockerfile_helpers import (  # noqa: E402
-        build_prompt, DOCKERFILE_GEN_PATH,
-    )
+    # download_repo/init_output_and_repo are libkit utilities (producers may use libkit).
+    # Lazy: only touch the RAT tree on the live path — add <repo>/rat to sys.path first.
+    ensure_rat_on_path()
+    from libkit.command import download_repo, init_output_and_repo  # noqa: E402
 
     dockerfile_base = os.environ.get("CLAUDE_DOCKERFILE_BASE", "python:3.11")
     base_image = os.environ.get("CLAUDE_BASE_IMAGE", "python:3.11")
