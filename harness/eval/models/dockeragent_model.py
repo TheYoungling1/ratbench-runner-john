@@ -17,7 +17,9 @@ sys.path[:0] = [RAT_ROOT, AGENT_ROOT]
 from libkit.command import init_output_and_repo                 # RAT repo
 from eval.common.base_model import BaseEvalModel                # RAT repo
 from eval.common.utils import TimeoutException                  # RAT repo
-from multi_docker_eval_adapter import MultiDockerEvalAdapter    # OUR repo
+# multi_docker_eval_adapter is imported LAZILY inside the predict methods (below). A BASELINE run
+# (rat/repo2run, DOCKERAGENT_ROOT=/opt/harness) imports THIS module for the class but never calls
+# those methods — it must not require the per-agent-checkout adapter to exist at import time.
 
 RP  = f"{RAT_ROOT}/libkit/tools/run_pytest.py"
 RPC = f"{RAT_ROOT}/libkit/tools/run_pytest_collect.py"
@@ -96,6 +98,7 @@ class DockerAgentModel(BaseEvalModel):
 
                 # 1) Run OUR agent -> docker_res dict. The eval Dockerfile (a STRING) is self-contained:
                 #    it `git clone`s the repo into /testbed and bakes the verified setup recipe.
+                from multi_docker_eval_adapter import MultiDockerEvalAdapter  # lazy: checkout-only
                 res = MultiDockerEvalAdapter(output_dir=out_dir).process_single_instance(
                     {"instance_id": full_name.replace("/", "__"),
                      "repo_url": f"https://github.com/{full_name}", "language": "python"},
@@ -182,6 +185,7 @@ class DockerAgentModel(BaseEvalModel):
         try:
             init_output_and_repo(self.root_path, full_name, renew=True)
             # Run OUR agent -> docker_res dict (the eval Dockerfile is a self-contained STRING).
+            from multi_docker_eval_adapter import MultiDockerEvalAdapter  # lazy: checkout-only
             res = MultiDockerEvalAdapter(output_dir=out_dir).process_single_instance(
                 {"instance_id": full_name.replace("/", "__"),
                  "repo_url": f"https://github.com/{full_name}", "language": "python"},
