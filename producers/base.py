@@ -38,6 +38,7 @@ class ProduceContext:
     workdir: str                # scratch for THIS repo (agent workplace/, clones) — never the build ctx
     num_turn: Optional[int] = None
     timeout: int = 3600
+    agent_root: Optional[str] = None  # the dockeragent checkout root (holds the branch's own multi_docker_eval_adapter.py)
 
 
 @dataclass(frozen=True)

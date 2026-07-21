@@ -351,7 +351,7 @@ def _run_one(
 # ─────────────────────────────────────────────────────────────────────────────
 
 def _print_paper_faithful_essr(root_path: str) -> None:
-    """Deterministic, paper-faithful ESSR recompute (wraps scripts/compute_essr.py).
+    """Deterministic, paper-faithful ESSR recompute (wraps bench.inline_score).
 
     The official/paper ESSR (eval/report/generate_latex_report.py) divides by *executed*
     repos; ``essr()`` mirrors it. We ALSO print a coverage-penalized ÷all variant
@@ -359,11 +359,11 @@ def _print_paper_faithful_essr(root_path: str) -> None:
     plus coverage, and cross-check the from-raw recompute against the stored scorer rows.
     Never raises — degrades to a note.
     """
-    scripts_dir = os.path.join(_THIS_DIR, "scripts")
-    if scripts_dir not in sys.path:
-        sys.path.insert(0, scripts_dir)
+    bench_dir = os.path.join(os.path.dirname(_THIS_DIR), "bench")
+    if bench_dir not in sys.path:
+        sys.path.insert(0, bench_dir)
     try:
-        from compute_essr import score_agent
+        from bench.inline_score import score_agent
     except Exception as exc:  # pragma: no cover - optional helper
         print(f"\n[essr] paper-faithful recompute unavailable: {exc}")
         return
@@ -485,12 +485,12 @@ def _emit_run_tables(root_path: str) -> None:
     """Write the derived rollups (per_repo_table.json + in_sandbox_score.json) so every run ships
     them without a manual post-step. Reads the persisted per-repo agent_run_summary.json. Never
     raises — degrades to a note (e.g. if compute_essr is unavailable)."""
-    scripts_dir = os.path.join(_THIS_DIR, "scripts")
-    if scripts_dir not in sys.path:
-        sys.path.insert(0, scripts_dir)
+    bench_dir = os.path.join(os.path.dirname(_THIS_DIR), "bench")
+    if bench_dir not in sys.path:
+        sys.path.insert(0, bench_dir)
     try:
-        import emit_run_tables
-        pt, isf = emit_run_tables.write(root_path)
+        from bench.report.run_tables import write as _write_tables
+        pt, isf = _write_tables(root_path)
         print(f"[aggregate] Wrote {pt} + {isf}")
     except Exception as exc:  # pragma: no cover - optional helper
         print(f"[aggregate] could not emit run tables: {exc}", flush=True)
@@ -796,15 +796,13 @@ def _consolidate_run(root_path, model_name=None, llm=None, repos_json=None):
     """Post-run hook: write per-task case_study.json + run rollups.
     Best-effort — never raises, so it can't fail the benchmark run."""
     import os as _os, subprocess as _sp
-    script = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "scripts", "consolidate_run.py")
-    if not _os.path.isfile(script):
-        return
+    bench_dir = _os.path.join(_os.path.dirname(_THIS_DIR), "bench")
     try:
-        cmd = [sys.executable, script, root_path]
+        cmd = [sys.executable, "-m", "bench.report.case_study", root_path]
         if model_name: cmd += ["--model", model_name]
         if llm: cmd += ["--llm", llm]
         if repos_json: cmd += ["--dataset", repos_json]
-        r = _sp.run(cmd, capture_output=True, text=True, timeout=900)
+        r = _sp.run(cmd, capture_output=True, text=True, timeout=900, cwd=bench_dir)
         print("[consolidate] ok" if r.returncode == 0
               else "[consolidate] non-fatal: " + r.stderr.strip()[:200])
     except Exception as e:

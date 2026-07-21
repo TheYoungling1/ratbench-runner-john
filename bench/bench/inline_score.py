@@ -26,7 +26,7 @@ EBSR vs ESSR (the two benchmarks measure different things):
   ESSR (RATBench):       what FRACTION of tests PASS?          (the headline here)
 
 Usage:
-  python scripts/compute_essr.py \
+  python -m bench.inline_score \
     dockeragent=rat_run_runner4 \
     rat=rat_run_rat_corrected \
     repo2run=rat_run_repo2run
@@ -39,8 +39,8 @@ import sys
 from glob import glob
 from typing import Any, Dict, Optional, Tuple
 
-from attribution import (AGENT_BUILD_FAILURE, WEAK_VERIFICATION, SYNTHESIZER_FAILURE,
-                         REPRODUCED_SUCCESS, UNATTRIBUTABLE, classify, read_agent_signals, summarize)
+from bench.attribution import (AGENT_BUILD_FAILURE, WEAK_VERIFICATION, SYNTHESIZER_FAILURE,
+                               REPRODUCED_SUCCESS, UNATTRIBUTABLE, classify, read_agent_signals, summarize)
 
 
 def official_pass_rate(results: Dict[str, Any]) -> Tuple[float, float, int, int]:

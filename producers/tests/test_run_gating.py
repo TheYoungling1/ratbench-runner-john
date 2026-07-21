@@ -30,16 +30,13 @@ class _Spec:
 
 
 @pytest.fixture(autouse=True)
-def _isolate_compute_essr():
-    """Fully isolate the compute_essr import between tests: pop any cached module AND restore
-    sys.path, so a scripts/ dir inserted by the success test can never let the failure test find a
-    stale compute_essr (cross-contamination via sys.path, not just sys.modules)."""
+def _restore_sys_path():
+    """_write_live_scores inserts BENCH_ROOT onto sys.path; restore it between tests so the
+    inserted path can never leak across cases."""
     saved_path = list(sys.path)
-    sys.modules.pop("compute_essr", None)
     try:
         yield
     finally:
-        sys.modules.pop("compute_essr", None)
         sys.path[:] = saved_path
 
 
@@ -62,11 +59,13 @@ def test_unregistered_model_falls_back_to_declared_tag():
 
 # ── _write_live_scores: always writes the marker; records the effective model ──────────────────
 def test_live_scores_written_with_null_score_on_capture_failure(tmp_path, monkeypatch):
-    # HARNESS_ROOT points at a dir with NO scripts/compute_essr.py -> the import fails -> the marker
-    # is still written with score=None and the effective model recorded.
+    # bench.inline_score.score_agent raises -> the capture fails -> the marker is still written with
+    # score=None and the effective model recorded.
+    def _boom(_root):
+        raise RuntimeError("no run_pytest_results")
+    monkeypatch.setattr("bench.inline_score.score_agent", _boom)
     out = tmp_path / "run"
     out.mkdir()
-    monkeypatch.setattr(run, "HARNESS_ROOT", str(tmp_path / "no_scripts_here"))
     run._write_live_scores(str(out), _Spec("rat"), "rat")
 
     payload = json.load(open(out / "live_scores.json"))
@@ -76,20 +75,15 @@ def test_live_scores_written_with_null_score_on_capture_failure(tmp_path, monkey
 
 
 def test_live_scores_captures_native_inline_score(tmp_path, monkeypatch):
-    # HARNESS_ROOT/scripts/compute_essr.py defines score_agent -> its keys flow into `score`.
-    harness = tmp_path / "harness_root"
-    scripts = harness / "scripts"
-    scripts.mkdir(parents=True)
-    (scripts / "compute_essr.py").write_text(
-        "def score_agent(p):\n"
-        "    return {'n': 3, 'n_exec': 2, 'coverage': 0.6667, 'n_ebsr': 2,\n"
-        "            'EBSR_build_execute': 0.66, 'n_agent_goal': 1, 'agent_goal_rate': 0.33,\n"
-        "            'ESSR_avg_pass_rate_official': 0.9, 'pass_rate_over_all': 0.6,\n"
-        "            'n_collect_success': 2, 'collect_success_all': 0.66}\n"
-    )
+    # bench.inline_score.score_agent returns a dict -> its keys flow into `score`.
+    def _fake_score(_root):
+        return {'n': 3, 'n_exec': 2, 'coverage': 0.6667, 'n_ebsr': 2,
+                'EBSR_build_execute': 0.66, 'n_agent_goal': 1, 'agent_goal_rate': 0.33,
+                'ESSR_avg_pass_rate_official': 0.9, 'pass_rate_over_all': 0.6,
+                'n_collect_success': 2, 'collect_success_all': 0.66}
+    monkeypatch.setattr("bench.inline_score.score_agent", _fake_score)
     out = tmp_path / "run"
     out.mkdir()
-    monkeypatch.setattr(run, "HARNESS_ROOT", str(harness))
     run._write_live_scores(str(out), _Spec("sweagent"), "sweagent")
 
     payload = json.load(open(out / "live_scores.json"))

@@ -8,16 +8,16 @@ synthesizer failed to turn a working environment into a reusable Dockerfile.
 Reuses compute_essr.score_agent (the metric authority) for eval signals + attribution.
 
 Usage (pass the run ROOT that contains output/, NOT output/ itself):
-  python scripts/detect_synth_gap.py /opt/runs/radical/<run>
-  python scripts/detect_synth_gap.py radical=/opt/runs/radical/<run> v1=/opt/runs/john-planner-v1/<run>
+  python -m bench.report.synth_gap /opt/runs/radical/<run>
+  python -m bench.report.synth_gap radical=/opt/runs/radical/<run> v1=/opt/runs/john-planner-v1/<run>
 """
 from __future__ import annotations
 
 import os
 import sys
 
-from compute_essr import score_agent
-from attribution import ALL_BUCKETS, LEGEND
+from bench.inline_score import score_agent
+from bench.attribution import ALL_BUCKETS, LEGEND
 
 
 def _print_one(name: str, root: str) -> dict:

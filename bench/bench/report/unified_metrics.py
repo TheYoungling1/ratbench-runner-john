@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Unified HONEST cross-method metrics for the RATBench harness.
+"""Unified HONEST cross-method metrics for the RATBench evaluator.
 
 ONE metric authority: ``compute_essr.score_agent(root)`` recomputes every number from raw
 ``run_pytest_results.json`` — we NEVER trust ``rat_results.json`` or ``_result_row.status``.
@@ -33,8 +33,7 @@ from glob import glob
 from typing import Any, Dict, List, Optional, Tuple
 
 # score_agent is the SOLE metric authority. attribution.py sits beside it; both must import.
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import compute_essr  # noqa: E402
+from bench import inline_score as compute_essr
 
 NA = "N/A"
 UNK = "?"
@@ -513,8 +512,8 @@ def main(argv: List[str]) -> int:
     )
 
     # ---- T3 Attribution ----------------------------------------------------------------------
-    from attribution import (AGENT_BUILD_FAILURE, WEAK_VERIFICATION, SYNTHESIZER_FAILURE,
-                             REPRODUCED_SUCCESS, UNATTRIBUTABLE)
+    from bench.attribution import (AGENT_BUILD_FAILURE, WEAK_VERIFICATION, SYNTHESIZER_FAILURE,
+                                   REPRODUCED_SUCCESS, UNATTRIBUTABLE)
     t3_rows = []
     for m in methods:
         c = m["res"]["attribution"]["counts"]

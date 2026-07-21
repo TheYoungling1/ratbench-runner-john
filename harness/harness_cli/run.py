@@ -76,10 +76,9 @@ def _write_live_scores(out: str, spec, model: str) -> None:
     EFFECTIVE method (spec.model, or --model override) — recorded so the marker names what ran."""
     summary = None
     try:
-        scripts_dir = os.path.join(HARNESS_ROOT, "scripts")
-        if scripts_dir not in sys.path:
-            sys.path.insert(0, scripts_dir)
-        from compute_essr import score_agent
+        if BENCH_ROOT not in sys.path:
+            sys.path.insert(0, BENCH_ROOT)
+        from bench.inline_score import score_agent
         r = score_agent(out)
         keys = ("n", "n_exec", "coverage", "n_ebsr", "EBSR_build_execute", "n_agent_goal",
                 "agent_goal_rate", "ESSR_avg_pass_rate_official", "pass_rate_over_all",

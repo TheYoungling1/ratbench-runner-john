@@ -4,15 +4,14 @@ EVERYTHING useful for the paper: metrics (ESSR/EBSR/attribution), tokens,
 timing/phase-breakdown, the synthesized final Dockerfile + ordered steps,
 and provenance. Post-hoc, non-destructive, model-agnostic.
 
-Usage: python3 consolidate_run.py <RUN_DIR> [--model rat] [--llm deepseek/...] [--dataset path.json]
+Usage: python3 -m bench.report.case_study <RUN_DIR> [--model rat] [--llm deepseek/...] [--dataset path.json]
 Writes: <RUN>/output/<owner>/<repo>/case_study.json  (one per task)
         <RUN>/case_studies.jsonl                     (one compact line per task)
         <RUN>/case_studies_summary.json              (aggregate table)
 """
-import json, os, re, sys, argparse
+import json, os, re, argparse
 
-sys.path.insert(0, "/opt/harness/scripts")
-import compute_essr  # noqa
+from bench import inline_score as compute_essr
 
 def load(p, default=None):
     try:
