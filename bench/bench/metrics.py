@@ -44,10 +44,10 @@ def compute_metrics(rows: list[MeasureRow], gold: dict | None = None) -> dict:
     micro_passed = sum(r.passed for r in ex)
     micro_total = sum(max(r.total - r.skipped, 0) for r in ex)
 
-    # EBSR — option (a), minimal: the EXACT Repo2Run collect gate (rc in {0,5}), credited ONLY when
-    # the repo is genuinely at /testbed (C1 & C2 held). This is byte-comparable to prior runs for
-    # conforming repos; the only rows that lose credit are non_conforming / empty_testbed.
-    n_ebsr = sum(1 for r in prod if _conforming(r) and r.collect_rc in (0, 5))
+    # EBSR credit uses the per-language gate outcome (collect_clean), so a language whose clean gate
+    # is NOT rc-5 (e.g. compiled: rc==0 only) is scored correctly. For Python collect_clean == (rc in
+    # {0,5}), so this is byte-identical. `n_raw` below stays the Repo2Run rc-{0,5} parity diagnostic.
+    n_ebsr = sum(1 for r in prod if _conforming(r) and r.collect_clean)
     # Diagnostic: the OLD ungated gate (what M3/paper reported). The delta is the removed false-green.
     n_raw = sum(1 for r in prod if r.collect_rc in (0, 5))
 

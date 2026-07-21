@@ -10,6 +10,7 @@ import xml.etree.ElementTree as ET
 
 from bench.contract import probe_testbed
 from bench.gold import junit_ids_to_paths
+from bench.languages import get_language
 from bench.schema import HarvestedEnv, MeasureRow
 
 # Harvest statuses whose env has a rebuildable artifact worth building. Everything else
@@ -82,10 +83,6 @@ def parse_collect(rc: int, stdout: str) -> dict:
 
 
 W = "/testbed"
-_ENSURE = ("python -m pip install -q --break-system-packages pytest pytest-timeout "
-           "|| python -m pip install -q pytest pytest-timeout || true")
-_TIMEOUT_GUARD = ('F=""; python -c "import pytest_timeout" >/dev/null 2>&1 && '
-                  'F="--timeout=120 --timeout-method=signal"')
 
 
 def _sh(cmd: str) -> list:
@@ -94,6 +91,7 @@ def _sh(cmd: str) -> list:
 
 def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeout: int = 1800) -> MeasureRow:
     agent, repo, m = env.agent, env.repo.full_name, env.meta
+    lang = get_language(env.repo.language)
     slug = f"{agent}-{repo}".lower().replace("/", "-")
     base_row = dict(agent=agent, repo=repo, env_status=env.status,
                     tokens_in=m.get("tokens_in"), tokens_out=m.get("tokens_out"),
@@ -101,9 +99,6 @@ def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeou
                     produce_s=m.get("produce_s"), meta=dict(m))
 
     if env.status not in _MEASURABLE or not env.dockerfile:
-        # No rebuildable artifact. Preserve a declared non-measurable status so metrics can exclude it
-        # (unmeasurable / legacy_missing) or count it honestly (error). A genuine POST-contract vanish
-        # (produced/ok/legacy_ok but no Dockerfile) still collapses to `missing` and counts as a 0.
         sc = env.status if env.status in ("unmeasurable", "error", "legacy_missing") else "missing"
         return MeasureRow(build_ok=False, executed=False, ebsr=False, status=sc, **base_row)
 
@@ -118,7 +113,7 @@ def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeou
     t0 = time.time()
     build_rc, build_log = docker.build(tag, ctx, timeout=build_timeout)
     build_s = round(time.time() - t0, 2)
-    shutil.rmtree(ctx, ignore_errors=True)   # ctx is only needed during docker.build
+    shutil.rmtree(ctx, ignore_errors=True)
     if build_rc != 0:
         return MeasureRow(build_ok=False, build_log_tail=build_log[-2000:], build_s=build_s,
                           executed=False, ebsr=False, status="build_fail", **base_row)
@@ -127,57 +122,70 @@ def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeou
     base_mb = docker.image_size_mb(env.base_image) if env.base_image else None
     delta_mb = round(img_mb - base_mb, 2) if (img_mb is not None and base_mb is not None) else None
 
+    timed_out = False
+    test_s = None
+    junit_xml = ""
+    pkgs_out = ""
     try:
         docker.run_detached(tag, name, W)
         docker.exec(name, _sh(f"mkdir -p {W}/logs"))
-        docker.exec(name, _sh(_ENSURE))
-        # /testbed CONTRACT GUARD (design §2.3): classify C1/C2 conformance. We STILL run the cheap
-        # collect-only gate below even on a NON-conforming build, so `collect_rc` is populated for the
-        # EBSR_repo2run_raw audit (which must reproduce what the OLD ungated gate credited). EBSR credit
-        # is denied via `status`; only the expensive full pytest run is skipped for non-conforming.
+        docker.exec(name, _sh(lang.ensure_cmd(W)))
         probe = probe_testbed(docker, name, W)
         py_test_files = probe["py_test_files"]
         conforming = probe["status"] == "conforming"
 
-        # EBSR gate command — EXACTLY Repo2Run (runtest.py:59). Run for conforming AND non-conforming
-        # (identical to the old bench) so the raw diagnostic is faithful.
-        crc, cout, _ = docker.exec(name, _sh(
-            f"python -m pytest --collect-only -q --disable-warnings {W}; exit ${{PIPESTATUS[0]:-$?}}"))
-        collect = parse_collect(crc, cout)
-        _, cout2, _ = docker.exec(name, _sh(
-            f"python -m pytest --co -q --continue-on-collection-errors {W} 2>&1 || true"))
-        collected = parse_collected_node_ids(cout2)
-        # number of modules that errored during collection (pytest prints one header each)
-        n_collect_errors = cout2.count("ERROR collecting")
+        # EBSR gate (per-language). collect_clean uses the language predicate; parse_collect still
+        # supplies the diagnostic collect_errors from the gate stdout.
+        grc, gout, _ = docker.exec(name, _sh(lang.gate_cmd(W)))
+        collect = parse_collect(grc, gout)
+        collect_clean = lang.gate_pass(grc)
+
+        # Node-id collection (Python only; "" => skip). Feeds collected_node_ids + collect_error_count.
+        collect_cmd = lang.collect_cmd(W)
+        if collect_cmd:
+            _, cout2, _ = docker.exec(name, _sh(collect_cmd))
+            collected = parse_collected_node_ids(cout2)
+            n_collect_errors = cout2.count("ERROR collecting")
+        else:
+            collected, n_collect_errors = (), 0
 
         if not conforming:
-            # Non-conforming: record the collect result (feeds EBSR_repo2run_raw so false_green_removed
-            # is faithful) but DENY EBSR credit via `status` and SKIP the expensive full pytest run.
             return MeasureRow(
                 build_ok=True, build_log_tail=build_log[-2000:], build_s=build_s,
-                collect_rc=crc, collect_clean=collect["collect_clean"],
+                collect_rc=grc, collect_clean=collect_clean,
                 collect_errors=collect["collect_errors"], collect_error_count=n_collect_errors,
                 collected_node_ids=collected, executed=False, ebsr=False,
                 status=probe["status"], py_test_files=py_test_files,
                 image_size_mb=img_mb, image_delta_mb=delta_mb, **base_row)
-        run = (f"{_TIMEOUT_GUARD}; python -m pytest -q --continue-on-collection-errors "
-               f"--junit-xml={W}/logs/junit.xml $F || true")
+
+        # Compiled-language gate short-circuits: a failed build cannot run tests, so skip the
+        # expensive run and record gate_fail. (Python: short_circuit_gate=False -> run regardless.)
+        if lang.short_circuit_gate and not collect_clean:
+            return MeasureRow(
+                build_ok=True, build_log_tail=build_log[-2000:], build_s=build_s,
+                collect_rc=grc, collect_clean=collect_clean,
+                collect_errors=collect["collect_errors"], collect_error_count=n_collect_errors,
+                collected_node_ids=collected, executed=False, ebsr=False,
+                status="gate_fail", py_test_files=py_test_files,
+                image_size_mb=img_mb, image_delta_mb=delta_mb, **base_row)
+
+        junit_out = f"{W}/logs/junit.xml"
+        run = lang.run_cmd(W, junit_out)
         t1 = time.time()
         _, _, timed_out = docker.exec(name, _sh(run), timeout=test_timeout)
         test_s = round(time.time() - t1, 2)
-        _, junit_xml, _ = docker.exec(name, _sh(f"cat {W}/logs/junit.xml 2>/dev/null || true"))
-        _, pkgs_out, _ = docker.exec(name, _sh("python -m pip list --format=freeze 2>/dev/null | wc -l"))
+        _, junit_xml, _ = docker.exec(name, _sh(f"cat {lang.junit_glob(W)} 2>/dev/null || true"))
+        pkg_cmd = lang.pkg_count_cmd(W)
+        if pkg_cmd:
+            _, pkgs_out, _ = docker.exec(name, _sh(pkg_cmd))
     finally:
         docker.rm(name, tag)
 
     j = parse_junit(junit_xml)
     executed = bool(junit_xml.strip()) and (j["total"] > 0 or "testsuite" in junit_xml)
-    # Diagnostic status label for a CONFORMING build (ebsr/executed/collect_clean semantics are
-    # UNCHANGED — this only names the outcome). Precedence: a run-timeout is surfaced first (ESSR
-    # side), then a collect error (rc not in {0,5}), then a real execution, else nothing collected.
     if timed_out:
         status = "timed_out"
-    elif crc not in (0, 5):
+    elif not collect_clean:
         status = "collect_error"
     elif executed:
         status = "executed"
@@ -190,16 +198,13 @@ def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeou
     except (ValueError, IndexError):
         pkg_count = None
 
-    # NODE-ID FORM: `collected` is pytest --co PATH form (tests/x.py::a); JUnit outcome ids
-    # are classname form (tests.x::a). Translate passed/failed/error back to PATH form (via the
-    # collected list) so they share one unit with `collected` and the gold set (bench/gold.py).
-    passed_ids = junit_ids_to_paths(j["passed_node_ids"], collected)
-    failed_ids = junit_ids_to_paths(j["failed_node_ids"], collected)
-    error_ids = junit_ids_to_paths(j["error_node_ids"], collected)
+    passed_ids = junit_ids_to_paths(j["passed_node_ids"], collected) if collected else j["passed_node_ids"]
+    failed_ids = junit_ids_to_paths(j["failed_node_ids"], collected) if collected else j["failed_node_ids"]
+    error_ids = junit_ids_to_paths(j["error_node_ids"], collected) if collected else j["error_node_ids"]
 
     return MeasureRow(
         build_ok=True, build_log_tail=build_log[-2000:], build_s=build_s, test_s=test_s,
-        collect_rc=crc, collect_clean=collect["collect_clean"], collect_errors=collect["collect_errors"],
+        collect_rc=grc, collect_clean=collect_clean, collect_errors=collect["collect_errors"],
         collect_error_count=n_collect_errors, collected_node_ids=collected, executed=executed,
         total=j["total"], passed=j["passed"], failed=j["failed"], errors=j["errors"], skipped=j["skipped"],
         passed_node_ids=passed_ids, failed_node_ids=failed_ids,
