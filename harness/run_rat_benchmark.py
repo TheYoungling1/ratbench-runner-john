@@ -244,13 +244,16 @@ def _run_one(
     os.makedirs(out_dir, exist_ok=True)
 
     done_marker = os.path.join(out_dir, "run_pytest_results.json")
+    # Produce-only (default dockeragent) writes NO run_pytest_results.json — only this marker.
+    # Resume must also skip on it, or a resumed run re-invokes the agent and re-spends LLM tokens.
+    produced_marker = os.path.join(out_dir, "run_produced.json")
     row_path = os.path.join(out_dir, "_result_row.json")
     meta_path = os.path.join(out_dir, "_meta.json")
 
     start_ts = time.time()
 
     # ── Resume skip ──────────────────────────────────────────────────────────
-    if os.path.exists(done_marker):
+    if os.path.exists(done_marker) or os.path.exists(produced_marker):
         # Reconstruct a minimal out dict for scoring from what's on disk.
         if os.path.exists(row_path):
             try:
@@ -261,7 +264,8 @@ def _run_one(
                 pass
         # Fallback: synthesise a success stub so scorers can run.
         out = {"status": "success", "root_path": root_path, "full_name": full_name}
-        print(f"[resume] {full_name} — skipping (run_pytest_results.json exists)", flush=True)
+        _marker = "run_produced.json" if os.path.exists(produced_marker) else "run_pytest_results.json"
+        print(f"[resume] {full_name} — skipping ({_marker} exists)", flush=True)
     else:
         # ── Run predict() ────────────────────────────────────────────────────
         print(f"[start ] {full_name}", flush=True)
@@ -284,7 +288,12 @@ def _run_one(
     # already-passing or absent-Dockerfile (e.g. no_dockerfile errors), so gating on
     # the artifact's existence is strictly broader-and-safe vs the old status!=error.
     _eval_dockerfile = os.path.join(root_path, "output", full_name, "eval_build", "Dockerfile")
-    if repair_mode in ("runner", "both") and os.path.exists(_eval_dockerfile):
+    # Produce-only path: bench/ rebuilds + scores the Dockerfile in a fresh container, so the
+    # runner's inline repair (another build) must be skipped when run_produced.json is present.
+    # Baselines are unaffected (rat writes no eval_build/Dockerfile; repo2run writes output_dir/
+    # Dockerfile, not eval_build) — none write run_produced.json.
+    if (repair_mode in ("runner", "both") and os.path.exists(_eval_dockerfile)
+            and not os.path.exists(produced_marker)):
         try:
             from repo2run_repair_port import _repair_and_rescore  # lazy import; module is optional
             out = _repair_and_rescore(
@@ -316,11 +325,18 @@ def _run_one(
         print(f"[warn  ] {full_name} — could not write _result_row.json: {exc}", flush=True)
 
     # ── Write _meta.json (best-effort) ────────────────────────────────────────
-    try:
-        meta = _collect_meta(out, start_ts, end_ts)
-        json.dump(meta, open(meta_path, "w"), indent=2)
-    except Exception as exc:
-        print(f"[warn  ] {full_name} — could not write _meta.json: {exc}", flush=True)
+    # Produce-only wrote an authoritative _meta.json{status:"produced", economy} via the producer
+    # contract. Do NOT clobber it with _collect_meta (which carries no status/economy) — that would
+    # make bench harvest read the packet as legacy_ok and lose the produced label + economy.
+    if os.path.exists(produced_marker):
+        print(f"[meta  ] {full_name} — keeping producer _meta.json (run_produced.json present)",
+              flush=True)
+    else:
+        try:
+            meta = _collect_meta(out, start_ts, end_ts)
+            json.dump(meta, open(meta_path, "w"), indent=2)
+        except Exception as exc:
+            print(f"[warn  ] {full_name} — could not write _meta.json: {exc}", flush=True)
 
     # ── Persist the agent run summary out of the ephemeral workplace ──────────
     # since_ts=start_ts: only persist a summary written during THIS run, never a stale leftover
