@@ -9,6 +9,11 @@ TOPLEVEL = ("tests", "qiskit", "examples")
     # harness_error FIRST so _pytest.* never reaches the ImportError branch
     ("_pytest.pathlib.ImportPathMismatchError", "", "", "harness_error"),
     ("UsageError", "", "", "harness_error"),
+    # ...and this row is the one that actually OBSERVES that ordering. The row above does not:
+    # "ImportPathMismatchError" does not end in "ImportError", so it falls through to the harness
+    # check wherever that check sits, and moving harness_error below the ImportError branch still
+    # passes. A token that matches BOTH predicates is the only way to pin the precedence.
+    ("_pytest.outcomes.ImportError", "libGL.so.1", "soname", "harness_error"),
     ("ModuleNotFoundError", "wrapt", "module", "module_not_found"),
     ("ModuleNotFoundError", "tests.conftest", "module", "internal_import_failure"),
     ("ModuleNotFoundError", "examples.mlperf.models.llama", "module", "internal_import_failure"),
@@ -57,7 +62,22 @@ def test_extract_events_threads_category_through():
 
 
 def test_categories_constant_covers_every_table_output():
-    outs = {categorize(t, g, k, TOPLEVEL) for t, g, k in
-            [("ModuleNotFoundError", "wrapt", "module"), ("ImportError", "libGL.so.1", "soname"),
-             ("UsageError", "", ""), ("RuntimeError", "", "")]}
-    assert outs <= set(CATEGORIES)
+    # EQUALITY, not `<=`. A subset assertion over four inputs is satisfied by a CATEGORIES that
+    # omits `partial_import` entirely — and CATEGORIES is the report universe (`_universe` in
+    # report/error_report.py), so a category missing from it never gets an interval column and
+    # silently reads as "this arm has no such errors" instead of "we never looked".
+    # One input per branch, both directions pinned.
+    per_branch = [
+        ("UsageError", "", ""),                                # harness_error
+        ("ModuleNotFoundError", "tests.conftest", "module"),   # internal_import_failure
+        ("ModuleNotFoundError", "wrapt", "module"),            # module_not_found
+        ("ImportError", "libGL.so.1", "soname"),               # syslib_missing
+        ("ImportError", "_accelerate", "name"),                # partial_import
+        ("ImportError", "", ""),                               # import_failed
+        ("ConnectionRefusedError", "", ""),                    # service_unavailable
+        ("SyntaxError", "", ""),                               # syntax_error
+        ("FileNotFoundError", "/opt/x.cfg", "path"),           # file_missing
+        ("RuntimeError", "", ""),                              # uncategorized
+    ]
+    outs = {categorize(t, g, k, TOPLEVEL) for t, g, k in per_branch}
+    assert outs == set(CATEGORIES)
