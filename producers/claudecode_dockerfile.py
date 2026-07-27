@@ -17,13 +17,22 @@ from producers.base import ProduceContext, ProducedEnv, ensure_rat_on_path, inje
 from bench.schema import RepoSpec  # noqa: E402
 
 
-def _ensure_pytest(dockerfile: str) -> str:
-    """Append a pytest install if the Dockerfile never mentions pytest (the fresh-container
-    measure needs it). Mirrors the model's `ensure_pytest` nicety without importing the RAT tree."""
+def _ensure_test_runner(dockerfile: str, language: str) -> str:
+    """Append the LANGUAGE's test-runner install if the emitted Dockerfile never mentions it.
+
+    Was `_ensure_pytest`, which appended `RUN pip install ... pytest` unconditionally. That is not
+    a harmless extra layer on a non-Python base: `node:20` has no pip, so the line failed the build
+    of every Node repo before a single test could run. The per-language rule lives on the profile;
+    Node's is None because NodeLanguage.ensure_cmd installs its JUnit reporters at measure time."""
     import re
-    if re.search(r"\bpytest\b", dockerfile):
+    from producers._claudecode_helpers import get_profile   # stdlib-only, no RAT tree
+    spec = get_profile(language).test_runner
+    if spec is None:
         return dockerfile
-    return dockerfile.rstrip() + "\nRUN pip install --no-cache-dir pytest\n"
+    probe, install = spec
+    if re.search(probe, dockerfile):
+        return dockerfile
+    return dockerfile.rstrip() + "\n" + install + "\n"
 
 
 def _capture_claude_stream(claude_cmd: list, timeout) -> tuple:
@@ -206,7 +215,7 @@ class ClaudeCodeDockerfileProducer:
                                    base_image=res.get("base_image"), conformance="native",
                                    producer_name=self.name, economy=economy)
 
-            dockerfile = _ensure_pytest(dockerfile)
+            dockerfile = _ensure_test_runner(dockerfile, repo.language)
             # Fix #1: the agent's emitted Dockerfile does a plain `git clone … /testbed` (its prompt
             # requires it) so the MEASURED build runs at HEAD. Pin its clone to the dataset SHA;
             # surface a pin_warning on miss so the drift is never silent. (Mirrors dockeragent.)

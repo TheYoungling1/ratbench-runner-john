@@ -35,6 +35,19 @@ def test_produce_ensures_pytest_when_absent(tmp_path):
     assert "pytest" in env.dockerfile          # the fresh-container measure needs pytest
 
 
+def test_produce_appends_no_pytest_for_a_node_repo(tmp_path):
+    # The regression this whole seam exists to stop: `RUN pip install ... pytest` on a node base
+    # (no pip) fails the BUILD, so every Node repo would score build_fail before a test could run.
+    def _stub(repo, ctx, **kw):
+        return {"dockerfile": "FROM node:20\nRUN git clone x /testbed\nRUN npm ci",
+                "base_image": "node:20"}
+
+    env = ClaudeCodeDockerfileProducer(runner=_stub).produce(
+        RepoSpec("o/r", "https://github.com/o/r", language="nodejs"), _ctx(tmp_path))
+    assert env.status == "produced"
+    assert "pip" not in env.dockerfile and "pytest" not in env.dockerfile
+
+
 def test_produce_no_gen_is_error(tmp_path):
     def _stub(repo, ctx, **kw):
         return {"dockerfile": None}            # agent wrote no /testbed/Dockerfile.gen
@@ -87,6 +100,39 @@ def test_produce_no_commit_leaves_clone_unpinned(tmp_path):
 def test_producer_is_registered():
     from producers import PRODUCERS
     assert PRODUCERS["claudecode-dockerfile"] is ClaudeCodeDockerfileProducer
+
+
+# ── _ensure_test_runner: the per-language staple-on ─────────────────────────────────────────
+
+from producers.claudecode_dockerfile import _ensure_test_runner
+
+_PY_DF = "FROM python:3.11\nRUN git clone x /testbed"
+_NODE_DF = "FROM node:20\nRUN git clone x /testbed\nRUN npm ci"
+
+
+def test_ensure_test_runner_appends_pytest_for_python():
+    out = _ensure_test_runner(_PY_DF, "python")
+    assert out.endswith("RUN pip install --no-cache-dir pytest\n")
+
+
+def test_ensure_test_runner_is_idempotent_when_pytest_present():
+    have = _PY_DF + "\nRUN pip install pytest\n"
+    assert _ensure_test_runner(have, "python") == have          # unchanged, not appended twice
+    assert _ensure_test_runner(have, "python").count("pip install") == 1
+
+
+def test_ensure_test_runner_is_a_noop_for_node_even_without_pytest():
+    # NodeLanguage.ensure_cmd installs the JUnit reporters at measure time, and pip does not exist
+    # on a node base — appending the Python line here breaks the build outright.
+    for alias in ("nodejs", "node", "javascript", "typescript"):
+        assert _ensure_test_runner(_NODE_DF, alias) == _NODE_DF, alias
+
+
+def test_ensure_test_runner_treats_unknown_language_as_python():
+    # get_profile falls back to Python, so a language-less RepoSpec keeps the old behavior exactly.
+    for lang in ("", None, "cobol"):
+        assert _ensure_test_runner(_PY_DF, lang).endswith(
+            "RUN pip install --no-cache-dir pytest\n"), lang
 
 
 # ── telemetry: the Claude Code stream is the ONLY record of cost/turns/trajectory ──────────
