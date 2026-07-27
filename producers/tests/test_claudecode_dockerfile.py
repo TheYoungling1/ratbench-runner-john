@@ -147,3 +147,73 @@ def test_producer_passes_economy_through_to_produced_env(tmp_path):
     assert env.economy["cost_usd"] == 1.25
     assert env.economy["tokens_in"] == 180
     assert env.economy["produce_s"] is not None      # still stamped by produce()
+
+
+# ── the timeout path: the COMMON case (budget cap / wall) and the one that regressed before ──
+#
+# On TimeoutExpired, CPython fills exc.stdout/exc.stderr with RAW BYTES even though text=True was
+# passed, and either may be None. A naive str() would write "b'...'" into the trajectory log.
+
+def test_capture_decodes_stdout_on_success(monkeypatch):
+    import subprocess as sp
+
+    from producers import claudecode_dockerfile as mod
+
+    # _capture_claude_stream does a function-local `import subprocess`, so it resolves the same
+    # module object we patch here.
+    monkeypatch.setattr(sp, "run",
+                        lambda *a, **k: sp.CompletedProcess(["claude"], 0,
+                                                            stdout="out", stderr="err"))
+    assert mod._capture_claude_stream(["claude"], 10) == ("out", "err")
+
+
+def test_capture_decodes_bytes_from_timeout(monkeypatch):
+    import subprocess as sp
+
+    from producers import claudecode_dockerfile as mod
+
+    def _boom(*a, **k):
+        raise sp.TimeoutExpired(cmd=["claude"], timeout=1,
+                                output=b"partial trajectory", stderr=b"partial err")
+
+    monkeypatch.setattr(sp, "run", _boom)
+    out, err = mod._capture_claude_stream(["claude"], 1)
+    assert out == "partial trajectory" and err == "partial err"   # decoded, not "b'...'"
+    assert "b'" not in out
+
+
+def test_capture_handles_none_output_from_timeout(monkeypatch):
+    import subprocess as sp
+
+    from producers import claudecode_dockerfile as mod
+
+    def _boom(*a, **k):
+        raise sp.TimeoutExpired(cmd=["claude"], timeout=1)      # output/stderr default to None
+
+    monkeypatch.setattr(sp, "run", _boom)
+    assert mod._capture_claude_stream(["claude"], 1) == ("", "")
+
+
+# ── persistence must be TOTAL, not just OSError-tolerant ──────────────────────────────────
+
+def test_persist_stream_writes_utf8_regardless_of_ambient_locale(tmp_path):
+    # Without an explicit encoding these writes inherit the locale; under C/POSIX (the default in
+    # minimal images) one non-ASCII char raises UnicodeEncodeError, which is NOT an OSError.
+    stream = json.dumps({"type": "assistant", "message": {"content": [
+        {"type": "text", "text": "installed café ☕ — done"}]}})
+    _persist_stream(str(tmp_path), stream, "")
+    text = (tmp_path / "claude_actions.log").read_text(encoding="utf-8")
+    assert "café ☕" in text
+
+
+def test_persist_stream_swallows_non_oserror_failures(tmp_path, monkeypatch, capsys):
+    # A telemetry bug must never downgrade a paid-for produce to status="error".
+    from producers import claudecode_dockerfile as mod
+
+    def _boom(*a, **k):
+        raise ValueError("not an OSError")
+
+    monkeypatch.setattr(mod.os, "makedirs", _boom)
+    econ = _persist_stream(str(tmp_path / "x"), _TELEMETRY_STREAM, "")
+    assert econ["cost_usd"] == 1.25                       # numbers still returned
+    assert "telemetry persist failed" in capsys.readouterr().out   # but not silent

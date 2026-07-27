@@ -26,6 +26,26 @@ def _ensure_pytest(dockerfile: str) -> str:
     return dockerfile.rstrip() + "\nRUN pip install --no-cache-dir pytest\n"
 
 
+def _capture_claude_stream(claude_cmd: list, timeout) -> tuple:
+    """Run the Claude Code CLI and return its ``(stdout, stderr)`` as text.
+
+    The timeout branch is the COMMON case — the agent is routinely killed by ``--max-budget-usd``
+    or ``ctx.timeout`` — and it is subtle: on ``TimeoutExpired`` CPython populates
+    ``exc.stdout``/``exc.stderr`` with RAW UNDECODED BYTES even though ``text=True`` was passed,
+    and either may be ``None`` if the wall hit before any output was read. ``_as_text`` handles
+    both, so a timed-out run still yields its partial trajectory rather than a ``b'...'`` repr or
+    a crash. Split out from the call site so this decoding is unit-testable without Docker."""
+    import subprocess
+    from producers._claudecode_helpers import _as_text
+    try:
+        proc = subprocess.run(claude_cmd, capture_output=True, text=True, timeout=timeout)
+        return _as_text(proc.stdout), _as_text(proc.stderr)
+    except subprocess.TimeoutExpired as exc:
+        # Partial work may still have written Dockerfile.gen; the partial stream is also the only
+        # record of what the agent did before the wall, so keep both.
+        return _as_text(exc.stdout), _as_text(exc.stderr)
+
+
 def _persist_stream(out_dir: str, stdout: str, stderr: str) -> dict:
     """Write the agent's raw event stream + a readable action log under the repo's packet dir,
     and return the economy dict `write_env_packet` consumes.
@@ -34,20 +54,28 @@ def _persist_stream(out_dir: str, stdout: str, stderr: str) -> dict:
     trajectory cannot be reconstructed from any other artifact after the run, so it is written
     at produce time. Persistence is best-effort: an IO failure must never fail the produce (the
     Dockerfile is the deliverable, design §1), so the parsed numbers are returned regardless.
+
+    `encoding="utf-8"` is explicit and `except Exception` is deliberate. Without the encoding the
+    writes inherit the ambient locale, and under the `C`/`POSIX` locale that minimal images
+    default to, one non-ASCII character in the agent's own prose raises UnicodeEncodeError — which
+    is NOT an OSError, so a narrow guard lets it escape and `produce()`'s outer handler downgrades
+    a successful, already-paid-for run to status="error". Telemetry must never be able to do that.
     """
     from producers._claudecode_helpers import summarize_stream   # stdlib-only, no RAT tree
     info = summarize_stream(stdout)
     try:
         os.makedirs(out_dir, exist_ok=True)
-        with open(os.path.join(out_dir, "claude_stream.jsonl"), "w") as fh:
+        with open(os.path.join(out_dir, "claude_stream.jsonl"), "w", encoding="utf-8") as fh:
             fh.write(stdout or "")
-        with open(os.path.join(out_dir, "claude_actions.log"), "w") as fh:
+        with open(os.path.join(out_dir, "claude_actions.log"), "w", encoding="utf-8") as fh:
             fh.write(info.get("actions") or "(no parsed actions)")
         if stderr:
-            with open(os.path.join(out_dir, "claude_stderr.txt"), "w") as fh:
+            with open(os.path.join(out_dir, "claude_stderr.txt"), "w", encoding="utf-8") as fh:
                 fh.write(stderr)
-    except OSError:
-        pass
+    except Exception as exc:      # noqa: BLE001 — see docstring: must never fail the produce
+        # Loud enough to debug a missing trajectory (this lands in the per-repo run.log), but
+        # never fatal.
+        print(f"[ccdf] telemetry persist failed for {out_dir}: {exc!r}", flush=True)
     return {
         "tokens_in": info["tokens_in"], "tokens_out": info["tokens_out"],
         "total_tokens": info["total_tokens"], "llm_calls": info["llm_calls"],
@@ -74,7 +102,7 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
     # runner package or RAT model modules (dependency direction: producers must not depend
     # on the runner).
     from producers._claudecode_helpers import (
-        W, AUTH_KEYS, _normalize_model, _as_text, build_prompt, DOCKERFILE_GEN_PATH,
+        W, AUTH_KEYS, _normalize_model, build_prompt, DOCKERFILE_GEN_PATH,
     )
     # download_repo/init_output_and_repo are libkit utilities (producers may use libkit).
     # Lazy: only touch the RAT tree on the live path — add <repo>/rat to sys.path first.
@@ -122,23 +150,22 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
             "--max-budget-usd", str(max_budget), "--model", _normalize_model(llm),
             "--output-format", "stream-json", "--verbose",
         ]
-        try:
-            proc = subprocess.run(claude_cmd, capture_output=True, text=True,
-                                  timeout=ctx.timeout)
-            stdout, stderr = _as_text(proc.stdout), _as_text(proc.stderr)
-        except subprocess.TimeoutExpired as exc:
-            # Partial work may still have written Dockerfile.gen; the partial stream is also the
-            # only record of what the agent did before the wall, so keep both.
-            stdout, stderr = _as_text(exc.stdout), _as_text(exc.stderr)
-        economy = _persist_stream(out_dir, stdout, stderr)
+        stdout, stderr = _capture_claude_stream(claude_cmd, ctx.timeout)
 
         try:
             subprocess.run(["docker", "cp", f"{container}:{DOCKERFILE_GEN_PATH}", gen_dst],
                            check=True, timeout=120)
-            with open(gen_dst) as fh:
+            # encoding="utf-8" for the same reason _persist_stream pins it: under a C/POSIX
+            # locale a non-ASCII byte in the agent's Dockerfile (a comment, a package name)
+            # raises UnicodeDecodeError, which is a ValueError — NOT caught below — and would
+            # discard the artifact this whole run exists to produce.
+            with open(gen_dst, encoding="utf-8") as fh:
                 text = fh.read().strip()
-        except (subprocess.CalledProcessError, subprocess.TimeoutExpired, OSError):
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired, OSError, ValueError):
             text = ""
+        # Persisted AFTER the Dockerfile is in hand, so telemetry sits downstream of the
+        # deliverable on every path (belt-and-braces with _persist_stream's own total guard).
+        economy = _persist_stream(out_dir, stdout, stderr)
         return {"dockerfile": text or None, "base_image": base_image, "economy": economy}
     finally:
         subprocess.run(f"docker rm -f {container} >/dev/null 2>&1", shell=True)
