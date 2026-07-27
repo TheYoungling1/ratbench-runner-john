@@ -32,6 +32,30 @@ def _merge_junit(raw: str) -> str:
     return f"<testsuites>{body}</testsuites>" if body else ""
 
 
+def _junit_collect(spec: str, W: str) -> str:
+    """Shell that concatenates every JUnit file `spec` names.
+
+    A spec with no glob is a single fixed path (python/go/node/rust) and is cat'd EXACTLY as
+    before — those languages must not be perturbed by a Java fix.
+
+    A glob spec is Java's, and Maven/Gradle write one report directory per MODULE, so the files
+    live at arbitrary depth. Two reasons this is `find` rather than a shell glob:
+      - `**` does not recurse under `bash -lc`; globstar is off by default, so the old
+        root-anchored pattern silently matched nothing in a multi-module build. Measured on
+        Netflix/concurrency-limits: gate PASSED, tests ran, row recorded ZERO.
+      - a large reactor (Camel, Flink) emits thousands of report files, which can overflow a
+        single `cat` argv. `-exec cat {} +` batches instead.
+    Each pattern is anchored with a leading `*/` so it matches BOTH the root location and any
+    module below it (find starts at W, so `*` covers the W prefix itself)."""
+    if "*" not in spec:
+        return f"cat {spec} 2>/dev/null || true"
+    pats = []
+    for tok in spec.split():
+        rel = tok[len(W) + 1:] if tok.startswith(W + "/") else tok.lstrip("/")
+        pats.append(f"-path '*/{rel}'")
+    return f"find {W} -type f \\( {' -o '.join(pats)} \\) -exec cat {{}} + 2>/dev/null || true"
+
+
 def _node_id(tc: ET.Element) -> str:
     cls = tc.get("classname") or ""
     name = tc.get("name") or ""
@@ -305,7 +329,7 @@ def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeou
         _, _, timed_out = docker.exec(name, _sh(run), timeout=test_timeout)
         test_s = round(time.time() - t1, 2)
         junit_spec = lang.junit_glob(W)
-        _, junit_raw, _ = docker.exec(name, _sh(f"cat {junit_spec} 2>/dev/null || true"))
+        _, junit_raw, _ = docker.exec(name, _sh(_junit_collect(junit_spec, W)))
         # Multi-file ecosystems (Java Surefire/Gradle) return a glob/space-separated spec -> merge the
         # concatenated files into one document. Single-file specs (python/go/node/rust) are unchanged.
         junit_xml = _merge_junit(junit_raw) if ("*" in junit_spec or " " in junit_spec) else junit_raw
