@@ -144,7 +144,7 @@ def test_language_default_base_reaches_the_prompt():
 # repo — harmless while no dataset uses them, wrong the day one does. Listing them explicitly makes
 # the parity check total in BOTH directions: a new measure alias or a new producer profile fails
 # this test until the other side is updated.
-_NO_PROFILE_YET = {"golang", "go", "java"}
+_NO_PROFILE_YET = {"golang", "go"}
 
 
 def test_profile_aliases_match_the_measure_registry():
@@ -248,5 +248,113 @@ def test_rust_prompt_states_the_one_turn_constraint():
 
 def test_rust_prompt_never_mentions_python_or_node_tooling():
     prompt = _rust_prompt()
+    for token in ("pip", "pytest", "npm ci", "package.json"):
+        assert token not in prompt
+
+
+# ── java ────────────────────────────────────────────────────────────────────────────────────
+
+def _java_prompt(full_name="o/r"):
+    from producers._claudecode_helpers import JAVA_PROFILE
+    return build_prompt(full_name, resolve_base(JAVA_PROFILE, None), JAVA_PROFILE)
+
+
+def test_java_profile_shape():
+    from producers._claudecode_helpers import JAVA_PROFILE
+    assert JAVA_PROFILE.key == "java"
+    # JAVA_HOME in this image is /opt/java/openjdk, which is exactly java.py's hardcoded default.
+    assert JAVA_PROFILE.default_base == "maven:3-eclipse-temurin-17"
+    assert JAVA_PROFILE.workbench == "claude-runner-java:latest"
+    assert JAVA_PROFILE.test_runner is None      # Surefire/Gradle emit JUnit natively
+
+
+def test_java_prompt_names_both_gate_branches_and_the_consequence():
+    prompt = _java_prompt()
+    assert "test-compile" in prompt               # Maven branch
+    assert "testClasses" in prompt                # Gradle branch
+    assert "ZERO" in prompt
+
+
+def test_java_prompt_reproduces_the_gate_verbatim_including_the_x_tests():
+    # The prompt says "EXACTLY this", so it must actually match java.py: the branch is `[ -f
+    # pom.xml ]` and the wrapper choice is `[ -x ./mvnw ]` / `[ -x ./gradlew ]` — EXECUTABLE, not
+    # merely present. A wrapper that lost its exec bit falls through to a different-versioned
+    # system tool, which is a silent-wrong-answer failure, not a loud one.
+    prompt = _java_prompt()
+    assert "[ -f pom.xml ]" in prompt
+    assert "[ -x ./mvnw ]" in prompt
+    assert "[ -x ./gradlew ]" in prompt
+    assert "EXECUTABLE, not merely" in prompt
+
+
+def test_java_prompt_states_the_post_gate_runner_prefers_the_wrapper():
+    # java.py run_cmd prefers ./mvnw -B test / ./gradlew test. Saying plain `mvn -B test` would
+    # mislead an agent whose repo pins a different Maven via the wrapper.
+    prompt = _java_prompt()
+    assert "./mvnw -B test" in prompt
+    assert "./gradlew test" in prompt
+
+
+def test_java_prompt_warns_about_a_natively_nested_pom():
+    # Not only "do not MOVE the pom" — a repo that already keeps its pom below the root hits the
+    # same gate failure with the agent having done nothing wrong.
+    prompt = _java_prompt()
+    assert "subdirectory" in prompt and "aggregator pom.xml" in prompt
+
+
+def test_java_prompt_tells_the_agent_env_java_home_is_honored():
+    # java.py reads ${JAVA_HOME:-/opt/java/openjdk}. `bash -l` resets PATH but NOT JAVA_HOME, so a
+    # Dockerfile ENV JAVA_HOME is respected by the grader — the only escape hatch for a repo that
+    # cannot build on JDK 17. No agent would infer this.
+    prompt = _java_prompt()
+    assert "ENV JAVA_HOME" in prompt
+
+
+def test_java_prompt_forbids_moving_the_root_build_file():
+    # The gate branches on `[ -f pom.xml ]` at the ROOT: a Maven project relocated into a
+    # subdirectory falls through to the Gradle branch and fails on a perfectly healthy repo.
+    # Case-sensitive on ROOT: the prompt shouts it, and a lowercase assertion would pass on
+    # unrelated prose ("the root cause") while the actual warning went missing.
+    prompt = _java_prompt()
+    assert "pom.xml" in prompt and "ROOT" in prompt
+
+
+def test_java_prompt_asks_for_the_compile_and_gives_the_real_reason():
+    # Same rule as the Rust twin: the grader does not inspect the Dockerfile for a compile step, so
+    # the justification is the exec timeout, not an invented requirement.
+    prompt = _java_prompt()
+    assert "time limit" in prompt
+    assert "COMPILES the tests without executing" in prompt
+    assert "REQUIRED work your Dockerfile must do" not in prompt
+
+
+def test_java_prompt_handles_a_wrapperless_gradle_repo():
+    # RAT's own java image apt-installs gradle; measured, that yields Gradle 4.4.1 (2017), which
+    # cannot build a modern project. So the prompt tells the agent to fetch a real one instead —
+    # strictly more capable than the reference environment, not merely at parity with it. And it
+    # must say SYMLINK: unpacking a distribution under /usr/local/bin/gradle-8.5/ leaves `gradle`
+    # itself unresolvable, which is the obvious way to follow this instruction and still fail.
+    prompt = _java_prompt()
+    assert "ships no EXECUTABLE ./gradlew" in prompt
+    assert "apt-get install gradle" in prompt          # named as the thing NOT to do
+    assert "symlink its `bin/gradle`" in prompt
+
+
+def test_neither_new_prompt_claims_the_grader_passes_no_daemon():
+    # java.py passes neither --no-daemon nor any daemon flag. Telling the agent to add one while
+    # also saying the gate runs "EXACTLY" as quoted is self-contradictory.
+    from producers._claudecode_helpers import JAVA_PROFILE, RUST_PROFILE
+    for profile in (JAVA_PROFILE, RUST_PROFILE):
+        assert "--no-daemon" not in profile.prompt_template
+
+
+def test_java_prompt_states_the_one_turn_constraint():
+    prompt = _java_prompt()
+    assert "EXACTLY ONE TURN" in prompt
+    assert "FOREGROUND" in prompt
+
+
+def test_java_prompt_never_mentions_python_or_node_tooling():
+    prompt = _java_prompt()
     for token in ("pip", "pytest", "npm ci", "package.json"):
         assert token not in prompt

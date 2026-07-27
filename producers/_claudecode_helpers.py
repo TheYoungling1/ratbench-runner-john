@@ -241,6 +241,81 @@ RUST_PROFILE = LangProfile(
     test_runner=None,
 )
 
+_JAVA_PROMPT = (
+    "You are configuring a Java repository at /testbed so its EXISTING test suite can run, and "
+    "then writing a Dockerfile that reproduces your setup from scratch.\n\n"
+    "YOU GET EXACTLY ONE TURN. Nothing will re-invoke you, no scheduled wakeup will ever fire, "
+    "and any backgrounded or detached process is killed the moment you stop. Run every command in "
+    "the FOREGROUND and wait for it to finish. Never end your turn intending to resume later — if "
+    "you are running short on budget, write the best Dockerfile you can to {gen_path} NOW instead "
+    "of deferring.\n\n"
+    "The grader rebuilds your Dockerfile from a clean base and then, inside the fresh image, runs "
+    "EXACTLY this at /testbed, after `export PATH=\"$JAVA_HOME/bin:$PATH\"`:\n"
+    "    if [ -f pom.xml ]; then\n"
+    "        if [ -x ./mvnw ]; then ./mvnw -q -B test-compile; else mvn -q -B test-compile; fi\n"
+    "    else\n"
+    "        if [ -x ./gradlew ]; then ./gradlew -q testClasses; else gradle -q testClasses; fi\n"
+    "    fi\n"
+    "If that gate fails, NO tests are run at all and the repo scores ZERO. If it passes, the "
+    "grader runs the suite the same way — `./mvnw -B test` or `mvn -B test`, else `./gradlew test` "
+    "or `gradle test` — and reads the Surefire / Gradle JUnit XML.\n\n"
+    "Four things about that gate decide whether your Dockerfile works:\n"
+    "  - It picks its branch on `[ -f pom.xml ]` AT THE REPOSITORY ROOT. If this project keeps its "
+    "real pom.xml in a subdirectory, the gate takes the GRADLE branch and fails on a healthy repo — "
+    "so add an aggregator pom.xml at the root that builds the real modules, and re-encode it in "
+    "the Dockerfile. Equally, never move, rename or delete a root build file that is already "
+    "there.\n"
+    "  - It picks the wrapper on `[ -x ./mvnw ]` / `[ -x ./gradlew ]` — EXECUTABLE, not merely "
+    "present. A wrapper that lost its execute bit silently falls back to the system tool at a "
+    "different version. If the repo ships a wrapper, `chmod +x` it and re-encode that as a RUN "
+    "step.\n"
+    "  - The image is JDK 17. If this project cannot compile on 17, install the JDK it needs and "
+    "set `ENV JAVA_HOME=/path/to/that/jdk` in your Dockerfile — the grader reads JAVA_HOME and "
+    "will honor it. (Do not try the same trick with PATH; the grader runs under a login shell "
+    "that resets PATH.)\n"
+    "  - It compiles from scratch with an empty dependency cache, under a time limit. A project "
+    "that only downloads its dependencies at gate time can exhaust that limit and score ZERO when "
+    "it was actually fine. Compiling in the Dockerfile is how you avoid that: end it with the "
+    "gate's own compile command so ~/.m2 (or the Gradle cache) and the build outputs are baked "
+    "into the image. That command COMPILES the tests without executing any, which is exactly what "
+    "is wanted — it is not the forbidden step.\n\n"
+    "If this project builds with Gradle and ships no EXECUTABLE ./gradlew, the gate falls back to a "
+    "system `gradle` that the base image does not have, and the repo scores ZERO. In that case "
+    "install one yourself and re-encode it in the Dockerfile — but do NOT use "
+    "`apt-get install gradle`, which is several major versions behind and cannot build a modern "
+    "project. Download the distribution the project expects, unpack it, and symlink its `bin/gradle` "
+    "to /usr/local/bin/gradle so that `gradle` itself resolves on the default PATH.\n\n"
+    "So, first, in THIS container: install any system packages the build needs "
+    "(`sudo apt-get install -y ...`), then run the gate command above at /testbed until it exits "
+    "0. You may edit configuration files. DO NOT modify, add, or delete any test files. DO NOT "
+    "execute the test suite (running the gate command above to check your work is fine).\n\n"
+    "Then write a self-contained Dockerfile to {gen_path} that reproduces this environment FROM A "
+    "CLEAN BASE. It MUST:\n"
+    "  - start `FROM {base}`;\n"
+    "  - `RUN git clone https://github.com/{full_name} /testbed` and `WORKDIR /testbed` (do NOT "
+    "rely on any files from this container — the build starts empty, and the grader requires "
+    "/testbed to still be a git worktree);\n"
+    "  - install the SAME system packages you installed, as RUN steps. The build runs as ROOT, so "
+    "DROP every `sudo` prefix (use `apt-get install -y ...`);\n"
+    "  - re-encode any edits you made to repo files as explicit RUN steps (e.g. `RUN sed -i ...` "
+    "or a heredoc), since the clone is pristine;\n"
+    "  - end with the gate's own compile command to bake the dependency cache;\n"
+    "  - NOT run `mvn test`, `gradle test`, or any other command that EXECUTES tests.\n"
+    "When the Dockerfile is written, stop.\n"
+)
+
+JAVA_PROFILE = LangProfile(
+    key="java",
+    # JAVA_HOME here is /opt/java/openjdk — exactly the default java.py falls back to — and mvn is
+    # on the login-shell PATH. No gradle binary; JavaLanguage prefers ./gradlew, which 12 of the
+    # 13 Gradle repos in rat_java50.json ship.
+    default_base="maven:3-eclipse-temurin-17",
+    prompt_template=_JAVA_PROMPT,
+    workbench="claude-runner-java:latest",
+    # None: Surefire and Gradle write JUnit XML natively, so there is nothing to install.
+    test_runner=None,
+)
+
 # Keys mirror bench.languages._REGISTRY exactly (see the note above); the aliases must resolve to
 # the same language on both sides of the seam or the prompt describes a grader that never runs.
 _PROFILES = {
@@ -248,6 +323,7 @@ _PROFILES = {
     "nodejs": NODE_PROFILE, "node": NODE_PROFILE,
     "javascript": NODE_PROFILE, "typescript": NODE_PROFILE,
     "rust": RUST_PROFILE,
+    "java": JAVA_PROFILE,
 }
 
 
