@@ -63,30 +63,57 @@ def _is_native_lane(model: str, declared_measure) -> bool:
 _CLAUDE_LANES = ("claudecode", "claudecode-dockerfile")
 
 
-def _ensure_claude_runner(model: str, repo_root: str = REPO_ROOT, runner=subprocess.run) -> None:
-    """Build the claude-runner workbench image if absent, BEFORE any repo runs.
+def _dataset_workbenches(repos_json) -> list:
+    """The workbench tags a dataset needs, in stable order.
 
-    The image is local-only (no registry — `docker pull claude-runner` fails), so a routine
-    `docker system prune` silently removes it. When it is gone the ccdf producer's anti-vanish
+    Falls back to the single default workbench when there is no dataset (tier/variety runs, which
+    are Python) or when the file cannot be read — a preflight must never be the thing that aborts
+    a run before it starts."""
+    from producers._claudecode_helpers import get_profile
+    default = ["claude-runner:latest"]
+    if not repos_json:
+        return default
+    try:
+        with open(repos_json, encoding="utf-8") as fh:
+            repos = json.load(fh)
+        tags = {get_profile((r.get("language") or "")).workbench for r in repos}
+    except Exception:                                    # noqa: BLE001 — degrade, never abort
+        return default
+    return sorted(tags) or default
+
+
+def _ensure_claude_runner(model: str, repo_root: str = REPO_ROOT, runner=subprocess.run,
+                          repos_json=None) -> None:
+    """Build every claude-runner workbench the run needs, BEFORE any repo runs.
+
+    These images are local-only (no registry — `docker pull claude-runner` fails), so a routine
+    `docker system prune` silently removes them. When one is gone the ccdf producer's anti-vanish
     guard turns every repo into status="error", which on disk is indistinguishable from a
-    completed run that scored zero. Building it up front makes the failure loud and early.
+    completed run that scored zero. Building them up front makes the failure loud and early.
+
+    Which images are needed depends on the dataset: a Rust repo's agent works inside
+    claude-runner-rust (cargo present), not the python+node default. Building only what the
+    dataset uses keeps a Python run from paying for three ~1GB builds.
 
     Idempotent: an existing image is a single `docker image inspect` and no build. `runner` is
     injectable so the preflight is unit-testable without Docker.
     """
     if model not in _CLAUDE_LANES:
         return
-    tag = os.environ.get("CLAUDE_RUNNER_IMAGE", "claude-runner:latest")
-    if runner(["docker", "image", "inspect", tag], capture_output=True).returncode == 0:
-        return
+    override = os.environ.get("CLAUDE_RUNNER_IMAGE")
+    tags = [override] if override else _dataset_workbenches(repos_json)
     ctx = os.path.join(repo_root, "docker")
-    dockerfile = os.path.join(ctx, "claude-runner.Dockerfile")
-    print(f"[bench] {tag} missing — building from {dockerfile}", flush=True)
-    rc = runner(["docker", "build", "-t", tag, "-f", dockerfile, ctx]).returncode
-    if rc != 0:
-        raise SystemExit(
-            f"[bench] FATAL: could not build {tag} (rc={rc}). The {model} lane cannot run "
-            f"without it; every repo would silently record status=\"error\".")
+    for tag in tags:
+        if runner(["docker", "image", "inspect", tag], capture_output=True).returncode == 0:
+            continue
+        # Tag -> recipe by convention: claude-runner-rust:latest -> claude-runner-rust.Dockerfile
+        dockerfile = os.path.join(ctx, tag.split(":")[0] + ".Dockerfile")
+        print(f"[bench] {tag} missing — building from {dockerfile}", flush=True)
+        rc = runner(["docker", "build", "-t", tag, "-f", dockerfile, ctx]).returncode
+        if rc != 0:
+            raise SystemExit(
+                f"[bench] FATAL: could not build {tag} (rc={rc}). The {model} lane cannot run "
+                f"without it; every repo would silently record status=\"error\".")
 
 
 def _write_live_scores(out: str, spec, model: str) -> None:
@@ -163,7 +190,7 @@ def main(argv=None) -> int:
     # `measure` tag only when the model has no registered producer (design §4 / FIX 1).
     native = _is_native_lane(model, spec.measure)
     # Preflight BEFORE output_dir/manifest so a failure leaves no half-started run directory.
-    _ensure_claude_runner(model)
+    _ensure_claude_runner(model, repos_json=args.repos_json)
     # LLM precedence: explicit --llm > variety's pinned llm > (None => runner's own default).
     # Resolve by None-check (not truthiness) so an explicit value always wins, then treat a
     # blank value from either source as unset so we never forward an empty model id.

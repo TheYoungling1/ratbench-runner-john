@@ -94,3 +94,53 @@ def test_vendored_dockerfile_exists_and_installs_the_cli():
     text = open(path).read()
     assert "@anthropic-ai/claude-code" in text
     assert "useradd" in text        # bypassPermissions is refused as root
+
+
+def _write_dataset(tmp_path, languages):
+    import json
+    p = tmp_path / "ds.json"
+    p.write_text(json.dumps([{"full_name": f"o/r{i}", "language": lang}
+                             for i, lang in enumerate(languages)]))
+    return str(p)
+
+
+def test_builds_only_the_workbench_the_dataset_needs(tmp_path):
+    # A Rust dataset must not build the python/node workbench, and vice versa: each build is ~1GB
+    # and several minutes.
+    fake = _FakeRun(1, 0)                    # inspect -> missing, build -> ok
+    ds = _write_dataset(tmp_path, ["Rust", "Rust"])
+    _ensure_claude_runner("claudecode-dockerfile", repo_root=str(tmp_path), runner=fake,
+                          repos_json=ds)
+    tags = [c[3] for c in fake.calls if c[:3] == ["docker", "image", "inspect"]]
+    assert tags == ["claude-runner-rust:latest"]
+    build = [c for c in fake.calls if c[1] == "build"][0]
+    assert build[3] == "claude-runner-rust:latest"
+    assert build[5].endswith("claude-runner-rust.Dockerfile")
+
+
+def test_mixed_language_dataset_builds_every_needed_workbench(tmp_path):
+    fake = _FakeRun(1, 0, 1, 0)              # two (inspect-missing, build-ok) pairs
+    ds = _write_dataset(tmp_path, ["Java", "Python"])
+    _ensure_claude_runner("claudecode-dockerfile", repo_root=str(tmp_path), runner=fake,
+                          repos_json=ds)
+    tags = sorted(c[3] for c in fake.calls if c[:3] == ["docker", "image", "inspect"])
+    assert tags == ["claude-runner-java:latest", "claude-runner:latest"]
+
+
+def test_no_dataset_keeps_the_original_single_workbench(tmp_path):
+    # Tier/variety runs pass no --repos-json. Those are Python, and must behave exactly as before.
+    fake = _FakeRun(0)
+    _ensure_claude_runner("claudecode-dockerfile", repo_root=str(tmp_path), runner=fake,
+                          repos_json=None)
+    assert len(fake.calls) == 1
+    assert fake.calls[0][3] == "claude-runner:latest"
+
+
+def test_unreadable_dataset_falls_back_to_the_default_workbench(tmp_path):
+    # A malformed dataset must not abort the run before it starts; the default is the safe guess.
+    bad = tmp_path / "bad.json"
+    bad.write_text("{not json")
+    fake = _FakeRun(0)
+    _ensure_claude_runner("claudecode-dockerfile", repo_root=str(tmp_path), runner=fake,
+                          repos_json=str(bad))
+    assert fake.calls[0][3] == "claude-runner:latest"
