@@ -1087,3 +1087,23 @@ Verified by re-measuring the smoke run's SAVED Dockerfiles at zero produce cost
 
 The two unchanged rows matter as much as the changed one: they show the recursive collection did
 not perturb a single-module Maven build or the Rust path.
+
+### Review dispositions — two P2s deliberately not actioned
+
+**`_tier` metadata on the new datasets.** Real mechanism (`benchmark.py:828` filters on
+`r.get("_tier") == tier` whenever `tier != "all"`), but not a defect introduced here: **none** of
+the four RAT datasets carry `_tier` — `rat_python50` 0/50, `rat_node50` 0/50, `rat_rust50` 0/50,
+`rat_java50` 0/50 — including the two that have already backed paid full runs. `--tier all` is the
+established convention for this dataset family, and every run in this session used it. It is also
+not silent: `benchmark.py:893` prints `No repos match the selection (tier=…, category=…, offset=…,
+limit=…). Nothing to do.` and returns. Adding `_tier` to only the two new datasets would make them
+inconsistent with the two they are meant to be compared against.
+
+**Preflight ignores `--only` / `--limit` / `--offset`.** Also real: `_dataset_workbenches` reads
+every record, so a `--only` run on one Rust repo in a mixed dataset could build the Java workbench
+too (~1.5GB, minutes). Not fixed, because the fix means duplicating `_select_repos`'s tier +
+category + offset + limit logic into `runner/cli.py`, where it would silently drift from the real
+selector — and a preflight that under-builds because its copy of the filter went stale fails in
+exactly the mode this preflight exists to prevent. The waste is bounded (one extra image, cached
+thereafter) and only occurs on a mixed-language dataset with a narrowing flag, which no current
+dataset is. If `_select_repos` is ever exported as a reusable function, wire it in then.
