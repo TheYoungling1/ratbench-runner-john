@@ -44,7 +44,7 @@ def parse_junit(xml_text: str) -> dict:
     # from <testcase> ELEMENTS (run_pytest.py:275) — the same mixed-unit RAT uses for pass_rate.
     # Node-id lists always come from <testcase> ELEMENTS (needed for display + gold intersection).
     passed_ids, failed_ids, error_ids = [], [], []
-    total = failed = errors = skipped = 0
+    total = failed = errors = skipped = n_testcases = 0
     try:
         root = ET.fromstring(xml_text) if xml_text.strip() else None
     except ET.ParseError:
@@ -59,6 +59,7 @@ def parse_junit(xml_text: str) -> dict:
             nested.update(id(tc) for tc in ts.iter("testcase"))   # identities live as long as `root`
         for tc in root.iter("testcase"):
             nid = _node_id(tc)
+            n_testcases += 1
             fail, err, skip = (tc.find("failure") is not None, tc.find("error") is not None,
                                tc.find("skipped") is not None)
             if fail:
@@ -90,9 +91,31 @@ def parse_junit(xml_text: str) -> dict:
     #   failed  = len(failed_ids); errors = len(error_ids); skipped = len(skipped_ids)
     return {
         "total": total, "passed": len(passed_ids), "failed": failed, "errors": errors, "skipped": skipped,
+        # Number of <testcase> ELEMENTS in the report — the evidence that tests actually ran, kept
+        # separate from the attribute-derived `total`. See is_executed().
+        "testcases": n_testcases,
         "passed_node_ids": tuple(passed_ids), "failed_node_ids": tuple(failed_ids),
         "error_node_ids": tuple(error_ids),
     }
+
+
+def is_executed(j: dict) -> bool:
+    """Did the suite actually run tests? Takes a parse_junit() result.
+
+    `total` (summed <testsuite tests> attributes) is the primary signal. The second clause covers
+    reports whose totals legitimately parse to 0 while real tests are present — a <testsuite> that
+    omits the `tests` attribute, or (since node --test) <testcase> elements outside any
+    <testsuite>. It used to be spelled `"testsuite" in junit_xml`, a SUBSTRING test over the raw
+    text, which an empty report satisfies for free: its root element is `<testsuites/>`, and
+    "testsuites" contains "testsuite". A run that collected nothing but still wrote a report
+    therefore scored executed=True / ebsr=True / pass_rate=0.0 — a false green that also made the
+    `no_tests_collected` status branch all but unreachable. jest-junit writes exactly that empty
+    root when a jest run matches no test files, so it would have been the common Node case.
+
+    Counting <testcase> ELEMENTS is the same evidence without the false positive: an empty
+    <testsuites/> has none. Non-XML and empty input parse to zeros, i.e. not executed.
+    """
+    return j["total"] > 0 or j["testcases"] > 0
 
 
 def parse_collected_node_ids(stdout: str) -> tuple:
@@ -293,7 +316,7 @@ def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeou
         docker.rm(name, tag)
 
     j = parse_junit(junit_xml)
-    executed = bool(junit_xml.strip()) and (j["total"] > 0 or "testsuite" in junit_xml)
+    executed = is_executed(j)
     if timed_out:
         status = "timed_out"
     elif not collect_clean:

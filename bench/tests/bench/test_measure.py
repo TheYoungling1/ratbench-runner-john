@@ -145,3 +145,23 @@ def test_passed_node_ids_translated_to_path_form():
     row = measure(_env(), docker=FakeDocker(script=script, junit=junit))
     assert row.collected_node_ids == ("tests/test_a.py::test_ok", "tests/test_a.py::test_skip")
     assert row.passed_node_ids == ("tests/test_a.py::test_ok",)
+
+
+def test_empty_junit_report_is_not_a_green_row():
+    # A run that wrote a report but collected nothing must land in `no_tests_collected`, not be
+    # credited with EBSR at pass_rate 0.0. The empty root <testsuites/> contains the substring
+    # "testsuite", which the old predicate accepted; jest-junit writes exactly this shape when
+    # jest matches no test files, so on Node it would have been the common case.
+    row = measure(_env(), docker=FakeDocker(junit="<testsuites/>"))
+    assert row.build_ok is True
+    assert row.executed is False and row.ebsr is False
+    assert row.status == "no_tests_collected"
+    assert row.total == 0 and row.passed == 0 and row.pass_rate == 0.0
+
+
+def test_a_report_with_testcases_but_no_totals_still_counts_as_executed():
+    # The case the substring check existed for: real <testcase> elements whose <testsuite> carries
+    # no `tests` attribute, so the attribute-derived total is 0.
+    junit = '<testsuites><testsuite name="s"><testcase classname="s" name="a"/></testsuite></testsuites>'
+    row = measure(_env(), docker=FakeDocker(junit=junit))
+    assert row.executed is True and row.ebsr is True and row.status == "executed"
