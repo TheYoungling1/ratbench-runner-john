@@ -102,17 +102,23 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
     # runner package or RAT model modules (dependency direction: producers must not depend
     # on the runner).
     from producers._claudecode_helpers import (
-        W, AUTH_KEYS, _normalize_model, build_prompt, DOCKERFILE_GEN_PATH,
+        W, AUTH_KEYS, _normalize_model, build_prompt, get_profile, resolve_base,
+        DOCKERFILE_GEN_PATH,
     )
     # download_repo/init_output_and_repo are libkit utilities (producers may use libkit).
     # Lazy: only touch the RAT tree on the live path — add <repo>/rat to sys.path first.
     ensure_rat_on_path()
     from libkit.command import download_repo, init_output_and_repo  # noqa: E402
 
-    dockerfile_base = os.environ.get("CLAUDE_DOCKERFILE_BASE", "python:3.11")
+    # The dataset's `language` (already lowered by runner/benchmark.py) picks the prompt AND the
+    # emitted FROM. CLAUDE_DOCKERFILE_BASE stays a GLOBAL override, so a mixed-language run must
+    # leave it unset or every repo gets the same base.
+    profile = get_profile(repo.language)
+    dockerfile_base = resolve_base(profile, os.environ.get("CLAUDE_DOCKERFILE_BASE"))
     # FIX 3: the CONTAINER image must be the claude-runner image (has the `agent` user + claude
     # CLI), mirroring the deleted wrapper. The generated Dockerfile's FROM is a SEPARATE thing
-    # (dockerfile_base, above) and stays vanilla python:3.11 — only the container image was wrong.
+    # (dockerfile_base, above) and stays a vanilla language base — only the container image was
+    # wrong. The workbench ships python3 AND node 20, so it hosts either language's setup.
     base_image = os.environ.get("CLAUDE_RUNNER_IMAGE", "claude-runner:latest")
     auth = {k: os.environ[k] for k in AUTH_KEYS if os.environ.get(k)}
     if not auth:
@@ -142,7 +148,7 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
         subprocess.run(["docker", "exec", container, "chown", "-R", "agent:agent", W],
                        check=True, timeout=120)
 
-        prompt = build_prompt(full_name, dockerfile_base)
+        prompt = build_prompt(full_name, dockerfile_base, profile)
         max_budget = os.environ.get("CLAUDE_MAX_BUDGET_USD", "2.0")
         claude_cmd = [
             "docker", "exec", "-u", "agent", "-w", W, container,

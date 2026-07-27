@@ -4,7 +4,11 @@ Folded out of the runner's claudecode model + dockerfile helpers so producers/ n
 imports the runner package or RAT model modules (the produce -> measure seam only
 crosses via bench.schema). Stdlib-only, so producers stay importable without the RAT tree.
 """
+from __future__ import annotations
+
 import json
+from dataclasses import dataclass
+from typing import Optional
 
 W = "/testbed"
 AUTH_KEYS = ("CLAUDE_CODE_OAUTH_TOKEN", "ANTHROPIC_API_KEY")
@@ -31,7 +35,38 @@ def _normalize_model(llm: str) -> str:
     return "sonnet"
 
 
-_PROMPT_TEMPLATE = (
+# ── Language profiles ────────────────────────────────────────────────────────────────────────
+#
+# The producer is otherwise language-blind: it drives an agent, pulls /testbed/Dockerfile.gen and
+# hands it to bench/, which scores it with the per-language strategy in bench.languages. A profile
+# is the produce-side half of that pairing — the FROM to ask for, the prompt to send, and whether
+# the emitted Dockerfile needs a test-runner install stapled on.
+#
+# ORGANIZING PRINCIPLE: a prompt must state, verbatim, what the grader will actually run. If the
+# prompt and bench.languages.<Lang>.gate_cmd drift, an agent failure and a harness mismatch become
+# indistinguishable in the results. Every claim a prompt makes about grading is copied from the
+# matching Language, not paraphrased.
+#
+# NOTE: producers/ must not import bench.languages (dependency direction: produce and measure share
+# only bench.schema), so the alias table below is a deliberate duplicate of bench.languages._REGISTRY.
+# A test in producers/tests asserts the two stay in lockstep — that assertion is the only thing
+# stopping them from drifting apart.
+
+
+@dataclass(frozen=True)
+class LangProfile:
+    """Everything the producer needs to run ONE language's setup+emit."""
+
+    key: str                # canonical name; matches the paired bench.languages Language.name
+    default_base: str       # the FROM the agent is told to write, absent CLAUDE_DOCKERFILE_BASE
+    prompt_template: str    # format keys: {gen_path} {base} {full_name}
+    # (probe_regex, RUN line): the producer appends `RUN line` to the emitted Dockerfile when
+    # probe_regex does not match it. A single tuple rather than two fields so the two halves
+    # cannot be set independently. None => append nothing (the language's own ensure_cmd covers it).
+    test_runner: Optional[tuple] = None
+
+
+_PYTHON_PROMPT = (
     "You are configuring a Python repository at /testbed so its EXISTING test suite can "
     "run, and then writing a Dockerfile that reproduces your setup from scratch.\n\n"
     "First, install ALL Python dependencies and any required system packages so that "
@@ -54,10 +89,113 @@ _PROMPT_TEMPLATE = (
     "When the Dockerfile is written, stop."
 )
 
+# The Node prompt is NOT the Python one with the nouns swapped — the contract is different in kind.
+# bench.languages.NodeLanguage sets short_circuit_gate = True, so a failed gate means ZERO tests run
+# and the repo scores zero; the gate and run lines below are copied verbatim from its gate_cmd/run_cmd.
+#
+# Two non-obvious consequences are spelled out to the agent because they are invisible from inside
+# the repo: (1) `npx --no-install` resolves ONLY binaries already in node_modules/.bin, so omitting
+# devDependencies silently produces an empty report rather than an error; (2) the gate's `npm ci`
+# wipes node_modules and reinstalls strictly from the lockfile, so a `--no-save` install does not
+# survive into the run step.
+#
+# The one-turn paragraph is here and deliberately NOT in the Python prompt: a live python50 run is
+# scored against the exact Python text above, so adding it there would break comparability. It exists
+# because agents have ended a `claude -p` run by backgrounding an install or calling ScheduleWakeup
+# and waiting for a re-invocation that single-shot mode never delivers — burning the whole budget for
+# no Dockerfile. Adding it to Python is a deferred, deliberate re-baseline.
+#
+# Literal braces are DOUBLED ({{}}) — this string goes through str.format, where a bare {} is an
+# auto-numbered field and raises IndexError.
+_NODE_PROMPT = (
+    "You are configuring a JavaScript/TypeScript (Node.js) repository at /testbed so its "
+    "EXISTING test suite can run, and then writing a Dockerfile that reproduces your setup "
+    "from scratch.\n\n"
+    "YOU GET EXACTLY ONE TURN. Nothing will re-invoke you, no scheduled wakeup will ever fire, "
+    "and any backgrounded or detached process is killed the moment you stop. Run every install "
+    "in the FOREGROUND and wait for it to finish. Never end your turn intending to resume later "
+    "— if you are running short on budget, write the best Dockerfile you can to {gen_path} NOW "
+    "instead of deferring.\n\n"
+    "The grader rebuilds your Dockerfile from a clean base and then, inside the fresh image, runs "
+    "EXACTLY this gate at /testbed:\n"
+    "    (npm ci || npm install) && node -e \"process.exit((require('./package.json')"
+    ".scripts||{{}}).test?0:1)\"\n"
+    "If that gate fails, NO tests are run at all and the repo scores ZERO. If it passes, the grader "
+    "runs the suite with `npx --no-install jest --ci --reporters=default --reporters=jest-junit`, "
+    "falling back to `npx --no-install mocha --reporter mocha-junit-reporter`.\n\n"
+    "So, first, in THIS container: install any system packages the dependencies need to build "
+    "(`sudo apt-get install -y ...`), then run `npm ci || npm install` at /testbed until it exits 0. "
+    "Install devDependencies too — never `--production` or `--omit=dev` — because `npx --no-install` "
+    "only finds binaries already in node_modules/.bin. Make sure /testbed/package.json defines a "
+    "`test` script (scripts.test); if it does not, add one that runs the project's own test framework. "
+    "Remember that the grader's `npm ci` DELETES node_modules and reinstalls strictly from the "
+    "lockfile, so anything you need at test time must be recorded in package.json and the lockfile "
+    "— a `--no-save` install will not survive. You may edit configuration files. DO NOT modify, add, "
+    "or delete any test files. DO NOT run the full test suite yourself (running the gate command "
+    "above to check your work is fine).\n\n"
+    "Then write a self-contained Dockerfile to {gen_path} that reproduces this environment FROM A "
+    "CLEAN BASE. It MUST:\n"
+    "  - start `FROM {base}`;\n"
+    "  - `RUN git clone https://github.com/{full_name} /testbed` and `WORKDIR /testbed` (do NOT "
+    "rely on any files from this container — the build starts empty, and the grader requires "
+    "/testbed to still be a git worktree);\n"
+    "  - install the SAME system packages and Node dependencies you installed, as RUN steps. The "
+    "build runs as ROOT, so DROP every `sudo` prefix (use `apt-get install -y ...`, `npm ci`);\n"
+    "  - re-encode any edits you made to repo files as explicit RUN steps (e.g. `RUN sed -i ...`, "
+    "`RUN npm pkg set scripts.test=...`, or a heredoc), since the clone is pristine;\n"
+    "  - NOT run the test suite in the Dockerfile.\n"
+    "When the Dockerfile is written, stop."
+)
 
-def build_prompt(full_name: str, base: str) -> str:
+PYTHON_PROFILE = LangProfile(
+    key="python",
+    default_base="python:3.11",
+    prompt_template=_PYTHON_PROMPT,
+    # The fresh-container measure needs pytest; PythonLanguage.ensure_cmd tries to install it but
+    # tolerates failure (`|| true`), so the emitted Dockerfile is the reliable place to guarantee it.
+    test_runner=(r"\bpytest\b", "RUN pip install --no-cache-dir pytest"),
+)
+
+NODE_PROFILE = LangProfile(
+    key="nodejs",
+    default_base="node:20",
+    prompt_template=_NODE_PROMPT,
+    # None, NOT a jest install: NodeLanguage.ensure_cmd already npm-installs the JUnit reporters at
+    # measure time, and the Python line would `pip install` onto a node base with no pip — failing
+    # the build of EVERY Node repo before a single test could run.
+    test_runner=None,
+)
+
+# Keys mirror bench.languages._REGISTRY exactly (see the note above); the aliases must resolve to
+# the same language on both sides of the seam or the prompt describes a grader that never runs.
+_PROFILES = {
+    "python": PYTHON_PROFILE,
+    "nodejs": NODE_PROFILE, "node": NODE_PROFILE,
+    "javascript": NODE_PROFILE, "typescript": NODE_PROFILE,
+}
+
+
+def get_profile(language) -> LangProfile:
+    """Return the LangProfile for `language`, defaulting to Python for unknown/empty names.
+
+    The default mirrors bench.languages.get_language so produce and measure agree on what an
+    unrecognized dataset `language` means — silently one language on one side of the seam and
+    another on the other is the worst outcome."""
+    return _PROFILES.get((language or "python").lower(), PYTHON_PROFILE)
+
+
+def resolve_base(profile: LangProfile, env_base) -> str:
+    """The FROM the agent is told to write: CLAUDE_DOCKERFILE_BASE if set, else the language default.
+
+    `or`, not a dict default: an explicitly-exported-but-empty var must fall through to the language
+    default rather than asking the agent for `FROM `."""
+    return env_base or profile.default_base
+
+
+def build_prompt(full_name: str, base: str, profile: LangProfile) -> str:
     """The agentic setup+emit prompt with the repo and emitted-base injected."""
-    return _PROMPT_TEMPLATE.format(gen_path=DOCKERFILE_GEN_PATH, base=base, full_name=full_name)
+    return profile.prompt_template.format(gen_path=DOCKERFILE_GEN_PATH, base=base,
+                                          full_name=full_name)
 
 
 def _as_int(value) -> int:
