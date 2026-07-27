@@ -3,6 +3,8 @@ import json
 import os
 from dataclasses import asdict
 
+import pytest
+
 from bench.schema import MeasureRow
 from bench.unified_bench import aggregate, aggregate_errors, load_rows, main
 
@@ -72,3 +74,42 @@ def test_metrics_json_is_written_even_if_classification_raises(tmp_path, monkeyp
     assert main(["--out", str(tmp_path), "--aggregate-only"]) == 0
     assert os.path.isfile(os.path.join(str(tmp_path), "metrics.json"))
     assert not os.path.exists(os.path.join(str(tmp_path), "errors.json"))
+
+
+def test_a_stale_errors_json_is_REMOVED_when_classification_raises(tmp_path, monkeypatch):
+    # metrics.json is rewritten unconditionally, so a surviving errors.json from an earlier run
+    # would be read as part of the same report — with exit 0 and nothing signalling the mismatch.
+    # The test above only passes because its directory is fresh.
+    _write(str(tmp_path), "baseline", "o/1")
+    stale = os.path.join(str(tmp_path), "errors.json")
+    assert main(["--out", str(tmp_path), "--aggregate-only"]) == 0
+    assert os.path.isfile(stale)                       # a real errors.json now exists
+
+    import bench.unified_bench as ub
+    monkeypatch.setattr(ub, "aggregate_errors",
+                        lambda *a, **k: (_ for _ in ()).throw(RuntimeError("boom")))
+    assert main(["--out", str(tmp_path), "--aggregate-only"]) == 0
+    assert os.path.isfile(os.path.join(str(tmp_path), "metrics.json"))
+    assert not os.path.exists(stale)                   # ...and is gone, not stale
+
+
+def test_bad_delta_fails_before_ANY_measuring_in_the_full_path(tmp_path, monkeypatch):
+    # The --aggregate-only test above cannot catch this: in the full path the validation used to
+    # sit AFTER run_one(), so a typo cost an entire docker measure pass before returning 2.
+    # `discover` explodes if reached, so "we got to the measure stage" fails loudly.
+    import bench.unified_bench as ub
+    monkeypatch.setattr(ub, "discover",
+                        lambda *a, **k: pytest.fail("reached discover(): validation was too late"))
+    rc = main(["--out", str(tmp_path), "--harvest", "baseline=/nonexistent",
+               "--delta", "baseline:nope"])
+    assert rc == 2
+    assert os.listdir(str(tmp_path)) == []
+
+
+def test_malformed_delta_is_rejected(tmp_path):
+    _write(str(tmp_path), "baseline", "o/1")
+    # NOT in this list: "" — it is falsy, so an empty --delta reads as "no delta requested",
+    # same as omitting the flag. That is deliberate, not a gap.
+    for bad in ("baseline", "baseline:", ":repaired"):
+        assert main(["--out", str(tmp_path), "--aggregate-only", "--delta", bad]) == 2
+    assert not os.path.exists(os.path.join(str(tmp_path), "metrics.json"))

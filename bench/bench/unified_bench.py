@@ -97,6 +97,24 @@ def main(argv=None) -> int:
     if not a.aggregate_only and not a.harvest:
         ap.error("--harvest is required unless --aggregate-only")
 
+    # `--delta` is validated BEFORE anything is produced, not just before the aggregate write.
+    # In the full path the agent names come from `--harvest`, so they are knowable without
+    # measuring anything: a typo fails in milliseconds instead of after a full docker measure
+    # pass has already written every row.json. The post-measure membership check below still
+    # runs — it is the one that covers --aggregate-only and catches an agent that harvested but
+    # produced no rows.
+    if a.delta:
+        _name_a, _sep, _name_b = a.delta.partition(":")
+        if not (_sep and _name_a and _name_b):
+            print(f"--delta must be AGENT_A:AGENT_B, got {a.delta!r}", file=sys.stderr)
+            return 2
+        if not a.aggregate_only:
+            _known = set(_parse_harvest(a.harvest))
+            if _name_a not in _known or _name_b not in _known:
+                print(f"unknown agent in --delta: {a.delta} (--harvest has {sorted(_known)})",
+                      file=sys.stderr)
+                return 2
+
     if not a.aggregate_only:
         envs = discover(_parse_harvest(a.harvest))
         docker = SubprocessDocker()
@@ -123,14 +141,22 @@ def main(argv=None) -> int:
         json.dump(out, f, indent=2)
     print(json.dumps(out, indent=2))
 
+    errors_path = os.path.join(a.out, "errors.json")
     try:
         errs = aggregate_errors(a.out, turn_cap=a.turn_cap)
         if pair:
             errs["_delta"] = {s: arm_delta(pair[0], pair[1], source=s, turn_cap=a.turn_cap)
                               for s in SOURCES}
-        with open(os.path.join(a.out, "errors.json"), "w") as f:
+        with open(errors_path, "w") as f:
             json.dump(errs, f, indent=2)
     except Exception as e:                       # classification is additive — never fatal
+        # ...but a STALE errors.json is worse than none. metrics.json has just been rewritten,
+        # so leaving a previous run's errors.json beside it presents two artifacts from
+        # different runs as one consistent report — and the exit code is 0, so nothing signals
+        # it. Silence about the current run beats confident numbers about an older one.
+        if os.path.exists(errors_path):
+            os.remove(errors_path)
+            print(f"removed stale {errors_path} — it predates this run", file=sys.stderr)
         print(f"error classification failed: {e!r}", file=sys.stderr)
     return 0
 

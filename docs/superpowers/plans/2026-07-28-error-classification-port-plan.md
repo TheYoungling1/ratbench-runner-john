@@ -1427,8 +1427,31 @@ Add the CLI flags and rewrite the tail of `main()` (currently `unified_bench.py:
     ap.add_argument("--delta", help="AGENT_A:AGENT_B — arm-vs-arm interval delta")
 ```
 
+> **Two review findings landed on top of this block.** (a) The `--delta` check below sits *after*
+> `run_one()` in the non-`--aggregate-only` path, so a typo cost a full docker measure pass before
+> returning 2. The agent names come from `--harvest` and are knowable up front, so a format +
+> membership check now runs **before** `discover()`; the check below stays, because it is the one
+> that covers `--aggregate-only` and catches an agent that harvested but produced no rows.
+> (b) On a classification failure the `except` must **delete** a pre-existing `errors.json` —
+> `metrics.json` has just been rewritten, so a surviving errors.json from an earlier run reads as
+> part of the same report, at exit code 0, with nothing signalling the mismatch. Both are
+> mutation-checked. Note `--delta ""` is falsy and deliberately means "not requested".
+
 ```python
-    # validate BEFORE any write — a bad --delta must not leave a half-written output dir
+    # runs BEFORE discover()/run_one() — see the note above
+    if a.delta:
+        _name_a, _sep, _name_b = a.delta.partition(":")
+        if not (_sep and _name_a and _name_b):
+            print(f"--delta must be AGENT_A:AGENT_B, got {a.delta!r}", file=sys.stderr)
+            return 2
+        if not a.aggregate_only:
+            _known = set(_parse_harvest(a.harvest))
+            if _name_a not in _known or _name_b not in _known:
+                print(f"unknown agent in --delta: {a.delta} (--harvest has {sorted(_known)})",
+                      file=sys.stderr)
+                return 2
+
+    # ...and this one still validates before any WRITE
     pair = None
     if a.delta:
         name_a, _, name_b = a.delta.partition(":")
@@ -1448,9 +1471,13 @@ Add the CLI flags and rewrite the tail of `main()` (currently `unified_bench.py:
         if pair:
             errs["_delta"] = {s: arm_delta(pair[0], pair[1], source=s, turn_cap=a.turn_cap)
                               for s in SOURCES}
-        with open(os.path.join(a.out, "errors.json"), "w") as f:
+        with open(errors_path, "w") as f:      # errors_path bound before the try
             json.dump(errs, f, indent=2)
     except Exception as e:                       # classification is additive — never fatal
+        # ...but a STALE errors.json is worse than none (see the note above).
+        if os.path.exists(errors_path):
+            os.remove(errors_path)
+            print(f"removed stale {errors_path} — it predates this run", file=sys.stderr)
         print(f"error classification failed: {e!r}", file=sys.stderr)
     return 0
 ```
