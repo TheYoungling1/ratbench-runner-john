@@ -60,6 +60,11 @@ class LangProfile:
     key: str                # canonical name; matches the paired bench.languages Language.name
     default_base: str       # the FROM the agent is told to write, absent CLAUDE_DOCKERFILE_BASE
     prompt_template: str    # format keys: {gen_path} {base} {full_name}
+    # The Docker image the AGENT works inside. Distinct from default_base, which is the FROM the
+    # agent writes into the emitted Dockerfile and is the only one ever measured. Python and Node
+    # share one workbench because it ships both toolchains; Rust and Java each need their own,
+    # since an agent with no cargo/JDK cannot verify its own setup.
+    workbench: str = "claude-runner:latest"
     # (probe_regex, RUN line): the producer appends `RUN line` to the emitted Dockerfile when
     # probe_regex does not match it. A single tuple rather than two fields so the two halves
     # cannot be set independently. None => append nothing (the language's own ensure_cmd covers it).
@@ -197,6 +202,14 @@ def resolve_base(profile: LangProfile, env_base) -> str:
     `or`, not a dict default: an explicitly-exported-but-empty var must fall through to the language
     default rather than asking the agent for `FROM `."""
     return env_base or profile.default_base
+
+
+def resolve_workbench(profile: LangProfile, env_image) -> str:
+    """The image the agent works inside: CLAUDE_RUNNER_IMAGE if set, else the language's own.
+
+    `or`, not a dict default: an exported-but-empty var must fall through to the profile rather
+    than asking Docker to run the image named "" (same rule as resolve_base)."""
+    return env_image or profile.workbench
 
 
 def build_prompt(full_name: str, base: str, profile: LangProfile) -> str:

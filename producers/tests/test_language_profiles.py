@@ -158,3 +158,25 @@ def test_profile_alias_groups_match_the_measure_registry():
 
     for alias, profile in _PROFILES.items():
         assert _REGISTRY[alias].name == profile.key, alias
+
+
+# ── workbench image ─────────────────────────────────────────────────────────────────────────
+
+def test_python_and_node_share_the_original_workbench():
+    # Task 1 is a pure refactor: whatever these two resolved to before must be byte-identical
+    # after, or the completed python50 / node-full50 runs stop being comparable.
+    assert PYTHON_PROFILE.workbench == "claude-runner:latest"
+    assert NODE_PROFILE.workbench == "claude-runner:latest"
+
+
+def test_workbench_env_override_wins_for_every_profile():
+    # CLAUDE_RUNNER_IMAGE is a GLOBAL pin, mirroring CLAUDE_DOCKERFILE_BASE.
+    from producers._claudecode_helpers import resolve_workbench
+    for profile in (PYTHON_PROFILE, NODE_PROFILE):
+        assert resolve_workbench(profile, "custom:tag") == "custom:tag"
+
+
+def test_unset_or_empty_workbench_env_falls_to_the_profile():
+    from producers._claudecode_helpers import resolve_workbench
+    for env in (None, ""):
+        assert resolve_workbench(PYTHON_PROFILE, env) == "claude-runner:latest"

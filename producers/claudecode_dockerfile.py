@@ -112,7 +112,7 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
     # on the runner).
     from producers._claudecode_helpers import (
         W, AUTH_KEYS, _normalize_model, build_prompt, get_profile, resolve_base,
-        DOCKERFILE_GEN_PATH,
+        resolve_workbench, DOCKERFILE_GEN_PATH,
     )
     # download_repo/init_output_and_repo are libkit utilities (producers may use libkit).
     # Lazy: only touch the RAT tree on the live path — add <repo>/rat to sys.path first.
@@ -124,11 +124,13 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
     # leave it unset or every repo gets the same base.
     profile = get_profile(repo.language)
     dockerfile_base = resolve_base(profile, os.environ.get("CLAUDE_DOCKERFILE_BASE"))
-    # FIX 3: the CONTAINER image must be the claude-runner image (has the `agent` user + claude
+    # FIX 3: the CONTAINER image must be a claude-runner workbench (has the `agent` user + claude
     # CLI), mirroring the deleted wrapper. The generated Dockerfile's FROM is a SEPARATE thing
     # (dockerfile_base, above) and stays a vanilla language base — only the container image was
-    # wrong. The workbench ships python3 AND node 20, so it hosts either language's setup.
-    base_image = os.environ.get("CLAUDE_RUNNER_IMAGE", "claude-runner:latest")
+    # wrong. The workbench is per-language: the original ships python3 AND node 20, but an agent
+    # asked to set up a Rust or Java repo inside it has no cargo and no JDK, so it cannot run the
+    # gate it is being scored on. CLAUDE_RUNNER_IMAGE remains a global override.
+    base_image = resolve_workbench(profile, os.environ.get("CLAUDE_RUNNER_IMAGE"))
     auth = {k: os.environ[k] for k in AUTH_KEYS if os.environ.get(k)}
     if not auth:
         raise RuntimeError("set CLAUDE_CODE_OAUTH_TOKEN or ANTHROPIC_API_KEY")
