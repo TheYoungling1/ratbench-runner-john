@@ -59,6 +59,36 @@ def _is_native_lane(model: str, declared_measure) -> bool:
     return declared_measure == "none"
 
 
+# Models whose lane execs the Claude Code CLI inside the claude-runner workbench image.
+_CLAUDE_LANES = ("claudecode", "claudecode-dockerfile")
+
+
+def _ensure_claude_runner(model: str, repo_root: str = REPO_ROOT, runner=subprocess.run) -> None:
+    """Build the claude-runner workbench image if absent, BEFORE any repo runs.
+
+    The image is local-only (no registry — `docker pull claude-runner` fails), so a routine
+    `docker system prune` silently removes it. When it is gone the ccdf producer's anti-vanish
+    guard turns every repo into status="error", which on disk is indistinguishable from a
+    completed run that scored zero. Building it up front makes the failure loud and early.
+
+    Idempotent: an existing image is a single `docker image inspect` and no build. `runner` is
+    injectable so the preflight is unit-testable without Docker.
+    """
+    if model not in _CLAUDE_LANES:
+        return
+    tag = os.environ.get("CLAUDE_RUNNER_IMAGE", "claude-runner:latest")
+    if runner(["docker", "image", "inspect", tag], capture_output=True).returncode == 0:
+        return
+    ctx = os.path.join(repo_root, "docker")
+    dockerfile = os.path.join(ctx, "claude-runner.Dockerfile")
+    print(f"[bench] {tag} missing — building from {dockerfile}", flush=True)
+    rc = runner(["docker", "build", "-t", tag, "-f", dockerfile, ctx]).returncode
+    if rc != 0:
+        raise SystemExit(
+            f"[bench] FATAL: could not build {tag} (rc={rc}). The {model} lane cannot run "
+            f"without it; every repo would silently record status=\"error\".")
+
+
 def _write_live_scores(out: str, spec, model: str) -> None:
     """Native-lane methods have no rebuildable artifact. Capture the method's native inline score
     (the same numbers the runner prints) to live_scores.json instead of harvesting a non-existent
@@ -132,6 +162,8 @@ def main(argv=None) -> int:
     # so `bench radical --model rat` correctly skips the harvest. Falls back to the variety's
     # `measure` tag only when the model has no registered producer (design §4 / FIX 1).
     native = _is_native_lane(model, spec.measure)
+    # Preflight BEFORE output_dir/manifest so a failure leaves no half-started run directory.
+    _ensure_claude_runner(model)
     # LLM precedence: explicit --llm > variety's pinned llm > (None => runner's own default).
     # Resolve by None-check (not truthiness) so an explicit value always wins, then treat a
     # blank value from either source as unset so we never forward an empty model id.
