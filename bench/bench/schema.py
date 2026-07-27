@@ -78,6 +78,12 @@ class MeasureRow:
     repo_toplevel: tuple = ()          # importable roots under /testbed; enables the internal split
     run_failed_lines: tuple = ()       # FAILED/ERROR lines from the run pass; source="run" events
     language: str = "python"           # keys the signature table; RepoSpec has it, MeasureRow did not
+    # PROVENANCE, set only by unified_bench.load_rows when it SYNTHESISES `status` for a
+    # pre-taxonomy row. A first-class field rather than a `meta` key on purpose: `meta` carries
+    # producer-written bench_meta.json, so a producer emitting the same key would silently make a
+    # genuinely-measured row look backfilled. measure() never sets this, so a freshly written
+    # row.json always has it False.
+    status_backfilled: bool = False
 
 
 @dataclass(frozen=True)

@@ -16,7 +16,6 @@ from bench.measure import measure
 from bench.metrics import compute_metrics
 from bench.report.error_report import arm_report, delta as arm_delta
 from bench.schema import MeasureRow
-from bench.verdict import STATUS_BACKFILL_MARKER
 
 
 def _row_path(out_root: str, agent: str, repo: str) -> str:
@@ -57,10 +56,9 @@ def load_rows(out_root: str) -> dict:
         # (design §2.5): legacy_ok if it shows a build/execution signal, else missing.
         if "status" not in d:
             d["status"] = "legacy_ok" if (d.get("build_ok") or d.get("executed")) else "missing"
-            # Stamp WHO invented this status. `missing` is also a status measure.py genuinely
+            # Record WHO invented this status. `missing` is also a status measure.py genuinely
             # assigns, so downstream cannot tell a backfilled one from a measured one by value.
-            # In-memory only — load_rows never rewrites row.json, and metrics.py ignores meta.
-            d["meta"] = dict(d.get("meta") or {}, **{STATUS_BACKFILL_MARKER: True})
+            d["status_backfilled"] = True
         # Filter to KNOWN fields: a row.json written by a newer checkout otherwise crashes an
         # older one with TypeError. Costs one line, prevents a cross-branch collision.
         row = MeasureRow(agent=agent, **{k: (tuple(v) if isinstance(v, list) else v)
@@ -114,9 +112,17 @@ def main(argv=None) -> int:
             print(f"--delta must be AGENT_A:AGENT_B, got {a.delta!r}", file=sys.stderr)
             return 2
         if not a.aggregate_only:
+            # UNION of "about to be measured" and "already in --out". run_one resumes, so a
+            # perfectly valid run measures one new arm while --delta compares two arms that were
+            # measured earlier: requiring both names in --harvest would reject it. This early
+            # check exists only to fail fast, so it must be permissive — the authoritative
+            # membership check is the load_rows one below, after the rows exist.
             _known = set(_parse_harvest(a.harvest))
+            if os.path.isdir(a.out):
+                _known |= {n for n in os.listdir(a.out)
+                           if os.path.isdir(os.path.join(a.out, n))}
             if _name_a not in _known or _name_b not in _known:
-                print(f"unknown agent in --delta: {a.delta} (--harvest has {sorted(_known)})",
+                print(f"unknown agent in --delta: {a.delta} (know {sorted(_known)})",
                       file=sys.stderr)
                 return 2
 

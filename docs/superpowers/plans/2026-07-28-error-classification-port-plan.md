@@ -1624,8 +1624,10 @@ syslib_missing absent from category_repos in both arms
 > measured — on a corpus where `status` is absent from all 100 rows. Worse than the counter:
 > `unit8co/darts` stayed labelled `missing` although its env harvested fine (`env_status='ok'`)
 > and its own meta carries a docker-125 error, i.e. `measure_error`. The fix is
-> `STATUS_BACKFILL_MARKER` — `load_rows` stamps the row's in-memory meta, `resolve_status`
-> treats a marked row as un-measured. `metrics.json` was verified byte-identical across the fix.
+> `MeasureRow.status_backfilled` — `load_rows` sets it, `resolve_status` treats a marked row as
+> un-measured. It is a **field, not a `meta` key**: `meta` carries producer-written
+> `bench_meta.json`, so a producer emitting the same key would make a genuinely-measured row look
+> invented. `metrics.json` was verified byte-identical across the fix.
 > Do not "simplify" this by adding `missing` to `_ALREADY_MEASURED`: that would silently
 > re-derive genuinely-measured `missing` rows, which is the same bug pointed the other way.
 

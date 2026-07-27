@@ -142,11 +142,17 @@ def test_a_status_load_rows_INVENTED_is_not_treated_as_measured():
     # `missing` is ALSO a status measure.py:245 genuinely assigns, so the value cannot say which
     # produced it — hence the marker. Without it the acceptance corpus (status absent on all 100
     # rows) reported n_status_derived as 48/44 instead of 50/50.
-    from bench.verdict import STATUS_BACKFILL_MARKER
     backfilled = _row(status="missing", build_ok=False, collect_rc=None, collect_clean=False,
-                      executed=False, meta={STATUS_BACKFILL_MARKER: True,
-                                            "error": "CalledProcessError(125, ['docker'])"})
+                      executed=False, status_backfilled=True,
+                      meta={"error": "CalledProcessError(125, ['docker'])"})
     assert resolve_status(backfilled) == ("measure_error", True)
+
+
+def test_a_producer_meta_key_cannot_forge_the_backfill_marker():
+    # provenance is a MeasureRow FIELD, not a meta key: `meta` is producer-written bench_meta.json,
+    # so a producer emitting "_status_backfilled" must not make a measured row look invented.
+    forged = _row(status="missing", build_ok=False, meta={"_status_backfilled": True})
+    assert resolve_status(forged) == ("missing", False)
 
 
 def test_a_genuinely_measured_missing_is_still_measured():

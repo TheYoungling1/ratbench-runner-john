@@ -34,12 +34,13 @@ _ALREADY_MEASURED = ("", "ok", "legacy_ok")
 # `unified_bench.load_rows` SYNTHESISES a status for rows stored before the taxonomy existed:
 # `legacy_ok` if there is a build/execution signal, else `missing`. `legacy_ok` is unambiguous —
 # nothing else emits it — but `missing` is ALSO a real status that measure.py:245 assigns, so the
-# value alone cannot say which produced it. load_rows therefore stamps this marker on the row's
-# meta, and resolve_status treats a marked row as un-measured. Without it, a backfilled `missing`
+# value alone cannot say which produced it. load_rows therefore sets `row.status_backfilled`, and
+# resolve_status treats a marked row as un-measured. Without it, a backfilled `missing`
 # reads as measured: on the 100-row acceptance corpus that under-reported n_status_derived as
 # 48/44 instead of 50/50 on a corpus with NO stored status at all, and left unit8co/darts labelled
 # `missing` when its env harvested fine and the row's own meta says measure_error.
-STATUS_BACKFILL_MARKER = "_status_backfilled"
+# It is a MeasureRow FIELD, not a meta key: `meta` holds producer-written bench_meta.json, so a
+# producer emitting the same key would make a genuinely-measured row look backfilled.
 
 
 def error_surface(row) -> tuple:
@@ -76,7 +77,7 @@ def resolve_status(row) -> tuple:
     """(status, was_derived). A measured status always wins — but a status that `load_rows`
     invented is not a measured one, however real its name looks (see STATUS_BACKFILL_MARKER)."""
     s = getattr(row, "status", "") or ""
-    if s in _ALREADY_MEASURED or (row.meta or {}).get(STATUS_BACKFILL_MARKER):
+    if s in _ALREADY_MEASURED or getattr(row, "status_backfilled", False):
         return legacy_status(row), True
     return s, False
 

@@ -39,7 +39,7 @@ def test_load_rows_ignores_unknown_fields_from_a_newer_checkout(tmp_path):
 def test_load_rows_marks_a_status_it_backfilled(tmp_path):
     # A row with no build/execute signal is backfilled to "missing" — indistinguishable by value
     # from a measured "missing", so load_rows stamps the marker and resolve_status honours it.
-    from bench.verdict import STATUS_BACKFILL_MARKER, resolve_status
+    from bench.verdict import resolve_status
     _write(str(tmp_path), "baseline", "o/1", build_ok=False, executed=False, collect_rc=None,
            collect_clean=False, env_status="missing")
     p = os.path.join(str(tmp_path), "baseline", "o", "1", "row.json")
@@ -47,7 +47,7 @@ def test_load_rows_marks_a_status_it_backfilled(tmp_path):
 
     row = load_rows(str(tmp_path))["baseline"][0]
     assert row.status == "missing"                       # existing backfill, unchanged
-    assert row.meta.get(STATUS_BACKFILL_MARKER) is True   # ...but marked as invented
+    assert row.status_backfilled is True                  # ...but marked as invented
     assert resolve_status(row)[1] is True                 # ...so it counts as derived
 
 
@@ -119,6 +119,24 @@ def test_bad_delta_fails_before_ANY_measuring_in_the_full_path(tmp_path, monkeyp
                "--delta", "baseline:nope"])
     assert rc == 2
     assert os.listdir(str(tmp_path)) == []
+
+
+def test_delta_may_name_an_arm_measured_EARLIER_not_in_this_harvest(tmp_path):
+    # run_one resumes, so measuring one new arm while --delta compares two already-measured arms
+    # is a valid invocation. An early check against --harvest alone would reject it outright.
+    import bench.unified_bench as ub
+    _write(str(tmp_path), "baseline", "o/1")
+    _write(str(tmp_path), "repaired", "o/1")
+    monkey = []
+    ub_discover = ub.discover
+    try:
+        ub.discover = lambda *a, **k: monkey.append(1) or []
+        rc = main(["--out", str(tmp_path), "--harvest", "newarm=/nonexistent",
+                   "--delta", "baseline:repaired"])
+    finally:
+        ub.discover = ub_discover
+    assert monkey == [1], "early --delta check rejected a valid resumed run"
+    assert rc == 0 and os.path.isfile(os.path.join(str(tmp_path), "errors.json"))
 
 
 def test_malformed_delta_is_rejected(tmp_path):
