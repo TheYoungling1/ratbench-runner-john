@@ -224,6 +224,48 @@ def _free_disk_gb() -> float:
         return 999.0  # unknown → don't gate
 
 
+def _merged_meta(
+    meta_path: str,
+    out: dict,
+    start_ts: float,
+    end_ts: float,
+    pid: Optional[int] = None,
+) -> dict:
+    """The _meta.json payload for a run that produced NOTHING, preserving what the producer wrote.
+
+    _ProducerModel.predict() calls write_env_packet unconditionally, so a FAILED produce has already
+    written an authoritative _meta.json{status:"error", cost_usd, tokens...}. Only success writes
+    run_produced.json, so the caller's marker check does not protect this path — and overwriting the
+    file with _collect_meta (no `status`, no `cost_usd`) is not merely lossy bookkeeping. Without
+    `status`, harvest.py resolves the packet as `legacy_missing`, and metrics.py DROPS it from `n`:
+    the repo disappears from the denominator and its spend disappears from total_cost_usd. Measured
+    on node-full50: n read 48 not 50, and $43.44 not the true $47.48.
+
+    Merge direction: the producer's dict WINS. It describes what actually ran (which workbench,
+    which commit, what it cost); `out` carries a base_image/head_sha that can be stale, and no cost
+    at all — the cost exists only in the file, which is why this reads rather than threads values
+    through. Only the wall-clock/host keys _collect_meta uniquely knows are layered on top.
+
+    Degrades to plain _collect_meta when the file is absent (a model that never called
+    write_env_packet), unparseable, or not a dict — bookkeeping must never abort a run.
+    """
+    base = _collect_meta(out, start_ts, end_ts, pid)
+    try:
+        with open(meta_path, encoding="utf-8") as fh:
+            produced = json.load(fh)
+        if not isinstance(produced, dict):      # a bare list parses fine, then .get explodes
+            return base
+    except Exception:                           # noqa: BLE001 — missing/corrupt/unreadable
+        return base
+    merged = dict(produced)
+    for k, v in base.items():
+        # Producer keys win; only fill what it did not record. `failure_reason` is normally absent
+        # from the producer packet, so this is where _collect_meta's diagnosis lands.
+        if merged.get(k) is None:
+            merged[k] = v
+    return merged
+
+
 def _collect_meta(
     out: dict,
     start_ts: float,
@@ -394,7 +436,10 @@ def _run_one(
               flush=True)
     else:
         try:
-            meta = _collect_meta(out, start_ts, end_ts)
+            # MERGE, never overwrite: a produce FAILURE also has a producer-written _meta.json (
+            # write_env_packet runs unconditionally), and clobbering its `status`/`cost_usd` drops
+            # the repo out of metrics.py's denominator entirely. See _merged_meta.
+            meta = _merged_meta(meta_path, out, start_ts, end_ts)
             json.dump(meta, open(meta_path, "w"), indent=2)
         except Exception as exc:
             print(f"[warn  ] {full_name} — could not write _meta.json: {exc}", flush=True)
