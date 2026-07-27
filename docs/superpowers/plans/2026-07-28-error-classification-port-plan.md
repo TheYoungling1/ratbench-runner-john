@@ -616,6 +616,25 @@ git commit -m "feat(bench): category derivation over (token, group, repo_topleve
 
 **This is the task where the port could go wrong.** `legacy_status` must emit **only names already in `schema.py:40-42`**. If you find yourself writing `no_env` or `setup_failed`, stop — that is the fork's vocabulary and the whole point of this port is to not have two.
 
+> **It DID go wrong here, in a way no unit test caught.** The code below originally read
+> `if row.env_status != "ok"` in both `error_surface` and `legacy_status`. That is the fork's
+> predicate, and this repo does not say `"ok"`: `measure.py:19` defines
+> `_MEASURABLE = ("ok", "legacy_ok", "produced")`, and `measure.py:245` tests membership in
+> **that set** before deciding `missing`. The real 50-row fixture at
+> `bench/tests/bench/data/py50_rows.json` is **45 `produced` / 5 `legacy_missing`** — zero `"ok"`.
+> So the ported predicate scored **all 50 rows** `("unobserved", "no_env")`, 43 of them with a
+> successful build, and made `legacy_status` return `missing` for every single one.
+>
+> Every unit test in Task 4 still passed, because they all build rows with `env_status="ok"`.
+> Only running against real rows exposed it. That is why
+> `test_the_real_corpus_is_not_uniformly_unobserved` exists — a canary over the fixture — and why
+> `_MEASURABLE` is **imported** from `bench.measure` rather than re-declared. A local copy is
+> exactly what lets this drift back in.
+>
+> The same review round found `status_flags` fabricating flags from dataclass defaults. See the
+> note on that function below. Both are fixed in the Task 4 follow-up commit; do not revert
+> either.
+
 - [ ] **Step 1: Write the failing test**
 
 ```python
@@ -784,7 +803,8 @@ from __future__ import annotations
 
 import re
 
-from bench.schema import RepoVerdict
+from bench.measure import _MEASURABLE   # ("ok", "legacy_ok", "produced") — measure.py:19.
+from bench.schema import RepoVerdict    # IMPORTED, never re-declared. See the warning above.
 
 # Infra is identified from the stored exception repr (unified_bench.py:32). This is a string match
 # on the ONE branch that empties a denominator, so it is provisional: the count must be reported,
@@ -808,7 +828,7 @@ def error_surface(row) -> tuple:
     """(surface, reason). POSITIVE structural test: did collection produce tests? A per-module
     failure still collects the other modules; a startup abort collects nothing. This is NOT
     `collect_error` — measure.py:346 sets that whether or not tests were collected."""
-    if row.env_status != "ok":
+    if row.env_status not in _MEASURABLE:
         return "unobserved", "no_env"
     if not row.build_ok:
         return "unobserved", "build_failed"
@@ -821,7 +841,7 @@ def legacy_status(row) -> str:
     """Backfill for rows measured before `status` existed. Covers 7 of 12 statuses: non_conforming/
     empty_testbed/gate_fail are assigned at gates BEFORE measure.py:344 from inputs that are never
     persisted, so they are unreachable here (spec 3.1.1)."""
-    if row.env_status != "ok":
+    if row.env_status not in _MEASURABLE:
         return "missing"
     if _INFRA.search(str((row.meta or {}).get("error") or "")):
         return "measure_error"
@@ -853,14 +873,23 @@ def bucket(status: str, pass_rate: float, threshold: float = DEFAULT_THRESHOLD) 
 
 
 def status_flags(row) -> tuple:
-    """First-match-wins is what makes buckets sum to n, but it is lossy. Flags carry the rest."""
+    """First-match-wins is what makes buckets sum to n, but it is lossy. Flags carry the rest.
+
+    EVERY FLAG NEEDS EVIDENCE THAT ITS STAGE ACTUALLY RAN. `build_ok` is False and
+    `collect_clean` is False on a row that never reached those stages — the first because
+    measure.py:245 short-circuits before docker.build, the second because it is simply the
+    dataclass default. Flagging off the raw booleans invents conditions: on the real 50-row
+    fixture, all 7 rows with `collect_rc is None` (collect never ran) were flagged
+    `collect_error`. A fabricated flag is worse than a missing one — it inflates the count of
+    repos said to have hit a condition, and flags exist precisely to be read as evidence.
+    """
     flags = []
-    if row.timed_out:
+    if row.timed_out:                       # explicit bool, only ever set True by an observation
         flags.append("timed_out")
-    if not row.build_ok:
-        flags.append("build_fail")
-    if not row.collect_clean:
-        flags.append("collect_error")
+    if not row.build_ok and row.env_status in _MEASURABLE:
+        flags.append("build_fail")          # ...the env was buildable, so the build really failed
+    if not row.collect_clean and row.collect_rc is not None:
+        flags.append("collect_error")       # collect_rc is None until collect actually runs
     chosen, _ = resolve_status(row)
     return tuple(f for f in flags if f != chosen)
 

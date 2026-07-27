@@ -3,7 +3,16 @@ from __future__ import annotations
 
 import re
 
+from bench.measure import _MEASURABLE
 from bench.schema import RepoVerdict
+
+# `_MEASURABLE` is IMPORTED, never re-declared. It is ("ok", "legacy_ok", "produced") — the
+# harvest statuses whose env has a rebuildable artifact (measure.py:19), and the exact set
+# measure.py:245 tests before deciding `missing`. The fork this layer was ported from wrote
+# `env_status != "ok"`, which on this repo's rows is catastrophically wrong: the real corpus is
+# 45/50 `produced`, so every healthy row scored ("unobserved", "no_env") and legacy_status
+# returned `missing` for all of them. A duplicated copy of this tuple is what would let that
+# drift back in, so it is a single source of truth.
 
 # Infra is identified from the stored exception repr (unified_bench.py:32). This is a string match
 # on the ONE branch that empties a denominator, so it is provisional: the count must be reported,
@@ -27,7 +36,7 @@ def error_surface(row) -> tuple:
     """(surface, reason). POSITIVE structural test: did collection produce tests? A per-module
     failure still collects the other modules; a startup abort collects nothing. This is NOT
     `collect_error` — measure.py:346 sets that whether or not tests were collected."""
-    if row.env_status != "ok":
+    if row.env_status not in _MEASURABLE:
         return "unobserved", "no_env"
     if not row.build_ok:
         return "unobserved", "build_failed"
@@ -40,7 +49,7 @@ def legacy_status(row) -> str:
     """Backfill for rows measured before `status` existed. Covers 7 of 12 statuses: non_conforming/
     empty_testbed/gate_fail are assigned at gates BEFORE measure.py:344 from inputs that are never
     persisted, so they are unreachable here (spec 3.1.1)."""
-    if row.env_status != "ok":
+    if row.env_status not in _MEASURABLE:
         return "missing"
     if _INFRA.search(str((row.meta or {}).get("error") or "")):
         return "measure_error"
@@ -72,14 +81,23 @@ def bucket(status: str, pass_rate: float, threshold: float = DEFAULT_THRESHOLD) 
 
 
 def status_flags(row) -> tuple:
-    """First-match-wins is what makes buckets sum to n, but it is lossy. Flags carry the rest."""
+    """First-match-wins is what makes buckets sum to n, but it is lossy. Flags carry the rest.
+
+    EVERY FLAG NEEDS EVIDENCE THAT ITS STAGE ACTUALLY RAN. `build_ok` is False and
+    `collect_clean` is False on a row that never reached those stages — the first because
+    measure.py:245 short-circuits before docker.build, the second because it is simply the
+    dataclass default. Flagging off the raw booleans invents conditions: on the real 50-row
+    fixture, all 7 rows with `collect_rc is None` (collect never ran) were flagged
+    `collect_error`. A fabricated flag is worse than a missing one — it inflates the count of
+    repos said to have hit a condition, and flags exist precisely to be read as evidence.
+    """
     flags = []
-    if row.timed_out:
+    if row.timed_out:                       # explicit bool, only ever set True by an observation
         flags.append("timed_out")
-    if not row.build_ok:
-        flags.append("build_fail")
-    if not row.collect_clean:
-        flags.append("collect_error")
+    if not row.build_ok and row.env_status in _MEASURABLE:
+        flags.append("build_fail")          # ...the env was buildable, so the build really failed
+    if not row.collect_clean and row.collect_rc is not None:
+        flags.append("collect_error")       # collect_rc is None until collect actually runs
     chosen, _ = resolve_status(row)
     return tuple(f for f in flags if f != chosen)
 
