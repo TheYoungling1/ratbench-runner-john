@@ -4,6 +4,7 @@
 # `docker system prune` silently removes it. Without it the ccdf producer's anti-vanish guard
 # turns all 50 repos into status="error" — which reads on disk as a completed run scoring zero.
 # The preflight converts that silent zero into a working run or one loud failure.
+import os
 import subprocess
 
 import pytest
@@ -17,9 +18,11 @@ class _FakeRun:
     def __init__(self, *codes):
         self.codes = list(codes)
         self.calls = []
+        self.kwargs = []
 
     def __call__(self, argv, **kw):
         self.calls.append(argv)
+        self.kwargs.append(kw)          # recorded so tests can assert HOW docker was invoked
         rc = self.codes.pop(0) if self.codes else 0
         return subprocess.CompletedProcess(argv, rc)
 
@@ -45,6 +48,19 @@ def test_builds_when_image_missing(tmp_path):
     assert build[:2] == ["docker", "build"]
     assert "claude-runner:latest" in build
     assert any(a.endswith("docker/claude-runner.Dockerfile") for a in build)
+    # The build CONTEXT is the docker/ dir, not the repo root (the Dockerfile has no COPY, so a
+    # whole-repo context would just ship megabytes to the daemon for nothing).
+    assert build[-1] == os.path.join(str(tmp_path), "docker")
+
+
+def test_build_output_is_not_captured_so_the_failure_is_actually_loud(tmp_path):
+    # The whole point of the preflight is a LOUD failure. `inspect` is quiet (capture_output),
+    # but the build must stream to the terminal — capturing it would silently defeat that while
+    # still passing every other test here.
+    fake = _FakeRun(1, 0)
+    _ensure_claude_runner("claudecode-dockerfile", repo_root=str(tmp_path), runner=fake)
+    assert fake.kwargs[0].get("capture_output") is True     # inspect: quiet
+    assert not fake.kwargs[1].get("capture_output")         # build: streams
 
 
 def test_build_failure_aborts_the_run(tmp_path):
