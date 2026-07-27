@@ -8,6 +8,7 @@
 # NO docker build, NO pytest, NO scoring — bench/ rebuilds and scores from the packet.
 from __future__ import annotations
 
+import os
 import time
 
 from producers.base import ProduceContext, ProducedEnv, ensure_rat_on_path, inject_clone_pin
@@ -23,6 +24,37 @@ def _ensure_pytest(dockerfile: str) -> str:
     if re.search(r"\bpytest\b", dockerfile):
         return dockerfile
     return dockerfile.rstrip() + "\nRUN pip install --no-cache-dir pytest\n"
+
+
+def _persist_stream(out_dir: str, stdout: str, stderr: str) -> dict:
+    """Write the agent's raw event stream + a readable action log under the repo's packet dir,
+    and return the economy dict `write_env_packet` consumes.
+
+    This stream is the ONLY record of what the ccdf agent cost and did — cost, turn count and
+    trajectory cannot be reconstructed from any other artifact after the run, so it is written
+    at produce time. Persistence is best-effort: an IO failure must never fail the produce (the
+    Dockerfile is the deliverable, design §1), so the parsed numbers are returned regardless.
+    """
+    from producers._claudecode_helpers import summarize_stream   # stdlib-only, no RAT tree
+    info = summarize_stream(stdout)
+    try:
+        os.makedirs(out_dir, exist_ok=True)
+        with open(os.path.join(out_dir, "claude_stream.jsonl"), "w") as fh:
+            fh.write(stdout or "")
+        with open(os.path.join(out_dir, "claude_actions.log"), "w") as fh:
+            fh.write(info.get("actions") or "(no parsed actions)")
+        if stderr:
+            with open(os.path.join(out_dir, "claude_stderr.txt"), "w") as fh:
+                fh.write(stderr)
+    except OSError:
+        pass
+    return {
+        "tokens_in": info["tokens_in"], "tokens_out": info["tokens_out"],
+        "total_tokens": info["total_tokens"], "llm_calls": info["llm_calls"],
+        "turns_used": info["turns"], "cost_usd": info["cost_usd"],
+        "tool_calls": info["tool_calls"], "agent_is_error": info["is_error"],
+        "rate_limited": info["rate_limited"],
+    }
 
 
 def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str | None) -> dict:
@@ -91,9 +123,14 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
             "--output-format", "stream-json", "--verbose",
         ]
         try:
-            subprocess.run(claude_cmd, capture_output=True, text=True, timeout=ctx.timeout)
-        except subprocess.TimeoutExpired:
-            pass   # partial work may still have written Dockerfile.gen; try to pull it below
+            proc = subprocess.run(claude_cmd, capture_output=True, text=True,
+                                  timeout=ctx.timeout)
+            stdout, stderr = _as_text(proc.stdout), _as_text(proc.stderr)
+        except subprocess.TimeoutExpired as exc:
+            # Partial work may still have written Dockerfile.gen; the partial stream is also the
+            # only record of what the agent did before the wall, so keep both.
+            stdout, stderr = _as_text(exc.stdout), _as_text(exc.stderr)
+        economy = _persist_stream(out_dir, stdout, stderr)
 
         try:
             subprocess.run(["docker", "cp", f"{container}:{DOCKERFILE_GEN_PATH}", gen_dst],
@@ -102,7 +139,7 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
                 text = fh.read().strip()
         except (subprocess.CalledProcessError, subprocess.TimeoutExpired, OSError):
             text = ""
-        return {"dockerfile": text or None, "base_image": base_image, "economy": {}}
+        return {"dockerfile": text or None, "base_image": base_image, "economy": economy}
     finally:
         subprocess.run(f"docker rm -f {container} >/dev/null 2>&1", shell=True)
 

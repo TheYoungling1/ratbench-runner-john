@@ -87,3 +87,63 @@ def test_produce_no_commit_leaves_clone_unpinned(tmp_path):
 def test_producer_is_registered():
     from producers import PRODUCERS
     assert PRODUCERS["claudecode-dockerfile"] is ClaudeCodeDockerfileProducer
+
+
+# ── telemetry: the Claude Code stream is the ONLY record of cost/turns/trajectory ──────────
+import json
+
+from producers.claudecode_dockerfile import _persist_stream
+
+_TELEMETRY_STREAM = "\n".join(json.dumps(o) for o in [
+    {"type": "assistant", "message": {"content": [
+        {"type": "tool_use", "name": "Bash", "input": {"command": "pip install -e ."}}]}},
+    {"type": "result", "subtype": "success", "is_error": False, "num_turns": 7,
+     "total_cost_usd": 1.25, "stop_reason": "end_turn",
+     "usage": {"input_tokens": 100, "output_tokens": 20,
+               "cache_creation_input_tokens": 30, "cache_read_input_tokens": 50}},
+])
+
+
+def test_persist_stream_writes_durable_artifacts(tmp_path):
+    out_dir = str(tmp_path / "output" / "o" / "r")
+    _persist_stream(out_dir, _TELEMETRY_STREAM, "some stderr")
+    assert (tmp_path / "output" / "o" / "r" / "claude_stream.jsonl").read_text() \
+        == _TELEMETRY_STREAM
+    assert "Bash" in (tmp_path / "output" / "o" / "r" / "claude_actions.log").read_text()
+    assert (tmp_path / "output" / "o" / "r" / "claude_stderr.txt").read_text() == "some stderr"
+
+
+def test_persist_stream_returns_economy_in_write_env_packet_keys(tmp_path):
+    econ = _persist_stream(str(tmp_path), _TELEMETRY_STREAM, "")
+    assert econ["tokens_in"] == 180          # 100 + 30 + 50
+    assert econ["tokens_out"] == 20
+    assert econ["total_tokens"] == 200
+    assert econ["turns_used"] == 7
+    assert econ["cost_usd"] == 1.25
+    assert econ["llm_calls"] == 1
+    assert econ["tool_calls"] == 1
+
+
+def test_persist_stream_never_raises_on_unwritable_dir(tmp_path):
+    # Anti-vanish (design §1): the Dockerfile is the deliverable. A telemetry IO failure must
+    # never fail the produce, so persistence is best-effort and still returns the parsed numbers.
+    blocker = tmp_path / "blocked"
+    blocker.write_text("i am a file, not a directory")
+    econ = _persist_stream(str(blocker / "nested"), _TELEMETRY_STREAM, "")
+    assert econ["cost_usd"] == 1.25
+
+
+def test_producer_passes_economy_through_to_produced_env(tmp_path):
+    def _stub(repo, ctx, **kw):
+        return {"dockerfile": "FROM python:3.11\nRUN git clone x /testbed\nRUN pip install pytest",
+                "base_image": "python:3.11",
+                "economy": {"tokens_in": 180, "tokens_out": 20, "turns_used": 7,
+                            "cost_usd": 1.25, "llm_calls": 1}}
+
+    env = ClaudeCodeDockerfileProducer(runner=_stub).produce(
+        RepoSpec("o/r", "https://github.com/o/r"), _ctx(tmp_path))
+    assert env.status == "produced"
+    assert env.economy["turns_used"] == 7
+    assert env.economy["cost_usd"] == 1.25
+    assert env.economy["tokens_in"] == 180
+    assert env.economy["produce_s"] is not None      # still stamped by produce()
