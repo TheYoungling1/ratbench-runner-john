@@ -35,4 +35,5 @@ def test_no_cost_anywhere_reports_none_not_zero():
     assert m["total_cost_usd"] is None
     assert m["mean_cost_usd"] is None
     assert m["cost_per_ebsr"] is None
+    assert m["cost_per_real_success"] is None
     assert m["n_cost_reporting"] == 0
