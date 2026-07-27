@@ -178,12 +178,76 @@ NODE_PROFILE = LangProfile(
     test_runner=None,
 )
 
+_RUST_PROMPT = (
+    "You are configuring a Rust repository at /testbed so its EXISTING test suite can run, and "
+    "then writing a Dockerfile that reproduces your setup from scratch.\n\n"
+    "YOU GET EXACTLY ONE TURN. Nothing will re-invoke you, no scheduled wakeup will ever fire, "
+    "and any backgrounded or detached process is killed the moment you stop. Run every command in "
+    "the FOREGROUND and wait for it to finish. Never end your turn intending to resume later — if "
+    "you are running short on budget, write the best Dockerfile you can to {gen_path} NOW instead "
+    "of deferring.\n\n"
+    "The grader rebuilds your Dockerfile from a clean base and then, inside the fresh image, runs "
+    "EXACTLY this gate at /testbed:\n"
+    "    export PATH=/usr/local/cargo/bin:$PATH && cargo test --no-run\n"
+    "If that gate fails, NO tests are run at all and the repo scores ZERO. If it passes, the "
+    "grader runs the suite with `cargo nextest run --profile ci`.\n\n"
+    "Two things about that gate decide whether your Dockerfile works:\n"
+    "  - It runs under a LOGIN shell, which resets PATH. The grader prepends exactly one directory, "
+    "/usr/local/cargo/bin, and relies on the rest of the default profile PATH for everything else. "
+    "So `cargo` must be reachable at /usr/local/cargo/bin or on that default PATH — an `ENV PATH` "
+    "in your Dockerfile does NOT survive, because the login shell overwrites it. The base image "
+    "already satisfies this; if you install another toolchain, symlink its `cargo` into "
+    "/usr/local/bin rather than editing PATH.\n"
+    "  - It compiles from scratch in a container that has never built this crate, and it runs under "
+    "a time limit. Nothing carries over from your container, so a crate that compiles only at gate "
+    "time can exhaust that limit and score ZERO on a repo that was actually fine. Compiling in the "
+    "Dockerfile is how you avoid that: end it with `RUN cargo test --no-run` so the crate registry, "
+    "the pinned toolchain and ./target are baked into the image. That command COMPILES the tests "
+    "without executing any, which is exactly what is wanted — it is not the forbidden step.\n\n"
+    "So, first, in THIS container: install any system packages the crate needs to build "
+    "(`sudo apt-get install -y ...` — pkg-config, libssl-dev and cmake are already present), then "
+    "run `cargo test --no-run` at /testbed until it exits 0. If the repo has a rust-toolchain.toml "
+    "or rust-toolchain file, LEAVE IT ALONE: rustup reads it and installs the pinned toolchain "
+    "automatically. The gate runs at the repo ROOT. If this repository has no Cargo.toml at the "
+    "root, the gate cannot run at all — add a root workspace manifest covering the real crates as "
+    "part of your setup, and re-encode it in the Dockerfile. Do NOT create or edit "
+    ".config/nextest.toml — the grader writes its own. You may edit configuration files. DO NOT "
+    "modify, add, or delete any test files. DO NOT execute the test suite (running the gate command "
+    "above to check your work is fine).\n\n"
+    "Then write a self-contained Dockerfile to {gen_path} that reproduces this environment FROM A "
+    "CLEAN BASE. It MUST:\n"
+    "  - start `FROM {base}`;\n"
+    "  - `RUN git clone https://github.com/{full_name} /testbed` and `WORKDIR /testbed` (do NOT "
+    "rely on any files from this container — the build starts empty, and the grader requires "
+    "/testbed to still be a git worktree);\n"
+    "  - install the SAME system packages you installed, as RUN steps. The build runs as ROOT, so "
+    "DROP every `sudo` prefix (use `apt-get install -y ...`);\n"
+    "  - re-encode any edits you made to repo files as explicit RUN steps (e.g. `RUN sed -i ...` "
+    "or a heredoc), since the clone is pristine;\n"
+    "  - end with `RUN cargo test --no-run` to bake the build;\n"
+    "  - NOT contain `cargo nextest run`, `cargo test` WITHOUT `--no-run`, or any other command "
+    "that EXECUTES tests.\n"
+    "When the Dockerfile is written, stop.\n"
+)
+
+RUST_PROFILE = LangProfile(
+    key="rust",
+    default_base="rust:1",
+    prompt_template=_RUST_PROMPT,
+    # rust:1, not -slim/alpine: rust.py hardcodes PATH=/usr/local/cargo/bin (the full image's
+    # layout) and its ensure_cmd curls a prebuilt cargo-nextest, so curl must ship in the base.
+    workbench="claude-runner-rust:latest",
+    # None: RustLanguage.ensure_cmd installs cargo-nextest at measure time.
+    test_runner=None,
+)
+
 # Keys mirror bench.languages._REGISTRY exactly (see the note above); the aliases must resolve to
 # the same language on both sides of the seam or the prompt describes a grader that never runs.
 _PROFILES = {
     "python": PYTHON_PROFILE,
     "nodejs": NODE_PROFILE, "node": NODE_PROFILE,
     "javascript": NODE_PROFILE, "typescript": NODE_PROFILE,
+    "rust": RUST_PROFILE,
 }
 
 

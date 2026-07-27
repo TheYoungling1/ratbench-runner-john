@@ -30,7 +30,9 @@ def test_get_profile_is_case_insensitive():
 def test_get_profile_defaults_to_python_for_unknown_none_and_empty():
     # Mirrors bench.languages.get_language: produce and measure must agree on what an
     # unrecognized language means, or the seam disagrees with itself.
-    for value in ("rust", "cobol", "", None):
+    # "rust" used to be listed here; it now has a real profile, so the stand-in for "a language
+    # bench/ can score but the producer has no prompt for" is `go` (see _NO_PROFILE_YET below).
+    for value in ("go", "cobol", "", None):
         assert get_profile(value) is PYTHON_PROFILE, value
 
 
@@ -142,7 +144,7 @@ def test_language_default_base_reaches_the_prompt():
 # repo — harmless while no dataset uses them, wrong the day one does. Listing them explicitly makes
 # the parity check total in BOTH directions: a new measure alias or a new producer profile fails
 # this test until the other side is updated.
-_NO_PROFILE_YET = {"golang", "go", "rust", "java"}
+_NO_PROFILE_YET = {"golang", "go", "java"}
 
 
 def test_profile_aliases_match_the_measure_registry():
@@ -180,3 +182,71 @@ def test_unset_or_empty_workbench_env_falls_to_the_profile():
     from producers._claudecode_helpers import resolve_workbench
     for env in (None, ""):
         assert resolve_workbench(PYTHON_PROFILE, env) == "claude-runner:latest"
+
+
+# ── rust ────────────────────────────────────────────────────────────────────────────────────
+
+def _rust_prompt(full_name="o/r"):
+    from producers._claudecode_helpers import RUST_PROFILE
+    return build_prompt(full_name, resolve_base(RUST_PROFILE, None), RUST_PROFILE)
+
+
+def test_rust_profile_shape():
+    from producers._claudecode_helpers import RUST_PROFILE
+    assert RUST_PROFILE.key == "rust"
+    assert RUST_PROFILE.default_base == "rust:1"
+    assert RUST_PROFILE.workbench == "claude-runner-rust:latest"
+    # None, NOT a cargo-nextest install: RustLanguage.ensure_cmd curls a prebuilt nextest at
+    # measure time, so an install line in the emitted Dockerfile would be dead weight.
+    assert RUST_PROFILE.test_runner is None
+
+
+def test_rust_prompt_names_the_gate_and_its_consequence():
+    # RustLanguage.short_circuit_gate is True: if the test target does not compile, nextest never
+    # runs and the repo scores zero. The agent must know which command it is being scored on.
+    prompt = _rust_prompt()
+    assert "cargo test --no-run" in prompt
+    assert "ZERO" in prompt
+    assert "cargo nextest run" in prompt          # what runs after the gate passes
+
+
+def test_rust_prompt_pins_the_cargo_location():
+    # rust.py hardcodes `export PATH=/usr/local/cargo/bin:$PATH` with no env indirection, and the
+    # grader's `bash -l` resets PATH from /etc/profile — so an agent that relocates CARGO_HOME and
+    # sets ENV PATH gets that PATH silently discarded and the gate cannot find cargo.
+    prompt = _rust_prompt()
+    assert "/usr/local/cargo/bin" in prompt
+    assert "ENV PATH" in prompt                   # names the trap explicitly
+
+
+def test_rust_prompt_asks_for_the_compile_and_gives_the_real_reason():
+    # The gate re-compiles from scratch in a fresh container. Nothing in the harness INSPECTS the
+    # Dockerfile for a compile step, so the prompt must not claim the grader requires one — the
+    # actual reason is the exec timeout (docker_client.exec returns rc 124 on expiry, and the
+    # scheduler applies a per-child hard wall). Overstating it as a grader rule teaches the agent
+    # a false model of the contract, which is how prompts start lying about everything else.
+    prompt = _rust_prompt()
+    assert "RUN cargo test --no-run" in prompt
+    assert "time limit" in prompt
+    assert "COMPILES the tests without executing" in prompt
+    assert "REQUIRED work your Dockerfile must do" not in prompt
+
+
+def test_rust_prompt_warns_about_a_missing_root_manifest():
+    # `cargo test --no-run` runs at the ROOT. A repo whose crates all live in subdirectories with
+    # no root Cargo.toml cannot be gated at all — and that is a property of the repo, not something
+    # the agent caused by moving files.
+    prompt = _rust_prompt()
+    assert "no Cargo.toml at the" in prompt
+
+
+def test_rust_prompt_states_the_one_turn_constraint():
+    prompt = _rust_prompt()
+    assert "EXACTLY ONE TURN" in prompt
+    assert "FOREGROUND" in prompt
+
+
+def test_rust_prompt_never_mentions_python_or_node_tooling():
+    prompt = _rust_prompt()
+    for token in ("pip", "pytest", "npm ci", "package.json"):
+        assert token not in prompt
