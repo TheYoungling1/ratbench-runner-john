@@ -35,8 +35,14 @@ def _ensure_test_runner(dockerfile: str, language: str) -> str:
     return dockerfile.rstrip() + "\n" + install + "\n"
 
 
-def _capture_claude_stream(claude_cmd: list, timeout) -> tuple:
+def _capture_claude_stream(claude_cmd: list, timeout, stdin_text: str | None = None) -> tuple:
     """Run the Claude Code CLI and return its ``(stdout, stderr)`` as text.
+
+    ``stdin_text`` carries the PROMPT. It is fed on stdin rather than as an argv operand because
+    the argv is world-readable inside the container: with ``claude -p "<prompt>"`` the agent's own
+    process listed as ``claude -p You are configuring a Rust repository at /testbed ...``, so an
+    agent clearing a hung build with ``pkill -f "cargo test --no-run"`` — a string its own prompt
+    contains — matched and killed itself. See the tests for the measured casualties.
 
     The timeout branch is the COMMON case — the agent is routinely killed by ``--max-budget-usd``
     or ``ctx.timeout`` — and it is subtle: on ``TimeoutExpired`` CPython populates
@@ -47,7 +53,8 @@ def _capture_claude_stream(claude_cmd: list, timeout) -> tuple:
     import subprocess
     from producers._claudecode_helpers import _as_text
     try:
-        proc = subprocess.run(claude_cmd, capture_output=True, text=True, timeout=timeout)
+        proc = subprocess.run(claude_cmd, capture_output=True, text=True, timeout=timeout,
+                              input=stdin_text)
         return _as_text(proc.stdout), _as_text(proc.stderr)
     except subprocess.TimeoutExpired as exc:
         # Partial work may still have written Dockerfile.gen; the partial stream is also the only
@@ -161,13 +168,17 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
 
         prompt = build_prompt(full_name, dockerfile_base, profile)
         max_budget = os.environ.get("CLAUDE_MAX_BUDGET_USD", "2.0")
+        # `-i` keeps stdin attached and `-p` is left flag-only, so the CLI reads the prompt from
+        # the pipe. The prompt must NOT be an argv operand: it would then appear in the container's
+        # process table, where the agent's own `pkill -f "<something the prompt says>"` matches and
+        # kills it. Measured on rust-full50-20260727-145029 — 3 of the first 12 repos died that way.
         claude_cmd = [
-            "docker", "exec", "-u", "agent", "-w", W, container,
-            "claude", "-p", prompt, "--permission-mode", "bypassPermissions",
+            "docker", "exec", "-i", "-u", "agent", "-w", W, container,
+            "claude", "-p", "--permission-mode", "bypassPermissions",
             "--max-budget-usd", str(max_budget), "--model", _normalize_model(llm),
             "--output-format", "stream-json", "--verbose",
         ]
-        stdout, stderr = _capture_claude_stream(claude_cmd, ctx.timeout)
+        stdout, stderr = _capture_claude_stream(claude_cmd, ctx.timeout, prompt)
 
         try:
             subprocess.run(["docker", "cp", f"{container}:{DOCKERFILE_GEN_PATH}", gen_dst],

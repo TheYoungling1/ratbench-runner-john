@@ -240,6 +240,120 @@ def test_capture_handles_none_output_from_timeout(monkeypatch):
     assert mod._capture_claude_stream(["claude"], 1) == ("", "")
 
 
+# ── the prompt must NOT be in the agent's own command line ────────────────────────────────
+#
+# MEASURED on rust-full50-20260727-145029: 3 of the first 12 repos died mid-run. Every one ended
+# on the agent running `pkill -f "cargo test --no-run"` to clear a hung compile. The producer used
+# to pass the prompt as an argv (`claude -p "<prompt>"`), and the Rust prompt contains the literal
+# string `cargo test --no-run` four times — so the pattern matched the agent's OWN process. Read
+# straight off a live container: `pgrep -af "cargo test --no-run"` returned
+#     19 claude -p You are configuring a Rust repository at /testbed ...
+# The agent killed itself. Casualties were risingwave and hyperswitch (no Dockerfile.gen ->
+# status=error) and zed (Dockerfile already written -> status=produced but every economy field
+# null, because the CLI never emitted its final type=="result" event).
+#
+# Feeding the prompt on stdin removes the whole class: nothing repo- or language-specific is left
+# in the process table for a `pkill -f` to hit. The prompt BYTES are unchanged, so this is a
+# transport fix, not a prompt change — python50/node50 stay comparable.
+
+class _Stop(Exception):
+    """Sentinel: unwind the live runner the moment the agent would have been invoked."""
+
+
+def _invoke_live_runner(monkeypatch, tmp_path, language="rust"):
+    """Drive the REAL `run_claudecode_dockerfile` with docker + the RAT tree stubbed out, and
+    return the `(claude_cmd, stdin_text)` it was about to hand the agent.
+
+    Worth the setup: the argv is built inside this function, so the injected-stub route the other
+    tests use (which replaces the whole runner) cannot see the defect this guards against."""
+    import subprocess as sp
+    import sys
+    import types
+
+    from producers import claudecode_dockerfile as mod
+
+    fake = types.ModuleType("libkit.command")
+    fake.download_repo = lambda *a, **k: None
+    fake.init_output_and_repo = lambda *a, **k: None
+    monkeypatch.setitem(sys.modules, "libkit.command", fake)
+    monkeypatch.setattr(mod, "ensure_rat_on_path", lambda: None)
+    monkeypatch.setenv("CLAUDE_CODE_OAUTH_TOKEN", "x")
+    monkeypatch.setattr(sp, "run",
+                        lambda *a, **k: sp.CompletedProcess(a[0] if a else [], 0, "", ""))
+
+    seen = {}
+
+    def _capture(cmd, timeout, stdin_text=None):
+        seen["cmd"], seen["stdin"] = cmd, stdin_text
+        raise _Stop
+
+    monkeypatch.setattr(mod, "_capture_claude_stream", _capture)
+    repo = RepoSpec("o/r", "https://github.com/o/r", language=language)   # frozen dataclass
+    try:
+        mod.run_claudecode_dockerfile(repo, _ctx(tmp_path), llm="claude-sonnet")
+    except _Stop:
+        pass
+    return seen["cmd"], seen["stdin"]
+
+
+def test_prompt_is_not_in_the_command_line(monkeypatch, tmp_path):
+    """The argv must not carry the prompt — that is what let `pkill -f` match the agent itself."""
+    cmd, stdin_text = _invoke_live_runner(monkeypatch, tmp_path)
+    argv = " ".join(cmd)
+    assert "cargo test --no-run" not in argv
+    assert "You are configuring" not in argv
+    # ...and the prompt still reaches the agent, just by the other door.
+    assert stdin_text and "You are configuring" in stdin_text
+    assert "cargo test --no-run" in stdin_text      # unchanged bytes, different transport
+
+
+def test_docker_exec_keeps_stdin_open(monkeypatch, tmp_path):
+    """`docker exec` without -i closes stdin, so the piped prompt would never arrive."""
+    cmd, _ = _invoke_live_runner(monkeypatch, tmp_path)
+    assert cmd[:2] == ["docker", "exec"]
+    assert "-i" in cmd[:cmd.index("claude")], "docker exec needs -i to attach stdin"
+    # -p must stay flag-only; a bare `-p` with no operand is what makes the CLI read stdin.
+    assert cmd[cmd.index("claude") + 1] == "-p"
+    assert cmd[cmd.index("claude") + 2].startswith("--")
+
+
+def test_no_language_prompt_leaks_into_argv(monkeypatch, tmp_path):
+    """Rust is where it was measured, but every prompt names the command the agent may pkill."""
+    for lang in ("python", "nodejs", "rust", "java"):
+        cmd, stdin_text = _invoke_live_runner(monkeypatch, tmp_path, language=lang)
+        assert "You are configuring" not in " ".join(cmd), lang
+        assert stdin_text, lang
+
+
+def test_capture_forwards_stdin_to_subprocess(monkeypatch):
+    import subprocess as sp
+
+    from producers import claudecode_dockerfile as mod
+
+    seen = {}
+
+    def _run(*a, **k):
+        seen.update(k)
+        return sp.CompletedProcess(["claude"], 0, stdout="out", stderr="err")
+
+    monkeypatch.setattr(sp, "run", _run)
+    assert mod._capture_claude_stream(["claude"], 10, "THE PROMPT") == ("out", "err")
+    assert seen["input"] == "THE PROMPT"
+
+
+def test_capture_timeout_still_decodes_when_stdin_used(monkeypatch):
+    """The timeout path is the common one; adding `input=` must not regress its byte decoding."""
+    import subprocess as sp
+
+    from producers import claudecode_dockerfile as mod
+
+    def _boom(*a, **k):
+        raise sp.TimeoutExpired(cmd=["claude"], timeout=1, output=b"partial", stderr=b"err")
+
+    monkeypatch.setattr(sp, "run", _boom)
+    assert mod._capture_claude_stream(["claude"], 1, "THE PROMPT") == ("partial", "err")
+
+
 # ── persistence must be TOTAL, not just OSError-tolerant ──────────────────────────────────
 
 def test_persist_stream_writes_utf8_regardless_of_ambient_locale(tmp_path):
