@@ -84,6 +84,24 @@ def test_warnings_are_not_events():
     assert extract_events([line], source="collect") == () and is_warning_only(line) is True
 
 
+def test_a_warning_message_quoting_an_exception_does_not_fabricate_an_event():
+    # measure.py:21 `_COLLECT_ERR` matches `(Error|Exception|Warning):`, so warning lines are
+    # deliberately captured into collect_errors and DO reach this function on real rows. Scanning
+    # past the warning label counted this line as a RuntimeError. Real pytest output, verbatim.
+    line = "<string>:2: UserWarning: RuntimeError: boom"
+    assert extract_events([line], source="collect") == ()
+    assert is_warning_only(line) is True
+
+
+def test_a_warning_label_does_not_shadow_an_error_that_came_first():
+    # the shadow is positional, not a blanket warning filter: an error line may legitimately
+    # mention a warning class in its message
+    ev = extract_events(
+        ["E   ImportError: cannot import name 'x' from 'p' (see DeprecationWarning)"],
+        source="collect")
+    assert len(ev) == 1 and ev[0].token == "ImportError" and ev[0].group == "x"
+
+
 def test_lines_without_a_token_are_skipped():
     assert extract_events(["2 tests collected, 1 error", ""], source="collect") == ()
 

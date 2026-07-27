@@ -13,10 +13,21 @@ _WARNING = re.compile(r"\b[A-Za-z_][\w.]*Warning\b")
 
 
 def _first_token(line: str) -> str | None:
-    """First dotted identifier used as an exception label. Warnings are NOT errors."""
+    """First dotted identifier used as an exception label. Warnings are NOT errors.
+
+    A Warning token SHADOWS the rest of the line rather than being skipped past. measure.py:21's
+    `_COLLECT_ERR` deliberately captures `...Warning:` lines into `collect_errors`, so warning
+    text reaches this function on real rows — and a warning whose MESSAGE quotes an exception
+    (`<string>:2: UserWarning: RuntimeError: boom`) would otherwise fabricate a counted
+    `RuntimeError` event out of a line that reported no error at all. Scanning past the warning
+    label is what made that possible; stopping at it is the fix. A genuine error line puts its
+    own token first (`E   ImportError: ... see DeprecationWarning`), so it is unaffected.
+    """
     for m in _TOKEN.finditer(line):
         tok = m.group(1)
-        if tok.endswith(_TOKEN_SUFFIXES) and not tok.endswith("Warning"):
+        if tok.endswith("Warning"):
+            return None
+        if tok.endswith(_TOKEN_SUFFIXES):
             return tok
     return None
 

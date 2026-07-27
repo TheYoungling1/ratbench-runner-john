@@ -349,12 +349,35 @@ _WARNING = re.compile(r"\b[A-Za-z_][\w.]*Warning\b")
 
 
 def _first_token(line: str) -> str | None:
-    """First dotted identifier used as an exception label. Warnings are NOT errors."""
+    """First dotted identifier used as an exception label. Warnings are NOT errors.
+
+    A Warning token SHADOWS the rest of the line rather than being skipped past. measure.py:21's
+    `_COLLECT_ERR` deliberately captures `...Warning:` lines into `collect_errors`, so warning
+    text reaches this function on real rows — and a warning whose MESSAGE quotes an exception
+    (`<string>:2: UserWarning: RuntimeError: boom`) would otherwise fabricate a counted
+    `RuntimeError` event out of a line that reported no error at all. Scanning past the warning
+    label is what made that possible; stopping at it is the fix. A genuine error line puts its
+    own token first (`E   ImportError: ... see DeprecationWarning`), so it is unaffected.
+    """
     for m in _TOKEN.finditer(line):
         tok = m.group(1)
-        if tok.endswith(_TOKEN_SUFFIXES) and not tok.endswith("Warning"):
+        if tok.endswith("Warning"):
+            return None
+        if tok.endswith(_TOKEN_SUFFIXES):
             return tok
     return None
+```
+
+> **This was a live fabrication bug**, found by codex review against real pytest output and fixed
+> in the Task 2 follow-up commit. The original `and not tok.endswith("Warning")` *continued*
+> scanning past the warning label instead of stopping, so `<string>:2: UserWarning: RuntimeError:
+> boom` — a line reporting no error at all — produced a counted `RuntimeError` event. It is not
+> hypothetical: `measure.py:21` puts `Warning` in its own capture alternation on purpose, so every
+> warning line in the corpus reaches `extract_events`. Two regression tests cover it
+> (`test_a_warning_message_quoting_an_exception_does_not_fabricate_an_event`,
+> `test_a_warning_label_does_not_shadow_an_error_that_came_first`). Do not revert to the scan.
+
+```python
 
 
 # ANCHORED PATTERNS FIRST, and the soname pattern is bounded on BOTH sides. Unbounded,
@@ -1455,6 +1478,27 @@ def errors_block(row) -> dict:
 
 `measure()` then sets `error_surface` / `error_surface_reason` on the returned `MeasureRow`, and
 `run_one` serialises `errors_block(row)` under an `"errors"` key beside it.
+
+**Two capture obligations that must be settled when `run_failed_lines` gets a producer.** Both
+were found during Task 2 and are latent only because nothing populates the field yet — the moment
+it does, they become live:
+
+1. **The token filter is currently narrower than arbitrary Python.** `_first_token` accepts only
+   tokens ending `Error` / `Exception` / `ExceptionGroup`, so a custom exception like
+   `E   BrokenThing: boom`, or pytest's own `E   Failed: DID NOT RAISE`, yields **no event**. On
+   the collect path this is harmless and invisible: `measure.py:21`'s `_COLLECT_ERR` requires
+   `(Error|Exception|Warning):` in the line, so those lines never reach `collect_errors` in the
+   first place — the two filters are aligned. A `run_failed_lines` producer with a *different*
+   capture rule breaks that alignment and starts silently dropping real failures. Do not widen
+   `_first_token` by loosening the suffix test — that is what lets `foo.py:12` and
+   `localhost:6379` become tokens. Widen it, if at all, with a **positional** anchor on pytest's
+   own shapes (`^\s*E\s+(<tok>):` and `^(?:FAILED|ERROR)\s+\S+\s+-\s+(<tok>):`), and decide it
+   together with the capture rule, not separately.
+2. **pytest truncates short-summary lines to terminal width.** Real `FAILED …` lines arrive as
+   `- FileNotFoundErr…` / `- ImportError: libG…`, so groups are systematically lost. Extraction
+   degrades honestly (`group=''`, no fabrication), but since the dedup key is `(token, group)`,
+   one underlying error splits into a truncated and an untruncated event. Capture with a wide
+   `COLUMNS`, or read the `FAILURES` block rather than the short summary.
 
 **One correctness note for whoever writes the test.** A row whose only error is
 `ModuleNotFoundError: No module named 'pytest_check'` categorises as **`module_not_found`**, not
