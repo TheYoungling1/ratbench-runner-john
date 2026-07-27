@@ -72,3 +72,58 @@ class MeasureRow:
     build_s: float | None = None
     test_s: float | None = None
     meta: dict = field(default_factory=dict)
+    error_surface: str = ""            # full | masked | unobserved — set by verdict.error_surface
+    error_surface_reason: str = ""
+    status_flags: tuple = ()           # what first-match-wins hid (spec 6.3)
+    repo_toplevel: tuple = ()          # importable roots under /testbed; enables the internal split
+    run_failed_lines: tuple = ()       # FAILED/ERROR lines from the run pass; source="run" events
+    language: str = "python"           # keys the signature table; RepoSpec has it, MeasureRow did not
+
+
+@dataclass(frozen=True)
+class ErrorEvent:
+    token: str                 # verbatim FQN exception label, e.g. "redis.exceptions.ConnectionError"
+    group: str                 # captured payload: module name, soname, imported name, path
+    group_kind: str            # module | soname | name | path | ""
+    category: str              # DERIVED view over (token, group, group_kind, repo_toplevel)
+    source: str                # collect | run | install — NEVER pooled (spec section 8)
+    occurrences: int = 1       # raw lines collapsed by dedup on (source, token, group)
+    raw: str = ""              # first raw line, 200 chars, kept for offline re-derivation
+
+
+@dataclass(frozen=True)
+class RepoVerdict:
+    agent: str
+    repo: str
+    status: str                # THIS REPO'S vocabulary (schema.py:40-42). Never a new name.
+    bucket: str                # status, or zero_pass|partial|success when status == "executed"
+    error_surface: str         # full | masked | unobserved
+    surface_reason: str        # startup_abort | nothing_collected | build_failed | no_env | ""
+    status_derived: bool = False   # True => backfilled by legacy_status, not measured
+    # ORTHOGONAL FLAGS, not modes (spec 6.3): first-match-wins is what makes buckets sum to n,
+    # but it is lossy. Flags carry what the ordering hid.
+    status_flags: tuple = ()
+    collect_rc: int | None = None
+    build_ok: bool = False
+    pass_rate: float = 0.0
+    turns_used: int | None = None
+
+
+@dataclass(frozen=True)
+class ArmErrorReport:
+    agent: str
+    n_repos: int
+    source: str = "collect"        # collect | run — one report per source, never pooled
+    n_admissible: int = 0
+    n_masked: int = 0
+    n_unobserved: int = 0
+    n_status_derived: int = 0      # LOUD backfill counter (spec 3.1)
+    buckets: dict = field(default_factory=dict)           # bucket -> #repos
+    surfaces: dict = field(default_factory=dict)          # surface -> #repos
+    token_repos: dict = field(default_factory=dict)       # token -> #repos  (SUBSTRATE)
+    token_events: dict = field(default_factory=dict)      # token -> #deduped events
+    category_repos: dict = field(default_factory=dict)    # category -> #repos (DERIVED)
+    category_events: dict = field(default_factory=dict)
+    crosstab: dict = field(default_factory=dict)          # "bucket|category" -> #repos
+    top_groups: dict = field(default_factory=dict)        # category -> [[group, #repos], ...]
+    uncategorized_rate: float = 0.0
