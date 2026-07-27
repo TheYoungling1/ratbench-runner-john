@@ -144,3 +144,46 @@ def test_unreadable_dataset_falls_back_to_the_default_workbench(tmp_path):
     _ensure_claude_runner("claudecode-dockerfile", repo_root=str(tmp_path), runner=fake,
                           repos_json=str(bad))
     assert fake.calls[0][3] == "claude-runner:latest"
+
+
+# ── regressions caught in review ────────────────────────────────────────────────────────────
+
+def test_custom_image_override_still_builds_from_the_default_recipe(tmp_path):
+    # CLAUDE_RUNNER_IMAGE names a TAG, not a recipe. Deriving `docker/<tag-stem>.Dockerfile` from it
+    # invents a path that does not exist (docker/my-runner.Dockerfile), so the documented override
+    # aborts the run on a fresh host. The tag is the override; the recipe stays the default one.
+    import os
+    fake = _FakeRun(1, 0)
+    os.environ["CLAUDE_RUNNER_IMAGE"] = "my-runner:v1"
+    try:
+        _ensure_claude_runner("claudecode-dockerfile", repo_root=str(tmp_path), runner=fake)
+    finally:
+        del os.environ["CLAUDE_RUNNER_IMAGE"]
+    build = [c for c in fake.calls if c[1] == "build"][0]
+    assert build[3] == "my-runner:v1"                       # tagged as the override
+    assert build[5].endswith("claude-runner.Dockerfile")    # built from the default recipe
+
+
+def test_native_claudecode_lane_always_gets_the_default_workbench(tmp_path):
+    # benchmark.py:201 hard-wires ClaudeCodeModel to claude-runner:latest regardless of dataset
+    # language, so dataset-aware selection must NOT apply to that lane — otherwise a Rust dataset
+    # builds claude-runner-rust and every worker then fails on the image nobody built.
+    fake = _FakeRun(1, 0)
+    ds = _write_dataset(tmp_path, ["Rust", "Rust"])
+    _ensure_claude_runner("claudecode", repo_root=str(tmp_path), runner=fake, repos_json=ds)
+    tags = [c[3] for c in fake.calls if c[:3] == ["docker", "image", "inspect"]]
+    assert tags == ["claude-runner:latest"]
+
+
+def test_wrapped_repos_dataset_is_understood(tmp_path):
+    # benchmark.load_repos accepts {"repos": [...]} as well as a bare list. Iterating the dict form
+    # yields string keys, .get() raises, and the broad handler silently degrades to the Python
+    # workbench — a Rust run would then reach the producer with no cargo image built.
+    import json
+    p = tmp_path / "wrapped.json"
+    p.write_text(json.dumps({"repos": [{"full_name": "o/r", "language": "Rust"}]}))
+    fake = _FakeRun(1, 0)
+    _ensure_claude_runner("claudecode-dockerfile", repo_root=str(tmp_path), runner=fake,
+                          repos_json=str(p))
+    tags = [c[3] for c in fake.calls if c[:3] == ["docker", "image", "inspect"]]
+    assert tags == ["claude-runner-rust:latest"]

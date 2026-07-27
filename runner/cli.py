@@ -75,7 +75,11 @@ def _dataset_workbenches(repos_json) -> list:
         return default
     try:
         with open(repos_json, encoding="utf-8") as fh:
-            repos = json.load(fh)
+            data = json.load(fh)
+        # Same shape rule as runner.benchmark.load_repos: a bare list OR {"repos": [...]}.
+        # Iterating the dict form would yield string KEYS, and `.get` on a str raises straight into
+        # the handler below — silently choosing the Python workbench for a Rust dataset.
+        repos = data["repos"] if isinstance(data, dict) else data
         tags = {get_profile((r.get("language") or "")).workbench for r in repos}
     except Exception:                                    # noqa: BLE001 — degrade, never abort
         return default
@@ -100,14 +104,26 @@ def _ensure_claude_runner(model: str, repo_root: str = REPO_ROOT, runner=subproc
     """
     if model not in _CLAUDE_LANES:
         return
+    # (tag, recipe stem) pairs. The stem is NOT always derivable from the tag:
+    #   - CLAUDE_RUNNER_IMAGE names an arbitrary TAG, not a recipe. Deriving docker/<stem>.Dockerfile
+    #     from `my-runner:v1` invents a path that does not exist and aborts the run, where the
+    #     pre-existing behaviour was to build the default recipe and tag it with the override.
+    #   - Only the `claudecode-dockerfile` lane consults the per-language profile. The native
+    #     `claudecode` lane hard-wires ClaudeCodeModel to claude-runner:latest
+    #     (runner/benchmark.py:201) regardless of dataset language, so selecting a Rust workbench
+    #     for it would leave the image its workers actually open unbuilt.
     override = os.environ.get("CLAUDE_RUNNER_IMAGE")
-    tags = [override] if override else _dataset_workbenches(repos_json)
+    if override:
+        pairs = [(override, "claude-runner")]
+    elif model == "claudecode-dockerfile":
+        pairs = [(t, t.split(":")[0]) for t in _dataset_workbenches(repos_json)]
+    else:
+        pairs = [("claude-runner:latest", "claude-runner")]
     ctx = os.path.join(repo_root, "docker")
-    for tag in tags:
+    for tag, stem in pairs:
         if runner(["docker", "image", "inspect", tag], capture_output=True).returncode == 0:
             continue
-        # Tag -> recipe by convention: claude-runner-rust:latest -> claude-runner-rust.Dockerfile
-        dockerfile = os.path.join(ctx, tag.split(":")[0] + ".Dockerfile")
+        dockerfile = os.path.join(ctx, stem + ".Dockerfile")
         print(f"[bench] {tag} missing — building from {dockerfile}", flush=True)
         rc = runner(["docker", "build", "-t", tag, "-f", dockerfile, ctx]).returncode
         if rc != 0:
