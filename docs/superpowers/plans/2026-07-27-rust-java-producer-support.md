@@ -1067,3 +1067,23 @@ unaffected (`target/nextest/ci/junit.xml` is always at the workspace root). It m
 any scored Java run. The fix is not a one-line glob change: `measure.py` passes the spec to
 `cat` through `bash -lc`, and `**` does not recurse without `globstar`, so it needs a `find`-based
 collection (the multi-file merge in `_merge_junit` already handles many files).
+
+### Follow-up: the junit_glob blocker is FIXED and verified
+
+`bench/measure.py` now collects Java reports with `find … -exec cat {} +` instead of a
+root-anchored shell glob (`_junit_collect`). Single-path languages keep the byte-identical `cat`
+command, pinned by a test.
+
+Verified by re-measuring the smoke run's SAVED Dockerfiles at zero produce cost
+(`python -m bench.unified_bench --harvest ccdf=<run>/output`):
+
+| repo | before | after |
+|---|---|---|
+| `Netflix/concurrency-limits` | `exec=False`, total 0, rate 0.0 | **`exec=True`, 55/59, rate 0.982** |
+| `denisidoro/navi` | 19/20, rate 0.95 | 19/20, rate 0.95 (unchanged) |
+| `pedrovgs/Algorithms` | 503/503, rate 1.0 | 503/503, rate 1.0 (unchanged) |
+
+`coverage 0.667 -> 1.0`, `real_success 0.667 -> 1.0`, `status_census {executed: 3}`.
+
+The two unchanged rows matter as much as the changed one: they show the recursive collection did
+not perturb a single-module Maven build or the Rust path.
