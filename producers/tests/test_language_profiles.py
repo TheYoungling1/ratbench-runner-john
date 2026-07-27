@@ -89,7 +89,7 @@ def test_node_prompt_states_the_actual_gate():
 
 def test_node_prompt_asks_for_the_node_base_and_the_repo_clone():
     prompt = _node_prompt("expressjs/express")
-    assert "FROM node:20" in prompt
+    assert "FROM node:22" in prompt
     assert "git clone https://github.com/expressjs/express /testbed" in prompt
 
 
@@ -114,7 +114,7 @@ def test_node_prompt_never_mentions_python_tooling():
 
 def test_env_base_overrides_the_language_default():
     # CLAUDE_DOCKERFILE_BASE is a GLOBAL pin (one base for the whole run), so it wins everywhere.
-    assert resolve_base(NODE_PROFILE, "node:22-bookworm") == "node:22-bookworm"
+    assert resolve_base(NODE_PROFILE, "node:20-bookworm") == "node:20-bookworm"
     assert resolve_base(PYTHON_PROFILE, "python:3.13") == "python:3.13"
 
 
@@ -122,11 +122,11 @@ def test_unset_or_empty_env_base_falls_to_the_language_default():
     # None is "unset"; "" is an exported-but-empty var, which must not become `FROM `.
     for env_base in (None, ""):
         assert resolve_base(PYTHON_PROFILE, env_base) == "python:3.11"
-        assert resolve_base(NODE_PROFILE, env_base) == "node:20"
+        assert resolve_base(NODE_PROFILE, env_base) == "node:22"
 
 
 def test_language_default_base_reaches_the_prompt():
-    assert "FROM node:20" in build_prompt("o/r", resolve_base(NODE_PROFILE, None), NODE_PROFILE)
+    assert "FROM node:22" in build_prompt("o/r", resolve_base(NODE_PROFILE, None), NODE_PROFILE)
     assert "FROM python:3.11" in build_prompt("o/r", resolve_base(PYTHON_PROFILE, None),
                                               PYTHON_PROFILE)
 

@@ -158,7 +158,14 @@ PYTHON_PROFILE = LangProfile(
 
 NODE_PROFILE = LangProfile(
     key="nodejs",
-    default_base="node:20",
+    # node:22, not the older node:20 LTS. Measured on cap-js-community/odata-v2-adapter: on
+    # node:20 every one of its 32 vitest FILES failed to import (0/32, 4.2s) because a transitive
+    # dep (@sap/cds@10) declares `engines.node >=22`; the identical Dockerfile on node:22 scores
+    # 280/283. Node floors like that are invisible to a scan of the repo's OWN `engines` field —
+    # this one arrived through a dependency — so the newer base is the safer default. Nothing in
+    # the corpus pins an upper bound below 22; the one repo wanting an OLDER node (^10.24.1) is
+    # already out of reach on either base.
+    default_base="node:22",
     prompt_template=_NODE_PROMPT,
     # None, NOT a jest install: NodeLanguage.ensure_cmd already npm-installs the JUnit reporters at
     # measure time, and the Python line would `pip install` onto a node base with no pip — failing
