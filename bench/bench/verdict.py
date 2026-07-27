@@ -1,0 +1,98 @@
+# bench/verdict.py
+from __future__ import annotations
+
+import re
+
+from bench.schema import RepoVerdict
+
+# Infra is identified from the stored exception repr (unified_bench.py:32). This is a string match
+# on the ONE branch that empties a denominator, so it is provisional: the count must be reported,
+# never silently excluded. A structured infra_returncode on the row would retire it.
+_INFRA = re.compile(r"CalledProcessError\(125|DockerException|No space left|Errno 28")
+
+DEFAULT_THRESHOLD = 0.8
+
+# Every value legacy_status can emit. All but one already exist in schema.py:40-42.
+# `unknown_conformance` is the SINGLE deliberate addition (spec 3.1.1): measure.py assigns
+# non_conforming / empty_testbed / gate_fail at gates before the :344 block, from inputs that are
+# never persisted (contract.py's `reason` is dropped; py_test_files is 0 on every failing
+# branch). A collect-unclean legacy row could be any of those four, so we name the ambiguity
+# instead of picking one. It is NOT added to metrics._DISQUALIFIED — it changes no denominator.
+LEGACY_STATUSES = ("missing", "measure_error", "build_fail", "timed_out", "unknown_conformance",
+                   "executed", "no_tests_collected")
+_ALREADY_MEASURED = ("", "ok", "legacy_ok")
+
+
+def error_surface(row) -> tuple:
+    """(surface, reason). POSITIVE structural test: did collection produce tests? A per-module
+    failure still collects the other modules; a startup abort collects nothing. This is NOT
+    `collect_error` — measure.py:346 sets that whether or not tests were collected."""
+    if row.env_status != "ok":
+        return "unobserved", "no_env"
+    if not row.build_ok:
+        return "unobserved", "build_failed"
+    if row.collect_rc != 0 and not (row.collected_node_ids or ()):
+        return "masked", ("startup_abort" if row.collect_rc in (3, 4) else "nothing_collected")
+    return "full", ""
+
+
+def legacy_status(row) -> str:
+    """Backfill for rows measured before `status` existed. Covers 7 of 12 statuses: non_conforming/
+    empty_testbed/gate_fail are assigned at gates BEFORE measure.py:344 from inputs that are never
+    persisted, so they are unreachable here (spec 3.1.1)."""
+    if row.env_status != "ok":
+        return "missing"
+    if _INFRA.search(str((row.meta or {}).get("error") or "")):
+        return "measure_error"
+    if not row.build_ok:
+        return "build_fail"
+    if row.timed_out:
+        return "timed_out"
+    if not row.collect_clean:
+        return "unknown_conformance"   # NOT collect_error — see LEGACY_STATUSES above
+    return "executed" if row.executed else "no_tests_collected"
+
+
+def resolve_status(row) -> tuple:
+    """(status, was_derived). A measured status always wins."""
+    s = getattr(row, "status", "") or ""
+    if s not in _ALREADY_MEASURED:
+        return s, False
+    return legacy_status(row), True
+
+
+def bucket(status: str, pass_rate: float, threshold: float = DEFAULT_THRESHOLD) -> str:
+    """`status` lumps everything that ran into `executed`, which collapses real signal. Sub-divide
+    ONLY that value — never introduce a name that competes with the status vocabulary."""
+    if status != "executed":
+        return status
+    if pass_rate <= 0:
+        return "zero_pass"
+    return "partial" if pass_rate < threshold else "success"
+
+
+def status_flags(row) -> tuple:
+    """First-match-wins is what makes buckets sum to n, but it is lossy. Flags carry the rest."""
+    flags = []
+    if row.timed_out:
+        flags.append("timed_out")
+    if not row.build_ok:
+        flags.append("build_fail")
+    if not row.collect_clean:
+        flags.append("collect_error")
+    chosen, _ = resolve_status(row)
+    return tuple(f for f in flags if f != chosen)
+
+
+def verdict(row, *, turn_cap=None, threshold: float = DEFAULT_THRESHOLD) -> RepoVerdict:
+    surface, reason = error_surface(row)
+    status, derived = resolve_status(row)
+    flags = list(status_flags(row))
+    if turn_cap and (row.turns_used or 0) >= turn_cap and row.pass_rate < threshold:
+        flags.append("unconverged")
+    return RepoVerdict(
+        agent=row.agent, repo=row.repo, status=status,
+        bucket=bucket(status, row.pass_rate, threshold),
+        error_surface=surface, surface_reason=reason, status_derived=derived,
+        status_flags=tuple(flags), collect_rc=row.collect_rc, build_ok=row.build_ok,
+        pass_rate=row.pass_rate, turns_used=row.turns_used)
