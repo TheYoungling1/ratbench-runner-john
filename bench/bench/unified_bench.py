@@ -28,9 +28,17 @@ def run_one(env, out_root: str, *, docker) -> str:
     try:
         row = measure(env, docker=docker)
     except Exception as e:                             # anti-vanish: infra crash still yields a row
+        # Carry the PRODUCER's economy across. A crash here says nothing about produce, which has
+        # already run and already been paid for: mlflow/mlflow in ccdf-full50-20260727-023223 kept
+        # an intact _meta.json (cost_usd=1.8553) while its row read None, silently shrinking
+        # total_cost_usd. `env.meta or {}` because non-producer agents harvest with no meta at all.
+        m = env.meta or {}
         row = MeasureRow(agent=env.agent, repo=env.repo.full_name, env_status=env.status,
                          build_ok=False, executed=False, ebsr=False, status="measure_error",
-                         meta={"error": repr(e)})
+                         tokens_in=m.get("tokens_in"), tokens_out=m.get("tokens_out"),
+                         llm_calls=m.get("llm_calls"), turns_used=m.get("turns_used"),
+                         cost_usd=m.get("cost_usd"), produce_s=m.get("produce_s"),
+                         meta=dict(m, error=repr(e)))
     tmp = out + ".tmp"
     with open(tmp, "w") as f:
         json.dump(asdict(row), f, indent=2, default=list)

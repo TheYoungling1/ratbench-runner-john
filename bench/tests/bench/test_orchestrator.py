@@ -39,6 +39,44 @@ def test_run_one_writes_antivanish_row_on_measure_crash(tmp_path, monkeypatch):
     assert "docker daemon died" in d["meta"]["error"]
 
 
+def test_measure_crash_keeps_the_producer_economy(tmp_path, monkeypatch):
+    """A crash in MEASURE must not erase what PRODUCE already paid for.
+
+    Measured on ccdf-full50-20260727-023223: mlflow/mlflow has an intact _meta.json
+    (status="produced", cost_usd=1.8553) yet its row reads cost_usd=None — the anti-vanish branch
+    rebuilt the row from scratch and dropped env.meta, so real spend vanished from total_cost_usd.
+    Distinct from the produce-side denominator bug (runner/tests/test_meta_merge.py): here the
+    _meta.json on disk is perfectly fine and it is the ROW that loses it."""
+    env = HarvestedEnv("v3", RepoSpec("o/r", "https://github.com/o/r"), "FROM x",
+                       base_image="python:3.13-slim",
+                       meta={"tokens_in": 900, "tokens_out": 40, "llm_calls": 7,
+                             "turns_used": 12, "cost_usd": 1.8553, "produce_s": 88.0,
+                             "status": "produced"})
+    monkeypatch.setattr(ub, "measure",
+                        lambda *a, **k: (_ for _ in ()).throw(RuntimeError("docker daemon died")))
+    with open(ub.run_one(env, str(tmp_path), docker=object())) as f:
+        d = json.load(f)
+    assert d["status"] == "measure_error"
+    assert d["cost_usd"] == 1.8553
+    assert d["tokens_in"] == 900 and d["turns_used"] == 12 and d["llm_calls"] == 7
+    assert d["produce_s"] == 88.0
+    # the crash detail must survive alongside the recovered meta, not replace it
+    assert "docker daemon died" in d["meta"]["error"]
+    assert d["meta"]["status"] == "produced"
+
+
+def test_measure_crash_tolerates_absent_meta(tmp_path, monkeypatch):
+    """Non-producer agents harvest with meta={}; the fallback must not KeyError on them."""
+    env = HarvestedEnv("v3", RepoSpec("o/r", "https://github.com/o/r"), "FROM x",
+                       base_image="python:3.13-slim", meta={})
+    monkeypatch.setattr(ub, "measure",
+                        lambda *a, **k: (_ for _ in ()).throw(RuntimeError("boom")))
+    with open(ub.run_one(env, str(tmp_path), docker=object())) as f:
+        d = json.load(f)
+    assert d["status"] == "measure_error" and d["cost_usd"] is None
+    assert "boom" in d["meta"]["error"]
+
+
 def test_aggregate_globs_rows(tmp_path, monkeypatch):
     monkeypatch.setattr(ub, "measure", _fake_measure)
     ub.run_one(_env(agent="v3", repo="o/r"), str(tmp_path), docker=object())
