@@ -60,6 +60,63 @@ def build_prompt(full_name: str, base: str) -> str:
     return _PROMPT_TEMPLATE.format(gen_path=DOCKERFILE_GEN_PATH, base=base, full_name=full_name)
 
 
+def _as_int(value) -> int:
+    """A token count from an untrusted stream field. Anything non-numeric (or a bool, which is
+    an int in Python but never a token count) becomes 0, so one malformed `usage` field degrades
+    to a wrong-but-harmless number instead of raising mid-parse."""
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return 0
+    return int(value)
+
+
+def _content_blocks(obj: dict) -> list:
+    """The `message.content` blocks of a stream event, or [] for any shape that is not the
+    expected ``{"message": {"content": [{...}, ...]}}``.
+
+    Truthiness is NOT enough here: a truthy non-dict `message` (a bare string) sails past an
+    ``or {}`` fallback and then raises on ``.get()``. Same for a non-list `content`."""
+    message = obj.get("message")
+    if not isinstance(message, dict):
+        return []
+    content = message.get("content")
+    return content if isinstance(content, list) else []
+
+
+def _flatten_tool_result(content) -> str:
+    """Readable text from a tool_result's `content`.
+
+    Claude Code emits this as a LIST of content blocks (``[{"type": "text", "text": "..."}]``)
+    far more often than a bare string — that is the normal shape for Bash/Read/Edit output. A
+    plain ``str()`` would put Python repr noise (``[{'type': 'text', ...}]``) into the action log
+    for essentially every real run, defeating the point of having one."""
+    if isinstance(content, str):
+        return " ".join(content.split())
+    if isinstance(content, list):
+        parts = []
+        for block in content:
+            if isinstance(block, dict):
+                parts.append(str(block.get("text") or ""))
+            elif isinstance(block, str):
+                parts.append(block)
+        return " ".join(" ".join(parts).split())
+    return "" if content is None else " ".join(str(content).split())
+
+
+def _tool_input_summary(inp) -> str:
+    """One-line rendering of a tool call's input. Bash/Read/Edit/Grep/WebFetch each carry a single
+    field that IS the action, so show that rather than the whole JSON blob; anything else falls
+    back to compact JSON."""
+    if not isinstance(inp, dict):
+        return ""
+    for key in ("command", "file_path", "path", "pattern", "url"):
+        if isinstance(inp.get(key), str):
+            return " ".join(inp[key].split())
+    try:
+        return json.dumps(inp)
+    except (TypeError, ValueError):
+        return ""
+
+
 def summarize_stream(stream_text: str) -> dict:
     """Parse claude `--output-format stream-json` (one JSON object per line) into the economy
     numbers plus a readable action log.
@@ -85,7 +142,7 @@ def summarize_stream(stream_text: str) -> dict:
             continue
         try:
             obj = json.loads(raw)
-        except (ValueError, TypeError):
+        except Exception:            # noqa: BLE001 — totality beats precision on untrusted input
             continue
         if not isinstance(obj, dict):
             continue
@@ -95,24 +152,28 @@ def summarize_stream(stream_text: str) -> dict:
                            f"cwd={obj.get('cwd', '?')}")
         elif kind == "assistant":
             info["llm_calls"] += 1
-            for block in ((obj.get("message") or {}).get("content") or []):
+            for block in _content_blocks(obj):
                 if not isinstance(block, dict):
                     continue
                 if block.get("type") == "tool_use":
                     info["tool_calls"] += 1
-                    payload = json.dumps(block.get("input") or {})[:200]
+                    payload = _tool_input_summary(block.get("input"))[:200]
                     actions.append(f"[{info['tool_calls']}] {block.get('name', '?')}: {payload}")
                 elif block.get("type") == "text":
-                    text = (block.get("text") or "").strip()
+                    raw_text = block.get("text")
+                    text = raw_text.strip() if isinstance(raw_text, str) else ""
                     if text:
                         actions.append(f"    say: {text[:240]}")
         elif kind == "user":
-            for block in ((obj.get("message") or {}).get("content") or []):
+            for block in _content_blocks(obj):
                 if isinstance(block, dict) and block.get("type") == "tool_result":
                     tag = "ERR" if block.get("is_error") else "ok"
-                    actions.append(f"      -> [{tag}] {str(block.get('content'))[:200]}")
+                    body = _flatten_tool_result(block.get("content"))[:200]
+                    actions.append(f"      -> [{tag}] {body}")
         elif kind == "rate_limit_event":
-            status = str((obj.get("rate_limit_info") or obj).get("status", ""))
+            info_block = obj.get("rate_limit_info")
+            source = info_block if isinstance(info_block, dict) else obj
+            status = str(source.get("status", ""))
             if status and status != "allowed":      # only flag ACTUAL throttling/rejection
                 info["rate_limited"] = True
             actions.append(f"[rate-limit] status={status}")
@@ -121,13 +182,14 @@ def summarize_stream(stream_text: str) -> dict:
             info["cost_usd"] = obj.get("total_cost_usd")
             info["is_error"] = obj.get("is_error")
             info["stop_reason"] = obj.get("stop_reason")
-            info["model_usage"] = obj.get("modelUsage") or {}
+            model_usage = obj.get("modelUsage")
+            info["model_usage"] = model_usage if isinstance(model_usage, dict) else {}
             usage = obj.get("usage")
             if isinstance(usage, dict):
-                tin = ((usage.get("input_tokens") or 0)
-                       + (usage.get("cache_creation_input_tokens") or 0)
-                       + (usage.get("cache_read_input_tokens") or 0))
-                tout = usage.get("output_tokens") or 0
+                tin = (_as_int(usage.get("input_tokens"))
+                       + _as_int(usage.get("cache_creation_input_tokens"))
+                       + _as_int(usage.get("cache_read_input_tokens")))
+                tout = _as_int(usage.get("output_tokens"))
                 info["tokens_in"], info["tokens_out"] = tin, tout
                 info["total_tokens"] = tin + tout
     info["actions"] = "\n".join(actions)
