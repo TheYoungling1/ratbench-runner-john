@@ -43,3 +43,27 @@ def test_write_then_harvest_unmeasurable_has_no_dockerfile(tmp_path):
     e = discover({"dockeragent": str(out_root)})[0]
     # harvest reads _meta.status (design §2.5): unmeasurable, no Dockerfile -> excluded downstream.
     assert e.status == "unmeasurable" and e.dockerfile is None
+
+
+def test_ccdf_economy_reaches_meta_json_and_measure_row(tmp_path):
+    # The full produce->measure seam for the fields a ccdf cost analysis needs: economy ->
+    # write_env_packet -> _meta.json -> harvest -> measure() base_row -> MeasureRow.
+    import json
+    import os
+
+    from producers.base import ProducedEnv, RepoSpec, write_env_packet
+
+    out_root = str(tmp_path / "output")
+    env = ProducedEnv(repo=RepoSpec("o/r", "https://github.com/o/r"),
+                      dockerfile="FROM python:3.11\nRUN pip install pytest",
+                      status="produced", producer_name="claudecode-dockerfile",
+                      economy={"tokens_in": 180, "tokens_out": 20, "total_tokens": 200,
+                               "llm_calls": 3, "turns_used": 7, "cost_usd": 1.25,
+                               "produce_s": 42.0})
+    repo_dir = write_env_packet(out_root, env)
+    with open(os.path.join(repo_dir, "_meta.json")) as fh:
+        meta = json.load(fh)
+    assert meta["tokens_in"] == 180 and meta["tokens_out"] == 20
+    assert meta["llm_calls"] == 3 and meta["turns_used"] == 7
+    assert meta["total_tokens"] == 200 and meta["produce_s"] == 42.0
+    assert meta["cost_usd"] == 1.25

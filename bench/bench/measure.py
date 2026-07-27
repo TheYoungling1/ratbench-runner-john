@@ -175,6 +175,7 @@ def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeou
     base_row = dict(agent=agent, repo=repo, env_status=env.status,
                     tokens_in=m.get("tokens_in"), tokens_out=m.get("tokens_out"),
                     llm_calls=m.get("llm_calls"), turns_used=m.get("turns_used"),
+                    cost_usd=m.get("cost_usd"),
                     produce_s=m.get("produce_s"), meta=dict(m))
 
     if env.status not in _MEASURABLE or not env.dockerfile:

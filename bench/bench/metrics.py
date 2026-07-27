@@ -87,6 +87,12 @@ def compute_metrics(rows: list[MeasureRow], gold: dict | None = None) -> dict:
     # Economy metrics are computed over `prod` too (unmeasurable rows carry no rebuildable env).
     tok_rows = [r for r in prod if r.tokens_in is not None and r.tokens_out is not None]
     tok_total = sum(r.tokens_in + r.tokens_out for r in tok_rows)
+    # Cost is reported directly by the agent (Claude Code's total_cost_usd), not derived from
+    # tokens and a rate card — Claude Code mixes models within one run, so a single rate would
+    # mis-price it. Rows from producers whose API reports no cost stay None and are EXCLUDED
+    # from the denominator rather than counted as free.
+    cost_rows = [r for r in prod if r.cost_usd is not None]
+    cost_total = sum(r.cost_usd for r in cost_rows)
     n_build_ok = sum(1 for r in prod if r.build_ok)
     n_setup_compile = sum(1 for r in prod if r.setup_compile_ok)
     n_unreplayed = sum(1 for r in prod if r.meta.get("unreplayed"))
@@ -99,6 +105,11 @@ def compute_metrics(rows: list[MeasureRow], gold: dict | None = None) -> dict:
         "tokens_per_ebsr": _r(tok_total / n_ebsr) if (tok_rows and n_ebsr) else None,
         "tokens_per_real_success": _r(tok_total / n_real) if (tok_rows and n_real) else None,
         "mean_turns": _mean_opt([r.turns_used for r in prod]),
+        "total_cost_usd": _r(cost_total) if cost_rows else None,
+        "mean_cost_usd": _r(cost_total / len(cost_rows)) if cost_rows else None,
+        "cost_per_ebsr": _r(cost_total / n_ebsr) if (cost_rows and n_ebsr) else None,
+        "cost_per_real_success": _r(cost_total / n_real) if (cost_rows and n_real) else None,
+        "n_cost_reporting": len(cost_rows),
         "mean_produce_s": _mean_opt([r.produce_s for r in prod]),
         "wall_s_per_real_success": (
             _r(sum((r.produce_s or 0) + (r.build_s or 0) + (r.test_s or 0) for r in prod) / n_real)

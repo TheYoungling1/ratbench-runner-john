@@ -66,6 +66,8 @@ class MeasureRow:
     tokens_out: int | None = None
     llm_calls: int | None = None
     turns_used: int | None = None
+    cost_usd: float | None = None   # agent-reported spend (Claude Code total_cost_usd); None
+                                    # for producers whose model API reports no cost
     produce_s: float | None = None
     build_s: float | None = None
     test_s: float | None = None

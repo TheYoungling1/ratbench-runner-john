@@ -137,6 +137,32 @@ branch without touching agent code. A row with no `commit` clones the live HEAD 
                                 --out runs/john-planner-v3/<run>/measure
   ```
 
+### claudecode-dockerfile artifacts
+
+Per repo, under `runs/<variety>/<run>/output/<owner>/<repo>/`:
+
+| File | Contents |
+| --- | --- |
+| `claude_stream.jsonl` | Raw Claude Code `stream-json` events — the agent's full trajectory (one `tool_use` per action, `tool_result` per observation). The ccdf analogue of dockeragent's `react_trace.jsonl`. |
+| `claude_actions.log` | Readable action log rendered from the stream. |
+| `claude_stderr.txt` | CLI stderr (only when non-empty). |
+| `_meta.json` | `cost_usd` (Claude Code's own `total_cost_usd`), `tokens_in`/`tokens_out`/`total_tokens`, `llm_calls`, `turns_used`. |
+
+`measure/metrics.json` then carries `total_cost_usd`, `mean_cost_usd`, `cost_per_ebsr`,
+`cost_per_real_success` and `n_cost_reporting` alongside the token/turn economy. Producers whose
+model API reports no cost stay `None` and are excluded from those denominators — never counted as free.
+
+Cost is taken from Claude Code's reported `total_cost_usd`, **not** derived from tokens and a rate
+card: Claude Code mixes models within a single run (a haiku for side tasks alongside the primary
+model), so one rate would mis-price it. `tokens_in` includes cache-creation and cache-read tokens
+(matching `ccdf_costs.py`), which makes it **not** directly comparable to the raw prompt-token counts
+the deepseek-backed agents report — the component split is preserved in `claude_stream.jsonl`.
+
+The `claudecode*` lanes need the local-only `claude-runner:latest` workbench image (no registry, so a
+`docker system prune` deletes it). `bench` builds it automatically from `docker/claude-runner.Dockerfile`
+when missing and aborts the run if that build fails — without the preflight every repo would record
+`status="error"`, which on disk is indistinguishable from a completed run that scored zero.
+
 ## Adding your own agent
 
 > ⚠️ **Honor the commit pin in your adapter — read this first.** The authoritative dataset pins every
