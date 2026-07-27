@@ -16,6 +16,7 @@ from bench.measure import measure
 from bench.metrics import compute_metrics
 from bench.report.error_report import arm_report, delta as arm_delta
 from bench.schema import MeasureRow
+from bench.verdict import STATUS_BACKFILL_MARKER
 
 
 def _row_path(out_root: str, agent: str, repo: str) -> str:
@@ -56,6 +57,10 @@ def load_rows(out_root: str) -> dict:
         # (design §2.5): legacy_ok if it shows a build/execution signal, else missing.
         if "status" not in d:
             d["status"] = "legacy_ok" if (d.get("build_ok") or d.get("executed")) else "missing"
+            # Stamp WHO invented this status. `missing` is also a status measure.py genuinely
+            # assigns, so downstream cannot tell a backfilled one from a measured one by value.
+            # In-memory only — load_rows never rewrites row.json, and metrics.py ignores meta.
+            d["meta"] = dict(d.get("meta") or {}, **{STATUS_BACKFILL_MARKER: True})
         # Filter to KNOWN fields: a row.json written by a newer checkout otherwise crashes an
         # older one with TypeError. Costs one line, prevents a cross-branch collision.
         row = MeasureRow(agent=agent, **{k: (tuple(v) if isinstance(v, list) else v)

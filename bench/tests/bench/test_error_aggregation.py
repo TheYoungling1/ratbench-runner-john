@@ -36,6 +36,21 @@ def test_load_rows_ignores_unknown_fields_from_a_newer_checkout(tmp_path):
     assert load_rows(str(tmp_path))["baseline"][0].repo == "o/1"
 
 
+def test_load_rows_marks_a_status_it_backfilled(tmp_path):
+    # A row with no build/execute signal is backfilled to "missing" — indistinguishable by value
+    # from a measured "missing", so load_rows stamps the marker and resolve_status honours it.
+    from bench.verdict import STATUS_BACKFILL_MARKER, resolve_status
+    _write(str(tmp_path), "baseline", "o/1", build_ok=False, executed=False, collect_rc=None,
+           collect_clean=False, env_status="missing")
+    p = os.path.join(str(tmp_path), "baseline", "o", "1", "row.json")
+    d = json.load(open(p)); d.pop("status"); json.dump(d, open(p, "w"))
+
+    row = load_rows(str(tmp_path))["baseline"][0]
+    assert row.status == "missing"                       # existing backfill, unchanged
+    assert row.meta.get(STATUS_BACKFILL_MARKER) is True   # ...but marked as invented
+    assert resolve_status(row)[1] is True                 # ...so it counts as derived
+
+
 def test_aggregate_errors_is_keyed_by_agent_then_source(tmp_path):
     _write(str(tmp_path), "baseline", "o/1")
     _write(str(tmp_path), "baseline", "o/2", collect_rc=4, collect_clean=False,

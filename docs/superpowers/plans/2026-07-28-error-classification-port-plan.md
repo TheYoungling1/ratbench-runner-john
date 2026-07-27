@@ -1617,7 +1617,31 @@ syslib_missing absent from category_repos in both arms
 `n_status_derived == 50` per arm is the point of the loud counter: the whole corpus predates
 `status`. If it reads 0, `resolve_status` is wrongly treating `legacy_ok` as measured.
 
+> **This criterion earned its keep — it failed on the first run, at 48/44.** `load_rows`
+> synthesises `status` for pre-taxonomy rows: `legacy_ok` when there is a build/execute signal,
+> else **`missing`**. `legacy_ok` is unambiguous, but `missing` is *also* a status
+> `measure.py:245` genuinely assigns, so `resolve_status` accepted eight invented statuses as
+> measured — on a corpus where `status` is absent from all 100 rows. Worse than the counter:
+> `unit8co/darts` stayed labelled `missing` although its env harvested fine (`env_status='ok'`)
+> and its own meta carries a docker-125 error, i.e. `measure_error`. The fix is
+> `STATUS_BACKFILL_MARKER` — `load_rows` stamps the row's in-memory meta, `resolve_status`
+> treats a marked row as un-measured. `metrics.json` was verified byte-identical across the fix.
+> Do not "simplify" this by adding `missing` to `_ALREADY_MEASURED`: that would silently
+> re-derive genuinely-measured `missing` rows, which is the same bug pointed the other way.
+
 - [ ] **Step 4: Record the result**
+
+**RESULT (2026-07-28): 17/17 criteria pass.** Run locally rather than on the VM, against a copy
+of `/opt/ratbench/remeasure_50` verified byte-identical by checksum manifest
+(`d0a3701197e95554401aa175ba75adb6ceb31428434f459b53b856df3cf8916d` over all 100 sorted
+`row.json`). Every published number reproduced exactly: `32/16/2` and `41/3/6`, 2x2
+`{neither 34, a_only 13, b_only 0, both 3, only_in_a 0, only_in_b 0}`, `paired_repos 30`,
+`module_not_found [-20, -5] identified`, `syslib_missing` absent, `*.run.token_repos == {}`.
+`n_status_derived` read 48/44 on the first attempt and exposed a real defect — see the note
+above — and reads 50/50 after the fix. `metrics.json` byte-identical before and after.
+
+Note the corpus contains a third top-level directory, `_repaired_consolidated`, which holds no
+`row.json` and therefore cannot become a third arm. Confirm that before reading any census.
 
 Write the observed numbers into this plan under the gate above. If any differ, **stop** — the two
 `measure.py` forks disagree about the stored rows, and that must be understood before Task 9.
