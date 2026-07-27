@@ -50,21 +50,38 @@ def parse_junit(xml_text: str) -> dict:
     except ET.ParseError:
         root = None
     if root is not None:
+        nested = set()
         for ts in root.iter("testsuite"):
             total += int(ts.get("tests", 0) or 0)
             failed += int(ts.get("failures", 0) or 0)
             errors += int(ts.get("errors", 0) or 0)
             skipped += int(ts.get("skipped", 0) or 0)
+            nested.update(id(tc) for tc in ts.iter("testcase"))   # identities live as long as `root`
         for tc in root.iter("testcase"):
             nid = _node_id(tc)
-            if tc.find("failure") is not None:
+            fail, err, skip = (tc.find("failure") is not None, tc.find("error") is not None,
+                               tc.find("skipped") is not None)
+            if fail:
                 failed_ids.append(nid)
-            elif tc.find("error") is not None:
+            elif err:
                 error_ids.append(nid)
-            elif tc.find("skipped") is not None:
-                pass
-            else:
+            elif not skip:
                 passed_ids.append(nid)
+            # ORPHAN <testcase> — outside every <testsuite>, so no `tests`/`failures` attribute
+            # counted it above and the attribute-derived totals silently omit it. node --test's
+            # junit reporter emits exactly this shape: describe()-grouped tests get a
+            # <testsuite tests=N> wrapper, but top-level test() calls are written as bare
+            # <testcase> children of <testsuites>. Left uncounted, an all-top-level suite reports
+            # total 0 -> pass_rate 0.0 (a false zero on a healthy repo), and a mixed suite divides
+            # `passed` by the grouped tests alone (2/2 instead of 2/3). Orphans are counted from
+            # ELEMENTS — the only unit that exists for them. Inert for every reporter that nests
+            # its testcases: pytest, jest-junit, mocha-junit-reporter, vitest, Surefire/Gradle,
+            # gotestsum, nextest.
+            if id(tc) not in nested:
+                total += 1
+                failed += int(fail)
+                errors += int(err and not fail)
+                skipped += int(skip and not (fail or err))
     # ELEMENT-CONSISTENT ALTERNATIVE (kept for reference — more correct on subtest suites, where the
     # <testsuite tests> attribute counts subtest REPORTS, not nodes: e.g. Archipelago attr 236474 vs
     # 4315 <testcase> elements -> pass_rate 0.017 attr vs 0.990 element). To switch back, count from

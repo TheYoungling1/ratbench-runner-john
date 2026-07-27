@@ -66,13 +66,28 @@ def test_run_cmd_installs_reporters_before_invoking_the_runner():
 
 
 def test_run_cmd_keeps_no_install_and_the_junit_absence_guard():
-    # Two properties the reinstall must not trade away: (1) --no-install stays, so npx never
-    # silently fetches a test RUNNER the repo did not declare; (2) the mocha fallback stays
-    # guarded on junit ABSENCE, so a legitimately-failing jest run cannot trigger mocha and
-    # overwrite the report with an empty one.
+    # Two properties the runner cascade must not trade away: (1) --no-install stays on every npx
+    # call, so npx never silently fetches a test RUNNER the repo did not declare; (2) each fallback
+    # stays guarded on junit ABSENCE — never on an exit code — so a legitimately-failing run cannot
+    # trigger the next runner and overwrite the report with an empty one.
+    # (test_nodejs_runner_cascade.py executes the command and asserts both behaviourally.)
     cmd = _node_lang().run_cmd("/testbed", "/testbed/logs/junit.xml")
     assert "npx --no-install jest" in cmd and "npx --no-install mocha" in cmd
-    assert "[ -f /testbed/logs/junit.xml ] || npx --no-install mocha" in cmd
+    assert cmd.count("npx --no-install") == cmd.count("npx ")
+    assert "[ -f /testbed/logs/junit.xml ] && break" in cmd
+    # ...and the guard is only sound if the file is known-absent when the cascade starts.
+    assert "rm -f /testbed/logs/junit.xml" in cmd
+
+
+def test_run_cmd_detects_vitest_and_node_test_without_extra_reporters():
+    # The two frameworks that need no reporter package: vitest and node:test both emit JUnit
+    # themselves, so they are invoked directly rather than through the jest/mocha reporter path.
+    cmd = _node_lang().run_cmd("/testbed", "/testbed/logs/junit.xml")
+    assert "npx --no-install vitest run --reporter=junit --outputFile=/testbed/logs/junit.xml" in cmd
+    assert ("node --test --test-reporter=junit "
+            "--test-reporter-destination=/testbed/logs/junit.xml") in cmd
+    # detection reads the repo's own package.json rather than always trying jest first
+    assert 'require("./package.json")' in cmd and "devDependencies" in cmd
 
 
 def test_ensure_cmd_still_prewarms_the_reporters():
