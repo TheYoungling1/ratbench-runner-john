@@ -1026,3 +1026,44 @@ git commit -m "docs: record the rust/java producer smoke result"
 - **Rust large-tier repos may exceed the budget.** `RUN cargo test --no-run` on a large workspace can take longer than the whole $2 produce budget. The node-full50 run already capped 7 of 50 repos; expect Rust to be worse, and treat "hit the cap" as a recorded property of the run rather than a bug.
 - **`test_count` in both datasets is a lower bound.** The curation counted annotation-style declarations only, so JUnit 3-style `public void testFoo()` methods are invisible (`elastic/elasticsearch` reads 200). It only ever under-counts, so it cannot have admitted a repo below the ≥10 threshold.
 - **Go still has no profile.** `_NO_PROFILE_YET` remains `{"golang", "go"}` after Task 3, and the parity test keeps it honest.
+
+---
+
+## Smoke result (2026-07-27, run `rj-smoke3-20260727-134626`)
+
+Three repos, not the two the plan specified. `RxAndroid` is the smallest Java repo but is Gradle
+**plus** the Android SDK, so a failure there would have measured a missing SDK rather than this
+seam; it was replaced by `pedrovgs/Algorithms` (Maven, pure Java) and `Netflix/concurrency-limits`
+(Gradle, wrapper, no Android) so that BOTH `java.py` gate branches are exercised.
+
+| repo | lang | clean | exec | total | passed | rate | cost |
+|---|---|---|---|---|---|---|---|
+| `denisidoro/navi` | Rust | ✓ | ✓ | 20 | 19 | 0.95 | $0.167 |
+| `pedrovgs/Algorithms` | Java/Maven | ✓ | ✓ | 503 | 503 | 1.00 | $0.152 |
+| `Netflix/concurrency-limits` | Java/Gradle | ✓ | **✗** | 0 | 0 | 0.00 | $0.380 |
+
+`EBSR 1.0 · ESSR 0.975 · real_success 0.667 · total $0.699`
+
+**The seam works.** Emitted Dockerfiles were exactly what the prompts asked for: `FROM rust:1`
+ending `RUN cargo test --no-run`; `FROM maven:3-eclipse-temurin-17` ending `RUN mvn -q -B
+test-compile`. The Java agent emitted `RUN chmod +x ./gradlew` unprompted-by-anything-but-the-new
+clause — direct evidence that the `[ -x ./mvnw ]` executability wording (codex finding #3) changed
+agent behaviour on its first live run. Per-language workbench selection was confirmed live: the
+Java container ran on `claude-runner-java:latest`.
+
+### BLOCKER for the Java dataset — `java.py` junit_glob is root-only
+
+`Netflix/concurrency-limits` passed its gate and still scored zero. Cause, verified: it declares 5
+subprojects in `settings.gradle`, so Gradle writes JUnit to
+`concurrency-limits-core/build/test-results/test/*.xml`, while `java.py:45` globs only
+`{W}/target/surefire-reports/*.xml {W}/build/test-results/test/*.xml` — the ROOT. `Algorithms` has
+zero `<module>` entries, which is precisely why it worked.
+
+Measured across `rat_java50.json`: **43 of 50 repos are multi-module** (large 19/20, medium 17/20,
+small 7/10). As it stands the Java dataset would report a false zero on 43 repos.
+
+This is a pre-existing measure-side defect, NOT part of this plan's producer work — Rust is
+unaffected (`target/nextest/ci/junit.xml` is always at the workspace root). It must be fixed before
+any scored Java run. The fix is not a one-line glob change: `measure.py` passes the spec to
+`cat` through `bash -lc`, and `**` does not recurse without `globstar`, so it needs a `find`-based
+collection (the multi-file merge in `_merge_junit` already handles many files).
