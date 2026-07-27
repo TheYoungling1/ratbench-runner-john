@@ -104,22 +104,28 @@ def _ensure_claude_runner(model: str, repo_root: str = REPO_ROOT, runner=subproc
     """
     if model not in _CLAUDE_LANES:
         return
-    # (tag, recipe stem) pairs. The stem is NOT always derivable from the tag:
-    #   - CLAUDE_RUNNER_IMAGE names an arbitrary TAG, not a recipe. Deriving docker/<stem>.Dockerfile
-    #     from `my-runner:v1` invents a path that does not exist and aborts the run, where the
-    #     pre-existing behaviour was to build the default recipe and tag it with the override.
-    #   - Only the `claudecode-dockerfile` lane consults the per-language profile. The native
-    #     `claudecode` lane hard-wires ClaudeCodeModel to claude-runner:latest
-    #     (runner/benchmark.py:201) regardless of dataset language, so selecting a Rust workbench
-    #     for it would leave the image its workers actually open unbuilt.
+    ctx = os.path.join(repo_root, "docker")
+    # CLAUDE_RUNNER_IMAGE means "use EXACTLY this image", so it is verified, never built. We cannot
+    # know what belongs inside a tag we did not define: building the default python/node recipe and
+    # stamping the override's name on it would hand a Rust or Java agent a workbench with no cargo
+    # and no JDK, and for a mixed-language dataset there is no single right recipe to guess.
+    # Failing here is the preflight doing its job — the alternative is 50 repos of status="error".
     override = os.environ.get("CLAUDE_RUNNER_IMAGE")
     if override:
-        pairs = [(override, "claude-runner")]
-    elif model == "claudecode-dockerfile":
+        if runner(["docker", "image", "inspect", override], capture_output=True).returncode != 0:
+            raise SystemExit(
+                f"[bench] FATAL: CLAUDE_RUNNER_IMAGE={override} is not present locally. An explicit "
+                f"override is used as-is, never built — build or pull it first, or unset the "
+                f"variable to use the per-language workbench for this dataset.")
+        return
+    # Only the `claudecode-dockerfile` lane consults the per-language profile. The native
+    # `claudecode` lane hard-wires ClaudeCodeModel to claude-runner:latest
+    # (runner/benchmark.py:201) regardless of dataset language, so selecting a Rust workbench for
+    # it would leave the image its workers actually open unbuilt.
+    if model == "claudecode-dockerfile":
         pairs = [(t, t.split(":")[0]) for t in _dataset_workbenches(repos_json)]
     else:
         pairs = [("claude-runner:latest", "claude-runner")]
-    ctx = os.path.join(repo_root, "docker")
     for tag, stem in pairs:
         if runner(["docker", "image", "inspect", tag], capture_output=True).returncode == 0:
             continue

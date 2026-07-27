@@ -148,20 +148,23 @@ def test_unreadable_dataset_falls_back_to_the_default_workbench(tmp_path):
 
 # ── regressions caught in review ────────────────────────────────────────────────────────────
 
-def test_custom_image_override_still_builds_from_the_default_recipe(tmp_path):
-    # CLAUDE_RUNNER_IMAGE names a TAG, not a recipe. Deriving `docker/<tag-stem>.Dockerfile` from it
-    # invents a path that does not exist (docker/my-runner.Dockerfile), so the documented override
-    # aborts the run on a fresh host. The tag is the override; the recipe stays the default one.
+def test_present_override_image_is_used_as_is_and_never_rebuilt(tmp_path):
+    # An override that EXISTS is honoured with a single inspect and no build: the user pinned a
+    # specific image, and the preflight must not second-guess or replace it.
+    #
+    # (An earlier revision built the DEFAULT recipe and stamped the override's tag on it, to avoid
+    # deriving a nonexistent docker/my-runner.Dockerfile. That is wrong now the workbench is
+    # per-language — it would hand a Rust or Java agent a python/node image with no cargo and no
+    # JDK. See test_missing_override_image_fails_loudly_instead_of_fabricating_one.)
     import os
-    fake = _FakeRun(1, 0)
+    fake = _FakeRun(0)                       # inspect -> present
     os.environ["CLAUDE_RUNNER_IMAGE"] = "my-runner:v1"
     try:
         _ensure_claude_runner("claudecode-dockerfile", repo_root=str(tmp_path), runner=fake)
     finally:
         del os.environ["CLAUDE_RUNNER_IMAGE"]
-    build = [c for c in fake.calls if c[1] == "build"][0]
-    assert build[3] == "my-runner:v1"                       # tagged as the override
-    assert build[5].endswith("claude-runner.Dockerfile")    # built from the default recipe
+    assert len(fake.calls) == 1
+    assert fake.calls[0] == ["docker", "image", "inspect", "my-runner:v1"]
 
 
 def test_native_claudecode_lane_always_gets_the_default_workbench(tmp_path):
@@ -187,3 +190,22 @@ def test_wrapped_repos_dataset_is_understood(tmp_path):
                           repos_json=str(p))
     tags = [c[3] for c in fake.calls if c[:3] == ["docker", "image", "inspect"]]
     assert tags == ["claude-runner-rust:latest"]
+
+
+def test_missing_override_image_fails_loudly_instead_of_fabricating_one(tmp_path):
+    # CLAUDE_RUNNER_IMAGE means "use exactly this image". If it is absent we cannot know what the
+    # user wanted inside it: building the default python/node recipe and stamping their tag on it
+    # hands a Rust or Java agent a workbench with no cargo and no JDK, and for a mixed-language
+    # dataset there is no single right recipe to guess. Fail loudly — that is the entire point of
+    # this preflight.
+    import os
+    import pytest as _pytest
+    fake = _FakeRun(1)                       # inspect -> missing
+    os.environ["CLAUDE_RUNNER_IMAGE"] = "my-runner:v1"
+    try:
+        with _pytest.raises(SystemExit) as exc:
+            _ensure_claude_runner("claudecode-dockerfile", repo_root=str(tmp_path), runner=fake)
+    finally:
+        del os.environ["CLAUDE_RUNNER_IMAGE"]
+    assert "my-runner:v1" in str(exc.value)
+    assert not any(c[1] == "build" for c in fake.calls)   # never guessed a recipe
