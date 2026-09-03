@@ -13,8 +13,8 @@ from __future__ import annotations
 
 import shlex
 
-# `RepoSpec` is re-exported by producers.base, whose import also puts bench/ on sys.path.
-from producers.base import RepoSpec
+# bench.schema is on the path via producers/__init__.py's shim, which runs before this module.
+from bench.schema import RepoSpec  # noqa: E402
 
 DEFAULT_BASE_IMAGE = "python:3.10"         # SetupX's own .env.example default. NOT ubuntu: every
                                            # bench command is `python -m ...` (bench/bench/languages/
@@ -81,7 +81,10 @@ def plan_replay(history: list | None) -> tuple:
 
         elif kind == "TRY_XPU_SUGGESTION":
             # FOUR outcomes, and they differ in what they leave on the snapshot stack.
-            stdout = result.get("stdout") or ""
+            # str(): `stdout` is another agent's JSON like every other field here, and a non-string
+            # would raise on .startswith — costing the WHOLE trajectory, since produce() turns any
+            # escape into status="error".
+            stdout = str(result.get("stdout") or "")
             if stdout.startswith("[XPU BLOCKED]"):
                 pass                       # returns BEFORE create_checkpoint; pushes no frame
             else:
@@ -97,8 +100,13 @@ def plan_replay(history: list | None) -> tuple:
                         steps.append(("lossy",))
                 elif stdout.startswith("[XPU SKIP]"):
                     pass                   # returns without rolling back; the frame SURVIVES
-                else:                      # [XPU FAIL] => auto-rollback of one frame (branch F)
-                    _truncate(steps, marks.pop())
+                elif stdout.startswith("[XPU FAIL]"):
+                    _truncate(steps, marks.pop())   # auto-rollback of one frame (branch F)
+                # Upstream enumerates exactly those four prefixes, so nothing should land here. An
+                # unrecognised one would mean upstream grew a fifth outcome: leave the frame ON the
+                # stack rather than guess, because popping a frame it did not push shifts every
+                # later ROLLBACK_ENV one frame too far — the same corruption SKIP is written to
+                # avoid. Keeping it only risks replaying work a rollback should have undone.
 
         elif kind == "ROLLBACK_ENV":
             # exit_code 1 => upstream found an empty stack and returned False without popping.
@@ -140,9 +148,15 @@ def render_replay(steps: list) -> str:
     is a PARSE error that aborts the whole script before `exit 0`, failing the build. A malformed
     command is a realistic trace member: upstream recorded the commands that failed too.
 
-    The `export` lines stay bare. They are ours and always well-formed, and a subshell would strip
-    them of their point: an env value containing a newline has its `ENV` instruction skipped, so the
-    export is the only thing carrying it to the steps that follow.
+    The `export` lines stay BARE — a subshell would strip them of their point: an env value
+    containing a newline has its `ENV` instruction skipped, so the export is the only thing carrying
+    it to the steps that follow. That is exactly why the KEY is gated on `isidentifier()` here, the
+    same predicate `render_dockerfile` applies: `env_key` is another agent's JSON, and bash does NOT
+    reject a bad name loudly — `export FOO BAR=x` exits 0, marking FOO exported-without-value and
+    setting BAR. A key holding a quote or backtick is worse: a parse error on a bare line swallows
+    the following steps into its string and aborts the whole script, so `RUN bash <replay>` fails
+    and the repo scores a false EBSR-0 charged to the agent. A `$(...)` key would run at build time.
+    Dropping the pair is the only safe reading; the ENV line is dropped for the same key anyway.
     """
     lines = ["#!/usr/bin/env bash",
              "# SetupX replay: the agent's surviving trajectory, folded into one build layer.",
@@ -150,7 +164,8 @@ def render_replay(steps: list) -> str:
              ""]
     for step in steps:
         if step[0] == "env":
-            lines.append(f"export {step[1]}={shlex.quote(step[2])}")
+            if str(step[1]).isidentifier():
+                lines.append(f"export {step[1]}={shlex.quote(step[2])}")
         else:
             lines.append("bash -c " + shlex.quote(f"cd {WORK_DIR} && {step[1]}"))
     # ponytail: no per-step timeout; bench's build_timeout bounds the whole layer. Add one
@@ -165,8 +180,15 @@ def render_dockerfile(repo: RepoSpec, steps: list, *,
     # `env_key`/`env_value` come out of another agent's JSON, so neither is trusted here. A newline
     # in the VALUE breaks the instruction (ENV has no line continuation); a KEY with a space
     # silently misfires into Docker's legacy `ENV key value` form, where `ENV FOO BAR='x'` sets FOO
-    # to "BAR='x'". Either way only the ENV line is dropped — the `export` in the replay script
-    # still carries the pair, and bash rejects a bad name loudly instead of mis-setting it.
+    # to "BAR='x'". A bad KEY is dropped from the replay script too (render_replay applies the same
+    # `isidentifier()` gate) — bash does not reject one loudly. A bad VALUE is dropped from the ENV
+    # only: the `export` still carries it to the steps that follow.
+    #
+    # ORDERING IS NOT FAITHFUL, and the exports do not make it so: every ENV is emitted before the
+    # replay RUN, so all vars are live from step 0, whereas upstream applied each only from its
+    # SET_ENV onward. The in-order exports cannot restore that — the Docker ENV already won. A
+    # command that behaved differently for having seen a var early is the (harmless in practice)
+    # cost; making it faithful means splitting the replay into one RUN per SET_ENV.
     env_lines = "".join(f"ENV {k}={shlex.quote(v)}\n"
                         for _, k, v in (s for s in steps if s[0] == "env")
                         if str(k).isidentifier() and "\n" not in v)
@@ -187,7 +209,12 @@ def render_dockerfile(repo: RepoSpec, steps: list, *,
         # (bench/bench/contract.py): a symlinked /testbed resolves to its physical path and is
         # classified non_conforming. So /testbed is the real dir; the reverse symlink keeps
         # venv/editable-install paths the replay baked in resolving.
-        f"RUN mv {WORK_DIR} /testbed && ln -sfn /testbed {WORK_DIR}\n"
+        # Guarded like producers/executionagent.py's _REHOME: the replay may have deleted the work
+        # dir (build fails on the `mv`) or created /testbed itself (the `mv` then lands the clone at
+        # /testbed/repo and bench measures an empty /testbed). Exit early once /testbed is a repo.
+        "RUN set -e; \\\n"
+        "    if [ -d /testbed/.git ]; then exit 0; fi; \\\n"
+        f"    mv {WORK_DIR} /testbed && ln -sfn /testbed {WORK_DIR}\n"
         # The probe is `git -C /testbed rev-parse --show-toplevel`, which fails closed to
         # non_conforming when git refuses the directory as dubiously owned.
         "RUN git config --global --add safe.directory /testbed\n"

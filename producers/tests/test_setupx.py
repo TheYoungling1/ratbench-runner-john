@@ -174,6 +174,16 @@ def test_history_that_is_not_a_list_of_entries_yields_no_steps():
     assert plan_replay([{"action": "not-a-dict", "result": None}]) == ([], False)
 
 
+def test_an_xpu_stdout_that_is_not_a_string_does_not_kill_the_trajectory():
+    # `stdout` is boundary JSON like every other field. Calling .startswith on a non-string raises,
+    # and produce() converts any escape into status="error" — losing the whole run over one entry.
+    entry = _xpu("pip install -e .", ok=True)
+    entry["result"]["stdout"] = ["[XPU SUCCESS]"]
+    steps, lossy = plan_replay([_shell("a"), entry])
+    assert steps == [("run", "a")]          # unrecognised outcome: no command, frame kept
+    assert lossy is False
+
+
 def test_a_rollback_whose_exit_code_is_a_string_still_rolls_back():
     # Reading "0" as a non-zero code would silently keep work the agent undid.
     entry = _rollback(1)
@@ -225,6 +235,16 @@ def test_the_repo_is_rehomed_to_testbed_with_a_reverse_symlink():
     assert "ln -sfn /testbed /workspace/repo" in df
     assert df.rstrip().endswith("WORKDIR /testbed")
     assert df.index("mv /workspace/repo /testbed") > df.index(REPLAY_BASENAME)
+
+
+def test_the_rehome_is_idempotent_like_the_executionagent_sibling():
+    # Bare `mv` breaks two ways the replay can really produce: if it deleted /workspace/repo the mv
+    # fails and takes the build with it, and if it created /testbed itself the mv lands the clone at
+    # /testbed/repo, leaving bench measuring an empty /testbed. Same guard as
+    # producers/executionagent.py's _REHOME.
+    df, _ = render_dockerfile(_repo(), [("run", "true")])
+    assert "if [ -d /testbed/.git ]; then exit 0; fi" in df
+    assert df.index("if [ -d /testbed/.git ]") < df.index("mv /workspace/repo /testbed")
 
 
 def test_safe_directory_is_declared_for_the_new_worktree_path():
@@ -305,15 +325,32 @@ def test_an_env_value_containing_a_dollar_sign_is_not_expanded():
     assert "export PROMPT='$HOME/x'" in scripts[REPLAY_BASENAME]
 
 
-def test_an_env_key_that_is_not_a_valid_name_never_reaches_the_dockerfile():
+def test_an_env_key_that_is_not_a_valid_name_reaches_neither_the_dockerfile_nor_the_replay():
     # `env_key` comes from another agent's JSON with only a truthiness check. A newline in the key
     # breaks the instruction outright; a space silently misfires into Docker's legacy `ENV key value`
-    # form, where `ENV FOO BAR='x'` sets FOO to "BAR='x'". bash rejects a bad name loudly, so the
-    # export can stay.
+    # form, where `ENV FOO BAR='x'` sets FOO to "BAR='x'". The export is NOT safe either: bash does
+    # not reject a bad name loudly (`export FOO BAR=x` exits 0, marking FOO exported-without-value
+    # and setting BAR), and it is the one line not wrapped in `bash -c`, so a key holding a quote
+    # takes the whole script down with it. Same gate, both emitters.
     df, scripts = render_dockerfile(_repo(), [("env", "FOO BAR", "x"), ("env", "A\nB", "y")])
     assert "ENV FOO BAR" not in df
     assert "ENV A" not in df
-    assert "export FOO BAR=x" in scripts[REPLAY_BASENAME]
+    assert "FOO BAR" not in scripts[REPLAY_BASENAME]
+    assert "A\nB" not in scripts[REPLAY_BASENAME]
+
+
+def test_a_malformed_env_key_cannot_take_the_rest_of_the_replay_with_it():
+    # The export line is bare, so an unbalanced quote in the KEY is a parse error that swallows the
+    # following steps into its string and aborts the script before `exit 0` — `RUN bash
+    # /tmp/setupx_replay.sh` then fails and the repo scores a false EBSR-0 charged to the agent.
+    # `$(...)` in a key would execute at build time. Neither may survive rendering.
+    _, scripts = render_dockerfile(_repo(), [("env", 'FOO"', "x"),
+                                             ("env", "X$(touch /pwned)", "y"),
+                                             ("run", "pip install -e .")])
+    body = scripts[REPLAY_BASENAME]
+    assert '"' not in body and "$(" not in body
+    # the surrounding step still runs
+    assert _replayed_commands(scripts) == ["cd /workspace/repo && pip install -e ."]
 
 
 def test_the_base_image_provides_the_python_binary_bench_invokes():
@@ -433,6 +470,47 @@ def test_child_env_points_setupx_at_the_pinned_mirror(monkeypatch):
     env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
     assert env["DOCKER_BASE_IMAGE"] == "setupx-mirror:o__r"
     assert env["DOCKER_WORK_DIR"] == "/workspace"
+
+
+def _fake_checkout(tmp_path, *, ckpt=True, calls=True):
+    """A directory shaped like a SetupX clone, patched or not."""
+    src = tmp_path / "src"
+    src.mkdir(parents=True, exist_ok=True)
+    (src / "main.py").write_text("# main\n")
+    (src / "environment_manager.py").write_text("def _ckpt_repo(self): ...\n" if ckpt else "pass\n")
+    (src / "llm_engine.py").write_text(
+        'os.environ.get("SETUPX_MAX_LLM_CALLS")\n' if calls else "pass\n")
+    return str(tmp_path)
+
+
+def test_setupx_root_accepts_a_patched_checkout(tmp_path):
+    from producers.setupx import _setupx_root
+    root = _fake_checkout(tmp_path)
+    assert _setupx_root(ProduceContext(llm=None, workdir=str(tmp_path), agent_root=root)) == root
+
+
+def test_setupx_root_refuses_a_checkout_without_the_call_budget_patch(tmp_path):
+    # Unpatched, SETUPX_MAX_LLM_CALLS is inert — and `--max-steps 9999` is passed deliberately
+    # BECAUSE the call cap is the real budget, so the run spends to the 3600s phase-1 alarm.
+    from producers.setupx import _setupx_root
+    root = _fake_checkout(tmp_path, calls=False)
+    with pytest.raises(RuntimeError, match="setupx-bench.patch"):
+        _setupx_root(ProduceContext(llm=None, workdir=str(tmp_path), agent_root=root))
+
+
+def test_setupx_root_refuses_a_checkout_without_the_checkpoint_namespace_patch(tmp_path):
+    # Unpatched, every concurrent repo shares one checkpoint image repository and rollbacks restore
+    # the wrong container — after which the replay no longer matches what the agent did.
+    from producers.setupx import _setupx_root
+    root = _fake_checkout(tmp_path, ckpt=False)
+    with pytest.raises(RuntimeError, match="setupx-bench.patch"):
+        _setupx_root(ProduceContext(llm=None, workdir=str(tmp_path), agent_root=root))
+
+
+def test_the_producers_own_call_budget_default_fails_safe():
+    # runner/benchmark.py's kwarg list is hardcoded; if `setupx` ever falls out of it this default
+    # is the budget. It must be the arm's real one (100 LLM calls), not something unbounded.
+    assert SetupXProducer().num_turn == 100
 
 
 def test_producer_emits_a_packet_from_a_stubbed_run(tmp_path):

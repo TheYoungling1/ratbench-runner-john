@@ -53,6 +53,25 @@ def _setupx_root(ctx: ProduceContext | None = None) -> str:
                 f"{os.path.join(root, name)} exists. SetupX loads it with override=True, which "
                 "would silently replace the model/endpoint/DSN this producer passes in. Remove it "
                 "— the producer supplies the whole environment.")
+    # tools/setupx-bench.patch adds the switches this producer's budget and isolation rest on. On an
+    # unpatched checkout they are inert and the failure is SILENT and expensive: SETUPX_MAX_LLM_CALLS
+    # does nothing, so `--max-steps 9999` (deliberately unbounded, because the call cap is the real
+    # budget) lets the run spend to the 3600s phase-1 alarm; and SETUPX_CKPT_NS does nothing, so at
+    # --concurrency > 1 every repo shares one checkpoint image repository and rollbacks restore the
+    # wrong container — after which the replayed trajectory no longer matches what the agent did.
+    for rel, marker in (("src/environment_manager.py", "_ckpt_repo"),
+                        ("src/llm_engine.py", "SETUPX_MAX_LLM_CALLS")):
+        try:
+            with open(os.path.join(root, rel), encoding="utf-8") as fh:
+                patched = marker in fh.read()
+        except OSError:
+            patched = False
+        if not patched:
+            raise RuntimeError(
+                f"{os.path.join(root, rel)} has no {marker}: tools/setupx-bench.patch is not "
+                "applied. Without it the LLM-call budget and the per-run checkpoint namespace are "
+                "both inert — the run spends unbounded to the phase-1 alarm, and concurrent repos "
+                "corrupt each other's rollbacks. Apply it (see README, 'SetupX setup').")
     return root
 
 
@@ -191,9 +210,11 @@ def run_setupx(repo: RepoSpec, ctx: ProduceContext, *, llm: str | None, num_turn
     # SHA. (git warns "--depth is ignored in local clones"; harmless.) One consequence: SetupX
     # names its report after the url basename, so every report here is `mirror_result.json` — the
     # glob below handles that, and out_dir is per-repo, so there is no collision.
+    # Before mirror_image, not after: `produce_s` feeds mean_produce_s and the cross-arm cost
+    # composite (bench/bench/metrics.py), and every other arm's clock covers its whole produce.
+    start = time.time()
     base_image = mirror_image(repo, ctx)
     ckpt_ns = f"{repo.full_name.replace('/', '__').lower()}_{os.getpid()}"
-    start = time.time()
     try:
         proc = subprocess.run(
             [python, "-m", "src.main", "/mirror",
@@ -239,7 +260,10 @@ class SetupXProducer:
     measurable = True
     conformance = "synthesized"
 
-    def __init__(self, llm: str | None = None, num_turn: int = 9999, runner=None):
+    # num_turn defaults to the variety's own budget (100 LLM CALLS), not to something unbounded:
+    # runner/benchmark.py's kwarg list is hardcoded, so a future edit dropping `setupx` from it
+    # would fall back to this default. Failing safe means failing at the arm's real budget.
+    def __init__(self, llm: str | None = None, num_turn: int = 100, runner=None):
         self.llm = llm
         self.num_turn = num_turn
         self._runner = runner   # injectable for tests; None => the real live runner
