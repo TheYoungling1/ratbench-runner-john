@@ -1,6 +1,8 @@
 # producers/tests/test_setupx.py — the SetupX trajectory transforms + SetupXProducer.
 #
 # SetupX is STUBBED (injected via runner=) — no SetupX checkout, no docker, no keys, no Postgres.
+import shlex
+
 from producers.base import RepoSpec
 from producers.setupx import REPLAY_BASENAME, plan_replay, render_dockerfile
 
@@ -185,6 +187,16 @@ def test_a_rollback_with_no_recorded_exit_code_still_rolls_back():
     assert plan_replay([_shell("a"), entry]) == ([], False)
 
 
+def _replayed_commands(scripts):
+    """The replayed commands as bash receives them, in order.
+
+    Each is one quoted argument to its own `bash -c`, and a multiline command spans several physical
+    lines, so unquote rather than reading the script text.
+    """
+    chunks = scripts[REPLAY_BASENAME].split("\nbash -c ")[1:]
+    return [shlex.split(chunk)[0] for chunk in chunks]
+
+
 def _repo(commit="abc123"):
     return RepoSpec("o/r", "https://github.com/o/r", commit=commit, language="python")
 
@@ -211,7 +223,7 @@ def test_the_repo_is_rehomed_to_testbed_with_a_reverse_symlink():
     df, _ = render_dockerfile(_repo(), [("run", "true")])
     assert "mv /workspace/repo /testbed" in df
     assert "ln -sfn /testbed /workspace/repo" in df
-    assert df.rstrip().endswith("WORKDIR /testbed") or "WORKDIR /testbed" in df
+    assert df.rstrip().endswith("WORKDIR /testbed")
     assert df.index("mv /workspace/repo /testbed") > df.index(REPLAY_BASENAME)
 
 
@@ -258,9 +270,50 @@ def test_the_replay_tolerates_failing_steps():
 
 
 def test_multiline_commands_survive_rendering():
+    # The command is quoted into a single `bash -c` argument, so it no longer appears raw in the
+    # script text — but it must arrive at bash byte-for-byte. Unquoting the line proves it does.
     heredoc = "cat > conftest.py <<'PY'\nimport sys\nPY"
     _, scripts = render_dockerfile(_repo(), [("run", heredoc)])
-    assert heredoc in scripts[REPLAY_BASENAME]
+    assert _replayed_commands(scripts) == [f"cd /workspace/repo && {heredoc}"]
+
+
+def test_a_malformed_command_cannot_take_the_rest_of_the_script_with_it():
+    # `set +e` survives non-zero exits, not parse errors: a bare line with an unbalanced quote makes
+    # bash abort the whole script (swallowing the following steps into its string) and the build
+    # fails at `RUN bash /tmp/setupx_replay.sh`. Upstream ran each command in its own
+    # `bash -c`, so a broken one failed alone; quoting each command into one argument restores that.
+    # A malformed command is a realistic trace member precisely because upstream recorded the
+    # commands that failed.
+    broken = "echo 'unbalanced"
+    _, scripts = render_dockerfile(_repo(), [("run", broken), ("run", "pip install -e .")])
+    assert _replayed_commands(scripts) == [f"cd /workspace/repo && {broken}",
+                                           "cd /workspace/repo && pip install -e ."]
+
+
+def test_env_exports_stay_bare_so_they_reach_the_steps_that_follow():
+    # The exports are ours and always well-formed, and a subshell would strip them of their point:
+    # a multiline value has its ENV line skipped, so the export is the ONLY thing carrying it to
+    # later commands.
+    _, scripts = render_dockerfile(_repo(), [("env", "PATCH", "line1\nline2"), ("run", "true")])
+    assert "\nexport PATCH=" in scripts[REPLAY_BASENAME]
+
+
+def test_an_env_value_containing_a_dollar_sign_is_not_expanded():
+    # The riskiest quoting case: unquoted, Docker and bash would both expand it away.
+    df, scripts = render_dockerfile(_repo(), [("env", "PROMPT", "$HOME/x")])
+    assert "ENV PROMPT='$HOME/x'" in df
+    assert "export PROMPT='$HOME/x'" in scripts[REPLAY_BASENAME]
+
+
+def test_an_env_key_that_is_not_a_valid_name_never_reaches_the_dockerfile():
+    # `env_key` comes from another agent's JSON with only a truthiness check. A newline in the key
+    # breaks the instruction outright; a space silently misfires into Docker's legacy `ENV key value`
+    # form, where `ENV FOO BAR='x'` sets FOO to "BAR='x'". bash rejects a bad name loudly, so the
+    # export can stay.
+    df, scripts = render_dockerfile(_repo(), [("env", "FOO BAR", "x"), ("env", "A\nB", "y")])
+    assert "ENV FOO BAR" not in df
+    assert "ENV A" not in df
+    assert "export FOO BAR=x" in scripts[REPLAY_BASENAME]
 
 
 def test_the_base_image_provides_the_python_binary_bench_invokes():

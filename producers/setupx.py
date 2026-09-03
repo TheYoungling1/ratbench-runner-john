@@ -138,8 +138,16 @@ def render_replay(steps: list) -> str:
     """Render the surviving steps as ONE bash script.
 
     `set +e` because the agent's own run continued past non-zero exits — a `set -e` replay would
-    abort the build on the first probe command upstream shrugged off. Each step re-enters the work
-    dir because upstream ran every command in its own `bash -c "cd /workspace/repo && ..."`.
+    abort the build on the first probe command upstream shrugged off. Each command is handed to its
+    own `bash -c` as ONE quoted argument, exactly as upstream ran it: that re-enters the work dir
+    (a `cd` never leaks into the next step) and, more importantly, contains a malformed command.
+    `set +e` only survives non-zero exits — a bare line with an unbalanced quote or a trailing `#`
+    is a PARSE error that aborts the whole script before `exit 0`, failing the build. A malformed
+    command is a realistic trace member: upstream recorded the commands that failed too.
+
+    The `export` lines stay bare. They are ours and always well-formed, and a subshell would strip
+    them of their point: an env value containing a newline has its `ENV` instruction skipped, so the
+    export is the only thing carrying it to the steps that follow.
     """
     lines = ["#!/usr/bin/env bash",
              "# SetupX replay: the agent's surviving trajectory, folded into one build layer.",
@@ -149,7 +157,7 @@ def render_replay(steps: list) -> str:
         if step[0] == "env":
             lines.append(f"export {step[1]}={shlex.quote(step[2])}")
         else:
-            lines.append(f"cd {WORK_DIR} && {step[1]}")
+            lines.append("bash -c " + shlex.quote(f"cd {WORK_DIR} && {step[1]}"))
     # ponytail: no per-step timeout; bench's build_timeout bounds the whole layer. Add one
     # (upstream's DOCKER_TIMEOUT is 300s) if a hung step ever becomes a real failure mode.
     lines += ["", "exit 0"]
@@ -159,11 +167,14 @@ def render_replay(steps: list) -> str:
 def render_dockerfile(repo: RepoSpec, steps: list, *,
                       base_image: str = DEFAULT_BASE_IMAGE) -> tuple:
     """Render the conforming Dockerfile + its COPY siblings. Returns ``(dockerfile, scripts)``."""
-    # A newline inside an ENV value breaks the instruction (ENV has no line continuation). The
-    # `export` in the replay script still carries it, so drop only the ENV line.
+    # `env_key`/`env_value` come out of another agent's JSON, so neither is trusted here. A newline
+    # in the VALUE breaks the instruction (ENV has no line continuation); a KEY with a space
+    # silently misfires into Docker's legacy `ENV key value` form, where `ENV FOO BAR='x'` sets FOO
+    # to "BAR='x'". Either way only the ENV line is dropped — the `export` in the replay script
+    # still carries the pair, and bash rejects a bad name loudly instead of mis-setting it.
     env_lines = "".join(f"ENV {k}={shlex.quote(v)}\n"
                         for _, k, v in (s for s in steps if s[0] == "env")
-                        if "\n" not in v)
+                        if str(k).isidentifier() and "\n" not in v)
     df = (
         f"FROM {base_image}\n"
         "RUN apt-get update \\\n"
