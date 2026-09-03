@@ -14,10 +14,18 @@
 # `plan_replay` mirrors EnvironmentManager.rollback_to_checkpoint exactly; see the tests.
 from __future__ import annotations
 
+import shlex
+
 from producers.base import ProduceContext, ProducedEnv
 
 # bench.schema is on the path via producers.base's shim (imported above).
 from bench.schema import RepoSpec  # noqa: E402
+
+DEFAULT_BASE_IMAGE = "python:3.10"         # SetupX's own .env.example default. NOT ubuntu: every
+                                           # bench command is `python -m ...` (bench/bench/languages/
+                                           # python.py) and ubuntu ships python3 only, with no pip.
+WORK_DIR = "/workspace/repo"               # DOCKER_WORK_DIR + "/repo"; where the agent worked
+REPLAY_BASENAME = "setupx_replay.sh"
 
 
 def _as_dict(value) -> dict:
@@ -114,3 +122,72 @@ def plan_replay(history: list | None) -> tuple:
     # documented step shapes.
     lossy = any(s[0] == "lossy" for s in steps)
     return [s for s in steps if s[0] != "lossy"], lossy
+
+
+def _clone_lines(repo: RepoSpec) -> str:
+    """The pinned clone, in the exact shape the README's commit-pinning invariant prescribes."""
+    if not repo.commit:
+        # No dataset SHA: shallow-clone the default branch, same as SetupX's own bootstrap.
+        return f"RUN git clone --depth=1 {repo.repo_url} {WORK_DIR}\n"
+    return (f"RUN git clone {repo.repo_url} {WORK_DIR} \\\n"
+            f" && git -C {WORK_DIR} fetch --depth 1 origin {repo.commit} \\\n"
+            f" && git -C {WORK_DIR} checkout --detach {repo.commit}\n")
+
+
+def render_replay(steps: list) -> str:
+    """Render the surviving steps as ONE bash script.
+
+    `set +e` because the agent's own run continued past non-zero exits — a `set -e` replay would
+    abort the build on the first probe command upstream shrugged off. Each step re-enters the work
+    dir because upstream ran every command in its own `bash -c "cd /workspace/repo && ..."`.
+    """
+    lines = ["#!/usr/bin/env bash",
+             "# SetupX replay: the agent's surviving trajectory, folded into one build layer.",
+             "set +e",
+             ""]
+    for step in steps:
+        if step[0] == "env":
+            lines.append(f"export {step[1]}={shlex.quote(step[2])}")
+        else:
+            lines.append(f"cd {WORK_DIR} && {step[1]}")
+    # ponytail: no per-step timeout; bench's build_timeout bounds the whole layer. Add one
+    # (upstream's DOCKER_TIMEOUT is 300s) if a hung step ever becomes a real failure mode.
+    lines += ["", "exit 0"]
+    return "\n".join(lines) + "\n"
+
+
+def render_dockerfile(repo: RepoSpec, steps: list, *,
+                      base_image: str = DEFAULT_BASE_IMAGE) -> tuple:
+    """Render the conforming Dockerfile + its COPY siblings. Returns ``(dockerfile, scripts)``."""
+    # A newline inside an ENV value breaks the instruction (ENV has no line continuation). The
+    # `export` in the replay script still carries it, so drop only the ENV line.
+    env_lines = "".join(f"ENV {k}={shlex.quote(v)}\n"
+                        for _, k, v in (s for s in steps if s[0] == "env")
+                        if "\n" not in v)
+    df = (
+        f"FROM {base_image}\n"
+        "RUN apt-get update \\\n"
+        " && apt-get install -y --no-install-recommends git ca-certificates \\\n"
+        " && rm -rf /var/lib/apt/lists/*\n"
+        + _clone_lines(repo) +
+        f"WORKDIR {WORK_DIR}\n"
+        + env_lines +
+        f"COPY {REPLAY_BASENAME} /tmp/{REPLAY_BASENAME}\n"
+        f"RUN bash /tmp/{REPLAY_BASENAME}\n"
+        # No pytest guard here: bench runs its own `_ENSURE` (`python -m pip install -q pytest
+        # pytest-timeout`) before the gate, and it needs `python` on PATH — which is why the base
+        # image is python:3.10 and not ubuntu.
+        # bench compares `git -C /testbed rev-parse --show-toplevel` to "/testbed"
+        # (bench/bench/contract.py): a symlinked /testbed resolves to its physical path and is
+        # classified non_conforming. So /testbed is the real dir; the reverse symlink keeps
+        # venv/editable-install paths the replay baked in resolving.
+        f"RUN mv {WORK_DIR} /testbed && ln -sfn /testbed {WORK_DIR}\n"
+        # The probe is `git -C /testbed rev-parse --show-toplevel`, which fails closed to
+        # non_conforming when git refuses the directory as dubiously owned.
+        "RUN git config --global --add safe.directory /testbed\n"
+        # ponytail: two guessed venv names. The agent may create a venv anywhere; a non-existent
+        # PATH entry is harmless. Parse the replay for the real path if this ever misses.
+        "ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n"
+        "WORKDIR /testbed\n"
+    )
+    return df, {REPLAY_BASENAME: render_replay(steps)}

@@ -1,7 +1,8 @@
 # producers/tests/test_setupx.py — the SetupX trajectory transforms + SetupXProducer.
 #
 # SetupX is STUBBED (injected via runner=) — no SetupX checkout, no docker, no keys, no Postgres.
-from producers.setupx import plan_replay
+from producers.base import RepoSpec
+from producers.setupx import REPLAY_BASENAME, plan_replay, render_dockerfile
 
 
 def _shell(cmd, exit_code=0):
@@ -182,3 +183,88 @@ def test_a_rollback_with_no_recorded_exit_code_still_rolls_back():
     entry = _rollback(1)
     del entry["result"]["exit_code"]
     assert plan_replay([_shell("a"), entry]) == ([], False)
+
+
+def _repo(commit="abc123"):
+    return RepoSpec("o/r", "https://github.com/o/r", commit=commit, language="python")
+
+
+def test_the_clone_is_pinned_to_the_dataset_sha_before_anything_is_installed():
+    df, scripts = render_dockerfile(_repo(), [("run", "pip install -e .")])
+    assert "git clone https://github.com/o/r /workspace/repo" in df
+    assert "fetch --depth 1 origin abc123" in df
+    assert "checkout --detach abc123" in df
+    assert df.index("checkout --detach abc123") < df.index(REPLAY_BASENAME)
+
+
+def test_a_repo_with_no_commit_clones_shallow_without_a_pin():
+    df, _ = render_dockerfile(_repo(commit=None), [("run", "true")])
+    assert "git clone --depth=1 https://github.com/o/r /workspace/repo" in df
+    assert "checkout --detach" not in df
+
+
+def test_the_repo_is_rehomed_to_testbed_with_a_reverse_symlink():
+    # bench probes `git -C /testbed rev-parse --show-toplevel` and compares it to "/testbed"
+    # (bench/bench/contract.py); a symlinked /testbed resolves to its physical path, mismatches, and
+    # is classified non_conforming. So /testbed must be the real directory; the reverse symlink
+    # keeps paths the replay baked in resolving.
+    df, _ = render_dockerfile(_repo(), [("run", "true")])
+    assert "mv /workspace/repo /testbed" in df
+    assert "ln -sfn /testbed /workspace/repo" in df
+    assert df.rstrip().endswith("WORKDIR /testbed") or "WORKDIR /testbed" in df
+    assert df.index("mv /workspace/repo /testbed") > df.index(REPLAY_BASENAME)
+
+
+def test_safe_directory_is_declared_for_the_new_worktree_path():
+    # bench's contract probe classifies the container by `git -C /testbed rev-parse --show-toplevel`,
+    # which fails closed to non_conforming if git refuses the directory as dubiously owned.
+    df, _ = render_dockerfile(_repo(), [("run", "true")])
+    assert "safe.directory /testbed" in df
+    assert df.index("mv /workspace/repo /testbed") < df.index("safe.directory /testbed")
+
+
+def test_env_steps_become_both_an_export_in_the_replay_and_a_dockerfile_env():
+    # export: so later replayed commands see it, as they did under SetupX's `environment=`.
+    # ENV: so it is still set in the container bench measures.
+    # Use a value that actually needs quoting: shlex.quote("-O0") is a no-op, so asserting on
+    # "ENV CFLAGS='-O0'" would fail against a correct renderer.
+    df, scripts = render_dockerfile(_repo(), [("env", "CFLAGS", "-O0 -g"), ("run", "pip install -e .")])
+    assert "ENV CFLAGS='-O0 -g'" in df
+    assert "export CFLAGS='-O0 -g'" in scripts[REPLAY_BASENAME]
+
+
+def test_a_multiline_env_value_is_left_out_of_the_dockerfile_but_kept_in_the_replay():
+    # ENV has no line continuation, so a newline in the value is a Dockerfile parse error. The
+    # export in the replay script still carries it, and bash handles it fine.
+    df, scripts = render_dockerfile(_repo(), [("env", "PATCH", "line1\nline2")])
+    assert "ENV PATCH" not in df
+    assert "export PATCH=" in scripts[REPLAY_BASENAME]
+
+
+def test_every_replayed_command_reenters_the_work_dir_like_upstream_did():
+    # Upstream runs each command as `bash -c "cd /workspace/repo && <cmd>"`, so a `cd` in one
+    # command never leaked into the next. Re-cd-ing before each step reproduces that.
+    _, scripts = render_dockerfile(_repo(), [("run", "cd docs"), ("run", "pip install -e .")])
+    body = scripts[REPLAY_BASENAME]
+    assert body.count("cd /workspace/repo &&") == 2
+
+
+def test_the_replay_tolerates_failing_steps():
+    # The agent's own run continued past non-zero exits; a `set -e` replay would abort the build on
+    # the first probe command that upstream shrugged off.
+    _, scripts = render_dockerfile(_repo(), [("run", "false")])
+    assert "set +e" in scripts[REPLAY_BASENAME]
+    assert scripts[REPLAY_BASENAME].rstrip().endswith("exit 0")
+
+
+def test_multiline_commands_survive_rendering():
+    heredoc = "cat > conftest.py <<'PY'\nimport sys\nPY"
+    _, scripts = render_dockerfile(_repo(), [("run", heredoc)])
+    assert heredoc in scripts[REPLAY_BASENAME]
+
+
+def test_the_base_image_provides_the_python_binary_bench_invokes():
+    # Every bench command is `python -m ...` (bench/bench/languages/python.py); ubuntu:22.04 ships
+    # python3 only and no pip, which would fail the gate for a reason that is not the environment.
+    df, _ = render_dockerfile(_repo(), [("run", "true")])
+    assert df.startswith("FROM python:3.10\n")
