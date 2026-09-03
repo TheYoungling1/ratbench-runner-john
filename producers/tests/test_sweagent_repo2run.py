@@ -650,3 +650,79 @@ def test_agent_settings_survive_the_no_dockerfile_failure_path(tmp_path):
     write_env_packet(str(tmp_path), env)
     meta = json.load(open(os.path.join(str(tmp_path), "o", "r", "_meta.json")))
     assert meta["agent_settings"]["thinking"] == "disabled"
+
+
+# ── DSML structured tool-call form ───────────────────────────────────────────────────────────
+# The simple <...DSML...bash>cmd</...> shape above is the easy case. DeepSeek far more often emits
+# Anthropic-style tool-call XML wrapping the REAL SWE-agent commands; a naive tag-strip leaves the
+# inner tags inside the command and bash dies with "syntax error near unexpected token `newline'".
+# Bytes below are copied verbatim from run-20260903-152104 on the VM.
+_DSML_STRUCTURED = (
+    'DISCUSSION\nLet me start by exploring the repository structure.\n\n'
+    '<｜｜DSML｜｜tool_calls>\n<｜｜DSML｜｜invoke name="bash">\n'
+    '<｜｜DSML｜｜parameter name="command" string="true">ls -la /repo/</｜｜DSML｜｜parameter>\n'
+    '</｜｜DSML｜｜invoke>\n</｜｜DSML｜｜tool_calls>')
+
+
+def _last_fenced(text):
+    import re
+    blocks = re.findall(r"^```\S*\s*\n(.*?)^```\s*$", text + "\n", re.MULTILINE | re.DOTALL)
+    return blocks[-1].strip() if blocks else None
+
+
+def test_structured_dsml_tool_call_becomes_the_bare_command():
+    from producers.sweagent_repo2run_runner import normalize_dsml_fences
+
+    out = normalize_dsml_fences(_DSML_STRUCTURED)
+    assert "DSML" not in out and "invoke" not in out and "parameter" not in out
+    assert _last_fenced(out) == "ls -la /repo/"
+
+
+def test_structured_dsml_renders_each_command_to_its_documented_signature():
+    """Signatures come from the command_docs the agent is shown; a wrong rendering would be
+    executed as a bash line and fail, which is how the tag-strip version broke."""
+    from producers.sweagent_repo2run_runner import normalize_dsml_fences
+
+    def invoke(name, **params):
+        inner = "".join(
+            f'<｜｜DSML｜｜parameter name="{k}" string="true">{v}</｜｜DSML｜｜parameter>\n'
+            for k, v in params.items())
+        return f'D\n<｜｜DSML｜｜invoke name="{name}">\n{inner}</｜｜DSML｜｜invoke>'
+
+    assert _last_fenced(normalize_dsml_fences(invoke("scroll_down"))) == "scroll_down"
+    assert _last_fenced(normalize_dsml_fences(invoke("goto", line_number="42"))) == "goto 42"
+    assert _last_fenced(normalize_dsml_fences(
+        invoke("open", path="/repo/setup.py", line_number="42"))) == "open /repo/setup.py 42"
+    assert _last_fenced(normalize_dsml_fences(
+        invoke("open", path="/repo/setup.py"))) == "open /repo/setup.py"
+    assert _last_fenced(normalize_dsml_fences(
+        invoke("find_file", file_name="*.cfg"))) == "find_file '*.cfg'"
+    # a search term with a space MUST come out quoted or it parses as two arguments
+    assert _last_fenced(normalize_dsml_fences(
+        invoke("search_dir", search_term="import torch", dir="/repo"))) == \
+        "search_dir 'import torch' /repo"
+
+
+def test_structured_dsml_edit_keeps_replacement_text_and_terminator():
+    from producers.sweagent_repo2run_runner import normalize_dsml_fences
+
+    raw = ('D\n<｜｜DSML｜｜invoke name="edit">\n'
+           '<｜｜DSML｜｜parameter name="start_line" string="true">1</｜｜DSML｜｜parameter>\n'
+           '<｜｜DSML｜｜parameter name="end_line" string="true">2</｜｜DSML｜｜parameter>\n'
+           '<｜｜DSML｜｜parameter name="replacement_text" string="true">FROM python:3.10\n'
+           'RUN pip install -e .</｜｜DSML｜｜parameter>\n</｜｜DSML｜｜invoke>')
+    assert _last_fenced(normalize_dsml_fences(raw)) == (
+        "edit 1:2\nFROM python:3.10\nRUN pip install -e .\nend_of_edit")
+
+
+def test_unknown_dsml_command_degrades_instead_of_leaving_tags_behind():
+    """An unrecognised tool must still produce a clean line: the tool rejects it and the agent
+    recovers, whereas a leftover tag is executed by bash and burns the episode."""
+    from producers.sweagent_repo2run_runner import normalize_dsml_fences
+
+    out = normalize_dsml_fences(
+        'D\n<｜｜DSML｜｜invoke name="teleport">\n'
+        '<｜｜DSML｜｜parameter name="x" string="true">1</｜｜DSML｜｜parameter>\n'
+        '</｜｜DSML｜｜invoke>')
+    assert "DSML" not in out
+    assert _last_fenced(out) == "teleport 1"
