@@ -187,7 +187,7 @@ def v1g_token_telemetry(repo_dir: str) -> Optional[Dict[str, int]]:
 
 def agent_meta_telemetry(repo_dir: str) -> Optional[Dict[str, Any]]:
     """Per-experiment agent economy from the result-row meta. claudecode emits these
-    via its stream-json action log (agent_turns, agent_cost_usd). Arm-agnostic — any
+    via its stream-json action log (agent_turns = LLM calls, agent_cost_usd). Arm-agnostic — any
     model that writes them lights up. None if the row or both fields are absent."""
     p = os.path.join(repo_dir, "_result_row.json")
     if not os.path.exists(p):
@@ -554,7 +554,7 @@ def main(argv: List[str]) -> int:
         ["steps are per-arm and NOT conflated: arm0 step = one LLM call ([Tokens] line); v1g step = env-mutating ledger entry.",
          "agentLoopTok = agent-loop tokens only. arm0 synth + image_selector tokens are N/A (PARTIAL — overwritten workplace).",
          "rat/repo2run carry no agent token/step telemetry => N/A. v1g token/step N/A until the A2/A3 re-run emits them.",
-         "turns[cc] = claude agent num_turns; cost$[cc] = claude agent total_cost_usd (stream-json meta). N/A where unrecorded."],
+         "turns[cc] = claude agent LLM calls; cost$[cc] = claude agent total_cost_usd (stream-json meta). N/A where unrecorded."],
     )
 
     # ---- T5 Intersection economy (gated behind status != running) ----------------------------
@@ -594,7 +594,7 @@ def main(argv: List[str]) -> int:
              ("envMutSteps[v1g]", 16), ("agentLoopTok", 12), ("turns[cc]", 9), ("cost$[cc]", 9)],
             t5_rows,
             ["Same per-arm telemetry rules as T4; N/A where the arm carries no token/step signal.",
-             "turns[cc]/cost$[cc] = claude agent num_turns / total_cost_usd from stream-json meta."],
+             "turns[cc]/cost$[cc] = claude agent LLM calls / total_cost_usd from stream-json meta."],
         )
 
     print("\n" + "=" * 96)

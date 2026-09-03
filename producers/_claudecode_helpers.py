@@ -12,6 +12,11 @@ from typing import Optional
 
 W = "/testbed"
 AUTH_KEYS = ("CLAUDE_CODE_OAUTH_TOKEN", "ANTHROPIC_API_KEY")
+# Env forwarded into the workbench container. ANTHROPIC_BASE_URL points the CLI at an
+# Anthropic-COMPATIBLE third-party endpoint (e.g. https://api.deepseek.com/anthropic, which maps
+# sonnet/haiku -> deepseek-v4-flash), so the Claude Code lanes can run the same LLM as the other
+# varieties. Auth still comes from AUTH_KEYS (there, ANTHROPIC_API_KEY = the DeepSeek key).
+ENV_KEYS = AUTH_KEYS + ("ANTHROPIC_BASE_URL",)
 DOCKERFILE_GEN_PATH = "/testbed/Dockerfile.gen"
 
 # The Claude Code CLI accepts model aliases (sonnet/opus/haiku) or full IDs.
@@ -23,6 +28,93 @@ def _as_text(v) -> str:
     if v is None:
         return ""
     return v.decode("utf-8", "replace") if isinstance(v, bytes) else v
+
+
+def _is_assistant_event(line: str) -> bool:
+    """One stream-json `assistant` event == one model response == one LLM call, which is both the
+    unit SWE-agent's per_instance_call_limit counts and what the reports call a turn."""
+    try:
+        return json.loads(line).get("type") == "assistant"
+    except Exception:                    # noqa: BLE001 — partial/garbage lines are not turns
+        return False
+
+
+def run_claude_capped(cmd: list, timeout, stdin_text: str | None = None,
+                      max_turns: int | None = None) -> dict:
+    """Run the Claude Code CLI under a TURN cap, returning ``{stdout, stderr, turns, timed_out}``.
+
+    The CLI has no turn flag — 2.1.258 ships ``--max-budget-usd`` and nothing else — and a dollar
+    cap is not a step budget, least of all against a DeepSeek-priced arm. So the cap is enforced
+    from outside: read the stream-json as it arrives, count `assistant` events, stop at the Nth.
+
+    Partial output is the POINT, not an edge case: a capped (or walled) run emits no final
+    `result` event, so the events already read are the only record of what the agent did. stderr
+    goes to a temp file rather than a pipe because nothing drains a second pipe while stdout is
+    read line-by-line, and a full stderr pipe would deadlock the agent.
+
+    Killing the process here kills the local `docker exec` CLIENT only — call `stop_agent` to stop
+    the agent inside the container.
+    """
+    import subprocess
+    import tempfile
+    import threading
+
+    chunks: list = []
+    turns = 0
+    walled = threading.Event()
+    with tempfile.TemporaryFile("w+", encoding="utf-8", errors="replace") as errf:
+        proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=errf,
+                                text=True, encoding="utf-8", errors="replace")
+
+        def _wall():
+            walled.set()
+            proc.kill()
+
+        timer = threading.Timer(max(1, int(timeout)), _wall)
+        timer.start()
+        try:
+            if stdin_text is not None:
+                try:
+                    proc.stdin.write(stdin_text)
+                except OSError:          # BrokenPipe: the agent died first; keep what it emitted
+                    pass
+            proc.stdin.close()
+            for line in proc.stdout:
+                chunks.append(line)
+                if _is_assistant_event(line):
+                    turns += 1
+                    if max_turns and turns >= max_turns:
+                        break
+        finally:
+            timer.cancel()
+            proc.kill()
+            proc.wait()
+            errf.seek(0)
+            stderr = errf.read()
+    return {"stdout": "".join(chunks), "stderr": stderr, "turns": turns,
+            "timed_out": walled.is_set()}
+
+
+def stop_agent(container: str) -> None:
+    """Kill everything the `agent` user is running inside `container`. Best-effort.
+
+    Killing the local `docker exec` client does NOT stop the process it started inside the
+    container, and what runs next races it: the live lane runs pytest in that SAME container, and
+    the Dockerfile lane copies Dockerfile.gen out of it. So an agent stopped by the turn cap or by
+    the wall would otherwise keep installing packages into the env being scored.
+
+    `kill -9 -1` run AS `agent` signals every process that account owns and nothing root owns, so
+    PID 1 survives and the container stays up. pkill would be the obvious tool, but the slim
+    workbench has no procps (measured: `command -v pkill` is empty in python:3.11-slim) — `kill`
+    is a shell builtin and always there.
+    """
+    import subprocess
+    try:
+        subprocess.run(["docker", "exec", "-u", "agent", container, "sh", "-c", "kill -9 -1"],
+                       check=False, timeout=60,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except Exception:                    # noqa: BLE001 — a failed cleanup must not sink the run
+        pass
 
 
 def _normalize_model(llm: str) -> str:

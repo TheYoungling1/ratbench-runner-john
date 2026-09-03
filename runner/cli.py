@@ -219,6 +219,10 @@ def main(argv=None) -> int:
     llm = args.llm if args.llm is not None else spec.llm
     if llm is not None:
         llm = llm.strip() or None
+    # Same precedence for the step budget. Without a per-variety value every arm inherits
+    # benchmark.py's --num-turn default of 30, which silently equalises budgets that the methods
+    # are not actually comparable on (see the sweagent budget note in the README).
+    num_turn = args.num_turn if args.num_turn is not None else spec.num_turn
 
     harness_commit = git_commit(REPO_ROOT)
     if spec.is_baseline:
@@ -236,19 +240,33 @@ def main(argv=None) -> int:
     out = output_dir(spec.name, args.run_name, time.time())
     env = build_env(spec, agent_root, harness_commit, agent_commit)
 
+    # Reproducibility provenance (design items 1/2/5/6), computed once per run, best-effort —
+    # none of this may ever be why a run fails to start.
+    sweagent_venv_py = os.environ.get("SWEAGENT_VENV_PY", "/opt/sweagent_venv/bin/python")
+    sweagent_commit = manifest.sweagent_commit(model, sweagent_venv_py)
+    sweagent_config = None
+    if model == "sweagent_repo2run":
+        cfg_src = os.path.join(REPO_ROOT, "producers", "sweagent_repo2run_config.yaml")
+        sweagent_config = manifest.copy_sweagent_config(cfg_src, out)
+    host = manifest.host_platform()
+    dataset_path = args.repos_json or os.path.join(REPO_ROOT, "datasets", "rat_python50.json")
+    dataset = manifest.dataset_provenance(dataset_path)
+
     # bench owns the run-level manifest: written here at run START so it exists
     # regardless of which runner exit path executes (--only worker mode, sequential,
     # or the --concurrency scheduler). Status updated to done/failed after the run.
     manifest.write_manifest(out, **manifest.manifest_fields_from_env(
-        model=model, tier=args.tier, num_turn=args.num_turn,
-        concurrency=args.concurrency, status="running"))
+        model=model, tier=args.tier, num_turn=num_turn,
+        concurrency=args.concurrency, status="running",
+        sweagent_commit=sweagent_commit, sweagent_config=sweagent_config,
+        host=host, dataset=dataset))
 
     cmd = [sys.executable, os.path.join(RUNNER_ROOT, "benchmark.py"),
            "--model", model, "--tier", args.tier, "--root-path", out]
     if args.concurrency is not None:
         cmd += ["--concurrency", str(args.concurrency)]
-    if args.num_turn is not None:
-        cmd += ["--num-turn", str(args.num_turn)]
+    if num_turn is not None:
+        cmd += ["--num-turn", str(num_turn)]
     if args.limit is not None:
         cmd += ["--limit", str(args.limit)]
     if args.only is not None:

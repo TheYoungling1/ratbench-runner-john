@@ -35,7 +35,8 @@ def _ensure_test_runner(dockerfile: str, language: str) -> str:
     return dockerfile.rstrip() + "\n" + install + "\n"
 
 
-def _capture_claude_stream(claude_cmd: list, timeout, stdin_text: str | None = None) -> tuple:
+def _capture_claude_stream(claude_cmd: list, timeout, stdin_text: str | None = None,
+                           max_turns: int | None = None) -> tuple:
     """Run the Claude Code CLI and return its ``(stdout, stderr)`` as text.
 
     ``stdin_text`` carries the PROMPT. It is fed on stdin rather than as an argv operand because
@@ -51,7 +52,12 @@ def _capture_claude_stream(claude_cmd: list, timeout, stdin_text: str | None = N
     both, so a timed-out run still yields its partial trajectory rather than a ``b'...'`` repr or
     a crash. Split out from the call site so this decoding is unit-testable without Docker."""
     import subprocess
-    from producers._claudecode_helpers import _as_text
+    from producers._claudecode_helpers import _as_text, run_claude_capped
+    if max_turns:
+        # The capped path streams the events instead of buffering them, so it can stop the agent
+        # on the Nth LLM call. Same (stdout, stderr) contract; the wall is enforced there too.
+        res = run_claude_capped(claude_cmd, timeout, stdin_text=stdin_text, max_turns=max_turns)
+        return res["stdout"], res["stderr"]
     try:
         proc = subprocess.run(claude_cmd, capture_output=True, text=True, timeout=timeout,
                               input=stdin_text)
@@ -95,7 +101,11 @@ def _persist_stream(out_dir: str, stdout: str, stderr: str) -> dict:
     return {
         "tokens_in": info["tokens_in"], "tokens_out": info["tokens_out"],
         "total_tokens": info["total_tokens"], "llm_calls": info["llm_calls"],
-        "turns_used": info["turns"], "cost_usd": info["cost_usd"],
+        # A turn IS an LLM call, so turns_used == llm_calls. NOT the CLI's own num_turns
+        # (info["turns"]): that counts user+assistant, and only a run reaching its final
+        # `result` event has one — a capped or walled run would report None and read as
+        # converged to bench.verdict.
+        "turns_used": info["llm_calls"], "cost_usd": info["cost_usd"],
         "tool_calls": info["tool_calls"], "agent_is_error": info["is_error"],
         "rate_limited": info["rate_limited"],
     }
@@ -118,7 +128,8 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
     # runner package or RAT model modules (dependency direction: producers must not depend
     # on the runner).
     from producers._claudecode_helpers import (
-        W, AUTH_KEYS, _normalize_model, build_prompt, get_profile, resolve_base,
+        W, AUTH_KEYS, ENV_KEYS, _normalize_model, build_prompt, get_profile, resolve_base,
+        stop_agent,
         resolve_workbench, DOCKERFILE_GEN_PATH,
     )
     # download_repo/init_output_and_repo are libkit utilities (producers may use libkit).
@@ -138,9 +149,9 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
     # asked to set up a Rust or Java repo inside it has no cargo and no JDK, so it cannot run the
     # gate it is being scored on. CLAUDE_RUNNER_IMAGE remains a global override.
     base_image = resolve_workbench(profile, os.environ.get("CLAUDE_RUNNER_IMAGE"))
-    auth = {k: os.environ[k] for k in AUTH_KEYS if os.environ.get(k)}
-    if not auth:
+    if not any(os.environ.get(k) for k in AUTH_KEYS):
         raise RuntimeError("set CLAUDE_CODE_OAUTH_TOKEN or ANTHROPIC_API_KEY")
+    auth = {k: os.environ[k] for k in ENV_KEYS if os.environ.get(k)}
 
     root_path = ctx.workdir
     full_name = repo.full_name
@@ -178,7 +189,11 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
             "--max-budget-usd", str(max_budget), "--model", _normalize_model(llm),
             "--output-format", "stream-json", "--verbose",
         ]
-        stdout, stderr = _capture_claude_stream(claude_cmd, ctx.timeout, prompt)
+        stdout, stderr = _capture_claude_stream(claude_cmd, ctx.timeout, prompt,
+                                                max_turns=ctx.num_turn)
+        # The cap and the wall both kill the docker exec client only; the agent keeps
+        # mutating /testbed unless it is stopped inside the container BEFORE the copy.
+        stop_agent(container)
 
         try:
             subprocess.run(["docker", "cp", f"{container}:{DOCKERFILE_GEN_PATH}", gen_dst],

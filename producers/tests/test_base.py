@@ -2,7 +2,7 @@
 import json
 import os
 
-from producers.base import ProducedEnv, RepoSpec, write_env_packet
+from producers.base import ProducedEnv, RepoSpec, inject_clone_pin, write_env_packet
 
 
 def _repo(full_name="o/r"):
@@ -92,3 +92,39 @@ def test_rewrite_to_unmeasurable_removes_stale_eval_build(tmp_path):
     assert os.path.isdir(os.path.join(str(tmp_path), "o", "rewrite2", "eval_build"))
     write_env_packet(str(tmp_path), ProducedEnv(repo=repo, dockerfile=None, status="unmeasurable"))
     assert not os.path.isdir(os.path.join(str(tmp_path), "o", "rewrite2", "eval_build"))
+
+
+def test_inject_clone_pin_resolves_the_dest_against_the_workdir():
+    # A bare `git clone <url>` lands at $WORKDIR/<basename>, not /<basename> — ExecutionAgent
+    # clones under `WORKDIR /app`, so pinning /r would `git -C` a directory that does not exist.
+    df = ("FROM python:3.10\nWORKDIR /app\n"
+          "RUN git clone https://github.com/o/r.git || exit 0\n")
+    out, ok = inject_clone_pin(df, "abc123", "https://github.com/o/r")
+    assert ok and "git -C /app/r fetch --depth 1 origin abc123" in out
+
+
+def test_inject_clone_pin_resolves_a_dot_dest_to_the_workdir():
+    df = ("FROM python:3.10\nWORKDIR /app/proj\n"
+          "RUN git clone https://github.com/o/r.git .\n")
+    out, ok = inject_clone_pin(df, "abc123", "https://github.com/o/r")
+    assert ok and "git -C /app/proj checkout --detach abc123" in out
+
+
+def test_exit_status_and_deploy_image_digest_are_optional_and_flow_to_meta(tmp_path):
+    # design item 3/4a: additive OPTIONAL fields — absent for a producer that never sets them
+    # (default None), present when a producer (sweagent_repo2run) does.
+    env = ProducedEnv(repo=_repo("o/r4"), dockerfile="FROM x", status="produced",
+                      producer_name="sweagent_repo2run",
+                      exit_status="submitted", deploy_image_digest="python@sha256:deadbeef")
+    repo_dir = write_env_packet(str(tmp_path), env)
+    meta = json.load(open(os.path.join(repo_dir, "_meta.json")))
+    assert meta["exit_status"] == "submitted"
+    assert meta["deploy_image_digest"] == "python@sha256:deadbeef"
+
+
+def test_exit_status_and_deploy_image_digest_default_to_none(tmp_path):
+    env = ProducedEnv(repo=_repo("o/r5"), dockerfile="FROM x", status="produced",
+                      producer_name="dockeragent")
+    repo_dir = write_env_packet(str(tmp_path), env)
+    meta = json.load(open(os.path.join(repo_dir, "_meta.json")))
+    assert meta["exit_status"] is None and meta["deploy_image_digest"] is None

@@ -23,6 +23,20 @@ class SubprocessDocker:
         except (ValueError, AttributeError):
             return None
 
+    def image_digest(self, tag: str) -> str | None:
+        """Resolved digest of `tag` (design item 4b), for the reproducibility record — never
+        gates measurement. Prefers the pulled RepoDigest; falls back to the image ID for a
+        locally-built image with no registry digest. Best-effort: any failure is None."""
+        try:
+            p = subprocess.run(
+                ["docker", "inspect", "--format",
+                 "{{if .RepoDigests}}{{index .RepoDigests 0}}{{else}}{{.Id}}{{end}}", tag],
+                capture_output=True, text=True)
+            out = (p.stdout or "").strip()
+            return out or None
+        except Exception:                                # noqa: BLE001 — provenance, never fatal
+            return None
+
     def run_detached(self, tag: str, name: str, workdir: str) -> None:
         subprocess.run(f"docker rm -f {name} >/dev/null 2>&1", shell=True)
         subprocess.run(["docker", "run", "-d", "--name", name, "-w", workdir, tag,

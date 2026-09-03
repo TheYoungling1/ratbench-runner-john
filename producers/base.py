@@ -49,11 +49,16 @@ _SHELL_SEPARATORS = frozenset({"&&", "||", ";", "|", "&", ">", ">>", "<", "2>", 
 _VALUE_FLAGS = frozenset({"--depth", "-b", "--branch", "-o", "--origin", "-j", "--jobs"})
 
 
-def _clone_dest(after_clone: str) -> Optional[str]:
+def _clone_dest(after_clone: str, workdir: str = "/") -> Optional[str]:
     """Given the substring AFTER ``git clone``, return the clone DESTINATION path (or None if the
     URL can't be identified). An explicit dest token following the URL wins (e.g. ``/testbed``);
-    otherwise the dest is the URL basename without ``.git`` (and without any ``?query``/``#frag``),
-    rooted at ``/`` — repo2run clones at WORKDIR ``/`` so ``https://github.com/o/r.git`` -> ``/r``."""
+    otherwise the dest is the URL basename without ``.git`` (and without any ``?query``/``#frag``).
+
+    A relative dest — the bare basename, or an explicit ``.``/``sub/dir`` — is resolved against
+    ``workdir``, the WORKDIR in effect at that instruction. repo2run clones at WORKDIR ``/`` so
+    ``https://github.com/o/r.git`` -> ``/r``; ExecutionAgent clones at ``WORKDIR /app`` so the same
+    URL -> ``/app/r``. Assuming ``/`` for everyone pinned the wrong directory and broke the build.
+    """
     tokens: list = []
     for t in after_clone.split():
         if t in _SHELL_SEPARATORS:
@@ -74,12 +79,16 @@ def _clone_dest(after_clone: str) -> Optional[str]:
     if url_idx is None:
         return None
     if url_idx + 1 < len(positional):
-        return positional[url_idx + 1]           # explicit destination (e.g. /testbed)
-    base = positional[url_idx].rstrip("/").rsplit("/", 1)[-1]
-    base = base.split("?", 1)[0].split("#", 1)[0]   # drop ?query / #fragment before the basename
-    if base.endswith(".git"):
-        base = base[: -len(".git")]
-    return "/" + base                            # basename, rooted at WORKDIR /
+        dest = positional[url_idx + 1]           # explicit destination (e.g. /testbed, or `.`)
+    else:
+        base = positional[url_idx].rstrip("/").rsplit("/", 1)[-1]
+        base = base.split("?", 1)[0].split("#", 1)[0]   # drop ?query / #fragment before basename
+        if base.endswith(".git"):
+            base = base[: -len(".git")]
+        dest = base
+    if dest.startswith("/"):
+        return dest
+    return os.path.normpath(os.path.join(workdir or "/", dest))   # relative to the WORKDIR
 
 
 def _repo_slug(repo_url: Optional[str]) -> Optional[str]:
@@ -122,6 +131,7 @@ def inject_clone_pin(dockerfile: str, commit: str, repo_url: Optional[str] = Non
         return s.rstrip().endswith("\\")
 
     i, n = 0, len(lines)
+    workdir = "/"          # the WORKDIR in effect at the instruction being scanned
     while i < n:
         start = i
         # Extend across backslash continuations to the instruction's last physical line.
@@ -136,6 +146,15 @@ def inject_clone_pin(dockerfile: str, commit: str, repo_url: Optional[str] = Non
             parts.append(s)
         joined = " ".join(parts)
         stripped = joined.lstrip()
+        # Track WORKDIR so a relative clone dest resolves against it (a Dockerfile WORKDIR is
+        # itself relative to the previous one). Only plain absolute/relative paths are tracked;
+        # a $VAR form leaves the previous value standing rather than guessing at build-time env.
+        if stripped.upper().startswith("WORKDIR ") and not stripped.startswith("#"):
+            wd = stripped.split(None, 1)[1].strip().strip('"\'')
+            if wd and "$" not in wd:
+                workdir = wd if wd.startswith("/") else os.path.normpath(os.path.join(workdir, wd))
+            i = end + 1
+            continue
         # Only pin real `RUN` shell instructions — never a comment (`# ... git clone ...`) or a
         # non-RUN line that merely mentions the words.
         if not stripped.upper().startswith("RUN ") or stripped.startswith("#"):
@@ -152,7 +171,7 @@ def inject_clone_pin(dockerfile: str, commit: str, repo_url: Optional[str] = Non
             continue
         if _MUTATES_CLONE.search(after):
             return dockerfile, False              # compound clone+cp/mv/rm — refuse, surface a miss
-        dest = _clone_dest(after)
+        dest = _clone_dest(after, workdir)
         if dest is None:
             return dockerfile, False
         pin = (f"RUN git -C {dest} fetch --depth 1 origin {commit} "
@@ -182,6 +201,19 @@ class ProducedEnv:
     head_sha: Optional[str] = None                        # commit the Dockerfile pins the clone to
     status: str = "produced"                             # "produced" | "unmeasurable" | "error"
     note: str = ""                                       # why unmeasurable/error, or "synthesized (lossy)"
+    exit_status: Optional[str] = None                    # agent-reported outcome (e.g. sweagent's
+                                                           # result.info["exit_status"]: "submitted",
+                                                           # "exit_cost", ...). OPTIONAL: absent for
+                                                           # every producer that doesn't have one.
+    agent_settings: dict = field(default_factory=dict)   # EFFECTIVE agent knobs as they reached the
+                                                         # wire, for settings an env var can flip at
+                                                         # run time. The copied config file records
+                                                         # the DEFAULT; an override would leave no
+                                                         # trace anywhere else, and some of these
+                                                         # (e.g. DeepSeek thinking mode) are not
+                                                         # recoverable from the trajectory.
+    deploy_image_digest: Optional[str] = None            # resolved digest of the agent's OWN
+                                                           # deployment/base image (provenance only)
     conformance: str = "native"                          # "native" | "rehomed" | "synthesized"
     unreplayed: bool = False                             # True only for lossy replay (rat)
     inline: Optional[dict] = None                        # method's own live score for the delta
@@ -275,6 +307,9 @@ def write_env_packet(out_root: str, env: ProducedEnv) -> str:
         "producer": env.producer_name,
         "status": env.status,
         "note": env.note,
+        "exit_status": env.exit_status,
+        "agent_settings": env.agent_settings or None,
+        "deploy_image_digest": env.deploy_image_digest,
         "conformance": env.conformance,
         "unreplayed": env.unreplayed,
         "inline": env.inline,

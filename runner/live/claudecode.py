@@ -29,6 +29,7 @@ sys.path[:0] = [RAT_ROOT]
 from libkit.command import init_output_and_repo, download_repo   # RAT repo
 from eval.common.base_model import BaseEvalModel                 # RAT repo
 from eval.common.utils import TimeoutException                   # RAT repo
+from producers._claudecode_helpers import run_claude_capped, stop_agent  # noqa: E402
 
 RP = f"{RAT_ROOT}/libkit/tools/run_pytest.py"
 RPC = f"{RAT_ROOT}/libkit/tools/run_pytest_collect.py"
@@ -38,6 +39,11 @@ PYTEST_TIMEOUT = int(os.environ.get("RAT_PYTEST_TIMEOUT", "1800"))
 PYTEST_RESERVE = int(os.environ.get("CLAUDE_PYTEST_RESERVE", "600"))
 W = "/testbed"
 AUTH_KEYS = ("CLAUDE_CODE_OAUTH_TOKEN", "ANTHROPIC_API_KEY")
+# Env forwarded into the workbench container. ANTHROPIC_BASE_URL points the CLI at an
+# Anthropic-COMPATIBLE third-party endpoint (e.g. https://api.deepseek.com/anthropic, which maps
+# sonnet/haiku -> deepseek-v4-flash), so the Claude Code lanes can run the same LLM as the other
+# varieties. Auth still comes from AUTH_KEYS (there, ANTHROPIC_API_KEY = the DeepSeek key).
+ENV_KEYS = AUTH_KEYS + ("ANTHROPIC_BASE_URL",)
 
 SETUP_PROMPT = (
     "You are configuring a Python repository so its EXISTING test suite can run. "
@@ -53,13 +59,6 @@ SETUP_PROMPT = (
 
 # The Claude Code CLI accepts model aliases (sonnet/opus/haiku) or full IDs.
 _CLAUDE_PREFIXES = ("claude", "sonnet", "opus", "haiku")
-
-
-def _as_text(v) -> str:
-    """Decode subprocess output that may be str (text mode), bytes, or None."""
-    if v is None:
-        return ""
-    return v.decode("utf-8", "replace") if isinstance(v, bytes) else v
 
 
 def _normalize_model(llm: str) -> str:
@@ -162,8 +161,8 @@ class ClaudeCodeModel(BaseEvalModel):
         ok = {"root_path": self.root_path, "full_name": full_name}
         meta = {"requested_model": self.llm, "base_image": self.base_image}
 
-        auth = {k: os.environ[k] for k in AUTH_KEYS if os.environ.get(k)}
-        if not auth:
+        auth = {k: os.environ[k] for k in ENV_KEYS if os.environ.get(k)}
+        if not any(os.environ.get(k) for k in AUTH_KEYS):
             return {"status": "error", "failure_reason": "no_auth",
                     "error": "set CLAUDE_CODE_OAUTH_TOKEN or ANTHROPIC_API_KEY", **ok, **meta}
 
@@ -193,9 +192,8 @@ class ClaudeCodeModel(BaseEvalModel):
 
                 # 2) Run Claude Code as the autonomous setup agent (non-root `agent`).
                 model = _normalize_model(self.llm)
-                # Claude Code 2.1.191 has no --max-turns; bound the agent by spend instead
-                # (parallels SWE-agent's per-instance cost limit). `num_turn` is kept on the
-                # model for interface parity with the other models but is not a claude flag.
+                # The CLI has no turn flag (2.1.258 ships only --max-budget-usd), so the spend
+                # cap below is a backstop and `num_turn` is enforced by run_claude_capped.
                 max_budget = os.environ.get("CLAUDE_MAX_BUDGET_USD", "2.0")
                 claude_cmd = [
                     "docker", "exec", "-u", "agent", "-w", W, container,
@@ -208,16 +206,24 @@ class ClaudeCodeModel(BaseEvalModel):
                     "--output-format", "stream-json", "--verbose",
                 ]
                 agent_budget = max(60, self.timeout - int(time.time() - start) - PYTEST_RESERVE)
-                agent_stdout, agent_stderr = "", ""
-                try:
-                    proc = subprocess.run(claude_cmd, capture_output=True, text=True,
-                                          timeout=agent_budget)
-                    agent_stdout, agent_stderr = proc.stdout or "", proc.stderr or ""
-                except subprocess.TimeoutExpired as e:
+                # num_turn is the variety's step budget (sweagent's per_instance_call_limit),
+                # enforced by counting `assistant` events on the stream. Partial output survives
+                # both the cap and the wall.
+                res = run_claude_capped(claude_cmd, agent_budget, max_turns=self.num_turn)
+                agent_stdout, agent_stderr = res["stdout"], res["stderr"]
+                # A "turn" IS an LLM call across the arms, so the counted assistant events ARE
+                # agent_turns (the report's turns[cc]) — not the CLI's own num_turns, which counts
+                # user+assistant and exists only on runs that reached a final `result` event,
+                # never on a capped or walled one.
+                meta["agent_turns"] = res["turns"]
+                meta["agent_turn_cap"] = self.num_turn
+                if self.num_turn and res["turns"] >= self.num_turn:
+                    meta["agent_turn_capped"] = True
+                if res["timed_out"]:
                     meta["agent_timed_out"] = True  # score the partial env, but record it
-                    # Preserve whatever the agent emitted before the budget ran out —
-                    # timed-out runs are the most important to inspect on hard repos.
-                    agent_stdout, agent_stderr = _as_text(e.stdout), _as_text(e.stderr)
+                # Whatever stopped it, the agent is still alive INSIDE the container (only the
+                # docker exec client was killed) and pytest runs there next — stop it first.
+                stop_agent(container)
                 # Persist raw stream + readable action log + metrics (handles the
                 # partial/timed-out stream too).
                 self._write_agent_logs(out_dir, agent_stdout, agent_stderr, meta)
@@ -277,7 +283,6 @@ class ClaudeCodeModel(BaseEvalModel):
                 f.write(summ["actions"] or "(no parsed actions)")
             with open(f"{out_dir}/claude_final.txt", "w") as f:
                 f.write(summ["final_text"])
-            meta["agent_turns"] = summ["info"]["turns"]
             meta["agent_cost_usd"] = summ["info"]["cost_usd"]
             if summ["info"].get("rate_limit_status"):
                 meta["agent_rate_limit_status"] = summ["info"]["rate_limit_status"]

@@ -54,6 +54,15 @@ class SweAgentSubprocessModel(BaseEvalModel):
                                   timeout=self.timeout + 180, env=env)
         except subprocess.TimeoutExpired:
             return {"status": "timeout", "failure_reason": "sweagent_timeout", **ok, **meta}
+        except OSError as exc:
+            # The py3.11 venv is NOT created by setup.sh — nothing in this repo provisions
+            # /opt/sweagent_venv. Without this branch the missing interpreter raised a raw
+            # FileNotFoundError out of predict(), once per repo, with no hint at the cause.
+            return {"status": "error", "failure_reason": "sweagent_venv_missing",
+                    "error": (f"cannot run {SWEAGENT_VENV_PY!r} ({exc}). SWE-agent needs its own "
+                              "Python 3.11 venv with sweagent installed from git; point "
+                              "SWEAGENT_VENV_PY at it (see README, 'SWE-agent setup')."),
+                    **ok, **meta}
 
         out_dir = f"{self.root_path}/output/{full_name}"
         try:

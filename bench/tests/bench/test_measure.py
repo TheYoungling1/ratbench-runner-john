@@ -165,3 +165,29 @@ def test_a_report_with_testcases_but_no_totals_still_counts_as_executed():
     junit = '<testsuites><testsuite name="s"><testcase classname="s" name="a"/></testsuite></testsuites>'
     row = measure(_env(), docker=FakeDocker(junit=junit))
     assert row.executed is True and row.ebsr is True and row.status == "executed"
+
+
+# ── image_digest (design item 4b: reproducibility of the MEASURED build) ──────────────────────
+
+def test_image_digest_absent_when_the_docker_double_doesnt_implement_it():
+    # FakeDocker (above) has no image_digest() — feature-detected, must not raise or gate.
+    row = measure(_env(), docker=FakeDocker())
+    assert row.image_digest is None
+
+
+def test_image_digest_threaded_through_when_the_docker_client_provides_it():
+    d = FakeDocker()
+    d.image_digest = lambda tag: f"sha256:deadbeef-{tag}"
+    row = measure(_env(), docker=d)
+    assert row.image_digest == "sha256:deadbeef-bench-v3-o-r"
+
+
+def test_image_digest_failure_degrades_to_none_not_a_raise():
+    d = FakeDocker()
+
+    def boom(tag):
+        raise RuntimeError("docker inspect failed")
+
+    d.image_digest = boom
+    row = measure(_env(), docker=d)
+    assert row.image_digest is None

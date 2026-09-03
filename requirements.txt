@@ -2,6 +2,11 @@
 # Python 3.10+.
 
 # --- core runtime: every variety + the measure stage need these ---
+# `tomllib` is stdlib only from 3.11; the runner targets 3.10, where runner/registry.py falls back
+# to `tomli`. Without it `python -m runner.cli` dies on import before ANY variety can start —
+# varieties.toml is read at startup. The fallback existed with only a comment telling you to
+# install it by hand ("uv pip install tomli"), so a clean 3.10 setup could never run.
+tomli>=2.0.1; python_version < "3.11"
 docker==7.1.0
 python-dotenv>=1.0.0
 openai>=1.65.2,<2.0.0
@@ -20,6 +25,11 @@ weave
 pypdf
 sentence-transformers>=3.0.0     # heavy (pulls torch); only needed if the agent uses embeddings
 
-# --- baselines (optional: only the 'sweagent' variety needs these) ---
-sweagent>=1.0.0
-streamlit>=1.28.0
+# --- baselines ---
+# NOT listed here on purpose: `sweagent` (+ its streamlit extra). The runner venv never imports
+# it — runner/live/sweagent.py subprocesses a SEPARATE Python 3.11 venv ($SWEAGENT_VENV_PY,
+# default /opt/sweagent_venv) because sweagent's pyproject is `requires-python = ">=3.11"` while
+# this venv is 3.10. It also is not installable from PyPI: the `sweagent` project there has one
+# release, 0.0.1, a stub pointing at swe-agent.com, so `sweagent>=1.0.0` resolved to
+# "No matching distribution found" and aborted this whole file's install. Install it from git
+# into that 3.11 venv instead — see README, "SWE-agent setup".

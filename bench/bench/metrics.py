@@ -50,6 +50,16 @@ def compute_metrics(rows: list[MeasureRow], gold: dict | None = None) -> dict:
     n_ebsr = sum(1 for r in prod if _conforming(r) and r.collect_clean)
     # Diagnostic: the OLD ungated gate (what M3/paper reported). The delta is the removed false-green.
     n_raw = sum(1 for r in prod if r.collect_rc in (0, 5))
+    # Diagnostic ONLY — deliberately does NOT change n_ebsr, so no existing number moves.
+    # Python's clean gate is rc in {0,5}, and rc 5 means "no tests collected". Every repo in these
+    # datasets HAS tests (`test_count` in the dataset file), so a row with EBSR credit and zero
+    # collected tests is a hollow pass: the image built and /testbed is a real worktree, but nothing
+    # ran. `n_real_success` already excludes it (it needs pass_rate >= 0.8), yet the headline EBSR
+    # still counts it. Surfacing the count makes that visible instead of averaged in; if it is ever
+    # non-zero, decide deliberately whether EBSR should require collected > 0.
+    n_ebsr_zero_collected = sum(1 for r in prod
+                                if _conforming(r) and r.collect_clean
+                                and not r.collected_node_ids)
 
     out = {
         "n": n, "n_exec": n_exec, "n_collect_clean": n_collect_clean,
@@ -63,6 +73,7 @@ def compute_metrics(rows: list[MeasureRow], gold: dict | None = None) -> dict:
         # Every disqualified reason named, over the FULL row set (incl. unmeasurable).
         "status_census": dict(Counter(r.status for r in rows)),
         # EBSR collection diagnostics: tests collected + collection errors (over measured repos).
+        "n_ebsr_zero_collected": n_ebsr_zero_collected,
         "total_collected": sum(len(r.collected_node_ids) for r in prod),
         "mean_collected": _div(sum(len(r.collected_node_ids) for r in prod), n),
         "total_collect_errors": sum(r.collect_error_count for r in prod),

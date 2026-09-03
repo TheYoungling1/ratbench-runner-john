@@ -16,6 +16,7 @@ class VarietySpec:
     venv: str | None
     is_baseline: bool
     llm: str | None = None   # per-variety LLM slug forwarded to the runner; None => runner default
+    num_turn: int | None = None   # per-variety step budget; None => the runner's own default
     measure: str | None = None   # "conforming" | "rehome" | "none"; None => harvest (back-compat)
 
 
@@ -37,5 +38,6 @@ def resolve_variety(registry: dict, name: str) -> VarietySpec:
         venv=spec.get("venv"),
         is_baseline=branch is None,
         llm=spec.get("llm"),
+        num_turn=spec.get("num_turn"),
         measure=spec.get("measure"),
     )

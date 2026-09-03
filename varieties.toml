@@ -63,16 +63,43 @@ measure = "rehome"
 model = "sweagent"
 # Same model + key as the DockerAgent baselines: routed through OpenRouter
 # (OPENROUTER_API_KEY) as a LiteLLM slug. SWE-agent needs the openrouter/ prefix; its
-# cost is registered in scripts/sweagent_runner.py since LiteLLM doesn't ship this model.
+# cost is registered in runner/live/sweagent_runner.py since LiteLLM doesn't ship this model.
 llm   = "openrouter/deepseek/deepseek-v4-flash"
 measure = "none"                   # only run_pytest JSONs, no Dockerfile artifact
 
 [variety.claudecode]
 model = "claudecode"
 llm   = "sonnet"                   # Claude Code CLI --model alias
+num_turn = 100                     # per-instance LLM-call cap; matches sweagent_repo2run
 measure = "none"                   # live in-place mutation, no static artifact
 
 [variety.claudecode-dockerfile]
 model = "claudecode-dockerfile"
 llm   = "sonnet"                   # Claude Code CLI --model alias
+num_turn = 100                     # per-instance LLM-call cap; matches sweagent_repo2run
 measure = "conforming"
+
+# ExecutionAgent (sola-st, ISSTA'25). Its own Dockerfile is only a base (clone + apt); deps are
+# installed live via linux_terminal and replayed from success_artifacts/commands.sh, which the
+# producer folds into the image before re-homing /app/<project> -> /testbed. Needs a checkout at
+# $EXECUTIONAGENT_ROOT (see README). Routed through OpenRouter via litellm, like sweagent.
+[variety.executionagent]
+model = "executionagent"
+llm   = "openrouter/deepseek/deepseek-v4-flash"
+measure = "rehome"
+
+# SWE-agent under the Repo2Run paper's baseline settings (arXiv:2502.13681 appendix I.2): the agent
+# is asked for a Dockerfile at /Dockerfile with the repo at /repo, so unlike the in-place `sweagent`
+# arm this one yields a rebuildable artifact and gets a real EBSR/ESSR row. Config (and the bundle
+# substitutions the current SWE-agent needs) in producers/sweagent_repo2run_config.yaml. Needs the
+# same py3.11 venv as `sweagent` — see README, "SWE-agent setup".
+[variety.sweagent_repo2run]
+model = "sweagent_repo2run"
+# DeepSeek's OWN API (litellm `deepseek/` provider, reads DEEPSEEK_API_KEY, base
+# https://api.deepseek.com/beta). There is no dated slug here: DeepSeek's docs state
+# `deepseek-v4-flash` IS DeepSeek-V4-Flash-0731 and "the calling method remains unchanged". The
+# `-0731` name exists only as a separately addressable OpenRouter route. Going direct also removes
+# provider-pinning entirely — one provider serves it, so there is no upstream ambiguity to manage.
+llm   = "deepseek/deepseek-v4-flash"
+num_turn = 100                     # per_instance_call_limit; the paper states no budget
+measure = "rehome"

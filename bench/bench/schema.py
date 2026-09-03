@@ -61,6 +61,11 @@ class MeasureRow:
     timed_out: bool = False
     image_size_mb: float | None = None
     image_delta_mb: float | None = None
+    # Resolved digest of the MEASURED build's image (design item 4b): the tag `bench-<slug>` is
+    # reused across runs, so without the digest a "rebuilt the same Dockerfile" claim is
+    # unverifiable. Provenance only — never gates measurement. None when the docker double in use
+    # doesn't implement image_digest(), or on any resolution failure.
+    image_digest: str | None = None
     installed_pkg_count: int | None = None
     tokens_in: int | None = None
     tokens_out: int | None = None

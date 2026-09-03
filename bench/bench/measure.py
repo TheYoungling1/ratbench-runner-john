@@ -275,6 +275,17 @@ def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeou
     img_mb = docker.image_size_mb(tag)
     base_mb = docker.image_size_mb(env.base_image) if env.base_image else None
     delta_mb = round(img_mb - base_mb, 2) if (img_mb is not None and base_mb is not None) else None
+    # Digest of the image THIS build produced (design item 4b), so a later "rebuilt the same
+    # Dockerfile" claim is verifiable against a moving base tag. Feature-detected: a test double
+    # implementing the DockerClient duck-type without image_digest() must not break — this is
+    # provenance only, never a measurement input.
+    image_digest = None
+    try:
+        _get_digest = getattr(docker, "image_digest", None)
+        if _get_digest is not None:
+            image_digest = _get_digest(tag)
+    except Exception:                                    # noqa: BLE001 — provenance, never fatal
+        image_digest = None
 
     timed_out = False
     test_s = None
@@ -310,7 +321,7 @@ def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeou
                 collect_errors=collect["collect_errors"], collect_error_count=n_collect_errors,
                 collected_node_ids=collected, executed=False, ebsr=False,
                 status=probe["status"], py_test_files=py_test_files,
-                image_size_mb=img_mb, image_delta_mb=delta_mb, **base_row)
+                image_size_mb=img_mb, image_delta_mb=delta_mb, image_digest=image_digest, **base_row)
 
         # Compiled-language gate short-circuits: a failed build cannot run tests, so skip the
         # expensive run and record gate_fail. (Python: short_circuit_gate=False -> run regardless.)
@@ -321,7 +332,7 @@ def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeou
                 collect_errors=collect["collect_errors"], collect_error_count=n_collect_errors,
                 collected_node_ids=collected, executed=False, ebsr=False,
                 status="gate_fail", py_test_files=py_test_files,
-                image_size_mb=img_mb, image_delta_mb=delta_mb, **base_row)
+                image_size_mb=img_mb, image_delta_mb=delta_mb, image_digest=image_digest, **base_row)
 
         junit_out = f"{W}/logs/junit.xml"
         run = lang.run_cmd(W, junit_out)
@@ -368,4 +379,5 @@ def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeou
         passed_node_ids=passed_ids, failed_node_ids=failed_ids,
         error_node_ids=error_ids, ebsr=executed, pass_rate=pass_rate, timed_out=timed_out,
         status=status, py_test_files=py_test_files,
-        image_size_mb=img_mb, image_delta_mb=delta_mb, installed_pkg_count=pkg_count, **base_row)
+        image_size_mb=img_mb, image_delta_mb=delta_mb, image_digest=image_digest,
+        installed_pkg_count=pkg_count, **base_row)

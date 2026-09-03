@@ -96,3 +96,20 @@ def test_live_scores_captures_native_inline_score(tmp_path, monkeypatch):
               "agent_goal_rate", "ESSR_avg_pass_rate_official", "pass_rate_over_all",
               "n_collect_success", "collect_success_all"):
         assert k in payload["score"]
+
+
+def test_every_measurable_producer_is_dispatchable_by_the_cli():
+    """A hardcoded argparse `choices` list went stale twice — executionagent and
+    sweagent_repo2run were dispatchable by _make_model but rejected at argparse, so a run died
+    with "invalid choice" AFTER writing its manifest. `choices` is now derived from
+    _PRODUCE_ABLE; this asserts the set it derives from stays complete."""
+    import producers
+    from runner.benchmark import _PRODUCE_ABLE
+
+    measurable = {n for n, p in producers.PRODUCERS.items() if p.measurable}
+    missing = measurable - _PRODUCE_ABLE
+    assert not missing, f"registered + measurable but not in _PRODUCE_ABLE: {sorted(missing)}"
+
+    # ...and nothing in _PRODUCE_ABLE lacks a producer to dispatch to.
+    unknown = _PRODUCE_ABLE - set(producers.PRODUCERS)
+    assert not unknown, f"_PRODUCE_ABLE names with no registered producer: {sorted(unknown)}"

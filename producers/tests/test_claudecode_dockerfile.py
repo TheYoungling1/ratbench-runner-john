@@ -164,7 +164,10 @@ def test_persist_stream_returns_economy_in_write_env_packet_keys(tmp_path):
     assert econ["tokens_in"] == 180          # 100 + 30 + 50
     assert econ["tokens_out"] == 20
     assert econ["total_tokens"] == 200
-    assert econ["turns_used"] == 7
+    # A turn IS an LLM call: one `assistant` event in the fixture. The result event's own
+    # num_turns (7, user+assistant) is deliberately NOT what turns_used reports — it does not
+    # exist on a capped or walled run, and it is not the unit the turn cap counts.
+    assert econ["turns_used"] == 1
     assert econ["cost_usd"] == 1.25
     assert econ["llm_calls"] == 1
     assert econ["tool_calls"] == 1
@@ -283,7 +286,7 @@ def _invoke_live_runner(monkeypatch, tmp_path, language="rust"):
 
     seen = {}
 
-    def _capture(cmd, timeout, stdin_text=None):
+    def _capture(cmd, timeout, stdin_text=None, **kw):
         seen["cmd"], seen["stdin"] = cmd, stdin_text
         raise _Stop
 

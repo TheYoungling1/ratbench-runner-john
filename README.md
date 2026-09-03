@@ -66,14 +66,16 @@ varieties.toml [variety.X]  (model=dockeragent, branch=X)
                                 └─ measure/metrics.json  (EBSR / ESSR / ESSR_all + economy)
 ```
 
-`_make_model` routes **produce-able** methods (`dockeragent`, `repo2run`, `claudecode-dockerfile`) to a
+`_make_model` routes **produce-able** methods (`dockeragent`, `repo2run`, `claudecode-dockerfile`,
+`executionagent`) to a
 `_ProducerModel` that drives the producer registry directly, and **native-lane** methods (`rat`,
 `sweagent`, `claudecode`) to the live models under `runner/live/`.
 
 ### Method lanes (the `measure` tag)
 
 - **conforming** — the agent's Dockerfile already homes the repo at `/testbed` (e.g. `dockeragent`).
-- **rehome** — the Dockerfile homes the repo at `/repo`; the producer moves it to `/testbed` (`repo2run`).
+- **rehome** — the Dockerfile homes the repo elsewhere (`/repo`, `/app/<project>`); the producer moves
+  it to `/testbed` (`repo2run`, `executionagent`).
 - **none** — a live in-place agent with no rebuildable artifact (`rat`, `sweagent`, `claudecode`). It is
   **gated out** of the fresh-container harvest (so it never emits a shadowing EBSR-0) and scored inline;
   the inline numbers land in `live_scores.json`.
@@ -101,8 +103,92 @@ Defined in `varieties.toml`:
 | `repo2run` | `repo2run` | Repo2Run baseline (re-homed to `/testbed`) |
 | `sweagent` | `sweagent` | SWE-agent baseline (needs the extra deps in `requirements.txt`) |
 | `claudecode` / `claudecode-dockerfile` | `claudecode` / `claudecode-dockerfile` | Claude Code, live in-place / Dockerfile-emitting |
+| `executionagent` | `executionagent` | ExecutionAgent baseline (Dockerfile + `commands.sh` folded into one image, re-homed to `/testbed`) |
+| `sweagent_repo2run` | `sweagent_repo2run` | SWE-agent under the Repo2Run paper's baseline settings — emits a Dockerfile, re-homed to `/testbed` |
 
 Run any with `./run_bench.sh <variety> …`. Override the LLM with `--llm <slug>`.
+
+### SWE-agent setup
+
+`sweagent` is **not** installed by `setup.sh` and is not on PyPI in a usable form (the `sweagent`
+project there has a single 0.0.1 stub release). It needs its own Python 3.11+ venv, because its
+`requires-python` is `>=3.11` while the runner venv is 3.10:
+
+It must be an **editable install from a clone** — a wheel install cannot work.
+`sweagent/__init__.py` asserts that `config/`, `tools/` and `trajectories/` exist as siblings of
+the package directory, and pip does not ship them into `site-packages`, so `import sweagent` fails
+outright. `tools/` is also where the tool bundles live (`tools/registry`, `tools/windowed`, ...),
+so the configs could not resolve either.
+
+```bash
+git clone https://github.com/SWE-agent/SWE-agent.git /opt/swe-agent
+mkdir -p /opt/swe-agent/trajectories          # asserted at import; not tracked in git
+python3.11 -m venv /opt/sweagent_venv
+/opt/sweagent_venv/bin/pip install -e /opt/swe-agent
+export SWEAGENT_VENV_PY=/opt/sweagent_venv/bin/python
+
+# validate the ported config against the installed package — no docker, no key, no cost:
+$SWEAGENT_VENV_PY tools/check_sweagent_repo2run_config.py
+```
+
+Pin the SWE-agent commit (`git -C /opt/swe-agent rev-parse HEAD`) and record it with the run if you
+are comparing against published numbers — the config schema moves between versions.
+
+`runner/live/sweagent.py` subprocesses `runner/live/sweagent_runner.py` under that interpreter; the
+runner venv itself never imports `sweagent`. Without the venv every repo returns
+`failure_reason="sweagent_venv_missing"`. The lane is `measure="none"` — no Dockerfile artifact, so
+it is gated out of the fresh-container harvest and scored inline into `live_scores.json`.
+
+The same venv serves **`sweagent_repo2run`**, a second arm that runs SWE-agent under the
+Repo2Run paper's baseline settings (arXiv:2502.13681 appendix I.2) instead of the in-place prompt:
+the agent is asked for a Dockerfile at `/Dockerfile` with the repo at `/repo`, so it produces a
+rebuildable artifact and gets a real EBSR/ESSR row alongside `repo2run` and `dockeragent`. Run both
+— the delta between them is how much of the score is the agent versus the scaffolding.
+
+```bash
+./run_bench.sh sweagent_repo2run --repos-json datasets/rat_python50.json --tier all
+```
+
+Three things to know about that arm:
+
+- **The paper's config could not be used verbatim.** Three of its six tool bundles
+  (`tools/defaults`, `tools/edit_linting`, `tools/env_setup`) no longer exist in SWE-agent; the
+  substitutions are listed at the top of `producers/sweagent_repo2run_config.yaml`. Its
+  `parse_function: thought_action` and `last_n_observations` history processor port unchanged.
+  Pin the SWE-agent git revision if you are reproducing published numbers.
+- **The paper's success criterion is `pytest --collect-only -q`** — your EBSR gate, not ESSR.
+  Expect a high-EBSR / low-ESSR profile by construction. That matches Repo2Run's own target, which
+  is the point of the comparison, but it is not evidence the agent builds good environments.
+- **Budget.** `rat/eval/sweagent/python-config.yaml` caps the in-place arm at
+  `per_instance_call_limit: 15` and `sweagent_wrapper.py` overrides only the *cost* limit, so
+  `--num-turn` never reaches it — while `dockeragent` gets 30 turns and `repo2run`/`executionagent`
+  get 40. This arm sets the call limit from `--num-turn` (default 40) so it is comparable; the
+  in-place arm's 15 is untouched and remains a confound if you compare the two directly.
+- **Python only.** The paper's template hardcodes `FROM python:3.10` and `pip install pytest`.
+
+### ExecutionAgent setup
+
+`executionagent` is the only variety that is not vendored here — point it at a checkout:
+
+```bash
+git clone https://github.com/sola-st/ExecutionAgent /opt/agents/ExecutionAgent
+python -m venv /opt/agents/ExecutionAgent/venv
+/opt/agents/ExecutionAgent/venv/bin/pip install -e /opt/agents/ExecutionAgent
+export EXECUTIONAGENT_ROOT=/opt/agents/ExecutionAgent
+# optional; defaults to $EXECUTIONAGENT_ROOT/venv/bin/python, then the runner's own interpreter
+export EXECUTIONAGENT_PYTHON=/opt/agents/ExecutionAgent/venv/bin/python
+
+./run_bench.sh executionagent --repos-json datasets/rat_python50.json --tier all --concurrency 4
+```
+
+It goes through litellm, so the variety pins an `openrouter/…` slug and reads `OPENROUTER_API_KEY`
+(same route as `sweagent`). **Note what is being measured:** EA's own prompt tells it to keep build
+and test steps *out* of the Dockerfile — it installs dependencies live in the container and dumps
+the transcript to `success_artifacts/commands.sh`. Rebuilding its Dockerfile alone measures a repo
+with no dependencies (a guaranteed EBSR-0), so `producers/executionagent.py` replays `commands.sh`
+as one build layer before re-homing `/app/<project>` to `/testbed` — the same env EA's own
+`launch.sh` reaches. That makes the row `conformance="synthesized"`, not `native`. A budget-exhausted
+run falls back to `forced_exit_cycle/Dockerfile` and is noted as such in `_meta.json`.
 
 ## Datasets
 
