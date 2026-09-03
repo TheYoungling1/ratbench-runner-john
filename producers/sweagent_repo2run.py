@@ -227,8 +227,13 @@ class SweAgentRepo2RunProducer:
             deploy_image_digest = res.get("deploy_image_digest")
             inline = res.get("inline")
             if not raw:
+                # agent_settings belongs here too, not just on the success path: the paper reports
+                # DGSR 26.9% for this baseline, so "no Dockerfile" is the MAJORITY outcome, and
+                # dropping the effective thinking mode exactly there would leave most of the run
+                # un-diagnosable — the failure rows are the ones you go back and interrogate.
                 return ProducedEnv(repo=repo, dockerfile=None, status="error",
                                    note=note or "SWE-agent wrote no /Dockerfile",
+                                   agent_settings=res.get("agent_settings") or {},
                                    exit_status=exit_status, deploy_image_digest=deploy_image_digest,
                                    inline=inline,
                                    conformance=self.conformance, producer_name=self.name,

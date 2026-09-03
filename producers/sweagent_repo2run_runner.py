@@ -21,6 +21,7 @@ Result protocol: one stdout line `__SWEAGENT_DF_RESULT__<json>`; the Dockerfile 
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -224,6 +225,53 @@ def _apply_overrides(cfg: dict, a) -> dict:
     return cfg
 
 
+# DeepSeek v4 intermittently serialises its command in its own DSML markup instead of the markdown
+# fence `thought_action` requires:
+#     <｜｜DSML｜｜bash>\nls -la /repo\n</｜｜DSML｜｜bash>
+# The surrounding prose is identical to a well-formed turn, so this is a serialisation choice, not a
+# confused model. Two facts make it fatal rather than cosmetic: the parser matches ``` only, and
+# DeepSeek's prompt cache makes the response deterministic — all three of SWE-agent's requeries came
+# back byte-identical, so the built-in format-retry cannot clear it and the episode dies after four
+# turns with exit_status="exit_format". Measured 2026-09-03 at 1/8 calls on the VM and 0/8 from
+# macOS with BYTE-IDENTICAL prompts (same sha256 for system and user), so it is host-independent
+# chance, not an amd64, litellm, or config difference. Rewriting the tags into a fence leaves the
+# paper's parser semantics untouched — it is the delimiter that differs, nothing else.
+_DSML_BLOCK = re.compile(r"<[^<>]*DSML[^<>]*>[ \t]*\n?(.*?)\n?[ \t]*</[^<>]*DSML[^<>]*>", re.DOTALL)
+
+
+def normalize_dsml_fences(text: str) -> str:
+    """Rewrite DeepSeek DSML command tags into ``` fences; unchanged when no DSML tag is present."""
+    if not text or "DSML" not in text:
+        return text
+    return _DSML_BLOCK.sub(lambda m: "```\n%s\n```" % m.group(1).strip("\n"), text)
+
+
+def patch_thought_action_parser(log=print) -> bool:
+    """Normalise DSML into fences before ThoughtActionParser sees the response.
+
+    Returns True if the patch was applied, False if it was already in place. Idempotent so a
+    re-import cannot stack wrappers."""
+    from sweagent.tools.parsing import ThoughtActionParser
+
+    if getattr(ThoughtActionParser, "_dsml_patched", False):
+        return False
+    original = ThoughtActionParser.__call__
+
+    def patched(self, model_response, commands, strict=False):
+        message = model_response.get("message") or ""
+        fixed = normalize_dsml_fences(message)
+        if fixed != message:
+            # Always log: a silent rescue would hide how often the model does this, and that rate
+            # is a finding about the model, not noise.
+            log(f"[dsml] rewrote DeepSeek DSML tags into a fenced block ({len(message)} chars)")
+            model_response = {**model_response, "message": fixed}
+        return original(self, model_response, commands, strict=strict)
+
+    ThoughtActionParser.__call__ = patched
+    ThoughtActionParser._dsml_patched = True
+    return True
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--full-name", required=True)
@@ -243,6 +291,8 @@ def main() -> int:
     _register_model_costs()   # must precede SWE-agent's first completion-cost call
     from sweagent.agent.problem_statement import TextProblemStatement
     from sweagent.run.run_single import RunSingle, RunSingleConfig
+
+    patch_thought_action_parser()
 
     start = time.time()
     with open(a.config) as fh:
