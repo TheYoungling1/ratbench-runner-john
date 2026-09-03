@@ -248,7 +248,7 @@ def test_empty_history_is_empty_not_an_error():
 
 - [ ] **Step 2: Run the tests to verify they fail**
 
-Run: `.venv/bin/python -m pytest producers/tests/test_setupx.py -v`
+Run: `python3 -m pytest producers/tests/test_setupx.py -v`
 Expected: FAIL, collection error `ModuleNotFoundError: No module named 'producers.setupx'`.
 
 - [ ] **Step 3: Write the minimal implementation**
@@ -355,7 +355,7 @@ def plan_replay(history: list | None) -> tuple:
 
 - [ ] **Step 4: Run the tests to verify they pass**
 
-Run: `.venv/bin/python -m pytest producers/tests/test_setupx.py -v`
+Run: `python3 -m pytest producers/tests/test_setupx.py -v`
 Expected: PASS — every test in the file.
 
 - [ ] **Step 5: Commit**
@@ -475,7 +475,7 @@ def test_the_base_image_provides_the_python_binary_bench_invokes():
 
 - [ ] **Step 2: Run the tests to verify they fail**
 
-Run: `.venv/bin/python -m pytest producers/tests/test_setupx.py -v -k 'render or clone or rehome or safe or env_steps or replay or base_image'`
+Run: `python3 -m pytest producers/tests/test_setupx.py -v -k 'render or clone or rehome or safe or env_steps or replay or base_image'`
 Expected: FAIL with `ImportError: cannot import name 'render_dockerfile'`.
 
 - [ ] **Step 3: Write the minimal implementation**
@@ -566,7 +566,7 @@ def render_dockerfile(repo: RepoSpec, steps: list, *,
 
 - [ ] **Step 4: Run the full test file**
 
-Run: `.venv/bin/python -m pytest producers/tests/test_setupx.py -v`
+Run: `python3 -m pytest producers/tests/test_setupx.py -v`
 Expected: PASS — every test in the file.
 
 - [ ] **Step 5: Commit**
@@ -770,7 +770,7 @@ def test_the_written_packet_matches_the_shared_contract(tmp_path):
 
 - [ ] **Step 2: Run the tests to verify they fail**
 
-Run: `.venv/bin/python -m pytest producers/tests/test_setupx.py -v`
+Run: `python3 -m pytest producers/tests/test_setupx.py -v`
 Expected: FAIL with `ImportError: cannot import name 'SetupXProducer'`.
 
 - [ ] **Step 3: Write the minimal implementation**
@@ -1032,7 +1032,7 @@ class SetupXProducer:
 
 - [ ] **Step 4: Run the full test file**
 
-Run: `.venv/bin/python -m pytest producers/tests/test_setupx.py -v`
+Run: `python3 -m pytest producers/tests/test_setupx.py -v`
 Expected: PASS — every test in the file.
 
 - [ ] **Step 5: Commit**
@@ -1093,7 +1093,7 @@ def test_the_variety_resolves_to_the_rehome_lane_with_an_explicit_budget():
 
 - [ ] **Step 2: Run the tests to verify they fail**
 
-Run: `.venv/bin/python -m pytest producers/tests/test_setupx.py -v -k 'registered or produce_able or variety_resolves'`
+Run: `python3 -m pytest producers/tests/test_setupx.py -v -k 'registered or produce_able or variety_resolves'`
 Expected: FAIL — `KeyError: 'setupx'` on the registry, `'setupx' not in _PRODUCE_ABLE`, `KeyError: unknown variety 'setupx'`.
 
 - [ ] **Step 3: Register the producer**
@@ -1166,7 +1166,7 @@ measure = "rehome"
 
 - [ ] **Step 6: Run the whole producer suite to check nothing regressed**
 
-Run: `.venv/bin/python -m pytest producers/tests/ -v`
+Run: `python3 -m pytest producers/tests/ -v`
 Expected: PASS — the new tests plus every pre-existing one.
 
 - [ ] **Step 7: Commit**
