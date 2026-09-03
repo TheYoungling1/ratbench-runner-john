@@ -20,6 +20,19 @@ from producers.base import ProduceContext, ProducedEnv
 from bench.schema import RepoSpec  # noqa: E402
 
 
+def _as_dict(value) -> dict:
+    """`history` is another agent's JSON report — a boundary, so nothing here is assumed."""
+    return value if isinstance(value, dict) else {}
+
+
+def _as_int(value, default: int) -> int:
+    """Coerce a JSON number-that-might-be-a-string; `"0"` must not read as a non-zero exit code."""
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
 def _truncate(steps: list, mark: int) -> None:
     """Undo the run-steps after `mark` — but KEEP the env-steps.
 
@@ -46,11 +59,10 @@ def plan_replay(history: list | None) -> tuple:
     """
     steps: list = []
     marks: list = [0]                      # the "initial_clone" checkpoint
-    lossy = False
-    for entry in history or []:
-        action = (entry or {}).get("action") or {}
-        result = (entry or {}).get("result") or {}
-        content = action.get("content") or {}
+    for entry in history if isinstance(history, list) else []:
+        action = _as_dict(_as_dict(entry).get("action"))
+        result = _as_dict(_as_dict(entry).get("result"))
+        content = _as_dict(action.get("content"))
         kind = action.get("action_type")
 
         if kind == "SHELL_COMMAND":
@@ -76,7 +88,10 @@ def plan_replay(history: list | None) -> tuple:
                     if command:
                         steps.append(("run", command))
                     else:
-                        lossy = True       # atom-rendered commands were never recorded
+                        # Atom-rendered commands were never recorded. Park a sentinel rather than
+                        # setting a flag: a later rollback can discard this very trial, and then the
+                        # replay IS faithful. `_truncate` drops sentinels exactly as it drops runs.
+                        steps.append(("lossy",))
                 elif stdout.startswith("[XPU SKIP]"):
                     pass                   # returns without rolling back; the frame SURVIVES
                 else:                      # [XPU FAIL] => auto-rollback of one frame (branch F)
@@ -84,12 +99,18 @@ def plan_replay(history: list | None) -> tuple:
 
         elif kind == "ROLLBACK_ENV":
             # exit_code 1 => upstream found an empty stack and returned False without popping.
-            if marks and result.get("exit_code") == 0:
-                n = min(max(1, int(content.get("n_frames") or 1)), len(marks))
+            # A missing code reads as success: skipping a rollback the agent really made bakes in
+            # work it undid, and that ships as a plausible-looking Dockerfile instead of an error.
+            if marks and _as_int(result.get("exit_code"), 0) == 0:
+                n = min(max(1, _as_int(content.get("n_frames"), 1)), len(marks))
                 for _ in range(n):
                     target = marks.pop()   # restore to the LAST tag popped
                 _truncate(steps, target)
 
         # VERIFY / FINISH carry no command. The VerifierAgent's own commands live in
         # `last_verify_messages`, not here, so a fix it made itself is lost — see the README note.
-    return steps, lossy
+
+    # Only sentinels that SURVIVED the rollbacks count; strip them so the caller sees just the two
+    # documented step shapes.
+    lossy = any(s[0] == "lossy" for s in steps)
+    return [s for s in steps if s[0] != "lossy"], lossy

@@ -135,3 +135,50 @@ def test_a_successful_xpu_trial_with_no_recorded_command_is_flagged_lossy():
 def test_empty_history_is_empty_not_an_error():
     assert plan_replay([]) == ([], False)
     assert plan_replay(None) == ([], False)
+
+
+def test_a_lossy_xpu_trial_that_was_rolled_back_is_not_lossy():
+    # The unrecorded command never survived, so the replay is faithful and must not say otherwise.
+    steps, lossy = plan_replay([_shell("a"), _xpu(None, ok=True), _rollback(1)])
+    assert steps == [("run", "a")]
+    assert lossy is False
+
+
+def test_a_later_failed_trial_does_not_undo_an_earlier_lossy_one():
+    # The FAIL auto-rollback pops only the frame that trial itself pushed, which sits AFTER the
+    # lossy trial's command — so that command survives and the replay really is missing it.
+    steps, lossy = plan_replay([_xpu(None, ok=True), _xpu("z", ok=False)])
+    assert steps == []
+    assert lossy is True
+
+
+def test_a_deeper_rollback_over_a_lossy_trial_clears_the_flag():
+    steps, lossy = plan_replay([_xpu(None, ok=True), _shell("b"), _rollback(2)])
+    assert steps == []
+    assert lossy is False
+
+
+def test_a_non_numeric_n_frames_falls_back_to_one_frame():
+    steps, lossy = plan_replay([_shell("a"), _rollback("two")])
+    assert steps == []
+    assert lossy is False
+
+
+def test_history_that_is_not_a_list_of_entries_yields_no_steps():
+    # The report is another agent's JSON; a shape we did not expect must not raise.
+    assert plan_replay({"a": 1}) == ([], False)
+    assert plan_replay(["oops", None, 7]) == ([], False)
+    assert plan_replay([{"action": "not-a-dict", "result": None}]) == ([], False)
+
+
+def test_a_rollback_whose_exit_code_is_a_string_still_rolls_back():
+    # Reading "0" as a non-zero code would silently keep work the agent undid.
+    entry = _rollback(1)
+    entry["result"]["exit_code"] = "0"
+    assert plan_replay([_shell("a"), entry]) == ([], False)
+
+
+def test_a_rollback_with_no_recorded_exit_code_still_rolls_back():
+    entry = _rollback(1)
+    del entry["result"]["exit_code"]
+    assert plan_replay([_shell("a"), entry]) == ([], False)
