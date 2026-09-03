@@ -321,3 +321,172 @@ def test_the_base_image_provides_the_python_binary_bench_invokes():
     # python3 only and no pip, which would fail the gate for a reason that is not the environment.
     df, _ = render_dockerfile(_repo(), [("run", "true")])
     assert df.startswith("FROM python:3.10\n")
+
+
+import json
+import os
+
+import pytest
+
+from producers.base import ProduceContext
+from producers.setupx import SetupXProducer, child_env
+
+
+def _ctx(tmp_path):
+    return ProduceContext(llm="deepseek/deepseek-v4-flash", workdir=str(tmp_path), num_turn=9999)
+
+
+def test_child_env_routes_the_bare_model_name_at_deepseeks_own_endpoint(monkeypatch):
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
+    assert env["LLM_PROVIDER"] == "openai"
+    assert env["OPENAI_BASE_URL"] == "https://api.deepseek.com/v1"
+    assert env["OPENAI_API_KEY"] == "sk-test"
+    # SetupX POSTs {"model": OPENAI_MODEL}; the litellm-style provider prefix is not a model name.
+    assert env["OPENAI_MODEL"] == "deepseek-v4-flash"
+
+
+def test_child_env_refuses_to_start_without_a_key(monkeypatch):
+    monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
+    with pytest.raises(RuntimeError, match="DEEPSEEK_API_KEY"):
+        child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
+
+
+def test_child_env_freezes_the_experience_store(monkeypatch):
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
+    monkeypatch.setenv("SETUPX_DB_DSN", "postgresql://postgres@localhost:5433/xpu_run")
+    monkeypatch.setenv("EMBEDDING_API_KEY", "sk-embed")
+    monkeypatch.setenv("EMBEDDING_BASE_URL", "https://openrouter.ai/api/v1")
+    monkeypatch.setenv("EMBEDDING_MODEL", "openai/text-embedding-3-small")
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
+    assert env["FREEZE_TELEMETRY"] == "1"
+    assert env["XPU_VECTOR_ENABLED"] == "1"
+    # config.py reads `dns` first, XPU_DB_DNS second; set both so neither spelling wins by accident.
+    assert env["dns"] == env["XPU_DB_DNS"] == "postgresql://postgres@localhost:5433/xpu_run"
+
+
+def test_child_env_sends_embeddings_somewhere_other_than_deepseek(monkeypatch):
+    # text_to_embedding falls back to OPENAI_API_KEY + OPENAI_BASE_URL, which now point at
+    # DeepSeek — and DeepSeek serves no /embeddings route. An unset EMBEDDING_API_KEY would 404
+    # every retrieval and silently turn the XPU arm into the no-XPU arm.
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
+    monkeypatch.setenv("SETUPX_DB_DSN", "postgresql://postgres@localhost:5433/xpu_run")
+    monkeypatch.delenv("EMBEDDING_API_KEY", raising=False)
+    with pytest.raises(RuntimeError, match="EMBEDDING_API_KEY"):
+        child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
+
+
+def test_child_env_namespaces_the_checkpoint_images_per_run(monkeypatch):
+    # Without this, two concurrent repos share the `setup_agent_checkpoint` repository: each one's
+    # startup deletes the other's snapshots and their step_<n>_pre_xpu tags collide, so a rollback
+    # restores the wrong repo's container. Requires tools/setupx-bench.patch.
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
+    assert env["SETUPX_CKPT_NS"] == "o__r_123"
+    assert env["SETUPX_NETWORK_MODE"] == "bridge"
+
+
+def test_child_env_passes_the_budget_as_llm_calls_not_steps(monkeypatch):
+    # num_turn is a completion budget, matching sweagent_repo2run's per_instance_call_limit. It must
+    # NOT be forwarded as --max-steps: a single VERIFY step spawns the verifier's whole ReAct loop,
+    # so steps and calls differ by an unbounded factor and would not be comparable across arms.
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
+    assert env["SETUPX_MAX_LLM_CALLS"] == "100"
+
+
+def test_child_env_marks_the_store_read_only_when_a_dsn_is_present(monkeypatch):
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
+    monkeypatch.setenv("SETUPX_DB_DSN", "postgresql://postgres@localhost:5433/xpu_run")
+    monkeypatch.setenv("EMBEDDING_API_KEY", "sk-embed")
+    monkeypatch.setenv("EMBEDDING_BASE_URL", "https://openrouter.ai/api/v1")
+    monkeypatch.setenv("EMBEDDING_MODEL", "openai/text-embedding-3-small")
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
+    assert env["XPU_READONLY"] == "1"
+
+
+def test_child_env_points_setupx_at_the_pinned_mirror(monkeypatch):
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
+    assert env["DOCKER_BASE_IMAGE"] == "setupx-mirror:o__r"
+    assert env["DOCKER_WORK_DIR"] == "/workspace"
+
+
+def test_producer_emits_a_packet_from_a_stubbed_run(tmp_path):
+    def stub(repo, ctx, *, llm, num_turn):
+        return {"history": [{"action": {"action_type": "SHELL_COMMAND",
+                                        "content": {"command": "pip install -e ."}},
+                             "result": {"exit_code": 0, "stdout": "", "stderr": ""}}],
+                "completed": True, "steps_taken": 7,
+                "phase2": {"success": True, "reason": "prosecutor found no substantive issue"},
+                "economy": {"turns_used": 7}}
+
+    env = SetupXProducer(llm="deepseek/deepseek-v4-flash", runner=stub).produce(_repo(), _ctx(tmp_path))
+    assert env.status == "produced"
+    assert env.conformance == "synthesized"
+    assert env.producer_name == "setupx"
+    assert env.head_sha == "abc123"
+    assert env.base_image == "python:3.10"
+    assert "pip install -e ." in env.setup_scripts[REPLAY_BASENAME]
+    assert env.economy["turns_used"] == 7
+    assert "produce_s" in env.economy
+    assert env.unreplayed is False
+
+
+def test_producer_still_emits_for_an_unfinished_phase_one(tmp_path):
+    # A guilty verdict or an exhausted step budget still leaves a real environment. Scoring it is
+    # more honest than recording status="error" and hiding the row. (Reachable only via step
+    # exhaustion — a wall-clock timeout writes no report for the producer to read.)
+    def stub(repo, ctx, *, llm, num_turn):
+        return {"history": [{"action": {"action_type": "SHELL_COMMAND",
+                                        "content": {"command": "pip install -e ."}},
+                             "result": {"exit_code": 0, "stdout": "", "stderr": ""}}],
+                "completed": False, "steps_taken": 40,
+                "phase2": {"success": False, "reason": "setup agent timed out"},
+                "economy": {}}
+
+    env = SetupXProducer(runner=stub).produce(_repo(), _ctx(tmp_path))
+    assert env.status == "produced"
+    assert "timed out" in env.note
+
+
+def test_producer_reports_an_empty_trajectory_as_an_error_not_an_empty_image(tmp_path):
+    def stub(repo, ctx, *, llm, num_turn):
+        return {"history": [], "completed": False, "steps_taken": 0,
+                "phase2": {"success": None, "reason": "[error] phase 2 execution failed"},
+                "economy": {}}
+
+    env = SetupXProducer(runner=stub).produce(_repo(), _ctx(tmp_path))
+    assert env.status == "error"
+    assert env.dockerfile is None
+
+
+def test_producer_never_raises_when_the_runner_blows_up(tmp_path):
+    def stub(repo, ctx, *, llm, num_turn):
+        raise RuntimeError("docker daemon is not running")
+
+    env = SetupXProducer(runner=stub).produce(_repo(), _ctx(tmp_path))
+    assert env.status == "error"
+    assert "docker daemon" in env.note
+    assert env.dockerfile is None
+
+
+def test_the_written_packet_matches_the_shared_contract(tmp_path):
+    def stub(repo, ctx, *, llm, num_turn):
+        return {"history": [{"action": {"action_type": "SHELL_COMMAND",
+                                        "content": {"command": "pip install -e ."}},
+                             "result": {"exit_code": 0, "stdout": "", "stderr": ""}}],
+                "completed": True, "steps_taken": 3, "phase2": {"success": True, "reason": "ok"},
+                "economy": {}}
+
+    from producers.base import write_env_packet
+    out = tmp_path / "out"
+    env = SetupXProducer(runner=stub).produce(_repo(), _ctx(tmp_path))
+    write_env_packet(str(out), env)
+    build = out / "o" / "r" / "eval_build"
+    assert (build / "Dockerfile").exists()
+    assert (build / REPLAY_BASENAME).exists()
+    meta = json.loads((out / "o" / "r" / "_meta.json").read_text())
+    assert meta["producer"] == "setupx"
+    assert meta["status"] == "produced"
+    assert meta["conformance"] == "synthesized"

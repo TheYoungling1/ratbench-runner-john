@@ -9,196 +9,263 @@
 # so the arm gets a real EBSR/ESSR row comparable with repo2run / executionagent / dockeragent.
 # Same shape as producers/executionagent.py, different trace format.
 #
-# The replay is NOT a linear `for cmd in history` — SetupX keeps a LIFO stack of `docker commit`
-# checkpoints and rolls back to them, so work the agent undid must be undone in the replay too.
-# `plan_replay` mirrors EnvironmentManager.rollback_to_checkpoint exactly; see the tests.
+# This module is the LIVE half: launching SetupX, building the per-repo pinned mirror image, and
+# the Producer itself. The trajectory->Dockerfile transforms live in producers/setupx_replay.py
+# (split out to keep both files small); they are re-exported here as the module's public surface.
 from __future__ import annotations
 
-import shlex
+import glob
+import json
+import os
+import subprocess
+import time
 
 from producers.base import ProduceContext, ProducedEnv
 
 # bench.schema is on the path via producers.base's shim (imported above).
 from bench.schema import RepoSpec  # noqa: E402
 
-DEFAULT_BASE_IMAGE = "python:3.10"         # SetupX's own .env.example default. NOT ubuntu: every
-                                           # bench command is `python -m ...` (bench/bench/languages/
-                                           # python.py) and ubuntu ships python3 only, with no pip.
-WORK_DIR = "/workspace/repo"               # DOCKER_WORK_DIR + "/repo"; where the agent worked
-REPLAY_BASENAME = "setupx_replay.sh"
+# Re-exported so `producers.setupx` stays the one import site for the whole producer.
+from producers.setupx_replay import (  # noqa: F401
+    DEFAULT_BASE_IMAGE, REPLAY_BASENAME, WORK_DIR, plan_replay, render_dockerfile, render_replay)
+
+DEEPSEEK_BASE_URL = "https://api.deepseek.com/v1"
+# A BACKSTOP, not the intended bound. main.py's Phase1Timeout handler returns before Stage 3, so a
+# wall-clock timeout writes no report and the run is lost entirely; the step budget (--max-steps,
+# from varieties.toml) is what should end a run, because step exhaustion still reports.
+DEFAULT_PHASE1_TIMEOUT = 3600
 
 
-def _as_dict(value) -> dict:
-    """`history` is another agent's JSON report — a boundary, so nothing here is assumed."""
-    return value if isinstance(value, dict) else {}
+def _setupx_root(ctx: ProduceContext | None = None) -> str:
+    # ctx.agent_root first, matching producers/executionagent.py; benchmark.py maps SETUPX_ROOT
+    # into it. Falling back to the env var keeps the producer usable standalone.
+    root = (ctx.agent_root if ctx else None) or os.environ.get("SETUPX_ROOT")
+    if not root or not os.path.isfile(os.path.join(root, "src", "main.py")):
+        raise RuntimeError(
+            "cannot locate the SetupX checkout (src/main.py). Set SETUPX_ROOT to a clone of "
+            "https://github.com/OpenDataBox/SetupX — see README, 'SetupX setup'.")
+    # src/config.py runs load_dotenv(..., override=True) at import, so a dotenv file in the
+    # checkout SILENTLY overrides the environment we pass in — including the model and the DSN.
+    # Fail loudly rather than pay for a run that quietly used the wrong endpoint.
+    for name in (".env", ".env.local"):
+        if os.path.isfile(os.path.join(root, name)):
+            raise RuntimeError(
+                f"{os.path.join(root, name)} exists. SetupX loads it with override=True, which "
+                "would silently replace the model/endpoint/DSN this producer passes in. Remove it "
+                "— the producer supplies the whole environment.")
+    return root
 
 
-def _as_int(value, default: int) -> int:
-    """Coerce a JSON number-that-might-be-a-string; `"0"` must not read as a non-zero exit code."""
+def child_env(llm: str | None, base_image: str, ckpt_ns: str, max_llm_calls: int) -> dict:
+    """The environment `python -m src.main` runs under. Validated here, at the boundary.
+
+    `ckpt_ns` namespaces SetupX's checkpoint images so concurrent repos cannot delete or overwrite
+    each other's snapshots, and gives the caller a handle to sweep the leftovers with.
+    `max_llm_calls` is the arm's budget in COMPLETIONS, not agent steps: SetupX's own --max-steps
+    counts steps, and one step can cost many completions. Both switches come from
+    tools/setupx-bench.patch.
+    """
+    key = os.environ.get("DEEPSEEK_API_KEY")
+    if not key:
+        raise RuntimeError("DEEPSEEK_API_KEY is not set; the setupx variety routes through "
+                           "DeepSeek's own API (see README, 'SetupX setup').")
+    # `deepseek/deepseek-v4-flash` is a litellm-style slug; SetupX POSTs the value verbatim as
+    # {"model": ...} to an OpenAI-compatible endpoint, which wants the bare name.
+    model = (llm or "deepseek/deepseek-v4-flash").split("/", 1)[-1]
+    env = dict(os.environ,
+               LLM_PROVIDER="openai",
+               OPENAI_API_KEY=key,
+               OPENAI_BASE_URL=os.environ.get("SETUPX_BASE_URL", DEEPSEEK_BASE_URL),
+               OPENAI_MODEL=model,
+               DOCKER_BASE_IMAGE=base_image,
+               DOCKER_WORK_DIR="/workspace",
+               SETUPX_CKPT_NS=ckpt_ns,
+               # num_turn means LLM CALLS here, matching sweagent_repo2run's per_instance_call_limit
+               # and claudecode's cap. SetupX's own --max-steps counts agent STEPS, and one step can
+               # cost many completions (a VERIFY step runs the verifier's whole ReAct sub-loop;
+               # phase 2 adds the prosecutor and judge), so steps are not a comparable budget.
+               SETUPX_MAX_LLM_CALLS=str(max_llm_calls),
+               # bridge networking: host networking shares the host port space, so two concurrent
+               # repos collide the moment either binds a port.
+               SETUPX_NETWORK_MODE=os.environ.get("SETUPX_NETWORK_MODE", "bridge"))
+    dsn = os.environ.get("SETUPX_DB_DSN")
+    if dsn:
+        # All THREE, not just the key. text_to_embedding takes the dedicated branch as soon as
+        # EMBEDDING_API_KEY is set, and then passes base_url=None straight through — sending an
+        # OpenRouter key to api.openai.com. VectorXPUClient.query swallows the 401 and returns [],
+        # so the arm would silently degrade to no-XPU, which is exactly what this guard exists to
+        # prevent. (The OPENAI_* fallback is no better: those now point at DeepSeek, which serves
+        # no /embeddings route at all.)
+        missing = [k for k in ("EMBEDDING_API_KEY", "EMBEDDING_BASE_URL", "EMBEDDING_MODEL")
+                   if not os.environ.get(k)]
+        if missing:
+            raise RuntimeError(
+                f"{', '.join(missing)} not set, but SETUPX_DB_DSN is — XPU retrieval embeds every "
+                "query and would fail silently, leaving an arm that reports as XPU-on while "
+                "retrieving nothing. See README, 'SetupX setup'.")
+        env.update(XPU_ENABLED="1", XPU_VECTOR_ENABLED="1", dns=dsn, XPU_DB_DNS=dsn,
+                   FREEZE_TELEMETRY="1",     # native switch: skips every telemetry write
+                   XPU_READONLY="1")         # patched-in switch: skips _store_xpu_experience, so
+                                             # concurrent repos cannot race on dedup_and_store and
+                                             # results do not depend on repo order
+    return env
+
+
+def mirror_image(repo: RepoSpec, ctx: ProduceContext) -> str:
+    """Build a per-repo base image holding the repo pinned at /mirror, and return its tag.
+
+    SetupX clones `git clone --depth=1 <repo_url> /workspace/repo` at the live default-branch HEAD
+    — it has no notion of a dataset SHA. Handing it a local path as the "repo url" makes its own
+    clone land the pinned tree instead, so the agent works on the same commit the emitted
+    Dockerfile builds, with no patch to the SetupX checkout.
+    """
+    tag = "setupx-mirror:" + repo.full_name.replace("/", "__").lower()
+    ctx_dir = os.path.join(ctx.workdir, "mirror", repo.full_name)
+    os.makedirs(ctx_dir, exist_ok=True)
+    clone = (f"RUN git clone --depth=1 {repo.repo_url} /mirror\n" if not repo.commit else
+             f"RUN git clone {repo.repo_url} /mirror \\\n"
+             f" && git -C /mirror fetch --depth 1 origin {repo.commit} \\\n"
+             # a branch, not a detached HEAD: cloning FROM a detached-HEAD repo checks out its
+             # default branch, which would put the agent back on an unpinned tree.
+             f" && git -C /mirror checkout -B pinned {repo.commit}\n")
+    with open(os.path.join(ctx_dir, "Dockerfile"), "w", encoding="utf-8") as fh:
+        fh.write(f"FROM {DEFAULT_BASE_IMAGE}\n"
+                 "RUN apt-get update \\\n"
+                 " && apt-get install -y --no-install-recommends git ca-certificates \\\n"
+                 " && rm -rf /var/lib/apt/lists/*\n"
+                 + clone)
     try:
-        return int(value)
-    except (TypeError, ValueError):
-        return default
+        subprocess.run(["docker", "build", "-t", tag, ctx_dir],
+                       check=True, capture_output=True, text=True, timeout=1800)
+    except subprocess.CalledProcessError as exc:
+        # CalledProcessError's repr() — which produce() stores as `note` — carries only the rc and
+        # argv, so every mirror failure would look identical. Surface the build's own stderr.
+        raise RuntimeError(f"mirror build failed for {repo.full_name}: "
+                           f"{(exc.stderr or '')[-2000:]}") from exc
+    return tag
 
 
-def _truncate(steps: list, mark: int) -> None:
-    """Undo the run-steps after `mark` — but KEEP the env-steps.
+def _sweep_checkpoints(ckpt_ns: str) -> None:
+    """Remove the checkpoint images this run leaked.
 
-    Upstream's rollback recreates the container from the checkpoint image with
-    `environment=self._env_vars.copy()`: the CURRENT dict, which `set_env` only ever adds to and
-    nothing ever restores. A SET_ENV issued after a checkpoint therefore SURVIVES the rollback —
-    only filesystem state is undone. Marks still on the stack were pushed at or before `mark`, so
-    they stay valid.
+    `agent.run()` calls `cleanup_snapshots()` on the happy path, but a crash or a phase-1 timeout
+    skips it — and each snapshot is a full `docker commit` of the container, so a 50-repo run would
+    otherwise leave dozens of multi-GB images behind. Never raises: this is housekeeping, not the run.
     """
-    steps[mark:] = [s for s in steps[mark:] if s[0] == "env"]
+    try:
+        out = subprocess.run(["docker", "images", "-q", f"setup_agent_checkpoint_{ckpt_ns}"],
+                             capture_output=True, text=True, timeout=60)
+        ids = sorted(set((out.stdout or "").split()))
+        if ids:
+            subprocess.run(["docker", "rmi", "-f", *ids], capture_output=True, timeout=300)
+    except Exception:                        # noqa: BLE001 — housekeeping must never fail a run
+        pass
 
 
-def plan_replay(history: list | None) -> tuple:
-    """Turn SetupX's `setup.history` into the steps that survive its rollbacks.
+def run_setupx(repo: RepoSpec, ctx: ProduceContext, *, llm: str | None, num_turn: int) -> dict:
+    """LIVE-ONLY: run SetupX for one repo and return its report. Raises on failure; the producer
+    wraps it for the anti-vanish invariant. Never exercised by unit tests (they inject a stub) —
+    it needs docker, keys, and the SetupX checkout."""
+    root = _setupx_root(ctx)
+    python = os.environ.get("SETUPX_PYTHON") or os.path.join(root, ".venv", "bin", "python")
+    if not os.path.isfile(python):
+        raise RuntimeError(f"cannot run {python!r}: SetupX needs its own venv with "
+                           "requirements.txt installed. Point SETUPX_PYTHON at it — see README, "
+                           "'SetupX setup'.")
+    out_dir = os.path.join(ctx.workdir, "output", repo.full_name, "setupx_log")
+    os.makedirs(out_dir, exist_ok=True)
+    phase1 = int(os.environ.get("SETUPX_PHASE1_TIMEOUT", DEFAULT_PHASE1_TIMEOUT))
 
-    Returns ``(steps, lossy)``. `steps` is a list of ``("run", command)`` / ``("env", key, value)``
-    tuples in execution order. `lossy` is True when a surviving XPU trial succeeded but recorded no
-    command (the agent fell back to atom-rendered `suggestion.commands`, which `AgentAction.to_dict`
-    drops) — the caller surfaces that as `unreplayed`.
+    # The positional argument is the REPO URL. `/mirror` is the pinned clone baked into
+    # base_image, so SetupX's own `git clone --depth=1 /mirror /workspace/repo` lands the dataset
+    # SHA. (git warns "--depth is ignored in local clones"; harmless.) One consequence: SetupX
+    # names its report after the url basename, so every report here is `mirror_result.json` — the
+    # glob below handles that, and out_dir is per-repo, so there is no collision.
+    base_image = mirror_image(repo, ctx)
+    ckpt_ns = f"{repo.full_name.replace('/', '__').lower()}_{os.getpid()}"
+    start = time.time()
+    try:
+        proc = subprocess.run(
+            [python, "-m", "src.main", "/mirror",
+             # Steps are deliberately unbounded: the budget is SETUPX_MAX_LLM_CALLS, and every step
+             # costs at least one completion, so the call cap binds first and binds comparably.
+             "--max-steps", "9999",
+             "--phase1-timeout", str(phase1),
+             "--output-dir", out_dir],
+            cwd=root, env=child_env(llm, base_image, ckpt_ns, num_turn),
+            capture_output=True, text=True, timeout=ctx.timeout)
+    finally:
+        _sweep_checkpoints(ckpt_ns)
+    try:
+        with open(os.path.join(out_dir, "setupx_stdout.txt"), "w", encoding="utf-8") as fh:
+            fh.write((proc.stdout or "") + "\n--- stderr ---\n" + (proc.stderr or ""))
+    except OSError:
+        pass                                     # telemetry must never fail a paid-for run
 
-    Mirrors upstream exactly: `marks` is EnvironmentManager's `_history_snapshots` stack, holding
-    the step index each checkpoint was taken at. `initial_clone` is the mark at 0, pushed by
-    `_setup_container` after the clone; every TRY_XPU_SUGGESTION pushes another before its trial.
-    """
-    steps: list = []
-    marks: list = [0]                      # the "initial_clone" checkpoint
-    for entry in history if isinstance(history, list) else []:
-        action = _as_dict(_as_dict(entry).get("action"))
-        result = _as_dict(_as_dict(entry).get("result"))
-        content = _as_dict(action.get("content"))
-        kind = action.get("action_type")
-
-        if kind == "SHELL_COMMAND":
-            command = content.get("command")
-            if command:
-                steps.append(("run", command))
-
-        elif kind == "SET_ENV":
-            key = content.get("env_key")
-            if key:
-                value = content.get("env_value")
-                steps.append(("env", key, "" if value is None else str(value)))
-
-        elif kind == "TRY_XPU_SUGGESTION":
-            # FOUR outcomes, and they differ in what they leave on the snapshot stack.
-            stdout = result.get("stdout") or ""
-            if stdout.startswith("[XPU BLOCKED]"):
-                pass                       # returns BEFORE create_checkpoint; pushes no frame
-            else:
-                marks.append(len(steps))   # agent.py takes step_<n>_pre_xpu before the trial
-                if stdout.startswith("[XPU SUCCESS]"):
-                    command = content.get("command")
-                    if command:
-                        steps.append(("run", command))
-                    else:
-                        # Atom-rendered commands were never recorded. Park a sentinel rather than
-                        # setting a flag: a later rollback can discard this very trial, and then the
-                        # replay IS faithful. `_truncate` drops sentinels exactly as it drops runs.
-                        steps.append(("lossy",))
-                elif stdout.startswith("[XPU SKIP]"):
-                    pass                   # returns without rolling back; the frame SURVIVES
-                else:                      # [XPU FAIL] => auto-rollback of one frame (branch F)
-                    _truncate(steps, marks.pop())
-
-        elif kind == "ROLLBACK_ENV":
-            # exit_code 1 => upstream found an empty stack and returned False without popping.
-            # A missing code reads as success: skipping a rollback the agent really made bakes in
-            # work it undid, and that ships as a plausible-looking Dockerfile instead of an error.
-            if marks and _as_int(result.get("exit_code"), 0) == 0:
-                n = min(max(1, _as_int(content.get("n_frames"), 1)), len(marks))
-                for _ in range(n):
-                    target = marks.pop()   # restore to the LAST tag popped
-                _truncate(steps, target)
-
-        # VERIFY / FINISH carry no command. The VerifierAgent's own commands live in
-        # `last_verify_messages`, not here, so a fix it made itself is lost — see the README note.
-
-    # Only sentinels that SURVIVED the rollbacks count; strip them so the caller sees just the two
-    # documented step shapes.
-    lossy = any(s[0] == "lossy" for s in steps)
-    return [s for s in steps if s[0] != "lossy"], lossy
+    reports = sorted(glob.glob(os.path.join(out_dir, "*_result.json")))
+    if not reports:
+        raise RuntimeError(f"SetupX wrote no *_result.json (rc={proc.returncode}); "
+                           "see setupx_stdout.txt")
+    with open(reports[-1], encoding="utf-8") as fh:
+        report = json.load(fh)
+    setup = report.get("setup") or {}
+    return {"history": setup.get("history") or [],
+            "completed": bool(setup.get("completed")),
+            "steps_taken": setup.get("steps_taken"),
+            "phase2": report.get("phase2") or {},
+            # SetupX discards the API `usage` block, so there are no token counts to harvest.
+            # llm_calls comes from the patched main.py, which reports llm_engine.llm_calls_used().
+            # Stock SetupX discards the API `usage` block entirely, so tokens/cost stay None until
+            # the metering ledger lands (see the note in Task 3's header).
+            "economy": {"turns_used": setup.get("steps_taken"),
+                        "llm_calls": report.get("llm_calls"),
+                        "produce_s": round(time.time() - start, 2)}}
 
 
-def _clone_lines(repo: RepoSpec) -> str:
-    """The pinned clone, in the exact shape the README's commit-pinning invariant prescribes."""
-    if not repo.commit:
-        # No dataset SHA: shallow-clone the default branch, same as SetupX's own bootstrap.
-        return f"RUN git clone --depth=1 {repo.repo_url} {WORK_DIR}\n"
-    return (f"RUN git clone {repo.repo_url} {WORK_DIR} \\\n"
-            f" && git -C {WORK_DIR} fetch --depth 1 origin {repo.commit} \\\n"
-            f" && git -C {WORK_DIR} checkout --detach {repo.commit}\n")
+class SetupXProducer:
+    """SetupX (XPU + speculative execution + prosecutor/judge), replayed into one image at /testbed."""
+    name = "setupx"
+    needs_llm = True
+    measurable = True
+    conformance = "synthesized"
 
+    def __init__(self, llm: str | None = None, num_turn: int = 9999, runner=None):
+        self.llm = llm
+        self.num_turn = num_turn
+        self._runner = runner   # injectable for tests; None => the real live runner
 
-def render_replay(steps: list) -> str:
-    """Render the surviving steps as ONE bash script.
+    def produce(self, repo: RepoSpec, ctx: ProduceContext) -> ProducedEnv:
+        # Anti-vanish invariant (design §1): a SetupX crash yields ProducedEnv(status="error"),
+        # never a raised exception.
+        start = time.time()
+        try:
+            runner = self._runner or run_setupx
+            num_turn = ctx.num_turn if ctx.num_turn is not None else self.num_turn
+            res = runner(repo, ctx, llm=(ctx.llm or self.llm), num_turn=num_turn)
 
-    `set +e` because the agent's own run continued past non-zero exits — a `set -e` replay would
-    abort the build on the first probe command upstream shrugged off. Each command is handed to its
-    own `bash -c` as ONE quoted argument, exactly as upstream ran it: that re-enters the work dir
-    (a `cd` never leaks into the next step) and, more importantly, contains a malformed command.
-    `set +e` only survives non-zero exits — a bare line with an unbalanced quote or a trailing `#`
-    is a PARSE error that aborts the whole script before `exit 0`, failing the build. A malformed
-    command is a realistic trace member: upstream recorded the commands that failed too.
+            economy = dict(res.get("economy") or {})
+            economy.setdefault("produce_s", round(time.time() - start, 2))
+            steps, lossy = plan_replay(res.get("history"))
+            phase2 = res.get("phase2") or {}
+            note = f"phase2={phase2.get('success')}: {(phase2.get('reason') or '')[:200]}"
+            if not res.get("completed"):
+                note = "phase1 incomplete; " + note
+            if lossy:
+                note += "; XPU trial commands not recorded (atom-rendered fallback)"
 
-    The `export` lines stay bare. They are ours and always well-formed, and a subshell would strip
-    them of their point: an env value containing a newline has its `ENV` instruction skipped, so the
-    export is the only thing carrying it to the steps that follow.
-    """
-    lines = ["#!/usr/bin/env bash",
-             "# SetupX replay: the agent's surviving trajectory, folded into one build layer.",
-             "set +e",
-             ""]
-    for step in steps:
-        if step[0] == "env":
-            lines.append(f"export {step[1]}={shlex.quote(step[2])}")
-        else:
-            lines.append("bash -c " + shlex.quote(f"cd {WORK_DIR} && {step[1]}"))
-    # ponytail: no per-step timeout; bench's build_timeout bounds the whole layer. Add one
-    # (upstream's DOCKER_TIMEOUT is 300s) if a hung step ever becomes a real failure mode.
-    lines += ["", "exit 0"]
-    return "\n".join(lines) + "\n"
+            if not steps:
+                return ProducedEnv(repo=repo, dockerfile=None, status="error",
+                                   note="no replayable steps survived; " + note,
+                                   conformance=self.conformance, producer_name=self.name,
+                                   economy=economy)
 
-
-def render_dockerfile(repo: RepoSpec, steps: list, *,
-                      base_image: str = DEFAULT_BASE_IMAGE) -> tuple:
-    """Render the conforming Dockerfile + its COPY siblings. Returns ``(dockerfile, scripts)``."""
-    # `env_key`/`env_value` come out of another agent's JSON, so neither is trusted here. A newline
-    # in the VALUE breaks the instruction (ENV has no line continuation); a KEY with a space
-    # silently misfires into Docker's legacy `ENV key value` form, where `ENV FOO BAR='x'` sets FOO
-    # to "BAR='x'". Either way only the ENV line is dropped — the `export` in the replay script
-    # still carries the pair, and bash rejects a bad name loudly instead of mis-setting it.
-    env_lines = "".join(f"ENV {k}={shlex.quote(v)}\n"
-                        for _, k, v in (s for s in steps if s[0] == "env")
-                        if str(k).isidentifier() and "\n" not in v)
-    df = (
-        f"FROM {base_image}\n"
-        "RUN apt-get update \\\n"
-        " && apt-get install -y --no-install-recommends git ca-certificates \\\n"
-        " && rm -rf /var/lib/apt/lists/*\n"
-        + _clone_lines(repo) +
-        f"WORKDIR {WORK_DIR}\n"
-        + env_lines +
-        f"COPY {REPLAY_BASENAME} /tmp/{REPLAY_BASENAME}\n"
-        f"RUN bash /tmp/{REPLAY_BASENAME}\n"
-        # No pytest guard here: bench runs its own `_ENSURE` (`python -m pip install -q pytest
-        # pytest-timeout`) before the gate, and it needs `python` on PATH — which is why the base
-        # image is python:3.10 and not ubuntu.
-        # bench compares `git -C /testbed rev-parse --show-toplevel` to "/testbed"
-        # (bench/bench/contract.py): a symlinked /testbed resolves to its physical path and is
-        # classified non_conforming. So /testbed is the real dir; the reverse symlink keeps
-        # venv/editable-install paths the replay baked in resolving.
-        f"RUN mv {WORK_DIR} /testbed && ln -sfn /testbed {WORK_DIR}\n"
-        # The probe is `git -C /testbed rev-parse --show-toplevel`, which fails closed to
-        # non_conforming when git refuses the directory as dubiously owned.
-        "RUN git config --global --add safe.directory /testbed\n"
-        # ponytail: two guessed venv names. The agent may create a venv anywhere; a non-existent
-        # PATH entry is harmless. Parse the replay for the real path if this ever misses.
-        "ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n"
-        "WORKDIR /testbed\n"
-    )
-    return df, {REPLAY_BASENAME: render_replay(steps)}
+            dockerfile, scripts = render_dockerfile(repo, steps)
+            return ProducedEnv(repo=repo, dockerfile=dockerfile, setup_scripts=scripts,
+                               base_image=DEFAULT_BASE_IMAGE, head_sha=repo.commit or "",
+                               status="produced", conformance=self.conformance,
+                               unreplayed=lossy, producer_name=self.name,
+                               economy=economy, note=note)
+        except Exception as exc:                # noqa: BLE001 — boundary guard, never propagate
+            return ProducedEnv(repo=repo, dockerfile=None, status="error", note=repr(exc),
+                               conformance=self.conformance, producer_name=self.name,
+                               economy={"produce_s": round(time.time() - start, 2)})
