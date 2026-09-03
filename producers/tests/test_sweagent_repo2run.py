@@ -726,3 +726,41 @@ def test_unknown_dsml_command_degrades_instead_of_leaving_tags_behind():
         '</｜｜DSML｜｜invoke>')
     assert "DSML" not in out
     assert _last_fenced(out) == "teleport 1"
+
+
+# ── DSML delimiter and whitespace variants ───────────────────────────────────────────────────
+# DeepSeek-V4-Pro HF discussion #209 reports two degradations we had not seen locally: the bars
+# arrive as ASCII "||" instead of the documented full-width form, and the elements arrive with no
+# newlines between them. Our runs show a THIRD bar form (doubled full-width). The extraction is
+# deliberately delimiter-agnostic rather than normalising to one canonical spelling, so all three
+# fall out of the same pattern; the no-newline case needs the fence forced onto its own line
+# because thought_action anchors on ^``` under re.MULTILINE.
+def _build_dsml(bar, newlines):
+    j = "\n" if newlines else ""
+    return (f'DISCUSSION{j}<{bar}DSML{bar}tool_calls>{j}<{bar}DSML{bar}invoke name="bash">{j}'
+            f'<{bar}DSML{bar}parameter name="command" string="true">ls -la /repo'
+            f'</{bar}DSML{bar}parameter>{j}</{bar}DSML{bar}invoke>{j}</{bar}DSML{bar}tool_calls>')
+
+
+def test_dsml_variants_all_normalize_to_the_same_command():
+    from producers.sweagent_repo2run_runner import normalize_dsml_fences
+
+    for bar in ("｜｜", "｜", "||"):          # ours, canonical, ASCII-degraded
+        for newlines in (True, False):
+            out = normalize_dsml_fences(_build_dsml(bar, newlines))
+            assert "DSML" not in out, (bar, newlines, out)
+            assert _last_fenced(out) == "ls -la /repo", (bar, newlines, out)
+
+
+def test_dsml_fence_never_lands_mid_line():
+    """thought_action matches ^``` with re.MULTILINE, so a fence emitted mid-line is invisible.
+    Regression guard: the tool_calls wrapper pattern consumes a trailing newline and previously
+    ate the one the replacement had just added."""
+    from producers.sweagent_repo2run_runner import normalize_dsml_fences
+
+    out = normalize_dsml_fences(_build_dsml("｜｜", newlines=False))
+    assert "\n```\n" in out
+    assert not any(ln.strip().startswith("```") and ln != ln.lstrip()
+                   for ln in out.splitlines())
+    for ln in out.splitlines():
+        assert not (ln.startswith("DISCUSSION") and "```" in ln), out

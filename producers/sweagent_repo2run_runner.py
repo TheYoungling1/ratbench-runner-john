@@ -299,11 +299,13 @@ def normalize_dsml_fences(text: str) -> str:
     matches SWE-agent's one-command-per-turn rule."""
     if not text or "DSML" not in text:
         return text
+    # Strip the tool_calls wrapper FIRST: its pattern consumes a trailing newline, which would
+    # otherwise eat the leading newline the invoke replacement adds and leave the fence mid-line.
+    out = _DSML_WRAPPER.sub("", text)
     out = _DSML_INVOKE.sub(
-        lambda m: "```\n%s\n```" % _render_dsml_command(
-            m.group(1), dict(_DSML_PARAM.findall(m.group(2)))), text)
-    out = _DSML_WRAPPER.sub("", out)          # drop the now-empty tool_calls wrapper
-    out = _DSML_SIMPLE.sub(lambda m: "```\n%s\n```" % m.group(2).strip("\n"), out)
+        lambda m: "\n```\n%s\n```\n" % _render_dsml_command(
+            m.group(1), dict(_DSML_PARAM.findall(m.group(2)))), out)
+    out = _DSML_SIMPLE.sub(lambda m: "\n```\n%s\n```\n" % m.group(2).strip("\n"), out)
     return out
 
 
