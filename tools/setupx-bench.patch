@@ -1,0 +1,232 @@
+diff --git a/src/environment_manager.py b/src/environment_manager.py
+index 261da70..4bce67a 100644
+--- a/src/environment_manager.py
++++ b/src/environment_manager.py
+@@ -16,6 +16,7 @@ Snapshot model:
+   stack; rollback pops the top tag.
+ """
+ 
++import os
+ import re
+ 
+ import docker
+@@ -73,10 +74,25 @@ class EnvironmentManager:
+         # Clean up checkpoint images left from a previous crash.
+         self._cleanup_stale_checkpoints()
+ 
++    @property
++    def _ckpt_repo(self) -> str:
++        """Per-run image repository for checkpoints.
++
++        The original name is a single global (`setup_agent_checkpoint`), so two concurrent runs
++        overwrite each other's `initial_clone` / `step_<n>_pre_xpu` tags and `_cleanup_stale_
++        checkpoints` deletes the other run's snapshots outright — a rollback then restores the
++        wrong repo's container, or dies on ImageNotFound. Namespacing by SETUPX_CKPT_NS (the
++        caller's token, so it can sweep leftovers) or the pid makes runs independent.
++
++        A property, not an __init__ attribute: _create_with_work_dir() builds instances via
++        __new__ and never runs __init__.
++        """
++        return "setup_agent_checkpoint_" + os.environ.get("SETUPX_CKPT_NS", str(os.getpid()))
++
+     def _cleanup_stale_checkpoints(self) -> None:
+-        """Remove `setup_agent_checkpoint` images left over from a previous crash."""
++        """Remove this run's checkpoint images left over from a previous crash."""
+         try:
+-            stale = self._client.images.list(name="setup_agent_checkpoint")
++            stale = self._client.images.list(name=self._ckpt_repo)
+             if not stale:
+                 return
+             logger.info(f"found {len(stale)} stale checkpoint images; cleaning...")
+@@ -220,7 +236,10 @@ class EnvironmentManager:
+             detach=True,
+             working_dir=self._config.work_dir,
+             environment=self._env_vars.copy(),
+-            network_mode="host",
++            # host networking shares the host's port space, so two concurrent runs collide as soon
++            # as either binds a port (a test suite starting a server, say). SETUPX_NETWORK_MODE
++            # lets a concurrent benchmark select "bridge"; the default is unchanged.
++            network_mode=os.environ.get("SETUPX_NETWORK_MODE", "host"),
+         )
+ 
+         logger.info(f"container created: {self._container.id[:12]}")
+@@ -427,7 +446,7 @@ class EnvironmentManager:
+         """
+         logger.info(f"create_checkpoint: {tag}")
+ 
+-        image = self.container.commit(repository="setup_agent_checkpoint", tag=tag)
++        image = self.container.commit(repository=self._ckpt_repo, tag=tag)
+ 
+         self._history_snapshots.append(tag)
+         logger.info(f"checkpoint created: {image.id[:12]}, stack depth: {len(self._history_snapshots)}")
+@@ -468,7 +487,7 @@ class EnvironmentManager:
+         logger.debug(f"removed old container: {old_container_id[:12]}")
+ 
+         # Recreate from the snapshot image.
+-        image_name = f"setup_agent_checkpoint:{tag}"
++        image_name = f"{self._ckpt_repo}:{tag}"
+         self._container = self._client.containers.run(
+             image_name,
+             command="sleep infinity",
+@@ -489,7 +508,7 @@ class EnvironmentManager:
+         logger.info("cleaning up snapshot images...")
+         for tag in self._history_snapshots:
+             try:
+-                image_name = f"setup_agent_checkpoint:{tag}"
++                image_name = f"{self._ckpt_repo}:{tag}"
+                 self._client.images.remove(image_name, force=True)
+                 logger.debug(f"removed snapshot image: {tag}")
+             except DockerException as e:
+diff --git a/src/llm_engine.py b/src/llm_engine.py
+index 8b1b5db..b4e1b2e 100644
+--- a/src/llm_engine.py
++++ b/src/llm_engine.py
+@@ -16,6 +16,7 @@ Module layout:
+ """
+ 
+ import json
++import os
+ import re
+ from abc import ABC, abstractmethod
+ from typing import Any
+@@ -53,6 +54,45 @@ class LLMClientBase(ABC):
+         pass
+ 
+ 
++# ── Per-run LLM call budget (bench) ──────────────────────────────────────────────────────────
++#
++# SetupX ships no call limit: `--max-steps` bounds AGENT STEPS, and one step can cost many
++# completions (a VERIFY step runs the verifier's whole ReAct sub-loop; phase 2 adds the prosecutor
++# and the judge). For a benchmark arm whose budget must be comparable with SWE-agent's
++# per_instance_call_limit, the unit has to be calls. Every completion funnels through
++# LLMClientBase.chat, so this is the one place to count. Embeddings use the OpenAI SDK directly
++# and are correctly NOT counted.
++
++
++class LLMCallLimit(BaseException):
++    """Raised when a run exhausts SETUPX_MAX_LLM_CALLS.
++
++    BaseException, not Exception: the retriever, verifier, prosecutor and judge all wrap their
++    chat() calls in `except Exception`, which would swallow the limit and let the run keep
++    spending past its budget. Same reasoning as main.py's Phase1Timeout.
++    """
++
++
++_llm_calls = 0
++
++
++def llm_calls_used() -> int:
++    """Completions issued so far in this process (one process == one repo)."""
++    return _llm_calls
++
++
++def _count_llm_call() -> None:
++    """Count one completion and enforce the budget. 0 / unset / malformed => unlimited (stock)."""
++    global _llm_calls
++    _llm_calls += 1
++    try:
++        limit = int(os.environ.get("SETUPX_MAX_LLM_CALLS", "0") or 0)
++    except ValueError:
++        limit = 0
++    if limit > 0 and _llm_calls > limit:
++        raise LLMCallLimit(f"LLM call budget exhausted ({limit} calls)")
++
++
+ class ARKClient(LLMClientBase):
+     """ARK API client.
+ 
+@@ -66,6 +106,7 @@ class ARKClient(LLMClientBase):
+         self._client = httpx.Client(timeout=300)
+ 
+     def chat(self, messages: list[dict], json_mode: bool = False) -> str:
++        _count_llm_call()
+         headers = {
+             "Authorization": f"Bearer {self._config.api_key}",
+             "Content-Type": "application/json",
+@@ -116,6 +157,7 @@ class OpenAICompatibleClient(LLMClientBase):
+         2. <think> stripping: qwen-style models embed reasoning in `content`
+            (`<think>...</think>actual output`); strip the reasoning block.
+         """
++        _count_llm_call()
+         headers = {
+             "Authorization": f"Bearer {self._config.api_key}",
+             "Content-Type": "application/json",
+diff --git a/src/main.py b/src/main.py
+index f44e839..0c69c39 100644
+--- a/src/main.py
++++ b/src/main.py
+@@ -19,7 +19,8 @@ from .logger import get_logger
+ from .agent import SpeculativeSetupAgent
+ from .prosecutor_agent import ProsecutorAgent
+ from .judge_agent import JudgeAgent
+-from .models import ProsecutionResult
++from .models import ProsecutionResult, SetupResult
++from .llm_engine import LLMCallLimit, llm_calls_used
+ 
+ logger = get_logger("main")
+ 
+@@ -89,6 +90,13 @@ def _store_xpu_experience(
+     or the trajectory is empty. Any failure is logged at warning level and
+     swallowed — XPU storage must never affect the run's exit status.
+     """
++    # XPU_READONLY=1: the store is a fixed corpus for this run. Returning here keeps the DB
++    # byte-identical across repos (so concurrent runs cannot race on dedup_and_store, and results
++    # do not depend on repo order) and skips the extractor LLM call this function would pay for.
++    if os.environ.get("XPU_READONLY") == "1":
++        logger.info("[XPU Store] XPU_READONLY=1 -> not storing this run's experience")
++        return
++
+     from .xpu_client import VectorXPUClient
+     if not isinstance(xpu_client, VectorXPUClient):
+         return
+@@ -253,14 +261,27 @@ def main() -> int:
+     signal.alarm(phase1_timeout)
+     try:
+         setup_result = agent.run()
+-    except Phase1Timeout as e:
++    except (Phase1Timeout, LLMCallLimit) as e:
++        # This handler used to `return 1`, skipping Stage 3 — so a run that hit its wall clock
++        # (or, now, its call budget) wrote no *_result.json at all and was lost, even though its
++        # trajectory is exactly what a replay-based harness needs. Synthesize the partial result
++        # and fall through to the report. completed=False routes phase 2 to its existing
++        # "did not FINISH" branch, so no other logic changes.
+         signal.alarm(0)
+-        logger.error(f"phase 1 timeout: {e}")
++        logger.error(f"phase 1 aborted: {e}")
+         try:
+-            agent.env.destroy()
++            container_id = agent.env.container_id or ""
+         except Exception:
+-            pass
+-        return 1
++            container_id = ""
++        setup_result = SetupResult(
++            repo_url=repo_url,
++            container_id=container_id,
++            completed=False,
++            steps_taken=agent._state.step,
++            final_message=f"[aborted] {e}",
++            history=agent._state.history,
++            last_verify_messages=agent._last_verify_messages,
++        )
+     finally:
+         signal.alarm(0)
+     logger.info(
+@@ -352,7 +373,8 @@ def main() -> int:
+             )
+             logger.info(f"setup did not finish, skipping phase 2: {phase2_reason}")
+ 
+-    except Exception as e:
++    except (Exception, LLMCallLimit) as e:
++        # LLMCallLimit is a BaseException, so it would otherwise escape this guard and skip Stage 3.
+         logger.error(f"phase 2 execution failed: {e}")
+         phase2_success = None
+         phase2_reason = f"[error] phase 2 execution failed: {e}"
+@@ -386,6 +408,7 @@ def main() -> int:
+     logger.info("=== Stage 3: Report ===")
+     report = {
+         "repo_url": repo_url,
++        "llm_calls": llm_calls_used(),
+         "setup": setup_result.to_dict(),
+         "phase2": {
+             "success": phase2_success,
