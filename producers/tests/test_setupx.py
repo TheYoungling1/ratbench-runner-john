@@ -513,3 +513,33 @@ def test_the_written_packet_matches_the_shared_contract(tmp_path):
     assert meta["producer"] == "setupx"
     assert meta["status"] == "produced"
     assert meta["conformance"] == "synthesized"
+
+
+def test_setupx_is_registered_and_constructible():
+    import producers
+    assert "setupx" in producers.PRODUCERS
+    prod = producers.get("setupx", llm="deepseek/deepseek-v4-flash", num_turn=9999)
+    assert prod.name == "setupx"
+    assert prod.measurable is True
+    assert prod.needs_llm is True
+
+
+def test_the_runner_treats_setupx_as_produce_able():
+    # Not derived from the registry — the set is hardcoded, so a producer missing from it is
+    # silently routed to _make_model's else-branch and raises "Unknown model name".
+    from runner.benchmark import _PRODUCE_ABLE
+    assert "setupx" in _PRODUCE_ABLE
+
+
+def test_the_variety_resolves_to_the_rehome_lane_with_an_explicit_budget():
+    import os
+    from runner.registry import load_registry, resolve_variety
+    root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    spec = resolve_variety(load_registry(os.path.join(root, "varieties.toml")), "setupx")
+    assert spec.model == "setupx"
+    assert spec.measure == "rehome"
+    assert spec.llm == "deepseek/deepseek-v4-flash"
+    # 100 LLM CALLS (SETUPX_MAX_LLM_CALLS), not agent steps — the same unit and value as
+    # sweagent_repo2run's per_instance_call_limit, so the budgets are comparable.
+    assert spec.num_turn == 100
+    assert spec.is_baseline is True

@@ -103,3 +103,22 @@ model = "sweagent_repo2run"
 llm   = "deepseek/deepseek-v4-flash"
 num_turn = 100                     # per_instance_call_limit; the paper states no budget
 measure = "rehome"
+
+# SetupX (OpenDataBox/SetupX): XPU experience store + speculative execution (docker-commit
+# snapshots with rollback) + a prosecutor/judge trial that re-checks the agent's own success claim.
+# It emits NO Dockerfile — producers/setupx.py replays the surviving `setup.history` onto a pinned
+# clone and re-homes /workspace/repo -> /testbed, so the arm gets a real EBSR/ESSR row.
+# Needs a checkout at $SETUPX_ROOT and a warm XPU store; see README, "SetupX setup".
+[variety.setupx]
+model = "setupx"
+# DeepSeek's OWN API. SetupX speaks raw OpenAI-compatible HTTP (not litellm), so the producer
+# strips the `deepseek/` prefix and passes the bare model name as OPENAI_MODEL. Reads
+# DEEPSEEK_API_KEY, base https://api.deepseek.com/v1.
+llm   = "deepseek/deepseek-v4-flash"
+# LLM CALLS, not agent steps — forwarded as SETUPX_MAX_LLM_CALLS by the producer, enforced at
+# LLMClientBase.chat by tools/setupx-bench.patch. SetupX's own --max-steps counts steps, and one
+# step can cost many completions (a VERIFY step runs the verifier's whole sub-loop; phase 2 adds
+# the prosecutor and judge), so steps are not comparable with the other arms' budgets. 100 matches
+# sweagent_repo2run's per_instance_call_limit and claudecode's cap.
+num_turn = 100
+measure = "rehome"
