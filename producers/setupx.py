@@ -108,6 +108,12 @@ def child_env(llm: str | None, base_image: str, ckpt_ns: str, max_llm_calls: int
                    XPU_READONLY="1")         # patched-in switch: skips _store_xpu_experience, so
                                              # concurrent repos cannot race on dedup_and_store and
                                              # results do not depend on repo order
+    else:
+        # Pin the arm OFF explicitly. `dict(os.environ, ...)` above copies the ambient shell, so an
+        # XPU_ENABLED exported for the on-arm would leak into the off-arm and hand SetupX an
+        # XPU-on child with no store — silently degrading the very control the variety is measured
+        # against. Arm membership is the producer's call, not the shell's.
+        env.update(XPU_ENABLED="0", XPU_VECTOR_ENABLED="0", XPU_READONLY="0")
     return env
 
 
@@ -119,7 +125,11 @@ def mirror_image(repo: RepoSpec, ctx: ProduceContext) -> str:
     clone land the pinned tree instead, so the agent works on the same commit the emitted
     Dockerfile builds, with no patch to the SetupX checkout.
     """
-    tag = "setupx-mirror:" + repo.full_name.replace("/", "__").lower()
+    # The SHA is part of the TAG, not just the context: SetupX resolves DOCKER_BASE_IMAGE by
+    # tag when it creates the container, so two concurrent produces of the same repo at
+    # different SHAs would race on one tag and an agent could get the other run's tree.
+    tag = "setupx-mirror:" + repo.full_name.replace("/", "__").lower() + (
+        f"_{repo.commit[:12]}" if repo.commit else "")
     ctx_dir = os.path.join(ctx.workdir, "mirror", repo.full_name)
     os.makedirs(ctx_dir, exist_ok=True)
     clone = (f"RUN git clone --depth=1 {repo.repo_url} /mirror\n" if not repo.commit else

@@ -324,12 +324,23 @@ def test_the_base_image_provides_the_python_binary_bench_invokes():
 
 
 import json
-import os
 
 import pytest
 
 from producers.base import ProduceContext
 from producers.setupx import SetupXProducer, child_env
+
+# Every input `child_env` reads from the ambient environment. A developer running these tests has
+# the live-run vars exported more often than not — SETUPX_DB_DSN especially — and a green run that
+# depends on the shell is not evidence. Clear them all; tests that need one set it explicitly.
+_AMBIENT = ("SETUPX_DB_DSN", "SETUPX_BASE_URL", "SETUPX_NETWORK_MODE", "XPU_ENABLED",
+            "XPU_VECTOR_ENABLED", "EMBEDDING_API_KEY", "EMBEDDING_BASE_URL", "EMBEDDING_MODEL")
+
+
+@pytest.fixture(autouse=True)
+def _clean_ambient_env(monkeypatch):
+    for name in _AMBIENT:
+        monkeypatch.delenv(name, raising=False)
 
 
 def _ctx(tmp_path):
@@ -403,6 +414,18 @@ def test_child_env_marks_the_store_read_only_when_a_dsn_is_present(monkeypatch):
     monkeypatch.setenv("EMBEDDING_MODEL", "openai/text-embedding-3-small")
     env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
     assert env["XPU_READONLY"] == "1"
+
+
+def test_child_env_pins_the_arm_off_when_there_is_no_store(monkeypatch):
+    # `dict(os.environ, ...)` copies the ambient shell. On the machine that runs BOTH arms,
+    # XPU_ENABLED stays exported and only SETUPX_DB_DSN gets unset for the off-arm — which would
+    # hand SetupX an XPU-on child with no store and silently degrade the control arm. The
+    # embeddings guard cannot catch it: it is keyed on the DSN, which is exactly what is absent.
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
+    monkeypatch.setenv("XPU_ENABLED", "1")
+    monkeypatch.setenv("XPU_VECTOR_ENABLED", "1")
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
+    assert env["XPU_ENABLED"] == env["XPU_VECTOR_ENABLED"] == env["XPU_READONLY"] == "0"
 
 
 def test_child_env_points_setupx_at_the_pinned_mirror(monkeypatch):
