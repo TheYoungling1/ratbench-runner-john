@@ -17,7 +17,14 @@
 - **Runner venv is Python 3.10.** SetupX runs in its own venv at `$SETUPX_ROOT/.venv`; the producer only ever subprocesses it. Do not add SetupX's dependencies to this repo's `requirements.txt`.
 - **No new dependencies in `requirements.txt`.** The producer uses stdlib `subprocess`/`json`/`glob` only.
 - **Commit pinning is enforced at every clone site** (README, "Commit pinning"). Both the produce-phase clone and the emitted Dockerfile's clone must land on `repo.commit`.
-- **The XPU store never accumulates across runs.** The 600 entries from `data/xpu_warm.jsonl` are the corpus. Each run works on a `CREATE DATABASE ... TEMPLATE` copy so nothing it learns survives into the next run. A SELECT-only role cannot be used — see Task 5 Step 4.
+- **Sweep the docker image store between runs.** Measured on the first smoke run: a single
+`initial_clone` checkpoint is **2.07 GB**, and SetupX commits another before every XPU trial.
+`_sweep_checkpoints` clears them on the normal and crashed paths, but a SIGKILL bypasses it — an
+interrupted 50-repo run can leave tens of gigabytes behind. Run
+`docker images --filter 'reference=setup_agent_checkpoint*' -q | xargs -r docker rmi -f` and
+`docker image prune` after an interrupted run; the per-repo `setupx-mirror:*` images accumulate too.
+
+**The XPU store never accumulates across runs.** The 600 entries from `data/xpu_warm.jsonl` are the corpus. Each run works on a `CREATE DATABASE ... TEMPLATE` copy so nothing it learns survives into the next run. A SELECT-only role cannot be used — see Task 5 Step 4.
 - **LLM slug:** `deepseek/deepseek-v4-flash`, served by DeepSeek's own API, key `DEEPSEEK_API_KEY` (already in `.env`). SetupX takes a bare model name, so the `deepseek/` provider prefix is stripped before it is passed on.
 - **Anti-vanish invariant** (`producers/base.py` §1): `produce()` never raises. Every failure path returns `ProducedEnv(status="error", ...)`.
 - **The SetupX checkout is pinned to `85de35515c45954b72afb9678dfd172855bfb847`** and carries `tools/setupx-bench.patch`. Without that patch the arm is correct only at `--concurrency 1`.
@@ -1189,14 +1196,14 @@ No new code — this is the operator-facing half, and the arm cannot run without
 - [ ] **Step 1: Clone and provision SetupX**
 
 ```bash
-git clone https://github.com/OpenDataBox/SetupX /opt/agents/SetupX
+git clone https://github.com/OpenDataBox/SetupX ~/agents/SetupX
 # Pin the baseline. A benchmark arm that tracks someone else's default branch is not reproducible,
 # and tools/setupx-bench.patch is cut against exactly this commit.
-git -C /opt/agents/SetupX checkout 85de35515c45954b72afb9678dfd172855bfb847
-git -C /opt/agents/SetupX apply /Users/john/ratbench-runner-john/tools/setupx-bench.patch
-python3 -m venv /opt/agents/SetupX/.venv
-/opt/agents/SetupX/.venv/bin/pip install -r /opt/agents/SetupX/requirements.txt
-export SETUPX_ROOT=/opt/agents/SetupX
+git -C ~/agents/SetupX checkout 85de35515c45954b72afb9678dfd172855bfb847
+git -C ~/agents/SetupX apply /Users/john/ratbench-runner-john/tools/setupx-bench.patch
+python3 -m venv ~/agents/SetupX/.venv
+~/agents/SetupX/.venv/bin/pip install -r ~/agents/SetupX/requirements.txt
+export SETUPX_ROOT=~/agents/SetupX
 
 # What the patch changes (three things, all required for concurrent runs):
 #  1. environment_manager.py: checkpoint images move from the single global
@@ -1220,11 +1227,11 @@ export SETUPX_ROOT=/opt/agents/SetupX
 #     report and was lost — the exact failure a replay-based harness cannot tolerate. The handler
 #     now synthesizes a partial SetupResult (completed=False) and falls through to the report.
 # Verify it took:
-grep -q "_ckpt_repo" /opt/agents/SetupX/src/environment_manager.py \
-  && grep -q "SETUPX_MAX_LLM_CALLS" /opt/agents/SetupX/src/llm_engine.py \
+grep -q "_ckpt_repo" ~/agents/SetupX/src/environment_manager.py \
+  && grep -q "SETUPX_MAX_LLM_CALLS" ~/agents/SetupX/src/llm_engine.py \
   && echo "patch applied"
 
-# Do NOT create /opt/agents/SetupX/.env — src/config.py loads it with override=True and would
+# Do NOT create ~/agents/SetupX/.env — src/config.py loads it with override=True and would
 # silently replace the model, endpoint and DSN the producer passes in. The producer refuses to
 # start if it exists.
 ```
@@ -1254,7 +1261,7 @@ sleep 5 && docker exec setupx-xpu psql -U postgres -d xpu_warm \
 
 # Import the 600 shipped entries. The JSONL carries no vectors — the importer embeds every entry,
 # so this costs one embeddings call per entry and must use the same model the runs will query with.
-cd /opt/agents/SetupX
+cd ~/agents/SetupX
 EMBEDDING_API_KEY=$OPENROUTER_API_KEY \
   EMBEDDING_BASE_URL=https://openrouter.ai/api/v1 \
   EMBEDDING_MODEL=openai/text-embedding-3-small EMBEDDING_DIM=1536 \
@@ -1357,6 +1364,13 @@ pinned tree. `git` warns `--depth is ignored in local clones`; that is expected.
 **No token accounting.** `src/llm_engine.py` discards the API `usage` block, so `_meta.json`
 carries `turns_used` and `produce_s` but not `tokens_in` / `tokens_out` / `cost_usd`.
 
+**Sweep the docker image store between runs.** Measured on the first smoke run: a single
+`initial_clone` checkpoint is **2.07 GB**, and SetupX commits another before every XPU trial.
+`_sweep_checkpoints` clears them on the normal and crashed paths, but a SIGKILL bypasses it — an
+interrupted 50-repo run can leave tens of gigabytes behind. Run
+`docker images --filter 'reference=setup_agent_checkpoint*' -q | xargs -r docker rmi -f` and
+`docker image prune` after an interrupted run; the per-repo `setupx-mirror:*` images accumulate too.
+
 **The XPU store never accumulates across runs.** Each run gets a `CREATE DATABASE ... TEMPLATE`
 copy of the immutable 600-entry `xpu_warm`, and `FREEZE_TELEMETRY=1` freezes the telemetry counters
 on top of that. A SELECT-only role is NOT a workable alternative: `XpuVectorStore.__init__` runs
@@ -1383,7 +1397,7 @@ The first task that spends money and needs docker. Everything before this is off
 
 ```bash
 source env.sh
-export SETUPX_ROOT=/opt/agents/SetupX
+export SETUPX_ROOT=~/agents/SetupX
 export SETUPX_DB_DSN=postgresql://postgres:setupx@localhost:5433/xpu_run   # from Task 5 Step 4
 docker info >/dev/null && echo "docker ok"
 test ! -e "$SETUPX_ROOT/.env" && echo "no dotenv shadow ok"
@@ -1392,17 +1406,21 @@ grep -c . <<<"$DEEPSEEK_API_KEY$SETUPX_DB_DSN$EMBEDDING_API_KEY" >/dev/null && e
 
 - [ ] **Step 2: Run one repo**
 
+`bruin-data/ingestr` is the lightest repo in `rat_python50.json` at 19 tests, which makes it the
+cheapest end-to-end signal. Do **not** use `psf/requests` — it is not in the dataset, so `--only`
+would match nothing and the run would exit having measured zero repos.
+
 ```bash
-./run_bench.sh setupx --repos-json datasets/rat_python50.json --only psf/requests --tier all
+./run_bench.sh setupx --repos-json datasets/rat_python50.json --only bruin-data/ingestr --tier all
 ```
 
 - [ ] **Step 3: Check the produce side**
 
 ```bash
 RUN=$(ls -td runs/setupx/* | head -1)
-cat "$RUN/output/psf/requests/_meta.json"
-cat "$RUN/output/psf/requests/eval_build/Dockerfile"
-head -30 "$RUN/output/psf/requests/eval_build/setupx_replay.sh"
+cat "$RUN/output/bruin-data/ingestr/_meta.json"
+cat "$RUN/output/bruin-data/ingestr/eval_build/Dockerfile"
+head -30 "$RUN/output/bruin-data/ingestr/eval_build/setupx_replay.sh"
 ```
 
 Expected: `_meta.json` has `"producer": "setupx"`, `"status": "produced"`, `"conformance": "synthesized"`, a non-null `head_sha` matching the dataset row, and a `note` carrying the phase-2 verdict. The Dockerfile pins that SHA, `COPY`s the replay script, and ends at `WORKDIR /testbed`.
@@ -1413,7 +1431,7 @@ Expected: `_meta.json` has `"producer": "setupx"`, `"status": "produced"`, `"con
 cat "$RUN/measure/metrics.json"
 ```
 
-Expected: one row for `psf/requests` with `build_ok: true` and a `status` that is not `non_conforming` (that would mean the `/testbed` probe failed) and not `empty_testbed` (that would mean the re-home moved the wrong directory).
+Expected: one row for `bruin-data/ingestr` with `build_ok: true` and a `status` that is not `non_conforming` (that would mean the `/testbed` probe failed) and not `empty_testbed` (that would mean the re-home moved the wrong directory).
 
 - [ ] **Step 5: Confirm the master store did not grow**
 
