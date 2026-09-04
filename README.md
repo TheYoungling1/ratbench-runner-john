@@ -254,8 +254,17 @@ dataset SHA. Rather than patch the checkout, the producer builds a per-repo base
 repo pinned at `/mirror` and hands SetupX `/mirror` as the repo URL, so its own clone lands the
 pinned tree. `git` warns `--depth is ignored in local clones`; that is expected.
 
-**No token accounting.** `src/llm_engine.py` discards the API `usage` block, so `_meta.json` carries
-`turns_used` and `produce_s` but `tokens_in` / `tokens_out` / `cost_usd` are `null`.
+**Token accounting.** Stock `src/llm_engine.py` discards the API `usage` block; the vendored patch
+accumulates it there and `src/main.py` reports it, so `_meta.json` carries `tokens_in` /
+`tokens_out` / `total_tokens` alongside `llm_calls`, `turns_used` and `produce_s`. `tokens_in` is
+**total** prompt tokens, DeepSeek cache hits included, so pricing from it alone overstates — the
+hit/miss split for correct pricing is `usage.prompt_cache_hit_tokens` /
+`prompt_cache_miss_tokens` in the per-repo `*_result.json`, which the producer preserves.
+`cost_usd` stays `null` by design: DeepSeek prices hits, misses and output separately across
+peak/off-peak windows, and that computation belongs with the metering ledger. On an unpatched
+checkout there is no `usage` block and all three token fields are `null`; a patched run whose
+provider omits `usage` records `0` instead, so `llm_calls > 0` with `total_tokens == 0` is the
+signal that the counts cannot be trusted.
 
 **`num_turn` is a budget in LLM completions, not agent steps** — enforced by the vendored patch at
 `LLMClientBase.chat`. The smoke run's 25 agent steps cost 101 completions, roughly 4:1, so a
@@ -416,6 +425,8 @@ card: Claude Code mixes models within a single run (a haiku for side tasks along
 model), so one rate would mis-price it. `tokens_in` includes cache-creation and cache-read tokens
 (matching `ccdf_costs.py`), which makes it **not** directly comparable to the raw prompt-token counts
 the deepseek-backed agents report — the component split is preserved in `claude_stream.jsonl`.
+`setupx` is the exception among those: its `tokens_in` is cache-inclusive too, with its own split
+kept in the per-repo `*_result.json` (see the SetupX section above).
 
 The `claudecode*` lanes need the local-only `claude-runner:latest` workbench image (no registry, so a
 `docker system prune` deletes it). `bench` builds it automatically from `docker/claude-runner.Dockerfile`

@@ -15,10 +15,12 @@
 from __future__ import annotations
 
 import glob
+import hashlib
 import json
 import os
 import subprocess
 import time
+from urllib.parse import urlsplit
 
 from producers.base import ProduceContext, ProducedEnv
 
@@ -29,11 +31,42 @@ from bench.schema import RepoSpec  # noqa: E402
 from producers.setupx_replay import (  # noqa: F401
     DEFAULT_BASE_IMAGE, REPLAY_BASENAME, WORK_DIR, plan_replay, render_dockerfile, render_replay)
 
+# Same coercion the trajectory transforms use: a JSON number that arrives as a string must still
+# read as a number.
+from producers.setupx_replay import _as_int  # noqa: E402
+
 DEEPSEEK_BASE_URL = "https://api.deepseek.com/v1"
+# The patch this producer's semantics rest on, resolved from this file so it follows the repo.
+PATCH_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                          "tools", "setupx-bench.patch")
 # A BACKSTOP, not the intended bound. main.py's Phase1Timeout handler returns before Stage 3, so a
 # wall-clock timeout writes no report and the run is lost entirely; the step budget (--max-steps,
 # from varieties.toml) is what should end a run, because step exhaustion still reports.
 DEFAULT_PHASE1_TIMEOUT = 3600
+
+
+def usage_economy(report: dict) -> dict:
+    """The report's `usage` block in producers/base.py's packet vocabulary.
+
+    Absent on an unpatched checkout — stock SetupX discards the API `usage` block — and then every
+    key is None, exactly what the packet recorded before this landed. Never raises: a run that
+    already cost money must not be lost to a malformed telemetry field.
+
+    cost_usd is deliberately NOT computed here: DeepSeek prices cache hits, cache misses and
+    output separately, across peak/off-peak windows, and that pricing belongs with the metering
+    ledger. The inputs are not thrown away — the cache hit/miss split has no home in the shared
+    packet schema, but main.py writes the WHOLE report to <out_dir>/*_result.json, which this
+    producer keeps per repo, so `usage.prompt_cache_hit_tokens` / `prompt_cache_miss_tokens` are
+    on disk there for the ledger to price later.
+    """
+    usage = report.get("usage")
+    if not isinstance(usage, dict):
+        return {"tokens_in": None, "tokens_out": None, "total_tokens": None}
+    tokens_in = _as_int(usage.get("prompt_tokens"), 0)
+    tokens_out = _as_int(usage.get("completion_tokens"), 0)
+    return {"tokens_in": tokens_in, "tokens_out": tokens_out,
+            # The provider's own total when it sent one; the sum is only a fallback.
+            "total_tokens": _as_int(usage.get("total_tokens"), tokens_in + tokens_out)}
 
 
 def _setupx_root(ctx: ProduceContext | None = None) -> str:
@@ -53,14 +86,23 @@ def _setupx_root(ctx: ProduceContext | None = None) -> str:
                 f"{os.path.join(root, name)} exists. SetupX loads it with override=True, which "
                 "would silently replace the model/endpoint/DSN this producer passes in. Remove it "
                 "— the producer supplies the whole environment.")
-    # tools/setupx-bench.patch adds the switches this producer's budget and isolation rest on. On an
-    # unpatched checkout they are inert and the failure is SILENT and expensive: SETUPX_MAX_LLM_CALLS
-    # does nothing, so `--max-steps 9999` (deliberately unbounded, because the call cap is the real
-    # budget) lets the run spend to the 3600s phase-1 alarm; and SETUPX_CKPT_NS does nothing, so at
-    # --concurrency > 1 every repo shares one checkpoint image repository and rollbacks restore the
-    # wrong container — after which the replayed trajectory no longer matches what the agent did.
-    for rel, marker in (("src/environment_manager.py", "_ckpt_repo"),
-                        ("src/llm_engine.py", "SETUPX_MAX_LLM_CALLS")):
+    # tools/setupx-bench.patch adds the switches this producer's budget, isolation and accounting
+    # rest on. Unpatched they are inert and every failure is SILENT and expensive, so each one gets
+    # ONE marker per functional area of the patch, not a spot-check. A live run recorded null
+    # tokens while agent_settings said setupx_patched=true, because the checkout carried an OLDER
+    # copy of the patch: it had the two markers below and no usage capture at all, and nothing
+    # noticed. A stale patch reporting itself as fully applied is worse than no check — a missing
+    # token column is visibly missing, but a false "patched" actively misleads. So every capability
+    # the patch adds needs its own marker here, and a new capability needs a new line.
+    for rel, marker, inert in (
+            ("src/environment_manager.py", "_ckpt_repo",
+             "concurrent repos corrupt each other's rollbacks"),
+            ("src/llm_engine.py", "SETUPX_MAX_LLM_CALLS",
+             "the LLM-call budget is inert and the run spends to the phase-1 alarm"),
+            # llm_usage_used, not _record_usage: main.py imports this one by name, so it is the
+            # identifier both halves of the usage hunk agree on.
+            ("src/llm_engine.py", "llm_usage_used",
+             "no token counts are captured and the run's cost is unrecoverable")):
         try:
             with open(os.path.join(root, rel), encoding="utf-8") as fh:
                 patched = marker in fh.read()
@@ -69,13 +111,13 @@ def _setupx_root(ctx: ProduceContext | None = None) -> str:
         if not patched:
             raise RuntimeError(
                 f"{os.path.join(root, rel)} has no {marker}: tools/setupx-bench.patch is not "
-                "applied. Without it the LLM-call budget and the per-run checkpoint namespace are "
-                "both inert — the run spends unbounded to the phase-1 alarm, and concurrent repos "
-                "corrupt each other's rollbacks. Apply it (see README, 'SetupX setup').")
+                f"applied, or the checkout carries an older copy of it — {inert}. Re-apply the "
+                "CURRENT patch (see README, 'SetupX setup').")
     return root
 
 
-def child_env(llm: str | None, base_image: str, ckpt_ns: str, max_llm_calls: int) -> dict:
+def child_env(llm: str | None, base_image: str, ckpt_ns: str, max_llm_calls: int,
+              log_dir: str) -> dict:
     """The environment `python -m src.main` runs under. Validated here, at the boundary.
 
     `ckpt_ns` namespaces SetupX's checkpoint images so concurrent repos cannot delete or overwrite
@@ -83,6 +125,11 @@ def child_env(llm: str | None, base_image: str, ckpt_ns: str, max_llm_calls: int
     `max_llm_calls` is the arm's budget in COMPLETIONS, not agent steps: SetupX's own --max-steps
     counts steps, and one step can cost many completions. Both switches come from
     tools/setupx-bench.patch.
+    `log_dir` is where SetupX's own INFO log goes. src/logger.py logs to a FILE, not to stdout —
+    ~10k lines per run of XPU retrieval decisions, per-command output and agent reasoning, against
+    the 12-line summary stdout carries. Unset, it defaults to $SETUPX_ROOT/log/, where every repo
+    of every run piles up under timestamped names that cannot be matched back to a row afterwards.
+    Caller must have created the directory.
     """
     key = os.environ.get("DEEPSEEK_API_KEY")
     if not key:
@@ -106,7 +153,8 @@ def child_env(llm: str | None, base_image: str, ckpt_ns: str, max_llm_calls: int
                SETUPX_MAX_LLM_CALLS=str(max_llm_calls),
                # bridge networking: host networking shares the host port space, so two concurrent
                # repos collide the moment either binds a port.
-               SETUPX_NETWORK_MODE=os.environ.get("SETUPX_NETWORK_MODE", "bridge"))
+               SETUPX_NETWORK_MODE=os.environ.get("SETUPX_NETWORK_MODE", "bridge"),
+               LOG_DIR=log_dir)
     dsn = os.environ.get("SETUPX_DB_DSN")
     if dsn:
         # All THREE, not just the key. text_to_embedding takes the dedicated branch as soon as
@@ -134,6 +182,85 @@ def child_env(llm: str | None, base_image: str, ckpt_ns: str, max_llm_calls: int
         # against. Arm membership is the producer's call, not the shell's.
         env.update(XPU_ENABLED="0", XPU_VECTOR_ENABLED="0", XPU_READONLY="0")
     return env
+
+
+def _xpu_store(dsn: str) -> str:
+    """The DATABASE NAME out of a DSN, and nothing else. "" if it cannot be read safely.
+
+    SETUPX_DB_DSN carries a password. `_meta.json` is committed alongside the run and gets pasted
+    into issues, so the DSN itself must never reach it — the store's identity is all an analyst
+    needs to tell two XPU corpora apart.
+    """
+    try:
+        parts = urlsplit(dsn)
+    except ValueError:
+        # urlsplit is NOT total: an unclosed IPv6 bracket ("@[::1:5433/db") and a netloc that
+        # NFKC-normalizes into /?#@: both raise. This function is called above every try in
+        # agent_settings, which is itself called above produce()'s try, and benchmark.py's
+        # `prod.produce(...)` is unwrapped on the strength of "producer is anti-vanish (never
+        # raises)" — so a ValueError here would vanish the row instead of recording an error one.
+        return ""
+    # A keyword-style DSN ("dbname=xpu_run password=hunter2") has no scheme/netloc and urlsplit
+    # hands the WHOLE string back as the path — password included. Require a URL, then require the
+    # result to be a bare identifier; anything else is dropped rather than risked.
+    name = parts.path.lstrip("/") if parts.scheme and parts.netloc else ""
+    return name if name and all(c.isalnum() or c in "_-." for c in name) else ""
+
+
+def agent_settings(ctx: ProduceContext, num_turn: int) -> dict:
+    """Which arm this row belongs to, and what the budget actually meant. NEVER raises.
+
+    Two facts are unrecoverable once a run is over. (1) ARM: the XPU-on and XPU-off runs emit
+    byte-identical artifact shapes, so without this the only thing separating them is the
+    directory name the operator typed into --run-name — and the on/off comparison is the entire
+    point of the variety. (2) PATCH STATE: `llm_call_budget` means COMPLETIONS only because
+    tools/setupx-bench.patch is applied; against an unpatched checkout SETUPX_MAX_LLM_CALLS is
+    inert, `--max-steps 9999` binds instead, and num_turn=100 silently becomes a step budget worth
+    roughly four times the spend — producing data that looks identical and means something else.
+
+    Computed from the same environment child_env reads, so the record and the child agree.
+    """
+    dsn = os.environ.get("SETUPX_DB_DSN") or ""
+    settings = {"xpu": "on" if dsn else "off",
+                "llm_call_budget": num_turn,
+                "network_mode": os.environ.get("SETUPX_NETWORK_MODE", "bridge")}
+    store = _xpu_store(dsn)
+    if store:
+        settings["xpu_store"] = store
+    # A fingerprint of the PATCH FILE, which is what survives the next time the patch changes:
+    # markers go stale silently, but this lets an analyst say "this run used patch X" and diff it
+    # against tools/setupx-bench.patch as of the run's commit. NOT proof the checkout matches it —
+    # that would take verifying applied hunks, which is not worth building. The marker loop in
+    # _setupx_root catches the realistic failure (a capability missing outright); this makes the
+    # intended version recoverable. Together they are a strong hint, not a guarantee.
+    try:
+        with open(PATCH_PATH, "rb") as fh:
+            settings["setupx_patch_sha"] = hashlib.sha256(fh.read()).hexdigest()[:12]
+    except OSError:                          # noqa: BLE001 — optional fact, and this runs outside
+        pass                                 # produce()'s guard, so it must not raise
+    try:
+        # _setupx_root is the marker grep, not a second copy of it: it returns only for a checkout
+        # that exists AND carries both patch markers, so "it returned" IS the patched signal.
+        root = _setupx_root(ctx)
+    except Exception:                        # noqa: BLE001 — provenance, never a failure path
+        settings["setupx_patched"] = False   # also covers "no checkout here", e.g. the error guard
+        return settings
+    settings["setupx_patched"] = True
+    try:
+        # --show-toplevel alongside HEAD, in one call: rev-parse WALKS UP, so a checkout vendored
+        # inside another repo would otherwise report the PARENT's HEAD — a wrong 40-hex value that
+        # reads as authoritative, which for a provenance field is worse than no value at all.
+        # 5s, not 30: this runs per repo and a local rev-parse takes milliseconds.
+        out = subprocess.run(["git", "-C", root, "rev-parse", "--show-toplevel", "HEAD"],
+                             capture_output=True, text=True, timeout=5)
+        top, _, commit = (out.stdout or "").partition("\n")
+        if out.returncode != 0 or os.path.realpath(top.strip()) != os.path.realpath(root):
+            commit = ""
+    except Exception:                        # noqa: BLE001 — a checkout with no .git still runs
+        commit = ""
+    if commit.strip():
+        settings["setupx_commit"] = commit.strip()
+    return settings
 
 
 def mirror_image(repo: RepoSpec, ctx: ProduceContext) -> str:
@@ -223,7 +350,7 @@ def run_setupx(repo: RepoSpec, ctx: ProduceContext, *, llm: str | None, num_turn
              "--max-steps", "9999",
              "--phase1-timeout", str(phase1),
              "--output-dir", out_dir],
-            cwd=root, env=child_env(llm, base_image, ckpt_ns, num_turn),
+            cwd=root, env=child_env(llm, base_image, ckpt_ns, num_turn, out_dir),
             capture_output=True, text=True, timeout=ctx.timeout)
     finally:
         _sweep_checkpoints(ckpt_ns)
@@ -244,12 +371,12 @@ def run_setupx(repo: RepoSpec, ctx: ProduceContext, *, llm: str | None, num_turn
             "completed": bool(setup.get("completed")),
             "steps_taken": setup.get("steps_taken"),
             "phase2": report.get("phase2") or {},
-            # SetupX discards the API `usage` block, so there are no token counts to harvest.
-            # llm_calls comes from the patched main.py, which reports llm_engine.llm_calls_used().
-            # Stock SetupX discards the API `usage` block entirely, so tokens/cost stay None until
-            # the metering ledger lands (see the note in Task 3's header).
+            # llm_calls and usage both come from the patched main.py (llm_engine.llm_calls_used()
+            # / llm_usage_used()); on an unpatched checkout they are simply absent. cost_usd is
+            # left unset — see usage_economy for where its inputs are persisted.
             "economy": {"turns_used": setup.get("steps_taken"),
                         "llm_calls": report.get("llm_calls"),
+                        **usage_economy(report),
                         "produce_s": round(time.time() - start, 2)}}
 
 
@@ -272,9 +399,14 @@ class SetupXProducer:
         # Anti-vanish invariant (design §1): a SetupX crash yields ProducedEnv(status="error"),
         # never a raised exception.
         start = time.time()
+        num_turn = ctx.num_turn if ctx.num_turn is not None else self.num_turn
+        # Hoisted out of the try, and onto EVERY return below: a run that failed still has to say
+        # what arm and what budget it failed under, or its row cannot be attributed at all — and
+        # the failures are the rows an analyst goes back to interrogate. agent_settings never
+        # raises, so computing it here cannot cost the anti-vanish invariant.
+        settings = agent_settings(ctx, num_turn)
         try:
             runner = self._runner or run_setupx
-            num_turn = ctx.num_turn if ctx.num_turn is not None else self.num_turn
             res = runner(repo, ctx, llm=(ctx.llm or self.llm), num_turn=num_turn)
 
             economy = dict(res.get("economy") or {})
@@ -290,16 +422,19 @@ class SetupXProducer:
             if not steps:
                 return ProducedEnv(repo=repo, dockerfile=None, status="error",
                                    note="no replayable steps survived; " + note,
+                                   agent_settings=settings,
                                    conformance=self.conformance, producer_name=self.name,
                                    economy=economy)
 
             dockerfile, scripts = render_dockerfile(repo, steps)
             return ProducedEnv(repo=repo, dockerfile=dockerfile, setup_scripts=scripts,
                                base_image=DEFAULT_BASE_IMAGE, head_sha=repo.commit or "",
+                               agent_settings=settings,
                                status="produced", conformance=self.conformance,
                                unreplayed=lossy, producer_name=self.name,
                                economy=economy, note=note)
         except Exception as exc:                # noqa: BLE001 — boundary guard, never propagate
             return ProducedEnv(repo=repo, dockerfile=None, status="error", note=repr(exc),
+                               agent_settings=settings,
                                conformance=self.conformance, producer_name=self.name,
                                economy={"produce_s": round(time.time() - start, 2)})

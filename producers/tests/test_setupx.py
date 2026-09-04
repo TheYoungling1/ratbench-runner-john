@@ -384,9 +384,13 @@ def _ctx(tmp_path):
     return ProduceContext(llm="deepseek/deepseek-v4-flash", workdir=str(tmp_path), num_turn=9999)
 
 
+# Where SetupX's own ~10k-line INFO log is told to land: that repo's output directory.
+_LOG_DIR = "/out/o__r/setupx_log"
+
+
 def test_child_env_routes_the_bare_model_name_at_deepseeks_own_endpoint(monkeypatch):
     monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
-    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100, _LOG_DIR)
     assert env["LLM_PROVIDER"] == "openai"
     assert env["OPENAI_BASE_URL"] == "https://api.deepseek.com/v1"
     assert env["OPENAI_API_KEY"] == "sk-test"
@@ -397,7 +401,7 @@ def test_child_env_routes_the_bare_model_name_at_deepseeks_own_endpoint(monkeypa
 def test_child_env_refuses_to_start_without_a_key(monkeypatch):
     monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
     with pytest.raises(RuntimeError, match="DEEPSEEK_API_KEY"):
-        child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
+        child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100, _LOG_DIR)
 
 
 def test_child_env_freezes_the_experience_store(monkeypatch):
@@ -406,7 +410,7 @@ def test_child_env_freezes_the_experience_store(monkeypatch):
     monkeypatch.setenv("EMBEDDING_API_KEY", "sk-embed")
     monkeypatch.setenv("EMBEDDING_BASE_URL", "https://openrouter.ai/api/v1")
     monkeypatch.setenv("EMBEDDING_MODEL", "openai/text-embedding-3-small")
-    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100, _LOG_DIR)
     assert env["FREEZE_TELEMETRY"] == "1"
     assert env["XPU_VECTOR_ENABLED"] == "1"
     # config.py reads `dns` first, XPU_DB_DNS second; set both so neither spelling wins by accident.
@@ -421,7 +425,7 @@ def test_child_env_sends_embeddings_somewhere_other_than_deepseek(monkeypatch):
     monkeypatch.setenv("SETUPX_DB_DSN", "postgresql://postgres@localhost:5433/xpu_run")
     monkeypatch.delenv("EMBEDDING_API_KEY", raising=False)
     with pytest.raises(RuntimeError, match="EMBEDDING_API_KEY"):
-        child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
+        child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100, _LOG_DIR)
 
 
 def test_child_env_namespaces_the_checkpoint_images_per_run(monkeypatch):
@@ -429,7 +433,7 @@ def test_child_env_namespaces_the_checkpoint_images_per_run(monkeypatch):
     # startup deletes the other's snapshots and their step_<n>_pre_xpu tags collide, so a rollback
     # restores the wrong repo's container. Requires tools/setupx-bench.patch.
     monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
-    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100, _LOG_DIR)
     assert env["SETUPX_CKPT_NS"] == "o__r_123"
     assert env["SETUPX_NETWORK_MODE"] == "bridge"
 
@@ -439,7 +443,7 @@ def test_child_env_passes_the_budget_as_llm_calls_not_steps(monkeypatch):
     # NOT be forwarded as --max-steps: a single VERIFY step spawns the verifier's whole ReAct loop,
     # so steps and calls differ by an unbounded factor and would not be comparable across arms.
     monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
-    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100, _LOG_DIR)
     assert env["SETUPX_MAX_LLM_CALLS"] == "100"
 
 
@@ -449,7 +453,7 @@ def test_child_env_marks_the_store_read_only_when_a_dsn_is_present(monkeypatch):
     monkeypatch.setenv("EMBEDDING_API_KEY", "sk-embed")
     monkeypatch.setenv("EMBEDDING_BASE_URL", "https://openrouter.ai/api/v1")
     monkeypatch.setenv("EMBEDDING_MODEL", "openai/text-embedding-3-small")
-    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100, _LOG_DIR)
     assert env["XPU_READONLY"] == "1"
 
 
@@ -461,25 +465,29 @@ def test_child_env_pins_the_arm_off_when_there_is_no_store(monkeypatch):
     monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
     monkeypatch.setenv("XPU_ENABLED", "1")
     monkeypatch.setenv("XPU_VECTOR_ENABLED", "1")
-    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100, _LOG_DIR)
     assert env["XPU_ENABLED"] == env["XPU_VECTOR_ENABLED"] == env["XPU_READONLY"] == "0"
 
 
 def test_child_env_points_setupx_at_the_pinned_mirror(monkeypatch):
     monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
-    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100, _LOG_DIR)
     assert env["DOCKER_BASE_IMAGE"] == "setupx-mirror:o__r"
     assert env["DOCKER_WORK_DIR"] == "/workspace"
 
 
-def _fake_checkout(tmp_path, *, ckpt=True, calls=True):
-    """A directory shaped like a SetupX clone, patched or not."""
+def _fake_checkout(tmp_path, *, ckpt=True, calls=True, usage=True):
+    """A directory shaped like a SetupX clone, carrying whichever of the patch's markers are asked
+    for. `usage=False` is a checkout patched with an OLDER copy of the patch — the shape that
+    reported itself fully patched on a live run while recording null tokens."""
     src = tmp_path / "src"
     src.mkdir(parents=True, exist_ok=True)
     (src / "main.py").write_text("# main\n")
     (src / "environment_manager.py").write_text("def _ckpt_repo(self): ...\n" if ckpt else "pass\n")
     (src / "llm_engine.py").write_text(
-        'os.environ.get("SETUPX_MAX_LLM_CALLS")\n' if calls else "pass\n")
+        ('os.environ.get("SETUPX_MAX_LLM_CALLS")\n' if calls else "")
+        + ("def llm_usage_used(): ...\n" if usage else "")
+        or "pass\n")
     return str(tmp_path)
 
 
@@ -621,3 +629,295 @@ def test_the_variety_resolves_to_the_rehome_lane_with_an_explicit_budget():
     # sweagent_repo2run's per_instance_call_limit, so the budgets are comparable.
     assert spec.num_turn == 100
     assert spec.is_baseline is True
+
+
+# ── Token capture ────────────────────────────────────────────────────────────────────────────
+# The report shapes are the ones the patched src/llm_engine.py accumulates and src/main.py writes
+# out. run_setupx itself stays live-only, so the mapping is exercised through usage_economy and
+# through an injected runner, never by launching SetupX.
+
+def test_usage_lands_in_the_economy_the_packet_reads():
+    from producers.setupx import usage_economy
+    assert usage_economy({"usage": {"prompt_tokens": 85, "completion_tokens": 5,
+                                    "prompt_cache_hit_tokens": 0,
+                                    "prompt_cache_miss_tokens": 85}}) == {
+        "tokens_in": 85, "tokens_out": 5, "total_tokens": 90}
+
+
+def test_a_reported_total_wins_over_the_sum():
+    from producers.setupx import usage_economy
+    assert usage_economy({"usage": {"prompt_tokens": 391, "completion_tokens": 12,
+                                    "total_tokens": 403}})["total_tokens"] == 403
+
+
+def test_an_unpatched_checkout_reports_no_tokens_rather_than_zero():
+    # Stock SetupX discards the API `usage` block, so the report carries none. Zeros would read as
+    # "this run was free"; None reads as "not measured", which is what happened.
+    from producers.setupx import usage_economy
+    assert usage_economy({"llm_calls": 4}) == {
+        "tokens_in": None, "tokens_out": None, "total_tokens": None}
+
+
+def test_a_malformed_usage_block_costs_a_count_not_the_run():
+    from producers.setupx import usage_economy
+    assert usage_economy({"usage": "429 Too Many Requests"})["tokens_in"] is None
+    assert usage_economy({"usage": {"prompt_tokens": None, "completion_tokens": "12"}}) == {
+        "tokens_in": 0, "tokens_out": 12, "total_tokens": 12}
+    assert usage_economy({"usage": {"prompt_tokens": [1], "total_tokens": "eight"}}) == {
+        "tokens_in": 0, "tokens_out": 0, "total_tokens": 0}
+
+
+def test_the_packet_carries_the_tokens_a_patched_run_reported(tmp_path):
+    def stub(repo, ctx, *, llm, num_turn):
+        from producers.setupx import usage_economy
+        report = {"llm_calls": 3,
+                  "usage": {"prompt_tokens": 391, "completion_tokens": 12,
+                            "prompt_cache_hit_tokens": 384, "prompt_cache_miss_tokens": 7}}
+        return {"history": [{"action": {"action_type": "SHELL_COMMAND",
+                                        "content": {"command": "pip install -e ."}},
+                             "result": {"exit_code": 0, "stdout": "", "stderr": ""}}],
+                "completed": True, "steps_taken": 3, "phase2": {"success": True, "reason": "ok"},
+                "economy": {"turns_used": 3, "llm_calls": report["llm_calls"],
+                            **usage_economy(report)}}
+
+    from producers.base import write_env_packet
+    out = tmp_path / "out"
+    env = SetupXProducer(runner=stub).produce(_repo(), _ctx(tmp_path))
+    write_env_packet(str(out), env)
+    meta = json.loads((out / "o" / "r" / "_meta.json").read_text())
+    assert (meta["tokens_in"], meta["tokens_out"], meta["total_tokens"]) == (391, 12, 403)
+    assert meta["llm_calls"] == 3
+    # Pricing DeepSeek's cache split belongs with the metering ledger, not here.
+    assert meta["cost_usd"] is None
+
+
+def test_an_unpatched_run_still_produces_a_packet_with_null_tokens(tmp_path):
+    def stub(repo, ctx, *, llm, num_turn):
+        from producers.setupx import usage_economy
+        return {"history": [{"action": {"action_type": "SHELL_COMMAND",
+                                        "content": {"command": "pip install -e ."}},
+                             "result": {"exit_code": 0, "stdout": "", "stderr": ""}}],
+                "completed": True, "steps_taken": 3, "phase2": {"success": True, "reason": "ok"},
+                "economy": {"turns_used": 3, **usage_economy({})}}
+
+    from producers.base import write_env_packet
+    out = tmp_path / "out"
+    env = SetupXProducer(runner=stub).produce(_repo(), _ctx(tmp_path))
+    write_env_packet(str(out), env)
+    meta = json.loads((out / "o" / "r" / "_meta.json").read_text())
+    assert env.status == "produced"
+    assert meta["tokens_in"] is None and meta["total_tokens"] is None
+
+
+# ── Provenance: which arm, which checkout ────────────────────────────────────────────────────
+# XPU-on and XPU-off emit byte-identical artifact shapes, and `llm_call_budget` only means
+# completions on a patched checkout. Both facts are unrecoverable once the run is over.
+
+def test_agent_settings_records_the_xpu_arm_as_on_when_a_store_is_configured(tmp_path, monkeypatch):
+    from producers.setupx import agent_settings
+    monkeypatch.setenv("SETUPX_DB_DSN", "postgresql://postgres:hunter2@localhost:5433/xpu_run")
+    settings = agent_settings(ProduceContext(llm=None, workdir=str(tmp_path)), 100)
+    assert settings["xpu"] == "on"
+    assert settings["xpu_store"] == "xpu_run"
+    assert settings["llm_call_budget"] == 100
+
+
+def test_agent_settings_records_the_xpu_arm_as_off_without_a_store(tmp_path, monkeypatch):
+    # The distinction the whole variety exists to measure. Without it the only thing separating
+    # the two runs is the directory name the operator typed into --run-name.
+    from producers.setupx import agent_settings
+    monkeypatch.delenv("SETUPX_DB_DSN", raising=False)
+    settings = agent_settings(ProduceContext(llm=None, workdir=str(tmp_path)), 100)
+    assert settings["xpu"] == "off"
+    assert "xpu_store" not in settings
+
+
+def test_agent_settings_never_carries_the_dsn_password(tmp_path, monkeypatch):
+    # _meta.json is committed alongside the run and gets pasted into issues.
+    from producers.setupx import agent_settings
+    monkeypatch.setenv("SETUPX_DB_DSN", "postgresql://postgres:hunter2@localhost:5433/xpu_run")
+    blob = json.dumps(agent_settings(ProduceContext(llm=None, workdir=str(tmp_path)), 100))
+    assert "hunter2" not in blob and "postgres:" not in blob and "5433" not in blob
+
+
+def test_a_keyword_style_dsn_is_dropped_rather_than_leaked(tmp_path, monkeypatch):
+    # urlsplit hands a scheme-less DSN back as one long path — password included. Dropping the
+    # store name is cheaper than putting a credential in a committed artifact.
+    from producers.setupx import agent_settings
+    monkeypatch.setenv("SETUPX_DB_DSN", "dbname=xpu_run password=hunter2")
+    settings = agent_settings(ProduceContext(llm=None, workdir=str(tmp_path)), 100)
+    assert settings["xpu"] == "on"           # a store IS configured; only its name is unreadable
+    assert "xpu_store" not in settings
+    assert "hunter2" not in json.dumps(settings)
+
+
+def test_agent_settings_records_the_checkout_commit_and_patch_state(tmp_path):
+    # An unpatched checkout produces data that looks identical and means something else:
+    # SETUPX_MAX_LLM_CALLS is inert there, so --max-steps 9999 binds and the budget is ~4x.
+    import subprocess
+    from producers.setupx import agent_settings
+    root = _fake_checkout(tmp_path)
+    for cmd in (["init", "-q"], ["add", "-A"]):
+        subprocess.run(["git", "-C", root, *cmd], check=True, capture_output=True)
+    subprocess.run(["git", "-C", root, "-c", "user.email=t@t", "-c", "user.name=t",
+                    "commit", "-qm", "x"], check=True, capture_output=True)
+    settings = agent_settings(ProduceContext(llm=None, workdir=str(tmp_path), agent_root=root), 100)
+    assert settings["setupx_patched"] is True
+    assert len(settings["setupx_commit"]) == 40
+
+
+def test_an_unpatched_checkout_is_recorded_as_unpatched_not_omitted(tmp_path):
+    from producers.setupx import agent_settings
+    root = _fake_checkout(tmp_path, calls=False)
+    settings = agent_settings(ProduceContext(llm=None, workdir=str(tmp_path), agent_root=root), 100)
+    assert settings["setupx_patched"] is False
+    assert "setupx_commit" not in settings
+
+
+def test_agent_settings_survives_a_checkout_that_is_not_there_at_all(tmp_path):
+    # The path the produce() error guard takes: record what is knowable, raise nothing.
+    from producers.setupx import agent_settings
+    ctx = ProduceContext(llm=None, workdir=str(tmp_path), agent_root="/nope")
+    settings = agent_settings(ctx, 7)
+    assert settings["setupx_patched"] is False
+    assert settings["llm_call_budget"] == 7
+
+
+def test_the_packet_records_the_arm_on_a_successful_run(tmp_path, monkeypatch):
+    def stub(repo, ctx, *, llm, num_turn):
+        return {"history": [{"action": {"action_type": "SHELL_COMMAND",
+                                        "content": {"command": "pip install -e ."}},
+                             "result": {"exit_code": 0, "stdout": "", "stderr": ""}}],
+                "completed": True, "steps_taken": 3, "phase2": {"success": True, "reason": "ok"},
+                "economy": {}}
+
+    from producers.base import write_env_packet
+    monkeypatch.setenv("SETUPX_DB_DSN", "postgresql://postgres:hunter2@localhost:5433/xpu_run")
+    out = tmp_path / "out"
+    env = SetupXProducer(runner=stub).produce(_repo(), _ctx(tmp_path))
+    write_env_packet(str(out), env)
+    meta = json.loads((out / "o" / "r" / "_meta.json").read_text())
+    assert meta["agent_settings"]["xpu"] == "on"
+    assert meta["agent_settings"]["xpu_store"] == "xpu_run"
+    assert meta["agent_settings"]["llm_call_budget"] == 9999
+    assert "hunter2" not in (out / "o" / "r" / "_meta.json").read_text()
+
+
+def test_the_packet_records_the_arm_when_the_run_blew_up(tmp_path, monkeypatch):
+    # A failed row still has to say what it was configured as — those are the rows you interrogate.
+    def stub(repo, ctx, *, llm, num_turn):
+        raise RuntimeError("docker daemon is not running")
+
+    monkeypatch.delenv("SETUPX_DB_DSN", raising=False)
+    env = SetupXProducer(runner=stub).produce(_repo(), _ctx(tmp_path))
+    assert env.status == "error"
+    assert env.agent_settings["xpu"] == "off"
+    assert env.agent_settings["llm_call_budget"] == 9999
+
+
+def test_an_empty_trajectory_still_records_the_arm(tmp_path, monkeypatch):
+    def stub(repo, ctx, *, llm, num_turn):
+        return {"history": [], "completed": False, "steps_taken": 0, "phase2": {}, "economy": {}}
+
+    monkeypatch.setenv("SETUPX_DB_DSN", "postgresql://postgres@localhost:5433/xpu_run")
+    env = SetupXProducer(runner=stub).produce(_repo(), _ctx(tmp_path))
+    assert env.status == "error"
+    assert env.agent_settings["xpu"] == "on"
+
+
+def test_child_env_lands_setupxs_own_log_beside_the_rest_of_the_repos_artifacts(monkeypatch):
+    # src/logger.py writes ~10k lines to a FILE, not stdout (stdout is a 12-line summary). Unset,
+    # LOG_DIR defaults to $SETUPX_ROOT/log/, where every repo of every run piles up under
+    # timestamped names that cannot be matched back to a row afterwards.
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100, _LOG_DIR)
+    assert env["LOG_DIR"] == _LOG_DIR
+
+
+def test_a_dsn_urlsplit_cannot_parse_does_not_vanish_the_row(tmp_path, monkeypatch):
+    # urlsplit raises ValueError on an unclosed IPv6 bracket. _xpu_store runs above every try in
+    # agent_settings, which runs above produce()'s try, and runner/benchmark.py calls
+    # `prod.produce(...)` unwrapped on the strength of "producer is anti-vanish (never raises)" —
+    # so this escaping means write_env_packet never runs and the repo produces NO packet at all.
+    def stub(repo, ctx, *, llm, num_turn):
+        raise RuntimeError("would not get this far")
+
+    monkeypatch.setenv("SETUPX_DB_DSN", "postgresql://u:hunter2@[::1:5433/db")
+    env = SetupXProducer(runner=stub).produce(_repo(), _ctx(tmp_path))
+    assert env.status == "error"                      # an honest row, not a missing one
+    assert env.agent_settings["xpu"] == "on"
+    assert "xpu_store" not in env.agent_settings
+    assert "hunter2" not in json.dumps(env.agent_settings)
+
+
+def test_a_netloc_that_normalizes_into_a_delimiter_is_also_survivable(tmp_path, monkeypatch):
+    # The other urlsplit ValueError: NFKC folding a full-width character into /?#@: .
+    from producers.setupx import agent_settings
+    monkeypatch.setenv("SETUPX_DB_DSN", "postgresql://ho＃st/xpu_run")
+    settings = agent_settings(ProduceContext(llm=None, workdir=str(tmp_path)), 100)
+    assert settings["xpu"] == "on"
+    assert "xpu_store" not in settings
+
+
+def test_a_checkout_vendored_inside_another_repo_reports_no_commit(tmp_path):
+    # `git rev-parse HEAD` WALKS UP. Recording the parent repo's HEAD would be a wrong 40-hex
+    # value that reads as authoritative — worse, for provenance, than omitting the key.
+    import subprocess
+    from producers.setupx import agent_settings
+    parent = tmp_path / "parent"
+    parent.mkdir()
+    subprocess.run(["git", "-C", str(parent), "init", "-q"], check=True, capture_output=True)
+    (parent / "seed").write_text("x\n")
+    subprocess.run(["git", "-C", str(parent), "add", "-A"], check=True, capture_output=True)
+    subprocess.run(["git", "-C", str(parent), "-c", "user.email=t@t", "-c", "user.name=t",
+                    "commit", "-qm", "x"], check=True, capture_output=True)
+    root = _fake_checkout(parent / "vendor" / "SetupX")      # no .git of its own
+    ctx = ProduceContext(llm=None, workdir=str(tmp_path), agent_root=root)
+    settings = agent_settings(ctx, 100)
+    assert settings["setupx_patched"] is True
+    assert "setupx_commit" not in settings
+
+
+# ── Stale-patch detection ────────────────────────────────────────────────────────────────────
+# Found by a live run, not by this suite: the checkout carried an OLDER copy of the patch, so it
+# had the checkpoint and call-budget markers but no usage capture. It recorded null tokens while
+# agent_settings said setupx_patched=true — a false "patched" misleads where a null column merely
+# looks missing.
+
+def test_a_checkout_patched_with_an_older_patch_is_not_patched(tmp_path):
+    from producers.setupx import agent_settings
+    root = _fake_checkout(tmp_path, usage=False)
+    ctx = ProduceContext(llm=None, workdir=str(tmp_path), agent_root=root)
+    assert agent_settings(ctx, 100)["setupx_patched"] is False
+
+
+def test_setupx_root_refuses_a_checkout_without_the_usage_capture_patch(tmp_path):
+    # The live-run failure, at the boundary that is supposed to catch it before any money is spent.
+    from producers.setupx import _setupx_root
+    root = _fake_checkout(tmp_path, usage=False)
+    with pytest.raises(RuntimeError, match="llm_usage_used"):
+        _setupx_root(ProduceContext(llm=None, workdir=str(tmp_path), agent_root=root))
+
+
+def test_the_patch_fingerprint_is_recorded_and_stable(tmp_path):
+    # Markers go stale silently; the fingerprint is what lets a future analyst say "this run used
+    # patch X" and diff it against tools/setupx-bench.patch as of the run's commit.
+    import hashlib
+    from producers.setupx import PATCH_PATH, agent_settings
+    ctx = ProduceContext(llm=None, workdir=str(tmp_path))
+    sha = agent_settings(ctx, 100)["setupx_patch_sha"]
+    assert sha == hashlib.sha256(open(PATCH_PATH, "rb").read()).hexdigest()[:12]
+    assert sha == agent_settings(ctx, 100)["setupx_patch_sha"]
+
+
+def test_an_unreadable_patch_file_drops_the_key_instead_of_vanishing_the_row(tmp_path, monkeypatch):
+    # agent_settings runs outside produce()'s guard, and benchmark.py does not wrap produce().
+    def stub(repo, ctx, *, llm, num_turn):
+        raise RuntimeError("docker daemon is not running")
+
+    import producers.setupx as setupx
+    monkeypatch.setattr(setupx, "PATCH_PATH", str(tmp_path / "does-not-exist.patch"))
+    env = SetupXProducer(runner=stub).produce(_repo(), _ctx(tmp_path))
+    assert env.status == "error"
+    assert "setupx_patch_sha" not in env.agent_settings
+    assert env.agent_settings["xpu"] == "off"
