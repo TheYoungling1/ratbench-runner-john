@@ -109,7 +109,7 @@ PY = sys.executable  # same interpreter for child subprocesses
 # _ProducerModel). The remaining names (rat/sweagent/claudecode) are native-lane, measurable=False
 # live models under runner/live/.
 _PRODUCE_ABLE = {"dockeragent", "repo2run", "claudecode-dockerfile", "executionagent",
-                 "sweagent_repo2run"}
+                 "sweagent_repo2run", "setupx"}
 
 
 class _ProducerModel:
@@ -147,14 +147,14 @@ class _ProducerModel:
         kw = {"llm": self.llm}
         if self.name == "dockeragent":
             kw.update(num_turn=self.num_turn, base_image="auto")
-        elif self.name in ("repo2run", "executionagent", "sweagent_repo2run"):
+        elif self.name in ("repo2run", "executionagent", "sweagent_repo2run", "setupx"):
             kw.update(num_turn=self.num_turn)
         # claudecode-dockerfile: llm only
         prod = producers.get(self.name, **kw)
         # The checkout that owns the agent: DOCKERAGENT_ROOT for our branches (set by run.py),
-        # EXECUTIONAGENT_ROOT for the vendored-elsewhere ExecutionAgent clone.
-        agent_root = (os.environ.get("EXECUTIONAGENT_ROOT") if self.name == "executionagent"
-                      else os.environ.get("DOCKERAGENT_ROOT"))
+        # EXECUTIONAGENT_ROOT / SETUPX_ROOT for the vendored-elsewhere baseline clones.
+        _ROOT_VAR = {"executionagent": "EXECUTIONAGENT_ROOT", "setupx": "SETUPX_ROOT"}
+        agent_root = os.environ.get(_ROOT_VAR.get(self.name, "DOCKERAGENT_ROOT"))
         ctx = ProduceContext(llm=self.llm, workdir=self.root_path, num_turn=self.num_turn,
                              timeout=self.timeout, agent_root=agent_root)
         env = prod.produce(repo, ctx)                     # producer is anti-vanish (never raises)
@@ -180,7 +180,7 @@ def _make_model(model_name: str, root_path: str, timeout: int, llm: str, num_tur
     Produce-able (measurable=True; model name == producer registry key) →
         _ProducerModel driving producers.get(name) directly (no runner/models wrapper):
         dockeragent, repo2run, claudecode-dockerfile, executionagent,
-        sweagent_repo2run.
+        sweagent_repo2run, setupx.
     Native-lane (measurable=False) → the live models under runner/live/ (lazy import):
         rat        → RATModel
         sweagent   → SweAgentSubprocessModel (RAT tree + `sweagent` pkg required)
@@ -207,7 +207,7 @@ def _make_model(model_name: str, root_path: str, timeout: int, llm: str, num_tur
     else:
         raise ValueError(f"Unknown model name: {model_name!r}. "
                          "Choose one of: dockeragent, rat, repo2run, sweagent, claudecode, "
-                         "claudecode-dockerfile, executionagent, sweagent_repo2run")
+                         "claudecode-dockerfile, executionagent, sweagent_repo2run, setupx")
 
 
 # ─────────────────────────────────────────────────────────────────────────────

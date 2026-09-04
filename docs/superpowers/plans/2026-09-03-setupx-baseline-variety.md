@@ -6,6 +6,8 @@
 
 **Architecture:** SetupX emits no Dockerfile — it mutates a live container and writes a JSON report whose `setup.history` is the complete list of shell commands it ran. The producer replays that history (honouring SetupX's snapshot/rollback semantics) into a single build layer on top of a pinned clone, then re-homes `/workspace/repo` to `/testbed`. This is the `producers/executionagent.py` pattern with a different runner and trace format; `bench` rebuilds and scores the result exactly as it does for `repo2run` / `executionagent`.
 
+**Relationship to the metering ledger plan.** `docs/superpowers/plans/2026-09-03-metering-ledger-stage1-stage2.md` Stage 2 stands a loopback proxy in front of each arm and derives `tokens_in`/`tokens_out`/`llm_calls`/`cost_usd` from its ledger. When it lands, **`setupx` should be added to its Stage 2 scope** — it is the cheapest arm to redirect, because it reads `OPENAI_BASE_URL` directly (`src/config.py:94`) and POSTs to `f"{base_url}/chat/completions"`, with none of the base-URL sniffing that makes `dockeragent` risky (that plan's verified facts 2 and 7). The ledger then supplies the token and cost fields this plan leaves `None`. It does **not** replace the in-process cap: that plan's own Q4 decided the proxy records and warns rather than enforces, and its first global constraint is that metering must not change behaviour — a budget is a behaviour change. Enforcement stays in-process; the ledger's request count and this arm's `llm_calls` then cross-check each other, which is exactly the self-report-independent check that plan's Phase 2.2 asks for.
+
 **Tech Stack:** Python 3.10 (runner venv), Python 3.10+ separate venv for the SetupX checkout, Docker (base image `python:3.10`), PostgreSQL 16 + pgvector, DeepSeek direct API (`https://api.deepseek.com/v1`), OpenRouter's OpenAI-compatible embeddings endpoint (`openai/text-embedding-3-small`, 1536 dims).
 
 **Spec:** This document. Section **Upstream Facts** below is the verified research this plan argues from — every claim there was read out of the SetupX source at commit `main` on 2026-09-03, not inferred.
@@ -15,10 +17,17 @@
 - **Runner venv is Python 3.10.** SetupX runs in its own venv at `$SETUPX_ROOT/.venv`; the producer only ever subprocesses it. Do not add SetupX's dependencies to this repo's `requirements.txt`.
 - **No new dependencies in `requirements.txt`.** The producer uses stdlib `subprocess`/`json`/`glob` only.
 - **Commit pinning is enforced at every clone site** (README, "Commit pinning"). Both the produce-phase clone and the emitted Dockerfile's clone must land on `repo.commit`.
-- **The XPU store never accumulates across runs.** The 600 entries from `data/xpu_warm.jsonl` are the corpus. Each run works on a `CREATE DATABASE ... TEMPLATE` copy so nothing it learns survives into the next run. A SELECT-only role cannot be used — see Task 5 Step 4.
+- **Sweep the docker image store between runs.** Measured on the first smoke run: a single
+`initial_clone` checkpoint is **2.07 GB**, and SetupX commits another before every XPU trial.
+`_sweep_checkpoints` clears them on the normal and crashed paths, but a SIGKILL bypasses it — an
+interrupted 50-repo run can leave tens of gigabytes behind. Run
+`docker images --filter 'reference=setup_agent_checkpoint*' -q | xargs -r docker rmi -f` and
+`docker image prune` after an interrupted run; the per-repo `setupx-mirror:*` images accumulate too.
+
+**The XPU store never accumulates across runs.** The 600 entries from `data/xpu_warm.jsonl` are the corpus. Each run works on a `CREATE DATABASE ... TEMPLATE` copy so nothing it learns survives into the next run. A SELECT-only role cannot be used — see Task 5 Step 4.
 - **LLM slug:** `deepseek/deepseek-v4-flash`, served by DeepSeek's own API, key `DEEPSEEK_API_KEY` (already in `.env`). SetupX takes a bare model name, so the `deepseek/` provider prefix is stripped before it is passed on.
 - **Anti-vanish invariant** (`producers/base.py` §1): `produce()` never raises. Every failure path returns `ProducedEnv(status="error", ...)`.
-- **The SetupX checkout is pinned to `85de35515c45954b72afb9678dfd172855bfb847`** and carries `tools/setupx-concurrency.patch`. Without that patch the arm is correct only at `--concurrency 1`.
+- **The SetupX checkout is pinned to `85de35515c45954b72afb9678dfd172855bfb847`** and carries `tools/setupx-bench.patch`. Without that patch the arm is correct only at `--concurrency 1`.
 - **File size:** keep `producers/setupx.py` under 400 lines. If it grows past that, split the pure transforms into `producers/setupx_replay.py`.
 
 ---
@@ -61,6 +70,8 @@ Verified by reading the SetupX source. The implementation depends on all of thes
 - `ROLLBACK_ENV` records `result.exit_code == 0` when the rollback happened, `1` when the stack was empty.
 
 **Lossy case:** when the main agent supplies no adapted command, `TRY_XPU_SUGGESTION` falls back to atom-rendered `suggestion.commands`, which are **not** recorded in `content.command`. A `[XPU SUCCESS]` entry with `content.command == None` is unreplayable — the run is flagged `unreplayed=True`.
+
+**Agent steps are not LLM calls, and stock SetupX caps neither.** `--max-steps` bounds steps; a single step costs one `generate_action` call plus the retriever's refinement and audit calls, and a `VERIFY` step runs the verifier's entire ReAct sub-loop. Phase 2 adds the prosecutor's multi-turn investigation and the judge. Every completion in the system funnels through `LLMClientBase.chat` (`llm_engine.py`, two implementations), which is the single point where a call budget can be counted and enforced; `text_to_embedding` uses the OpenAI SDK directly and is correctly outside it.
 
 **Phase-2 commands are not in `history`.** `VerifierAgent` runs its own ReAct sub-loop (transcript in `last_verify_messages`) and can write files (`verifier_agent.py:211`); `ProsecutorAgent` (`:300`) and `JudgeAgent` (`:191`) also `exec_run` against the same container. None of it is replayed.
 
@@ -244,7 +255,7 @@ def test_empty_history_is_empty_not_an_error():
 
 - [ ] **Step 2: Run the tests to verify they fail**
 
-Run: `.venv/bin/python -m pytest producers/tests/test_setupx.py -v`
+Run: `python3 -m pytest producers/tests/test_setupx.py -v`
 Expected: FAIL, collection error `ModuleNotFoundError: No module named 'producers.setupx'`.
 
 - [ ] **Step 3: Write the minimal implementation**
@@ -351,7 +362,7 @@ def plan_replay(history: list | None) -> tuple:
 
 - [ ] **Step 4: Run the tests to verify they pass**
 
-Run: `.venv/bin/python -m pytest producers/tests/test_setupx.py -v`
+Run: `python3 -m pytest producers/tests/test_setupx.py -v`
 Expected: PASS — every test in the file.
 
 - [ ] **Step 5: Commit**
@@ -471,7 +482,7 @@ def test_the_base_image_provides_the_python_binary_bench_invokes():
 
 - [ ] **Step 2: Run the tests to verify they fail**
 
-Run: `.venv/bin/python -m pytest producers/tests/test_setupx.py -v -k 'render or clone or rehome or safe or env_steps or replay or base_image'`
+Run: `python3 -m pytest producers/tests/test_setupx.py -v -k 'render or clone or rehome or safe or env_steps or replay or base_image'`
 Expected: FAIL with `ImportError: cannot import name 'render_dockerfile'`.
 
 - [ ] **Step 3: Write the minimal implementation**
@@ -562,7 +573,7 @@ def render_dockerfile(repo: RepoSpec, steps: list, *,
 
 - [ ] **Step 4: Run the full test file**
 
-Run: `.venv/bin/python -m pytest producers/tests/test_setupx.py -v`
+Run: `python3 -m pytest producers/tests/test_setupx.py -v`
 Expected: PASS — every test in the file.
 
 - [ ] **Step 5: Commit**
@@ -610,7 +621,7 @@ def _ctx(tmp_path):
 
 def test_child_env_routes_the_bare_model_name_at_deepseeks_own_endpoint(monkeypatch):
     monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
-    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123")
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
     assert env["LLM_PROVIDER"] == "openai"
     assert env["OPENAI_BASE_URL"] == "https://api.deepseek.com/v1"
     assert env["OPENAI_API_KEY"] == "sk-test"
@@ -621,7 +632,7 @@ def test_child_env_routes_the_bare_model_name_at_deepseeks_own_endpoint(monkeypa
 def test_child_env_refuses_to_start_without_a_key(monkeypatch):
     monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
     with pytest.raises(RuntimeError, match="DEEPSEEK_API_KEY"):
-        child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123")
+        child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
 
 
 def test_child_env_freezes_the_experience_store(monkeypatch):
@@ -630,7 +641,7 @@ def test_child_env_freezes_the_experience_store(monkeypatch):
     monkeypatch.setenv("EMBEDDING_API_KEY", "sk-embed")
     monkeypatch.setenv("EMBEDDING_BASE_URL", "https://openrouter.ai/api/v1")
     monkeypatch.setenv("EMBEDDING_MODEL", "openai/text-embedding-3-small")
-    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123")
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
     assert env["FREEZE_TELEMETRY"] == "1"
     assert env["XPU_VECTOR_ENABLED"] == "1"
     # config.py reads `dns` first, XPU_DB_DNS second; set both so neither spelling wins by accident.
@@ -645,17 +656,26 @@ def test_child_env_sends_embeddings_somewhere_other_than_deepseek(monkeypatch):
     monkeypatch.setenv("SETUPX_DB_DSN", "postgresql://postgres@localhost:5433/xpu_run")
     monkeypatch.delenv("EMBEDDING_API_KEY", raising=False)
     with pytest.raises(RuntimeError, match="EMBEDDING_API_KEY"):
-        child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123")
+        child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
 
 
 def test_child_env_namespaces_the_checkpoint_images_per_run(monkeypatch):
     # Without this, two concurrent repos share the `setup_agent_checkpoint` repository: each one's
     # startup deletes the other's snapshots and their step_<n>_pre_xpu tags collide, so a rollback
-    # restores the wrong repo's container. Requires tools/setupx-concurrency.patch.
+    # restores the wrong repo's container. Requires tools/setupx-bench.patch.
     monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
-    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123")
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
     assert env["SETUPX_CKPT_NS"] == "o__r_123"
     assert env["SETUPX_NETWORK_MODE"] == "bridge"
+
+
+def test_child_env_passes_the_budget_as_llm_calls_not_steps(monkeypatch):
+    # num_turn is a completion budget, matching sweagent_repo2run's per_instance_call_limit. It must
+    # NOT be forwarded as --max-steps: a single VERIFY step spawns the verifier's whole ReAct loop,
+    # so steps and calls differ by an unbounded factor and would not be comparable across arms.
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
+    assert env["SETUPX_MAX_LLM_CALLS"] == "100"
 
 
 def test_child_env_marks_the_store_read_only_when_a_dsn_is_present(monkeypatch):
@@ -664,13 +684,13 @@ def test_child_env_marks_the_store_read_only_when_a_dsn_is_present(monkeypatch):
     monkeypatch.setenv("EMBEDDING_API_KEY", "sk-embed")
     monkeypatch.setenv("EMBEDDING_BASE_URL", "https://openrouter.ai/api/v1")
     monkeypatch.setenv("EMBEDDING_MODEL", "openai/text-embedding-3-small")
-    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123")
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
     assert env["XPU_READONLY"] == "1"
 
 
 def test_child_env_points_setupx_at_the_pinned_mirror(monkeypatch):
     monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
-    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123")
+    env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100)
     assert env["DOCKER_BASE_IMAGE"] == "setupx-mirror:o__r"
     assert env["DOCKER_WORK_DIR"] == "/workspace"
 
@@ -757,7 +777,7 @@ def test_the_written_packet_matches_the_shared_contract(tmp_path):
 
 - [ ] **Step 2: Run the tests to verify they fail**
 
-Run: `.venv/bin/python -m pytest producers/tests/test_setupx.py -v`
+Run: `python3 -m pytest producers/tests/test_setupx.py -v`
 Expected: FAIL with `ImportError: cannot import name 'SetupXProducer'`.
 
 - [ ] **Step 3: Write the minimal implementation**
@@ -802,12 +822,14 @@ def _setupx_root(ctx: ProduceContext | None = None) -> str:
     return root
 
 
-def child_env(llm: str | None, base_image: str, ckpt_ns: str) -> dict:
+def child_env(llm: str | None, base_image: str, ckpt_ns: str, max_llm_calls: int) -> dict:
     """The environment `python -m src.main` runs under. Validated here, at the boundary.
 
     `ckpt_ns` namespaces SetupX's checkpoint images so concurrent repos cannot delete or overwrite
-    each other's snapshots (see tools/setupx-concurrency.patch), and gives the caller a handle to
-    sweep the leftovers with.
+    each other's snapshots, and gives the caller a handle to sweep the leftovers with.
+    `max_llm_calls` is the arm's budget in COMPLETIONS, not agent steps: SetupX's own --max-steps
+    counts steps, and one step can cost many completions. Both switches come from
+    tools/setupx-bench.patch.
     """
     key = os.environ.get("DEEPSEEK_API_KEY")
     if not key:
@@ -824,6 +846,11 @@ def child_env(llm: str | None, base_image: str, ckpt_ns: str) -> dict:
                DOCKER_BASE_IMAGE=base_image,
                DOCKER_WORK_DIR="/workspace",
                SETUPX_CKPT_NS=ckpt_ns,
+               # num_turn means LLM CALLS here, matching sweagent_repo2run's per_instance_call_limit
+               # and claudecode's cap. SetupX's own --max-steps counts agent STEPS, and one step can
+               # cost many completions (a VERIFY step runs the verifier's whole ReAct sub-loop;
+               # phase 2 adds the prosecutor and judge), so steps are not a comparable budget.
+               SETUPX_MAX_LLM_CALLS=str(max_llm_calls),
                # bridge networking: host networking shares the host port space, so two concurrent
                # repos collide the moment either binds a port.
                SETUPX_NETWORK_MODE=os.environ.get("SETUPX_NETWORK_MODE", "bridge"))
@@ -926,10 +953,12 @@ def run_setupx(repo: RepoSpec, ctx: ProduceContext, *, llm: str | None, num_turn
     try:
         proc = subprocess.run(
             [python, "-m", "src.main", "/mirror",
-             "--max-steps", str(num_turn),
+             # Steps are deliberately unbounded: the budget is SETUPX_MAX_LLM_CALLS, and every step
+             # costs at least one completion, so the call cap binds first and binds comparably.
+             "--max-steps", "9999",
              "--phase1-timeout", str(phase1),
              "--output-dir", out_dir],
-            cwd=root, env=child_env(llm, base_image, ckpt_ns),
+            cwd=root, env=child_env(llm, base_image, ckpt_ns, num_turn),
             capture_output=True, text=True, timeout=ctx.timeout)
     finally:
         _sweep_checkpoints(ckpt_ns)
@@ -951,7 +980,11 @@ def run_setupx(repo: RepoSpec, ctx: ProduceContext, *, llm: str | None, num_turn
             "steps_taken": setup.get("steps_taken"),
             "phase2": report.get("phase2") or {},
             # SetupX discards the API `usage` block, so there are no token counts to harvest.
+            # llm_calls comes from the patched main.py, which reports llm_engine.llm_calls_used().
+            # Stock SetupX discards the API `usage` block entirely, so tokens/cost stay None until
+            # the metering ledger lands (see the note in Task 3's header).
             "economy": {"turns_used": setup.get("steps_taken"),
+                        "llm_calls": report.get("llm_calls"),
                         "produce_s": round(time.time() - start, 2)}}
 
 
@@ -1006,7 +1039,7 @@ class SetupXProducer:
 
 - [ ] **Step 4: Run the full test file**
 
-Run: `.venv/bin/python -m pytest producers/tests/test_setupx.py -v`
+Run: `python3 -m pytest producers/tests/test_setupx.py -v`
 Expected: PASS — every test in the file.
 
 - [ ] **Step 5: Commit**
@@ -1059,15 +1092,15 @@ def test_the_variety_resolves_to_the_rehome_lane_with_an_explicit_budget():
     assert spec.model == "setupx"
     assert spec.measure == "rehome"
     assert spec.llm == "deepseek/deepseek-v4-flash"
-    # Not 9999: a wall-clock timeout returns before main.py's Stage 3 and writes no report at all,
-    # so the step budget has to be what ends a run.
+    # 100 LLM CALLS (SETUPX_MAX_LLM_CALLS), not agent steps — the same unit and value as
+    # sweagent_repo2run's per_instance_call_limit, so the budgets are comparable.
     assert spec.num_turn == 100
     assert spec.is_baseline is True
 ```
 
 - [ ] **Step 2: Run the tests to verify they fail**
 
-Run: `.venv/bin/python -m pytest producers/tests/test_setupx.py -v -k 'registered or produce_able or variety_resolves'`
+Run: `python3 -m pytest producers/tests/test_setupx.py -v -k 'registered or produce_able or variety_resolves'`
 Expected: FAIL — `KeyError: 'setupx'` on the registry, `'setupx' not in _PRODUCE_ABLE`, `KeyError: unknown variety 'setupx'`.
 
 - [ ] **Step 3: Register the producer**
@@ -1129,17 +1162,18 @@ model = "setupx"
 # strips the `deepseek/` prefix and passes the bare model name as OPENAI_MODEL. Reads
 # DEEPSEEK_API_KEY, base https://api.deepseek.com/v1.
 llm   = "deepseek/deepseek-v4-flash"
-# NOT SetupX's own 9999 default. main.py returns at the Phase1Timeout handler BEFORE Stage 3, so a
-# wall-clock timeout writes no *_result.json at all and the run is lost. Step exhaustion DOES write
-# one, so the step budget is made the binding bound and the wall clock is only a backstop
-# (SETUPX_PHASE1_TIMEOUT, default 3600). 100 matches the other Dockerfile-emitting arms.
+# LLM CALLS, not agent steps — forwarded as SETUPX_MAX_LLM_CALLS by the producer, enforced at
+# LLMClientBase.chat by tools/setupx-bench.patch. SetupX's own --max-steps counts steps, and one
+# step can cost many completions (a VERIFY step runs the verifier's whole sub-loop; phase 2 adds
+# the prosecutor and judge), so steps are not comparable with the other arms' budgets. 100 matches
+# sweagent_repo2run's per_instance_call_limit and claudecode's cap.
 num_turn = 100
 measure = "rehome"
 ```
 
 - [ ] **Step 6: Run the whole producer suite to check nothing regressed**
 
-Run: `.venv/bin/python -m pytest producers/tests/ -v`
+Run: `python3 -m pytest producers/tests/ -v`
 Expected: PASS — the new tests plus every pre-existing one.
 
 - [ ] **Step 7: Commit**
@@ -1162,14 +1196,14 @@ No new code — this is the operator-facing half, and the arm cannot run without
 - [ ] **Step 1: Clone and provision SetupX**
 
 ```bash
-git clone https://github.com/OpenDataBox/SetupX /opt/agents/SetupX
+git clone https://github.com/OpenDataBox/SetupX ~/agents/SetupX
 # Pin the baseline. A benchmark arm that tracks someone else's default branch is not reproducible,
-# and tools/setupx-concurrency.patch is cut against exactly this commit.
-git -C /opt/agents/SetupX checkout 85de35515c45954b72afb9678dfd172855bfb847
-git -C /opt/agents/SetupX apply /Users/john/ratbench-runner-john/tools/setupx-concurrency.patch
-python3 -m venv /opt/agents/SetupX/.venv
-/opt/agents/SetupX/.venv/bin/pip install -r /opt/agents/SetupX/requirements.txt
-export SETUPX_ROOT=/opt/agents/SetupX
+# and tools/setupx-bench.patch is cut against exactly this commit.
+git -C ~/agents/SetupX checkout 85de35515c45954b72afb9678dfd172855bfb847
+git -C ~/agents/SetupX apply /Users/john/ratbench-runner-john/tools/setupx-bench.patch
+python3 -m venv ~/agents/SetupX/.venv
+~/agents/SetupX/.venv/bin/pip install -r ~/agents/SetupX/requirements.txt
+export SETUPX_ROOT=~/agents/SetupX
 
 # What the patch changes (three things, all required for concurrent runs):
 #  1. environment_manager.py: checkpoint images move from the single global
@@ -1183,10 +1217,21 @@ export SETUPX_ROOT=/opt/agents/SetupX
 #  3. main.py: `_store_xpu_experience` returns early when XPU_READONLY=1, so the shared store is
 #     never written — no dedup_and_store race between concurrent repos, no dependence on repo
 #     order, and one fewer extractor LLM call per repo.
+#  4. llm_engine.py: a per-run completion counter at LLMClientBase.chat, capped by
+#     $SETUPX_MAX_LLM_CALLS (0/unset = unlimited = stock). Raises LLMCallLimit, a BaseException,
+#     because the retriever/verifier/prosecutor/judge all wrap chat() in `except Exception` and
+#     would otherwise swallow the limit. Also exposes llm_calls_used() so the report can carry a
+#     real llm_calls figure — stock SetupX discards the API usage block entirely.
+#  5. main.py: Stage 3 is now reachable after a phase-1 abort. The stock handler `return 1`s on
+#     Phase1Timeout BEFORE writing *_result.json, so a run that hit its wall clock produced no
+#     report and was lost — the exact failure a replay-based harness cannot tolerate. The handler
+#     now synthesizes a partial SetupResult (completed=False) and falls through to the report.
 # Verify it took:
-grep -q "_ckpt_repo" /opt/agents/SetupX/src/environment_manager.py && echo "patch applied"
+grep -q "_ckpt_repo" ~/agents/SetupX/src/environment_manager.py \
+  && grep -q "SETUPX_MAX_LLM_CALLS" ~/agents/SetupX/src/llm_engine.py \
+  && echo "patch applied"
 
-# Do NOT create /opt/agents/SetupX/.env — src/config.py loads it with override=True and would
+# Do NOT create ~/agents/SetupX/.env — src/config.py loads it with override=True and would
 # silently replace the model, endpoint and DSN the producer passes in. The producer refuses to
 # start if it exists.
 ```
@@ -1216,7 +1261,7 @@ sleep 5 && docker exec setupx-xpu psql -U postgres -d xpu_warm \
 
 # Import the 600 shipped entries. The JSONL carries no vectors — the importer embeds every entry,
 # so this costs one embeddings call per entry and must use the same model the runs will query with.
-cd /opt/agents/SetupX
+cd ~/agents/SetupX
 EMBEDDING_API_KEY=$OPENROUTER_API_KEY \
   EMBEDDING_BASE_URL=https://openrouter.ai/api/v1 \
   EMBEDDING_MODEL=openai/text-embedding-3-small EMBEDDING_DIM=1536 \
@@ -1319,6 +1364,13 @@ pinned tree. `git` warns `--depth is ignored in local clones`; that is expected.
 **No token accounting.** `src/llm_engine.py` discards the API `usage` block, so `_meta.json`
 carries `turns_used` and `produce_s` but not `tokens_in` / `tokens_out` / `cost_usd`.
 
+**Sweep the docker image store between runs.** Measured on the first smoke run: a single
+`initial_clone` checkpoint is **2.07 GB**, and SetupX commits another before every XPU trial.
+`_sweep_checkpoints` clears them on the normal and crashed paths, but a SIGKILL bypasses it — an
+interrupted 50-repo run can leave tens of gigabytes behind. Run
+`docker images --filter 'reference=setup_agent_checkpoint*' -q | xargs -r docker rmi -f` and
+`docker image prune` after an interrupted run; the per-repo `setupx-mirror:*` images accumulate too.
+
 **The XPU store never accumulates across runs.** Each run gets a `CREATE DATABASE ... TEMPLATE`
 copy of the immutable 600-entry `xpu_warm`, and `FREEZE_TELEMETRY=1` freezes the telemetry counters
 on top of that. A SELECT-only role is NOT a workable alternative: `XpuVectorStore.__init__` runs
@@ -1345,7 +1397,7 @@ The first task that spends money and needs docker. Everything before this is off
 
 ```bash
 source env.sh
-export SETUPX_ROOT=/opt/agents/SetupX
+export SETUPX_ROOT=~/agents/SetupX
 export SETUPX_DB_DSN=postgresql://postgres:setupx@localhost:5433/xpu_run   # from Task 5 Step 4
 docker info >/dev/null && echo "docker ok"
 test ! -e "$SETUPX_ROOT/.env" && echo "no dotenv shadow ok"
@@ -1354,17 +1406,21 @@ grep -c . <<<"$DEEPSEEK_API_KEY$SETUPX_DB_DSN$EMBEDDING_API_KEY" >/dev/null && e
 
 - [ ] **Step 2: Run one repo**
 
+`bruin-data/ingestr` is the lightest repo in `rat_python50.json` at 19 tests, which makes it the
+cheapest end-to-end signal. Do **not** use `psf/requests` — it is not in the dataset, so `--only`
+would match nothing and the run would exit having measured zero repos.
+
 ```bash
-./run_bench.sh setupx --repos-json datasets/rat_python50.json --only psf/requests --tier all
+./run_bench.sh setupx --repos-json datasets/rat_python50.json --only bruin-data/ingestr --tier all
 ```
 
 - [ ] **Step 3: Check the produce side**
 
 ```bash
 RUN=$(ls -td runs/setupx/* | head -1)
-cat "$RUN/output/psf/requests/_meta.json"
-cat "$RUN/output/psf/requests/eval_build/Dockerfile"
-head -30 "$RUN/output/psf/requests/eval_build/setupx_replay.sh"
+cat "$RUN/output/bruin-data/ingestr/_meta.json"
+cat "$RUN/output/bruin-data/ingestr/eval_build/Dockerfile"
+head -30 "$RUN/output/bruin-data/ingestr/eval_build/setupx_replay.sh"
 ```
 
 Expected: `_meta.json` has `"producer": "setupx"`, `"status": "produced"`, `"conformance": "synthesized"`, a non-null `head_sha` matching the dataset row, and a `note` carrying the phase-2 verdict. The Dockerfile pins that SHA, `COPY`s the replay script, and ends at `WORKDIR /testbed`.
@@ -1375,7 +1431,7 @@ Expected: `_meta.json` has `"producer": "setupx"`, `"status": "produced"`, `"con
 cat "$RUN/measure/metrics.json"
 ```
 
-Expected: one row for `psf/requests` with `build_ok: true` and a `status` that is not `non_conforming` (that would mean the `/testbed` probe failed) and not `empty_testbed` (that would mean the re-home moved the wrong directory).
+Expected: one row for `bruin-data/ingestr` with `build_ok: true` and a `status` that is not `non_conforming` (that would mean the `/testbed` probe failed) and not `empty_testbed` (that would mean the re-home moved the wrong directory).
 
 - [ ] **Step 5: Confirm the master store did not grow**
 
@@ -1392,7 +1448,7 @@ next run.)
 ./run_bench.sh setupx --repos-json datasets/rat_python50.json --tier all --concurrency 4
 ```
 
-Concurrency is safe **only with `tools/setupx-concurrency.patch` applied** (Task 5 Step 1). Without
+Concurrency is safe **only with `tools/setupx-bench.patch` applied** (Task 5 Step 1). Without
 it the arm must run at `--concurrency 1`: SetupX's checkpoint images live in one global repository
 that every `EnvironmentManager` wipes on construction, so parallel repos silently destroy each
 other's snapshots. Confirm the patch is in place before raising concurrency:
