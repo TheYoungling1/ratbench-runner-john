@@ -78,7 +78,7 @@ index 261da70..4bce67a 100644
                  logger.debug(f"removed snapshot image: {tag}")
              except DockerException as e:
 diff --git a/src/llm_engine.py b/src/llm_engine.py
-index 8b1b5db..b4e1b2e 100644
+index 8b1b5db..d79bd11 100644
 --- a/src/llm_engine.py
 +++ b/src/llm_engine.py
 @@ -16,6 +16,7 @@ Module layout:
@@ -89,7 +89,7 @@ index 8b1b5db..b4e1b2e 100644
  import re
  from abc import ABC, abstractmethod
  from typing import Any
-@@ -53,6 +54,45 @@ class LLMClientBase(ABC):
+@@ -53,6 +54,79 @@ class LLMClientBase(ABC):
          pass
  
  
@@ -132,10 +132,44 @@ index 8b1b5db..b4e1b2e 100644
 +        raise LLMCallLimit(f"LLM call budget exhausted ({limit} calls)")
 +
 +
++# ── Per-run token usage (bench) ──────────────────────────────────────────────────────────────
++#
++# Stock chat() reads `data["choices"]` and throws the rest of the response away, so every run
++# reports null tokens and no cost can ever be computed for the arm. The `usage` block sits right
++# there in the same payload; accumulate it here, next to the call counter, for the same reason —
++# every completion funnels through these two chat() implementations.
++
++_llm_usage = {"prompt_tokens": 0, "completion_tokens": 0,
++              # DeepSeek's native cache split. The documented fields, and they agree exactly with
++              # prompt_tokens_details.cached_tokens, so that nested form is not read as a fallback.
++              "prompt_cache_hit_tokens": 0, "prompt_cache_miss_tokens": 0}
++
++
++def llm_usage_used() -> dict:
++    """Tokens billed so far in this process (one process == one repo). A copy, not the live dict."""
++    return dict(_llm_usage)
++
++
++def _record_usage(usage: Any) -> None:
++    """Accumulate one response's `usage` block. NEVER raises.
++
++    This is telemetry wrapped around a paid-for run: a provider that omits the block, renames a
++    field, or returns a string where an int belongs must cost a token count, not the repo. Every
++    value is coerced independently, and whatever will not coerce is skipped.
++    """
++    if not isinstance(usage, dict):
++        return
++    for key in _llm_usage:
++        try:
++            _llm_usage[key] += int(usage.get(key) or 0)
++        except (TypeError, ValueError):
++            continue
++
++
  class ARKClient(LLMClientBase):
      """ARK API client.
  
-@@ -66,6 +106,7 @@ class ARKClient(LLMClientBase):
+@@ -66,6 +140,7 @@ class ARKClient(LLMClientBase):
          self._client = httpx.Client(timeout=300)
  
      def chat(self, messages: list[dict], json_mode: bool = False) -> str:
@@ -143,7 +177,15 @@ index 8b1b5db..b4e1b2e 100644
          headers = {
              "Authorization": f"Bearer {self._config.api_key}",
              "Content-Type": "application/json",
-@@ -116,6 +157,7 @@ class OpenAICompatibleClient(LLMClientBase):
+@@ -87,6 +162,7 @@ class ARKClient(LLMClientBase):
+         response.raise_for_status()
+ 
+         data = response.json()
++        _record_usage(data.get("usage"))
+         return data["choices"][0]["message"]["content"]
+ 
+     def close(self) -> None:
+@@ -116,6 +192,7 @@ class OpenAICompatibleClient(LLMClientBase):
          2. <think> stripping: qwen-style models embed reasoning in `content`
             (`<think>...</think>actual output`); strip the reasoning block.
          """
@@ -151,8 +193,16 @@ index 8b1b5db..b4e1b2e 100644
          headers = {
              "Authorization": f"Bearer {self._config.api_key}",
              "Content-Type": "application/json",
+@@ -138,6 +215,7 @@ class OpenAICompatibleClient(LLMClientBase):
+         response.raise_for_status()
+ 
+         data = response.json()
++        _record_usage(data.get("usage"))
+         msg = data["choices"][0]["message"]
+ 
+         # Reasoning-model compat: some return main text in `reasoning_content`.
 diff --git a/src/main.py b/src/main.py
-index f44e839..0c69c39 100644
+index f44e839..ebf1503 100644
 --- a/src/main.py
 +++ b/src/main.py
 @@ -19,7 +19,8 @@ from .logger import get_logger
@@ -161,7 +211,7 @@ index f44e839..0c69c39 100644
  from .judge_agent import JudgeAgent
 -from .models import ProsecutionResult
 +from .models import ProsecutionResult, SetupResult
-+from .llm_engine import LLMCallLimit, llm_calls_used
++from .llm_engine import LLMCallLimit, llm_calls_used, llm_usage_used
  
  logger = get_logger("main")
  
@@ -222,11 +272,12 @@ index f44e839..0c69c39 100644
          logger.error(f"phase 2 execution failed: {e}")
          phase2_success = None
          phase2_reason = f"[error] phase 2 execution failed: {e}"
-@@ -386,6 +408,7 @@ def main() -> int:
+@@ -386,6 +408,8 @@ def main() -> int:
      logger.info("=== Stage 3: Report ===")
      report = {
          "repo_url": repo_url,
 +        "llm_calls": llm_calls_used(),
++        "usage": llm_usage_used(),
          "setup": setup_result.to_dict(),
          "phase2": {
              "success": phase2_success,

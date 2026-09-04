@@ -29,11 +29,39 @@ from bench.schema import RepoSpec  # noqa: E402
 from producers.setupx_replay import (  # noqa: F401
     DEFAULT_BASE_IMAGE, REPLAY_BASENAME, WORK_DIR, plan_replay, render_dockerfile, render_replay)
 
+# Same coercion the trajectory transforms use: a JSON number that arrives as a string must still
+# read as a number.
+from producers.setupx_replay import _as_int  # noqa: E402
+
 DEEPSEEK_BASE_URL = "https://api.deepseek.com/v1"
 # A BACKSTOP, not the intended bound. main.py's Phase1Timeout handler returns before Stage 3, so a
 # wall-clock timeout writes no report and the run is lost entirely; the step budget (--max-steps,
 # from varieties.toml) is what should end a run, because step exhaustion still reports.
 DEFAULT_PHASE1_TIMEOUT = 3600
+
+
+def usage_economy(report: dict) -> dict:
+    """The report's `usage` block in producers/base.py's packet vocabulary.
+
+    Absent on an unpatched checkout — stock SetupX discards the API `usage` block — and then every
+    key is None, exactly what the packet recorded before this landed. Never raises: a run that
+    already cost money must not be lost to a malformed telemetry field.
+
+    cost_usd is deliberately NOT computed here: DeepSeek prices cache hits, cache misses and
+    output separately, across peak/off-peak windows, and that pricing belongs with the metering
+    ledger. The inputs are not thrown away — the cache hit/miss split has no home in the shared
+    packet schema, but main.py writes the WHOLE report to <out_dir>/*_result.json, which this
+    producer keeps per repo, so `usage.prompt_cache_hit_tokens` / `prompt_cache_miss_tokens` are
+    on disk there for the ledger to price later.
+    """
+    usage = report.get("usage")
+    if not isinstance(usage, dict):
+        return {"tokens_in": None, "tokens_out": None, "total_tokens": None}
+    tokens_in = _as_int(usage.get("prompt_tokens"), 0)
+    tokens_out = _as_int(usage.get("completion_tokens"), 0)
+    return {"tokens_in": tokens_in, "tokens_out": tokens_out,
+            # The provider's own total when it sent one; the sum is only a fallback.
+            "total_tokens": _as_int(usage.get("total_tokens"), tokens_in + tokens_out)}
 
 
 def _setupx_root(ctx: ProduceContext | None = None) -> str:
@@ -244,12 +272,12 @@ def run_setupx(repo: RepoSpec, ctx: ProduceContext, *, llm: str | None, num_turn
             "completed": bool(setup.get("completed")),
             "steps_taken": setup.get("steps_taken"),
             "phase2": report.get("phase2") or {},
-            # SetupX discards the API `usage` block, so there are no token counts to harvest.
-            # llm_calls comes from the patched main.py, which reports llm_engine.llm_calls_used().
-            # Stock SetupX discards the API `usage` block entirely, so tokens/cost stay None until
-            # the metering ledger lands (see the note in Task 3's header).
+            # llm_calls and usage both come from the patched main.py (llm_engine.llm_calls_used()
+            # / llm_usage_used()); on an unpatched checkout they are simply absent. cost_usd is
+            # left unset — see usage_economy for where its inputs are persisted.
             "economy": {"turns_used": setup.get("steps_taken"),
                         "llm_calls": report.get("llm_calls"),
+                        **usage_economy(report),
                         "produce_s": round(time.time() - start, 2)}}
 
 

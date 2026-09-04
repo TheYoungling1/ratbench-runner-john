@@ -621,3 +621,81 @@ def test_the_variety_resolves_to_the_rehome_lane_with_an_explicit_budget():
     # sweagent_repo2run's per_instance_call_limit, so the budgets are comparable.
     assert spec.num_turn == 100
     assert spec.is_baseline is True
+
+
+# ── Token capture ────────────────────────────────────────────────────────────────────────────
+# The report shapes are the ones the patched src/llm_engine.py accumulates and src/main.py writes
+# out. run_setupx itself stays live-only, so the mapping is exercised through usage_economy and
+# through an injected runner, never by launching SetupX.
+
+def test_usage_lands_in_the_economy_the_packet_reads():
+    from producers.setupx import usage_economy
+    assert usage_economy({"usage": {"prompt_tokens": 85, "completion_tokens": 5,
+                                    "prompt_cache_hit_tokens": 0,
+                                    "prompt_cache_miss_tokens": 85}}) == {
+        "tokens_in": 85, "tokens_out": 5, "total_tokens": 90}
+
+
+def test_a_reported_total_wins_over_the_sum():
+    from producers.setupx import usage_economy
+    assert usage_economy({"usage": {"prompt_tokens": 391, "completion_tokens": 12,
+                                    "total_tokens": 403}})["total_tokens"] == 403
+
+
+def test_an_unpatched_checkout_reports_no_tokens_rather_than_zero():
+    # Stock SetupX discards the API `usage` block, so the report carries none. Zeros would read as
+    # "this run was free"; None reads as "not measured", which is what happened.
+    from producers.setupx import usage_economy
+    assert usage_economy({"llm_calls": 4}) == {
+        "tokens_in": None, "tokens_out": None, "total_tokens": None}
+
+
+def test_a_malformed_usage_block_costs_a_count_not_the_run():
+    from producers.setupx import usage_economy
+    assert usage_economy({"usage": "429 Too Many Requests"})["tokens_in"] is None
+    assert usage_economy({"usage": {"prompt_tokens": None, "completion_tokens": "12"}}) == {
+        "tokens_in": 0, "tokens_out": 12, "total_tokens": 12}
+    assert usage_economy({"usage": {"prompt_tokens": [1], "total_tokens": "eight"}}) == {
+        "tokens_in": 0, "tokens_out": 0, "total_tokens": 0}
+
+
+def test_the_packet_carries_the_tokens_a_patched_run_reported(tmp_path):
+    def stub(repo, ctx, *, llm, num_turn):
+        from producers.setupx import usage_economy
+        report = {"llm_calls": 3,
+                  "usage": {"prompt_tokens": 391, "completion_tokens": 12,
+                            "prompt_cache_hit_tokens": 384, "prompt_cache_miss_tokens": 7}}
+        return {"history": [{"action": {"action_type": "SHELL_COMMAND",
+                                        "content": {"command": "pip install -e ."}},
+                             "result": {"exit_code": 0, "stdout": "", "stderr": ""}}],
+                "completed": True, "steps_taken": 3, "phase2": {"success": True, "reason": "ok"},
+                "economy": {"turns_used": 3, "llm_calls": report["llm_calls"],
+                            **usage_economy(report)}}
+
+    from producers.base import write_env_packet
+    out = tmp_path / "out"
+    env = SetupXProducer(runner=stub).produce(_repo(), _ctx(tmp_path))
+    write_env_packet(str(out), env)
+    meta = json.loads((out / "o" / "r" / "_meta.json").read_text())
+    assert (meta["tokens_in"], meta["tokens_out"], meta["total_tokens"]) == (391, 12, 403)
+    assert meta["llm_calls"] == 3
+    # Pricing DeepSeek's cache split belongs with the metering ledger, not here.
+    assert meta["cost_usd"] is None
+
+
+def test_an_unpatched_run_still_produces_a_packet_with_null_tokens(tmp_path):
+    def stub(repo, ctx, *, llm, num_turn):
+        from producers.setupx import usage_economy
+        return {"history": [{"action": {"action_type": "SHELL_COMMAND",
+                                        "content": {"command": "pip install -e ."}},
+                             "result": {"exit_code": 0, "stdout": "", "stderr": ""}}],
+                "completed": True, "steps_taken": 3, "phase2": {"success": True, "reason": "ok"},
+                "economy": {"turns_used": 3, **usage_economy({})}}
+
+    from producers.base import write_env_packet
+    out = tmp_path / "out"
+    env = SetupXProducer(runner=stub).produce(_repo(), _ctx(tmp_path))
+    write_env_packet(str(out), env)
+    meta = json.loads((out / "o" / "r" / "_meta.json").read_text())
+    assert env.status == "produced"
+    assert meta["tokens_in"] is None and meta["total_tokens"] is None
