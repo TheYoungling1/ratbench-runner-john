@@ -15,6 +15,7 @@
 from __future__ import annotations
 
 import glob
+import hashlib
 import json
 import os
 import subprocess
@@ -35,6 +36,9 @@ from producers.setupx_replay import (  # noqa: F401
 from producers.setupx_replay import _as_int  # noqa: E402
 
 DEEPSEEK_BASE_URL = "https://api.deepseek.com/v1"
+# The patch this producer's semantics rest on, resolved from this file so it follows the repo.
+PATCH_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                          "tools", "setupx-bench.patch")
 # A BACKSTOP, not the intended bound. main.py's Phase1Timeout handler returns before Stage 3, so a
 # wall-clock timeout writes no report and the run is lost entirely; the step budget (--max-steps,
 # from varieties.toml) is what should end a run, because step exhaustion still reports.
@@ -82,14 +86,23 @@ def _setupx_root(ctx: ProduceContext | None = None) -> str:
                 f"{os.path.join(root, name)} exists. SetupX loads it with override=True, which "
                 "would silently replace the model/endpoint/DSN this producer passes in. Remove it "
                 "— the producer supplies the whole environment.")
-    # tools/setupx-bench.patch adds the switches this producer's budget and isolation rest on. On an
-    # unpatched checkout they are inert and the failure is SILENT and expensive: SETUPX_MAX_LLM_CALLS
-    # does nothing, so `--max-steps 9999` (deliberately unbounded, because the call cap is the real
-    # budget) lets the run spend to the 3600s phase-1 alarm; and SETUPX_CKPT_NS does nothing, so at
-    # --concurrency > 1 every repo shares one checkpoint image repository and rollbacks restore the
-    # wrong container — after which the replayed trajectory no longer matches what the agent did.
-    for rel, marker in (("src/environment_manager.py", "_ckpt_repo"),
-                        ("src/llm_engine.py", "SETUPX_MAX_LLM_CALLS")):
+    # tools/setupx-bench.patch adds the switches this producer's budget, isolation and accounting
+    # rest on. Unpatched they are inert and every failure is SILENT and expensive, so each one gets
+    # ONE marker per functional area of the patch, not a spot-check. A live run recorded null
+    # tokens while agent_settings said setupx_patched=true, because the checkout carried an OLDER
+    # copy of the patch: it had the two markers below and no usage capture at all, and nothing
+    # noticed. A stale patch reporting itself as fully applied is worse than no check — a missing
+    # token column is visibly missing, but a false "patched" actively misleads. So every capability
+    # the patch adds needs its own marker here, and a new capability needs a new line.
+    for rel, marker, inert in (
+            ("src/environment_manager.py", "_ckpt_repo",
+             "concurrent repos corrupt each other's rollbacks"),
+            ("src/llm_engine.py", "SETUPX_MAX_LLM_CALLS",
+             "the LLM-call budget is inert and the run spends to the phase-1 alarm"),
+            # llm_usage_used, not _record_usage: main.py imports this one by name, so it is the
+            # identifier both halves of the usage hunk agree on.
+            ("src/llm_engine.py", "llm_usage_used",
+             "no token counts are captured and the run's cost is unrecoverable")):
         try:
             with open(os.path.join(root, rel), encoding="utf-8") as fh:
                 patched = marker in fh.read()
@@ -98,9 +111,8 @@ def _setupx_root(ctx: ProduceContext | None = None) -> str:
         if not patched:
             raise RuntimeError(
                 f"{os.path.join(root, rel)} has no {marker}: tools/setupx-bench.patch is not "
-                "applied. Without it the LLM-call budget and the per-run checkpoint namespace are "
-                "both inert — the run spends unbounded to the phase-1 alarm, and concurrent repos "
-                "corrupt each other's rollbacks. Apply it (see README, 'SetupX setup').")
+                f"applied, or the checkout carries an older copy of it — {inert}. Re-apply the "
+                "CURRENT patch (see README, 'SetupX setup').")
     return root
 
 
@@ -215,6 +227,17 @@ def agent_settings(ctx: ProduceContext, num_turn: int) -> dict:
     store = _xpu_store(dsn)
     if store:
         settings["xpu_store"] = store
+    # A fingerprint of the PATCH FILE, which is what survives the next time the patch changes:
+    # markers go stale silently, but this lets an analyst say "this run used patch X" and diff it
+    # against tools/setupx-bench.patch as of the run's commit. NOT proof the checkout matches it —
+    # that would take verifying applied hunks, which is not worth building. The marker loop in
+    # _setupx_root catches the realistic failure (a capability missing outright); this makes the
+    # intended version recoverable. Together they are a strong hint, not a guarantee.
+    try:
+        with open(PATCH_PATH, "rb") as fh:
+            settings["setupx_patch_sha"] = hashlib.sha256(fh.read()).hexdigest()[:12]
+    except OSError:                          # noqa: BLE001 — optional fact, and this runs outside
+        pass                                 # produce()'s guard, so it must not raise
     try:
         # _setupx_root is the marker grep, not a second copy of it: it returns only for a checkout
         # that exists AND carries both patch markers, so "it returned" IS the patched signal.

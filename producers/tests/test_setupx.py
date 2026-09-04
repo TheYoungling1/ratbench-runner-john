@@ -476,14 +476,18 @@ def test_child_env_points_setupx_at_the_pinned_mirror(monkeypatch):
     assert env["DOCKER_WORK_DIR"] == "/workspace"
 
 
-def _fake_checkout(tmp_path, *, ckpt=True, calls=True):
-    """A directory shaped like a SetupX clone, patched or not."""
+def _fake_checkout(tmp_path, *, ckpt=True, calls=True, usage=True):
+    """A directory shaped like a SetupX clone, carrying whichever of the patch's markers are asked
+    for. `usage=False` is a checkout patched with an OLDER copy of the patch — the shape that
+    reported itself fully patched on a live run while recording null tokens."""
     src = tmp_path / "src"
     src.mkdir(parents=True, exist_ok=True)
     (src / "main.py").write_text("# main\n")
     (src / "environment_manager.py").write_text("def _ckpt_repo(self): ...\n" if ckpt else "pass\n")
     (src / "llm_engine.py").write_text(
-        'os.environ.get("SETUPX_MAX_LLM_CALLS")\n' if calls else "pass\n")
+        ('os.environ.get("SETUPX_MAX_LLM_CALLS")\n' if calls else "")
+        + ("def llm_usage_used(): ...\n" if usage else "")
+        or "pass\n")
     return str(tmp_path)
 
 
@@ -872,3 +876,48 @@ def test_a_checkout_vendored_inside_another_repo_reports_no_commit(tmp_path):
     settings = agent_settings(ctx, 100)
     assert settings["setupx_patched"] is True
     assert "setupx_commit" not in settings
+
+
+# ── Stale-patch detection ────────────────────────────────────────────────────────────────────
+# Found by a live run, not by this suite: the checkout carried an OLDER copy of the patch, so it
+# had the checkpoint and call-budget markers but no usage capture. It recorded null tokens while
+# agent_settings said setupx_patched=true — a false "patched" misleads where a null column merely
+# looks missing.
+
+def test_a_checkout_patched_with_an_older_patch_is_not_patched(tmp_path):
+    from producers.setupx import agent_settings
+    root = _fake_checkout(tmp_path, usage=False)
+    ctx = ProduceContext(llm=None, workdir=str(tmp_path), agent_root=root)
+    assert agent_settings(ctx, 100)["setupx_patched"] is False
+
+
+def test_setupx_root_refuses_a_checkout_without_the_usage_capture_patch(tmp_path):
+    # The live-run failure, at the boundary that is supposed to catch it before any money is spent.
+    from producers.setupx import _setupx_root
+    root = _fake_checkout(tmp_path, usage=False)
+    with pytest.raises(RuntimeError, match="llm_usage_used"):
+        _setupx_root(ProduceContext(llm=None, workdir=str(tmp_path), agent_root=root))
+
+
+def test_the_patch_fingerprint_is_recorded_and_stable(tmp_path):
+    # Markers go stale silently; the fingerprint is what lets a future analyst say "this run used
+    # patch X" and diff it against tools/setupx-bench.patch as of the run's commit.
+    import hashlib
+    from producers.setupx import PATCH_PATH, agent_settings
+    ctx = ProduceContext(llm=None, workdir=str(tmp_path))
+    sha = agent_settings(ctx, 100)["setupx_patch_sha"]
+    assert sha == hashlib.sha256(open(PATCH_PATH, "rb").read()).hexdigest()[:12]
+    assert sha == agent_settings(ctx, 100)["setupx_patch_sha"]
+
+
+def test_an_unreadable_patch_file_drops_the_key_instead_of_vanishing_the_row(tmp_path, monkeypatch):
+    # agent_settings runs outside produce()'s guard, and benchmark.py does not wrap produce().
+    def stub(repo, ctx, *, llm, num_turn):
+        raise RuntimeError("docker daemon is not running")
+
+    import producers.setupx as setupx
+    monkeypatch.setattr(setupx, "PATCH_PATH", str(tmp_path / "does-not-exist.patch"))
+    env = SetupXProducer(runner=stub).produce(_repo(), _ctx(tmp_path))
+    assert env.status == "error"
+    assert "setupx_patch_sha" not in env.agent_settings
+    assert env.agent_settings["xpu"] == "off"
