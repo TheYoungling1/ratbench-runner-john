@@ -44,7 +44,10 @@ def test_get_profile_defaults_to_python_for_unknown_none_and_empty():
 # The one-turn clause deliberately does NOT appear in this prompt (it is Node-only until Python
 # is re-baselined on purpose).
 #
-# RE-BASELINED 2026-09-04, deliberately. The task changed from "collect and run" to COLLECTION
+# RE-BASELINED 2026-09-04, deliberately, TWICE — the second time is the one that stands:
+# the prompt is now a port of sweagent_repo2run_config.yaml's `instance_template`, so the
+# two compared arms are given the same task text rather than two paraphrases of it.
+# Superseded first pass, for the record: The task changed from "collect and run" to COLLECTION
 # ONLY, to match producers/sweagent_repo2run_config.yaml, which targets `pytest --collect-only -q`
 # — the two arms are compared, so they must be asked for the same outcome. The quoted command is
 # this harness's own gate (rat/libkit/tools/run_pytest_collect.py runs `python -m pytest --co -q`),
@@ -52,17 +55,40 @@ def test_get_profile_defaults_to_python_for_unknown_none_and_empty():
 # against the previous text and are not comparable with results produced after it.
 
 _PYTHON_PROMPT_GOLDEN = (
-    'You are configuring a Python repository at /testbed so its EXISTING test suite can be COLLECTED, and then writing a Dockerfile that reproduces your setup from scratch.\n'
+    'We\'re currently setting up the environment for the following task. Here are the details:\n'
     '\n'
-    'First, install ALL Python dependencies and any required system packages so that `python -m pytest --co -q` runs without errors — that is the exact command the grader runs. Install into the SYSTEM Python using `sudo pip install ...` and `sudo apt-get install -y ...` for system libraries — do NOT create a virtualenv (the grader runs the system python3). You may edit configuration files. DO NOT modify, add, or delete any test files. Verify your work by running `python -m pytest --co -q` yourself; do NOT run the test suite itself.\n'
+    'TASK:\n'
+    'Set up the environment for the Python repository o/r (https://github.com/o/r) so that its test suite can be collected, and record the working setup as a Dockerfile at /testbed/Dockerfile.gen.\n'
     '\n'
-    'Then write a self-contained Dockerfile to /testbed/Dockerfile.gen that reproduces this environment FROM A CLEAN BASE. It MUST:\n'
-    '  - start `FROM python:3.11`;\n'
-    '  - `RUN git clone https://github.com/o/r /testbed` and `WORKDIR /testbed` (do NOT rely on any files from this container — the build starts empty);\n'
-    '  - install the SAME system packages and Python dependencies you installed, as RUN steps. The build runs as ROOT, so DROP every `sudo` prefix (use `apt-get install -y ...`, `pip install ...`);\n'
-    '  - re-encode any edits you made to repo files as explicit RUN steps (e.g. `RUN sed -i ...` or a heredoc), since the clone is pristine;\n'
-    '  - NOT run pytest or the test suite in the Dockerfile.\n'
-    'When the Dockerfile is written, stop.'
+    'INSTRUCTIONS:\n'
+    'Now, you\'ll carry out this task on your own. Your session has begun in the repository\'s root directory. Use any bash commands you need. Edit and check files as needed.\n'
+    '\n'
+    'The goal is to generate a Dockerfile that can successfully build and run the tests in the repository using the command "pytest --collect-only -q".\n'
+    '\n'
+    'NOTE:\n'
+    '1. The repository is cloned into /testbed.\n'
+    '2. The Dockerfile should start with the following lines (if the base image is python:3.11 and the repository is adamobeng/wddbfs):\n'
+    '```\n'
+    'FROM python:3.11\n'
+    'RUN pip install pytest\n'
+    'RUN git clone https://github.com/adamobeng/wddbfs.git /testbed\n'
+    'WORKDIR /testbed\n'
+    '```\n'
+    '3. The build runs as ROOT from an EMPTY image: drop every `sudo` prefix from the commands you write into the Dockerfile, and do not rely on any file from this container.\n'
+    '4. Install into the system Python — do NOT create a virtualenv, since the grader runs the system python3.\n'
+    'Your task includes:\n'
+    '0. **Generate Dockerfile**: Create the Dockerfile at /testbed/Dockerfile.gen.\n'
+    '1. **Read Directory Structure**: Check the folder structure in the root directory.\n'
+    '2. **Check the Configuration Files**: Inspect files like "requirements.txt", "setup.py", "setup.cfg", "Pipfile*", etc.\n'
+    '3. **Determine Package Dependencies**: Handle dependencies and manage conflicting dependency versions.\n'
+    '4. **Testing**: Ensure "python -m pytest /testbed --co -q" runs without errors.\n'
+    '5. **Generate Dockerfile**: Write necessary installation or setup steps determined from the inspection. If you finish run testing successfully, you should modify the Dockerfile in /testbed/Dockerfile.gen.\n'
+    '\n'
+    'IMPORTANT TIPS:\n'
+    '* Check the directory and files carefully.\n'
+    '* Make sure Dockerfile commands are correct.\n'
+    '* Use proper Dockerfile syntax and indentation.\n'
+    '* Test the final Dockerfile by running "python -m pytest /testbed --co -q".'
 )
 
 
@@ -354,3 +380,35 @@ def test_java_prompt_never_mentions_python_or_node_tooling():
     prompt = _java_prompt()
     for token in ("pip", "pytest", "npm ci", "package.json"):
         assert token not in prompt
+
+
+# ── the ported prompt must keep the baseline's task, not a paraphrase ────────────────────────
+# Ported from sweagent_repo2run_config.yaml's instance_template. These assert the parts that make
+# it the SAME TASK as that arm, and the parts that had to change because the grader differs.
+
+def test_python_prompt_carries_the_baselines_task_text():
+    p = build_prompt("o/r", "python:3.11", PYTHON_PROFILE)
+    for phrase in [
+        "We're currently setting up the environment for the following task",
+        'The goal is to generate a Dockerfile that can successfully build and run the tests in '
+        'the repository using the command "pytest --collect-only -q"',
+        "**Read Directory Structure**", "**Check the Configuration Files**",
+        "**Determine Package Dependencies**", "**Testing**", "**Generate Dockerfile**",
+        "IMPORTANT TIPS:", "Use proper Dockerfile syntax and indentation.",
+    ]:
+        assert phrase in p, phrase
+
+
+def test_python_prompt_drops_sweagents_interface_scaffolding():
+    # system_template teaches SWE-agent's own REPL; copying it would describe a machine Claude
+    # Code does not have.
+    p = build_prompt("o/r", "python:3.11", PYTHON_PROFILE)
+    for scaffold in ["bash-$", "DISCUSSION", "(Current task:", "{{WINDOW}}", "command_docs"]:
+        assert scaffold not in p, scaffold
+
+
+def test_python_prompt_uses_this_lanes_paths_and_gate():
+    p = build_prompt("o/r", "python:3.11", PYTHON_PROFILE)
+    assert "/repo" not in p.replace("/repo2run", "")      # repo2run re-homes; this lane does not
+    assert "/testbed/Dockerfile.gen" in p
+    assert "python -m pytest /testbed --co -q" in p       # what run_pytest_collect.py runs

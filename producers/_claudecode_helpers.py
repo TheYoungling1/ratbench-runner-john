@@ -358,28 +358,67 @@ class LangProfile:
 # CHANGING THIS TEXT RE-BASELINES THE ARM: the Node prompt's comment records that a live python50
 # run is scored against the exact Python text, so results produced before this edit are not
 # comparable with results produced after it.
+# PORTED FROM producers/sweagent_repo2run_config.yaml's `instance_template` — the per-task half
+# of that agent config. Its `system_template` is NOT portable: it teaches SWE-agent's own scaffold
+# (the {{WINDOW}}-line viewport, the DISCUSSION/command format, one command per turn, the `bash-$`
+# marker), describing an interface Claude Code does not have. The trailing
+# "(Current task:)/(Current directory:)/bash-$" lines are that REPL's turn markers, dropped for the
+# same reason.
+#
+# Adapted ONLY where this lane's grader differs, never in what the task asks for:
+#   /repo            -> /testbed              (this lane is `conforming`; repo2run re-homes)
+#   /Dockerfile      -> {gen_path}            (what the producer copies out)
+#   the clone+cp preamble -> a direct clone to /testbed, since there is nothing to re-home
+#   "pytest /repo --collect-only -q" -> "python -m pytest /testbed --co -q", which is what
+#       rat/libkit/tools/run_pytest_collect.py actually runs
+# NOTE items 3 and 4 are forced by the environment, not by the task: the agent works as a non-root
+# user with sudo while the image build is root, and the gate runs the system python3.
+#
+# NOT ported, and worth knowing: the paper's prompt has no prohibition on editing test files. The
+# earlier Claude-side guard was dropped to keep this faithful, so an agent may now encode
+# `RUN rm tests/...` into the Dockerfile and collect cleanly on what remains.
 _PYTHON_PROMPT = (
-    "You are configuring a Python repository at /testbed so its EXISTING test suite can be "
-    "COLLECTED, and then writing a Dockerfile that reproduces your setup from scratch.\n\n"
-    "First, install ALL Python dependencies and any required system packages so that "
-    "`python -m pytest --co -q` runs without errors — that is the exact command the grader "
-    "runs. Install into the SYSTEM Python using `sudo pip install ...` and "
-    "`sudo apt-get install -y ...` for system libraries — do NOT create a virtualenv (the "
-    "grader runs the system python3). You may edit configuration files. DO NOT modify, add, "
-    "or delete any test files. Verify your work by running `python -m pytest --co -q` "
-    "yourself; do NOT run the test suite itself.\n\n"
-    "Then write a self-contained Dockerfile to {gen_path} that reproduces this environment "
-    "FROM A CLEAN BASE. It MUST:\n"
-    "  - start `FROM {base}`;\n"
-    "  - `RUN git clone https://github.com/{full_name} /testbed` and `WORKDIR /testbed` "
-    "(do NOT rely on any files from this container — the build starts empty);\n"
-    "  - install the SAME system packages and Python dependencies you installed, as RUN "
-    "steps. The build runs as ROOT, so DROP every `sudo` prefix (use "
-    "`apt-get install -y ...`, `pip install ...`);\n"
-    "  - re-encode any edits you made to repo files as explicit RUN steps (e.g. "
-    "`RUN sed -i ...` or a heredoc), since the clone is pristine;\n"
-    "  - NOT run pytest or the test suite in the Dockerfile.\n"
-    "When the Dockerfile is written, stop."
+    "We\'re currently setting up the environment for the following task. Here are the "
+    "details:\n\n"
+    "TASK:\n"
+    "Set up the environment for the Python repository {full_name} "
+    "(https://github.com/{full_name}) so that its test suite can be collected, and record the "
+    "working setup as a Dockerfile at {gen_path}.\n\n"
+    "INSTRUCTIONS:\n"
+    "Now, you\'ll carry out this task on your own. Your session has begun in the repository\'s "
+    "root directory. Use any bash commands you need. Edit and check files as needed.\n\n"
+    "The goal is to generate a Dockerfile that can successfully build and run the tests in the "
+    "repository using the command \"pytest --collect-only -q\".\n\n"
+    "NOTE:\n"
+    "1. The repository is cloned into /testbed.\n"
+    "2. The Dockerfile should start with the following lines (if the base image is {base} and "
+    "the repository is adamobeng/wddbfs):\n"
+    "```\n"
+    "FROM {base}\n"
+    "RUN pip install pytest\n"
+    "RUN git clone https://github.com/adamobeng/wddbfs.git /testbed\n"
+    "WORKDIR /testbed\n"
+    "```\n"
+    "3. The build runs as ROOT from an EMPTY image: drop every `sudo` prefix from the commands "
+    "you write into the Dockerfile, and do not rely on any file from this container.\n"
+    "4. Install into the system Python — do NOT create a virtualenv, since the grader runs the "
+    "system python3.\n"
+    "Your task includes:\n"
+    "0. **Generate Dockerfile**: Create the Dockerfile at {gen_path}.\n"
+    "1. **Read Directory Structure**: Check the folder structure in the root directory.\n"
+    "2. **Check the Configuration Files**: Inspect files like \"requirements.txt\", "
+    "\"setup.py\", \"setup.cfg\", \"Pipfile*\", etc.\n"
+    "3. **Determine Package Dependencies**: Handle dependencies and manage conflicting "
+    "dependency versions.\n"
+    "4. **Testing**: Ensure \"python -m pytest /testbed --co -q\" runs without errors.\n"
+    "5. **Generate Dockerfile**: Write necessary installation or setup steps determined from "
+    "the inspection. If you finish run testing successfully, you should modify the Dockerfile "
+    "in {gen_path}.\n\n"
+    "IMPORTANT TIPS:\n"
+    "* Check the directory and files carefully.\n"
+    "* Make sure Dockerfile commands are correct.\n"
+    "* Use proper Dockerfile syntax and indentation.\n"
+    "* Test the final Dockerfile by running \"python -m pytest /testbed --co -q\"."
 )
 
 # The Node prompt is NOT the Python one with the nouns swapped — the contract is different in kind.
