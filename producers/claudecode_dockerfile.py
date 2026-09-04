@@ -109,6 +109,7 @@ def _persist_stream(out_dir: str, stdout: str, stderr: str, model: str = "",
         # converged to bench.verdict.
         "turns_used": info["llm_calls"], "cost_usd": cost, "usage_source": source,
         "tool_calls": info["tool_calls"], "agent_is_error": info["is_error"],
+        "dsml_text_blocks": info["dsml_text_blocks"],
         "rate_limited": info["rate_limited"],
     }
 
@@ -190,7 +191,9 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
             "docker", "exec", "-i", "-u", "agent", "-w", W, container,
             "claude", "-p", "--permission-mode", "bypassPermissions",
             *budget_flags(), "--model", _normalize_model(llm),
-            "--output-format", "stream-json", "--verbose",
+            # message_delta carries per-response output tokens, the only way a turn-capped
+            # run can be priced (see summarize_stream).
+            "--output-format", "stream-json", "--verbose", "--include-partial-messages",
         ]
         stdout, stderr = _capture_claude_stream(claude_cmd, ctx.timeout, prompt,
                                                 max_turns=ctx.num_turn)

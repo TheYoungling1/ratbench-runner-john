@@ -144,7 +144,10 @@ class ClaudeCodeModel(BaseEvalModel):
                     "--model", model,
                     # Emit the full agentic event stream so each experiment records the
                     # agent's actual actions (tool calls). stream-json requires --verbose.
+                    # message_delta carries per-response output tokens, the only way a
+                    # turn-capped run can be priced (see summarize_stream).
                     "--output-format", "stream-json", "--verbose",
+                    "--include-partial-messages",
                 ]
                 agent_budget = max(60, self.timeout - int(time.time() - start) - PYTEST_RESERVE)
                 # num_turn is the variety's step budget (sweagent's per_instance_call_limit),
@@ -244,6 +247,7 @@ class ClaudeCodeModel(BaseEvalModel):
             meta["agent_tokens_in"] = info["tokens_in"]
             meta["agent_tokens_out"] = info["tokens_out"]
             meta["agent_cache_read_tokens"] = info["cache_read_tokens"]
+            meta["agent_dsml_text_blocks"] = info["dsml_text_blocks"]
             if info["rate_limited"]:
                 meta["agent_rate_limited"] = True
         except Exception:

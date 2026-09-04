@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from dataclasses import dataclass
 from typing import Optional
 
@@ -119,8 +120,13 @@ def settled_cost(info: dict, model: str, base_url: str) -> tuple:
     CLI's number stands, tagged `"cli"`. Neither branch ever invents a 0.0.
     """
     if is_deepseek(base_url):
-        return (deepseek_cost(model, info.get("input_miss_tokens"), info.get("cache_read_tokens"),
-                              info.get("tokens_out")), "computed")
+        cost = deepseek_cost(model, info.get("input_miss_tokens"), info.get("cache_read_tokens"),
+                             info.get("tokens_out"))
+        if cost is not None:
+            return (cost, "computed")
+        # A truncated stream has the input half and not the output half. Say so, rather than
+        # publishing a knowingly-low figure or an unexplained null.
+        return (None, "partial" if info.get("usage_partial") else None)
     cost = info.get("cost_usd")
     return (cost, "cli" if cost is not None else None)
 
@@ -148,6 +154,24 @@ def agent_env() -> dict:
 def has_auth(env: dict) -> bool:
     """True when `env` carries a credential the CLI can actually authenticate with."""
     return any(env.get(k) for k in AUTH_KEYS)
+
+
+# DeepSeek v4 intermittently serialises a command in its own DSML markup instead of using the
+# tool protocol — `<｜｜DSML｜｜bash>\nls -la /repo\n</｜｜DSML｜｜bash>`. On the SWE-agent arm that
+# breaks ThoughtActionParser LOUDLY (see producers/sweagent_repo2run_runner.normalize_dsml_fences,
+# which rewrites it into a fence). Here it cannot break anything: DeepSeek's Anthropic bridge
+# builds typed tool_use blocks server-side and this module only reads the CLI's JSON envelope.
+#
+# That is exactly why it is worth counting. A leak lands as ordinary assistant TEXT: no error, no
+# parse failure, just a turn spent on a command that never ran — invisible unless someone reads the
+# trajectory. The count makes it a number on the row instead. Deliberately wider than the
+# SWE-agent regex: DSML tags plus the raw special-token markers of the same family.
+_MARKUP_LEAK = re.compile(r"DSML|tool▁call|｜｜")
+
+
+def count_markup_leaks(text: str) -> int:
+    """1 if this text block carries leaked DeepSeek markup, else 0."""
+    return 1 if text and _MARKUP_LEAK.search(text) else 0
 
 
 def _assistant_message_id(line: str):
@@ -670,12 +694,13 @@ def summarize_stream(stream_text: str) -> dict:
                   # The cache split, kept SEPARATELY from the tokens_in sum: DeepSeek prices a
                   # hit 31x cheaper than a miss, so collapsing them makes cost unrecoverable.
                   "input_miss_tokens": None, "cache_read_tokens": None,
-                  "llm_calls": 0, "tool_calls": 0, "model_usage": {}, "rate_limited": False}
+                  "llm_calls": 0, "tool_calls": 0, "model_usage": {}, "rate_limited": False,
+                  "dsml_text_blocks": 0, "usage_partial": False}
     seen: set = set()
     # Per-response usage, summed as a FALLBACK for a run with no final `result` event — i.e. every
     # turn-capped or walled run. Without it the hardest runs report no tokens at all and
     # bench.metrics averages cost/tokens over the cheap runs only.
-    acc = {"in": 0, "out": 0, "n": 0, "miss": 0, "hit": 0}
+    acc = {"in": 0, "out": 0, "n": 0, "miss": 0, "hit": 0, "deltas": 0}
     for raw in (stream_text or "").splitlines():
         raw = raw.strip()
         if not raw:
@@ -687,6 +712,19 @@ def summarize_stream(stream_text: str) -> dict:
         if not isinstance(obj, dict):
             continue
         kind = obj.get("type")
+        if kind == "stream_event":
+            # --include-partial-messages emits one `message_delta` per RESPONSE carrying that
+            # response's output_tokens. It is the only per-response source of them: the `assistant`
+            # events always report output_tokens: 0, and the final `result` event does not exist on
+            # a capped or walled run. Without this a truncated run cannot be priced at all — and
+            # output is ~30% of the cost against input that is 98% cache reads.
+            ev = obj.get("event")
+            if isinstance(ev, dict) and ev.get("type") == "message_delta":
+                u = ev.get("usage")
+                if isinstance(u, dict):
+                    acc["out"] += _as_int(u.get("output_tokens"))
+                    acc["deltas"] += 1
+            continue
         if kind == "system" and obj.get("subtype") == "init":
             actions.append(f"[init] session={str(obj.get('session_id', '?'))[:8]} "
                            f"cwd={obj.get('cwd', '?')}")
@@ -718,7 +756,11 @@ def summarize_stream(stream_text: str) -> dict:
                     raw_text = block.get("text")
                     text = raw_text.strip() if isinstance(raw_text, str) else ""
                     if text:
-                        actions.append(f"    say: {text[:240]}")
+                        leaked = count_markup_leaks(text)
+                        info["dsml_text_blocks"] += leaked
+                        # Tagged in the log too, so a leak is greppable in the trajectory and not
+                        # only a count on the row.
+                        actions.append(f"    say{'[DSML]' if leaked else ''}: {text[:240]}")
         elif kind == "user":
             for block in _content_blocks(obj):
                 if isinstance(block, dict) and block.get("type") == "tool_result":
@@ -739,22 +781,56 @@ def summarize_stream(stream_text: str) -> dict:
             info["stop_reason"] = obj.get("stop_reason")
             model_usage = obj.get("modelUsage")
             info["model_usage"] = model_usage if isinstance(model_usage, dict) else {}
-            usage = obj.get("usage")
+            # Prefer modelUsage over the top-level usage block. Measured on four real runs, the
+            # two disagree by a CONSTANT +454 input and +11..18 output tokens in modelUsage's
+            # favour — the CLI makes an auxiliary call that the aggregate `usage` omits. The gap is
+            # ~0.01% of input, so this is about the claim being exact rather than about money; it
+            # also gives a per-model split, which is what would expose a second model ever being
+            # billed (every run so far: claude-sonnet-5 alone).
+            mu, usage = obj.get("modelUsage"), obj.get("usage")
+            cands = []
+            if isinstance(mu, dict) and mu:
+                rows = [m for m in mu.values() if isinstance(m, dict)]
+                cands.append((sum(_as_int(m.get("inputTokens"))
+                                  + _as_int(m.get("cacheCreationInputTokens")) for m in rows),
+                              sum(_as_int(m.get("cacheReadInputTokens")) for m in rows),
+                              sum(_as_int(m.get("outputTokens")) for m in rows)))
             if isinstance(usage, dict):
-                tin = (_as_int(usage.get("input_tokens"))
-                       + _as_int(usage.get("cache_creation_input_tokens"))
-                       + _as_int(usage.get("cache_read_input_tokens")))
-                tout = _as_int(usage.get("output_tokens"))
-                info["tokens_in"], info["tokens_out"] = tin, tout
-                info["total_tokens"] = tin + tout
-                info["input_miss_tokens"] = (_as_int(usage.get("input_tokens"))
-                                             + _as_int(usage.get("cache_creation_input_tokens")))
-                info["cache_read_tokens"] = _as_int(usage.get("cache_read_input_tokens"))
+                cands.append((_as_int(usage.get("input_tokens"))
+                              + _as_int(usage.get("cache_creation_input_tokens")),
+                              _as_int(usage.get("cache_read_input_tokens")),
+                              _as_int(usage.get("output_tokens"))))
+            if cands:
+                # Take whichever block accounts for MORE, never whichever comes first. On real
+                # streams modelUsage wins by a constant +454 input (an auxiliary call the aggregate
+                # `usage` omits), but modelUsage is not guaranteed to carry the cache fields — and
+                # a modelUsage without them would silently drop ~98% of the input on a run like
+                # these, where cache reads are nearly all of it. Undercounting must not be the
+                # quiet default.
+                miss, hit, _ = max(cands, key=lambda c: c[0] + c[1])
+                tout = max(c[2] for c in cands)
+            else:
+                miss = None
+            if miss is not None:
+                info["input_miss_tokens"], info["cache_read_tokens"] = miss, hit
+                info["tokens_in"], info["tokens_out"] = miss + hit, tout
+                info["total_tokens"] = miss + hit + tout
     if info["tokens_in"] is None and acc["n"]:
-        # No `result` event: capped or walled. Same accounting as the result branch
-        # (in + cache_creation + cache_read), summed per response instead of read off the total.
-        info["tokens_in"], info["tokens_out"] = acc["in"], acc["out"]
-        info["total_tokens"] = acc["in"] + acc["out"]
+        # No `result` event: capped or walled. Input is fully recoverable — summing per-response
+        # usage reproduces the result event's input total exactly (verified on four real runs).
+        info["tokens_in"] = acc["in"]
         info["input_miss_tokens"], info["cache_read_tokens"] = acc["miss"], acc["hit"]
+        # OUTPUT is not. Measured: per-assistant usage always carries `output_tokens: 0`, and the
+        # final `result` event is the ONLY event type in the stream that reports a non-zero one
+        # (14,401 system + 208 assistant + 88 user events in a 69-call run, none of them carrying
+        # it). So on a truncated run output is UNKNOWN, not zero, and saying zero would understate
+        # DeepSeek cost by 25-30% — output is $0.66/1M against input that is ~98% cache reads at
+        # $0.007/1M. `usage_partial` is what makes the resulting None self-explaining.
+        # acc["out"] is real only when message_delta events were present (--include-partial-
+        # messages). Without them it is a sum of zeros, which must stay None rather than read as
+        # "the agent produced no output".
+        info["tokens_out"] = acc["out"] if acc["deltas"] else None
+        info["total_tokens"] = acc["in"] + acc["out"] if acc["deltas"] else None
+        info["usage_partial"] = not acc["deltas"]
     info["actions"] = "\n".join(actions)
     return info

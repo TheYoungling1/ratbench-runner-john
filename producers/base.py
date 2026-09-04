@@ -329,5 +329,8 @@ def write_env_packet(out_root: str, env: ProducedEnv) -> str:
         # "cli" (the agent's own figure), "table", or None. A cost with no provenance
         # cannot be pooled across arms that price by different routes.
         "usage_source": economy.get("usage_source"),
+        # Leaked DeepSeek DSML markup in the agent's prose. Harmless to the harness (the
+        # tool protocol is typed), but a turn spent on a command that never ran.
+        "dsml_text_blocks": economy.get("dsml_text_blocks"),
     }, indent=2))
     return repo_dir
