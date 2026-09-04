@@ -19,6 +19,7 @@ import json
 import os
 import subprocess
 import time
+from urllib.parse import urlsplit
 
 from producers.base import ProduceContext, ProducedEnv
 
@@ -103,7 +104,8 @@ def _setupx_root(ctx: ProduceContext | None = None) -> str:
     return root
 
 
-def child_env(llm: str | None, base_image: str, ckpt_ns: str, max_llm_calls: int) -> dict:
+def child_env(llm: str | None, base_image: str, ckpt_ns: str, max_llm_calls: int,
+              log_dir: str) -> dict:
     """The environment `python -m src.main` runs under. Validated here, at the boundary.
 
     `ckpt_ns` namespaces SetupX's checkpoint images so concurrent repos cannot delete or overwrite
@@ -111,6 +113,11 @@ def child_env(llm: str | None, base_image: str, ckpt_ns: str, max_llm_calls: int
     `max_llm_calls` is the arm's budget in COMPLETIONS, not agent steps: SetupX's own --max-steps
     counts steps, and one step can cost many completions. Both switches come from
     tools/setupx-bench.patch.
+    `log_dir` is where SetupX's own INFO log goes. src/logger.py logs to a FILE, not to stdout —
+    ~10k lines per run of XPU retrieval decisions, per-command output and agent reasoning, against
+    the 12-line summary stdout carries. Unset, it defaults to $SETUPX_ROOT/log/, where every repo
+    of every run piles up under timestamped names that cannot be matched back to a row afterwards.
+    Caller must have created the directory.
     """
     key = os.environ.get("DEEPSEEK_API_KEY")
     if not key:
@@ -134,7 +141,8 @@ def child_env(llm: str | None, base_image: str, ckpt_ns: str, max_llm_calls: int
                SETUPX_MAX_LLM_CALLS=str(max_llm_calls),
                # bridge networking: host networking shares the host port space, so two concurrent
                # repos collide the moment either binds a port.
-               SETUPX_NETWORK_MODE=os.environ.get("SETUPX_NETWORK_MODE", "bridge"))
+               SETUPX_NETWORK_MODE=os.environ.get("SETUPX_NETWORK_MODE", "bridge"),
+               LOG_DIR=log_dir)
     dsn = os.environ.get("SETUPX_DB_DSN")
     if dsn:
         # All THREE, not just the key. text_to_embedding takes the dedicated branch as soon as
@@ -162,6 +170,60 @@ def child_env(llm: str | None, base_image: str, ckpt_ns: str, max_llm_calls: int
         # against. Arm membership is the producer's call, not the shell's.
         env.update(XPU_ENABLED="0", XPU_VECTOR_ENABLED="0", XPU_READONLY="0")
     return env
+
+
+def _xpu_store(dsn: str) -> str:
+    """The DATABASE NAME out of a DSN, and nothing else. "" if it cannot be read safely.
+
+    SETUPX_DB_DSN carries a password. `_meta.json` is committed alongside the run and gets pasted
+    into issues, so the DSN itself must never reach it — the store's identity is all an analyst
+    needs to tell two XPU corpora apart.
+    """
+    parts = urlsplit(dsn)
+    # A keyword-style DSN ("dbname=xpu_run password=hunter2") has no scheme/netloc and urlsplit
+    # hands the WHOLE string back as the path — password included. Require a URL, then require the
+    # result to be a bare identifier; anything else is dropped rather than risked.
+    name = parts.path.lstrip("/") if parts.scheme and parts.netloc else ""
+    return name if name and all(c.isalnum() or c in "_-." for c in name) else ""
+
+
+def agent_settings(ctx: ProduceContext, num_turn: int) -> dict:
+    """Which arm this row belongs to, and what the budget actually meant. NEVER raises.
+
+    Two facts are unrecoverable once a run is over. (1) ARM: the XPU-on and XPU-off runs emit
+    byte-identical artifact shapes, so without this the only thing separating them is the
+    directory name the operator typed into --run-name — and the on/off comparison is the entire
+    point of the variety. (2) PATCH STATE: `llm_call_budget` means COMPLETIONS only because
+    tools/setupx-bench.patch is applied; against an unpatched checkout SETUPX_MAX_LLM_CALLS is
+    inert, `--max-steps 9999` binds instead, and num_turn=100 silently becomes a step budget worth
+    roughly four times the spend — producing data that looks identical and means something else.
+
+    Computed from the same environment child_env reads, so the record and the child agree.
+    """
+    dsn = os.environ.get("SETUPX_DB_DSN") or ""
+    settings = {"xpu": "on" if dsn else "off",
+                "llm_call_budget": num_turn,
+                "network_mode": os.environ.get("SETUPX_NETWORK_MODE", "bridge")}
+    store = _xpu_store(dsn)
+    if store:
+        settings["xpu_store"] = store
+    try:
+        # _setupx_root is the marker grep, not a second copy of it: it returns only for a checkout
+        # that exists AND carries both patch markers, so "it returned" IS the patched signal.
+        root = _setupx_root(ctx)
+    except Exception:                        # noqa: BLE001 — provenance, never a failure path
+        settings["setupx_patched"] = False   # also covers "no checkout here", e.g. the error guard
+        return settings
+    settings["setupx_patched"] = True
+    try:
+        out = subprocess.run(["git", "-C", root, "rev-parse", "HEAD"],
+                             capture_output=True, text=True, timeout=30)
+        commit = (out.stdout or "").strip() if out.returncode == 0 else ""
+    except Exception:                        # noqa: BLE001 — a checkout with no .git still runs
+        commit = ""
+    if commit:
+        settings["setupx_commit"] = commit
+    return settings
 
 
 def mirror_image(repo: RepoSpec, ctx: ProduceContext) -> str:
@@ -251,7 +313,7 @@ def run_setupx(repo: RepoSpec, ctx: ProduceContext, *, llm: str | None, num_turn
              "--max-steps", "9999",
              "--phase1-timeout", str(phase1),
              "--output-dir", out_dir],
-            cwd=root, env=child_env(llm, base_image, ckpt_ns, num_turn),
+            cwd=root, env=child_env(llm, base_image, ckpt_ns, num_turn, out_dir),
             capture_output=True, text=True, timeout=ctx.timeout)
     finally:
         _sweep_checkpoints(ckpt_ns)
@@ -300,9 +362,14 @@ class SetupXProducer:
         # Anti-vanish invariant (design §1): a SetupX crash yields ProducedEnv(status="error"),
         # never a raised exception.
         start = time.time()
+        num_turn = ctx.num_turn if ctx.num_turn is not None else self.num_turn
+        # Hoisted out of the try, and onto EVERY return below: a run that failed still has to say
+        # what arm and what budget it failed under, or its row cannot be attributed at all — and
+        # the failures are the rows an analyst goes back to interrogate. agent_settings never
+        # raises, so computing it here cannot cost the anti-vanish invariant.
+        settings = agent_settings(ctx, num_turn)
         try:
             runner = self._runner or run_setupx
-            num_turn = ctx.num_turn if ctx.num_turn is not None else self.num_turn
             res = runner(repo, ctx, llm=(ctx.llm or self.llm), num_turn=num_turn)
 
             economy = dict(res.get("economy") or {})
@@ -318,16 +385,19 @@ class SetupXProducer:
             if not steps:
                 return ProducedEnv(repo=repo, dockerfile=None, status="error",
                                    note="no replayable steps survived; " + note,
+                                   agent_settings=settings,
                                    conformance=self.conformance, producer_name=self.name,
                                    economy=economy)
 
             dockerfile, scripts = render_dockerfile(repo, steps)
             return ProducedEnv(repo=repo, dockerfile=dockerfile, setup_scripts=scripts,
                                base_image=DEFAULT_BASE_IMAGE, head_sha=repo.commit or "",
+                               agent_settings=settings,
                                status="produced", conformance=self.conformance,
                                unreplayed=lossy, producer_name=self.name,
                                economy=economy, note=note)
         except Exception as exc:                # noqa: BLE001 — boundary guard, never propagate
             return ProducedEnv(repo=repo, dockerfile=None, status="error", note=repr(exc),
+                               agent_settings=settings,
                                conformance=self.conformance, producer_name=self.name,
                                economy={"produce_s": round(time.time() - start, 2)})
