@@ -105,6 +105,7 @@ Defined in `varieties.toml`:
 | `claudecode` / `claudecode-dockerfile` | `claudecode` / `claudecode-dockerfile` | Claude Code, live in-place / Dockerfile-emitting |
 | `executionagent` | `executionagent` | ExecutionAgent baseline (Dockerfile + `commands.sh` folded into one image, re-homed to `/testbed`) |
 | `sweagent_repo2run` | `sweagent_repo2run` | SWE-agent under the Repo2Run paper's baseline settings — emits a Dockerfile, re-homed to `/testbed` |
+| `setupx` | `setupx` | SetupX baseline (XPU store + speculative execution + prosecutor/judge; trajectory replayed and re-homed to `/testbed`) |
 
 Run any with `./run_bench.sh <variety> …`. Override the LLM with `--llm <slug>`.
 
@@ -189,6 +190,138 @@ with no dependencies (a guaranteed EBSR-0), so `producers/executionagent.py` rep
 as one build layer before re-homing `/app/<project>` to `/testbed` — the same env EA's own
 `launch.sh` reaches. That makes the row `conformance="synthesized"`, not `native`. A budget-exhausted
 run falls back to `forced_exit_cycle/Dockerfile` and is noted as such in `_meta.json`.
+
+### SetupX setup
+
+Like `executionagent`, `setupx` is not vendored — point it at a checkout. The vendored patch
+`tools/setupx-bench.patch` is **required**: it namespaces the checkpoint images per run, makes the
+container network mode configurable, and adds the `SETUPX_MAX_LLM_CALLS` budget and the
+`XPU_READONLY` switch. The venv must be **Python 3.10** (3.10.11 here).
+
+```bash
+mkdir -p ~/agents
+git clone https://github.com/OpenDataBox/SetupX ~/agents/SetupX
+git -C ~/agents/SetupX checkout 85de35515c45954b72afb9678dfd172855bfb847
+git -C ~/agents/SetupX apply "$PWD/tools/setupx-bench.patch"
+python3.10 -m venv ~/agents/SetupX/.venv
+~/agents/SetupX/.venv/bin/pip install -r ~/agents/SetupX/requirements.txt
+export SETUPX_ROOT=~/agents/SetupX
+# optional; defaults to $SETUPX_ROOT/.venv/bin/python
+export SETUPX_PYTHON=~/agents/SetupX/.venv/bin/python
+
+# the producer re-checks these at runtime, but check them here too — an unpatched checkout
+# fails silently and expensively:
+grep -q "_ckpt_repo" ~/agents/SetupX/src/environment_manager.py
+grep -q "SETUPX_MAX_LLM_CALLS" ~/agents/SetupX/src/llm_engine.py
+```
+
+**Never create a `.env` inside the checkout.** `src/config.py` calls `load_dotenv(override=True)` at
+import, which would silently override the model, endpoint and DSN the producer passes in. The
+producer refuses to start if one exists.
+
+The arm routes through **DeepSeek's own API**, not OpenRouter — SetupX speaks raw OpenAI-compatible
+HTTP rather than litellm — so it reads `DEEPSEEK_API_KEY`. A first run needs nothing else: with
+`SETUPX_DB_DSN` unset the producer pins the arm XPU-off (`XPU_ENABLED=0`, `XPU_VECTOR_ENABLED=0`,
+`XPU_READONLY=0`) and skips embeddings entirely, so `DEEPSEEK_API_KEY` plus docker is enough to
+exercise the whole produce → replay → rebuild → measure path:
+
+```bash
+export SETUPX_ROOT=~/agents/SetupX
+./run_bench.sh setupx --repos-json datasets/rat_python50.json --only bruin-data/ingestr --tier all
+```
+
+`bruin-data/ingestr` is the lightest repo in `rat_python50.json` (19 tests), so it is the cheapest
+end-to-end signal. The smoke run scored `EBSR 1.0` / `ESSR 1.0`, 19 tests collected, 0 collect
+errors; `_meta.json` showed `status=produced`, `conformance=synthesized`, `unreplayed=false`,
+`llm_calls=101`, `turns_used=25`, `produce_s=3198.77` (~53 min).
+
+**The XPU store — optional, only for the XPU-on arm.** pgvector, verified working:
+
+```bash
+docker pull pgvector/pgvector:pg16          # ~2 min; pull before the run below
+docker run -d --name setupx-xpu -p 5433:5432 \
+  -e POSTGRES_PASSWORD=setupx -e POSTGRES_DB=xpu_warm pgvector/pgvector:pg16
+sleep 5 && docker exec setupx-xpu psql -U postgres -d xpu_warm \
+  -c 'CREATE EXTENSION IF NOT EXISTS vector;'
+```
+
+**Untested below this line.** The import needs an embeddings key that was not available, so the
+warm-store load and everything downstream of it have not been run.
+
+```bash
+# Import the 600 shipped entries. The JSONL carries no vectors — the importer embeds every entry,
+# so this costs one embeddings call per entry and must use the same model the runs query with.
+cd ~/agents/SetupX
+EMBEDDING_API_KEY=$OPENROUTER_API_KEY \
+  EMBEDDING_BASE_URL=https://openrouter.ai/api/v1 \
+  EMBEDDING_MODEL=openai/text-embedding-3-small EMBEDDING_DIM=1536 \
+  dns=postgresql://postgres:setupx@localhost:5433/xpu_warm \
+  .venv/bin/python scripts/import_xpu_jsonl.py data/xpu_warm.jsonl --clear
+```
+
+`xpu_warm` is then the immutable master; nothing ever runs against it again. Take a fresh copy
+**before each benchmark run**:
+
+```bash
+docker exec setupx-xpu psql -U postgres -d postgres -c 'DROP DATABASE IF EXISTS xpu_run;'
+docker exec setupx-xpu psql -U postgres -d postgres \
+  -c 'CREATE DATABASE xpu_run TEMPLATE xpu_warm;'
+export SETUPX_DB_DSN=postgresql://postgres:setupx@localhost:5433/xpu_run
+```
+
+`CREATE DATABASE … TEMPLATE` is a file-level copy: instant, no re-embedding, and every run starts
+from the same 600 entries. A SELECT-only role is **not** a workable alternative —
+`XpuVectorStore.__init__` runs CREATE EXTENSION/TABLE/INDEX DDL on every connect, unguarded, so a
+role without those rights kills every repo before Stage 1. Setting `SETUPX_DB_DSN` without
+`EMBEDDING_API_KEY` / `EMBEDDING_BASE_URL` / `EMBEDDING_MODEL` is refused by the producer: every
+retrieval would 404 and be swallowed, leaving an arm that reports as XPU-on while retrieving
+nothing. What the template copy does *not* isolate is writes *within* one run — `XPU_READONLY=1`
+(from the patch) handles that by skipping `_store_xpu_experience`, and `FREEZE_TELEMETRY=1` freezes
+the telemetry counters.
+
+**Note what is being measured:** SetupX emits no Dockerfile — it mutates a live container and
+writes a JSON report. `producers/setupx.py` replays the surviving `setup.history` (SetupX rolls back to `docker commit`
+checkpoints, so undone work is dropped rather than replayed) onto a clone pinned at the dataset SHA,
+then re-homes `/workspace/repo` to `/testbed`. That makes the row `conformance="synthesized"`, not
+`native` — the same status `executionagent` carries.
+
+**Two fidelity limits, both surfaced in `_meta.json`:**
+
+- Every phase-2 agent runs commands against the same live container — `VerifierAgent`,
+  `ProsecutorAgent` and `JudgeAgent`. None of it lands in `history`, so anything they install or
+  write is in the container the agent finished with but is not replayed.
+- A successful XPU trial that fell back to atom-rendered `suggestion.commands` records no command in
+  the trajectory. Those runs are flagged `unreplayed=true`.
+
+**Commit pinning.** SetupX clones `--depth=1` at the live default-branch HEAD and has no notion of a
+dataset SHA. Rather than patch the checkout, the producer builds a per-repo base image holding the
+repo pinned at `/mirror` and hands SetupX `/mirror` as the repo URL, so its own clone lands the
+pinned tree. `git` warns `--depth is ignored in local clones`; that is expected.
+
+**No token accounting.** `src/llm_engine.py` discards the API `usage` block, so `_meta.json` carries
+`turns_used` and `produce_s` but `tokens_in` / `tokens_out` / `cost_usd` are `null`.
+
+**`num_turn` is a budget in LLM completions, not agent steps** — enforced by the vendored patch at
+`LLMClientBase.chat`. The smoke run's 25 agent steps cost 101 completions, roughly 4:1, so a
+step-based budget at the same nominal number would have spent about four times what
+`sweagent_repo2run` spends.
+
+**Cleanup is mandatory, not advisory.** A single `initial_clone` checkpoint measured **2.07 GB**,
+and SetupX commits another before every XPU trial. `_sweep_checkpoints` clears them on both the
+normal and crashed exits (verified: zero left after the smoke run), but a `SIGKILL` bypasses it —
+and the per-repo `setupx-mirror:*` images (2.01 GB each) are never swept at all. After any run:
+
+```bash
+docker images --filter 'reference=setup_agent_checkpoint*' -q | xargs -r docker rmi -f
+docker images --filter 'reference=setupx-mirror*' -q | xargs -r docker rmi -f
+```
+
+**Concurrency is safe only with the patch applied** — it namespaces the checkpoint images per run
+(e.g. `setup_agent_checkpoint_bruin-data__ingestr_54709:initial_clone`) and makes the network mode
+configurable. Without it, run at `--concurrency 1`.
+
+**A run prints nothing until it exits.** `run_setupx` captures the child's output rather than
+streaming it, so the 53-minute smoke run was silent throughout. That is not a hang.
 
 ## Datasets
 
