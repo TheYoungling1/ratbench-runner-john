@@ -262,6 +262,17 @@ pinned tree. `git` warns `--depth is ignored in local clones`; that is expected.
 step-based budget at the same nominal number would have spent about four times what
 `sweagent_repo2run` spends.
 
+**Decided: the budget stays at 100, and phase 2 therefore never runs.** SetupX has two phases —
+phase 1 sets the environment up, phase 2 reviews it (`VerifierAgent`, `ProsecutorAgent`,
+`JudgeAgent`). Phase 1 consumes the whole budget: two independent smokes on different machines both
+stopped at exactly `llm_calls=101`, each recording `note="phase2=None: [error] phase 2 execution
+failed: LLM call budget exhausted (100 calls)"`. Raising the budget would let phase 2 finish, but
+would also hand this arm more completions than `sweagent_repo2run` gets, and cross-arm
+comparability is the reason the number is 100 in the first place. The cost of that choice is real
+and is recorded here rather than absorbed silently: **this arm measures SetupX phase 1 only.** Do
+not read the score as SetupX at full strength, and do not compare it against published SetupX
+numbers that include the review phase.
+
 **Cleanup is mandatory, not advisory.** A single `initial_clone` checkpoint measured **2.07 GB**,
 and SetupX commits another before every XPU trial. `_sweep_checkpoints` clears them on both the
 normal and crashed exits (verified: zero left after the smoke run), but a `SIGKILL` bypasses it —
