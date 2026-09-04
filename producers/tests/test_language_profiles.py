@@ -43,28 +43,24 @@ def test_get_profile_defaults_to_python_for_unknown_none_and_empty():
 # template — a refactor that "obviously" preserves the prompt has to prove it here.
 # The one-turn clause deliberately does NOT appear in this prompt (it is Node-only until Python
 # is re-baselined on purpose).
+#
+# RE-BASELINED 2026-09-04, deliberately. The task changed from "collect and run" to COLLECTION
+# ONLY, to match producers/sweagent_repo2run_config.yaml, which targets `pytest --collect-only -q`
+# — the two arms are compared, so they must be asked for the same outcome. The quoted command is
+# this harness's own gate (rat/libkit/tools/run_pytest_collect.py runs `python -m pytest --co -q`),
+# and the agent may now run it to verify. python50 results produced BEFORE this date are scored
+# against the previous text and are not comparable with results produced after it.
 
 _PYTHON_PROMPT_GOLDEN = (
-    'You are configuring a Python repository at /testbed so its EXISTING test suite can'
-    ' run, and then writing a Dockerfile that reproduces your setup from scratch.\n'
+    'You are configuring a Python repository at /testbed so its EXISTING test suite can be COLLECTED, and then writing a Dockerfile that reproduces your setup from scratch.\n'
     '\n'
-    'First, install ALL Python dependencies and any required system packages so that '
-    'pytest can collect and run the tests. Install into the SYSTEM Python using `sudo '
-    'pip install ...` and `sudo apt-get install -y ...` for system libraries — do NOT '
-    'create a virtualenv (the grader runs the system python3). You may edit '
-    'configuration files. DO NOT modify, add, or delete any test files. DO NOT run the '
-    'test suite yourself.\n'
+    'First, install ALL Python dependencies and any required system packages so that `python -m pytest --co -q` runs without errors — that is the exact command the grader runs. Install into the SYSTEM Python using `sudo pip install ...` and `sudo apt-get install -y ...` for system libraries — do NOT create a virtualenv (the grader runs the system python3). You may edit configuration files. DO NOT modify, add, or delete any test files. Verify your work by running `python -m pytest --co -q` yourself; do NOT run the test suite itself.\n'
     '\n'
-    'Then write a self-contained Dockerfile to /testbed/Dockerfile.gen that reproduces '
-    'this environment FROM A CLEAN BASE. It MUST:\n'
+    'Then write a self-contained Dockerfile to /testbed/Dockerfile.gen that reproduces this environment FROM A CLEAN BASE. It MUST:\n'
     '  - start `FROM python:3.11`;\n'
-    '  - `RUN git clone https://github.com/o/r /testbed` and `WORKDIR /testbed` (do NOT'
-    ' rely on any files from this container — the build starts empty);\n'
-    '  - install the SAME system packages and Python dependencies you installed, as RUN'
-    ' steps. The build runs as ROOT, so DROP every `sudo` prefix (use `apt-get install '
-    '-y ...`, `pip install ...`);\n'
-    '  - re-encode any edits you made to repo files as explicit RUN steps (e.g. `RUN '
-    'sed -i ...` or a heredoc), since the clone is pristine;\n'
+    '  - `RUN git clone https://github.com/o/r /testbed` and `WORKDIR /testbed` (do NOT rely on any files from this container — the build starts empty);\n'
+    '  - install the SAME system packages and Python dependencies you installed, as RUN steps. The build runs as ROOT, so DROP every `sudo` prefix (use `apt-get install -y ...`, `pip install ...`);\n'
+    '  - re-encode any edits you made to repo files as explicit RUN steps (e.g. `RUN sed -i ...` or a heredoc), since the clone is pristine;\n'
     '  - NOT run pytest or the test suite in the Dockerfile.\n'
     'When the Dockerfile is written, stop.'
 )

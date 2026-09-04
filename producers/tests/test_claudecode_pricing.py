@@ -155,3 +155,62 @@ def test_a_complete_run_is_not_flagged_partial():
     assert info["usage_partial"] is False and info["tokens_out"] == 5852
     cost, src = settled_cost(info, "claude-sonnet-5", "https://api.deepseek.com/anthropic")
     assert src == "computed" and cost > 0
+
+
+# ── inference config parity with sweagent_repo2run ───────────────────────────────────────────
+# That arm pins thinking off to stay faithful to a non-reasoning baseline. Running the same weights
+# with reasoning on here would be a model difference reported as an agent difference.
+
+def test_thinking_is_disabled_by_default(monkeypatch):
+    from producers._claudecode_helpers import agent_env, inference_env
+
+    monkeypatch.delenv("CLAUDE_THINKING", raising=False)
+    assert inference_env() == {"MAX_THINKING_TOKENS": "0"}
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "k")
+    assert agent_env()["MAX_THINKING_TOKENS"] == "0"      # and it reaches the container
+
+
+def test_thinking_can_be_turned_back_on_explicitly(monkeypatch):
+    from producers._claudecode_helpers import inference_env
+
+    monkeypatch.setenv("CLAUDE_THINKING", "enabled")
+    assert inference_env() == {}
+    monkeypatch.setenv("CLAUDE_THINKING", " DISABLED ")
+    assert inference_env() == {"MAX_THINKING_TOKENS": "0"}
+
+
+# ── the dockerfile lane records WHY the agent stopped ────────────────────────────────────────
+# The live lane has agent_turn_capped / agent_timed_out; without the same on this lane, a capped
+# run and a finished one look identical on the row — and the repos that hit the cap are exactly
+# the ones whose numbers need the caveat.
+
+def test_capped_path_reports_its_outcome():
+    from producers import claudecode_dockerfile as mod
+
+    def fake(cmd, timeout, stdin_text=None, max_turns=None):
+        return {"stdout": "", "stderr": "", "turns": 100, "timed_out": False}
+
+    import producers._claudecode_helpers as helpers
+    orig, helpers.run_claude_capped = helpers.run_claude_capped, fake
+    try:
+        out = {}
+        mod._capture_claude_stream(["claude"], 60, "prompt", max_turns=100, outcome=out)
+        assert out == {"turns": 100, "turn_capped": True, "timed_out": False}
+        out2 = {}
+        helpers.run_claude_capped = lambda *a, **k: {"stdout": "", "stderr": "", "turns": 12,
+                                                    "timed_out": True}
+        mod._capture_claude_stream(["claude"], 60, "prompt", max_turns=100, outcome=out2)
+        assert out2 == {"turns": 12, "turn_capped": False, "timed_out": True}
+    finally:
+        helpers.run_claude_capped = orig
+
+
+def test_outcome_reaches_the_economy_dict(tmp_path):
+    from producers.claudecode_dockerfile import _persist_stream
+
+    econ = _persist_stream(str(tmp_path), "", "", "claude-sonnet-5",
+                           "https://api.deepseek.com/anthropic",
+                           {"turns": 100, "turn_capped": True, "timed_out": False})
+    assert econ["turn_capped"] is True and econ["agent_timed_out"] is False
+    # and stays None-not-False when nothing was reported, so "unknown" never reads as "finished"
+    assert _persist_stream(str(tmp_path), "", "", "", "")["turn_capped"] is None

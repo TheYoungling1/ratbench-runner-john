@@ -180,3 +180,39 @@ def test_sweagent_commit_survives_the_import_banner_on_stdout():
     assert got == SHA
     # the path handed to git must be the path, not the banner
     assert fake.calls[1] == ["git", "-C", "/opt/swe-agent/sweagent", "rev-parse", "HEAD"]
+
+
+# ── dirty was hardcoded False; every run claimed a clean tree ────────────────────────────────
+# harness_commit only means something if the reader knows whether the tree matched it. A constant
+# False is worse than no field: it asserts reproducibility that was never checked.
+
+def test_dirty_is_measured_not_asserted(monkeypatch):
+    from runner import manifest
+
+    calls = {}
+
+    def fake(cmd, **kw):
+        calls["cmd"] = cmd
+        return subprocess.CompletedProcess(cmd, 0, stdout=" M runner/live/claudecode.py\n", stderr="")
+
+    assert manifest.worktree_dirty("/repo", runner=fake) is True
+    assert "--porcelain" in calls["cmd"] and "--untracked-files=no" in calls["cmd"]
+
+
+def test_untracked_files_are_not_dirt():
+    # runs/, scratch datasets and editor droppings live in the tree constantly; counting them
+    # would pin every run to dirty=True, which is the same lie inverted.
+    clean = lambda cmd, **kw: subprocess.CompletedProcess(cmd, 0, stdout="", stderr="")
+    from runner import manifest
+    assert manifest.worktree_dirty("/repo", runner=clean) is False
+
+
+def test_unreadable_git_state_is_dirty_not_clean():
+    from runner import manifest
+
+    def boom(cmd, **kw):
+        raise OSError("no git")
+
+    assert manifest.worktree_dirty("/repo", runner=boom) is True
+    fail = lambda cmd, **kw: subprocess.CompletedProcess(cmd, 128, stdout="", stderr="not a repo")
+    assert manifest.worktree_dirty("/repo", runner=fail) is True

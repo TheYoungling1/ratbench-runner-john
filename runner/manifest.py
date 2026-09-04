@@ -27,6 +27,27 @@ def update_status(out_dir: str, status: str) -> None:
         json.dump(data, f, indent=2, sort_keys=True)
 
 
+def worktree_dirty(path: str | None = None, runner=subprocess.run) -> bool:
+    """True when the harness tree has uncommitted changes to TRACKED files.
+
+    `dirty` used to be hardcoded False, so every run claimed a clean tree and `harness_commit`
+    named a commit that need not contain the code that produced the rows. That is the one
+    provenance field whose whole job is telling a future reader whether the recorded commit
+    describes the run — a constant False is worse than no field at all.
+
+    Untracked files are deliberately NOT dirt: runs/, scratch datasets and editor droppings live
+    in the tree constantly and would pin every run to dirty=True, which is the same lie inverted.
+    Unreadable git state answers True, since "cannot prove clean" is not "clean".
+    """
+    root = path or os.environ.get("REPO_ROOT") or os.getcwd()
+    try:
+        r = runner(["git", "-C", root, "status", "--porcelain", "--untracked-files=no"],
+                   capture_output=True, text=True, timeout=30)
+    except Exception:                    # noqa: BLE001 — provenance must not sink a run
+        return True
+    return bool(r.stdout.strip()) if r.returncode == 0 else True
+
+
 def manifest_fields_from_env(*, model: str, tier: str, num_turn,
                              concurrency, status: str,
                              sweagent_commit: str | None = None,
@@ -43,7 +64,7 @@ def manifest_fields_from_env(*, model: str, tier: str, num_turn,
         agent_branch=os.environ.get("RUN_AGENT_BRANCH", ""),
         agent_commit=os.environ.get("AGENT_COMMIT", ""),
         harness_commit=os.environ.get("HARNESS_COMMIT", ""),
-        dirty=False,
+        dirty=worktree_dirty(),
         model=model,
         tier=tier,
         num_turn=num_turn,

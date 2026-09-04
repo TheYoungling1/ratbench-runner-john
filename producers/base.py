@@ -332,5 +332,9 @@ def write_env_packet(out_root: str, env: ProducedEnv) -> str:
         # Leaked DeepSeek DSML markup in the agent's prose. Harmless to the harness (the
         # tool protocol is typed), but a turn spent on a command that never ran.
         "dsml_text_blocks": economy.get("dsml_text_blocks"),
+        # Why the agent stopped. A capped run is not a finished one, and turns_used alone
+        # cannot say which without knowing the run's cap.
+        "turn_capped": economy.get("turn_capped"),
+        "agent_timed_out": economy.get("agent_timed_out"),
     }, indent=2))
     return repo_dir

@@ -36,7 +36,7 @@ def _ensure_test_runner(dockerfile: str, language: str) -> str:
 
 
 def _capture_claude_stream(claude_cmd: list, timeout, stdin_text: str | None = None,
-                           max_turns: int | None = None) -> tuple:
+                           max_turns: int | None = None, outcome: dict | None = None) -> tuple:
     """Run the Claude Code CLI and return its ``(stdout, stderr)`` as text.
 
     ``stdin_text`` carries the PROMPT. It is fed on stdin rather than as an argv operand because
@@ -57,6 +57,13 @@ def _capture_claude_stream(claude_cmd: list, timeout, stdin_text: str | None = N
         # The capped path streams the events instead of buffering them, so it can stop the agent
         # on the Nth LLM call. Same (stdout, stderr) contract; the wall is enforced there too.
         res = run_claude_capped(claude_cmd, timeout, stdin_text=stdin_text, max_turns=max_turns)
+        if outcome is not None:
+            # WHY the agent stopped, which the (stdout, stderr) contract cannot carry. Without it a
+            # capped run and a finished one are indistinguishable on the row, and the repos that
+            # hit the cap are exactly the ones whose numbers need the caveat.
+            outcome["turns"] = res["turns"]
+            outcome["turn_capped"] = bool(max_turns and res["turns"] >= max_turns)
+            outcome["timed_out"] = res["timed_out"]
         return res["stdout"], res["stderr"]
     try:
         proc = subprocess.run(claude_cmd, capture_output=True, text=True, timeout=timeout,
@@ -69,7 +76,7 @@ def _capture_claude_stream(claude_cmd: list, timeout, stdin_text: str | None = N
 
 
 def _persist_stream(out_dir: str, stdout: str, stderr: str, model: str = "",
-                    base_url: str = "") -> dict:
+                    base_url: str = "", outcome: dict | None = None) -> dict:
     """Write the agent's raw event stream + a readable action log under the repo's packet dir,
     and return the economy dict `write_env_packet` consumes.
 
@@ -110,6 +117,9 @@ def _persist_stream(out_dir: str, stdout: str, stderr: str, model: str = "",
         "turns_used": info["llm_calls"], "cost_usd": cost, "usage_source": source,
         "tool_calls": info["tool_calls"], "agent_is_error": info["is_error"],
         "dsml_text_blocks": info["dsml_text_blocks"],
+        # Parity with the live lane's agent_turn_capped / agent_timed_out.
+        "turn_capped": (outcome or {}).get("turn_capped"),
+        "agent_timed_out": (outcome or {}).get("timed_out"),
         "rate_limited": info["rate_limited"],
     }
 
@@ -195,8 +205,9 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
             # run can be priced (see summarize_stream).
             "--output-format", "stream-json", "--verbose", "--include-partial-messages",
         ]
+        outcome: dict = {}
         stdout, stderr = _capture_claude_stream(claude_cmd, ctx.timeout, prompt,
-                                                max_turns=ctx.num_turn)
+                                                max_turns=ctx.num_turn, outcome=outcome)
         # The cap and the wall both kill the docker exec client only; the agent keeps
         # mutating /testbed unless it is stopped inside the container BEFORE the copy.
         stop_agent(container)
@@ -215,7 +226,7 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
         # Persisted AFTER the Dockerfile is in hand, so telemetry sits downstream of the
         # deliverable on every path (belt-and-braces with _persist_stream's own total guard).
         economy = _persist_stream(out_dir, stdout, stderr, _normalize_model(llm),
-                                  auth.get("ANTHROPIC_BASE_URL", ""))
+                                  auth.get("ANTHROPIC_BASE_URL", ""), outcome)
         return {"dockerfile": text or None, "base_image": base_image, "economy": economy}
     finally:
         subprocess.run(f"docker rm -f {container} >/dev/null 2>&1", shell=True)

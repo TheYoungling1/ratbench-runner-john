@@ -148,7 +148,29 @@ def agent_env() -> dict:
     base = env.get("ANTHROPIC_BASE_URL", "")
     if base and not any(host in base for host in _ANTHROPIC_HOSTS):
         env.pop("CLAUDE_CODE_OAUTH_TOKEN", None)
+    env.update(inference_env())
     return env
+
+
+def inference_env() -> dict:
+    """Inference settings forwarded into the container, matching sweagent_repo2run.
+
+    That arm pins `thinking: {type: disabled}` (its config explains why: the paper's baselines ran
+    on a non-reasoning model, so leaving reasoning on makes it a materially stronger agent than the
+    one being reproduced). Same weights in two inference modes is a model difference dressed up as
+    an agent difference, so this lane matches it.
+
+    MEASURED, because the CLI exposes no flag for it: `--effort low|medium|high|max` all put the
+    same `thinking: {"type": "adaptive", "display": "omitted"}` on the wire, while
+    MAX_THINKING_TOKENS=0 puts `{"type": "disabled"}` there — which DeepSeek's bridge honours
+    (thinking blocks disappear; 237 -> 164 output tokens on one probe).
+
+    NOT matched: temperature. sweagent_repo2run pins 0.2 and Claude Code sends no temperature field
+    at all, so the endpoint's default applies. Nothing short of rewriting the request body can
+    change that; it is recorded per run rather than silently ignored.
+    """
+    mode = (os.environ.get("CLAUDE_THINKING") or "disabled").strip().lower()
+    return {} if mode == "enabled" else {"MAX_THINKING_TOKENS": "0"}
 
 
 def has_auth(env: dict) -> bool:
@@ -329,15 +351,23 @@ class LangProfile:
     test_runner: Optional[tuple] = None
 
 
+# Collection-only, matching producers/sweagent_repo2run_config.yaml (see the note on
+# runner/live/claudecode.py::SETUP_PROMPT for the alignment and its two deviations). The quoted
+# command is this harness's gate, rat/libkit/tools/run_pytest_collect.py.
+#
+# CHANGING THIS TEXT RE-BASELINES THE ARM: the Node prompt's comment records that a live python50
+# run is scored against the exact Python text, so results produced before this edit are not
+# comparable with results produced after it.
 _PYTHON_PROMPT = (
-    "You are configuring a Python repository at /testbed so its EXISTING test suite can "
-    "run, and then writing a Dockerfile that reproduces your setup from scratch.\n\n"
+    "You are configuring a Python repository at /testbed so its EXISTING test suite can be "
+    "COLLECTED, and then writing a Dockerfile that reproduces your setup from scratch.\n\n"
     "First, install ALL Python dependencies and any required system packages so that "
-    "pytest can collect and run the tests. Install into the SYSTEM Python using "
-    "`sudo pip install ...` and `sudo apt-get install -y ...` for system libraries — do "
-    "NOT create a virtualenv (the grader runs the system python3). You may edit "
-    "configuration files. DO NOT modify, add, or delete any test files. DO NOT run the "
-    "test suite yourself.\n\n"
+    "`python -m pytest --co -q` runs without errors — that is the exact command the grader "
+    "runs. Install into the SYSTEM Python using `sudo pip install ...` and "
+    "`sudo apt-get install -y ...` for system libraries — do NOT create a virtualenv (the "
+    "grader runs the system python3). You may edit configuration files. DO NOT modify, add, "
+    "or delete any test files. Verify your work by running `python -m pytest --co -q` "
+    "yourself; do NOT run the test suite itself.\n\n"
     "Then write a self-contained Dockerfile to {gen_path} that reproduces this environment "
     "FROM A CLEAN BASE. It MUST:\n"
     "  - start `FROM {base}`;\n"

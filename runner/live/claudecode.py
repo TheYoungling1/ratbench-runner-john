@@ -42,16 +42,27 @@ PYTEST_TIMEOUT = int(os.environ.get("RAT_PYTEST_TIMEOUT", "1800"))
 PYTEST_RESERVE = int(os.environ.get("CLAUDE_PYTEST_RESERVE", "600"))
 W = "/testbed"
 
+# Aligned with producers/sweagent_repo2run_config.yaml, which targets COLLECTION only ("Ensure
+# `pytest /repo --collect-only -q` runs without errors"), so the two arms are asked for the same
+# outcome. The command quoted below is this harness's own gate — rat/libkit/tools/
+# run_pytest_collect.py runs `python -m pytest --co -q` — because a prompt must name what the
+# grader actually runs rather than paraphrase another arm's path.
+#
+# Two deliberate deviations from that config: the test-file prohibition stays (without it an agent
+# can delete what it cannot fix), and verification is limited to the collect command rather than
+# the full suite, which is what the goal is now scored on.
+#
+# NOTE: bench still scores ESSR (a pass rate) for this lane, which collection alone does not
+# target. That mismatch is inherited from the baseline being matched, not introduced here.
 SETUP_PROMPT = (
-    "You are configuring a Python repository so its EXISTING test suite can run. "
-    "The repository is at /testbed (your working directory). "
-    "Install ALL Python dependencies and any required system packages so that pytest "
-    "can collect and run the tests. Install packages into the SYSTEM Python using "
-    "`sudo pip install ...` and use `sudo apt-get install -y ...` for system libraries "
-    "— do NOT create a virtualenv (the grader runs the system python3). "
-    "You may edit configuration files and create files. "
-    "DO NOT modify, add, or delete any test files. DO NOT run the test suite yourself. "
-    "When the environment is ready, stop."
+    "You are configuring a Python repository so its EXISTING test suite can be COLLECTED. The "
+    "repository is at /testbed (your working directory). Install ALL Python dependencies and any "
+    "required system packages so that `python -m pytest --co -q` runs without errors — that is "
+    "the exact command the grader runs. Install packages into the SYSTEM Python using `sudo pip "
+    "install ...` and use `sudo apt-get install -y ...` for system libraries — do NOT create a "
+    "virtualenv (the grader runs the system python3). You may edit configuration files and create "
+    "files. DO NOT modify, add, or delete any test files. Verify your work by running `python -m "
+    "pytest --co -q` yourself; do NOT run the test suite itself. When collection is clean, stop."
 )
 
 # The Claude Code CLI accepts model aliases (sonnet/opus/haiku) or full IDs.
