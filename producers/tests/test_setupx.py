@@ -828,3 +828,47 @@ def test_child_env_lands_setupxs_own_log_beside_the_rest_of_the_repos_artifacts(
     monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-test")
     env = child_env("deepseek/deepseek-v4-flash", "setupx-mirror:o__r", "o__r_123", 100, _LOG_DIR)
     assert env["LOG_DIR"] == _LOG_DIR
+
+
+def test_a_dsn_urlsplit_cannot_parse_does_not_vanish_the_row(tmp_path, monkeypatch):
+    # urlsplit raises ValueError on an unclosed IPv6 bracket. _xpu_store runs above every try in
+    # agent_settings, which runs above produce()'s try, and runner/benchmark.py calls
+    # `prod.produce(...)` unwrapped on the strength of "producer is anti-vanish (never raises)" —
+    # so this escaping means write_env_packet never runs and the repo produces NO packet at all.
+    def stub(repo, ctx, *, llm, num_turn):
+        raise RuntimeError("would not get this far")
+
+    monkeypatch.setenv("SETUPX_DB_DSN", "postgresql://u:hunter2@[::1:5433/db")
+    env = SetupXProducer(runner=stub).produce(_repo(), _ctx(tmp_path))
+    assert env.status == "error"                      # an honest row, not a missing one
+    assert env.agent_settings["xpu"] == "on"
+    assert "xpu_store" not in env.agent_settings
+    assert "hunter2" not in json.dumps(env.agent_settings)
+
+
+def test_a_netloc_that_normalizes_into_a_delimiter_is_also_survivable(tmp_path, monkeypatch):
+    # The other urlsplit ValueError: NFKC folding a full-width character into /?#@: .
+    from producers.setupx import agent_settings
+    monkeypatch.setenv("SETUPX_DB_DSN", "postgresql://ho＃st/xpu_run")
+    settings = agent_settings(ProduceContext(llm=None, workdir=str(tmp_path)), 100)
+    assert settings["xpu"] == "on"
+    assert "xpu_store" not in settings
+
+
+def test_a_checkout_vendored_inside_another_repo_reports_no_commit(tmp_path):
+    # `git rev-parse HEAD` WALKS UP. Recording the parent repo's HEAD would be a wrong 40-hex
+    # value that reads as authoritative — worse, for provenance, than omitting the key.
+    import subprocess
+    from producers.setupx import agent_settings
+    parent = tmp_path / "parent"
+    parent.mkdir()
+    subprocess.run(["git", "-C", str(parent), "init", "-q"], check=True, capture_output=True)
+    (parent / "seed").write_text("x\n")
+    subprocess.run(["git", "-C", str(parent), "add", "-A"], check=True, capture_output=True)
+    subprocess.run(["git", "-C", str(parent), "-c", "user.email=t@t", "-c", "user.name=t",
+                    "commit", "-qm", "x"], check=True, capture_output=True)
+    root = _fake_checkout(parent / "vendor" / "SetupX")      # no .git of its own
+    ctx = ProduceContext(llm=None, workdir=str(tmp_path), agent_root=root)
+    settings = agent_settings(ctx, 100)
+    assert settings["setupx_patched"] is True
+    assert "setupx_commit" not in settings

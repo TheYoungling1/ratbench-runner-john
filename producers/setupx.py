@@ -179,7 +179,15 @@ def _xpu_store(dsn: str) -> str:
     into issues, so the DSN itself must never reach it — the store's identity is all an analyst
     needs to tell two XPU corpora apart.
     """
-    parts = urlsplit(dsn)
+    try:
+        parts = urlsplit(dsn)
+    except ValueError:
+        # urlsplit is NOT total: an unclosed IPv6 bracket ("@[::1:5433/db") and a netloc that
+        # NFKC-normalizes into /?#@: both raise. This function is called above every try in
+        # agent_settings, which is itself called above produce()'s try, and benchmark.py's
+        # `prod.produce(...)` is unwrapped on the strength of "producer is anti-vanish (never
+        # raises)" — so a ValueError here would vanish the row instead of recording an error one.
+        return ""
     # A keyword-style DSN ("dbname=xpu_run password=hunter2") has no scheme/netloc and urlsplit
     # hands the WHOLE string back as the path — password included. Require a URL, then require the
     # result to be a bare identifier; anything else is dropped rather than risked.
@@ -216,13 +224,19 @@ def agent_settings(ctx: ProduceContext, num_turn: int) -> dict:
         return settings
     settings["setupx_patched"] = True
     try:
-        out = subprocess.run(["git", "-C", root, "rev-parse", "HEAD"],
-                             capture_output=True, text=True, timeout=30)
-        commit = (out.stdout or "").strip() if out.returncode == 0 else ""
+        # --show-toplevel alongside HEAD, in one call: rev-parse WALKS UP, so a checkout vendored
+        # inside another repo would otherwise report the PARENT's HEAD — a wrong 40-hex value that
+        # reads as authoritative, which for a provenance field is worse than no value at all.
+        # 5s, not 30: this runs per repo and a local rev-parse takes milliseconds.
+        out = subprocess.run(["git", "-C", root, "rev-parse", "--show-toplevel", "HEAD"],
+                             capture_output=True, text=True, timeout=5)
+        top, _, commit = (out.stdout or "").partition("\n")
+        if out.returncode != 0 or os.path.realpath(top.strip()) != os.path.realpath(root):
+            commit = ""
     except Exception:                        # noqa: BLE001 — a checkout with no .git still runs
         commit = ""
-    if commit:
-        settings["setupx_commit"] = commit
+    if commit.strip():
+        settings["setupx_commit"] = commit.strip()
     return settings
 
 

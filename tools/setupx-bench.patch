@@ -78,7 +78,7 @@ index 261da70..4bce67a 100644
                  logger.debug(f"removed snapshot image: {tag}")
              except DockerException as e:
 diff --git a/src/llm_engine.py b/src/llm_engine.py
-index 8b1b5db..d79bd11 100644
+index 8b1b5db..03dc7c5 100644
 --- a/src/llm_engine.py
 +++ b/src/llm_engine.py
 @@ -16,6 +16,7 @@ Module layout:
@@ -89,7 +89,7 @@ index 8b1b5db..d79bd11 100644
  import re
  from abc import ABC, abstractmethod
  from typing import Any
-@@ -53,6 +54,79 @@ class LLMClientBase(ABC):
+@@ -53,6 +54,83 @@ class LLMClientBase(ABC):
          pass
  
  
@@ -156,20 +156,24 @@ index 8b1b5db..d79bd11 100644
 +    This is telemetry wrapped around a paid-for run: a provider that omits the block, renames a
 +    field, or returns a string where an int belongs must cost a token count, not the repo. Every
 +    value is coerced independently, and whatever will not coerce is skipped.
++
++    The guard is `except Exception`, not `(TypeError, ValueError)`: json.loads accepts the
++    non-standard `Infinity` literal by default, and int(float("inf")) raises OverflowError, which
++    a narrower guard would let escape from inside chat() and kill the run.
 +    """
 +    if not isinstance(usage, dict):
 +        return
 +    for key in _llm_usage:
 +        try:
 +            _llm_usage[key] += int(usage.get(key) or 0)
-+        except (TypeError, ValueError):
++        except Exception:                # noqa: BLE001 — see the docstring; NEVER means never
 +            continue
 +
 +
  class ARKClient(LLMClientBase):
      """ARK API client.
  
-@@ -66,6 +140,7 @@ class ARKClient(LLMClientBase):
+@@ -66,6 +144,7 @@ class ARKClient(LLMClientBase):
          self._client = httpx.Client(timeout=300)
  
      def chat(self, messages: list[dict], json_mode: bool = False) -> str:
@@ -177,7 +181,7 @@ index 8b1b5db..d79bd11 100644
          headers = {
              "Authorization": f"Bearer {self._config.api_key}",
              "Content-Type": "application/json",
-@@ -87,6 +162,7 @@ class ARKClient(LLMClientBase):
+@@ -87,6 +166,7 @@ class ARKClient(LLMClientBase):
          response.raise_for_status()
  
          data = response.json()
@@ -185,7 +189,7 @@ index 8b1b5db..d79bd11 100644
          return data["choices"][0]["message"]["content"]
  
      def close(self) -> None:
-@@ -116,6 +192,7 @@ class OpenAICompatibleClient(LLMClientBase):
+@@ -116,6 +196,7 @@ class OpenAICompatibleClient(LLMClientBase):
          2. <think> stripping: qwen-style models embed reasoning in `content`
             (`<think>...</think>actual output`); strip the reasoning block.
          """
@@ -193,7 +197,7 @@ index 8b1b5db..d79bd11 100644
          headers = {
              "Authorization": f"Bearer {self._config.api_key}",
              "Content-Type": "application/json",
-@@ -138,6 +215,7 @@ class OpenAICompatibleClient(LLMClientBase):
+@@ -138,6 +219,7 @@ class OpenAICompatibleClient(LLMClientBase):
          response.raise_for_status()
  
          data = response.json()
