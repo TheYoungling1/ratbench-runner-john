@@ -325,5 +325,9 @@ def write_env_packet(out_root: str, env: ProducedEnv) -> str:
         "produce_s": economy.get("produce_s"),
         "total_tokens": economy.get("total_tokens"),
         "cost_usd": economy.get("cost_usd"),
+        # How cost_usd was arrived at: "computed" (priced from captured billing inputs),
+        # "cli" (the agent's own figure), "table", or None. A cost with no provenance
+        # cannot be pooled across arms that price by different routes.
+        "usage_source": economy.get("usage_source"),
     }, indent=2))
     return repo_dir

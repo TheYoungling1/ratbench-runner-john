@@ -68,7 +68,8 @@ def _capture_claude_stream(claude_cmd: list, timeout, stdin_text: str | None = N
         return _as_text(exc.stdout), _as_text(exc.stderr)
 
 
-def _persist_stream(out_dir: str, stdout: str, stderr: str) -> dict:
+def _persist_stream(out_dir: str, stdout: str, stderr: str, model: str = "",
+                    base_url: str = "") -> dict:
     """Write the agent's raw event stream + a readable action log under the repo's packet dir,
     and return the economy dict `write_env_packet` consumes.
 
@@ -83,7 +84,7 @@ def _persist_stream(out_dir: str, stdout: str, stderr: str) -> dict:
     is NOT an OSError, so a narrow guard lets it escape and `produce()`'s outer handler downgrades
     a successful, already-paid-for run to status="error". Telemetry must never be able to do that.
     """
-    from producers._claudecode_helpers import summarize_stream   # stdlib-only, no RAT tree
+    from producers._claudecode_helpers import settled_cost, summarize_stream  # stdlib, no RAT
     info = summarize_stream(stdout)
     try:
         os.makedirs(out_dir, exist_ok=True)
@@ -98,6 +99,7 @@ def _persist_stream(out_dir: str, stdout: str, stderr: str) -> dict:
         # Loud enough to debug a missing trajectory (this lands in the per-repo run.log), but
         # never fatal.
         print(f"[ccdf] telemetry persist failed for {out_dir}: {exc!r}", flush=True)
+    cost, source = settled_cost(info, model, base_url)
     return {
         "tokens_in": info["tokens_in"], "tokens_out": info["tokens_out"],
         "total_tokens": info["total_tokens"], "llm_calls": info["llm_calls"],
@@ -105,7 +107,7 @@ def _persist_stream(out_dir: str, stdout: str, stderr: str) -> dict:
         # (info["turns"]): that counts user+assistant, and only a run reaching its final
         # `result` event has one — a capped or walled run would report None and read as
         # converged to bench.verdict.
-        "turns_used": info["llm_calls"], "cost_usd": info["cost_usd"],
+        "turns_used": info["llm_calls"], "cost_usd": cost, "usage_source": source,
         "tool_calls": info["tool_calls"], "agent_is_error": info["is_error"],
         "rate_limited": info["rate_limited"],
     }
@@ -128,7 +130,7 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
     # runner package or RAT model modules (dependency direction: producers must not depend
     # on the runner).
     from producers._claudecode_helpers import (
-        W, AUTH_KEYS, ENV_KEYS, _normalize_model, build_prompt, get_profile, resolve_base,
+        W, agent_env, budget_flags, has_auth, _normalize_model, build_prompt, get_profile, resolve_base,
         stop_agent,
         resolve_workbench, DOCKERFILE_GEN_PATH,
     )
@@ -149,9 +151,11 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
     # asked to set up a Rust or Java repo inside it has no cargo and no JDK, so it cannot run the
     # gate it is being scored on. CLAUDE_RUNNER_IMAGE remains a global override.
     base_image = resolve_workbench(profile, os.environ.get("CLAUDE_RUNNER_IMAGE"))
-    if not any(os.environ.get(k) for k in AUTH_KEYS):
-        raise RuntimeError("set CLAUDE_CODE_OAUTH_TOKEN or ANTHROPIC_API_KEY")
-    auth = {k: os.environ[k] for k in ENV_KEYS if os.environ.get(k)}
+    auth = agent_env()
+    if not has_auth(auth):
+        raise RuntimeError("set CLAUDE_CODE_OAUTH_TOKEN, or ANTHROPIC_API_KEY / "
+                           "ANTHROPIC_AUTH_TOKEN (required when ANTHROPIC_BASE_URL is not "
+                           "Anthropic — an OAuth token is never sent to a third party)")
 
     root_path = ctx.workdir
     full_name = repo.full_name
@@ -178,7 +182,6 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
                        check=True, timeout=120)
 
         prompt = build_prompt(full_name, dockerfile_base, profile)
-        max_budget = os.environ.get("CLAUDE_MAX_BUDGET_USD", "2.0")
         # `-i` keeps stdin attached and `-p` is left flag-only, so the CLI reads the prompt from
         # the pipe. The prompt must NOT be an argv operand: it would then appear in the container's
         # process table, where the agent's own `pkill -f "<something the prompt says>"` matches and
@@ -186,7 +189,7 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
         claude_cmd = [
             "docker", "exec", "-i", "-u", "agent", "-w", W, container,
             "claude", "-p", "--permission-mode", "bypassPermissions",
-            "--max-budget-usd", str(max_budget), "--model", _normalize_model(llm),
+            *budget_flags(), "--model", _normalize_model(llm),
             "--output-format", "stream-json", "--verbose",
         ]
         stdout, stderr = _capture_claude_stream(claude_cmd, ctx.timeout, prompt,
@@ -208,7 +211,8 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
             text = ""
         # Persisted AFTER the Dockerfile is in hand, so telemetry sits downstream of the
         # deliverable on every path (belt-and-braces with _persist_stream's own total guard).
-        economy = _persist_stream(out_dir, stdout, stderr)
+        economy = _persist_stream(out_dir, stdout, stderr, _normalize_model(llm),
+                                  auth.get("ANTHROPIC_BASE_URL", ""))
         return {"dockerfile": text or None, "base_image": base_image, "economy": economy}
     finally:
         subprocess.run(f"docker rm -f {container} >/dev/null 2>&1", shell=True)

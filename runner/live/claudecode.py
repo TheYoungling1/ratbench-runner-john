@@ -29,7 +29,9 @@ sys.path[:0] = [RAT_ROOT]
 from libkit.command import init_output_and_repo, download_repo   # RAT repo
 from eval.common.base_model import BaseEvalModel                 # RAT repo
 from eval.common.utils import TimeoutException                   # RAT repo
-from producers._claudecode_helpers import run_claude_capped, stop_agent  # noqa: E402
+from producers._claudecode_helpers import (                             # noqa: E402
+    agent_env, budget_flags, has_auth, run_claude_capped, settled_cost, stop_agent,
+)
 
 RP = f"{RAT_ROOT}/libkit/tools/run_pytest.py"
 RPC = f"{RAT_ROOT}/libkit/tools/run_pytest_collect.py"
@@ -38,12 +40,6 @@ PYTEST_TIMEOUT = int(os.environ.get("RAT_PYTEST_TIMEOUT", "1800"))
 # by PYTEST_TIMEOUT (a cap, not an expected duration). Override via env.
 PYTEST_RESERVE = int(os.environ.get("CLAUDE_PYTEST_RESERVE", "600"))
 W = "/testbed"
-AUTH_KEYS = ("CLAUDE_CODE_OAUTH_TOKEN", "ANTHROPIC_API_KEY")
-# Env forwarded into the workbench container. ANTHROPIC_BASE_URL points the CLI at an
-# Anthropic-COMPATIBLE third-party endpoint (e.g. https://api.deepseek.com/anthropic, which maps
-# sonnet/haiku -> deepseek-v4-flash), so the Claude Code lanes can run the same LLM as the other
-# varieties. Auth still comes from AUTH_KEYS (there, ANTHROPIC_API_KEY = the DeepSeek key).
-ENV_KEYS = AUTH_KEYS + ("ANTHROPIC_BASE_URL",)
 
 SETUP_PROMPT = (
     "You are configuring a Python repository so its EXISTING test suite can run. "
@@ -161,10 +157,15 @@ class ClaudeCodeModel(BaseEvalModel):
         ok = {"root_path": self.root_path, "full_name": full_name}
         meta = {"requested_model": self.llm, "base_image": self.base_image}
 
-        auth = {k: os.environ[k] for k in ENV_KEYS if os.environ.get(k)}
-        if not any(os.environ.get(k) for k in AUTH_KEYS):
+        # ANTHROPIC_BASE_URL (e.g. https://api.deepseek.com/anthropic) rides along so this lane
+        # can run the same LLM as the other varieties; an OAuth token is never sent to a
+        # third-party endpoint, so a redirected run must carry that provider's key.
+        auth = agent_env()
+        if not has_auth(auth):
             return {"status": "error", "failure_reason": "no_auth",
-                    "error": "set CLAUDE_CODE_OAUTH_TOKEN or ANTHROPIC_API_KEY", **ok, **meta}
+                    "error": "set CLAUDE_CODE_OAUTH_TOKEN, or ANTHROPIC_API_KEY / "
+                             "ANTHROPIC_AUTH_TOKEN for a non-Anthropic ANTHROPIC_BASE_URL",
+                    **ok, **meta}
 
         try:
             try:
@@ -192,14 +193,14 @@ class ClaudeCodeModel(BaseEvalModel):
 
                 # 2) Run Claude Code as the autonomous setup agent (non-root `agent`).
                 model = _normalize_model(self.llm)
-                # The CLI has no turn flag (2.1.258 ships only --max-budget-usd), so the spend
-                # cap below is a backstop and `num_turn` is enforced by run_claude_capped.
-                max_budget = os.environ.get("CLAUDE_MAX_BUDGET_USD", "2.0")
+                # The CLI has no turn flag (2.1.258 ships only --max-budget-usd), so `num_turn` is
+                # enforced by run_claude_capped. See _claudecode_helpers.budget_flags for why the
+                # dollar cap is opt-in rather than defaulted.
                 claude_cmd = [
                     "docker", "exec", "-u", "agent", "-w", W, container,
                     "claude", "-p", SETUP_PROMPT,
                     "--permission-mode", "bypassPermissions",
-                    "--max-budget-usd", str(max_budget),
+                    *budget_flags(),
                     "--model", model,
                     # Emit the full agentic event stream so each experiment records the
                     # agent's actual actions (tool calls). stream-json requires --verbose.
@@ -224,9 +225,20 @@ class ClaudeCodeModel(BaseEvalModel):
                 # Whatever stopped it, the agent is still alive INSIDE the container (only the
                 # docker exec client was killed) and pytest runs there next — stop it first.
                 stop_agent(container)
+                if res["turns"] == 0:
+                    # No `assistant` event at all: bad key, bad base URL, or an image without the
+                    # CLI. The container is untouched, so scoring it would publish a zero-effort
+                    # env as a measured result — the old num_turns reported None here, which no
+                    # longer distinguishes itself from a real count.
+                    self._write_agent_logs(out_dir, agent_stdout, agent_stderr, meta,
+                                           model, auth.get("ANTHROPIC_BASE_URL", ""))
+                    return {"status": "error", "failure_reason": "agent_no_llm_calls",
+                            "error": (agent_stderr or "claude emitted no assistant events")[:500],
+                            **ok, **meta}
                 # Persist raw stream + readable action log + metrics (handles the
                 # partial/timed-out stream too).
-                self._write_agent_logs(out_dir, agent_stdout, agent_stderr, meta)
+                self._write_agent_logs(out_dir, agent_stdout, agent_stderr, meta,
+                                       model, auth.get("ANTHROPIC_BASE_URL", ""))
                 self._check_timeout(start, "agent")
 
                 # 3) Run RAT's pytest tools at /testbed; copy result JSONs out.
@@ -270,7 +282,8 @@ class ClaudeCodeModel(BaseEvalModel):
             subprocess.run(f"docker rm -f {container} >/dev/null 2>&1", shell=True)
             raise
 
-    def _write_agent_logs(self, out_dir: str, stdout: str, stderr: str, meta: dict) -> None:
+    def _write_agent_logs(self, out_dir: str, stdout: str, stderr: str, meta: dict,
+                          model: str = "", base_url: str = "") -> None:
         """Persist the raw event stream + a readable action log + final summary, and
         lift a few per-experiment metrics (turns/cost/rate-limit) into `meta`. Best-effort."""
         try:
@@ -283,7 +296,11 @@ class ClaudeCodeModel(BaseEvalModel):
                 f.write(summ["actions"] or "(no parsed actions)")
             with open(f"{out_dir}/claude_final.txt", "w") as f:
                 f.write(summ["final_text"])
-            meta["agent_cost_usd"] = summ["info"]["cost_usd"]
+            # The CLI's total_cost_usd is Anthropic-priced whatever the base URL says;
+            # settled_cost recomputes it from the captured cache split on DeepSeek.
+            cost, source = settled_cost(summ["info"], model, base_url)
+            meta["agent_cost_usd"] = cost
+            meta["agent_usage_source"] = source
             if summ["info"].get("rate_limit_status"):
                 meta["agent_rate_limit_status"] = summ["info"]["rate_limit_status"]
             if summ["info"]["rate_limited"]:
