@@ -31,6 +31,7 @@ from eval.common.base_model import BaseEvalModel                 # RAT repo
 from eval.common.utils import TimeoutException                   # RAT repo
 from producers._claudecode_helpers import (                             # noqa: E402
     agent_env, budget_flags, has_auth, run_claude_capped, settled_cost, stop_agent,
+    summarize_stream,
 )
 
 RP = f"{RAT_ROOT}/libkit/tools/run_pytest.py"
@@ -67,80 +68,19 @@ def _normalize_model(llm: str) -> str:
     return "sonnet"
 
 
-def _tool_input_summary(name: str, inp) -> str:
-    """One-line summary of a tool_use input for the readable action log."""
-    if not isinstance(inp, dict):
-        return str(inp)[:300]
-    if name == "Bash":
-        return (inp.get("command") or "").strip()[:400]
-    for k in ("file_path", "path", "pattern", "url", "notebook_path", "command"):
-        if inp.get(k):
-            return f"{k}={inp[k]}"
-    return json.dumps(inp)[:300]
-
-
-def _flatten_tool_result(res) -> str:
-    """tool_result content may be a str or a list of {type:text,text:...} blocks."""
-    if isinstance(res, str):
-        out = res
-    elif isinstance(res, list):
-        out = " ".join((b.get("text") or "") if isinstance(b, dict) else str(b) for b in res)
-    else:
-        out = str(res)
-    return " ".join(out.split())
-
-
-def _summarize_stream(stream_text: str) -> dict:
-    """Parse claude `--output-format stream-json` (one JSON object per line) into a
-    readable action log, the final result text, and a few metrics. Tolerant of
-    partial/truncated streams (timed-out runs) — malformed lines are skipped."""
-    actions = []
-    final_text = ""
-    info = {"turns": None, "cost_usd": None, "is_error": None, "rate_limited": False,
-            "rate_limit_status": None, "tools_used": []}
-    step = 0
-    for raw in stream_text.splitlines():
-        raw = raw.strip()
-        if not raw:
-            continue
+def _final_text(stream_text: str) -> str:
+    """The agent's closing message, which only the final `result` event carries (so: empty on a
+    capped or walled run). Everything else about the stream is parsed by the SHARED
+    summarize_stream — this lane used to keep its own copy of that parser, and the copy silently
+    fell behind, which is why a run could report usage_source="computed" with no cost."""
+    for raw in (stream_text or "").splitlines():
         try:
             obj = json.loads(raw)
-        except Exception:
+        except Exception:            # noqa: BLE001 — partial streams are expected
             continue
-        t = obj.get("type")
-        if t == "system" and obj.get("subtype") == "init":
-            sid = str(obj.get("session_id", "?"))[:8]
-            actions.append(f"[init] session={sid} cwd={obj.get('cwd', '?')}")
-        elif t == "assistant":
-            for block in (obj.get("message", {}).get("content") or []):
-                bt = block.get("type")
-                if bt == "tool_use":
-                    step += 1
-                    name = block.get("name", "?")
-                    info["tools_used"].append(name)
-                    actions.append(f"[{step}] {name}: {_tool_input_summary(name, block.get('input', {}))}")
-                elif bt == "text":
-                    txt = (block.get("text") or "").strip()
-                    if txt:
-                        actions.append(f"    say: {txt[:240]}")
-        elif t == "user":
-            for block in (obj.get("message", {}).get("content") or []):
-                if block.get("type") == "tool_result":
-                    tag = "ERR" if block.get("is_error") else "ok"
-                    actions.append(f"      -> [{tag}] {_flatten_tool_result(block.get('content'))[:200]}")
-        elif t == "rate_limit_event":
-            rli = obj.get("rate_limit_info") or obj
-            status = str(rli.get("status", ""))
-            info["rate_limit_status"] = status
-            if status and status != "allowed":  # only flag ACTUAL throttling/rejection
-                info["rate_limited"] = True
-            actions.append(f"[rate-limit] status={status} {json.dumps(rli)[:180]}")
-        elif t == "result":
-            final_text = obj.get("result", "") or ""
-            info["turns"] = obj.get("num_turns")
-            info["cost_usd"] = obj.get("total_cost_usd")
-            info["is_error"] = obj.get("is_error")
-    return {"actions": "\n".join(actions), "final_text": final_text, "info": info}
+        if isinstance(obj, dict) and obj.get("type") == "result":
+            return obj.get("result") or ""
+    return ""
 
 
 class ClaudeCodeModel(BaseEvalModel):
@@ -291,19 +231,20 @@ class ClaudeCodeModel(BaseEvalModel):
                 f.write(stdout)
             with open(f"{out_dir}/claude_stderr.txt", "w") as f:
                 f.write(stderr)
-            summ = _summarize_stream(stdout)
+            info = summarize_stream(stdout)
             with open(f"{out_dir}/claude_actions.log", "w") as f:
-                f.write(summ["actions"] or "(no parsed actions)")
+                f.write(info["actions"] or "(no parsed actions)")
             with open(f"{out_dir}/claude_final.txt", "w") as f:
-                f.write(summ["final_text"])
+                f.write(_final_text(stdout))
             # The CLI's total_cost_usd is Anthropic-priced whatever the base URL says;
             # settled_cost recomputes it from the captured cache split on DeepSeek.
-            cost, source = settled_cost(summ["info"], model, base_url)
+            cost, source = settled_cost(info, model, base_url)
             meta["agent_cost_usd"] = cost
             meta["agent_usage_source"] = source
-            if summ["info"].get("rate_limit_status"):
-                meta["agent_rate_limit_status"] = summ["info"]["rate_limit_status"]
-            if summ["info"]["rate_limited"]:
+            meta["agent_tokens_in"] = info["tokens_in"]
+            meta["agent_tokens_out"] = info["tokens_out"]
+            meta["agent_cache_read_tokens"] = info["cache_read_tokens"]
+            if info["rate_limited"]:
                 meta["agent_rate_limited"] = True
         except Exception:
             pass
