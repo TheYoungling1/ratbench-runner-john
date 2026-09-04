@@ -289,20 +289,35 @@ sleep 5 && docker exec setupx-xpu psql -U postgres -d xpu_warm \
   -c 'CREATE EXTENSION IF NOT EXISTS vector;'
 ```
 
-**Everything from here to the end of the section is untested.** The import needs an embeddings key
-that was not available, so the warm-store load, the per-run copy and the XPU-on arm have never been
-run.
+The import is now verified — 600 entries loaded, 0 failed:
 
 ```bash
 # Import the 600 shipped entries. The JSONL carries no vectors — the importer embeds every entry,
 # so this costs one embeddings call per entry and must use the same model the runs query with.
+#
+# scripts/import_xpu_jsonl.py imports the vector store, which triggers src/logger.py's
+# LoggerSetup.setup() -> get_config(), and get_config() validates the *whole* config eagerly —
+# chat credentials included — even though the import only ever calls the embeddings endpoint. The
+# OPENAI_* vars below are therefore required for this embeddings-only import; they are not a
+# copy-paste mistake. They mirror what producers/setupx.py::child_env sets at runtime, and no chat
+# call is made during the import.
 cd ~/agents/SetupX
-EMBEDDING_API_KEY=$OPENROUTER_API_KEY \
+LLM_PROVIDER=openai \
+  OPENAI_API_KEY="$DEEPSEEK_API_KEY" \
+  OPENAI_BASE_URL=https://api.deepseek.com/v1 \
+  OPENAI_MODEL=deepseek-v4-flash \
+  EMBEDDING_API_KEY="$OPENROUTER_API_KEY" \
   EMBEDDING_BASE_URL=https://openrouter.ai/api/v1 \
-  EMBEDDING_MODEL=openai/text-embedding-3-small EMBEDDING_DIM=1536 \
+  EMBEDDING_MODEL=openai/text-embedding-3-small \
+  EMBEDDING_DIM=1536 \
   dns=postgresql://postgres:setupx@localhost:5433/xpu_warm \
   .venv/bin/python scripts/import_xpu_jsonl.py data/xpu_warm.jsonl --clear
 ```
+
+The OpenRouter embeddings endpoint returns HTTP 200 with 1536 dimensions, matching `EMBEDDING_DIM`,
+priced at $0.02/1M — the whole import cost about $0.003. Confirmed in the database: 600 rows,
+`vector_dims=1536`, 593 rows carrying non-empty telemetry (the ranking is telemetry-weighted, so
+that matters).
 
 `xpu_warm` is then the immutable master; nothing ever runs against it again. Take a fresh copy
 **before each benchmark run**:
@@ -315,7 +330,8 @@ export SETUPX_DB_DSN=postgresql://postgres:setupx@localhost:5433/xpu_run
 ```
 
 `CREATE DATABASE … TEMPLATE` is a file-level copy: instant, no re-embedding, and every run starts
-from the same 600 entries. A SELECT-only role is **not** a workable alternative —
+from the same 600 entries — verified: the copy landed 600 rows, and deleting 5 rows from `xpu_run`
+left `xpu_warm` at 600. A SELECT-only role is **not** a workable alternative —
 `XpuVectorStore.__init__` runs CREATE EXTENSION/TABLE/INDEX DDL on every connect, unguarded, so a
 role without those rights kills every repo before Stage 1. Setting `SETUPX_DB_DSN` without
 `EMBEDDING_API_KEY` / `EMBEDDING_BASE_URL` / `EMBEDDING_MODEL` is refused by the producer: every
@@ -323,6 +339,9 @@ retrieval would 404 and be swallowed, leaving an arm that reports as XPU-on whil
 nothing. What the template copy does *not* isolate is writes *within* one run — `XPU_READONLY=1`
 (from the patch) handles that by skipping `_store_xpu_experience`, and `FREEZE_TELEMETRY=1` freezes
 the telemetry counters.
+
+**Still untested: the XPU-on arm itself.** A run against the loaded store has been launched, but
+its result is not yet known.
 
 ## Datasets
 
