@@ -235,55 +235,11 @@ end-to-end signal. The smoke run scored `EBSR 1.0` / `ESSR 1.0`, 19 tests collec
 errors; `_meta.json` showed `status=produced`, `conformance=synthesized`, `unreplayed=false`,
 `llm_calls=101`, `turns_used=25`, `produce_s=3198.77` (~53 min).
 
-**The XPU store — optional, only for the XPU-on arm.** pgvector, verified working:
-
-```bash
-docker pull pgvector/pgvector:pg16          # ~2 min; pull before the run below
-docker run -d --name setupx-xpu -p 5433:5432 \
-  -e POSTGRES_PASSWORD=setupx -e POSTGRES_DB=xpu_warm pgvector/pgvector:pg16
-sleep 5 && docker exec setupx-xpu psql -U postgres -d xpu_warm \
-  -c 'CREATE EXTENSION IF NOT EXISTS vector;'
-```
-
-**Untested below this line.** The import needs an embeddings key that was not available, so the
-warm-store load and everything downstream of it have not been run.
-
-```bash
-# Import the 600 shipped entries. The JSONL carries no vectors — the importer embeds every entry,
-# so this costs one embeddings call per entry and must use the same model the runs query with.
-cd ~/agents/SetupX
-EMBEDDING_API_KEY=$OPENROUTER_API_KEY \
-  EMBEDDING_BASE_URL=https://openrouter.ai/api/v1 \
-  EMBEDDING_MODEL=openai/text-embedding-3-small EMBEDDING_DIM=1536 \
-  dns=postgresql://postgres:setupx@localhost:5433/xpu_warm \
-  .venv/bin/python scripts/import_xpu_jsonl.py data/xpu_warm.jsonl --clear
-```
-
-`xpu_warm` is then the immutable master; nothing ever runs against it again. Take a fresh copy
-**before each benchmark run**:
-
-```bash
-docker exec setupx-xpu psql -U postgres -d postgres -c 'DROP DATABASE IF EXISTS xpu_run;'
-docker exec setupx-xpu psql -U postgres -d postgres \
-  -c 'CREATE DATABASE xpu_run TEMPLATE xpu_warm;'
-export SETUPX_DB_DSN=postgresql://postgres:setupx@localhost:5433/xpu_run
-```
-
-`CREATE DATABASE … TEMPLATE` is a file-level copy: instant, no re-embedding, and every run starts
-from the same 600 entries. A SELECT-only role is **not** a workable alternative —
-`XpuVectorStore.__init__` runs CREATE EXTENSION/TABLE/INDEX DDL on every connect, unguarded, so a
-role without those rights kills every repo before Stage 1. Setting `SETUPX_DB_DSN` without
-`EMBEDDING_API_KEY` / `EMBEDDING_BASE_URL` / `EMBEDDING_MODEL` is refused by the producer: every
-retrieval would 404 and be swallowed, leaving an arm that reports as XPU-on while retrieving
-nothing. What the template copy does *not* isolate is writes *within* one run — `XPU_READONLY=1`
-(from the patch) handles that by skipping `_store_xpu_experience`, and `FREEZE_TELEMETRY=1` freezes
-the telemetry counters.
-
 **Note what is being measured:** SetupX emits no Dockerfile — it mutates a live container and
-writes a JSON report. `producers/setupx.py` replays the surviving `setup.history` (SetupX rolls back to `docker commit`
-checkpoints, so undone work is dropped rather than replayed) onto a clone pinned at the dataset SHA,
-then re-homes `/workspace/repo` to `/testbed`. That makes the row `conformance="synthesized"`, not
-`native` — the same status `executionagent` carries.
+writes a JSON report. `producers/setupx.py` replays the surviving `setup.history` (SetupX rolls
+back to `docker commit` checkpoints, so undone work is dropped rather than replayed) onto a clone
+pinned at the dataset SHA, then re-homes `/workspace/repo` to `/testbed`. That makes the row
+`conformance="synthesized"`, not `native` — the same status `executionagent` carries.
 
 **Two fidelity limits, both surfaced in `_meta.json`:**
 
@@ -322,6 +278,51 @@ configurable. Without it, run at `--concurrency 1`.
 
 **A run prints nothing until it exits.** `run_setupx` captures the child's output rather than
 streaming it, so the 53-minute smoke run was silent throughout. That is not a hang.
+
+**The XPU store — optional, only for the XPU-on arm.** pgvector, verified working:
+
+```bash
+docker pull pgvector/pgvector:pg16          # ~2 min; pull before the run below
+docker run -d --name setupx-xpu -p 5433:5432 \
+  -e POSTGRES_PASSWORD=setupx -e POSTGRES_DB=xpu_warm pgvector/pgvector:pg16
+sleep 5 && docker exec setupx-xpu psql -U postgres -d xpu_warm \
+  -c 'CREATE EXTENSION IF NOT EXISTS vector;'
+```
+
+**Everything from here to the end of the section is untested.** The import needs an embeddings key
+that was not available, so the warm-store load, the per-run copy and the XPU-on arm have never been
+run.
+
+```bash
+# Import the 600 shipped entries. The JSONL carries no vectors — the importer embeds every entry,
+# so this costs one embeddings call per entry and must use the same model the runs query with.
+cd ~/agents/SetupX
+EMBEDDING_API_KEY=$OPENROUTER_API_KEY \
+  EMBEDDING_BASE_URL=https://openrouter.ai/api/v1 \
+  EMBEDDING_MODEL=openai/text-embedding-3-small EMBEDDING_DIM=1536 \
+  dns=postgresql://postgres:setupx@localhost:5433/xpu_warm \
+  .venv/bin/python scripts/import_xpu_jsonl.py data/xpu_warm.jsonl --clear
+```
+
+`xpu_warm` is then the immutable master; nothing ever runs against it again. Take a fresh copy
+**before each benchmark run**:
+
+```bash
+docker exec setupx-xpu psql -U postgres -d postgres -c 'DROP DATABASE IF EXISTS xpu_run;'
+docker exec setupx-xpu psql -U postgres -d postgres \
+  -c 'CREATE DATABASE xpu_run TEMPLATE xpu_warm;'
+export SETUPX_DB_DSN=postgresql://postgres:setupx@localhost:5433/xpu_run
+```
+
+`CREATE DATABASE … TEMPLATE` is a file-level copy: instant, no re-embedding, and every run starts
+from the same 600 entries. A SELECT-only role is **not** a workable alternative —
+`XpuVectorStore.__init__` runs CREATE EXTENSION/TABLE/INDEX DDL on every connect, unguarded, so a
+role without those rights kills every repo before Stage 1. Setting `SETUPX_DB_DSN` without
+`EMBEDDING_API_KEY` / `EMBEDDING_BASE_URL` / `EMBEDDING_MODEL` is refused by the producer: every
+retrieval would 404 and be swallowed, leaving an arm that reports as XPU-on while retrieving
+nothing. What the template copy does *not* isolate is writes *within* one run — `XPU_READONLY=1`
+(from the patch) handles that by skipping `_store_xpu_experience`, and `FREEZE_TELEMETRY=1` freezes
+the telemetry counters.
 
 ## Datasets
 
