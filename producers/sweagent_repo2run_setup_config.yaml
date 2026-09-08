@@ -1,0 +1,154 @@
+# SWE-agent config for the Graph2Env ablation arms E+S / S+S / F+S.
+# Base: SWE-agent's own config/default.yaml (tools, parser, history processors) verbatim.
+# Templates: the Repo2Run port (sweagent_repo2run_config.yaml) with the Dockerfile deliverable
+# replaced by editing /g2e/setup.sh + /g2e/runtime_handoff.json in place, and one
+# {{context_block}} placeholder above the shell-prompt trailer.
+# Spec: Graph2Env/docs/superpowers/specs/2026-09-08-fs-arm-swe-runner-design.md
+#
+# Substituted at runtime by producers/sweagent_repo2run_runner.py --setup-spec:
+#   {{context_block}}, {{base_image}} in the templates; env.deployment.image / docker_args;
+#   agent.model.* from the spec's "model" object.
+agent:
+  model:
+    name: deepseek/deepseek-v4-flash
+    per_instance_cost_limit: 0
+    total_cost_limit: 0
+    temperature: 0.2
+    completion_kwargs:
+      extra_body:
+        thinking:
+          type: disabled
+  templates:
+    system_template: |-
+      SETTING: You are an expert skilled in environment configuration, operating directly in the
+      command line with a specialized interface.
+
+      In addition to typical bash commands, you can also use the following commands to help you
+      with environment setup.
+
+      COMMANDS:
+      {{command_docs}}
+
+      Please note that THE EDIT COMMAND REQUIRES PROPER INDENTATION. Ensure correct indentation
+      when modifying code.
+
+      You should only include a SINGLE command per response and then wait for a response. You can
+      use any other bash commands and the special commands listed above, but interactive session
+      commands (e.g., python, vim) are not supported.
+    instance_template: |-
+      We're currently setting up the environment for the following task. Here are the details:
+
+      TASK:
+      {{problem_statement}}
+
+      INSTRUCTIONS:
+      Now, you'll carry out this task on your own. Your terminal session has begun in the
+      repository's root directory. Use the provided commands and any bash commands you need. Edit
+      and check files as needed.
+
+      The goal is to produce a setup script that can successfully build and run the tests in the
+      repository using the command "pytest --collect-only -q".
+
+      NOTE:
+      1. The repository is cloned into /repo.
+      2. This session runs in the base image {{base_image}} plus git. The evaluator uses the same
+         image: it clones the repository fresh at the same commit into /repo, runs /g2e/setup.sh
+         once as root from /repo, then installs pytest and puts /repo/.venv/bin first on PATH if a
+         virtual environment exists, then applies /g2e/runtime_handoff.json and runs
+         "pytest --collect-only -q" from /repo.
+      3. /g2e/runtime_handoff.json declares what a script cannot provide at test time:
+      ```
+      {"version": 1,
+       "services": [{"kind": "redis", "start": "redis-server --daemonize yes", "check": "redis-cli ping"}],
+       "environment": {"DJANGO_SETTINGS_MODULE": "app.settings"},
+       "capabilities": []}
+      ```
+         Each service's "start" command is run before the tests, and its "check" command is polled for
+         up to 30 seconds. Each "environment" entry is exported. A daemon started inside setup.sh does
+         not survive to the tests; declare it here.
+      4. Only /g2e/setup.sh and /g2e/runtime_handoff.json survive this session. Edits to repository
+         files, packages installed by hand, daemons started by hand, and shell exports do not.
+
+      Your task includes:
+      0. **Read the setup script**: Open /g2e/setup.sh and /g2e/runtime_handoff.json.
+      1. **Read Directory Structure**: Check the folder structure in the root directory.
+      2. **Check the Configuration Files**: Inspect files like "requirements.txt", "setup.py",
+         "setup.cfg", "Pipfile*", etc.
+      3. **Determine Package Dependencies**: Handle dependencies and manage conflicting dependency
+         versions.
+      4. **Testing**: Ensure "pytest /repo --collect-only -q" runs without errors.
+      5. **Update the setup script**: Write necessary installation or setup steps determined from the
+         inspection into /g2e/setup.sh. If you finish run testing successfully, you should make sure
+         /g2e/setup.sh and /g2e/runtime_handoff.json reproduce it.
+
+      IMPORTANT TIPS:
+      * Check the directory and files carefully.
+      * Make sure the setup script commands are correct and non-interactive.
+      * Do not delete, skip, or rewrite tests, and do not edit conftest.py or test configuration to
+        avoid a missing service or dependency.
+      * Test the final setup script by running "bash /g2e/setup.sh" and then
+        "pytest /repo --collect-only -q".
+      {{context_block}}
+      (Current task: Update setup script)
+      (Current directory: {{working_dir}})
+      bash-$
+    problem_statement_template: |-
+      Set up the environment for the {{language}} repository {{full_name}} ({{repo_url}}) so that
+      its test suite can be collected and run, and record the working setup in the setup script at
+      /g2e/setup.sh and the runtime file at /g2e/runtime_handoff.json.
+    next_step_template: |-
+      {{observation}}
+      (Current task: Update setup script)
+      (Current directory: {{working_dir}})
+      bash-$
+    next_step_no_output_template: |-
+      Your command ran successfully and did not produce any output.
+      (Current task: Update setup script)
+      (Current directory: {{working_dir}})
+      bash-$
+  tools:
+    env_variables:
+      PAGER: cat
+      MANPAGER: cat
+      LESS: -R
+      PIP_PROGRESS_BAR: 'off'
+      TQDM_DISABLE: '1'
+      GIT_PAGER: cat
+    bundles:
+      - path: tools/registry
+      - path: tools/edit_anthropic
+      - path: tools/review_on_submit_m
+    registry_variables:
+      USE_FILEMAP: 'true'
+      SUBMIT_REVIEW_MESSAGES:
+        - |
+          Thank you for your work on this issue. Please carefully follow the steps below to help review your changes.
+
+          1. If you made any changes to your code after running the reproduction script, please run the reproduction script again.
+            If the reproduction script is failing, please revisit your changes and make sure they are correct.
+            If you have already removed your reproduction script, please ignore this step.
+          2. Remove your reproduction script (if you haven't done so already).
+          3. If you have modified any TEST files, please revert them to the state they had before you started fixing the issue.
+            You can do this with `git checkout -- /path/to/test/file.py`. Use below <diff> to find the files you need to revert.
+          4. Run the submit command again to confirm.
+
+          Here is a list of all of your changes:
+
+          <diff>
+          {{diff}}
+          </diff>
+    enable_bash_tool: true
+    parse_function:
+      type: function_calling
+  history_processors:
+    - type: cache_control
+      last_n_messages: 2
+env:
+  deployment:
+    type: docker
+    image: python:3.11-slim        # replaced by the setup spec's deploy_image at runtime
+    remove_container: false        # kept alive so /g2e files can be read back
+    remove_images: false
+  repo:
+    type: local
+    path: ./my-repo

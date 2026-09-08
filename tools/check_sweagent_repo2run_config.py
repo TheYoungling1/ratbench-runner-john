@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-"""Validate producers/sweagent_repo2run_config.yaml against the INSTALLED SWE-agent.
+"""Validate a SWE-agent producer config against the INSTALLED SWE-agent.
+
+Defaults to producers/sweagent_repo2run_config.yaml; pass another config path to check it instead
+(e.g. producers/sweagent_repo2run_setup_config.yaml).
 
 No Docker, no API key, no network, no cost. Run under the sweagent venv:
 
-    $SWEAGENT_VENV_PY tools/check_sweagent_repo2run_config.py
+    $SWEAGENT_VENV_PY tools/check_sweagent_repo2run_config.py [config.yaml]
 
 Why this exists: that config is a port of the Repo2Run paper's appendix I.2 onto a SWE-agent
 version whose schema has moved. Three of the paper's six tool bundles no longer exist upstream and
@@ -29,6 +32,7 @@ CONFIG = REPO_ROOT / "producers" / "sweagent_repo2run_config.yaml"
 
 
 def main() -> int:
+    config = Path(sys.argv[1]) if len(sys.argv) > 1 else CONFIG
     if sys.version_info < (3, 11):
         print(f"FAIL: sweagent needs Python >=3.11; this is {sys.version.split()[0]}.\n"
               "      Run me under $SWEAGENT_VENV_PY, not the runner venv.")
@@ -42,9 +46,9 @@ def main() -> int:
               "      pip install 'git+https://github.com/SWE-agent/SWE-agent.git' into this venv.")
         return 1
 
-    with open(CONFIG) as fh:
+    with open(config) as fh:
         cfg = yaml.safe_load(fh)
-    print(f"loaded {CONFIG.relative_to(REPO_ROOT)}")
+    print(f"loaded {config}")
 
     # A throwaway git repo so `repo: type: local` validation passes without touching the network.
     tmp = tempfile.mkdtemp(prefix="sweagent-cfgcheck-")
@@ -57,7 +61,7 @@ def main() -> int:
     cfg["problem_statement"] = TextProblemStatement(text="config check", id="cfgcheck")
 
     try:
-        config = RunSingleConfig(**cfg)
+        run_config = RunSingleConfig(**cfg)
     except Exception as exc:
         print(f"FAIL: config rejected by RunSingleConfig — {type(exc).__name__}: {exc}")
         return 1
@@ -70,7 +74,7 @@ def main() -> int:
     os.chdir(safe_cwd)
 
     try:
-        runner = RunSingle.from_config(config)
+        runner = RunSingle.from_config(run_config)
     except Exception as exc:
         print(f"FAIL: RunSingle.from_config — {type(exc).__name__}: {exc}\n"
               "      This is where a bad tools/ bundle path surfaces.")
