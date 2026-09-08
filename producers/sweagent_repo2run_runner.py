@@ -19,8 +19,11 @@ Result protocol: one stdout line `__SWEAGENT_DF_RESULT__<json>`; the Dockerfile 
 --out (a file), never through stdout, so a large or oddly-encoded Dockerfile cannot corrupt it.
 """
 import argparse
+import copy
 import json
 import os
+import re
+import shlex
 import subprocess
 import sys
 import time
@@ -164,6 +167,50 @@ def _render(template: str, variables: dict) -> str:
     return out
 
 
+_G2E_RC = re.compile(r"__G2E_RC=(\d+)")
+_TEMPLATE_KEYS = ("system_template", "instance_template", "next_step_template",
+                  "next_step_no_output_template", "problem_statement_template")
+
+
+def apply_setup_spec(cfg: dict, spec: dict) -> dict:
+    """Graph2Env setup-deliverable mode: substitute the two prompt placeholders and point the
+    deployment and model at what the spec says. Pure; returns a new dict."""
+    cfg = copy.deepcopy(cfg)
+    variables = {"context_block": spec.get("context_block", ""), "base_image": spec["base_image"]}
+    templates = cfg.setdefault("agent", {}).setdefault("templates", {})
+    for key in _TEMPLATE_KEYS:
+        if key in templates:
+            templates[key] = _render(templates[key], variables)
+    dep = cfg.setdefault("env", {}).setdefault("deployment", {})
+    dep["image"] = spec["deploy_image"]
+    dep["docker_args"] = list(spec.get("docker_args") or [])
+    cfg["agent"].setdefault("model", {}).update(spec.get("model") or {})
+    return cfg
+
+
+def collect_script(handoff: dict, test_command: str) -> str:
+    """One shell line: apply the handoff the way the evaluator does, run the test command,
+    capture its output to /tmp/g2e_collect.txt, print the exit code marker."""
+    parts = ["cd /repo"]
+    for key, value in sorted((handoff.get("environment") or {}).items()):
+        parts.append(f"export {key}={shlex.quote(str(value))}")
+    for service in handoff.get("services") or []:
+        start = str(service.get("start") or "").strip()
+        check = str(service.get("check") or "").strip()
+        if start:
+            parts.append(start)
+        if check:
+            parts.append(f"for _i in $(seq 1 30); do ({check}) && break; sleep 1; done")
+    parts.append(f"{test_command} > /tmp/g2e_collect.txt 2>&1; echo __G2E_RC=$?")
+    return "; ".join(parts)
+
+
+def parse_collect_rc(output: str) -> int | None:
+    match = _G2E_RC.search(output or "")
+    return int(match.group(1)) if match else None
+
+
+
 def resolve_image_digest(tag: str, runner=subprocess.run) -> str | None:
     """Best-effort resolved digest of a local docker image `tag` (provenance item 4a: the
     agent's OWN deployment image — `python:3.10` is a moving tag). Prefers the pulled
@@ -224,6 +271,53 @@ def _apply_overrides(cfg: dict, a) -> dict:
     return cfg
 
 
+# DeepSeek v4 intermittently serialises its command in its own DSML markup instead of the markdown
+# fence `thought_action` requires:
+#     <｜｜DSML｜｜bash>\nls -la /repo\n</｜｜DSML｜｜bash>
+# The surrounding prose is identical to a well-formed turn, so this is a serialisation choice, not a
+# confused model. Two facts make it fatal rather than cosmetic: the parser matches ``` only, and
+# DeepSeek's prompt cache makes the response deterministic — all three of SWE-agent's requeries came
+# back byte-identical, so the built-in format-retry cannot clear it and the episode dies after four
+# turns with exit_status="exit_format". Measured 2026-09-03 at 1/8 calls on the VM and 0/8 from
+# macOS with BYTE-IDENTICAL prompts (same sha256 for system and user), so it is host-independent
+# chance, not an amd64, litellm, or config difference. Rewriting the tags into a fence leaves the
+# paper's parser semantics untouched — it is the delimiter that differs, nothing else.
+_DSML_BLOCK = re.compile(r"<[^<>]*DSML[^<>]*>[ \t]*\n?(.*?)\n?[ \t]*</[^<>]*DSML[^<>]*>", re.DOTALL)
+
+
+def normalize_dsml_fences(text: str) -> str:
+    """Rewrite DeepSeek DSML command tags into ``` fences; unchanged when no DSML tag is present."""
+    if not text or "DSML" not in text:
+        return text
+    return _DSML_BLOCK.sub(lambda m: "```\n%s\n```" % m.group(1).strip("\n"), text)
+
+
+def patch_thought_action_parser(log=print) -> bool:
+    """Normalise DSML into fences before ThoughtActionParser sees the response.
+
+    Returns True if the patch was applied, False if it was already in place. Idempotent so a
+    re-import cannot stack wrappers."""
+    from sweagent.tools.parsing import ThoughtActionParser
+
+    if getattr(ThoughtActionParser, "_dsml_patched", False):
+        return False
+    original = ThoughtActionParser.__call__
+
+    def patched(self, model_response, commands, strict=False):
+        message = model_response.get("message") or ""
+        fixed = normalize_dsml_fences(message)
+        if fixed != message:
+            # Always log: a silent rescue would hide how often the model does this, and that rate
+            # is a finding about the model, not noise.
+            log(f"[dsml] rewrote DeepSeek DSML tags into a fenced block ({len(message)} chars)")
+            model_response = {**model_response, "message": fixed}
+        return original(self, model_response, commands, strict=strict)
+
+    ThoughtActionParser.__call__ = patched
+    ThoughtActionParser._dsml_patched = True
+    return True
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--full-name", required=True)
@@ -236,6 +330,7 @@ def main() -> int:
     ap.add_argument("--commit", default=None)
     ap.add_argument("--cost-limit", type=float, default=2.0)
     ap.add_argument("--call-limit", type=int, default=0)
+    ap.add_argument("--setup-spec", default=None, help="Graph2Env setup-deliverable spec JSON")
     a = ap.parse_args()
 
     import yaml
@@ -247,6 +342,8 @@ def main() -> int:
     start = time.time()
     with open(a.config) as fh:
         cfg = yaml.safe_load(fh)
+    if (cfg.get("agent", {}).get("tools", {}).get("parse_function", {}) or {}).get("type") == "thought_action":
+        patch_thought_action_parser()
 
     problem = _render(cfg["agent"]["templates"].get("problem_statement_template", ""), {
         "language": a.language,
@@ -254,6 +351,11 @@ def main() -> int:
         "repo_url": f"https://github.com/{a.full_name}",
     })
     cfg = _apply_overrides(cfg, a)
+    setup_spec = None
+    if a.setup_spec:
+        with open(a.setup_spec) as fh:
+            setup_spec = json.load(fh)
+        cfg = apply_setup_spec(cfg, setup_spec)
     cfg["problem_statement"] = TextProblemStatement(
         text=problem, id=a.full_name.replace("/", "_"))
 
@@ -288,6 +390,11 @@ def main() -> int:
             f"repo landed at /{landed}, but the prompt hardcodes /repo. SWE-agent's local-repo "
             "upload path changed; fix producers.sweagent_repo2run.repo_clone_dir or the config's "
             "instance_template together — they must agree.")
+    if setup_spec:
+        import asyncio
+        from swerex.runtime.abstract import UploadRequest
+        asyncio.run(runner.env.deployment.runtime.upload(
+            UploadRequest(source_path=setup_spec["g2e_dir"], target_path="/g2e")))
     runner._chooks.on_instance_start(index=0, env=runner.env,
                                      problem_statement=runner.problem_statement)
     out_dir = runner.output_dir / runner.problem_statement.id
@@ -296,6 +403,30 @@ def main() -> int:
                               env=runner.env, output_dir=out_dir)
     runner._chooks.on_instance_completed(result=result)
     runner._chooks.on_end()
+
+    collect_rc, setup_read_error = None, ""
+    if setup_spec:
+        artifacts_dir = setup_spec["artifacts_dir"]
+        os.makedirs(artifacts_dir, exist_ok=True)
+        handoff = {}
+        for name in ("setup.sh", "runtime_handoff.json"):
+            try:
+                content = runner.env.read_file(f"/g2e/{name}") or ""
+                with open(os.path.join(artifacts_dir, name), "w", encoding="utf-8") as fh:
+                    fh.write(content)
+                if name == "runtime_handoff.json":
+                    handoff = json.loads(content) if content.strip() else {}
+            except Exception as exc:                # noqa: BLE001 — record, do not abort
+                setup_read_error += f"{name}: {type(exc).__name__}: {exc}; "
+        try:
+            output = runner.env.communicate(
+                collect_script(handoff if isinstance(handoff, dict) else {}, setup_spec["test_command"]),
+                timeout=int(setup_spec.get("collect_timeout", 1800)))
+            collect_rc = parse_collect_rc(output)
+            with open(os.path.join(artifacts_dir, "container_collect.txt"), "w", encoding="utf-8") as fh:
+                fh.write(runner.env.read_file("/tmp/g2e_collect.txt") or "")
+        except Exception as exc:                    # noqa: BLE001
+            setup_read_error += f"collect: {type(exc).__name__}: {exc}; "
 
     # Capture BEFORE close() — close() clears deployment._container_name.
     container_name = deployment_container_name(runner)
@@ -333,12 +464,17 @@ def main() -> int:
 
     stats = result.info.get("model_stats") or {}
     payload = {
-        "status": "produced" if dockerfile else "error",
+        "status": "produced" if (dockerfile or (setup_spec and not setup_read_error)) else "error",
         "exit_status": result.info.get("exit_status"),
+        "collect_returncode": collect_rc,
+        "traj_path": str(out_dir / f"{runner.problem_statement.id}.traj"),
+        "artifacts_dir": (setup_spec or {}).get("artifacts_dir", ""),
+        "setup_read_error": setup_read_error,
         "agent_settings": {"thinking": eff_thinking, "temperature": (cfg["agent"]["model"]
                                                                      .get("temperature"))},
         "deploy_image_digest": deploy_image_digest,
-        "note": "" if dockerfile else (read_error or f"no {DOCKERFILE_PATH} in the container"),
+        "note": "" if (dockerfile or setup_spec) else (
+            read_error or f"no {DOCKERFILE_PATH} in the container"),
         "economy": {
             "llm_calls": stats.get("api_calls"),
             "cost_usd": stats.get("instance_cost"),
