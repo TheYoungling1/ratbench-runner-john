@@ -33,6 +33,7 @@ from bench.schema import RepoSpec  # noqa: E402
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 CONFIG_PATH = os.path.join(_HERE, "sweagent_repo2run_config.yaml")
+MODERN_CONFIG_PATH = os.path.join(_HERE, "sweagent_repo2run_modern_config.yaml")
 RUNNER_PATH = os.path.join(_HERE, "sweagent_repo2run_runner.py")
 RESULT_MARK = "__SWEAGENT_DF_RESULT__"
 
@@ -135,7 +136,7 @@ def _clone_pinned(repo: RepoSpec, dest: str) -> None:
 
 
 def run_sweagent_repo2run(repo: RepoSpec, ctx: ProduceContext, *, llm: str | None,
-                            num_turn: int) -> dict:
+                            num_turn: int, config_path: str | None = None) -> dict:
     """LIVE-ONLY: clone the repo, run SWE-agent under the paper's config in the py3.11 venv, and
     return the /Dockerfile it wrote. Raises on failure; the producer wraps it for the anti-vanish
     invariant. Never exercised by unit tests (they inject a stub runner) — it needs docker, keys,
@@ -156,7 +157,9 @@ def run_sweagent_repo2run(repo: RepoSpec, ctx: ProduceContext, *, llm: str | Non
     cmd = [venv_py, RUNNER_PATH,
            "--full-name", repo.full_name,
            "--repo-path", repo_path,
-           "--config", os.environ.get("SWEAGENT_REPO2RUN_CONFIG", CONFIG_PATH),
+           # An explicit config_path is the ARM'S IDENTITY (see SweAgentRepo2RunModernProducer)
+           # and wins; $SWEAGENT_REPO2RUN_CONFIG stays an operator override for the default arm.
+           "--config", config_path or os.environ.get("SWEAGENT_REPO2RUN_CONFIG", CONFIG_PATH),
            "--out", df_out,
            "--trajectory-dir", os.path.join(out_dir, "sweagent_trajectories"),
            "--llm", str(llm),
@@ -204,6 +207,7 @@ class SweAgentRepo2RunProducer:
     needs_llm = True
     measurable = True
     conformance = "rehomed"
+    config_path = None      # None => the paper's config (or $SWEAGENT_REPO2RUN_CONFIG)
 
     def __init__(self, llm: str | None = None, num_turn: int = 100, runner=None):
         self.llm = llm
@@ -217,7 +221,12 @@ class SweAgentRepo2RunProducer:
         try:
             runner = self._runner or run_sweagent_repo2run
             num_turn = ctx.num_turn if ctx.num_turn is not None else self.num_turn
-            res = runner(repo, ctx, llm=(ctx.llm or self.llm), num_turn=num_turn)
+            # config_path is passed ONLY when a subclass sets one, so the injected stub runners
+            # in the tests keep their exact (repo, ctx, *, llm, num_turn) signature.
+            kw = {"llm": (ctx.llm or self.llm), "num_turn": num_turn}
+            if self.config_path:
+                kw["config_path"] = self.config_path
+            res = runner(repo, ctx, **kw)
 
             economy = dict(res.get("economy") or {})
             economy.setdefault("produce_s", round(time.time() - start, 2))
@@ -227,8 +236,13 @@ class SweAgentRepo2RunProducer:
             deploy_image_digest = res.get("deploy_image_digest")
             inline = res.get("inline")
             if not raw:
+                # agent_settings belongs here too, not just on the success path: the paper reports
+                # DGSR 26.9% for this baseline, so "no Dockerfile" is the MAJORITY outcome, and
+                # dropping the effective thinking mode exactly there would leave most of the run
+                # un-diagnosable — the failure rows are the ones you go back and interrogate.
                 return ProducedEnv(repo=repo, dockerfile=None, status="error",
                                    note=note or "SWE-agent wrote no /Dockerfile",
+                                   agent_settings=res.get("agent_settings") or {},
                                    exit_status=exit_status, deploy_image_digest=deploy_image_digest,
                                    inline=inline,
                                    conformance=self.conformance, producer_name=self.name,
@@ -251,3 +265,18 @@ class SweAgentRepo2RunProducer:
             return ProducedEnv(repo=repo, dockerfile=None, status="error", note=repr(exc),
                                conformance=self.conformance, producer_name=self.name,
                                economy={"produce_s": round(time.time() - start, 2)})
+
+
+class SweAgentRepo2RunModernProducer(SweAgentRepo2RunProducer):
+    """Same producer, SWE-agent's OWN recommended harness instead of the paper's 2025-era scaffold.
+
+    Everything about the run is identical to `sweagent_repo2run` — same model, same budget, same
+    Dockerfile deliverable, same re-home to /testbed — except which config YAML SWE-agent loads.
+    That config is pinned as a CLASS ATTRIBUTE rather than left to $SWEAGENT_REPO2RUN_CONFIG on
+    purpose: varieties.toml has no way to set an env var (VarietySpec carries name/model/branch/
+    venv/llm/num_turn/measure and nothing else), so an env-selected config would mean the variety
+    name and the config that actually ran could silently disagree — and the whole point of this arm
+    is a controlled contrast where the ONLY difference is the scaffold.
+    """
+    name = "sweagent_repo2run_modern"
+    config_path = MODERN_CONFIG_PATH

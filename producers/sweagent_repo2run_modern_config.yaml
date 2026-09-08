@@ -1,0 +1,156 @@
+# SWE-agent config for the `sweagent_repo2run_modern` variety — SWE-agent 1.1.0 under its OWN
+# recommended harness (config/default.yaml), pointed at the Repo2Run task.
+#
+# WHY THIS ARM EXISTS: `sweagent_repo2run` reproduces the Repo2Run paper's appendix I.2 scaffold
+# (thought_action text parsing, windowed edit, last_n_observations=5). That is the right config for
+# claiming "we reproduced the published baseline", and the wrong config for claiming "this is what
+# SWE-agent can do". This arm answers the second question. The delta between the two is itself a
+# result: how much of a margin is method versus scaffolding.
+#
+# WHAT IS PORTED AND WHAT IS NOT: only the two task-carrying templates come from the Repo2Run port.
+# The interface is left entirely to default.yaml, because under `function_calling` the tool schemas
+# ARE the interface documentation — porting the paper's system_template would mean instructing the
+# model to emit fenced bash while the parser expects native tool calls, and its `{{WINDOW}}`
+# reference would be unbound once tools/windowed is dropped for tools/edit_anthropic.
+#
+# Runtime overrides applied by producers/sweagent_repo2run_runner.py:
+#   agent.model.name / per_instance_cost_limit / per_instance_call_limit
+#   env.repo.path / env.repo.base_commit          (dataset commit pin)
+#   env.deployment.image                          ($SWEAGENT_DEPLOY_IMAGE)
+#   output_dir
+agent:
+  model:
+    # name / limits are set at runtime; a placeholder here keeps the file loadable standalone.
+    name: deepseek/deepseek-v4-flash
+    # Matched to the baseline arm so modern-vs-baseline isolates the harness. Note this is the same
+    # NOMINAL ceiling but a larger EFFECTIVE budget: last_n_observations breaks prompt caching
+    # (history_processors.py:106), and this arm does not use it, so the same $2 buys more turns.
+    per_instance_cost_limit: 2.0
+    # The paper ran every baseline at temperature 0.2 (§4). SWE-agent's own default is 0.0, so
+    # leaving this unset would silently diverge from the arm this one is contrasted against.
+    temperature: 0.2
+    completion_kwargs:
+      extra_body:
+        # Thinking mode OFF, carried over from the baseline arm. DeepSeek v4 enables it by default.
+        # If the two arms disagree here, the contrast measures reasoning mode, not the harness.
+        thinking:
+          type: disabled
+  templates:
+    # ---- config/default.yaml verbatim ----
+    # One line, deliberately. Under function_calling the tool schemas carry the interface, which is
+    # why upstream puts the whole task in the instance template instead.
+    system_template: |-
+      You are a helpful assistant that can interact with a computer to solve tasks.
+    # ---- sweagent_repo2run_config.yaml verbatim, minus the shell-prompt trailer ----
+    # The trailing "(Current task: ...) / bash-$" lines are dropped: they describe a prompt format
+    # defined by the paper's system_template, which this arm does not use.
+    instance_template: |-
+      We're currently setting up the environment for the following task. Here are the details:
+
+      TASK:
+      {{problem_statement}}
+
+      INSTRUCTIONS:
+      Now, you'll carry out this task on your own. Your terminal session has begun in the
+      repository's root directory. Use the provided commands and any bash commands you need. Edit
+      and check files as needed.
+
+      The goal is to generate a Dockerfile that can successfully build and run the tests in the
+      repository using the command "pytest --collect-only -q".
+
+      NOTE:
+      1. The repository is cloned into /repo.
+      2. The Dockerfile should start with the following lines (if the base image is python:3.10
+         and repository is adamobeng/wddbfs):
+      ```
+      FROM python:3.10
+      RUN pip install pytest
+      RUN git clone https://github.com/adamobeng/wddbfs.git
+      RUN mkdir /repo
+      RUN git config --global --add safe.directory /repo
+      RUN cp -r /wddbfs/. /repo && rm -rf /wddbfs/
+      RUN rm -rf /wddbfs
+      ```
+
+      Your task includes:
+      0. **Generate Dockerfile**: Create a file named "Dockerfile" in the root path (e.g, the
+         absolute path is /Dockerfile).
+      1. **Read Directory Structure**: Check the folder structure in the root directory.
+      2. **Check the Configuration Files**: Inspect files like "requirements.txt", "setup.py",
+         "setup.cfg", "Pipfile*", etc.
+      3. **Determine Package Dependencies**: Handle dependencies and manage conflicting dependency
+         versions.
+      4. **Testing**: Ensure "pytest /repo --collect-only -q" runs without errors.
+      5. **Generate Dockerfile**: Write necessary installation or setup steps determined from the
+         inspection. If you finish run testing successfully, you should modify the Dockerfile in
+         /Dockerfile.
+
+      IMPORTANT TIPS:
+      * Check the directory and files carefully.
+      * Make sure Dockerfile commands are correct.
+      * Use proper Dockerfile syntax and indentation.
+      * Test the final Dockerfile by running "pytest /repo --collect-only -q".
+    problem_statement_template: |-
+      Set up the environment for the {{language}} repository {{full_name}} ({{repo_url}}) so that
+      its test suite can be collected and run, and record the working setup as a Dockerfile at
+      /Dockerfile.
+    # ---- config/default.yaml verbatim ----
+    next_step_template: |-
+      OBSERVATION:
+      {{observation}}
+    next_step_no_output_template: |-
+      Your command ran successfully and did not produce any output.
+  tools:
+    # NOT in default.yaml, which inherits SWE-agent's 30 s / 1800 s defaults (tools.py:139,145)
+    # plus max_consecutive_execution_timeouts=3. On an ENVIRONMENT-CONSTRUCTION benchmark the
+    # workload is `pip install` of scientific stacks and `apt-get update`; at 30 s those routinely
+    # time out and three in a row end the run, so the default would make this arm partly a
+    # measurement of the clock. Same ceilings the Graph2Env ablation arms get.
+    execution_timeout: 600
+    total_execution_timeout: 7200
+    env_variables:
+      PAGER: cat
+      MANPAGER: cat
+      LESS: -R
+      PIP_PROGRESS_BAR: 'off'
+      TQDM_DISABLE: '1'
+      GIT_PAGER: cat
+    bundles:
+      - path: tools/registry
+      - path: tools/edit_anthropic
+      # default.yaml ships tools/review_on_submit_m, which is NOT used here. That bundle gates
+      # `submit`: it captures `git diff` from $ROOT (=/repo), prints a review checklist with the
+      # diff inlined, and refuses to submit until called again. It is welded to SWE-bench's
+      # deliverable and wrong for this task on three counts — the deliverable is /Dockerfile, which
+      # lives OUTSIDE /repo and so never appears in the diff the agent is asked to review; the
+      # checklist tells it to delete a reproduction script that does not exist and to
+      # `git checkout --` test files; and each stage costs a turn against the call cap. The plain
+      # bundle is also what the baseline arm uses, so the two arms match on submit semantics and a
+      # difference between them cannot be an artifact of one getting a free self-review turn.
+      - path: tools/submit
+    registry_variables:
+      USE_FILEMAP: 'true'
+    enable_bash_tool: true
+    parse_function:
+      type: function_calling
+  # default.yaml sets `cache_control` (last_n_messages: 2). Deliberately omitted: it is
+  # Anthropic-specific by its own docstring (history_processors.py:263), and this lane is
+  # OPENAI-dialect — litellm resolves `deepseek/deepseek-v4-flash` to api.deepseek.com/beta.
+  # _set_cache_control nests {"cache_control": {"type": "ephemeral"}} INSIDE a content block, and
+  # SWE-agent's only stripping pass (models.py:686) checks the message top level, so the marker
+  # would reach an OpenAI-shaped endpoint as an unknown nested field. It buys nothing either way:
+  # DeepSeek caches automatically and bills no cache-write, and an Anthropic cache_control block is
+  # ignored (measured — see producers/_claudecode_helpers.py:60).
+  # Omitting the key falls through to DefaultHistoryProcessor (agents.py:155), a no-op passthrough
+  # that retains full history — which is what this arm wants.
+env:
+  deployment:
+    type: docker
+    # python:3.10 (not -slim) because the deployment container needs git; matches the baseline arm
+    # so the two differ only in harness. Overridden at runtime from $SWEAGENT_DEPLOY_IMAGE.
+    image: python:3.10
+    remove_container: false
+    remove_images: false
+  repo:
+    type: local
+    path: ./my-repo

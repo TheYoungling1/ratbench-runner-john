@@ -530,3 +530,196 @@ def test_cleanup_returns_the_name_on_success():
 
     with mock.patch("subprocess.run", return_value=_OK()):
         assert remove_deployment_container("python3.10-abc") == "python3.10-abc"
+
+
+# ── DSML normalisation ───────────────────────────────────────────────────────────────────────
+# DeepSeek v4 intermittently emits its own DSML markup instead of a markdown fence. The bytes
+# below are copied verbatim from the failed VM smoke (run-20260903-131340) — full-width U+FF5C
+# bars, not ASCII pipes, which is exactly why a naive `<|...|>` pattern would miss them.
+_DSML_RESPONSE = (
+    "DISCUSSION\nLet me start by exploring the repository structure to understand what we're "
+    "working with.\n\n<｜｜DSML｜｜bash>\nls -la /repo\n</｜｜DSML｜｜bash>")
+
+
+def test_normalize_dsml_rewrites_the_real_failing_response():
+    from producers.sweagent_repo2run_runner import normalize_dsml_fences
+
+    out = normalize_dsml_fences(_DSML_RESPONSE)
+    assert "DSML" not in out
+    assert "```\nls -la /repo\n```" in out
+    # the discussion prose must survive untouched — only the delimiter changes
+    assert out.startswith("DISCUSSION\nLet me start by exploring")
+
+
+def test_normalize_dsml_output_parses_as_the_paper_parser_expects():
+    """The whole point: the rewritten text must yield the command under thought_action's rule
+    (last non-nested fenced block). Reimplemented here so the test needs no sweagent install."""
+    import re
+
+    from producers.sweagent_repo2run_runner import normalize_dsml_fences
+
+    blocks = re.findall(r"^```\S*\s*\n(.*?)^```\s*$",
+                        normalize_dsml_fences(_DSML_RESPONSE) + "\n", re.MULTILINE | re.DOTALL)
+    assert [b.strip() for b in blocks] == ["ls -la /repo"]
+
+
+def test_normalize_dsml_leaves_a_well_formed_fenced_response_byte_identical():
+    from producers.sweagent_repo2run_runner import normalize_dsml_fences
+
+    good = "DISCUSSION\nLooks fine.\n```\nls -la /repo\n```"
+    assert normalize_dsml_fences(good) == good
+    assert normalize_dsml_fences("") == ""
+
+
+def test_normalize_dsml_handles_multiple_and_multiline_blocks():
+    from producers.sweagent_repo2run_runner import normalize_dsml_fences
+
+    text = ("<｜｜DSML｜｜bash>\ncd /repo\npytest -q\n</｜｜DSML｜｜bash>\n"
+            "tail\n<｜｜DSML｜｜bash>\nls\n</｜｜DSML｜｜bash>")
+    out = normalize_dsml_fences(text)
+    assert "DSML" not in out
+    assert "```\ncd /repo\npytest -q\n```" in out and "```\nls\n```" in out
+
+
+def test_patch_thought_action_parser_normalizes_and_is_idempotent():
+    """Patch the real class if sweagent is importable; otherwise a stand-in with the same shape.
+    Either way the wrapper must rewrite the message, log once, and never stack on re-application."""
+    import sys
+    import types
+
+    from producers import sweagent_repo2run_runner as R
+
+    try:
+        from sweagent.tools.parsing import ThoughtActionParser        # noqa: F401
+        created = None
+    except ImportError:
+        mod = types.ModuleType("sweagent.tools.parsing")
+
+        class ThoughtActionParser:                                     # noqa: D401 - test stand-in
+            def __call__(self, model_response, commands, strict=False):
+                return model_response["message"]
+
+        mod.ThoughtActionParser = ThoughtActionParser
+        pkg = types.ModuleType("sweagent"); pkg.__path__ = []
+        tools = types.ModuleType("sweagent.tools"); tools.__path__ = []
+        sys.modules.setdefault("sweagent", pkg)
+        sys.modules.setdefault("sweagent.tools", tools)
+        sys.modules["sweagent.tools.parsing"] = mod
+        created = ThoughtActionParser
+
+    from sweagent.tools.parsing import ThoughtActionParser as TAP
+
+    original = TAP.__call__
+    was_patched = getattr(TAP, "_dsml_patched", False)
+    logged = []
+    try:
+        applied = R.patch_thought_action_parser(log=logged.append)
+        assert applied is not was_patched or applied is False
+        # second application is a no-op, so no wrapper stacking
+        assert R.patch_thought_action_parser(log=logged.append) is False
+
+        if created is not None:
+            got = TAP()({"message": _DSML_RESPONSE}, [])
+            assert "DSML" not in got and "```\nls -la /repo\n```" in got
+            assert len(logged) == 1 and "dsml" in logged[0]
+            # a clean response logs nothing further
+            TAP()({"message": "DISCUSSION\nfine\n```\nls\n```"}, [])
+            assert len(logged) == 1
+    finally:
+        TAP.__call__ = original
+        if hasattr(TAP, "_dsml_patched"):
+            del TAP._dsml_patched
+
+
+def test_agent_settings_survive_the_no_dockerfile_failure_path(tmp_path):
+    """The paper's baseline fails to emit a Dockerfile ~73% of the time, so provenance must survive
+    that path — otherwise most of a 50-repo run has no record of the effective thinking mode."""
+    def runner(repo, ctx, **kw):
+        return {"dockerfile": "", "note": "exit_format",
+                "agent_settings": {"thinking": "disabled", "temperature": 0.2},
+                "exit_status": "exit_format", "deploy_image_digest": "python@sha256:abc",
+                "economy": {"tokens_in": 4690}}
+
+    env = SweAgentRepo2RunProducer(llm="deepseek/deepseek-v4-flash", runner=runner).produce(
+        RepoSpec(full_name="o/r", repo_url="https://github.com/o/r", commit="c" * 40),
+        ProduceContext(llm=None, workdir=str(tmp_path), num_turn=100))
+
+    assert env.status == "error"
+    assert env.agent_settings == {"thinking": "disabled", "temperature": 0.2}
+    assert env.exit_status == "exit_format"          # already worked; guard against regression
+    write_env_packet(str(tmp_path), env)
+    meta = json.load(open(os.path.join(str(tmp_path), "o", "r", "_meta.json")))
+    assert meta["agent_settings"]["thinking"] == "disabled"
+
+
+# ── the modern arm: same producer, different scaffold ─────────────────────────────────────────
+#
+# The hazard these guard is silent, not loud: varieties.toml cannot set an env var, so if the
+# modern variety did not pin its own config it would run the PAPER's scaffold while reporting
+# itself as the modern arm — a controlled contrast whose only controlled variable had quietly
+# reverted. A wrong number that looks right is the worst outcome this repo can produce.
+
+def test_modern_producer_pins_its_own_config_and_the_baseline_does_not():
+    from producers.sweagent_repo2run import (
+        MODERN_CONFIG_PATH,
+        SweAgentRepo2RunModernProducer,
+    )
+    assert SweAgentRepo2RunProducer.config_path is None
+    assert SweAgentRepo2RunModernProducer.config_path == MODERN_CONFIG_PATH
+    assert SweAgentRepo2RunModernProducer.name == "sweagent_repo2run_modern"
+    # Same lane as the baseline: a rehomed, measurable Dockerfile arm.
+    assert SweAgentRepo2RunModernProducer.conformance == "rehomed"
+    assert SweAgentRepo2RunModernProducer.measurable is True
+
+
+def test_modern_producer_forwards_its_config_path_to_the_runner(tmp_path):
+    from producers.sweagent_repo2run import (
+        MODERN_CONFIG_PATH,
+        SweAgentRepo2RunModernProducer,
+    )
+    seen = {}
+
+    def stub(repo, ctx, *, llm, num_turn, config_path):
+        seen["config_path"] = config_path
+        return {"dockerfile": _PAPER_DF, "note": "", "economy": {}}
+
+    env = SweAgentRepo2RunModernProducer(runner=stub).produce(_repo(), _ctx(tmp_path))
+    assert env.status == "produced"
+    assert seen["config_path"] == MODERN_CONFIG_PATH
+
+
+def test_baseline_producer_still_calls_the_runner_without_a_config_kwarg(tmp_path):
+    # The injected stubs elsewhere in this file take no config_path; passing one unconditionally
+    # would break every one of them. Pin that the baseline call signature is unchanged.
+    def stub(repo, ctx, *, llm, num_turn):
+        return {"dockerfile": _PAPER_DF, "note": "", "economy": {}}
+
+    assert SweAgentRepo2RunProducer(runner=stub).produce(_repo(), _ctx(tmp_path)).status == "produced"
+
+
+def test_modern_config_is_the_contrast_it_claims_to_be():
+    """The scaffold differences that define this arm, asserted against the file itself."""
+    from producers.sweagent_repo2run import MODERN_CONFIG_PATH
+    modern = yaml.safe_load(open(MODERN_CONFIG_PATH))
+    paper = yaml.safe_load(open(CONFIG_PATH))
+    mt, pt = modern["agent"]["tools"], paper["agent"]["tools"]
+
+    assert mt["parse_function"]["type"] == "function_calling"
+    assert pt["parse_function"]["type"] == "thought_action"
+    # No elision processor: full history, and no Anthropic cache_control on an OpenAI-dialect lane.
+    assert "history_processors" not in modern["agent"]
+    # The SWE-bench submit gate is welded to a repo-relative diff; this arm's deliverable is
+    # /Dockerfile, which lives outside /repo and so never appears in it.
+    bundles = [b["path"] for b in mt["bundles"]]
+    assert "tools/submit" in bundles and "tools/review_on_submit_m" not in bundles
+    # Neither arm may inherit SWE-agent's 30s/1800s defaults on an env-construction benchmark.
+    assert mt["execution_timeout"] == 600 and mt["total_execution_timeout"] == 7200
+    # The contrast is the SCAFFOLD: model, temperature and thinking mode must not drift.
+    assert modern["agent"]["model"]["temperature"] == paper["agent"]["model"]["temperature"]
+    assert (modern["agent"]["model"]["completion_kwargs"]["extra_body"]["thinking"]
+            == paper["agent"]["model"]["completion_kwargs"]["extra_body"]["thinking"])
+    # The task text is ported verbatim; only the interface description is dropped.
+    assert (modern["agent"]["templates"]["problem_statement_template"]
+            == paper["agent"]["templates"]["problem_statement_template"])
+    assert "RESPONSE FORMAT" not in modern["agent"]["templates"]["system_template"]
+    assert "{{WINDOW}}" not in modern["agent"]["templates"]["system_template"]

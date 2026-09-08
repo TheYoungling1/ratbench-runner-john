@@ -245,8 +245,13 @@ def main(argv=None) -> int:
     sweagent_venv_py = os.environ.get("SWEAGENT_VENV_PY", "/opt/sweagent_venv/bin/python")
     sweagent_commit = manifest.sweagent_commit(model, sweagent_venv_py)
     sweagent_config = None
-    if model == "sweagent_repo2run":
-        cfg_src = os.path.join(REPO_ROOT, "producers", "sweagent_repo2run_config.yaml")
+    # Snapshot the config the arm ACTUALLY loads. The two sweagent_repo2run arms differ only in
+    # this file, so a manifest that recorded the wrong one would make the contrast unreadable
+    # after the fact — which is the entire value of keeping both arms.
+    _SWEAGENT_CONFIGS = {"sweagent_repo2run": "sweagent_repo2run_config.yaml",
+                         "sweagent_repo2run_modern": "sweagent_repo2run_modern_config.yaml"}
+    if model in _SWEAGENT_CONFIGS:
+        cfg_src = os.path.join(REPO_ROOT, "producers", _SWEAGENT_CONFIGS[model])
         sweagent_config = manifest.copy_sweagent_config(cfg_src, out)
     host = manifest.host_platform()
     dataset_path = args.repos_json or os.path.join(REPO_ROOT, "datasets", "rat_python50.json")

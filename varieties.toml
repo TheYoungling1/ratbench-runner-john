@@ -104,6 +104,22 @@ llm   = "deepseek/deepseek-v4-flash"
 num_turn = 100                     # per_instance_call_limit; the paper states no budget
 measure = "rehome"
 
+# SWE-agent 1.1.0 under its OWN recommended harness (config/default.yaml), pointed at the same
+# Repo2Run task as `sweagent_repo2run`. Same producer, same model, same budget — the ONLY thing
+# that differs is the scaffold: function_calling + edit_anthropic + full history, against the
+# paper's thought_action + windowed edit + last_n_observations=5. The delta between the two arms
+# is how much of a score is method versus scaffolding. Config in
+# producers/sweagent_repo2run_modern_config.yaml, pinned by SweAgentRepo2RunModernProducer as a
+# class attribute — NOT by $SWEAGENT_REPO2RUN_CONFIG. varieties.toml cannot set env vars
+# (VarietySpec carries name/model/branch/venv/llm/num_turn/measure and nothing else), so an
+# env-selected config would let the variety name and the config that actually ran disagree in
+# silence, which would destroy the one controlled variable this arm exists for.
+[variety.sweagent_repo2run_modern]
+model = "sweagent_repo2run_modern"
+llm   = "deepseek/deepseek-v4-flash"
+num_turn = 100                     # per_instance_call_limit; matches the baseline arm
+measure = "rehome"
+
 # SetupX (OpenDataBox/SetupX): XPU experience store + speculative execution (docker-commit
 # snapshots with rollback) + a prosecutor/judge trial that re-checks the agent's own success claim.
 # It emits NO Dockerfile — producers/setupx.py replays the surviving `setup.history` onto a pinned
