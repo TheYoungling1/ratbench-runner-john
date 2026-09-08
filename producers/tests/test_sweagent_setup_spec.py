@@ -57,9 +57,29 @@ def test_collect_script_exports_env_starts_services_and_marks_rc():
     assert script.endswith("pytest --collect-only -q --disable-warnings > /tmp/g2e_collect.txt 2>&1; echo __G2E_RC=$?")
 
 
-def test_collect_script_with_bare_handoff_is_just_the_test():
+def test_collect_script_bootstraps_pytest_and_the_repo_venv_like_the_evaluator():
+    # The prompt promises the agent that the evaluator installs pytest and puts /repo/.venv/bin
+    # first on PATH before collecting. Without mirroring that, a setup.sh which correctly relies
+    # on the promise is graded 127 (pytest: command not found).
     script = collect_script({"version": 1, "services": [], "environment": {}, "capabilities": []}, "pytest -q")
-    assert script == "cd /repo; pytest -q > /tmp/g2e_collect.txt 2>&1; echo __G2E_RC=$?"
+    assert script.startswith("cd /repo; ")
+    assert "/repo/.venv/bin/python -m pip install -q pytest" in script
+    assert "uv pip install --python /repo/.venv/bin/python pytest" in script
+    assert "python3 -m pip install -q --break-system-packages pytest" in script
+    assert "export PATH=/repo/.venv/bin:$PATH" in script
+    assert script.endswith("pytest -q > /tmp/g2e_collect.txt 2>&1; echo __G2E_RC=$?")
+
+
+def test_collect_script_applies_the_handoff_after_the_venv_path_so_the_handoff_wins():
+    # Evaluator order: image ENV PATH is baked in, then `docker run --env` per handoff entry.
+    handoff = {"version": 1, "services": [], "environment": {"PATH": "/custom/bin"}, "capabilities": []}
+    script = collect_script(handoff, "pytest -q")
+    assert script.index("export PATH=/repo/.venv/bin:$PATH") < script.index("export PATH=/custom/bin")
+
+
+def test_collect_script_installs_pytest_before_the_test_runs():
+    script = collect_script({"version": 1, "services": [], "environment": {}, "capabilities": []}, "pytest -q")
+    assert script.index("pip install") < script.index("> /tmp/g2e_collect.txt")
 
 
 def test_parse_collect_rc():

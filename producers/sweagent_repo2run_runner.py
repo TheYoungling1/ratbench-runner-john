@@ -188,10 +188,34 @@ def apply_setup_spec(cfg: dict, spec: dict) -> dict:
     return cfg
 
 
+# The evaluator (rat_v3_adapter's rendered Dockerfile) installs pytest and puts the repo venv
+# first on PATH before it collects, and the instance prompt promises the agent exactly that.
+# Mirroring it here is not optional: without it a setup.sh that correctly relies on the promise
+# is graded 127 ("pytest: command not found"). Same shape as the Dockerfile's bootstrap, rooted
+# at /repo instead of /testbed — including the uv branch, because a uv-created .venv has no pip.
+_PYTEST_BOOTSTRAP = (
+    "if [ -x /repo/.venv/bin/python ]; then "
+    "if /repo/.venv/bin/python -m pip --version >/dev/null 2>&1; then "
+    "/repo/.venv/bin/python -m pip install -q pytest; "
+    "else command -v uv >/dev/null 2>&1 || "
+    "(python3 -m pip install -q --break-system-packages uv || python3 -m pip install -q uv); "
+    "uv pip install --python /repo/.venv/bin/python pytest; "
+    "fi; "
+    "else python3 -m pip install -q --break-system-packages pytest || "
+    "python3 -m pip install -q pytest; "
+    "fi"
+)
+_VENV_ON_PATH = "[ -d /repo/.venv/bin ] && export PATH=/repo/.venv/bin:$PATH"
+
+
 def collect_script(handoff: dict, test_command: str) -> str:
     """One shell line: apply the handoff the way the evaluator does, run the test command,
-    capture its output to /tmp/g2e_collect.txt, print the exit code marker."""
-    parts = ["cd /repo"]
+    capture its output to /tmp/g2e_collect.txt, print the exit code marker.
+
+    Order mirrors the evaluator: bootstrap pytest, put the repo venv on PATH, THEN apply the
+    handoff environment — a handoff PATH is meant to win, exactly as `docker run --env` overrides
+    the image's baked-in ENV."""
+    parts = ["cd /repo", _PYTEST_BOOTSTRAP, _VENV_ON_PATH]
     for key, value in sorted((handoff.get("environment") or {}).items()):
         parts.append(f"export {key}={shlex.quote(str(value))}")
     for service in handoff.get("services") or []:
