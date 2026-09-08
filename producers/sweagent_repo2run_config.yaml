@@ -148,6 +148,17 @@ agent:
       (Current directory: {{working_dir}})
       bash-$
   tools:
+    # NOT in the paper and NOT in config/default.yaml, which inherits SWE-agent's own defaults of
+    # 30 s per command / 1800 s total (sweagent/tools/tools.py:139,145) plus
+    # max_consecutive_execution_timeouts=3. On an ENVIRONMENT-CONSTRUCTION benchmark the workload
+    # is `pip install` of scientific stacks and `apt-get update`, which routinely exceed 30 s, so
+    # three consecutive timeouts would end the run and the default would make this arm partly a
+    # measurement of the clock rather than of the scaffold. These are the same ceilings set in
+    # producers/sweagent_repo2run_modern_config.yaml, so the baseline-vs-modern contrast isolates
+    # the SCAFFOLD rather than the timeout budget. A deliberate deviation from SWE-agent's own
+    # defaults, applied identically to both arms.
+    execution_timeout: 600
+    total_execution_timeout: 7200
     env_variables:
       WINDOW: 100
       OVERLAP: 2
