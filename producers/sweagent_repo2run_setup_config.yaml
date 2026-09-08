@@ -107,6 +107,13 @@ agent:
       (Current directory: {{working_dir}})
       bash-$
   tools:
+    # Hold SWE-agent to the SAME ceilings the graph+ReAct engine gets, not its own defaults
+    # (30 s per command, 1800 s total). G0+R gets 600 s per command from Sandbox and a 7200 s
+    # outer budget from run_benchmark_ebsr --agent-timeout. At 30 s a pip install of a scientific
+    # stack or an apt-get update routinely times out, and three consecutive timeouts end the run —
+    # so the default would make an F+S vs G0+R contrast partly a measurement of the timeout.
+    execution_timeout: 600
+    total_execution_timeout: 7200
     env_variables:
       PAGER: cat
       MANPAGER: cat

@@ -41,6 +41,17 @@ def test_system_template_dropped_window_and_fenced_response_format():
     assert "{{command_docs}}" in s
 
 
+def test_timeouts_match_the_graph_react_engine_not_sweagent_defaults():
+    # G0+R gets 600 s per command (Sandbox.command_timeout_seconds) and a 7200 s outer budget
+    # (run_benchmark_ebsr --agent-timeout). SWE-agent defaults to 30 s / 1800 s, and dies after
+    # three consecutive command timeouts — a pip install of a scientific stack exceeds 30 s
+    # routinely. Left at the defaults, an F+S vs G0+R contrast would partly measure the timeout
+    # rather than the engine, so both arms are held to the same ceilings.
+    tools = _cfg()["agent"]["tools"]
+    assert tools["execution_timeout"] == 600
+    assert tools["total_execution_timeout"] == 7200
+
+
 def test_model_keeps_the_variety_settings():
     m = _cfg()["agent"]["model"]
     assert m["temperature"] == 0.2
