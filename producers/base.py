@@ -325,5 +325,16 @@ def write_env_packet(out_root: str, env: ProducedEnv) -> str:
         "produce_s": economy.get("produce_s"),
         "total_tokens": economy.get("total_tokens"),
         "cost_usd": economy.get("cost_usd"),
+        # How cost_usd was arrived at: "computed" (priced from captured billing inputs),
+        # "cli" (the agent's own figure), "table", or None. A cost with no provenance
+        # cannot be pooled across arms that price by different routes.
+        "usage_source": economy.get("usage_source"),
+        # Leaked DeepSeek DSML markup in the agent's prose. Harmless to the harness (the
+        # tool protocol is typed), but a turn spent on a command that never ran.
+        "dsml_text_blocks": economy.get("dsml_text_blocks"),
+        # Why the agent stopped. A capped run is not a finished one, and turns_used alone
+        # cannot say which without knowing the run's cap.
+        "turn_capped": economy.get("turn_capped"),
+        "agent_timed_out": economy.get("agent_timed_out"),
     }, indent=2))
     return repo_dir
