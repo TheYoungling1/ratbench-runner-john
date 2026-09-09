@@ -316,6 +316,41 @@ def normalize_dsml_fences(text: str) -> str:
     return _DSML_BLOCK.sub(lambda m: "```\n%s\n```" % m.group(1).strip("\n"), text)
 
 
+def swerex_request_timeout(cfg: dict, *, headroom: int = 120) -> float:
+    """The aiohttp client timeout swe-rex needs, given the config's per-command tool ceiling.
+
+    swerex.runtime.remote.RemoteRuntime._request posts to the in-container runtime with no
+    timeout argument, so aiohttp's module default applies — ClientTimeout(total=300). A command
+    that runs longer than that dies as asyncio.TimeoutError and takes the session down
+    (exit_status="exit_error"), no matter what tools.execution_timeout says. Headroom covers the
+    round trip on top of the command itself."""
+    tools = (cfg.get("agent") or {}).get("tools") or {}
+    return float(tools.get("execution_timeout", 30)) + headroom
+
+
+def patch_swerex_request_timeout(total: float, log=print) -> bool:
+    """Raise aiohttp's default client timeout to `total` seconds, in-process.
+
+    aiohttp resolves DEFAULT_TIMEOUT at ClientSession construction, so rebinding it before
+    swe-rex opens a session is enough; there is no config knob for _request's timeout. Only ever
+    raises, never lowers, so a config that already fits under the default (the 30 s Repo2Run arm)
+    is left alone. Returns True if it changed anything. Idempotent."""
+    import aiohttp
+
+    current = aiohttp.client.DEFAULT_TIMEOUT
+    if current.total is not None and current.total >= total:
+        return False
+    aiohttp.client.DEFAULT_TIMEOUT = aiohttp.ClientTimeout(
+        total=total,
+        connect=current.connect,
+        sock_read=current.sock_read,
+        sock_connect=current.sock_connect,
+    )
+    log(f"[sweagent_repo2run] raised aiohttp client timeout {current.total} -> {total}s "
+        "so a long command cannot outlive its HTTP request")
+    return True
+
+
 def patch_thought_action_parser(log=print) -> bool:
     """Normalise DSML into fences before ThoughtActionParser sees the response.
 
@@ -368,6 +403,8 @@ def main() -> int:
         cfg = yaml.safe_load(fh)
     if (cfg.get("agent", {}).get("tools", {}).get("parse_function", {}) or {}).get("type") == "thought_action":
         patch_thought_action_parser()
+    # Must precede runner.env.start(): aiohttp resolves its default at session construction.
+    patch_swerex_request_timeout(swerex_request_timeout(cfg))
 
     problem = _render(cfg["agent"]["templates"].get("problem_statement_template", ""), {
         "language": a.language,

@@ -86,3 +86,39 @@ def test_parse_collect_rc():
     assert parse_collect_rc("blah\n__G2E_RC=0\n") == 0
     assert parse_collect_rc("__G2E_RC=5") == 5
     assert parse_collect_rc("no marker") is None
+
+
+# --- swe-rex request timeout -------------------------------------------------------------
+# aiohttp's default ClientTimeout(total=300) caps every swe-rex run_in_session request.
+# RemoteRuntime._request passes no timeout, so a command running past 300 s dies as
+# asyncio.TimeoutError and takes the whole session down as exit_error — regardless of
+# tools.execution_timeout. Observed on two smoke runs after execution_timeout was raised to 600.
+from producers.sweagent_repo2run_runner import (  # noqa: E402
+    patch_swerex_request_timeout,
+    swerex_request_timeout,
+)
+
+
+def test_swerex_request_timeout_tracks_the_tool_ceiling_with_headroom():
+    cfg = {"agent": {"tools": {"execution_timeout": 600}}}
+    assert swerex_request_timeout(cfg) == 720.0
+
+
+def test_swerex_request_timeout_falls_back_to_the_sweagent_default():
+    assert swerex_request_timeout({}) == 150.0
+
+
+def test_patch_raises_the_aiohttp_default_and_is_idempotent():
+    import aiohttp
+
+    original = aiohttp.client.DEFAULT_TIMEOUT
+    try:
+        assert patch_swerex_request_timeout(720.0, log=lambda *a: None) is True
+        assert aiohttp.client.DEFAULT_TIMEOUT.total == 720.0
+        # sock_connect must survive: dropping it would make a dead container hang for 720 s
+        assert aiohttp.client.DEFAULT_TIMEOUT.sock_connect == original.sock_connect
+        # already high enough -> no-op, so the 30 s Repo2Run arm is never lowered or re-wrapped
+        assert patch_swerex_request_timeout(150.0, log=lambda *a: None) is False
+        assert aiohttp.client.DEFAULT_TIMEOUT.total == 720.0
+    finally:
+        aiohttp.client.DEFAULT_TIMEOUT = original
