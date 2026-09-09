@@ -271,6 +271,26 @@ signal that the counts cannot be trusted.
 step-based budget at the same nominal number would have spent about four times what
 `sweagent_repo2run` spends.
 
+**Decided: the budget stays at 100. Whether phase 2 runs depends on the arm.** SetupX has two
+phases — phase 1 sets the environment up, phase 2 reviews it (`VerifierAgent`, `ProsecutorAgent`,
+`JudgeAgent`). The budget was set to 100 to match `sweagent_repo2run`'s `per_instance_call_limit`
+so the arms stay comparable, and it stays there.
+
+- **XPU-off: phase 1 consumes the whole budget and phase 2 never runs.** Two independent smokes on
+  different machines both stopped at exactly `llm_calls=101`, each recording
+  `note="phase2=None: [error] phase 2 execution failed: LLM call budget exhausted (100 calls)"`.
+  On this arm the score measures phase 1 only — do not read it as SetupX at full strength.
+- **XPU-on: phase 2 completes within the same budget.** Retrieval makes phase 1 markedly cheaper,
+  which leaves room for the review phase. Verified 2026-09-04 on the VM (amd64, concurrency 2):
+  `bruin-data/ingestr` finished 30 turns / **100** calls with
+  `note="phase2=True: prosecutor found no substantive issue"`, and `coderamp-labs/gitingest`
+  finished 12 turns / **63** calls — well under budget — with phase 2 upholding a real defect
+  (`the gitingest console script is not on PATH`). Compare the XPU-off run of the *same* repo,
+  which spent 101 calls and never reached phase 2.
+
+So the budget is a binding constraint on the off-arm and a non-binding one on the on-arm. Report
+which arm a number came from; the two are not interchangeable.
+
 **Cleanup is mandatory, not advisory.** A single `initial_clone` checkpoint measured **2.07 GB**,
 and SetupX commits another before every XPU trial. `_sweep_checkpoints` clears them on both the
 normal and crashed exits (verified: zero left after the smoke run), but a `SIGKILL` bypasses it —

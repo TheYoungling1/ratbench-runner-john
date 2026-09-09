@@ -78,7 +78,7 @@ index 261da70..4bce67a 100644
                  logger.debug(f"removed snapshot image: {tag}")
              except DockerException as e:
 diff --git a/src/llm_engine.py b/src/llm_engine.py
-index 8b1b5db..03dc7c5 100644
+index 8b1b5db..7f63cee 100644
 --- a/src/llm_engine.py
 +++ b/src/llm_engine.py
 @@ -16,6 +16,7 @@ Module layout:
@@ -205,6 +205,29 @@ index 8b1b5db..03dc7c5 100644
          msg = data["choices"][0]["message"]
  
          # Reasoning-model compat: some return main text in `reasoning_content`.
+@@ -563,16 +645,20 @@ You MUST respond in JSON format with this schema:
+         2. JSON wrapped in a ```json ... ``` markdown fence.
+         """
+         try:
+-            data = json.loads(response)
++            data = json.loads(response, strict=False)
+         except json.JSONDecodeError:
+             match = re.search(r"```(?:json)?\s*(.*?)\s*```", response, re.DOTALL)
+             if match:
+-                data = json.loads(match.group(1))
++                data = json.loads(match.group(1), strict=False)
+             else:
+                 raise ValueError(f"could not parse LLM response as JSON: {response[:200]}")
+ 
+         action_type_str = data.get("action_type", "SHELL_COMMAND")
+         content = data.get("content", {})
++        if isinstance(content, str):
++            content = {"command": content}
++        elif not isinstance(content, dict):
++            content = {}
+         thought = data.get("thought", "")
+ 
+         if action_type_str == "SHELL_COMMAND":
 diff --git a/src/main.py b/src/main.py
 index f44e839..ebf1503 100644
 --- a/src/main.py

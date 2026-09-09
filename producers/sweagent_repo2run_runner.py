@@ -306,14 +306,76 @@ def _apply_overrides(cfg: dict, a) -> dict:
 # macOS with BYTE-IDENTICAL prompts (same sha256 for system and user), so it is host-independent
 # chance, not an amd64, litellm, or config difference. Rewriting the tags into a fence leaves the
 # paper's parser semantics untouched — it is the delimiter that differs, nothing else.
-_DSML_BLOCK = re.compile(r"<[^<>]*DSML[^<>]*>[ \t]*\n?(.*?)\n?[ \t]*</[^<>]*DSML[^<>]*>", re.DOTALL)
+# DeepSeek serialises these as Anthropic-style tool-call XML wrapping the REAL SWE-agent
+# commands, so the payload has to be translated back to each command's documented signature —
+# a naive tag-strip leaves the inner <...invoke>/<...parameter> tags inside the command and bash
+# dies with "syntax error near unexpected token `newline'". Both shapes occur in the wild:
+#   simple:      <｜｜DSML｜｜bash>ls -la /repo</｜｜DSML｜｜bash>
+#   structured:  <｜｜DSML｜｜tool_calls>
+#                <｜｜DSML｜｜invoke name="bash">
+#                <｜｜DSML｜｜parameter name="command" string="true">ls -la /repo/</｜｜DSML｜｜parameter>
+#                </｜｜DSML｜｜invoke></｜｜DSML｜｜tool_calls>
+# The bars are U+FF5C (full-width), not ASCII pipes.
+_DSML_INVOKE = re.compile(
+    r'<[^<>]*DSML[^<>]*invoke\s+name="([^"]+)"[^<>]*>(.*?)</[^<>]*DSML[^<>]*invoke>', re.DOTALL)
+_DSML_PARAM = re.compile(
+    r'<[^<>]*DSML[^<>]*parameter\s+name="([^"]+)"[^<>]*>(.*?)</[^<>]*DSML[^<>]*parameter>', re.DOTALL)
+_DSML_WRAPPER = re.compile(r'</?[^<>]*DSML[^<>]*tool_calls>[ \t]*\n?')
+_DSML_SIMPLE = re.compile(
+    r'<[^<>]*DSML[^<>]*?([A-Za-z_]+)>[ \t]*\n?(.*?)\n?[ \t]*</[^<>]*DSML[^<>]*?\1>', re.DOTALL)
+
+
+def _render_dsml_command(name: str, params: dict) -> str:
+    """Render one DSML invoke as the command line its docstring advertises.
+
+    Signatures are taken verbatim from the command_docs the agent is shown, so the translation
+    round-trips to what the model would have typed had it used a fence."""
+    def q(v: str) -> str:
+        return shlex.quote(v.strip())
+
+    def opt(v):
+        return (" " + q(v)) if (v or "").strip() else ""
+
+    if name == "bash":                                   # signature: <command>
+        return (params.get("command") or "").strip()
+    if name in ("scroll_up", "scroll_down", "submit"):   # signature: <name>
+        return name
+    if name == "goto":                                   # goto <line_number>
+        return f"goto {(params.get('line_number') or '').strip()}".strip()
+    if name == "create":                                 # create <filename>
+        return f"create {q(params.get('filename') or '')}"
+    if name == "open":                                   # open "<path>" [<line_number>]
+        return f"open {q(params.get('path') or '')}{opt(params.get('line_number'))}"
+    if name == "find_file":                              # find_file <file_name> [<dir>]
+        return f"find_file {q(params.get('file_name') or '')}{opt(params.get('dir'))}"
+    if name == "search_dir":                             # search_dir <search_term> [<dir>]
+        return f"search_dir {q(params.get('search_term') or '')}{opt(params.get('dir'))}"
+    if name == "search_file":                            # search_file <search_term> [<file>]
+        return f"search_file {q(params.get('search_term') or '')}{opt(params.get('file'))}"
+    if name == "edit":                                   # edit <start>:<end>\n<text>\nend_of_edit
+        start = (params.get("start_line") or "").strip()
+        end = (params.get("end_line") or "").strip()
+        return f"edit {start}:{end}\n{params.get('replacement_text') or ''}\nend_of_edit"
+    # Unknown command: emit the name with its values rather than dropping the turn outright. The
+    # tool will reject it and the agent gets a normal error message it can recover from.
+    vals = " ".join(q(v) for v in params.values() if (v or "").strip())
+    return f"{name} {vals}".strip()
 
 
 def normalize_dsml_fences(text: str) -> str:
-    """Rewrite DeepSeek DSML command tags into ``` fences; unchanged when no DSML tag is present."""
+    """Rewrite DeepSeek DSML command markup into ``` fences; unchanged when no DSML tag is
+    present. Multiple invokes become multiple fences, and `thought_action` takes the last, which
+    matches SWE-agent's one-command-per-turn rule."""
     if not text or "DSML" not in text:
         return text
-    return _DSML_BLOCK.sub(lambda m: "```\n%s\n```" % m.group(1).strip("\n"), text)
+    # Strip the tool_calls wrapper FIRST: its pattern consumes a trailing newline, which would
+    # otherwise eat the leading newline the invoke replacement adds and leave the fence mid-line.
+    out = _DSML_WRAPPER.sub("", text)
+    out = _DSML_INVOKE.sub(
+        lambda m: "\n```\n%s\n```\n" % _render_dsml_command(
+            m.group(1), dict(_DSML_PARAM.findall(m.group(2)))), out)
+    out = _DSML_SIMPLE.sub(lambda m: "\n```\n%s\n```\n" % m.group(2).strip("\n"), out)
+    return out
 
 
 def swerex_request_timeout(cfg: dict, *, headroom: int = 120) -> float:
@@ -397,6 +459,8 @@ def main() -> int:
     _register_model_costs()   # must precede SWE-agent's first completion-cost call
     from sweagent.agent.problem_statement import TextProblemStatement
     from sweagent.run.run_single import RunSingle, RunSingleConfig
+
+    patch_thought_action_parser()
 
     start = time.time()
     with open(a.config) as fh:
