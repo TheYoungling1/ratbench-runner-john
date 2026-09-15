@@ -41,8 +41,12 @@ def run_pipreqs(repo: RepoSpec, ctx: ProduceContext, *, runner=subprocess.run,
     third-party imports found" (a valid "\\n") from "something actually broke" (raise).
     """
     start = time.time()
-    repo_path = os.path.join(ctx.workdir, "repo")
-    os.makedirs(ctx.workdir, exist_ok=True)
+    # ctx.workdir is the SHARED run root (runner/benchmark.py passes root_path), so the clone MUST
+    # be scoped by full_name or repo #2 of a 50-repo run clones onto repo #1's tree and git aborts
+    # with "destination path already exists and is not an empty directory". Same input/<full_name>
+    # convention every sibling producer uses.
+    repo_path = os.path.join(ctx.workdir, "input", repo.full_name, "repo")
+    os.makedirs(os.path.dirname(repo_path), exist_ok=True)
 
     runner(["git", "clone", "--depth=1", f"{repo.repo_url}.git", repo_path],
            check=True, capture_output=True, timeout=timeout)

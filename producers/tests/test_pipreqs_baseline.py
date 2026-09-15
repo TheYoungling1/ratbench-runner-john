@@ -188,3 +188,28 @@ def test_producer_accepts_llm_kwarg_from_the_runner():
     import producers
     prod = producers.get("pipreqs", llm="anything")
     assert isinstance(prod, PipreqsProducer)
+
+
+def test_run_pipreqs_scopes_the_clone_per_repo(tmp_path):
+    # ctx.workdir is the SHARED run root, not a per-repo scratch dir (runner/benchmark.py:159
+    # passes root_path; producers/dockeragent.py:86 documents it as "the shared run root").
+    # Cloning every repo to <workdir>/repo makes repo #2 of a 50-repo run fail with
+    # "destination path already exists and is not an empty directory". Every sibling producer
+    # scopes by repo.full_name; so must this one.
+    clone_dests = []
+
+    def fake_runner(cmd, **kwargs):
+        if isinstance(cmd, list) and "clone" in cmd:
+            clone_dests.append(cmd[-1])
+            os.makedirs(cmd[-1], exist_ok=True)
+        if isinstance(cmd, list) and cmd and cmd[0] == "pipreqs":
+            with open(cmd[cmd.index("--savepath") + 1], "w") as f:
+                f.write("\n")
+        return _FakeCompletedProcess()
+
+    ctx = _ctx(tmp_path)                       # ONE workdir, as a real multi-repo run has
+    run_pipreqs(RepoSpec("o/one", "https://github.com/o/one"), ctx, runner=fake_runner)
+    run_pipreqs(RepoSpec("o/two", "https://github.com/o/two"), ctx, runner=fake_runner)
+
+    assert len(set(clone_dests)) == 2, f"clone destinations collide: {clone_dests}"
+    assert "o/one" in clone_dests[0] and "o/two" in clone_dests[1]
