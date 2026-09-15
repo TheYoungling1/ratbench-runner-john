@@ -64,3 +64,65 @@ def run_pipreqs(repo: RepoSpec, ctx: ProduceContext, *, runner=subprocess.run,
         requirements = f.read()
 
     return {"requirements": requirements, "produce_s": round(time.time() - start, 2)}
+
+
+_DOCKERFILE_TEMPLATE = """FROM python:3.10
+WORKDIR /
+RUN pip install pytest pytest-xdist
+RUN git clone {repo_url}.git /testbed
+WORKDIR /testbed
+COPY requirements_pipreqs.txt /requirements_pipreqs.txt
+RUN pip install -r /requirements_pipreqs.txt || true
+"""
+# `|| true`: a bad pin/resolved-version in the generated list must not abort the build before
+# `pytest --collect-only` runs — that would score an EBSR-0 for "the Dockerfile didn't build"
+# rather than "the collected tests failed", conflating two different failure signals. The
+# tradeoff is a half-installed environment can silently reach the collect step; distinguishing
+# "pip install actually failed" from "pip install succeeded but the deps were wrong" needs a
+# separate pass over the build log if that distinction matters later — not handled here.
+
+
+class PipreqsProducer:
+    """Static, non-agentic baseline: pipreqs-detected requirements + a fixed Dockerfile shape.
+    No docker build, no pytest, no scoring here — bench/ owns MEASURE, same as every producer."""
+
+    name = "pipreqs"
+    needs_llm = False       # the first producer in the registry with this flag — see the plan's
+                            # Global Constraints for why that needs no special registry handling
+    measurable = True
+
+    def __init__(self, llm: str | None = None, runner=run_pipreqs):
+        # `llm` is accepted and ignored: runner/benchmark.py:148 passes llm= to EVERY produce-able
+        # producer with no needs_llm check, so dropping the parameter is a TypeError on the first
+        # real run. Same signature shape as every sibling producer.
+        self._runner = runner
+
+    def produce(self, repo: RepoSpec, ctx: ProduceContext) -> ProducedEnv:
+        try:
+            result = self._runner(repo, ctx)
+        except Exception as e:                        # noqa: BLE001 — anti-vanish, never raise
+            return ProducedEnv(repo=repo, dockerfile=None, status="error",
+                               note=repr(e), producer_name=self.name)
+
+        dockerfile = _DOCKERFILE_TEMPLATE.format(repo_url=repo.repo_url)
+        note = ""
+        if repo.commit:
+            dockerfile, injected = inject_clone_pin(dockerfile, repo.commit, repo.repo_url)
+            if not injected:
+                note = "pin_warning: could not pin the emitted Dockerfile's clone"
+
+        return ProducedEnv(
+            repo=repo,
+            dockerfile=dockerfile,
+            setup_scripts={"requirements_pipreqs.txt": result["requirements"]},
+            base_image="python:3.10",
+            head_sha=repo.commit,
+            status="produced",
+            conformance="native",   # ProducedEnv's enum; the toml's measure="conforming" is separate
+            note=note,
+            producer_name=self.name,
+            economy={"produce_s": result.get("produce_s")},
+            # No tokens_in/out, llm_calls, turns_used, cost_usd: nothing to report — this arm
+            # spends zero LLM tokens and zero dollars. write_env_packet already handles these
+            # as None when absent from `economy` (see producers/base.py::write_env_packet).
+        )

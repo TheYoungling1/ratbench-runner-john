@@ -104,3 +104,87 @@ def test_run_pipreqs_clone_failure_propagates(tmp_path):
         assert False, "expected an exception"
     except subprocess.CalledProcessError:
         pass
+
+
+from producers.base import ProducedEnv
+from producers.pipreqs_baseline import PipreqsProducer
+
+
+def test_producer_success_is_native(tmp_path):
+    def _stub(repo, ctx, **kw):
+        return {"requirements": "Flask==3.1.3\n", "produce_s": 1.23}
+
+    p = PipreqsProducer(runner=_stub)
+    env = p.produce(RepoSpec("o/r", "https://github.com/o/r", commit="c0ffee"), _ctx(tmp_path))
+
+    assert env.status == "produced"
+    assert env.conformance == "native"      # ProducedEnv's enum, NOT varieties.toml's "conforming"
+    assert env.producer_name == "pipreqs"
+    assert env.base_image == "python:3.10"
+    assert env.head_sha == "c0ffee"
+    assert env.setup_scripts == {"requirements_pipreqs.txt": "Flask==3.1.3\n"}
+    assert "COPY requirements_pipreqs.txt /requirements_pipreqs.txt" in env.dockerfile
+    assert "pip install -r /requirements_pipreqs.txt" in env.dockerfile
+    assert env.economy["produce_s"] == 1.23
+
+
+def test_producer_empty_requirements_still_produces(tmp_path):
+    # A stdlib-only repo is a VALID pipreqs result, not an error: the Dockerfile still installs
+    # pytest via its own fixed lines, and `pip install -r` on an empty file is a no-op.
+    def _stub(repo, ctx, **kw):
+        return {"requirements": "\n", "produce_s": 0.5}
+
+    env = PipreqsProducer(runner=_stub).produce(
+        RepoSpec("o/r", "https://github.com/o/r"), _ctx(tmp_path))
+    assert env.status == "produced"
+    assert env.setup_scripts == {"requirements_pipreqs.txt": "\n"}
+
+
+def test_producer_pins_the_emitted_dockerfiles_own_clone(tmp_path):
+    def _stub(repo, ctx, **kw):
+        return {"requirements": "Flask==3.1.3\n", "produce_s": 1.0}
+
+    env = PipreqsProducer(runner=_stub).produce(
+        RepoSpec("o/r", "https://github.com/o/r", commit="c0ffee"), _ctx(tmp_path))
+    assert "git -C /testbed fetch --depth 1 origin c0ffee" in env.dockerfile
+    assert "git -C /testbed checkout --detach c0ffee" in env.dockerfile
+    assert env.note == ""
+
+
+def test_producer_no_commit_leaves_dockerfile_unpinned(tmp_path):
+    def _stub(repo, ctx, **kw):
+        return {"requirements": "Flask==3.1.3\n", "produce_s": 1.0}
+
+    env = PipreqsProducer(runner=_stub).produce(
+        RepoSpec("o/r", "https://github.com/o/r"), _ctx(tmp_path))   # commit=None
+    assert "checkout --detach" not in env.dockerfile
+
+
+def test_producer_run_pipreqs_failure_is_error_not_raise(tmp_path):
+    def _boom(repo, ctx, **kw):
+        raise RuntimeError("pipreqs exploded")
+
+    env = PipreqsProducer(runner=_boom).produce(
+        RepoSpec("o/r", "https://github.com/o/r"), _ctx(tmp_path))
+    assert env.status == "error" and env.dockerfile is None
+    assert "pipreqs exploded" in env.note
+
+
+def test_producer_is_needs_llm_false():
+    assert PipreqsProducer.needs_llm is False
+    assert PipreqsProducer.measurable is True
+    assert PipreqsProducer.name == "pipreqs"
+
+
+def test_producer_is_registered():
+    from producers import PRODUCERS
+    assert PRODUCERS["pipreqs"] is PipreqsProducer
+
+
+def test_producer_accepts_llm_kwarg_from_the_runner():
+    # runner/benchmark.py:148 calls producers.get(name, llm=...) for EVERY produce-able model,
+    # with no needs_llm check. A constructor without `llm` blows up with TypeError on the first
+    # real run and NO direct-instantiation test catches it. This is that test.
+    import producers
+    prod = producers.get("pipreqs", llm="anything")
+    assert isinstance(prod, PipreqsProducer)
