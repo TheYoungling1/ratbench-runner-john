@@ -274,3 +274,43 @@ def test_producer_does_not_swallow_pip_install_failure(tmp_path):
         RepoSpec("o/r", "https://github.com/o/r"), _ctx(tmp_path))
     assert "pip install -r /requirements_pipreqs.txt" in env.dockerfile
     assert "|| true" not in env.dockerfile
+
+
+def test_run_pipreqs_deletes_the_clone_when_done(tmp_path):
+    # The clone exists only so pipreqs can read it. Keeping it cost 7.7 GB per 50-repo run
+    # (the entire run directory was 7.7 GB; output/ + measure/ together were 8 MB), which is a
+    # disk-full risk on a 100-repo sweep. It is reproducible from the pinned SHA at any time.
+    holder = {}
+
+    def fake_runner(cmd, **kwargs):
+        if isinstance(cmd, list) and "clone" in cmd:
+            os.makedirs(cmd[-1], exist_ok=True)
+            holder["clone"] = cmd[-1]
+            with open(os.path.join(cmd[-1], "big.bin"), "w") as f:
+                f.write("x" * 1000)
+        if isinstance(cmd, list) and "pipreqs.pipreqs" in cmd:
+            with open(cmd[cmd.index("--savepath") + 1], "w") as f:
+                f.write("Flask\n")
+        return _FakeCompletedProcess()
+
+    out = run_pipreqs(RepoSpec("o/r", "https://github.com/o/r"), _ctx(tmp_path), runner=fake_runner)
+    assert out["requirements"] == "Flask\n"          # content was read BEFORE the delete
+    assert not os.path.exists(holder["clone"]), "clone dir should be removed after the scan"
+
+
+def test_run_pipreqs_deletes_the_clone_even_on_failure(tmp_path):
+    import subprocess
+    holder = {}
+
+    def fake_runner(cmd, **kwargs):
+        if isinstance(cmd, list) and "clone" in cmd:
+            os.makedirs(cmd[-1], exist_ok=True)
+            holder["clone"] = cmd[-1]
+            return _FakeCompletedProcess()
+        raise subprocess.CalledProcessError(1, cmd)   # pipreqs itself blows up
+
+    try:
+        run_pipreqs(RepoSpec("o/r", "https://github.com/o/r"), _ctx(tmp_path), runner=fake_runner)
+    except subprocess.CalledProcessError:
+        pass
+    assert not os.path.exists(holder["clone"]), "a failed scan must not leak its clone either"

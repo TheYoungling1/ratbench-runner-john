@@ -12,6 +12,7 @@
 from __future__ import annotations
 
 import os
+import shutil
 import subprocess
 import sys
 import time
@@ -67,27 +68,35 @@ def run_pipreqs(repo: RepoSpec, ctx: ProduceContext, *, runner=subprocess.run,
     repo_path = os.path.join(ctx.workdir, "input", repo.full_name, "repo")
     os.makedirs(os.path.dirname(repo_path), exist_ok=True)
 
-    runner(["git", "clone", "--depth=1", f"{repo.repo_url}.git", repo_path],
-           check=True, capture_output=True, timeout=timeout)
+    try:
+        runner(["git", "clone", "--depth=1", f"{repo.repo_url}.git", repo_path],
+               check=True, capture_output=True, timeout=timeout)
 
-    if repo.commit:
-        # Pin BEFORE scanning: pipreqs must see the dataset-pinned tree, not live HEAD, or the
-        # detected imports (and therefore the whole point of pinning the dataset) are wrong.
-        runner(["git", "fetch", "--depth", "1", "origin", repo.commit],
-               cwd=repo_path, check=True, capture_output=True, timeout=timeout)
-        runner(["git", "checkout", "--detach", repo.commit],
-               cwd=repo_path, check=True, capture_output=True, timeout=timeout)
+        if repo.commit:
+            # Pin BEFORE scanning: pipreqs must see the dataset-pinned tree, not live HEAD, or the
+            # detected imports (and therefore the whole point of pinning the dataset) are wrong.
+            runner(["git", "fetch", "--depth", "1", "origin", repo.commit],
+                   cwd=repo_path, check=True, capture_output=True, timeout=timeout)
+            runner(["git", "checkout", "--detach", repo.commit],
+                   cwd=repo_path, check=True, capture_output=True, timeout=timeout)
 
-    req_path = os.path.join(repo_path, "requirements_pipreqs.txt")
-    # Invoked as a MODULE, not the `pipreqs` console script: the console script is pinned to the
-    # venv that installed it, which defeats the whole point of choosing the interpreter above.
-    runner([_pipreqs_python(), "-m", "pipreqs.pipreqs", repo_path, "--savepath", req_path,
-            "--force", "--ignore", _IGNORE_DIRS, "--mode", _PIPREQS_MODE,
-            "--encoding", _ENCODING],
-           check=True, capture_output=True, timeout=timeout)
+        req_path = os.path.join(repo_path, "requirements_pipreqs.txt")
+        # Invoked as a MODULE, not the `pipreqs` console script: the console script is pinned to the
+        # venv that installed it, which defeats the whole point of choosing the interpreter above.
+        runner([_pipreqs_python(), "-m", "pipreqs.pipreqs", repo_path, "--savepath", req_path,
+                "--force", "--ignore", _IGNORE_DIRS, "--mode", _PIPREQS_MODE,
+                "--encoding", _ENCODING],
+               check=True, capture_output=True, timeout=timeout)
 
-    with open(req_path) as f:               # raises FileNotFoundError if pipreqs never wrote it
-        requirements = f.read()
+        with open(req_path) as f:           # raises FileNotFoundError if pipreqs never wrote it
+            requirements = f.read()
+    finally:
+        # The clone exists ONLY for the duration of the scan; the requirements string is the whole
+        # deliverable. Keeping it cost 7.7 GB per 50-repo run against a run whose actual results
+        # (output/ + measure/) are 8 MB — a disk-full risk on a 100-repo sweep, and worse at
+        # --concurrency 8 where several clones are live at once. Reproducible at any time from the
+        # pinned SHA, so nothing durable is lost.
+        shutil.rmtree(repo_path, ignore_errors=True)
 
     return {"requirements": requirements, "produce_s": round(time.time() - start, 2)}
 
