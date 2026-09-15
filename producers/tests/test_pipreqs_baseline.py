@@ -257,3 +257,20 @@ def test_run_pipreqs_defaults_to_the_running_interpreter(tmp_path, monkeypatch):
 
     run_pipreqs(RepoSpec("o/r", "https://github.com/o/r"), _ctx(tmp_path), runner=fake_runner)
     assert seen[-1][0] == sys.executable
+
+
+def test_producer_does_not_swallow_pip_install_failure(tmp_path):
+    # `pip install -r` is all-or-nothing: one requirement whose metadata cannot be generated
+    # makes pip install NOTHING from the file. With `|| true` appended, the layer still exits 0,
+    # the image builds, and the empty environment surfaces later as a pytest collection error —
+    # filing an INSTALL failure under the COLLECT heading and reporting a build-success rate that
+    # counts environments with zero dependencies installed (measured: 15 of 47 "successful"
+    # builds on rat_python50). The Repo2Run paper's own reference template
+    # (rat/eval/pipreqs/pipreqs_ref.md) has no `|| true`; match it and let the build fail.
+    def _stub(repo, ctx, **kw):
+        return {"requirements": "Flask==3.1.3\n", "produce_s": 1.0}
+
+    env = PipreqsProducer(runner=_stub).produce(
+        RepoSpec("o/r", "https://github.com/o/r"), _ctx(tmp_path))
+    assert "pip install -r /requirements_pipreqs.txt" in env.dockerfile
+    assert "|| true" not in env.dockerfile

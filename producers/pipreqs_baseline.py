@@ -98,14 +98,19 @@ RUN pip install pytest pytest-xdist
 RUN git clone {repo_url}.git /testbed
 WORKDIR /testbed
 COPY requirements_pipreqs.txt /requirements_pipreqs.txt
-RUN pip install -r /requirements_pipreqs.txt || true
+RUN pip install -r /requirements_pipreqs.txt
 """
-# `|| true`: a bad pin/resolved-version in the generated list must not abort the build before
-# `pytest --collect-only` runs — that would score an EBSR-0 for "the Dockerfile didn't build"
-# rather than "the collected tests failed", conflating two different failure signals. The
-# tradeoff is a half-installed environment can silently reach the collect step; distinguishing
-# "pip install actually failed" from "pip install succeeded but the deps were wrong" needs a
-# separate pass over the build log if that distinction matters later — not handled here.
+# No `|| true` on the install, matching the Repo2Run paper's own reference template for this
+# baseline (rat/eval/pipreqs/pipreqs_ref.md). It was briefly appended on the theory that a bad
+# requirement should not abort the build before `pytest --collect-only` runs, so that an EBSR-0
+# would read as "the tests failed" rather than "the Dockerfile didn't build". Measuring it on
+# rat_python50 showed that reasoning backwards: `pip install -r` is ALL-OR-NOTHING, so one
+# requirement whose metadata cannot be generated installs NOTHING from the file. `|| true` then
+# turns that into a green build with an empty environment, and the failure resurfaces as a
+# ModuleNotFoundError at collect time — filing an INSTALL failure under the COLLECT heading.
+# It affected 15 of 47 "successful" builds and reported rebuild_ok_rate=0.94 for environments
+# that had installed zero dependencies. Letting the build fail is both truthful and the paper's
+# definition; a pipreqs requirements file that does not install IS a baseline failure.
 
 
 class PipreqsProducer:
