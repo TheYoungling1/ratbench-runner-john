@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import os
 import subprocess
+import sys
 import time
 
 from producers.base import ProduceContext, ProducedEnv, inject_clone_pin
@@ -28,6 +29,24 @@ from bench.schema import RepoSpec  # noqa: E402
 # an accepted, disclosed tradeoff, not a bug to fix later.
 _PIPREQS_MODE = "no-pin"
 _IGNORE_DIRS = ".venv,venv,env"
+# utf-8-sig, not utf-8. pipreqs ast.parse()s the raw decoded text, so ONE file with a UTF-8 BOM
+# raises "SyntaxError: invalid non-printable character U+FEFF" and aborts the WHOLE scan, leaving
+# the repo with no requirements at all. Verified on Azure/azure-cli: fails under utf-8, yields 51
+# packages under utf-8-sig, and utf-8-sig changes nothing for repos without a BOM.
+_ENCODING = "utf-8-sig"
+
+
+def _pipreqs_python() -> str:
+    """Interpreter to run the pipreqs scan under.
+
+    pipreqs parses every .py with `ast.parse` under the interpreter EXECUTING it, so it cannot
+    scan a repo written in syntax newer than that interpreter — one PEP 695 `type X = ...` line
+    (3.12+) aborts the entire scan. The runner venv is deliberately old (3.10/3.11 floor, see
+    requirements.txt), which would handicap this arm for a reason that has nothing to do with
+    pipreqs' dependency-detection method. $PIPREQS_PYTHON points at the newest interpreter on the
+    box that has pipreqs installed; without it we fall back to the venv running the runner.
+    Verified on PostHog/posthog: 0 packages (crash) under 3.11, 191 packages under 3.14."""
+    return os.environ.get("PIPREQS_PYTHON") or sys.executable
 
 
 def run_pipreqs(repo: RepoSpec, ctx: ProduceContext, *, runner=subprocess.run,
@@ -60,8 +79,11 @@ def run_pipreqs(repo: RepoSpec, ctx: ProduceContext, *, runner=subprocess.run,
                cwd=repo_path, check=True, capture_output=True, timeout=timeout)
 
     req_path = os.path.join(repo_path, "requirements_pipreqs.txt")
-    runner(["pipreqs", repo_path, "--savepath", req_path, "--force",
-            "--ignore", _IGNORE_DIRS, "--mode", _PIPREQS_MODE],
+    # Invoked as a MODULE, not the `pipreqs` console script: the console script is pinned to the
+    # venv that installed it, which defeats the whole point of choosing the interpreter above.
+    runner([_pipreqs_python(), "-m", "pipreqs.pipreqs", repo_path, "--savepath", req_path,
+            "--force", "--ignore", _IGNORE_DIRS, "--mode", _PIPREQS_MODE,
+            "--encoding", _ENCODING],
            check=True, capture_output=True, timeout=timeout)
 
     with open(req_path) as f:               # raises FileNotFoundError if pipreqs never wrote it

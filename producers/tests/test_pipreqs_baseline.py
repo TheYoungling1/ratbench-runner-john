@@ -27,7 +27,7 @@ def test_run_pipreqs_clones_pins_and_scans(tmp_path):
             os.makedirs(cmd[-1], exist_ok=True)
         # The 4th call is the `pipreqs` invocation itself — write the file it's told to write,
         # since run_pipreqs() reads that file back after the subprocess call returns.
-        if isinstance(cmd, list) and cmd and cmd[0] == "pipreqs":
+        if isinstance(cmd, list) and "pipreqs.pipreqs" in cmd:
             savepath = cmd[cmd.index("--savepath") + 1]
             with open(savepath, "w") as f:
                 f.write("Flask==3.1.3\nrequests==2.34.2\n")
@@ -49,9 +49,14 @@ def test_run_pipreqs_clones_pins_and_scans(tmp_path):
     checkout_cmd = calls[2][0]
     assert "checkout" in checkout_cmd and "c0ffee" in checkout_cmd
     pipreqs_cmd = calls[3][0]
-    assert pipreqs_cmd[0] == "pipreqs"
+    assert pipreqs_cmd[1:3] == ["-m", "pipreqs.pipreqs"]     # module, not the console script
     assert "--mode" in pipreqs_cmd and "no-pin" in pipreqs_cmd
     assert "--force" in pipreqs_cmd
+    # utf-8-sig, not utf-8: a single file with a UTF-8 BOM raises
+    # "SyntaxError: invalid non-printable character U+FEFF" inside pipreqs' ast.parse and aborts
+    # the WHOLE scan (verified on Azure/azure-cli: fails with utf-8, yields 51 packages with
+    # utf-8-sig). Stock pipreqs flag, no patching of the tool.
+    assert "--encoding" in pipreqs_cmd and "utf-8-sig" in pipreqs_cmd
 
 
 def test_run_pipreqs_no_commit_skips_pin(tmp_path):
@@ -61,7 +66,7 @@ def test_run_pipreqs_no_commit_skips_pin(tmp_path):
         calls.append(cmd)
         if isinstance(cmd, list) and "clone" in cmd:      # git clone creates the dest dir
             os.makedirs(cmd[-1], exist_ok=True)
-        if isinstance(cmd, list) and cmd and cmd[0] == "pipreqs":
+        if isinstance(cmd, list) and "pipreqs.pipreqs" in cmd:
             savepath = cmd[cmd.index("--savepath") + 1]
             with open(savepath, "w") as f:
                 f.write("\n")
@@ -202,7 +207,7 @@ def test_run_pipreqs_scopes_the_clone_per_repo(tmp_path):
         if isinstance(cmd, list) and "clone" in cmd:
             clone_dests.append(cmd[-1])
             os.makedirs(cmd[-1], exist_ok=True)
-        if isinstance(cmd, list) and cmd and cmd[0] == "pipreqs":
+        if isinstance(cmd, list) and "pipreqs.pipreqs" in cmd:
             with open(cmd[cmd.index("--savepath") + 1], "w") as f:
                 f.write("\n")
         return _FakeCompletedProcess()
@@ -213,3 +218,42 @@ def test_run_pipreqs_scopes_the_clone_per_repo(tmp_path):
 
     assert len(set(clone_dests)) == 2, f"clone destinations collide: {clone_dests}"
     assert "o/one" in clone_dests[0] and "o/two" in clone_dests[1]
+
+
+def test_run_pipreqs_interpreter_is_overridable(tmp_path, monkeypatch):
+    # pipreqs ast.parse()s every .py under the interpreter RUNNING it, so a repo using syntax
+    # newer than that interpreter (PEP 695 `type X = ...`, 3.12+) aborts the entire scan —
+    # verified on PostHog/posthog: fails under 3.11, yields 191 packages under 3.14. The venv
+    # Python is therefore the wrong default when a newer one is available on the box.
+    monkeypatch.setenv("PIPREQS_PYTHON", "/usr/bin/python3.14")
+    seen = []
+
+    def fake_runner(cmd, **kwargs):
+        seen.append(cmd)
+        if isinstance(cmd, list) and "clone" in cmd:
+            os.makedirs(cmd[-1], exist_ok=True)
+        if isinstance(cmd, list) and "pipreqs.pipreqs" in cmd:
+            with open(cmd[cmd.index("--savepath") + 1], "w") as f:
+                f.write("\n")
+        return _FakeCompletedProcess()
+
+    run_pipreqs(RepoSpec("o/r", "https://github.com/o/r"), _ctx(tmp_path), runner=fake_runner)
+    assert seen[-1][0] == "/usr/bin/python3.14"
+
+
+def test_run_pipreqs_defaults_to_the_running_interpreter(tmp_path, monkeypatch):
+    import sys
+    monkeypatch.delenv("PIPREQS_PYTHON", raising=False)
+    seen = []
+
+    def fake_runner(cmd, **kwargs):
+        seen.append(cmd)
+        if isinstance(cmd, list) and "clone" in cmd:
+            os.makedirs(cmd[-1], exist_ok=True)
+        if isinstance(cmd, list) and "pipreqs.pipreqs" in cmd:
+            with open(cmd[cmd.index("--savepath") + 1], "w") as f:
+                f.write("\n")
+        return _FakeCompletedProcess()
+
+    run_pipreqs(RepoSpec("o/r", "https://github.com/o/r"), _ctx(tmp_path), runner=fake_runner)
+    assert seen[-1][0] == sys.executable
