@@ -57,6 +57,16 @@ model = "repo2run"
 llm   = "deepseek/deepseek-v4-flash"
 measure = "rehome"
 
+# Static, non-agentic baseline: pipreqs scans the repo's imports and writes a
+# requirements.txt; no LLM, no API key, near-zero produce_s. A cost/EBSR floor for the
+# agentic arms above — see producers/pipreqs_baseline.py for the version-pinning-mode
+# rationale (--mode no-pin, to avoid live-PyPI-version drift across reruns of this arm).
+# No `llm =`: this arm never uses a model slug (the runner still passes llm=None to the
+# constructor, which accepts and ignores it).
+[variety.pipreqs]
+model = "pipreqs"
+measure = "conforming"
+
 # General coding agents (no agent branch => baselines). `llm` is the model slug
 # forwarded to the runner; override per-run with `bench --llm ...`.
 [variety.sweagent]

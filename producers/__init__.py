@@ -45,6 +45,7 @@ from producers.sweagent_repo2run import (  # noqa: E402
     SweAgentRepo2RunProducer,
 )
 from producers.setupx import SetupXProducer  # noqa: E402
+from producers.pipreqs_baseline import PipreqsProducer  # noqa: E402
 # Non-producers (measurable=False): native-lane methods with no rebuildable artifact — gated
 # OUT of the fresh-container bench so they never emit a shadowing EBSR-0 (design §3 methods 5-6
 # + rat "Open call", LOCKED inline-only).
@@ -59,6 +60,7 @@ register(ExecutionAgentProducer)
 register(SweAgentRepo2RunProducer)
 register(SweAgentRepo2RunModernProducer)
 register(SetupXProducer)
+register(PipreqsProducer)
 register(RatProducer)
 register(SweAgentProducer)
 register(ClaudeCodeLiveProducer)
@@ -67,6 +69,6 @@ __all__ = [
     "CONTRACT_VERSION", "ProduceContext", "ProducedEnv", "Producer", "write_env_packet",
     "PRODUCERS", "register", "get", "DockerAgentProducer",
     "ClaudeCodeDockerfileProducer", "Repo2RunProducer", "ExecutionAgentProducer",
-    "SweAgentRepo2RunProducer", "SetupXProducer",
+    "SweAgentRepo2RunProducer", "SetupXProducer", "PipreqsProducer",
     "RatProducer", "SweAgentProducer", "ClaudeCodeLiveProducer",
 ]

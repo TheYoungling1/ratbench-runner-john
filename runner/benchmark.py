@@ -109,7 +109,7 @@ PY = sys.executable  # same interpreter for child subprocesses
 # _ProducerModel). The remaining names (rat/sweagent/claudecode) are native-lane, measurable=False
 # live models under runner/live/.
 _PRODUCE_ABLE = {"dockeragent", "repo2run", "claudecode-dockerfile", "executionagent",
-                 "sweagent_repo2run", "sweagent_repo2run_modern", "setupx"}
+                 "sweagent_repo2run", "sweagent_repo2run_modern", "setupx", "pipreqs"}
 
 
 class _ProducerModel:

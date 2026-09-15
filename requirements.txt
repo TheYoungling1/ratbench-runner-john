@@ -33,3 +33,8 @@ sentence-transformers>=3.0.0     # heavy (pulls torch); only needed if the agent
 # release, 0.0.1, a stub pointing at swe-agent.com, so `sweagent>=1.0.0` resolved to
 # "No matching distribution found" and aborted this whole file's install. Install it from git
 # into that 3.11 venv instead — see README, "SWE-agent setup".
+#
+# pipreqs: the static, zero-LLM baseline producer (producers/pipreqs_baseline.py). Pinned
+# exactly, not `>=`, so a CLI flag change (this arm passes --mode/--savepath/--force/--ignore)
+# cannot land silently in a rerun of a published number.
+pipreqs==0.4.13
