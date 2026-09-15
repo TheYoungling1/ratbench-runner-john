@@ -4,7 +4,7 @@
 # self-documenting. Baselines (rat/repo2run) have no branch.
 #
 # `llm` pins the model slug bench forwards to the runner. It must be served by
-# the pinned OpenRouter provider (currently Alibaba). Omit it to fall back to
+# the pinned OpenRouter provider (currently DeepInfra). Omit it to fall back to
 # the runner's own default. An explicit `bench --llm ...` overrides this.
 #
 # `measure` tells the measure hook how to score the variety:
@@ -16,45 +16,45 @@
 branch = "radical"
 model  = "dockeragent"
 venv   = "/opt/rat_venv"
-llm    = "deepseek/deepseek-v4-flash"
+llm    = "deepseek/deepseek-v4-flash-0731"
 measure = "conforming"
 
 [variety.john-planner-v1]
 branch = "john-planner-v1"
 model  = "dockeragent"
 venv   = "/opt/rat_venv"
-llm    = "deepseek/deepseek-v4-flash"
+llm    = "deepseek/deepseek-v4-flash-0731"
 measure = "conforming"
 
 [variety.Jayint-Planer]
 branch = "Jayint-Planer"
 model  = "dockeragent"
 venv   = "/opt/jp_venv"
-llm    = "deepseek/deepseek-v4-flash"
+llm    = "deepseek/deepseek-v4-flash-0731"
 measure = "conforming"
 
 [variety.john-planner-v3]
 branch = "v3-core"
 model  = "dockeragent"
 venv   = "/opt/rat_venv"
-llm    = "deepseek/deepseek-v4-flash"
+llm    = "deepseek/deepseek-v4-flash-0731"
 measure = "conforming"
 
 [variety.john-v3-multi-lang]
 branch = "john-v3-multi-lang"
 model  = "dockeragent"
 venv   = "/opt/rat_venv"
-llm    = "deepseek/deepseek-v4-flash"
+llm    = "deepseek/deepseek-v4-flash-0731"
 measure = "conforming"
 
 [variety.rat]
 model = "rat"
-llm   = "deepseek/deepseek-v4-flash"
+llm   = "deepseek/deepseek-v4-flash-0731"
 measure = "none"                   # LOCKED inline-only (no rebuildable artifact; design §3 open call)
 
 [variety.repo2run]
 model = "repo2run"
-llm   = "deepseek/deepseek-v4-flash"
+llm   = "deepseek/deepseek-v4-flash-0731"
 measure = "rehome"
 
 # Static, non-agentic baseline: pipreqs scans the repo's imports and writes a
@@ -74,7 +74,9 @@ model = "sweagent"
 # Same model + key as the DockerAgent baselines: routed through OpenRouter
 # (OPENROUTER_API_KEY) as a LiteLLM slug. SWE-agent needs the openrouter/ prefix; its
 # cost is registered in runner/live/sweagent_runner.py since LiteLLM doesn't ship this model.
-llm   = "openrouter/deepseek/deepseek-v4-flash"
+# Pinned to the dated -0731 route (not the bare alias) so the run always hits the same
+# OpenRouter endpoint the provider pin below is verified against.
+llm   = "openrouter/deepseek/deepseek-v4-flash-0731"
 measure = "none"                   # only run_pytest JSONs, no Dockerfile artifact
 
 [variety.claudecode]
@@ -95,7 +97,7 @@ measure = "conforming"
 # $EXECUTIONAGENT_ROOT (see README). Routed through OpenRouter via litellm, like sweagent.
 [variety.executionagent]
 model = "executionagent"
-llm   = "openrouter/deepseek/deepseek-v4-flash"
+llm   = "openrouter/deepseek/deepseek-v4-flash-0731"
 measure = "rehome"
 
 # SWE-agent under the Repo2Run paper's baseline settings (arXiv:2502.13681 appendix I.2): the agent
@@ -105,12 +107,12 @@ measure = "rehome"
 # same py3.11 venv as `sweagent` — see README, "SWE-agent setup".
 [variety.sweagent_repo2run]
 model = "sweagent_repo2run"
-# DeepSeek's OWN API (litellm `deepseek/` provider, reads DEEPSEEK_API_KEY, base
-# https://api.deepseek.com/beta). There is no dated slug here: DeepSeek's docs state
-# `deepseek-v4-flash` IS DeepSeek-V4-Flash-0731 and "the calling method remains unchanged". The
-# `-0731` name exists only as a separately addressable OpenRouter route. Going direct also removes
-# provider-pinning entirely — one provider serves it, so there is no upstream ambiguity to manage.
-llm   = "deepseek/deepseek-v4-flash"
+# Routed through OpenRouter (OPENROUTER_API_KEY), pinned to DeepInfra as the upstream provider
+# (OPENROUTER_PROVIDER default in producers/sweagent_repo2run_runner.py) and to the dated
+# -0731 slug, matching the endpoint at openrouter.ai/deepseek/deepseek-v4-flash-0731. Was
+# direct DeepSeek (`deepseek/deepseek-v4-flash`); moved to OpenRouter deliberately, so
+# check the pinned provider's cost/limits if this arm's economy numbers look off.
+llm   = "openrouter/deepseek/deepseek-v4-flash-0731"
 num_turn = 100                     # per_instance_call_limit; the paper states no budget
 measure = "rehome"
 
@@ -126,7 +128,10 @@ measure = "rehome"
 # silence, which would destroy the one controlled variable this arm exists for.
 [variety.sweagent_repo2run_modern]
 model = "sweagent_repo2run_modern"
-llm   = "deepseek/deepseek-v4-flash"
+# Same OpenRouter+DeepInfra, -0731-pinned route as sweagent_repo2run (see its comment above) —
+# both must move together or the modern-vs-baseline delta would measure the provider, not
+# the harness.
+llm   = "openrouter/deepseek/deepseek-v4-flash-0731"
 num_turn = 100                     # per_instance_call_limit; matches the baseline arm
 measure = "rehome"
 
