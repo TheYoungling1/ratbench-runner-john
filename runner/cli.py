@@ -207,6 +207,19 @@ def _write_live_scores(out: str, spec, model: str) -> None:
                 pass
 
 
+def resolve_llm(cli_llm, variety_llm):
+    """LLM precedence: explicit --llm > $LLM_MODEL > variety's pinned llm > None (runner default).
+
+    An explicit --llm always wins, by None-check, so `--llm ""` still means "runner default".
+    A blank $LLM_MODEL or variety value counts as unset, so an empty model id is never forwarded."""
+    if cli_llm is not None:
+        return cli_llm.strip() or None
+    for value in (os.environ.get("LLM_MODEL"), variety_llm):
+        if value and value.strip():
+            return value.strip()
+    return None
+
+
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(prog="bench")
     p.add_argument("variety")
@@ -240,12 +253,7 @@ def main(argv=None) -> int:
     native = _is_native_lane(model, spec.measure)
     # Preflight BEFORE output_dir/manifest so a failure leaves no half-started run directory.
     _ensure_claude_runner(model, repos_json=args.repos_json)
-    # LLM precedence: explicit --llm > variety's pinned llm > (None => runner's own default).
-    # Resolve by None-check (not truthiness) so an explicit value always wins, then treat a
-    # blank value from either source as unset so we never forward an empty model id.
-    llm = args.llm if args.llm is not None else spec.llm
-    if llm is not None:
-        llm = llm.strip() or None
+    llm = resolve_llm(args.llm, spec.llm)
     # Same precedence for the step budget. Without a per-variety value every arm inherits
     # benchmark.py's --num-turn default of 30, which silently equalises budgets that the methods
     # are not actually comparable on (see the sweagent budget note in the README).

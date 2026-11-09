@@ -10,7 +10,9 @@
 # Usage:  ./tools/provision_setupx.sh            # full setup incl. the XPU store
 #         ./tools/provision_setupx.sh --no-xpu   # skip pgvector; XPU-off arm only
 #
-# Requires in .env: DEEPSEEK_API_KEY, and for the XPU store OPENROUTER_API_KEY.
+# Requires in .env: LLM_API_KEY (or the legacy DEEPSEEK_API_KEY). The XPU store is embedded through
+# EMBEDDING_* if set, else the shared LLM_API_KEY / LLM_BASE_URL (OpenRouter by default) — the
+# same defaults producers/setupx.py queries with, so the store and the runs agree.
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -34,10 +36,20 @@ PY310="$(command -v python3.10 || true)"
 [ -n "$PY310" ] || die "python3.10 not on PATH — SetupX needs it (repo venv is 3.10; system python3 may differ)"
 [ -f "$PATCH" ] || die "missing $PATCH — is this a full checkout of the harness?"
 [ -f "$REPO_ROOT/.env" ] || die "missing $REPO_ROOT/.env"
-grep -q '^DEEPSEEK_API_KEY=' "$REPO_ROOT/.env" || die ".env has no DEEPSEEK_API_KEY"
+set -a; . "$REPO_ROOT/.env"; set +a
+CHAT_KEY="${LLM_API_KEY:-${DEEPSEEK_API_KEY:-}}"
+[ -n "$CHAT_KEY" ] || die ".env has no LLM_API_KEY"
+EMB_KEY="${EMBEDDING_API_KEY:-${LLM_API_KEY:-${OPENROUTER_API_KEY:-}}}"
+EMB_BASE="${EMBEDDING_BASE_URL:-${LLM_BASE_URL:-https://openrouter.ai/api/v1}}"
+case "$EMB_BASE" in
+  *openrouter.ai*) EMB_MODEL="${EMBEDDING_MODEL:-openai/text-embedding-3-small}"
+                   EMB_DIM="${EMBEDDING_DIM:-1536}" ;;
+  *)               EMB_MODEL="${EMBEDDING_MODEL:-}"; EMB_DIM="${EMBEDDING_DIM:-}" ;;
+esac
 if [ "$WANT_XPU" = 1 ]; then
-  grep -q '^OPENROUTER_API_KEY=' "$REPO_ROOT/.env" \
-    || die ".env has no OPENROUTER_API_KEY (needed to embed the warm store; use --no-xpu to skip)"
+  [ -n "$EMB_KEY" ] || die ".env has no LLM_API_KEY or EMBEDDING_API_KEY (needed to embed the warm store; use --no-xpu to skip)"
+  [ -n "$EMB_MODEL" ] && [ -n "$EMB_DIM" ] \
+    || die "EMBEDDING_MODEL and EMBEDDING_DIM must be set in .env for a non-OpenRouter embeddings endpoint ($EMB_BASE)"
 fi
 echo "  ok"
 
@@ -81,8 +93,6 @@ if [ "$WANT_XPU" = 0 ]; then
   exit 0
 fi
 
-set -a; . "$REPO_ROOT/.env"; set +a
-
 say "pgvector ($PG_NAME on :$PG_PORT)"
 docker image inspect pgvector/pgvector:pg16 >/dev/null 2>&1 || docker pull -q pgvector/pgvector:pg16
 if ! docker ps -a --format '{{.Names}}' | grep -qx "$PG_NAME"; then
@@ -113,13 +123,13 @@ else
   # vector store, which triggers src/logger.py -> get_config(), and that validates them eagerly.
   ( cd "$SETUPX_ROOT" && \
     LLM_PROVIDER=openai \
-    OPENAI_API_KEY="$DEEPSEEK_API_KEY" \
-    OPENAI_BASE_URL=https://api.deepseek.com/v1 \
+    OPENAI_API_KEY="$CHAT_KEY" \
+    OPENAI_BASE_URL="${LLM_BASE_URL:-https://api.deepseek.com/v1}" \
     OPENAI_MODEL=deepseek-v4-flash \
-    EMBEDDING_API_KEY="$OPENROUTER_API_KEY" \
-    EMBEDDING_BASE_URL=https://openrouter.ai/api/v1 \
-    EMBEDDING_MODEL=openai/text-embedding-3-small \
-    EMBEDDING_DIM=1536 \
+    EMBEDDING_API_KEY="$EMB_KEY" \
+    EMBEDDING_BASE_URL="$EMB_BASE" \
+    EMBEDDING_MODEL="$EMB_MODEL" \
+    EMBEDDING_DIM="$EMB_DIM" \
     dns="$DSN" \
     ./.venv/bin/python scripts/import_xpu_jsonl.py data/xpu_warm.jsonl --clear )
   have=$(docker exec "$PG_NAME" psql -U postgres -d xpu_warm -tAc "select count(*) from xpu_entries" | tr -d ' ')
@@ -137,10 +147,7 @@ say "ready"
 cat <<EOF
   export SETUPX_ROOT=$SETUPX_ROOT
   export SETUPX_DB_DSN=postgresql://postgres:$PG_PASS@localhost:$PG_PORT/xpu_run
-  export EMBEDDING_API_KEY="\$OPENROUTER_API_KEY"
-  export EMBEDDING_BASE_URL=https://openrouter.ai/api/v1
-  export EMBEDDING_MODEL=openai/text-embedding-3-small
-  export EMBEDDING_DIM=1536
+  (EMBEDDING_* default to LLM_API_KEY / LLM_BASE_URL; set them only to embed somewhere else)
 
   Re-take the xpu_run copy before each run so nothing carries across:
     docker exec $PG_NAME psql -U postgres -d postgres -c 'DROP DATABASE IF EXISTS xpu_run;'

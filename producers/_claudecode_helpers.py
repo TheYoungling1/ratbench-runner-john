@@ -227,6 +227,11 @@ def agent_env() -> dict:
     base = env.get("ANTHROPIC_BASE_URL", "")
     if base and not any(host in base for host in _ANTHROPIC_HOSTS):
         env.pop("CLAUDE_CODE_OAUTH_TOKEN", None)
+        # The shared LLM_API_KEY (README, "API keys") fills in for a third-party endpoint only —
+        # never for Anthropic itself, which it is not a key for.
+        shared = os.environ.get("LLM_API_KEY", "").strip()
+        if shared and not (env.get("ANTHROPIC_AUTH_TOKEN") or env.get("ANTHROPIC_API_KEY")):
+            env["ANTHROPIC_AUTH_TOKEN"] = shared
     if is_openrouter(base):
         # OpenRouter authenticates `Authorization: Bearer` only. ANTHROPIC_API_KEY goes out as
         # `x-api-key`, which it ignores — and which is an ANTHROPIC credential shape, so leaving it
@@ -867,7 +872,7 @@ def summarize_stream(stream_text: str) -> dict:
     # Per-response usage, summed as a FALLBACK for a run with no final `result` event — i.e. every
     # turn-capped or walled run. Without it the hardest runs report no tokens at all and
     # bench.metrics averages cost/tokens over the cheap runs only.
-    acc = {"in": 0, "out": 0, "n": 0, "miss": 0, "hit": 0, "deltas": 0}
+    acc = {"in": 0, "out": 0, "n": 0, "miss": 0, "hit": 0, "deltas": 0, "delta_cost": None}
     for raw in (stream_text or "").splitlines():
         raw = raw.strip()
         if not raw:
@@ -891,6 +896,12 @@ def summarize_stream(stream_text: str) -> dict:
                 if isinstance(u, dict):
                     acc["out"] += _as_int(u.get("output_tokens"))
                     acc["deltas"] += 1
+                    # Current CLI versions carry OpenRouter's per-response `usage.cost` HERE, not
+                    # on the `assistant` message. Kept apart and used only when the assistant
+                    # events reported none, so a CLI that sends both is not double-counted.
+                    c = u.get("cost")
+                    if isinstance(c, (int, float)) and not isinstance(c, bool):
+                        acc["delta_cost"] = (acc["delta_cost"] or 0.0) + float(c)
             continue
         if kind == "system" and obj.get("subtype") == "init":
             actions.append(f"[init] session={str(obj.get('session_id', '?'))[:8]} "
@@ -985,6 +996,8 @@ def summarize_stream(stream_text: str) -> dict:
                 info["input_miss_tokens"], info["cache_read_tokens"] = miss, hit
                 info["tokens_in"], info["tokens_out"] = miss + hit, tout
                 info["total_tokens"] = miss + hit + tout
+    if info["provider_cost"] is None:
+        info["provider_cost"] = acc["delta_cost"]
     if info["tokens_in"] is None and acc["n"]:
         # No `result` event: capped or walled. Input is fully recoverable — summing per-response
         # usage reproduces the result event's input total exactly (verified on four real runs).

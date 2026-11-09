@@ -24,5 +24,5 @@ pip install -r requirements.txt
 
 echo
 echo "Setup complete. Next:"
-echo "  cp .env.example .env       # then add your OPENROUTER_API_KEY"
+echo "  cp .env.example .env       # then set LLM_API_KEY"
 echo "  ./run_bench.sh pipreqs --tier all --only bruin-data/ingestr   # smoke, no API key"

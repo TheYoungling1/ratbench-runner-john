@@ -258,6 +258,23 @@ def _apply_overrides(cfg: dict, a) -> dict:
     # budget as the other produce-able arms rather than silently inheriting a different one.
     if a.call_limit:
         model["per_instance_call_limit"] = a.call_limit
+    # One endpoint for every arm (README, "API keys"). litellm picks the provider from the name's
+    # prefix: `openrouter/` keeps OpenRouter (and the provider pin below); any other endpoint is
+    # reached as a generic OpenAI-compatible one through `openai/` + api_base.
+    shared_key = os.environ.get("LLM_API_KEY", "").strip()
+    shared_base = os.environ.get("LLM_BASE_URL", "").strip()
+    if shared_key or shared_base:
+        bare = str(a.llm).removeprefix("openrouter/").removeprefix("openai/")
+        if shared_key:
+            model["api_key"] = "$LLM_API_KEY"   # SWE-agent resolves `$VAR`; no key in the config
+        if shared_base and "openrouter.ai" not in shared_base:
+            model["name"] = f"openai/{bare}"
+            model["api_base"] = shared_base
+            # litellm cannot price an arbitrary model, and SWE-agent aborts on turn 1 when it
+            # cannot price a response under a $ cap. The call limit stays the budget.
+            model["per_instance_cost_limit"] = 0
+        else:
+            model["name"] = f"openrouter/{bare}"
     # Pin the OpenRouter upstream provider the way every other arm does (libkit/llm.py), so a
     # cross-method comparison differs by method and not by which provider served the tokens.
     # Default matches Graph2Env's envstate/openrouter.py DEFAULT_PROVIDER -- the two must agree or
@@ -268,7 +285,7 @@ def _apply_overrides(cfg: dict, a) -> dict:
     providers = [p.strip()
                  for p in os.environ.get("OPENROUTER_PROVIDER", "baidu/fp8,streamlake/fp8").split(",")
                  if p.strip()]
-    if providers and str(a.llm).startswith("openrouter/"):
+    if providers and str(model["name"]).startswith("openrouter/"):
         ck = model.setdefault("completion_kwargs", {})
         ck.setdefault("extra_body", {}).setdefault(
             "provider", {"order": providers, "allow_fallbacks": False})

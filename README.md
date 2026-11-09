@@ -55,13 +55,27 @@ sudo apt-get install -y git python3-venv tmux
 ```bash
 git clone <this-repo> env-bench && cd env-bench
 ./setup.sh                  # creates .venv and installs requirements.txt
-cp .env.example .env        # then fill in the key(s) you need
+cp .env.example .env        # then set LLM_API_KEY
 ```
 
-| Key in `.env` | Needed by |
+### API keys
+
+Every arm uses **one key and one OpenAI-compatible endpoint**:
+
+| In `.env` | What it is |
 |---|---|
-| `OPENROUTER_API_KEY` | most arms (rat, repo2run, sweagent_repo2run*, claudecode-dockerfile) |
-| `DEEPSEEK_API_KEY` | `setupx` |
+| `LLM_API_KEY` | Your key. The only value you must fill in. |
+| `LLM_BASE_URL` | The endpoint. Defaults to OpenRouter (`https://openrouter.ai/api/v1`). |
+| `LLM_MODEL` | Optional: one model for every arm, as that provider names it. Empty = each arm's pinned model in `varieties.toml`. `--llm` overrides it. |
+
+On OpenRouter every arm is pinned to the same upstream provider (DeepInfra) with reasoning off,
+which is how `runs_results/` was produced. Those switches are OpenRouter-only: on another provider
+the arms run with that provider's defaults, so numbers are not directly comparable. SWE-agent also
+cannot price an unknown model there, so its cost is not tracked (the 100-call cap still applies).
+
+The older per-provider variables (`OPENROUTER_API_KEY`, `DEEPSEEK_API_KEY`, `SETUPX_BASE_URL`,
+`EMBEDDING_*`, `ANTHROPIC_AUTH_TOKEN`) still work and take over when `LLM_API_KEY` and
+`LLM_BASE_URL` are both unset.
 
 ### 3. Smoke test (one repo, free)
 
@@ -101,14 +115,16 @@ Each run lands in `runs/<variety>/<run>-<timestamp>/`:
 ## Adding SetupX
 
 SetupX is not vendored. `tools/provision_setupx.sh` clones it to `~/agents/SetupX`, pins the commit,
-applies the required `tools/setupx-bench.patch`, and builds its Python 3.10 venv. It is safe to
-re-run, and you **should** re-run it after every `git pull`.
+applies the required `tools/setupx-bench.patch`, builds its Python 3.10 venv, starts a pgvector
+container and loads SetupX's 600-entry XPU store. It is safe to re-run, and you **should** re-run it
+after every `git pull`.
+
+The XPU store's embeddings use `LLM_API_KEY` / `LLM_BASE_URL` (`openai/text-embedding-3-small` on
+OpenRouter). On another provider, also set `EMBEDDING_MODEL` and `EMBEDDING_DIM` in `.env`.
 
 ```bash
-# needs python3.10 on PATH and DEEPSEEK_API_KEY in .env
-./tools/provision_setupx.sh --no-xpu          # XPU-off arm (no database)
-./tools/provision_setupx.sh                   # XPU-on arm: also starts pgvector and loads the store
-                                              #   (also needs OPENROUTER_API_KEY, for embeddings)
+# needs python3.10 on PATH, and LLM_API_KEY + SETUPX_DB_DSN in .env (both in .env.example)
+./tools/provision_setupx.sh
 export SETUPX_ROOT=~/agents/SetupX
 ```
 
@@ -118,9 +134,9 @@ Then run it like any other arm:
 ./run_bench.sh setupx --repos-json datasets/rat_python50.json --tier all --only bruin-data/ingestr
 ```
 
-- **XPU-off vs XPU-on** is decided by `SETUPX_DB_DSN`: leave it unset for XPU-off. For XPU-on, set
-  it plus the `EMBEDDING_*` keys from `.env.example`. Re-running the provision script resets the
-  per-run database copy (`xpu_run`), so every run starts from the same store.
+- **The XPU store is read-only during a run** — no new entries, no telemetry updates — so every repo
+  sees the same store. Re-run the provision script before each run to reset the per-run copy
+  (`xpu_run`) from the master.
 - **Never create a `.env` inside `~/agents/SetupX`** — SetupX would load it and override the model
   and endpoint the benchmark passes in. The producer refuses to start if one exists.
 - **Clean up after a run** — every checkpoint image is ~2 GB:
@@ -129,6 +145,32 @@ Then run it like any other arm:
   docker images --filter 'reference=setup_agent_checkpoint*' -q | xargs -r docker rmi -f
   docker images --filter 'reference=setupx-mirror*' -q | xargs -r docker rmi -f
   ```
+
+## Adding Claude Code
+
+The `claudecode-dockerfile` arm runs the Claude Code CLI inside a `claude-runner` container, routed
+to `deepseek/deepseek-v4-flash-0731` through OpenRouter's Anthropic-compatible API. The image is
+built automatically from `docker/claude-runner.Dockerfile` on the first run.
+
+The CLI can't turn reasoning off for a non-Claude model, so requests go through a small local proxy
+that does it (`tools/anthropic_thinking_proxy.py`). Start it in its own terminal or `tmux` window:
+
+```bash
+PROXY_UPSTREAM_HOST=openrouter.ai python3 tools/anthropic_thinking_proxy.py     # listens on :8931
+```
+
+Then run it. It authenticates with `LLM_API_KEY`; the two proxy settings are already in
+`.env.example`:
+
+```bash
+# .env: ANTHROPIC_BASE_URL=http://host.docker.internal:8931/api   (the proxy, seen from the container)
+#       PROXY_UPSTREAM_HOST=openrouter.ai                         (so cost uses OpenRouter rates)
+./run_bench.sh claudecode-dockerfile --repos-json datasets/rat_python50.json --tier all
+```
+
+The CLI only speaks Anthropic's format, so on another provider point `ANTHROPIC_BASE_URL` (and the
+proxy's `PROXY_UPSTREAM_HOST`) at that provider's Anthropic-compatible endpoint. The budget is 100
+LLM calls per repo (`num_turn` in `varieties.toml`), the same as SetupX and SWE-agent.
 
 ## Benchmark results (`runs_results/`)
 

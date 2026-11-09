@@ -36,6 +36,19 @@ from producers.setupx_replay import (  # noqa: F401
 from producers.setupx_replay import _as_int  # noqa: E402
 
 DEEPSEEK_BASE_URL = "https://api.deepseek.com/v1"
+OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
+
+
+def _shared_route() -> tuple[str, str] | None:
+    """(base_url, key) from the shared LLM_BASE_URL / LLM_API_KEY, or None when neither is set
+    (then the legacy SETUPX_BASE_URL / DEEPSEEK_API_KEY / OPENROUTER_API_KEY path applies)."""
+    base = os.environ.get("LLM_BASE_URL", "").strip()
+    key = os.environ.get("LLM_API_KEY", "").strip()
+    if not (base or key):
+        return None
+    return base or OPENROUTER_BASE_URL, key
+
+
 # The patch this producer's semantics rest on, resolved from this file so it follows the repo.
 PATCH_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                           "tools", "setupx-bench.patch")
@@ -144,16 +157,25 @@ def child_env(llm: str | None, base_image: str, ckpt_ns: str, max_llm_calls: int
     # The key must match the ENDPOINT, not the arm's history. SetupX sends it as a bearer to
     # whatever OPENAI_BASE_URL points at, so a DeepSeek key on the OpenRouter route is a 401 on
     # every repo — after the mirror image is already built and paid for.
-    base_url = os.environ.get("SETUPX_BASE_URL", DEEPSEEK_BASE_URL)
-    key_var = "OPENROUTER_API_KEY" if "openrouter.ai" in base_url else "DEEPSEEK_API_KEY"
-    key = os.environ.get(key_var)
+    shared = _shared_route()
+    if shared:
+        # One endpoint for every arm (README, "API keys"). SETUPX_BASE_URL still overrides the
+        # endpoint for this arm alone. Only litellm's routing prefix is stripped: on a generic
+        # endpoint `org/model` IS the model name.
+        base_url = os.environ.get("SETUPX_BASE_URL") or shared[0]
+        key_var, key = "LLM_API_KEY", shared[1]
+        model = (llm or "deepseek/deepseek-v4-flash").removeprefix("openrouter/")
+    else:
+        base_url = os.environ.get("SETUPX_BASE_URL", DEEPSEEK_BASE_URL)
+        key_var = "OPENROUTER_API_KEY" if "openrouter.ai" in base_url else "DEEPSEEK_API_KEY"
+        key = os.environ.get(key_var)
+        # `deepseek/deepseek-v4-flash` is a litellm-style slug; SetupX POSTs the value verbatim as
+        # {"model": ...} to an OpenAI-compatible endpoint, which wants the bare name.
+        model = (llm or "deepseek/deepseek-v4-flash").split("/", 1)[-1]
     if not key:
         raise RuntimeError(f"{key_var} is not set, but SETUPX_BASE_URL points at {base_url} — "
                            "the setupx variety sends this key as the bearer for that endpoint "
                            "(see README, 'SetupX setup').")
-    # `deepseek/deepseek-v4-flash` is a litellm-style slug; SetupX POSTs the value verbatim as
-    # {"model": ...} to an OpenAI-compatible endpoint, which wants the bare name.
-    model = (llm or "deepseek/deepseek-v4-flash").split("/", 1)[-1]
     env = dict(os.environ,
                LLM_PROVIDER="openai",
                OPENAI_API_KEY=key,
@@ -191,6 +213,15 @@ def child_env(llm: str | None, base_image: str, ckpt_ns: str, max_llm_calls: int
         })
 
     dsn = os.environ.get("SETUPX_DB_DSN")
+    if dsn and shared:
+        # Embeddings default to the shared endpoint. The embedding model's name is
+        # provider-specific, so it is only defaulted on OpenRouter; elsewhere it must be set.
+        for k, v in (("EMBEDDING_API_KEY", shared[1]), ("EMBEDDING_BASE_URL", shared[0])):
+            if not env.get(k):
+                env[k] = v
+        if "openrouter.ai" in env["EMBEDDING_BASE_URL"] and not env.get("EMBEDDING_MODEL"):
+            env["EMBEDDING_MODEL"] = "openai/text-embedding-3-small"
+            env.setdefault("EMBEDDING_DIM", "1536")
     if dsn:
         # All THREE, not just the key. text_to_embedding takes the dedicated branch as soon as
         # EMBEDDING_API_KEY is set, and then passes base_url=None straight through — sending an
@@ -199,7 +230,7 @@ def child_env(llm: str | None, base_image: str, ckpt_ns: str, max_llm_calls: int
         # prevent. (The OPENAI_* fallback is no better: those now point at DeepSeek, which serves
         # no /embeddings route at all.)
         missing = [k for k in ("EMBEDDING_API_KEY", "EMBEDDING_BASE_URL", "EMBEDDING_MODEL")
-                   if not os.environ.get(k)]
+                   if not env.get(k)]
         if missing:
             raise RuntimeError(
                 f"{', '.join(missing)} not set, but SETUPX_DB_DSN is — XPU retrieval embeds every "

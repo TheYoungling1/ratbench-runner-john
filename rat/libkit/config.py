@@ -119,6 +119,16 @@ class Config:
         Returns:
             Dict containing 'key' and 'base_url'
         """
+        # Shared path: one OpenAI-compatible endpoint for every arm (README, "API keys"). When
+        # LLM_API_KEY or LLM_BASE_URL is set it wins for every model name; unset, nothing changes.
+        # The OpenRouter provider pin in llm.py is keyed on the base URL, so it still applies only
+        # there.
+        _shared_key = os.getenv("LLM_API_KEY", "").strip()
+        _shared_base = os.getenv("LLM_BASE_URL", "").strip()
+        if _shared_key or _shared_base:
+            return {"base_url": _shared_base or "https://openrouter.ai/api/v1",
+                    "key": _shared_key or None}
+
         # MiniMax path: explicit provider OR a MiniMax model id. MUST use MINIMAX_API_BASE
         # (never the OpenRouter base — that would burn OpenRouter credits). Fail fast if unset.
         _provider = os.getenv("LLM_API_PROVIDER", "").strip().lower()
