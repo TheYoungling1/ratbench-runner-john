@@ -1,0 +1,24 @@
+{
+  "agent_branch": "",
+  "agent_commit": "unknown",
+  "concurrency": 4,
+  "dataset": {
+    "path": "datasets/rat_python50_new.json",
+    "repo_count": 50,
+    "sha256": "2bd6edaa718ed61b13ab86f0de3f87379d19811031b0108570bba6c4f29432e4"
+  },
+  "dirty": true,
+  "harness_commit": "unknown",
+  "host": {
+    "machine": "x86_64",
+    "python_version": "3.11.16",
+    "system": "Linux"
+  },
+  "model": "pipreqs",
+  "num_turn": null,
+  "status": "done",
+  "sweagent_commit": "unknown",
+  "sweagent_config": null,
+  "tier": "all",
+  "variety": "pipreqs"
+}

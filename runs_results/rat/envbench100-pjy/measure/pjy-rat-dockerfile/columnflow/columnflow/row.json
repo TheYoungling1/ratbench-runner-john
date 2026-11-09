@@ -1,0 +1,83 @@
+{
+  "agent": "rat__envbench100-pjy",
+  "repo": "columnflow/columnflow",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "w-0.1.20 llvmlite-0.49.0 locket-1.0.0 lockfile-0.12.2 luigi-3.5.2 lz4-4.4.5 markdown-it-py-4.2.0 matplotlib-3.11.1 mdurl-0.1.2 mplhep-1.3.3 mplhep_data-0.1.0 numba-0.67.0 numpy-1.25.2 openai-3.11.0 order-2.1.7 pandas-2.3.3 partd-1.4.2 pillow-12.3.0 pyarrow-13.0.0 pyparsing-3.3.2 pytest-7.4.4 pytest-cov-3.0.0 python-daemon-3.1.2 python-dateutil-2.9.0.post0 pytz-2026.3.post1 rich-15.0.0 scinum-2.1.2 scipy-1.16.3 six-1.16.0 tabulate-0.10.0 tenacity-8.5.0 toml-0.10.2 toolz-1.1.0 tornado-6.5.8 tqdm-4.70.0 tzdata-2026.3 uhi-1.1.1 uproot-5.1.2 xxhash-4.0.1 zipp-4.1.0 zstandard-0.25.0\n#18 132.6 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 132.7 \n#18 132.7 [notice] A new release of pip is available: 24.0 -> 26.2.1\n#18 132.7 [notice] To update, run: pip install --upgrade pip\n#18 DONE 133.8s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.5s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 43.8s done\n#21 exporting manifest sha256:00cdb52c85b289d519c184b450da80634ee2c01f7068de17ffd0b311e68fc1eb\n#21 exporting manifest sha256:00cdb52c85b289d519c184b450da80634ee2c01f7068de17ffd0b311e68fc1eb 0.0s done\n#21 exporting config sha256:27c7b214d3689cd315bfc1df906490d3e717c67bf09cde87437176971dd15c1a 0.0s done\n#21 exporting attestation manifest sha256:8b447f55a8bc28d8c05cfcc782d44021aed74f53bc821a3b5537ac207bb472df 0.0s done\n#21 exporting manifest list sha256:d6c6cb6dab29456655384f0969fd7d3e0283ea8c3425581490f4a9dd97e9cf47 0.0s done\n#21 naming to docker.io/library/bench-rat__envbench100-pjy-columnflow-columnflow:latest done\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-columnflow-columnflow:latest\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-columnflow-columnflow:latest 12.2s done\n#21 DONE 56.2s\n",
+  "status": "collect_error",
+  "py_test_files": 5,
+  "collect_rc": 2,
+  "collect_clean": false,
+  "collect_errors": [
+    "E   ValueError: Not a boolean: $CF_WLCG_USE_CACHE",
+    "E   ValueError: Not a boolean: $CF_WLCG_USE_CACHE",
+    "E   ValueError: Not a boolean: $CF_WLCG_USE_CACHE",
+    "E   ValueError: Not a boolean: $CF_WLCG_USE_CACHE",
+    "E   ValueError: Not a boolean: $CF_WLCG_USE_CACHE",
+    "ERROR tests/test_columnar_util.py - ValueError: Not a boolean: $CF_WLCG_USE_C...",
+    "ERROR tests/test_config_util.py - ValueError: Not a boolean: $CF_WLCG_USE_CACHE",
+    "ERROR tests/test_plotting.py - ValueError: Not a boolean: $CF_WLCG_USE_CACHE",
+    "ERROR tests/test_task_parameters.py - ValueError: Not a boolean: $CF_WLCG_USE...",
+    "ERROR tests/test_util.py - ValueError: Not a boolean: $CF_WLCG_USE_CACHE"
+  ],
+  "collect_error_count": 5,
+  "collected_node_ids": [],
+  "executed": true,
+  "total": 5,
+  "passed": 0,
+  "failed": 0,
+  "errors": 5,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [
+    "tests.test_columnar_util",
+    "tests.test_config_util",
+    "tests.test_plotting",
+    "tests.test_task_parameters",
+    "tests.test_util"
+  ],
+  "ebsr": true,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 365.8,
+  "image_delta_mb": null,
+  "image_digest": "bench-rat__envbench100-pjy-columnflow-columnflow@sha256:d6c6cb6dab29456655384f0969fd7d3e0283ea8c3425581490f4a9dd97e9cf47",
+  "installed_pkg_count": 83,
+  "tokens_in": 700579,
+  "tokens_out": 12141,
+  "llm_calls": 33,
+  "turns_used": null,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 215.65,
+  "test_s": 0.8,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "results_pjy",
+    "tokens_in": 700579,
+    "tokens_out": 12141,
+    "llm_calls": 33,
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

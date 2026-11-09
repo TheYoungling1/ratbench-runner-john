@@ -22,9 +22,12 @@ def test_gates_over_full_denominator():
     # EBSR = conforming AND Repo2Run collect gate (rc in {0,5}): only r1 qualifies -> 1/3
     assert m["n_ebsr"] == 1 and m["EBSR"] == round(1 / 3, 4)
     assert m["n_collect_clean"] == 1
-    assert m["ESSR_all"] == round((1.0 + 0.5 + 0.0) / 3, 4)
-    # ESSR (RAT-official headline) = mean pass_rate over the 2 executed repos
-    assert m["ESSR"] == round((1.0 + 0.5) / 2, 4)
+    # ESSR is gold-anchored: min(passed/D, 1) per repo, build_fail scored 0 and kept IN the mean.
+    # (The old ÷exec and ÷all assertions were removed with those metrics on 2026-09-15.)
+    gold = {r: {"size": 10, "sha": None, "status": "CERTIFIED"} for r in ("r1", "r2", "r3")}
+    mg = compute_metrics(rows, gold=gold, population=["r1", "r2", "r3"])
+    assert mg["ESSR"] == round((1.0 + 0.5 + 0.0) / 3, 4)
+    assert m["ESSR"] is None                      # no gold supplied -> not scored, not zero
     assert m["coverage"] == round(2 / 3, 4)
 
 
@@ -54,4 +57,4 @@ def test_micro_is_test_weighted_over_executed():
 
 def test_empty_rows_safe():
     m = compute_metrics([])
-    assert m["n"] == 0 and m["EBSR"] == 0.0 and m["ESSR_all"] == 0.0
+    assert m["n"] == 0 and m["EBSR"] == 0.0 and m["ESSR"] is None

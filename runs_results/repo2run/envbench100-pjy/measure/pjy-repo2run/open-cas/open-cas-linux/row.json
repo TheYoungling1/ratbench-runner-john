@@ -1,0 +1,70 @@
+{
+  "agent": "repo2run__envbench100-pjy",
+  "repo": "open-cas/open-cas-linux",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "he 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#47 1.092 \n#47 1.092 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#47 1.092 [notice] To update, run: pip install --upgrade pip\n#47 DONE 1.2s\n\n#48 [45/49] RUN pip show pytest | head -3\n#48 0.465 Name: pytest\n#48 0.465 Version: 6.2.5\n#48 0.465 Summary: pytest: simple powerful testing with Python\n#48 0.465 ERROR: Pipe to stdout was broken\n#48 0.465 Exception ignored in: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>\n#48 0.465 BrokenPipeError: [Errno 32] Broken pipe\n#48 DONE 0.5s\n\n#49 [46/49] RUN pip show pytest-asyncio | head -3\n#49 0.509 ERROR: Pipe to stdout was broken\n#49 0.510 Exception ignored in: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>\n#49 0.510 BrokenPipeError: [Errno 32] Broken pipe\n#49 0.510 Name: pytest-asyncio\n#49 0.510 Version: 0.14.0\n#49 0.510 Summary: Pytest support for asyncio.\n#49 DONE 0.6s\n\n#50 [47/49] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#50 DONE 0.6s\n\n#51 [48/49] WORKDIR /testbed\n#51 DONE 0.0s\n\n#52 exporting to image\n#52 exporting layers\n#52 exporting layers 2.5s done\n#52 exporting manifest sha256:748797d697d85565cff3993f292dee8d2d43962e7a71fa9183c1f2029308e0d0 done\n#52 exporting config sha256:687dc08b2ca372e62f2e135d0e809bc832f27c9c77b070f16922cf1b80d3ba21 done\n#52 exporting attestation manifest sha256:588e26c2e5d809ec452244b50cd77e5d307deaa32ed235559f6fb26b98e63fd2 0.0s done\n#52 exporting manifest list sha256:e098655a7b2a87460a6598245177da4dd87fbf1407423ef01197a04723dbd543 done\n#52 naming to docker.io/library/bench-repo2run__envbench100-pjy-open-cas-open-cas-linux:latest done\n#52 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-open-cas-open-cas-linux:latest\n#52 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-open-cas-open-cas-linux:latest 1.5s done\n#52 DONE 4.1s\n",
+  "status": "collect_error",
+  "py_test_files": 152,
+  "collect_rc": 1,
+  "collect_clean": false,
+  "collect_errors": [
+    "/usr/local/lib/python3.10/site-packages/_pytest/config/__init__.py:318: PluggyTeardownRaisedWarning: A plugin raised an exception during an old-style hookwrapper teardown.",
+    "AssertionError:"
+  ],
+  "collect_error_count": 0,
+  "collected_node_ids": [],
+  "executed": false,
+  "total": 0,
+  "passed": 0,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [],
+  "ebsr": false,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 528.3,
+  "image_delta_mb": null,
+  "image_digest": "bench-repo2run__envbench100-pjy-open-cas-open-cas-linux@sha256:e098655a7b2a87460a6598245177da4dd87fbf1407423ef01197a04723dbd543",
+  "installed_pkg_count": 53,
+  "tokens_in": 600225,
+  "tokens_out": 11106,
+  "llm_calls": null,
+  "turns_used": 28,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 46.67,
+  "test_s": 0.22,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "results_pjy",
+    "tokens_in": 600225,
+    "tokens_out": 11106,
+    "llm_calls": null,
+    "turns_used": 28,
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

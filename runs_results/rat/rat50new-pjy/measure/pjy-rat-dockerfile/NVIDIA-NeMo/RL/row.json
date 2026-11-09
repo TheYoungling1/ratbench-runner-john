@@ -1,0 +1,70 @@
+{
+  "agent": "rat__rat50new-pjy",
+  "repo": "NVIDIA-NeMo/RL",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "ytest-xdist-3.8.0 python-dateutil-2.9.0.post0 python-discovery-1.6.0 python-dotenv-1.2.3 pyzmq-27.2.0 ray-2.58.0 referencing-0.37.0 regex-2026.9.10 requests-2.34.2 requests-oauthlib-2.0.0 rich-15.0.0 rpds-py-2026.6.3 safetensors-0.8.0 scikit-learn-1.9.1 scipy-1.18.1 shellingham-1.5.4 simplejson-4.1.2 six-1.17.0 skops-0.15.0 smart_open-8.0.1 smmap-5.0.3 sqlparse-0.6.0 starlette-1.6.0 swanlab-0.10.0 sympy-1.14.0 template-project-0.1.0 tenacity-9.1.4 tensorboard-2.21.0 tensorboard-data-server-0.7.2 text-unidecode-1.3 threadpoolctl-3.6.0 tokenizers-0.22.2 torch-2.14.0+cpu tqdm-4.70.1 transformers-5.12.1 triton-3.8.0 typer-0.27.2 typing-inspection-0.4.4 typing_extensions-4.16.0 urllib3-2.7.0 uvicorn-0.53.0 virtualenv-21.7.9 wandb-0.30.0 watchdog-6.0.0 wcwidth-0.8.3 websocket-client-1.9.2 wrapt-2.4.1 xxhash-3.5.0 yarl-1.24.5 zipp-4.1.0\n#22 314.3 \n#22 314.3 [notice] A new release of pip is available: 24.3.1 -> 26.2.1\n#22 314.3 [notice] To update, run: python -m pip install --upgrade pip\n#22 DONE 319.5s\n\n#23 [19/20] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#23 DONE 1.7s\n\n#24 [20/20] WORKDIR /testbed\n#24 DONE 0.0s\n\n#25 exporting to image\n#25 exporting layers\n#25 exporting layers 137.7s done\n#25 exporting manifest sha256:f40f9f8088aa0665ff166b44fd2c501994ebe899aa65e53cbe66ea059ed3ce68\n#25 exporting manifest sha256:f40f9f8088aa0665ff166b44fd2c501994ebe899aa65e53cbe66ea059ed3ce68 done\n#25 exporting config sha256:804cf8523a4497c505a238bc2b1b0785c888bf1a61a65c39112d89ce71c5a09b done\n#25 exporting attestation manifest sha256:4ef1703f34c6b53bb339a59047cb8c850005bdefbb7dd4235ae0a66fbd9356d8 0.0s done\n#25 exporting manifest list sha256:c7a544904a27102c1a0e73926fd7b434fcf3d09bfad3e52476b547cfa4d5bca7 0.0s done\n#25 naming to docker.io/library/bench-rat__rat50new-pjy-nvidia-nemo-rl:latest done\n#25 unpacking to docker.io/library/bench-rat__rat50new-pjy-nvidia-nemo-rl:latest\n#25 unpacking to docker.io/library/bench-rat__rat50new-pjy-nvidia-nemo-rl:latest 38.8s done\n#25 DONE 176.6s\n",
+  "status": "collect_error",
+  "py_test_files": 345,
+  "collect_rc": 1,
+  "collect_clean": false,
+  "collect_errors": [
+    "E   ModuleNotFoundError: No module named 'megatron'"
+  ],
+  "collect_error_count": 1,
+  "collected_node_ids": [],
+  "executed": true,
+  "total": 1,
+  "passed": 0,
+  "failed": 0,
+  "errors": 1,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [
+    "tests.functional.test_converter_roundtrip"
+  ],
+  "ebsr": true,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 1204.9,
+  "image_delta_mb": null,
+  "image_digest": "bench-rat__rat50new-pjy-nvidia-nemo-rl@sha256:c7a544904a27102c1a0e73926fd7b434fcf3d09bfad3e52476b547cfa4d5bca7",
+  "installed_pkg_count": 188,
+  "tokens_in": 3668790,
+  "tokens_out": 14073,
+  "llm_calls": 103,
+  "turns_used": null,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 557.97,
+  "test_s": 8.94,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "results_pjy",
+    "tokens_in": 3668790,
+    "tokens_out": 14073,
+    "llm_calls": 103,
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

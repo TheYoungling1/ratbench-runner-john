@@ -41,6 +41,7 @@ from producers.claudecode_dockerfile import ClaudeCodeDockerfileProducer  # noqa
 from producers.repo2run import Repo2RunProducer  # noqa: E402
 from producers.executionagent import ExecutionAgentProducer  # noqa: E402
 from producers.sweagent_repo2run import (  # noqa: E402
+    SweAgentRepo2RunGraphProducer,
     SweAgentRepo2RunModernProducer,
     SweAgentRepo2RunProducer,
 )
@@ -59,6 +60,7 @@ register(Repo2RunProducer)
 register(ExecutionAgentProducer)
 register(SweAgentRepo2RunProducer)
 register(SweAgentRepo2RunModernProducer)
+register(SweAgentRepo2RunGraphProducer)
 register(SetupXProducer)
 register(PipreqsProducer)
 register(RatProducer)

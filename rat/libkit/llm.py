@@ -18,7 +18,7 @@ def _openrouter_extra_body(existing: dict | None = None) -> dict:
     """Build (or merge into) an extra_body dict with the provider-pin block."""
     providers = [
         p.strip()
-        for p in os.getenv("OPENROUTER_PROVIDER", "Alibaba").split(",")
+        for p in os.getenv("OPENROUTER_PROVIDER", "DeepInfra").split(",")
         if p.strip()
     ]
     body = dict(existing) if existing else {}

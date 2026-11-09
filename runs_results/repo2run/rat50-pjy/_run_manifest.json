@@ -1,0 +1,16 @@
+{
+  "variety": "pjy-repo2run",
+  "tier": "all",
+  "adapted_from": "RatBench_Repo2Run/ebsr_evaluation",
+  "adapter": "tools/adapt_pjy.py",
+  "dataset": {
+    "path": "datasets/rat_python50.json",
+    "repo_count": 50,
+    "sha256": "0111697043d2790ce593726c33d9295a002a069f0660d4304aae27d5964b82fb"
+  },
+  "repos_linked": 50,
+  "repos_with_dockerfile": 47,
+  "missing_copy_sources": {},
+  "off_dataset_dropped": [],
+  "note": "Symlink mirror of a separate pipeline's artifacts. Scores come from bench.unified_bench rebuilding these Dockerfiles, NOT from that pipeline's own ebsr/MTPR JSONs."
+}

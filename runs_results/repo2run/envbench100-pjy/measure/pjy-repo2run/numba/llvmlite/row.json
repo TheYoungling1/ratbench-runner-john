@@ -1,0 +1,69 @@
+{
+  "agent": "repo2run__envbench100-pjy",
+  "repo": "numba/llvmlite",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "ot 132875504 Sep 26 06:01 llvmlite/binding/libllvmlite.so\n#31 0.211 00000000007c798b T LLVMPY_AddRefPrunePass_function\n#31 0.211 00000000007c78d7 T LLVMPY_AddRefPrunePass_module\n#31 DONE 0.2s\n\n#32 [29/35] RUN cd /repo && pip download llvmlite==0.44.0 --no-deps -d /tmp/llvmlite_wheel --python-version 3.10 --platform manylinux2014_x86_64 --implementation cp --abi cp310 -q\n#32 0.911 \n#32 0.911 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#32 0.911 [notice] To update, run: pip install --upgrade pip\n#32 DONE 1.0s\n\n#33 [30/35] RUN cd /tmp/llvmlite_wheel && python -c \"import zipfile,glob; w=glob.glob('*.whl')[0]; zipfile.ZipFile(w).extractall('/tmp/llvmlite_extract')\"\n#33 DONE 0.8s\n\n#34 [31/35] RUN cd /tmp/llvmlite_wheel && cp /tmp/llvmlite_extract/llvmlite/binding/libllvmlite.so /repo/llvmlite/binding/libllvmlite.so\n#34 DONE 0.4s\n\n#35 [32/35] RUN cd /tmp/llvmlite_wheel && nm -D /repo/llvmlite/binding/libllvmlite.so | grep AddRefPrunePass\n#35 0.140 00000000007c798b T LLVMPY_AddRefPrunePass_function\n#35 0.140 00000000007c78d7 T LLVMPY_AddRefPrunePass_module\n#35 DONE 0.1s\n\n#36 [33/35] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#36 DONE 0.3s\n\n#37 [34/35] WORKDIR /testbed\n#37 DONE 0.0s\n\n#38 exporting to image\n#38 exporting layers\n#38 exporting layers 8.1s done\n#38 exporting manifest sha256:5b2428aa629acfd6d8a12221b99c6df66d6a437c4fbddfc65cdd0f24fbabb320 done\n#38 exporting config sha256:0bc619e4268d44aae13ad84409dfe0273e6072755274c650e95c81d9e10a2a38 done\n#38 exporting attestation manifest sha256:7893e62b5c73c2886c503b5942036d3d532d77a224df520410d88ae215e4c991 done\n#38 exporting manifest list sha256:9aa5a561e22a467358734be9b50e80cc29d789f21c632745178280a8e375fd5a done\n#38 naming to docker.io/library/bench-repo2run__envbench100-pjy-numba-llvmlite:latest done\n#38 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-numba-llvmlite:latest\n#38 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-numba-llvmlite:latest 4.5s done\n#38 DONE 12.7s\n",
+  "status": "collect_error",
+  "py_test_files": 5,
+  "collect_rc": 3,
+  "collect_clean": false,
+  "collect_errors": [],
+  "collect_error_count": 0,
+  "collected_node_ids": [],
+  "executed": true,
+  "total": 1,
+  "passed": 0,
+  "failed": 0,
+  "errors": 1,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [
+    "pytest::internal"
+  ],
+  "ebsr": true,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 2814.3,
+  "image_delta_mb": null,
+  "image_digest": "bench-repo2run__envbench100-pjy-numba-llvmlite@sha256:9aa5a561e22a467358734be9b50e80cc29d789f21c632745178280a8e375fd5a",
+  "installed_pkg_count": 27,
+  "tokens_in": 3704823,
+  "tokens_out": 80334,
+  "llm_calls": null,
+  "turns_used": 100,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 30.43,
+  "test_s": 0.34,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "results_pjy",
+    "tokens_in": 3704823,
+    "tokens_out": 80334,
+    "llm_calls": null,
+    "turns_used": 100,
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

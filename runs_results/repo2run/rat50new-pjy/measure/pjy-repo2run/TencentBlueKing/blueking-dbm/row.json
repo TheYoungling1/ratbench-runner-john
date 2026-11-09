@@ -1,0 +1,92 @@
+{
+  "agent": "repo2run__rat50new-pjy",
+  "repo": "TencentBlueKing/blueking-dbm",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "(0.0.4)\n#20 9.856   - Installing promql-parser (0.3.3)\n#20 9.932   - Installing pydotplus (2.0.2)\n#20 10.03   - Installing pygtrans (1.6.2)\n#20 10.12   - Installing pyinstrument (3.4.2)\n#20 10.13   - Installing pymysql (1.1.1)\n#20 10.17   - Installing pytest-cover (3.0.0)\n#20 10.22   - Installing pytest-django (3.9.0)\n#20 10.31   - Installing python-validator (0.0.8)\n#20 10.33   - Installing requests-mock (1.9.3)\n#20 10.35   - Installing simpleeval (1.0.7)\n#20 10.37   - Installing sqlglot (30.7.0)\n#20 10.40   - Installing validators (0.18.2)\n#20 10.42   - Installing xlrd (1.2.0)\n#20 DONE 11.8s\n\n#21 [18/20] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#21 DONE 8.4s\n\n#22 [19/20] WORKDIR /testbed\n#22 DONE 0.3s\n\n#23 exporting to image\n#23 exporting layers\n#23 exporting layers 40.1s done\n#23 exporting manifest sha256:06165ef2ea54a7ed968affe08b110a1a20ddba3850a2528f601e2f3f2a7cb1a0\n#23 exporting manifest sha256:06165ef2ea54a7ed968affe08b110a1a20ddba3850a2528f601e2f3f2a7cb1a0 0.0s done\n#23 exporting config sha256:6cc5bf20c917a8252fe895da8c5453a82d8903fcda8cd1f60bf5fb2ccd7503a0 0.0s done\n#23 exporting attestation manifest sha256:c238220335f41a2f1a9e78c69ff045ce4f723d87555982073d04d777ba8b0704 0.0s done\n#23 exporting manifest list sha256:6227c1fbd655a44190a9e358d6634dd113db7b77e8a2840188b22d9954e761ff 0.0s done\n#23 naming to docker.io/library/bench-repo2run__rat50new-pjy-tencentblueking-blueking-dbm:latest done\n#23 unpacking to docker.io/library/bench-repo2run__rat50new-pjy-tencentblueking-blueking-dbm:latest\n#23 unpacking to docker.io/library/bench-repo2run__rat50new-pjy-tencentblueking-blueking-dbm:latest 27.4s done\n#23 DONE 67.6s\n\n \u001b[33m3 warnings found (use docker --debug to expand):\n\u001b[0m - UndefinedVar: Usage of undefined variable '$PYTHONPATH' (line 21)\n - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV \"APP_TOKEN\") (line 23)\n - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV \"APP_TOKEN\") (line 28)\n",
+  "status": "collect_error",
+  "py_test_files": 298,
+  "collect_rc": 2,
+  "collect_clean": false,
+  "collect_errors": [
+    "E   ModuleNotFoundError: No module named 'django'",
+    "E   ModuleNotFoundError: No module named 'django'",
+    "E   ModuleNotFoundError: No module named 'django'",
+    "E   ModuleNotFoundError: No module named 'django'",
+    "E   ModuleNotFoundError: No module named 'django'",
+    "E   ModuleNotFoundError: No module named 'django'",
+    "E   ModuleNotFoundError: No module named 'django'",
+    "E   ModuleNotFoundError: No module named 'django'",
+    "ERROR dbm-ui/backend/tests - ModuleNotFoundError: No module named 'django'"
+  ],
+  "collect_error_count": 8,
+  "collected_node_ids": [
+    "dbm-services/common/dbha-v2/scripts/test_render_configs_detector.py::TestValidateProbeInstallDir::test_invalid_paths",
+    "dbm-services/common/dbha-v2/scripts/test_render_configs_detector.py::TestValidateProbeInstallDir::test_valid_paths"
+  ],
+  "executed": true,
+  "total": 17,
+  "passed": 2,
+  "failed": 0,
+  "errors": 8,
+  "skipped": 0,
+  "passed_node_ids": [
+    "dbm-services/common/dbha-v2/scripts/test_render_configs_detector.py::TestValidateProbeInstallDir::test_invalid_paths",
+    "dbm-services/common/dbha-v2/scripts/test_render_configs_detector.py::TestValidateProbeInstallDir::test_valid_paths"
+  ],
+  "failed_node_ids": [],
+  "error_node_ids": [
+    "dbm-ui.backend.flow.engine.bamboo.scene.spider.upgrade.test_filter_upgrade_instances",
+    "dbm-ui.backend.flow.plugins.components.collections.mysql.test_check_long_innodb_trx",
+    "dbm-ui.backend.flow.signal.test_mysql_rollback_exercise_handler",
+    "dbm-ui.backend.flow.utils.mysql.test_mysql_cross_major_version",
+    "dbm-ui.backend.flow.utils.mysql.test_mysql_semantic_start_configs",
+    "dbm-ui.backend.flow.utils.mysql.test_mysql_version_parse_batch",
+    "dbm-ui.backend.flow.utils.spider.test_spider_version_upgrade_checker",
+    "dbm-ui.backend.tests"
+  ],
+  "ebsr": true,
+  "pass_rate": 0.1176,
+  "timed_out": false,
+  "image_size_mb": 1471.7,
+  "image_delta_mb": null,
+  "image_digest": "bench-repo2run__rat50new-pjy-tencentblueking-blueking-dbm@sha256:6227c1fbd655a44190a9e358d6634dd113db7b77e8a2840188b22d9954e761ff",
+  "installed_pkg_count": 26,
+  "tokens_in": 1327499,
+  "tokens_out": 4509,
+  "llm_calls": null,
+  "turns_used": 45,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 148.03,
+  "test_s": 1.66,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "results_pjy",
+    "tokens_in": 1327499,
+    "tokens_out": 4509,
+    "llm_calls": null,
+    "turns_used": 45,
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\nremoved pyproject.toml\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

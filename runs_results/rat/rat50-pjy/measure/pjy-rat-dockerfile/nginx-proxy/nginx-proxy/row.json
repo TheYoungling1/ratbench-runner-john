@@ -1,0 +1,68 @@
+{
+  "agent": "rat__rat50-pjy",
+  "repo": "nginx-proxy/nginx-proxy",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "Found existing installation: httpcore2 2.13.0\n#16 16.39     Uninstalling httpcore2-2.13.0:\n#16 16.42       Successfully uninstalled httpcore2-2.13.0\n#16 16.62   Attempting uninstall: anyio\n#16 16.62     Found existing installation: anyio 4.15.1\n#16 16.64     Uninstalling anyio-4.15.1:\n#16 16.70       Successfully uninstalled anyio-4.15.1\n#16 16.80 Successfully installed Pygments-2.20.0 anyio-4.14.2 backoff-2.2.1 certifi-2026.7.22 charset-normalizer-3.5.1 distro-1.9.0 docker-7.1.0 httpcore2-2.10.0 httpx2-2.10.0 idna-3.18 jiter-0.16.0 openai-3.0.0 packaging-26.2 pydantic-2.13.4 pydantic_core-2.46.4 pytest-ignore-flaky-2.2.1 requests-2.34.2 tqdm-4.70.0 typing-inspection-0.4.3 urllib3-2.7.0\n#16 16.80 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#16 16.89 \n#16 16.89 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#16 16.89 [notice] To update, run: pip install --upgrade pip\n#16 DONE 17.4s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.5s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.0s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 15.9s done\n#19 exporting manifest sha256:ee4f2dbe99e9df7bb767807cb1258dc67f6522c47a9ee7a5572a6e469b786e58 0.0s done\n#19 exporting config sha256:5a0bd96b8f2c3ea645ebc22f74ab9c1abde3f151c800b19cf7c9b7c96197037c 0.0s done\n#19 exporting attestation manifest sha256:600e33ade98a69342626263bedce1d8273e4852f353892f588a65ef3dc98569e 0.0s done\n#19 exporting manifest list sha256:2e9aa0a161e4d010a5b132d85f8e19759d8ade3209fce9e9aa84106ecae3b211 done\n#19 naming to docker.io/library/bench-rat__rat50-pjy-nginx-proxy-nginx-proxy:latest done\n#19 unpacking to docker.io/library/bench-rat__rat50-pjy-nginx-proxy-nginx-proxy:latest\n#19 unpacking to docker.io/library/bench-rat__rat50-pjy-nginx-proxy-nginx-proxy:latest 5.4s done\n#19 DONE 21.4s\n",
+  "status": "collect_error",
+  "py_test_files": 95,
+  "collect_rc": 4,
+  "collect_clean": false,
+  "collect_errors": [
+    "E   docker.errors.DockerException: Error while fetching server API version: ('Connection aborted.', FileNotFoundError(2, 'No such file or directory'))"
+  ],
+  "collect_error_count": 0,
+  "collected_node_ids": [],
+  "executed": false,
+  "total": 0,
+  "passed": 0,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [],
+  "ebsr": false,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 847.1,
+  "image_delta_mb": null,
+  "image_digest": "bench-rat__rat50-pjy-nginx-proxy-nginx-proxy@sha256:2e9aa0a161e4d010a5b132d85f8e19759d8ade3209fce9e9aa84106ecae3b211",
+  "installed_pkg_count": 34,
+  "tokens_in": 1196651,
+  "tokens_out": 15001,
+  "llm_calls": 44,
+  "turns_used": null,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 49.11,
+  "test_s": 0.43,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "results_pjy",
+    "tokens_in": 1196651,
+    "tokens_out": 15001,
+    "llm_calls": 44,
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

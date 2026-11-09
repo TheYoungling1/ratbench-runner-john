@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import shlex
 import shutil
 import tempfile
 import time
@@ -162,7 +163,32 @@ W = "/testbed"
 
 
 def _sh(cmd: str) -> list:
-    return ["bash", "-lc", cmd]
+    # NOT a login shell. `-l` sources /etc/profile, whose Debian default OVERWRITES PATH
+    # unconditionally -- discarding the `ENV PATH` the image set. Any Dockerfile that exposes a
+    # virtualenv that way (Graph2Env: ENV PATH="/testbed/.venv/bin:...") was therefore measured
+    # against the SYSTEM interpreter: baserow reported 10 installed packages and could not import
+    # `requests`, while the same image collected cleanly under a non-login shell. That scored 25 of
+    # 50 rat50 repos as collect_error and put EBSR at 0.42 against a true ~0.92.
+    # languages/golang.py documents this same reset and works around it per-command; fixing it here
+    # makes that workaround redundant rather than load-bearing.
+    return ["bash", "-c", cmd]
+
+
+def services_script(services: list) -> str:
+    """Start runtime-handoff services, then wait up to 30s for each `check`. Mirrors Graph2Env's
+    EBSR runner, except a service whose check already passes (the image's own entrypoint may have
+    started it) is not started twice. Exit 1 if any service never became ready; measure() records
+    that and carries on, so a dead service shows up as test failures, not a missing row."""
+    lines = ["_g2e_rc=0"]
+    for s in services:
+        kind, start, check = s["kind"], s["start"], s["check"]
+        lines.append(f"({check}) >/dev/null 2>&1 || {{\n{start}\n}}")
+        lines.append(
+            f"_g2e_i=0; until ({check}) >/dev/null 2>&1; do _g2e_i=$((_g2e_i+1)); "
+            f"if [ $_g2e_i -ge 30 ]; then echo {shlex.quote(f'runtime service {kind} not ready')} >&2; "
+            "_g2e_rc=1; break; fi; sleep 1; done")
+    lines.append("exit $_g2e_rc")
+    return "\n".join(lines)
 
 
 _COPY_RE = re.compile(r"^\s*COPY\s+(.+)$", re.MULTILINE)
@@ -232,6 +258,25 @@ def _probe_setup_compile(docker, env: HarvestedEnv, probe_tag: str, *, timeout: 
         docker.rm(probe_tag, probe_tag)   # untag the (cache-shared) probe image; no container
 
 
+def _stage_copy_dirs(ctx: str, copy_dirs: dict | None) -> None:
+    """Copy DIRECTORY COPY sources into the build context.
+
+    Copied, never inlined: contents may be binary (a git checkout's .git/index, which a text read
+    with errors="replace" silently corrupted -- the image then failed contract._probe_script's
+    `git rev-parse --show-toplevel` and scored non_conforming) and large (a 132MB working tree).
+
+    symlinks=True PRESERVES links instead of dereferencing them. Dereferencing raised on a dangling
+    link and lost the whole repo (baserow/baserow, polarsource/polar and Checkmk/checkmk all carry
+    dangling node_modules links), and preserving is what Docker's own build context does anyway.
+    """
+    for dname, srcdir in (copy_dirs or {}).items():
+        try:
+            shutil.copytree(srcdir, os.path.join(ctx, dname), symlinks=True, dirs_exist_ok=True)
+        except (OSError, shutil.Error) as e:
+            shutil.rmtree(ctx, ignore_errors=True)
+            raise RuntimeError(f"could not stage COPY directory {dname!r} from {srcdir}: {e}") from e
+
+
 def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeout: int = 1800) -> MeasureRow:
     agent, repo, m = env.agent, env.repo.full_name, env.meta
     lang = get_language(env.repo.language)
@@ -255,6 +300,7 @@ def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeou
         os.makedirs(os.path.dirname(dest), exist_ok=True)   # nested keys (e.g. src/lib.rs) need their parent dir
         with open(dest, "w") as f:
             f.write(content)
+    _stage_copy_dirs(ctx, env.copy_dirs)
 
     t0 = time.time()
     build_rc, build_log = docker.build(tag, ctx, timeout=build_timeout)
@@ -292,12 +338,44 @@ def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeou
     junit_xml = ""
     pkgs_out = ""
     try:
-        docker.run_detached(tag, name, W)
+        # Runtime handoff (Graph2Env runtime_handoff.json): env for every exec, services started
+        # once, before the pytest bootstrap. Absent handoff => the call is exactly as before.
+        rt = env.runtime or {}
+        docker.run_detached(tag, name, W, **({"env": rt["environment"]} if rt.get("environment") else {}))
+        if rt:
+            src = docker.exec(name, _sh(services_script(rt["services"])))[0] if rt.get("services") else None
+            base_row["meta"]["runtime_handoff"] = {
+                "environment": sorted(rt.get("environment") or {}),
+                "services": [s["kind"] for s in rt.get("services") or []], "services_rc": src}
         docker.exec(name, _sh(f"mkdir -p {W}/logs"))
         docker.exec(name, _sh(lang.ensure_cmd(W)))
         probe = probe_testbed(docker, name, W)
         py_test_files = probe["py_test_files"]
         conforming = probe["status"] == "conforming"
+
+        # The repo's own test config, not the system's: restore pristine pytest config before
+        # collection and again before the run (collection imports repo code). Each outcome is
+        # recorded in meta; rc != 0 means the suite measured may not be the repo's own.
+        restore_cmd = getattr(lang, "config_restore_cmd", None)
+
+        def _restore_config(stage: str) -> bool:
+            if not (restore_cmd and conforming):
+                return True
+            rrc, rout, _ = docker.exec(name, _sh(restore_cmd(W, m.get("head_sha") or "")))
+            base_row["meta"].setdefault("pytest_config_restore", []).append(
+                {"stage": stage, "rc": rrc, "log": rout[-2000:]})
+            return rrc == 0
+
+        def _restore_failed_row() -> MeasureRow:
+            # Fail closed: the suite we would measure may be the system's, not the repo's.
+            return MeasureRow(
+                build_ok=True, build_log_tail=build_log[-2000:], build_s=build_s,
+                executed=False, ebsr=False, status="config_restore_failed",
+                py_test_files=py_test_files, image_size_mb=img_mb, image_delta_mb=delta_mb,
+                image_digest=image_digest, **base_row)
+
+        if not _restore_config("collect"):
+            return _restore_failed_row()
 
         # EBSR gate (per-language). collect_clean uses the language predicate; parse_collect still
         # supplies the diagnostic collect_errors from the gate stdout.
@@ -334,6 +412,8 @@ def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeou
                 status="gate_fail", py_test_files=py_test_files,
                 image_size_mb=img_mb, image_delta_mb=delta_mb, image_digest=image_digest, **base_row)
 
+        if not _restore_config("run"):
+            return _restore_failed_row()
         junit_out = f"{W}/logs/junit.xml"
         run = lang.run_cmd(W, junit_out)
         t1 = time.time()

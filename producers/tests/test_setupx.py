@@ -921,3 +921,64 @@ def test_an_unreadable_patch_file_drops_the_key_instead_of_vanishing_the_row(tmp
     assert env.status == "error"
     assert "setupx_patch_sha" not in env.agent_settings
     assert env.agent_settings["xpu"] == "off"
+
+
+# ── OpenRouter route: provider pin + reasoning off (matches the sweagent arms) ───────────────
+
+def test_openrouter_route_pins_provider_and_disables_reasoning(monkeypatch):
+    import json as _json
+    from producers.setupx import child_env
+
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "k")
+    monkeypatch.setenv("SETUPX_BASE_URL", "https://openrouter.ai/api/v1")
+    monkeypatch.delenv("SETUPX_DB_DSN", raising=False)
+    monkeypatch.delenv("OPENROUTER_PROVIDER", raising=False)
+
+    env = child_env("openrouter/deepseek/deepseek-v4-flash-0731", "img", "ns", 100, "/tmp")
+    # the `openrouter/` prefix is stripped, the OpenRouter slug survives whole
+    assert env["OPENAI_MODEL"] == "deepseek/deepseek-v4-flash-0731"
+    assert _json.loads(env["SETUPX_EXTRA_BODY"]) == {
+        "provider": {"order": ["DeepInfra"], "allow_fallbacks": False},
+        "reasoning": {"enabled": False},
+    }
+    # $OPENROUTER_PROVIDER overrides, same knob the sweagent arms read
+    monkeypatch.setenv("OPENROUTER_PROVIDER", "DeepInfra, Fireworks")
+    env2 = child_env("openrouter/deepseek/deepseek-v4-flash-0731", "img", "ns", 100, "/tmp")
+    assert _json.loads(env2["SETUPX_EXTRA_BODY"])["provider"]["order"] == ["DeepInfra", "Fireworks"]
+
+
+def test_deepseek_route_sends_no_extra_body():
+    """No body extras off OpenRouter: DeepSeek would 400 on an unknown `provider` field."""
+    import os
+    from producers.setupx import child_env
+
+    os.environ["DEEPSEEK_API_KEY"] = "k"
+    os.environ.pop("SETUPX_BASE_URL", None)
+    os.environ.pop("SETUPX_DB_DSN", None)
+    env = child_env("deepseek/deepseek-v4-flash", "img", "ns", 100, "/tmp")
+    assert "SETUPX_EXTRA_BODY" not in env
+    assert env["OPENAI_MODEL"] == "deepseek-v4-flash"
+
+
+def test_the_key_follows_the_endpoint_not_the_arms_history(monkeypatch):
+    """A DeepSeek key on the OpenRouter route is a 401 per repo, after the mirror image is paid for."""
+    import pytest
+    from producers.setupx import child_env
+
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "ds-key")
+    monkeypatch.setenv("OPENROUTER_API_KEY", "or-key")
+    monkeypatch.delenv("SETUPX_DB_DSN", raising=False)
+
+    monkeypatch.setenv("SETUPX_BASE_URL", "https://openrouter.ai/api/v1")
+    assert child_env("openrouter/deepseek/deepseek-v4-flash-0731", "i", "n", 100, "/tmp")[
+        "OPENAI_API_KEY"] == "or-key"
+
+    monkeypatch.delenv("SETUPX_BASE_URL")
+    assert child_env("deepseek/deepseek-v4-flash", "i", "n", 100, "/tmp")[
+        "OPENAI_API_KEY"] == "ds-key"
+
+    # and it names the RIGHT variable when the route's key is missing
+    monkeypatch.setenv("SETUPX_BASE_URL", "https://openrouter.ai/api/v1")
+    monkeypatch.delenv("OPENROUTER_API_KEY")
+    with pytest.raises(RuntimeError, match="OPENROUTER_API_KEY"):
+        child_env("openrouter/deepseek/deepseek-v4-flash-0731", "i", "n", 100, "/tmp")

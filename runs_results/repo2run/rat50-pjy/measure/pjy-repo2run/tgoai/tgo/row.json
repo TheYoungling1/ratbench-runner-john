@@ -1,0 +1,97 @@
+{
+  "agent": "repo2run__rat50-pjy",
+  "repo": "tgoai/tgo",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "d-0.14.0 fsspec-2026.9.0 hf-xet-1.6.0 huggingface-hub-1.33.0 humanize-4.16.0 joblib-1.6.0 lark-1.3.1 lxml-6.1.3 networkx-3.6.1 nltk-3.10.3 patchright-1.63.0 pillow-12.3.0 playwright-1.63.0 playwright-stealth-2.0.3 psutil-7.2.2 pyOpenSSL-26.4.0 pyee-13.0.1 rank-bm25-0.2.2 rtree-1.4.1 scipy-1.17.1 shapely-2.1.2 snowballstemmer-2.2.0 tokenizers-0.23.2 trimesh-5.1.0 unclecode-litellm-1.81.13 xxhash-3.8.1\n#73 15.23 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable.It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#73 15.25 \n#73 15.25 [notice] A new release of pip is available: 24.2 -> 26.2.1\n#73 15.25 [notice] To update, run: pip install --upgrade pip\n#73 DONE 16.2s\n\n#74 [71/74] RUN cd /repo && find /repo -name \"requirements*.txt\" -o -name \"requirements*.lock\" 2>/dev/null | head -50\n#74 0.338 /repo/requirements_pipreqs.txt\n#74 DONE 0.4s\n\n#75 [72/74] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#75 DONE 1.2s\n\n#76 [73/74] WORKDIR /testbed\n#76 DONE 0.4s\n\n#77 exporting to image\n#77 exporting layers\n#77 exporting layers 39.2s done\n#77 exporting manifest sha256:ee3a14d858147b9ec71591b25b561db5dd3595b6b5d2ce9074096bd751268cc2 0.0s done\n#77 exporting config sha256:af3fc4bf9f50c97f37695a51de998c4b816db499c0179912a79a6ab46800c526 0.0s done\n#77 exporting attestation manifest sha256:04a146b0ba8e5984ece2e2110c733534df15bb4b7924e26b24eec6e8498e5c0d 0.0s done\n#77 exporting manifest list sha256:e2e1403f20c72afe5ced2a8f9ac7f59fb8e05deddf21f9772b636d6b9714a2a5 0.0s done\n#77 naming to docker.io/library/bench-repo2run__rat50-pjy-tgoai-tgo:latest done\n#77 unpacking to docker.io/library/bench-repo2run__rat50-pjy-tgoai-tgo:latest\n#77 unpacking to docker.io/library/bench-repo2run__rat50-pjy-tgoai-tgo:latest 17.9s done\n#77 DONE 57.2s\n",
+  "status": "collect_error",
+  "py_test_files": 39,
+  "collect_rc": 2,
+  "collect_clean": false,
+  "collect_errors": [
+    "E   SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?",
+    "E   SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?",
+    "E   SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?",
+    "E   SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?"
+  ],
+  "collect_error_count": 4,
+  "collected_node_ids": [
+    "repos/tgo-api/scripts/test_internal_service.py::test_internal_health",
+    "repos/tgo-api/scripts/test_internal_service.py::test_internal_ai_event",
+    "repos/tgo-api/scripts/test_internal_service.py::test_main_api_requires_auth",
+    "repos/tgo-api/scripts/test_setup.py::test_imports",
+    "repos/tgo-api/scripts/test_setup.py::test_configuration",
+    "repos/tgo-api/scripts/test_setup.py::test_models",
+    "repos/tgo-api/scripts/test_setup.py::test_schemas",
+    "repos/tgo-api/scripts/test_setup.py::test_security",
+    "repos/tgo-platform/test_imap_connection.py::test_imap"
+  ],
+  "executed": true,
+  "total": 13,
+  "passed": 5,
+  "failed": 3,
+  "errors": 5,
+  "skipped": 0,
+  "passed_node_ids": [
+    "repos/tgo-api/scripts/test_setup.py::test_imports",
+    "repos/tgo-api/scripts/test_setup.py::test_configuration",
+    "repos/tgo-api/scripts/test_setup.py::test_models",
+    "repos/tgo-api/scripts/test_setup.py::test_schemas",
+    "repos/tgo-api/scripts/test_setup.py::test_security"
+  ],
+  "failed_node_ids": [
+    "repos/tgo-api/scripts/test_internal_service.py::test_internal_health",
+    "repos/tgo-api/scripts/test_internal_service.py::test_internal_ai_event",
+    "repos/tgo-api/scripts/test_internal_service.py::test_main_api_requires_auth"
+  ],
+  "error_node_ids": [
+    "repos.tgo-ai.tests",
+    "repos.tgo-api.tests",
+    "repos.tgo-rag.tests",
+    "repos.tgo-workflow.tests",
+    "repos/tgo-platform/test_imap_connection.py::test_imap"
+  ],
+  "ebsr": true,
+  "pass_rate": 0.3846,
+  "timed_out": false,
+  "image_size_mb": 4534.7,
+  "image_delta_mb": null,
+  "image_digest": "bench-repo2run__rat50-pjy-tgoai-tgo@sha256:e2e1403f20c72afe5ced2a8f9ac7f59fb8e05deddf21f9772b636d6b9714a2a5",
+  "installed_pkg_count": 235,
+  "tokens_in": 3491988,
+  "tokens_out": 83568,
+  "llm_calls": 100,
+  "turns_used": null,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 208.65,
+  "test_s": 1.72,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "results_pjy",
+    "tokens_in": 3491988,
+    "tokens_out": 83568,
+    "llm_calls": 100,
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

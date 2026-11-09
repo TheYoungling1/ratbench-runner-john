@@ -1,0 +1,79 @@
+{
+  "agent": "repo2run__rat50-pjy",
+  "repo": "polarsource/polar",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "RUN python --version\n#23 0.192 Python 3.14.7\n#23 DONE 0.2s\n\n#24 [20/26] RUN pip list 2>/dev/null | head -80\n#24 0.402 Package            Version\n#24 0.402 ------------------ ---------\n#24 0.402 certifi            2026.7.22\n#24 0.402 charset-normalizer 3.5.1\n#24 0.402 docopt             0.6.2\n#24 0.402 execnet            2.1.2\n#24 0.402 idna               3.20\n#24 0.402 iniconfig          2.3.0\n#24 0.402 packaging          26.3\n#24 0.402 pip                24.2\n#24 0.402 pipdeptree         2.23.4\n#24 0.402 pipreqs            0.4.13\n#24 0.402 pluggy             1.6.0\n#24 0.402 Pygments           2.21.0\n#24 0.402 pytest             9.1.1\n#24 0.402 pytest-xdist       3.8.0\n#24 0.402 requests           2.34.2\n#24 0.402 urllib3            2.8.0\n#24 0.402 yarg               0.1.10\n#24 DONE 0.4s\n\n#25 [21/26] RUN cd /repo && git apply --reject /patch/patch_1.diff --allow-empty\n#25 DONE 0.2s\n\n#26 [22/26] RUN cd /repo && git apply -R --reject /patch/patch_1.diff --allow-empty\n#26 DONE 0.3s\n\n#27 [23/26] RUN cd /repo && git apply --reject /patch/patch_2.diff --allow-empty\n#27 DONE 0.2s\n\n#28 [24/26] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#28 DONE 1.0s\n\n#29 [25/26] WORKDIR /testbed\n#29 DONE 0.1s\n\n#30 exporting to image\n#30 exporting layers\n#30 exporting layers 5.5s done\n#30 exporting manifest sha256:f7782d9fedc294a8dc49446ab9ff9e6fa412ce56e7a34218fd6eb28ecac2665c 0.0s done\n#30 exporting config sha256:2aa6acc241c75ba6994d5755435c803b6d15081190c233280b047db2dff9d4ea 0.0s done\n#30 exporting attestation manifest sha256:b89c0ede71d3aff019eb4c824dfdcf22a683b6748d1e0dd469323996de62effe 0.0s done\n#30 exporting manifest list sha256:9bced9ec71a480725bc15d4c1bee114b816e5f90c197f1bfc21a38622033e5be done\n#30 naming to docker.io/library/bench-repo2run__rat50-pjy-polarsource-polar:latest done\n#30 unpacking to docker.io/library/bench-repo2run__rat50-pjy-polarsource-polar:latest\n#30 unpacking to docker.io/library/bench-repo2run__rat50-pjy-polarsource-polar:latest 5.0s done\n#30 DONE 10.7s\n",
+  "status": "collect_error",
+  "py_test_files": 343,
+  "collect_rc": 2,
+  "collect_clean": false,
+  "collect_errors": [
+    "E   ModuleNotFoundError: No module named 'boto3'",
+    "E   ModuleNotFoundError: No module named 'tests.test_base'",
+    "E   ModuleNotFoundError: No module named 'tests.test_ir'",
+    "E   ModuleNotFoundError: No module named 'tests.test_base'",
+    "E   ModuleNotFoundError: No module named 'tests.conftest'",
+    "ERROR server/tests - ModuleNotFoundError: No module named 'tests.conftest'"
+  ],
+  "collect_error_count": 5,
+  "collected_node_ids": [],
+  "executed": true,
+  "total": 5,
+  "passed": 0,
+  "failed": 0,
+  "errors": 5,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [
+    "lambda.image-resizer.tests.test_handler",
+    "sdk.generator.python.template.tests.test_base",
+    "sdk.generator.tests.test_ir",
+    "sdk.python.tests.test_base",
+    "server.tests"
+  ],
+  "ebsr": true,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 734.9,
+  "image_delta_mb": null,
+  "image_digest": "bench-repo2run__rat50-pjy-polarsource-polar@sha256:9bced9ec71a480725bc15d4c1bee114b816e5f90c197f1bfc21a38622033e5be",
+  "installed_pkg_count": 18,
+  "tokens_in": 1930067,
+  "tokens_out": 39288,
+  "llm_calls": 61,
+  "turns_used": null,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 44.38,
+  "test_s": 0.71,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "results_pjy",
+    "tokens_in": 1930067,
+    "tokens_out": 39288,
+    "llm_calls": 61,
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

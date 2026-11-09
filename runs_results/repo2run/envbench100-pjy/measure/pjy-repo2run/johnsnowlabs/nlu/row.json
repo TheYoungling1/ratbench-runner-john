@@ -1,0 +1,75 @@
+{
+  "agent": "repo2run__envbench100-pjy",
+  "repo": "johnsnowlabs/nlu",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": ".465 VERSION_CODENAME=trixie\n#19 DONE 1.6s\n\n#20 [17/21] RUN apt-get install -y -qq openjdk-21-jdk-headless 2>&1 | tail -5\n#20 6.452 update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jstat to provide /usr/bin/jstat (jstat) in auto mode\n#20 6.452 update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jstatd to provide /usr/bin/jstatd (jstatd) in auto mode\n#20 6.452 update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jwebserver to provide /usr/bin/jwebserver (jwebserver) in auto mode\n#20 6.452 update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/serialver to provide /usr/bin/serialver (serialver) in auto mode\n#20 6.452 update-alternatives: using /usr/lib/jvm/java-21-openjdk-amd64/bin/jhsdb to provide /usr/bin/jhsdb (jhsdb) in auto mode\n#20 DONE 7.1s\n\n#21 [18/21] RUN java -version 2>&1\n#21 0.284 openjdk version \"21.0.12.1\" 2026-08-18\n#21 0.284 OpenJDK Runtime Environment (build 21.0.12.1+1-1-deb13u1-Debian)\n#21 0.284 OpenJDK 64-Bit Server VM (build 21.0.12.1+1-1-deb13u1-Debian, mixed mode, sharing)\n#21 DONE 0.4s\n\n#22 [19/21] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#22 DONE 3.0s\n\n#23 [20/21] WORKDIR /testbed\n#23 DONE 0.1s\n\n#24 exporting to image\n#24 exporting layers\n#24 exporting layers 25.2s done\n#24 exporting manifest sha256:7d67e6ca5afa3cba6936a2cc8b51815478d609c979646734b14c4b7eaa7c2c1e 0.0s done\n#24 exporting config sha256:4a1adf32ed818c07cc7b5dc8ad60d8b281532f183690084f4983e7722bda4e01 done\n#24 exporting attestation manifest sha256:5e31a1d812fa486c42c443b48d721641cc30ec206ca18dc8a3d0160c711c7b38 0.0s done\n#24 exporting manifest list sha256:a28903e59db5910fe692b2224bd114fde950b0b756c912803c82328ad91ceff7 done\n#24 naming to docker.io/library/bench-repo2run__envbench100-pjy-johnsnowlabs-nlu:latest done\n#24 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-johnsnowlabs-nlu:latest\n#24 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-johnsnowlabs-nlu:latest 12.0s done\n#24 DONE 37.3s\n",
+  "status": "collect_error",
+  "py_test_files": 3,
+  "collect_rc": 2,
+  "collect_clean": false,
+  "collect_errors": [
+    "E   ImportError: You ned to install Pyspark to run nlu. Run pip install pyspark==3.0.1",
+    "E   ImportError: You ned to install Pyspark to run nlu. Run pip install pyspark==3.0.1",
+    "E   ModuleNotFoundError: No module named 'pandas'"
+  ],
+  "collect_error_count": 3,
+  "collected_node_ids": [],
+  "executed": true,
+  "total": 3,
+  "passed": 0,
+  "failed": 0,
+  "errors": 3,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [
+    "tests.nlu_core_tests.component_tests.seq2seq.openai_completion_test",
+    "tests.nlu_hc_tests.component_tests.drug_normalizer.drug_normalizer_test",
+    "tests.test_utils"
+  ],
+  "ebsr": true,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 3178.1,
+  "image_delta_mb": null,
+  "image_digest": "bench-repo2run__envbench100-pjy-johnsnowlabs-nlu@sha256:a28903e59db5910fe692b2224bd114fde950b0b756c912803c82328ad91ceff7",
+  "installed_pkg_count": 27,
+  "tokens_in": 193622,
+  "tokens_out": 4875,
+  "llm_calls": null,
+  "turns_used": 13,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 79.15,
+  "test_s": 0.43,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "results_pjy",
+    "tokens_in": 193622,
+    "tokens_out": 4875,
+    "llm_calls": null,
+    "turns_used": 13,
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

@@ -3,7 +3,7 @@
 .venv/
 
 # run outputs (regenerated per run)
-/runs/
+/runs
 **/workplace/
 
 # python / os cruft
@@ -16,3 +16,14 @@
 # tooling caches (local only)
 .superpowers/
 .pytest_cache/
+
+# large / external / generated
+results.zip
+/results_pjy
+/figures/
+/Graph2Env-Paper/
+.playwright-mcp/
+bench/tests/fixtures/java/target/
+/DATA_VERIFICATION.md
+/datasets_archive/
+/runs_results/*/*.zip

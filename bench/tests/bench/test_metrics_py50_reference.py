@@ -20,8 +20,11 @@ _DATA = pathlib.Path(__file__).resolve().parent / "data" / "py50_rows.json"
 _AGENT = "claudecode-dockerfile"
 
 # The completed run's headline numbers.
-_REFERENCE = {"n": 45, "n_ebsr": 22, "EBSR": 0.4889, "n_exec": 35, "ESSR": 0.7368,
-              "ESSR_all": 0.5731, "real_success": 0.5111, "full_pass_repos": 8}
+# ESSR (0.7368 ÷exec) and ESSR_all (0.5731) were dropped from this pin on 2026-09-15 when both
+# metrics were removed; this run has no gold manifest, so its ESSR is now None. Every other number
+# is unchanged, which is what shows the removal touched nothing but those two keys.
+_REFERENCE = {"n": 45, "n_ebsr": 22, "EBSR": 0.4889, "n_exec": 35,
+              "real_success": 0.5111, "full_pass_repos": 8}
 
 
 def _rows() -> list:

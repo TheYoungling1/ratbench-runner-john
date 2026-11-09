@@ -1,0 +1,69 @@
+{
+  "agent": "repo2run__envbench100-pjy",
+  "repo": "ellmetha/django-machina",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "te-packages/pkg_resources/__init__.py\n#28 DONE 2.2s\n\n#29 [26/30] RUN cd /repo && poetry run pip install -q 'setuptools<81'\n#29 0.672 The \"poetry.dev-dependencies\" section is deprecated and will be removed in a future version. Use \"poetry.group.dev.dependencies\" instead.\n#29 1.528 WARNING: Error parsing dependencies of django-machina: Expected matching RIGHT_PARENTHESIS for LEFT_PARENTHESIS, after version specifier\n#29 1.528     django (>=3.2,<4.0 || >=4.0)\n#29 1.528            ~~~~~~~~~~~~^\n#29 DONE 4.1s\n\n#30 [27/30] RUN cd /repo && poetry run python -c \"import pkg_resources; print('pkg_resources OK')\"\n#30 0.762 The \"poetry.dev-dependencies\" section is deprecated and will be removed in a future version. Use \"poetry.group.dev.dependencies\" instead.\n#30 0.976 <string>:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.\n#30 1.002 pkg_resources OK\n#30 DONE 1.1s\n\n#31 [28/30] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#31 DONE 0.5s\n\n#32 [29/30] WORKDIR /testbed\n#32 DONE 0.1s\n\n#33 exporting to image\n#33 exporting layers\n#33 exporting layers 15.5s done\n#33 exporting manifest sha256:89efaa8ad8c8e16d48cc1d53eff2b20e7fc29f636b8f5e04c0f814215aa816b4 done\n#33 exporting config sha256:90ee24cfe83fd434a1caa8377b646422fc334051fb51e1b9c52d690276220d1b done\n#33 exporting attestation manifest sha256:c50ff54d6cc7dc70c5168c6847eee250a858d3c218af79ad0e03d64e961be400 0.0s done\n#33 exporting manifest list sha256:15fddeee43237df5522f882012c8b135ddd40ca23c3ec22b884da9bb113a1b39 done\n#33 naming to docker.io/library/bench-repo2run__envbench100-pjy-ellmetha-django-machina:latest done\n#33 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-ellmetha-django-machina:latest\n#33 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-ellmetha-django-machina:latest 6.5s done\n#33 DONE 22.0s\n",
+  "status": "collect_error",
+  "py_test_files": 46,
+  "collect_rc": 4,
+  "collect_clean": false,
+  "collect_errors": [
+    "E   ModuleNotFoundError: No module named 'django'"
+  ],
+  "collect_error_count": 0,
+  "collected_node_ids": [],
+  "executed": false,
+  "total": 0,
+  "passed": 0,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [],
+  "ebsr": false,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 626.7,
+  "image_delta_mb": null,
+  "image_digest": "bench-repo2run__envbench100-pjy-ellmetha-django-machina@sha256:15fddeee43237df5522f882012c8b135ddd40ca23c3ec22b884da9bb113a1b39",
+  "installed_pkg_count": 27,
+  "tokens_in": 456729,
+  "tokens_out": 9929,
+  "llm_calls": null,
+  "turns_used": 21,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 50.72,
+  "test_s": 0.23,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "results_pjy",
+    "tokens_in": 456729,
+    "tokens_out": 9929,
+    "llm_calls": null,
+    "turns_used": 21,
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

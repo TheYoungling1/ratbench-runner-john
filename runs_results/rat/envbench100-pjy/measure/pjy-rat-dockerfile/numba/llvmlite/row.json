@@ -1,0 +1,68 @@
+{
+  "agent": "rat__envbench100-pjy",
+  "repo": "numba/llvmlite",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": " Successfully uninstalled jiter-0.17.0\n#18 5.718   Attempting uninstall: idna\n#18 5.718     Found existing installation: idna 3.20\n#18 5.726     Uninstalling idna-3.20:\n#18 5.739       Successfully uninstalled idna-3.20\n#18 5.780   Attempting uninstall: httpx2\n#18 5.781     Found existing installation: httpx2 2.13.0\n#18 5.794     Uninstalling httpx2-2.13.0:\n#18 5.822       Successfully uninstalled httpx2-2.13.0\n#18 5.880   Attempting uninstall: httpcore2\n#18 5.881     Found existing installation: httpcore2 2.13.0\n#18 5.894     Uninstalling httpcore2-2.13.0:\n#18 5.921       Successfully uninstalled httpcore2-2.13.0\n#18 5.971 Successfully installed httpcore2-2.12.0 httpx2-2.12.0 idna-3.19 jiter-0.16.0 openai-3.11.0\n#18 5.971 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 6.274 \n#18 6.274 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 6.274 [notice] To update, run: pip install --upgrade pip\n#18 DONE 6.5s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.3s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 0.9s done\n#21 exporting manifest sha256:984ef17f8b58e5bc96a3df4e9ca0241aa21b530fe628c77b3e0af7ae9fbd49b8 done\n#21 exporting config sha256:6822421836e935b19e111a244869d5f3475849d82fa26ef71b90d36d0183690c done\n#21 exporting attestation manifest sha256:e7318d17575564aa5fc9f3ecf0396283ad3ea5a9b6eeb389f9bdd1de2cf05c59 done\n#21 exporting manifest list sha256:2f6c7173716ab2098843a969f3c77b1c86e17a13be3baa10981d1373c9b02922 done\n#21 naming to docker.io/library/bench-rat__envbench100-pjy-numba-llvmlite:latest done\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-numba-llvmlite:latest\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-numba-llvmlite:latest 3.1s done\n#21 DONE 4.0s\n",
+  "status": "collect_error",
+  "py_test_files": 5,
+  "collect_rc": 3,
+  "collect_clean": false,
+  "collect_errors": [],
+  "collect_error_count": 0,
+  "collected_node_ids": [],
+  "executed": true,
+  "total": 1,
+  "passed": 0,
+  "failed": 0,
+  "errors": 1,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [
+    "pytest::internal"
+  ],
+  "ebsr": true,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 437.9,
+  "image_delta_mb": null,
+  "image_digest": "bench-rat__envbench100-pjy-numba-llvmlite@sha256:2f6c7173716ab2098843a969f3c77b1c86e17a13be3baa10981d1373c9b02922",
+  "installed_pkg_count": 25,
+  "tokens_in": 4293609,
+  "tokens_out": 104142,
+  "llm_calls": 101,
+  "turns_used": null,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 15.17,
+  "test_s": 0.34,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "results_pjy",
+    "tokens_in": 4293609,
+    "tokens_out": 104142,
+    "llm_calls": 101,
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

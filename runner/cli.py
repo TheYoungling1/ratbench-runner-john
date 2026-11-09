@@ -59,6 +59,33 @@ def _is_native_lane(model: str, declared_measure) -> bool:
     return declared_measure == "none"
 
 
+# Gold manifest for the ESSR denominator. In-repo mirror by default; $RATBENCH_GOLD overrides
+# (the canonical copy lives outside the repo and is ~47 MB, so a checkout may not carry it).
+_GOLD_DEFAULT = os.path.join(REPO_ROOT, "datasets", "gold_manifests_combined.json")
+
+
+def _gold_for(dataset_path: str) -> tuple:
+    """(gold_path, corpus) for a dataset, or (None, None) when no manifest is on disk.
+
+    The combined manifest holds one corpus per benchmark; picking the right one matters because
+    the two corpora share no repos, so the wrong corpus scores every repo as having no gold.
+    envbench70 / minus70 are SUBSETS of envbench_python100 and resolve to that corpus.
+    """
+    path = os.environ.get("RATBENCH_GOLD") or _GOLD_DEFAULT
+    if not os.path.isfile(path):
+        return None, None
+    base = os.path.basename(dataset_path or "").lower()
+    # Before the rat_python50 prefix check, which rat_python50_new.json also matches — that corpus
+    # shares 0 repos with it, so every repo would score as having no gold.
+    if base.startswith("rat_python50_new"):
+        return path, "rat_python50_new"
+    if base.startswith("rat_python50"):
+        return path, "rat_python50"
+    if "envbench" in base:
+        return path, "envbench_python100"
+    return path, None            # unknown dataset: merge every corpus rather than guess wrong
+
+
 # Models whose lane execs the Claude Code CLI inside the claude-runner workbench image.
 _CLAUDE_LANES = ("claudecode", "claudecode-dockerfile")
 
@@ -249,7 +276,8 @@ def main(argv=None) -> int:
     # this file, so a manifest that recorded the wrong one would make the contrast unreadable
     # after the fact — which is the entire value of keeping both arms.
     _SWEAGENT_CONFIGS = {"sweagent_repo2run": "sweagent_repo2run_config.yaml",
-                         "sweagent_repo2run_modern": "sweagent_repo2run_modern_config.yaml"}
+                         "sweagent_repo2run_modern": "sweagent_repo2run_modern_config.yaml",
+                         "sweagent_repo2run_modern_graph": "sweagent_repo2run_graph_config.yaml"}
     if model in _SWEAGENT_CONFIGS:
         cfg_src = os.path.join(REPO_ROOT, "producers", _SWEAGENT_CONFIGS[model])
         sweagent_config = manifest.copy_sweagent_config(cfg_src, out)
@@ -296,12 +324,23 @@ def main(argv=None) -> int:
             _write_live_scores(out, spec, model)
         else:
             try:
-                subprocess.run(
-                    [sys.executable, "-m", "bench.unified_bench",
-                     "--harvest", f"{spec.name}={os.path.join(out, 'output')}",
-                     "--out", os.path.join(out, "measure"),
-                     "--concurrency", str(args.concurrency or 4)],
-                    cwd=BENCH_ROOT, env=env, check=False)
+                # ESSR is gold-anchored and needs a manifest; without one the run still measures
+                # and still reports EBSR, but ESSR comes back null. Pass the gold file when it is
+                # present rather than silently publishing an unanchored run.
+                cmd = [sys.executable, "-m", "bench.unified_bench",
+                       "--harvest", f"{spec.name}={os.path.join(out, 'output')}",
+                       "--out", os.path.join(out, "measure"),
+                       "--concurrency", str(args.concurrency or 4)]
+                gold_path, gold_corpus = _gold_for(dataset_path)
+                if gold_path:
+                    cmd += ["--gold", gold_path]
+                    if gold_corpus:
+                        cmd += ["--gold-corpus", gold_corpus]
+                else:
+                    print("[bench] no gold manifest found — ESSR will be null for this run "
+                          f"(looked for {_GOLD_DEFAULT}; override with $RATBENCH_GOLD)",
+                          flush=True)
+                subprocess.run(cmd, cwd=BENCH_ROOT, env=env, check=False)
             except Exception as exc:
                 print(f"[bench] measure stage failed (non-fatal): {exc}", flush=True)
     manifest.update_status(out, "done" if rc == 0 else "failed")

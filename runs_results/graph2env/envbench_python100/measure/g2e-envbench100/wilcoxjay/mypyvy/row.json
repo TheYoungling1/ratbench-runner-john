@@ -1,0 +1,76 @@
+{
+  "agent": "graph2env__envbench_python100",
+  "repo": "wilcoxjay/mypyvy",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "hon3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#14 0.670 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (9.1.1)\n#14 0.678 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#14 0.679 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.11/site-packages (from pytest) (26.3)\n#14 0.681 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#14 0.682 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest) (2.21.0)\n#14 0.848 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#14 DONE 0.9s\n\n#15 [11/11] WORKDIR /testbed\n#15 DONE 0.0s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 12.1s done\n#16 exporting manifest sha256:8e187e91cdd2510906befa99d54beddd2caf570dc0d7df0fa7dc2195c9f3d868\n#16 exporting manifest sha256:8e187e91cdd2510906befa99d54beddd2caf570dc0d7df0fa7dc2195c9f3d868 0.0s done\n#16 exporting config sha256:39a0d1db94e8f19903b892c359bdb18953dd16f21e1d6b1879affd24567d3d42 0.0s done\n#16 exporting attestation manifest sha256:658b571f3688de79e5a47a86e88564d85a4b467e6fe83efb74b0d3fc60749c97 0.0s done\n#16 exporting manifest list sha256:e3f4384fc2129c1282ba6b4087ce4c30d3aab7ba9985baeff1708d246a551340 done\n#16 naming to docker.io/library/bench-graph2env__envbench_python100-wilcoxjay-mypyvy:latest done\n#16 unpacking to docker.io/library/bench-graph2env__envbench_python100-wilcoxjay-mypyvy:latest\n#16 unpacking to docker.io/library/bench-graph2env__envbench_python100-wilcoxjay-mypyvy:latest 5.1s done\n#16 DONE 17.4s\n",
+  "status": "no_tests_collected",
+  "py_test_files": 0,
+  "collect_rc": 5,
+  "collect_clean": true,
+  "collect_errors": [],
+  "collect_error_count": 0,
+  "collected_node_ids": [],
+  "executed": false,
+  "total": 0,
+  "passed": 0,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [],
+  "ebsr": false,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 224.7,
+  "image_delta_mb": null,
+  "image_digest": "bench-graph2env__envbench_python100-wilcoxjay-mypyvy@sha256:e3f4384fc2129c1282ba6b4087ce4c30d3aab7ba9985baeff1708d246a551340",
+  "installed_pkg_count": 48,
+  "tokens_in": 452621,
+  "tokens_out": 26902,
+  "llm_calls": 17,
+  "turns_used": null,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 41.11,
+  "test_s": 0.22,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "graph2env",
+    "head_sha": "3a055dfad3d13fb35b6125ab6f43fa6ea4493b5f",
+    "base_image": "python:3.11-slim",
+    "tokens_in": 452621,
+    "tokens_out": 26902,
+    "llm_calls": 17,
+    "runtime_handoff": {
+      "environment": [
+        "PATH",
+        "PYTHON"
+      ],
+      "services": [],
+      "services_rc": null
+    },
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=3a055dfad3d13fb35b6125ab6f43fa6ea4493b5f (pinned)\nremoved pytest.ini\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=3a055dfad3d13fb35b6125ab6f43fa6ea4493b5f (pinned)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

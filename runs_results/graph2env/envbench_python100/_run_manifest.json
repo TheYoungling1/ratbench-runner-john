@@ -1,0 +1,32 @@
+{
+  "variety": "g2e-envbench100",
+  "tier": "all",
+  "adapter": "tools/adapt_graph2env.py",
+  "adapted_from": [
+    "/opt/ratbench/results_pjy/EnvBench_Graph2Env/ebsr_evaluation/output"
+  ],
+  "dataset": {
+    "path": "datasets/envbench_python100.json",
+    "repo_count": 100,
+    "sha256": "dfea1373f96310ff83d580613f5a32369d78e1edd4c68526f4a1dbe3b59e3cac"
+  },
+  "repos_linked": 100,
+  "repos_stubbed": [],
+  "repos_skipped": {
+    "google/trax": "no Dockerfile",
+    "karlicoss/hpi": "no Dockerfile",
+    "librephotos/librephotos": "no Dockerfile",
+    "nixtla/neuralforecast": "no Dockerfile",
+    "skrub-data/skrub": "no Dockerfile",
+    "sublimelinter/sublimelinter": "no Dockerfile",
+    "wireless-innovation-forum/spectrum-access-system": "no Dockerfile",
+    "wpi-lnl/lnldb": "no Dockerfile"
+  },
+  "repos_with_dockerfile": 92,
+  "repos_per_source": {
+    "/opt/ratbench/results_pjy/EnvBench_Graph2Env/ebsr_evaluation/output": 100
+  },
+  "missing_copy_sources": {},
+  "off_dataset_dropped": [],
+  "note": "Symlink mirror of Graph2Env artifacts. Scores come from bench.unified_bench rebuilding these Dockerfiles, NOT from react_ebsr_results.json."
+}

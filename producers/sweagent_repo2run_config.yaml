@@ -29,7 +29,9 @@
 agent:
   model:
     # name / limits are set at runtime; a placeholder here keeps the file loadable standalone.
-    name: deepseek/deepseek-v4-flash
+    # Must match [variety.sweagent_repo2run].llm in varieties.toml — test_sweagent_repo2run.py
+    # asserts the two agree.
+    name: openrouter/deepseek/deepseek-v4-flash-0731
     per_instance_cost_limit: 2.0
     # The paper ran every baseline at temperature 0.2 (§4: "we select gpt-4o-2024-05-13 for all
     # experiments, with the temperature uniformly set to 0.2"). SWE-agent's own default is 0.0,

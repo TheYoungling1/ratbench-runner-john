@@ -109,7 +109,8 @@ PY = sys.executable  # same interpreter for child subprocesses
 # _ProducerModel). The remaining names (rat/sweagent/claudecode) are native-lane, measurable=False
 # live models under runner/live/.
 _PRODUCE_ABLE = {"dockeragent", "repo2run", "claudecode-dockerfile", "executionagent",
-                 "sweagent_repo2run", "sweagent_repo2run_modern", "setupx", "pipreqs"}
+                 "sweagent_repo2run", "sweagent_repo2run_modern", "sweagent_repo2run_modern_graph",
+                 "setupx", "pipreqs"}
 
 
 class _ProducerModel:
@@ -148,7 +149,7 @@ class _ProducerModel:
         if self.name == "dockeragent":
             kw.update(num_turn=self.num_turn, base_image="auto")
         elif self.name in ("repo2run", "executionagent", "sweagent_repo2run",
-                           "sweagent_repo2run_modern", "setupx"):
+                           "sweagent_repo2run_modern", "sweagent_repo2run_modern_graph", "setupx"):
             kw.update(num_turn=self.num_turn)
         # claudecode-dockerfile: llm only
         prod = producers.get(self.name, **kw)

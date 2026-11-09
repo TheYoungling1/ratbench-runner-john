@@ -1,0 +1,77 @@
+{
+  "agent": "graph2env__envbench_python100",
+  "repo": "benadida/helios-server",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "3.11/site-packages (from pytest) (26.3)\n#14 0.723 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#14 0.724 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest) (2.21.0)\n#14 0.871 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#14 DONE 1.1s\n\n#15 [11/12] RUN printf '%s' IyEvdXNyL2Jpbi9lbnYgYmFzaApzZXQgLWUKIyBydW50aW1lIHNlcnZpY2UgMTogcG9zdGdyZXNxbAovdXNyL2xvY2FsL2Jpbi9zdGFydF9wZy5zaApfZ3JhcGgyZW52X3JlYWR5PTAKdW50aWwgKHBnX2lzcmVhZHkgLXEpOyBkbwogIF9ncmFwaDJlbnZfcmVhZHk9JCgoX2dyYXBoMmVudl9yZWFkeSArIDEpKQogIGlmIFsgIiRfZ3JhcGgyZW52X3JlYWR5IiAtZ2UgMzAgXTsgdGhlbgogICAgZWNobyAncnVudGltZSBzZXJ2aWNlIDEgKHBvc3RncmVzcWwpIGRpZCBub3QgYmVjb21lIHJlYWR5JyA+JjIKICAgIGV4aXQgMQogIGZpCiAgc2xlZXAgMQpkb25lCmV4ZWMgIiRAIgo= | base64 -d       > /usr/local/bin/graph2env-runtime-entrypoint &&     chmod +x /usr/local/bin/graph2env-runtime-entrypoint\n#15 DONE 0.2s\n\n#16 [12/12] WORKDIR /testbed\n#16 DONE 0.0s\n\n#17 exporting to image\n#17 exporting layers\n#17 exporting layers 32.1s done\n#17 exporting manifest sha256:291941842afa0d4d2d1e7009c95daf5aab7427a91dc51d19b4e039736ef13a1e done\n#17 exporting config sha256:47a465b44c2948a23918b4964cfd252624e467a4e571e12d66d122a3e72274f7 done\n#17 exporting attestation manifest sha256:cada3406190bceedea213f39dbe715ae5711b21f23bd6ef905086cfa5429274c done\n#17 exporting manifest list sha256:0a5f8451805cc98958796aadab52d2ff2133af60c21b4bf40dc89ec9d2912d29 done\n#17 naming to docker.io/library/bench-graph2env__envbench_python100-benadida-helios-server:latest done\n#17 unpacking to docker.io/library/bench-graph2env__envbench_python100-benadida-helios-server:latest\n#17 unpacking to docker.io/library/bench-graph2env__envbench_python100-benadida-helios-server:latest 6.5s done\n#17 DONE 38.7s\n",
+  "status": "no_tests_collected",
+  "py_test_files": 0,
+  "collect_rc": 5,
+  "collect_clean": true,
+  "collect_errors": [],
+  "collect_error_count": 0,
+  "collected_node_ids": [],
+  "executed": false,
+  "total": 0,
+  "passed": 0,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [],
+  "ebsr": false,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 1423.6,
+  "image_delta_mb": 1245.3,
+  "image_digest": "bench-graph2env__envbench_python100-benadida-helios-server@sha256:0a5f8451805cc98958796aadab52d2ff2133af60c21b4bf40dc89ec9d2912d29",
+  "installed_pkg_count": 63,
+  "tokens_in": 1260992,
+  "tokens_out": 30871,
+  "llm_calls": 23,
+  "turns_used": null,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 119.16,
+  "test_s": 0.54,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "graph2env",
+    "head_sha": "c7ed0608e2cdfc75bf323a834f0ca579e6273e34",
+    "base_image": "python:3.11-slim",
+    "tokens_in": 1260992,
+    "tokens_out": 30871,
+    "llm_calls": 23,
+    "runtime_handoff": {
+      "environment": [
+        "PATH"
+      ],
+      "services": [
+        "postgresql"
+      ],
+      "services_rc": 0
+    },
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=c7ed0608e2cdfc75bf323a834f0ca579e6273e34 (pinned)\nremoved pytest.ini\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=c7ed0608e2cdfc75bf323a834f0ca579e6273e34 (pinned)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

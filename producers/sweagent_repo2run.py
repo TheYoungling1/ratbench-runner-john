@@ -34,6 +34,7 @@ from bench.schema import RepoSpec  # noqa: E402
 _HERE = os.path.dirname(os.path.abspath(__file__))
 CONFIG_PATH = os.path.join(_HERE, "sweagent_repo2run_config.yaml")
 MODERN_CONFIG_PATH = os.path.join(_HERE, "sweagent_repo2run_modern_config.yaml")
+GRAPH_CONFIG_PATH = os.path.join(_HERE, "sweagent_repo2run_graph_config.yaml")
 RUNNER_PATH = os.path.join(_HERE, "sweagent_repo2run_runner.py")
 RESULT_MARK = "__SWEAGENT_DF_RESULT__"
 
@@ -136,7 +137,8 @@ def _clone_pinned(repo: RepoSpec, dest: str) -> None:
 
 
 def run_sweagent_repo2run(repo: RepoSpec, ctx: ProduceContext, *, llm: str | None,
-                            num_turn: int, config_path: str | None = None) -> dict:
+                            num_turn: int, config_path: str | None = None,
+                            setup_spec: str | None = None) -> dict:
     """LIVE-ONLY: clone the repo, run SWE-agent under the paper's config in the py3.11 venv, and
     return the /Dockerfile it wrote. Raises on failure; the producer wraps it for the anti-vanish
     invariant. Never exercised by unit tests (they inject a stub runner) — it needs docker, keys,
@@ -168,6 +170,8 @@ def run_sweagent_repo2run(repo: RepoSpec, ctx: ProduceContext, *, llm: str | Non
            "--call-limit", str(num_turn)]
     if repo.commit:
         cmd += ["--commit", repo.commit]
+    if setup_spec:
+        cmd += ["--setup-spec", setup_spec]
 
     proc = subprocess.run(cmd, capture_output=True, text=True, timeout=ctx.timeout)
     try:
@@ -214,6 +218,9 @@ class SweAgentRepo2RunProducer:
         self.num_turn = num_turn
         self._runner = runner   # injectable for tests; None => the real live runner
 
+    def _extra_runner_kwargs(self, repo: RepoSpec) -> dict:
+        return {}
+
     def produce(self, repo: RepoSpec, ctx: ProduceContext) -> ProducedEnv:
         # Anti-vanish invariant (design §1): a SWE-agent crash yields ProducedEnv(status="error"),
         # never a raised exception.
@@ -226,6 +233,7 @@ class SweAgentRepo2RunProducer:
             kw = {"llm": (ctx.llm or self.llm), "num_turn": num_turn}
             if self.config_path:
                 kw["config_path"] = self.config_path
+            kw.update(self._extra_runner_kwargs(repo))
             res = runner(repo, ctx, **kw)
 
             economy = dict(res.get("economy") or {})
@@ -280,3 +288,37 @@ class SweAgentRepo2RunModernProducer(SweAgentRepo2RunProducer):
     """
     name = "sweagent_repo2run_modern"
     config_path = MODERN_CONFIG_PATH
+
+
+GRAPH_SPEC_ROOT_ENV = "SWEAGENT_GRAPH_SPEC_ROOT"
+
+
+def graph_spec_path(spec_root: str, full_name: str) -> str:
+    """Per-repo Graph2Env spec, written by Graph2Env's scripts/prepare_graph_context_specs.py."""
+    return os.path.join(spec_root, *full_name.split("/"), "spec.json")
+
+
+class SweAgentRepo2RunGraphProducer(SweAgentRepo2RunModernProducer):
+    """`sweagent_repo2run_modern` plus Graph2Env's graph context; the context is the ONLY change.
+
+    Config: sweagent_repo2run_graph_config.yaml, the modern config plus one `{{context_block}}`
+    line (a test pins that). Per repo, the runner gets a `"deliverable": "dockerfile"` spec that
+    fills the placeholder and uploads the graph files to /g2e, and leaves the deployment image,
+    model, budget and /Dockerfile deliverable exactly as the modern arm has them.
+
+    The spec root comes from $SWEAGENT_GRAPH_SPEC_ROOT (varieties.toml cannot carry a path). A
+    missing root or spec is an ERROR row, never a silent run without context -- that would be a
+    second baseline row filed under this arm's name.
+    """
+    name = "sweagent_repo2run_modern_graph"
+    config_path = GRAPH_CONFIG_PATH
+
+    def _extra_runner_kwargs(self, repo: RepoSpec) -> dict:
+        root = os.environ.get(GRAPH_SPEC_ROOT_ENV)
+        if not root:
+            raise RuntimeError(f"{GRAPH_SPEC_ROOT_ENV} is not set; this arm needs a Graph2Env "
+                               "spec per repo")
+        spec = graph_spec_path(root, repo.full_name)
+        if not os.path.isfile(spec):
+            raise FileNotFoundError(f"no Graph2Env context for {repo.full_name}: {spec}")
+        return {"setup_spec": spec}

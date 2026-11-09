@@ -81,7 +81,7 @@ def test_aggregate_globs_rows(tmp_path, monkeypatch):
     monkeypatch.setattr(ub, "measure", _fake_measure)
     ub.run_one(_env(agent="v3", repo="o/r"), str(tmp_path), docker=object())
     out = ub.aggregate(str(tmp_path))
-    assert out["v3"]["n"] == 1 and out["v3"]["EBSR"] == 1.0 and out["v3"]["ESSR_all"] == 1.0
+    assert out["v3"]["n"] == 1 and out["v3"]["EBSR"] == 1.0
 
 
 def test_run_one_write_is_atomic_no_tmp_left(tmp_path, monkeypatch):

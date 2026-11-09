@@ -1,0 +1,24 @@
+{
+  "agent_branch": "",
+  "agent_commit": "d7d7fb3",
+  "concurrency": 4,
+  "dataset": {
+    "path": "/opt/ratbench-cc/datasets/rat_python50.json",
+    "repo_count": 50,
+    "sha256": "0111697043d2790ce593726c33d9295a002a069f0660d4304aae27d5964b82fb"
+  },
+  "dirty": false,
+  "harness_commit": "d7d7fb3",
+  "host": {
+    "machine": "x86_64",
+    "python_version": "3.11.16",
+    "system": "Linux"
+  },
+  "model": "claudecode-dockerfile",
+  "num_turn": 100,
+  "status": "done",
+  "sweagent_commit": "unknown",
+  "sweagent_config": null,
+  "tier": "all",
+  "variety": "claudecode-dockerfile"
+}

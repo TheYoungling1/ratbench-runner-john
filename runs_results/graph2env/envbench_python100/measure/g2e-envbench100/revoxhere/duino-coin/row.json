@@ -1,0 +1,76 @@
+{
+  "agent": "graph2env__envbench_python100",
+  "repo": "revoxhere/duino-coin",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "l uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#14 0.596 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (9.1.1)\n#14 0.600 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#14 0.602 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.11/site-packages (from pytest) (26.3)\n#14 0.603 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#14 0.604 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest) (2.21.0)\n#14 0.678 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#14 DONE 0.8s\n\n#15 [11/11] WORKDIR /testbed\n#15 DONE 0.1s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 17.9s done\n#16 exporting manifest sha256:4d5f618b0c9dbf28fca2418e1b6f4286acef452f1506618ef2b53193b81ad766 0.0s done\n#16 exporting config sha256:0c3ac7439d4b0b3b12dd01b6b1fb55fc71de25af5b963efe81138141ee8ca9c3 0.0s done\n#16 exporting attestation manifest sha256:387fc2d7bb99d11f26454861e44bb3e2f4ca10cf27f2fe7974edd16aa3ee064f 0.0s done\n#16 exporting manifest list sha256:3f7b6e8f1634d9823a68aff2110b452c875f68ba926c2aded8896a230c35d4b9 0.0s done\n#16 naming to docker.io/library/bench-graph2env__envbench_python100-revoxhere-duino-coin:latest\n#16 naming to docker.io/library/bench-graph2env__envbench_python100-revoxhere-duino-coin:latest done\n#16 unpacking to docker.io/library/bench-graph2env__envbench_python100-revoxhere-duino-coin:latest\n#16 unpacking to docker.io/library/bench-graph2env__envbench_python100-revoxhere-duino-coin:latest 8.2s done\n#16 DONE 26.2s\n",
+  "status": "no_tests_collected",
+  "py_test_files": 0,
+  "collect_rc": 5,
+  "collect_clean": true,
+  "collect_errors": [],
+  "collect_error_count": 0,
+  "collected_node_ids": [],
+  "executed": false,
+  "total": 0,
+  "passed": 0,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [],
+  "ebsr": false,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 216.9,
+  "image_delta_mb": null,
+  "image_digest": "bench-graph2env__envbench_python100-revoxhere-duino-coin@sha256:3f7b6e8f1634d9823a68aff2110b452c875f68ba926c2aded8896a230c35d4b9",
+  "installed_pkg_count": 20,
+  "tokens_in": 308304,
+  "tokens_out": 29102,
+  "llm_calls": 13,
+  "turns_used": null,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 58.53,
+  "test_s": 0.27,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "graph2env",
+    "head_sha": "2d3d3dd61982ddc6fc6f9933d3ba4d2b60447259",
+    "base_image": "python:3.11-slim",
+    "tokens_in": 308304,
+    "tokens_out": 29102,
+    "llm_calls": 13,
+    "runtime_handoff": {
+      "environment": [
+        "PATH",
+        "PYTEST_ADDOPTS"
+      ],
+      "services": [],
+      "services_rc": null
+    },
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=2d3d3dd61982ddc6fc6f9933d3ba4d2b60447259 (pinned)\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=2d3d3dd61982ddc6fc6f9933d3ba4d2b60447259 (pinned)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

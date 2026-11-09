@@ -58,6 +58,6 @@ def probe_testbed(docker, name: str, W: str = "/testbed") -> dict:
     Returns {"status": one of {conforming, non_conforming, empty_testbed},
              "py_test_files": int (diagnostic), "reason": str}.
     """
-    result = docker.exec(name, ["bash", "-lc", _probe_script(W)])
+    result = docker.exec(name, ["bash", "-c", _probe_script(W)])
     out = result[1] if isinstance(result, (tuple, list)) and len(result) >= 2 else ""
     return _parse_probe(out)

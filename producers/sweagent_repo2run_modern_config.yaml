@@ -21,7 +21,8 @@
 agent:
   model:
     # name / limits are set at runtime; a placeholder here keeps the file loadable standalone.
-    name: deepseek/deepseek-v4-flash
+    # Must match [variety.sweagent_repo2run_modern].llm in varieties.toml.
+    name: openrouter/deepseek/deepseek-v4-flash-0731
     # Matched to the baseline arm so modern-vs-baseline isolates the harness. Note this is the same
     # NOMINAL ceiling but a larger EFFECTIVE budget: last_n_observations breaks prompt caching
     # (history_processors.py:106), and this arm does not use it, so the same $2 buys more turns.
@@ -30,11 +31,33 @@ agent:
     # leaving this unset would silently diverge from the arm this one is contrasted against.
     temperature: 0.2
     completion_kwargs:
+      # SWE-agent passes no timeout to litellm.completion (models.py:722), so the call inherits
+      # litellm.request_timeout = 6000s -- 100 minutes of silence before anything raises, and
+      # RetryConfig cannot help because tenacity fires on exceptions and a stalled socket raises
+      # none. Matched to the Graph2Env ablation arms, which set the same 300s: without it the
+      # baseline loses repos to a failure mode the arms survive, and the delta measures that.
+      timeout: 300.0
+      # Output cap. SWE-agent 1.1 sends max_tokens only for anthropic models (models.py:712), so
+      # DeepSeek had no ceiling but its 384K output limit: on 2026-09-23 two agents at a time hung
+      # 15+ min on one call, their OpenRouter sockets receiving only keepalive bytes, which also
+      # stops the 300 s timeout above from ever firing. Real replies here are ~40 tokens; 16K
+      # never touches them and ends a runaway generation in minutes. Same value in both arms.
+      max_tokens: 16384
       extra_body:
         # Thinking mode OFF, carried over from the baseline arm. DeepSeek v4 enables it by default.
         # If the two arms disagree here, the contrast measures reasoning mode, not the harness.
+        #
+        # BOTH fields are needed, because each provider honours only its own and ignores the
+        # other. `thinking` is DeepSeek-direct's; on OpenRouter it is inert -- measured, not
+        # assumed: outputs/lite_fs_75 ran this lane with thinking=disabled recorded in arm.json
+        # and `reasoning_content` still came back populated on every response. Since
+        # varieties.toml moved this arm to openrouter/..., `thinking` alone left reasoning ON,
+        # while the Graph2Env ablation arms disable it through provider_pin()'s `reasoning`.
+        # That is exactly the disagreement the comment above warns about.
         thinking:
           type: disabled
+        reasoning:
+          enabled: false
   templates:
     # ---- config/default.yaml verbatim ----
     # One line, deliberately. Under function_calling the tool schemas carry the interface, which is

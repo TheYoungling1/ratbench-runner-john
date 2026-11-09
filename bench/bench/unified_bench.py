@@ -9,8 +9,11 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, fields
 from glob import glob
 
-from bench.docker_client import SubprocessDocker
-# from bench.gold import load_gold  # golden-set calc disabled for now (no gold JSON)
+REPO_ROOT = os.environ.get("REPO_ROOT") or os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from bench.docker_client import SubprocessDocker  # noqa: E402
+from bench.metrics import load_gold_counts
 from bench.harvest import discover
 from bench.measure import measure
 from bench.metrics import compute_metrics
@@ -20,6 +23,30 @@ from bench.schema import MeasureRow
 
 def _row_path(out_root: str, agent: str, repo: str) -> str:
     return os.path.join(out_root, agent, *repo.split("/"), "row.json")
+
+
+def _error_detail(e: BaseException) -> str:
+    """A failure string that still says WHY.
+
+    `repr(CalledProcessError)` prints the exit code and argv and NOTHING else, so a subprocess run
+    with capture_output=True loses the message entirely: ten repo2run repos recorded
+    `CalledProcessError(125, ['docker','run',...])` and the cause was undiagnosable from the rows.
+    docker_client runs its commands captured, so the daemon's explanation is sitting in .stderr --
+    this pulls it back out. Truncated, because a failed build log can be megabytes and this string
+    is persisted in every affected row.
+    """
+    parts = [repr(e)]
+    for stream in ("stderr", "output"):
+        raw = getattr(e, stream, None)
+        if not raw:
+            continue
+        if isinstance(raw, bytes):
+            raw = raw.decode("utf-8", "replace")       # docker output is not guaranteed UTF-8
+        text = str(raw).strip()
+        if text:
+            parts.append(f"{stream}: {text[-2000:]}")
+            break                                       # stderr wins; stdout is the fallback
+    return " | ".join(parts)
 
 
 def run_one(env, out_root: str, *, docker) -> str:
@@ -40,7 +67,7 @@ def run_one(env, out_root: str, *, docker) -> str:
                          tokens_in=m.get("tokens_in"), tokens_out=m.get("tokens_out"),
                          llm_calls=m.get("llm_calls"), turns_used=m.get("turns_used"),
                          cost_usd=m.get("cost_usd"), produce_s=m.get("produce_s"),
-                         meta=dict(m, error=repr(e)))
+                         meta=dict(m, error=_error_detail(e)))
     tmp = out + ".tmp"
     with open(tmp, "w") as f:
         json.dump(asdict(row), f, indent=2, default=list)
@@ -85,6 +112,89 @@ def aggregate_errors(out_root: str, *, turn_cap=None) -> dict:
             for a, rows in load_rows(out_root).items()}
 
 
+def _econ(e: dict) -> str:
+    """The economy line. Medians, with the telemetry count — a median over 89% of an arm's repos
+    is not the same claim as one over all of them, so the n travels with the number."""
+    if not e or not e["n_token_reporting"]:
+        return "no telemetry on any row"
+    tok = f"{e['median_tokens'] / 1000:,.1f}K median"
+    cov = "" if e["n_token_reporting"] == e["n_rows"] else f" over {e['n_token_reporting']}/{e['n_rows']} rows"
+    turns = f"   turns {e['median_turns']:.0f}" if e["median_turns"] is not None else ""
+    cost = f"   ${e['median_cost_usd']:.4f}" if e["median_cost_usd"] is not None else "   cost n/a"
+    return tok + cov + turns + cost
+
+
+def _report_agent(a, ap) -> int:
+    """Score one arm across every dataset it has run. Read-only: nothing is measured or rebuilt."""
+    from bench.campaign import score_agent
+
+    gold = a.gold
+    if gold and not os.path.isfile(gold):
+        print(f"--gold not found: {gold}", file=sys.stderr)
+        return 2
+    try:
+        res = score_agent(a.agent_dir, gold_path=gold,
+                          datasets_dir=os.path.join(REPO_ROOT, "datasets"))
+    except FileNotFoundError as e:
+        print(str(e), file=sys.stderr)
+        return 2
+
+    print(f"agent      {res['agent']}   ({res['runs_found']} run dirs found)")
+    if not res["groups"]:
+        print("  no run matched a known dataset — nothing to score", file=sys.stderr)
+        for p, ds in res["ignored"]:
+            print(f"    ignored {os.path.basename(p)} (dataset={ds})", file=sys.stderr)
+        return 2
+    if not gold:
+        print("  no --gold: ESSR is null (EBSR is unaffected)")
+
+    for group, b in res["groups"].items():
+        m = b["metrics"]
+        essr = "null" if m["ESSR"] is None else f"{m['ESSR']:.4f}"
+        cov = f"{b['n_measured']}/{b['n_expected']}" if b["n_expected"] else str(b["n_measured"])
+        print(f"\n  {group}")
+        print(f"    source(s)   {', '.join(b['sources'])}"
+              + ("   [POOLED]" if b["pooled"] else ""))
+        print(f"    repos       {cov} measured   ESSR scored over {m['n_gold_scored']}")
+        print(f"    EBSR        {m['EBSR']:.4f}   ({m['n_ebsr']}/{m['n']})")
+        print(f"    ESSR        {essr}")
+        print(f"    tokens      {_econ(b['economy'])}")
+        for flag, msg in (("incomplete", "POOL INCOMPLETE — a part run is missing"),
+                          ("ambiguous", "tie on row count broken by name; check `rejected`")):
+            if b[flag]:
+                print(f"    !! {msg}")
+        if b["duplicate_repos"]:
+            print(f"    !! {len(b['duplicate_repos'])} repo(s) in more than one source: "
+                  f"{', '.join(b['duplicate_repos'][:4])}")
+        if b["n_expected"] and b["n_measured"] != b["n_expected"]:
+            print(f"    !! {b['n_expected'] - b['n_measured']} repo(s) of the dataset have no row")
+        if b["rejected"]:
+            print(f"    not used    {', '.join(b['rejected'])}")
+
+    p = res.get("pooled")
+    if p:
+        essr = "null" if p["ESSR"] is None else f"{p['ESSR']:.4f}"
+        print(f"\n  POOLED — the official cross-dataset figure: one mean over one pile of repos")
+        print(f"    EBSR        {p['EBSR']:.4f}   ({p['n_ebsr']}/{p['n']} repos)")
+        print(f"    ESSR        {essr}   (over the {p['n_gold_scored']} repos with a gold manifest)")
+        print(f"    tokens      {_econ(p['economy'])}")
+        if p["n_gold_scored"] != p["n"]:
+            print(f"    note        the two denominators differ on purpose: every repo has an "
+                  f"EBSR,\n                only {p['n_gold_scored']} have a certified ESSR denominator")
+    else:
+        print("\n  POOLED      not computable — no dataset scored")
+
+    if res["ignored"]:
+        print(f"\n  ignored     {', '.join(os.path.basename(p) for p, _ in res['ignored'])}")
+    if a.out:
+        os.makedirs(a.out, exist_ok=True)
+        dest = os.path.join(a.out, "campaign.json")
+        with open(dest, "w") as f:
+            json.dump(res, f, indent=2, default=str)
+        print(f"\nwrote {dest}")
+    return 0
+
+
 def _parse_harvest(arg: str) -> dict:
     out = {}
     for pair in arg.split(","):
@@ -96,15 +206,28 @@ def _parse_harvest(arg: str) -> dict:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--harvest", help="agent=run_dir,agent2=run_dir2")
-    ap.add_argument("--out", required=True)
+    ap.add_argument("--agent-dir",
+                    help="score a whole arm from its run root (e.g. runs/claudecode-dockerfile): "
+                         "finds the rat50 and envbench100 runs from each run's own manifest, "
+                         "scores both, and reports the unified figures. Measures nothing.")
+    ap.add_argument("--out", required=False)
     ap.add_argument("--concurrency", type=int, default=1)
+    ap.add_argument("--only", help="file of repo full_names (one per line, # comments): measure "
+                                   "only these — a targeted re-measure")
     ap.add_argument("--aggregate-only", action="store_true")
-    ap.add_argument("--gold")
+    ap.add_argument("--gold", help="gold manifest JSON; enables the gold-anchored ESSR block")
+    ap.add_argument("--gold-corpus", default=None,
+                    help="corpus inside a combined gold file (e.g. rat_python50, "
+                         "envbench_python100). Omitted, every corpus is merged.")
     ap.add_argument("--turn-cap", type=int, default=None,
                     help="repair-loop turn cap; required for the unconverged flag")
     ap.add_argument("--delta", help="AGENT_A:AGENT_B — arm-vs-arm interval delta")
     a = ap.parse_args(argv)
 
+    if a.agent_dir:
+        return _report_agent(a, ap)
+    if not a.out:
+        ap.error("--out is required unless --agent-dir")
     if not a.aggregate_only and not a.harvest:
         ap.error("--harvest is required unless --aggregate-only")
 
@@ -136,14 +259,32 @@ def main(argv=None) -> int:
 
     if not a.aggregate_only:
         envs = discover(_parse_harvest(a.harvest))
+        if a.only:
+            with open(a.only, encoding="utf-8") as fh:
+                keep = {ln.strip().lower() for ln in fh if ln.strip() and not ln.lstrip().startswith("#")}
+            envs = [e for e in envs if e.repo.full_name.lower() in keep]
         docker = SubprocessDocker()
         with ThreadPoolExecutor(max_workers=max(1, a.concurrency)) as ex:
             list(ex.map(lambda e: run_one(e, a.out, docker=docker), envs))
 
-    # Gold-anchored scoring is DEPRECATED — force None so no gold JSON is ever read (a missing
-    # gold file can't error). `--gold` is accepted but IGNORED. See bench/gold.py (dormant).
+    # Gold-anchored ESSR (bench.metrics.gold_essr). Opt-in via --gold: without it the block is
+    # still written, with ESSR_gold=None, so "no gold supplied" stays distinguishable from "this
+    # field was never computed". A BAD --gold path is fatal rather than silently unanchored — a
+    # table published with no anchor and no warning is the failure this guards.
+    # (The node-id-intersection metric in bench/gold.py remains dormant and separate.)
     gold = None
-    # gold = load_gold(a.gold) if a.gold else None
+    if a.gold:
+        try:
+            gold = load_gold_counts(a.gold, corpus=a.gold_corpus)
+        except (FileNotFoundError, ValueError, KeyError) as e:
+            print(f"--gold could not be loaded: {e}", file=sys.stderr)
+            return 2
+        if not gold:
+            print(f"--gold loaded 0 usable denominators from {a.gold}"
+                  + (f" (corpus {a.gold_corpus})" if a.gold_corpus else ""), file=sys.stderr)
+            return 2
+        print(f"[gold] {len(gold)} denominators from {os.path.basename(a.gold)}"
+              + (f" :: {a.gold_corpus}" if a.gold_corpus else ""), file=sys.stderr)
 
     # validate BEFORE any write — a bad --delta must not leave a half-written output dir
     pair = None

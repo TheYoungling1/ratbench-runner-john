@@ -102,7 +102,17 @@ def _setupx_root(ctx: ProduceContext | None = None) -> str:
             # llm_usage_used, not _record_usage: main.py imports this one by name, so it is the
             # identifier both halves of the usage hunk agree on.
             ("src/llm_engine.py", "llm_usage_used",
-             "no token counts are captured and the run's cost is unrecoverable")):
+             "no token counts are captured and the run's cost is unrecoverable"),
+            # The provider pin and reasoning switch are body fields the stock client cannot send.
+            # Inert, the arm silently runs reasoning-ON against whichever provider OpenRouter picks
+            # — the exact confound this route exists to remove, and invisible in the output.
+            ("src/llm_engine.py", "SETUPX_EXTRA_BODY",
+             "the provider pin and reasoning:off never reach the request"),
+            # Without it a single 429 ends a repo. A pinned provider (allow_fallbacks=false)
+            # answers 429 instead of rerouting, so this is the difference between a blip and a
+            # lost repo — measured: one cost a repo 43s into a run.
+            ("src/llm_engine.py", "_post_with_retry",
+             "one transient 429 or 5xx kills the repo instead of being retried")):
         try:
             with open(os.path.join(root, rel), encoding="utf-8") as fh:
                 patched = marker in fh.read()
@@ -131,17 +141,23 @@ def child_env(llm: str | None, base_image: str, ckpt_ns: str, max_llm_calls: int
     of every run piles up under timestamped names that cannot be matched back to a row afterwards.
     Caller must have created the directory.
     """
-    key = os.environ.get("DEEPSEEK_API_KEY")
+    # The key must match the ENDPOINT, not the arm's history. SetupX sends it as a bearer to
+    # whatever OPENAI_BASE_URL points at, so a DeepSeek key on the OpenRouter route is a 401 on
+    # every repo — after the mirror image is already built and paid for.
+    base_url = os.environ.get("SETUPX_BASE_URL", DEEPSEEK_BASE_URL)
+    key_var = "OPENROUTER_API_KEY" if "openrouter.ai" in base_url else "DEEPSEEK_API_KEY"
+    key = os.environ.get(key_var)
     if not key:
-        raise RuntimeError("DEEPSEEK_API_KEY is not set; the setupx variety routes through "
-                           "DeepSeek's own API (see README, 'SetupX setup').")
+        raise RuntimeError(f"{key_var} is not set, but SETUPX_BASE_URL points at {base_url} — "
+                           "the setupx variety sends this key as the bearer for that endpoint "
+                           "(see README, 'SetupX setup').")
     # `deepseek/deepseek-v4-flash` is a litellm-style slug; SetupX POSTs the value verbatim as
     # {"model": ...} to an OpenAI-compatible endpoint, which wants the bare name.
     model = (llm or "deepseek/deepseek-v4-flash").split("/", 1)[-1]
     env = dict(os.environ,
                LLM_PROVIDER="openai",
                OPENAI_API_KEY=key,
-               OPENAI_BASE_URL=os.environ.get("SETUPX_BASE_URL", DEEPSEEK_BASE_URL),
+               OPENAI_BASE_URL=base_url,
                OPENAI_MODEL=model,
                DOCKER_BASE_IMAGE=base_image,
                DOCKER_WORK_DIR="/workspace",
@@ -155,6 +171,25 @@ def child_env(llm: str | None, base_image: str, ckpt_ns: str, max_llm_calls: int
                # repos collide the moment either binds a port.
                SETUPX_NETWORK_MODE=os.environ.get("SETUPX_NETWORK_MODE", "bridge"),
                LOG_DIR=log_dir)
+    # OpenRouter carries the arm's provider pin and reasoning switch as BODY fields on
+    # /chat/completions — the endpoint where both exist (the Anthropic skin has no `reasoning`
+    # field at all). SetupX's OpenAICompatibleClient builds its payload by hand, so
+    # tools/setupx-bench.patch merges this JSON into it. Producer's call, not the shell's: same
+    # rule as XPU arm membership below, and for the same reason — an arm whose inference mode
+    # depends on the ambient environment is not a controlled arm.
+    #
+    # reasoning OFF matches every other arm (sweagent_repo2run{,_modern} pin
+    # `thinking: {type: disabled}`; the paper's baselines ran on a non-reasoning model). On
+    # DeepSeek direct it is NOT expressible — SetupX sends no such field and DeepSeek v4 defaults
+    # reasoning ON — so a DeepSeek-routed setupx run is reasoning-ON whatever this says.
+    if "openrouter.ai" in base_url:
+        providers = [p.strip() for p in
+                     os.environ.get("OPENROUTER_PROVIDER", "DeepInfra").split(",") if p.strip()]
+        env["SETUPX_EXTRA_BODY"] = json.dumps({
+            "provider": {"order": providers, "allow_fallbacks": False},
+            "reasoning": {"enabled": False},
+        })
+
     dsn = os.environ.get("SETUPX_DB_DSN")
     if dsn:
         # All THREE, not just the key. text_to_embedding takes the dedicated branch as soon as

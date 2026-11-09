@@ -1,0 +1,74 @@
+{
+  "agent": "rat__rat50new-pjy",
+  "repo": "JonBunator/Enterr",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "ib-0.33 python3-xlib-0.15 pytweening-1.2.0 pytz-2025.2 requests-2.32.5 requests-oauthlib-2.0.0 rich-14.3.4 rich-toolkit-0.20.5 rignore-0.8.1 rsa-4.9.1 sbvirtualdisplay-1.4.0 selenium-4.41.0 seleniumbase-4.47.3 sentry-sdk-2.69.1 shellingham-1.5.4 simple-websocket-1.1.0 six-1.17.0 sortedcontainers-2.4.0 soupsieve-2.8.4 sqlcipher3-wheels-0.5.7 starlette-1.6.0 tabcompleter-1.4.1 trio-0.34.0 trio-websocket-0.12.2 typer-0.27.2 typing-inspect-0.9.0 tzlocal-5.4.4 urllib3-2.7.0 uvicorn-0.53.0 uvloop-0.22.1 watchfiles-1.2.0 websocket-client-1.9.2 websockets-17.1 wsproto-1.3.2\n#19 91.29 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#19 91.57 \n#19 91.57 [notice] A new release of pip is available: 25.0.1 -> 26.2.1\n#19 91.57 [notice] To update, run: pip install --upgrade pip\n#19 DONE 92.3s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 0.4s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.0s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 14.0s done\n#22 exporting manifest sha256:c7fee52bb93f0f468ce52c52bc43edb7a1d1ce472b621a5a9cca01643cecd186 done\n#22 exporting config sha256:46c8a05edead09ec719aba2a349da2e5764634a34824491881cfd1bf433282fe done\n#22 exporting attestation manifest sha256:f2c606bf03a6e797bda1dd7e60de77841ffb65462c0c5f18080b991f0c4bb45a 0.0s done\n#22 exporting manifest list sha256:81eab464f16469ff51186ba0b98d5488a07a70b2144e5b2fd673bb2e977befe0 done\n#22 naming to docker.io/library/bench-rat__rat50new-pjy-jonbunator-enterr:latest done\n#22 unpacking to docker.io/library/bench-rat__rat50new-pjy-jonbunator-enterr:latest\n#22 unpacking to docker.io/library/bench-rat__rat50new-pjy-jonbunator-enterr:latest 6.6s done\n#22 DONE 20.8s\n",
+  "status": "collect_error",
+  "py_test_files": 3,
+  "collect_rc": 2,
+  "collect_clean": false,
+  "collect_errors": [
+    "E   ModuleNotFoundError: No module named 'dataAccess'",
+    "E   ModuleNotFoundError: No module named 'execution'",
+    "E   ModuleNotFoundError: No module named 'execution'"
+  ],
+  "collect_error_count": 3,
+  "collected_node_ids": [],
+  "executed": true,
+  "total": 3,
+  "passed": 0,
+  "failed": 0,
+  "errors": 3,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [
+    "src.backend.tests.database.test_add_entries",
+    "src.backend.tests.endpoints.test_find_form_automatically",
+    "src.backend.tests.execution.login.test_parser.test_parser"
+  ],
+  "ebsr": true,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 168.6,
+  "image_delta_mb": null,
+  "image_digest": "bench-rat__rat50new-pjy-jonbunator-enterr@sha256:81eab464f16469ff51186ba0b98d5488a07a70b2144e5b2fd673bb2e977befe0",
+  "installed_pkg_count": 135,
+  "tokens_in": 266220,
+  "tokens_out": 1749,
+  "llm_calls": 18,
+  "turns_used": null,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 144.59,
+  "test_s": 0.95,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "results_pjy",
+    "tokens_in": 266220,
+    "tokens_out": 1749,
+    "llm_calls": 18,
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

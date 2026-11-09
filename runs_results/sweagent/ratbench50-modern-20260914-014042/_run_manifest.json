@@ -1,0 +1,27 @@
+{
+  "agent_branch": "",
+  "agent_commit": "ba0eca2",
+  "concurrency": 4,
+  "dataset": {
+    "path": "datasets/rat_python50.json",
+    "repo_count": 50,
+    "sha256": "0111697043d2790ce593726c33d9295a002a069f0660d4304aae27d5964b82fb"
+  },
+  "dirty": true,
+  "harness_commit": "ba0eca2",
+  "host": {
+    "machine": "x86_64",
+    "python_version": "3.11.16",
+    "system": "Linux"
+  },
+  "model": "sweagent_repo2run_modern",
+  "num_turn": 100,
+  "status": "done",
+  "sweagent_commit": "3ea751c087f32b16e039a2233dd6eefecef325d5",
+  "sweagent_config": {
+    "path": "configs/sweagent_repo2run_modern_config.yaml",
+    "sha256": "50d1a175993594571acd4241c9d0e587c68185c75eb25f626f5cdd00c2c6b003"
+  },
+  "tier": "all",
+  "variety": "sweagent_repo2run_modern"
+}

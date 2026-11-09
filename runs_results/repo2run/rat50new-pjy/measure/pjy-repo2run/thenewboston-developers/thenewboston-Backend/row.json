@@ -1,0 +1,69 @@
+{
+  "agent": "repo2run__rat50new-pjy",
+  "repo": "thenewboston-developers/thenewboston-Backend",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "*******************************************************************\n#17 7.116 \n#17 7.116 !!\n#17 7.116   self._finalize_license_expression()\n#17 14.08 /tmp/tmpzp3lp_3w/.venv/lib/python3.13/site-packages/setuptools/dist.py:765: BuildBackendWarning: License classifiers are deprecated.\n#17 14.08 !!\n#17 14.08 \n#17 14.08         ********************************************************************************\n#17 14.08         Please consider removing the following classifiers in favor of a SPDX license expression:\n#17 14.08 \n#17 14.08         License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)\n#17 14.08 \n#17 14.08         See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.\n#17 14.08         ********************************************************************************\n#17 14.08 \n#17 14.08 !!\n#17 14.08   self._finalize_license_expression()\n#17 14.12 \n#17 14.12 Installing the current project: thenewboston-backend (0.1.0)\n#17 DONE 14.7s\n\n#18 [14/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#18 DONE 0.7s\n\n#19 [15/16] WORKDIR /testbed\n#19 DONE 0.0s\n\n#20 exporting to image\n#20 exporting layers\n#20 exporting layers 14.4s done\n#20 exporting manifest sha256:00606f2913ca0a2f2e36294b085df03e4bc2c6c829123870a3b0e26e75bafa45 done\n#20 exporting config sha256:0510516fe0d4b3692d9b2bdd1dcb833b321d3685df1460ccdc776b88cfab58c1 done\n#20 exporting attestation manifest sha256:6085d01dd598bcb289e6ef2be1abe4746cd559f7c5ae718807e21594d99393a6 done\n#20 exporting manifest list sha256:fdeeffda9f88a0835ee70b3f91f7febff21eeb89a9eb0b05386e6e71f235f2ab done\n#20 naming to docker.io/library/bench-repo2run__rat50new-pjy-thenewboston-developers-thenewboston-backend:latest done\n#20 unpacking to docker.io/library/bench-repo2run__rat50new-pjy-thenewboston-developers-thenewboston-backend:latest\n#20 unpacking to docker.io/library/bench-repo2run__rat50new-pjy-thenewboston-developers-thenewboston-backend:latest 5.6s done\n#20 DONE 20.1s\n",
+  "status": "collect_error",
+  "py_test_files": 23,
+  "collect_rc": 4,
+  "collect_clean": false,
+  "collect_errors": [
+    "E   ModuleNotFoundError: No module named 'model_bakery'"
+  ],
+  "collect_error_count": 0,
+  "collected_node_ids": [],
+  "executed": false,
+  "total": 0,
+  "passed": 0,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [],
+  "ebsr": false,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 2281.0,
+  "image_delta_mb": null,
+  "image_digest": "bench-repo2run__rat50new-pjy-thenewboston-developers-thenewboston-backend@sha256:fdeeffda9f88a0835ee70b3f91f7febff21eeb89a9eb0b05386e6e71f235f2ab",
+  "installed_pkg_count": 24,
+  "tokens_in": 33075,
+  "tokens_out": 228,
+  "llm_calls": null,
+  "turns_used": 5,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 57.63,
+  "test_s": 0.24,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "results_pjy",
+    "tokens_in": 33075,
+    "tokens_out": 228,
+    "llm_calls": null,
+    "turns_used": 5,
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

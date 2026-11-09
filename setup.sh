@@ -25,4 +25,4 @@ pip install -r requirements.txt
 echo
 echo "Setup complete. Next:"
 echo "  cp .env.example .env       # then add your OPENROUTER_API_KEY"
-echo "  ./run_bench.sh john-planner-v3 --tier all --limit 2 --concurrency 2   # smoke"
+echo "  ./run_bench.sh pipreqs --tier all --only bruin-data/ingestr   # smoke, no API key"

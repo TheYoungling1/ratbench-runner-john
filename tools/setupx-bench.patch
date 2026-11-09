@@ -78,18 +78,21 @@ index 261da70..4bce67a 100644
                  logger.debug(f"removed snapshot image: {tag}")
              except DockerException as e:
 diff --git a/src/llm_engine.py b/src/llm_engine.py
-index 8b1b5db..7f63cee 100644
+index 8b1b5db..2811acd 100644
 --- a/src/llm_engine.py
 +++ b/src/llm_engine.py
-@@ -16,6 +16,7 @@ Module layout:
+@@ -16,7 +16,10 @@ Module layout:
  """
  
  import json
 +import os
++import random
  import re
++import time
  from abc import ABC, abstractmethod
  from typing import Any
-@@ -53,6 +54,83 @@ class LLMClientBase(ABC):
+ 
+@@ -53,6 +56,128 @@ class LLMClientBase(ABC):
          pass
  
  
@@ -170,10 +173,55 @@ index 8b1b5db..7f63cee 100644
 +            continue
 +
 +
++# ── Transient-failure retry (bench) ──────────────────────────────────────────
++#
++# Stock chat() calls raise_for_status() on the FIRST response, so a single 429 ends the whole
++# repo. That is survivable on a provider that reroutes, and not survivable here: this arm pins
++# provider.order with allow_fallbacks=false, so a busy upstream answers 429 instead of routing
++# elsewhere. One blip cost a repo 43 seconds into a run. The litellm-based arms never showed this
++# because litellm retries internally -- this restores parity, it does not add a new behaviour.
++#
++# The call BUDGET is unaffected: _count_llm_call() runs once per chat(), before this.
++_RETRY_STATUS = frozenset({408, 409, 429, 500, 502, 503, 504})
++# Cap per-attempt sleep so 8 attempts is ~4 minutes, not an unbounded doubling.
++_RETRY_MAX_DELAY = 60.0
++
++
++def _post_with_retry(client, url: str, headers: dict, payload: dict, attempts: int = 8):
++    """POST, retrying the statuses that mean "later" rather than "no".
++
++    Honours Retry-After when the provider sends one. The final response is returned as-is, so the
++    caller's raise_for_status() still reports a genuine, non-transient failure.
++    """
++    delay = 2.0
++    response = None
++    for attempt in range(attempts):
++        try:
++            response = client.post(url, headers=headers, json=payload)
++        except httpx.TransportError:
++            if attempt == attempts - 1:
++                raise
++            time.sleep(delay)
++            delay = min(delay * 2, _RETRY_MAX_DELAY)
++            continue
++        if response.status_code not in _RETRY_STATUS or attempt == attempts - 1:
++            return response
++        wait = delay
++        after = response.headers.get("Retry-After")
++        if after:
++            try:
++                wait = max(wait, float(after))
++            except ValueError:
++                pass
++        time.sleep(wait + random.uniform(0, 1))
++        delay = min(delay * 2, _RETRY_MAX_DELAY)
++    return response
++
++
  class ARKClient(LLMClientBase):
      """ARK API client.
  
-@@ -66,6 +144,7 @@ class ARKClient(LLMClientBase):
+@@ -66,6 +191,7 @@ class ARKClient(LLMClientBase):
          self._client = httpx.Client(timeout=300)
  
      def chat(self, messages: list[dict], json_mode: bool = False) -> str:
@@ -181,7 +229,17 @@ index 8b1b5db..7f63cee 100644
          headers = {
              "Authorization": f"Bearer {self._config.api_key}",
              "Content-Type": "application/json",
-@@ -87,6 +166,7 @@ class ARKClient(LLMClientBase):
+@@ -79,14 +205,12 @@ class ARKClient(LLMClientBase):
+         if json_mode:
+             payload["response_format"] = {"type": "json_object"}
+ 
+-        response = self._client.post(
+-            f"{self._config.base_url}/chat/completions",
+-            headers=headers,
+-            json=payload,
+-        )
++        response = _post_with_retry(
++            self._client, f"{self._config.base_url}/chat/completions", headers, payload)
          response.raise_for_status()
  
          data = response.json()
@@ -189,7 +247,7 @@ index 8b1b5db..7f63cee 100644
          return data["choices"][0]["message"]["content"]
  
      def close(self) -> None:
-@@ -116,6 +196,7 @@ class OpenAICompatibleClient(LLMClientBase):
+@@ -116,6 +240,7 @@ class OpenAICompatibleClient(LLMClientBase):
          2. <think> stripping: qwen-style models embed reasoning in `content`
             (`<think>...</think>actual output`); strip the reasoning block.
          """
@@ -197,7 +255,28 @@ index 8b1b5db..7f63cee 100644
          headers = {
              "Authorization": f"Bearer {self._config.api_key}",
              "Content-Type": "application/json",
-@@ -138,6 +219,7 @@ class OpenAICompatibleClient(LLMClientBase):
+@@ -126,18 +251,23 @@ class OpenAICompatibleClient(LLMClientBase):
+             "messages": messages,
+             "max_tokens": 4096,
+         }
++        # bench: the arm's provider pin and reasoning switch travel as BODY fields on
++        # /chat/completions. SetupX builds this payload by hand, so there is no other injection
++        # point. Producer-supplied JSON (producers/setupx.py::child_env); a malformed value raises
++        # rather than silently running the arm unpinned.
++        extra = os.environ.get("SETUPX_EXTRA_BODY")
++        if extra:
++            payload.update(json.loads(extra))
+ 
+         if json_mode:
+             payload["response_format"] = {"type": "json_object"}
+ 
+-        response = self._client.post(
+-            f"{self._config.base_url}/chat/completions",
+-            headers=headers,
+-            json=payload,
+-        )
++        response = _post_with_retry(
++            self._client, f"{self._config.base_url}/chat/completions", headers, payload)
          response.raise_for_status()
  
          data = response.json()
@@ -205,7 +284,7 @@ index 8b1b5db..7f63cee 100644
          msg = data["choices"][0]["message"]
  
          # Reasoning-model compat: some return main text in `reasoning_content`.
-@@ -563,16 +645,20 @@ You MUST respond in JSON format with this schema:
+@@ -563,16 +693,20 @@ You MUST respond in JSON format with this schema:
          2. JSON wrapped in a ```json ... ``` markdown fence.
          """
          try:

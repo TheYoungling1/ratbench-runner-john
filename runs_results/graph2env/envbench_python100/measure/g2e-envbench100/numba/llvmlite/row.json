@@ -1,0 +1,77 @@
+{
+  "agent": "graph2env__envbench_python100",
+  "repo": "numba/llvmlite",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "e         command -v uv >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#14 0.805 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (9.1.1)\n#14 0.811 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#14 0.812 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.11/site-packages (from pytest) (26.3)\n#14 0.813 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#14 0.814 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest) (2.21.0)\n#14 0.937 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#14 DONE 1.0s\n\n#15 [11/11] WORKDIR /testbed\n#15 DONE 0.0s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 66.8s done\n#16 exporting manifest sha256:1232fba2929f8775dcd2e096ea864b0f41fd51110c2b713990dc9c73625f0db6 done\n#16 exporting config sha256:4f3c11550e1a5a32da33d135052001dafe33b4d01021c5ed684a8d3f61ed1f84 done\n#16 exporting attestation manifest sha256:3c328d64fb3f8136b2995b5258cb38a4906962cca691677012576549e0f088ee 0.0s done\n#16 exporting manifest list sha256:943a0977f64f38f22aec605634d0dbfc7b5b8ee97ed9e04f304766d2525c8735 done\n#16 naming to docker.io/library/bench-graph2env__envbench_python100-numba-llvmlite:latest done\n#16 unpacking to docker.io/library/bench-graph2env__envbench_python100-numba-llvmlite:latest\n#16 unpacking to docker.io/library/bench-graph2env__envbench_python100-numba-llvmlite:latest 10.3s done\n#16 DONE 77.2s\n",
+  "status": "collect_error",
+  "py_test_files": 5,
+  "collect_rc": 3,
+  "collect_clean": false,
+  "collect_errors": [],
+  "collect_error_count": 0,
+  "collected_node_ids": [],
+  "executed": true,
+  "total": 1,
+  "passed": 0,
+  "failed": 0,
+  "errors": 1,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [
+    "pytest::internal"
+  ],
+  "ebsr": true,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 453.0,
+  "image_delta_mb": null,
+  "image_digest": "bench-graph2env__envbench_python100-numba-llvmlite@sha256:943a0977f64f38f22aec605634d0dbfc7b5b8ee97ed9e04f304766d2525c8735",
+  "installed_pkg_count": 32,
+  "tokens_in": 1888026,
+  "tokens_out": 54588,
+  "llm_calls": 73,
+  "turns_used": null,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 141.35,
+  "test_s": 0.33,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "graph2env",
+    "head_sha": "5c181ff3af1de04d4bd70fb0ee287aa81d1fe198",
+    "base_image": "python:3.11-slim",
+    "tokens_in": 1888026,
+    "tokens_out": 54588,
+    "llm_calls": 73,
+    "runtime_handoff": {
+      "environment": [
+        "PATH"
+      ],
+      "services": [],
+      "services_rc": null
+    },
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=5c181ff3af1de04d4bd70fb0ee287aa81d1fe198 (pinned)\nremoved pytest.ini\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=5c181ff3af1de04d4bd70fb0ee287aa81d1fe198 (pinned)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

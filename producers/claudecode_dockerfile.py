@@ -141,8 +141,8 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
     # runner package or RAT model modules (dependency direction: producers must not depend
     # on the runner).
     from producers._claudecode_helpers import (
-        W, agent_env, budget_flags, has_auth, _normalize_model, build_prompt, get_profile, resolve_base,
-        stop_agent,
+        W, agent_env, budget_flags, effective_base_url, has_auth, _normalize_model, build_prompt,
+        get_profile, resolve_base, stop_agent,
         resolve_workbench, DOCKERFILE_GEN_PATH,
     )
     # download_repo/init_output_and_repo are libkit utilities (producers may use libkit).
@@ -182,7 +182,13 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
         os.makedirs(os.path.dirname(gen_dst), exist_ok=True)
 
         subprocess.run(f"docker rm -f {container} >/dev/null 2>&1", shell=True)
-        run_cmd = ["docker", "run", "-d", "--name", container, "-w", W]
+        # --add-host is what lets a container reach tools/anthropic_thinking_proxy.py at
+        # ANTHROPIC_BASE_URL=http://host.docker.internal:<port>/...: Docker Desktop (Mac/Windows)
+        # resolves that name for free, but plain Linux Docker Engine (20.10+) only does it with
+        # this flag. Harmless when the proxy isn't in use — nothing resolves a name it never asks
+        # for.
+        run_cmd = ["docker", "run", "-d", "--name", container, "-w", W,
+                  "--add-host=host.docker.internal:host-gateway"]
         for k, v in auth.items():
             run_cmd += ["-e", f"{k}={v}"]
         run_cmd += ["-e", "DISABLE_AUTOUPDATER=1", base_image, "tail", "-f", "/dev/null"]
@@ -226,7 +232,7 @@ def run_claudecode_dockerfile(repo: RepoSpec, ctx: ProduceContext, *, llm: str |
         # Persisted AFTER the Dockerfile is in hand, so telemetry sits downstream of the
         # deliverable on every path (belt-and-braces with _persist_stream's own total guard).
         economy = _persist_stream(out_dir, stdout, stderr, _normalize_model(llm),
-                                  auth.get("ANTHROPIC_BASE_URL", ""), outcome)
+                                  effective_base_url(auth), outcome)
         return {"dockerfile": text or None, "base_image": base_image, "economy": economy}
     finally:
         subprocess.run(f"docker rm -f {container} >/dev/null 2>&1", shell=True)

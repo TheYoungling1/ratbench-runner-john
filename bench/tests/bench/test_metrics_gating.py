@@ -55,7 +55,7 @@ def test_unmeasurable_excluded_from_every_denominator():
     m = compute_metrics(rows)
     # denominator is 1 (only r1), unmeasurable counted separately
     assert m["n"] == 1 and m["n_unmeasurable"] == 1
-    assert m["EBSR"] == 1.0 and m["ESSR"] == 1.0 and m["ESSR_all"] == 1.0
+    assert m["EBSR"] == 1.0 and m["ESSR"] is None   # ESSR needs gold; EBSR does not
     assert m["coverage"] == 1.0 and m["real_success"] == 1.0
     assert m["status_census"]["unmeasurable"] == 1
 

@@ -1,0 +1,331 @@
+% ---------------------------------------------------------------------------
+% Appendix: Baseline Settings
+% Requires: booktabs, tabularx, listings
+% Suggested preamble:
+%   \usepackage{booktabs,tabularx,listings}
+%   \lstdefinestyle{promptstyle}{basicstyle=\ttfamily\small,
+%     breaklines=true, breakautoindent=true, breakindent=20pt,
+%     columns=fixed, keepspaces=true, frame=none, numbers=none,
+%     aboveskip=1em, belowskip=1em}
+% Matches the plain unframed listing style used by Repo2Run, App. I.2.
+% ---------------------------------------------------------------------------
+
+% Weighted wrapping column for tabularx: widths sum to the number of Y columns.
+% Rename if `Y` is already taken in your preamble.
+\newcolumntype{Y}[1]{>{\raggedright\arraybackslash\hsize=#1\hsize}X}
+
+\section{Baseline Settings}
+\label{app:baseline-settings}
+
+This section records the exact configuration of each baseline agent, so that a
+reader can reproduce our runs or audit where our settings depart from the
+published defaults. We report three baselines: Claude Code, SWE-agent, and
+SetupX.
+
+All three run the same underlying model, \texttt{deepseek-v4-flash}, but reach
+it by three different routes, because each agent speaks a different API dialect.
+Claude Code requires an Anthropic-shaped endpoint and is pointed at DeepSeek's
+Anthropic-compatible bridge, which maps the \texttt{claude-sonnet-*} family to
+\texttt{deepseek-v4-flash}; SWE-agent resolves a LiteLLM slug and is routed
+through OpenRouter with the upstream provider pinned to DeepInfra; SetupX issues
+raw OpenAI-compatible HTTP and is pointed at DeepSeek's own \texttt{/v1}
+endpoint. The routes are therefore not interchangeable, and we note below where
+this leaves a residual difference between arms.
+
+Each baseline is given a budget of 100 LLM calls per repository, the same
+dataset and commit pin, and the same per-repository wall clock. We discuss the
+limits of that budget's comparability in
+Appendix~\ref{app:budget-comparability}.
+
+% ===========================================================================
+\subsection{Claude Code}
+\label{app:baseline-claudecode}
+
+Claude Code is driven as a CLI inside a per-language container, working as a
+non-root user with \texttt{sudo}. The invocation:
+
+\begin{lstlisting}[style=promptstyle]
+# env: ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
+#        the CLI expands `sonnet` to claude-sonnet-5, which this bridge serves with
+#        deepseek-v4-flash -- the same model the other two baselines use
+#      ANTHROPIC_API_KEY=<key>     # an OAuth token is never forwarded to a third party
+#      DISABLE_AUTOUPDATER=1
+
+claude -p \
+  --model sonnet \
+  --max-turns 100 \
+  --permission-mode bypassPermissions \
+  --output-format stream-json --verbose --include-partial-messages
+
+# The prompt is piped on stdin, not passed as an argv operand.
+# No --max-budget-usd: the CLI prices every call against the Anthropic rate card
+#   whatever the endpoint, so a dollar cap is not a step budget. The budget is the
+#   100-turn cap together with a per-repository wall clock.
+\end{lstlisting}
+
+\paragraph{Prompt.}
+Adapted from the Repo2Run instance template (\citealp{repo2run},
+Appendix~I.2), changed only where our grader differs from theirs: the repository
+and deliverable paths, a direct clone in place of the clone-and-copy preamble,
+and the verification command. Notes 3 and 4 are imposed by the environment
+rather than by the task --- the agent works as a non-root user while the image
+build runs as root, and the gate invokes the system \texttt{python3}. 
+
+\begin{lstlisting}[style=promptstyle]
+We're currently setting up the environment for the following task. Here are the details:
+
+TASK:
+Set up the environment for the Python repository {full_name} (https://github.com/{full_name})
+so that its test suite can be collected, and record the working setup as a Dockerfile at
+/testbed/Dockerfile.gen.
+
+INSTRUCTIONS:
+Now, you'll carry out this task on your own. Your session has begun in the repository's root
+directory. Use any bash commands you need. Edit and check files as needed.
+
+The goal is to generate a Dockerfile that can successfully build and run the tests in the
+repository using the command "pytest --collect-only -q".
+
+NOTE:
+1. The repository is cloned into /testbed.
+2. The Dockerfile should start with the following lines (if the base image is python:3.11 and
+   the repository is adamobeng/wddbfs):
+```
+FROM python:3.11
+RUN pip install pytest
+RUN git clone https://github.com/adamobeng/wddbfs.git /testbed
+WORKDIR /testbed
+```
+3. The build runs as ROOT from an EMPTY image: drop every `sudo` prefix from the commands you
+   write into the Dockerfile, and do not rely on any file from this container.
+4. Install into the system Python -- do NOT create a virtualenv, since the grader runs the
+   system python3.
+Your task includes:
+0. **Generate Dockerfile**: Create the Dockerfile at /testbed/Dockerfile.gen.
+1. **Read Directory Structure**: Check the folder structure in the root directory.
+2. **Check the Configuration Files**: Inspect files like "requirements.txt", "setup.py",
+   "setup.cfg", "Pipfile*", etc.
+3. **Determine Package Dependencies**: Handle dependencies and manage conflicting dependency
+   versions.
+4. **Testing**: Ensure "python -m pytest /testbed --co -q" runs without errors.
+5. **Generate Dockerfile**: Write necessary installation or setup steps determined from the
+   inspection. If you finish run testing successfully, you should modify the Dockerfile in
+   /testbed/Dockerfile.gen.
+
+IMPORTANT TIPS:
+* Check the directory and files carefully.
+* Make sure Dockerfile commands are correct.
+* Use proper Dockerfile syntax and indentation.
+* Test the final Dockerfile by running "python -m pytest /testbed --co -q".
+\end{lstlisting}
+
+% ===========================================================================
+\subsection{SWE-agent}
+\label{app:baseline-sweagent}
+
+SWE-agent 1.1.0, run under its own \texttt{config/default.yaml} harness. The
+effective configuration is reproduced below, with the runtime overrides folded
+in; comments mark the values that depart from the upstream default. The two
+task-carrying templates are ported from Repo2Run (\citealp{repo2run},
+Appendix~I.2), with \texttt{\{\{task\_details\}\}} rebound to the variable
+SWE-agent provides and the trailing shell-prompt markers dropped, since those
+describe a REPL format defined by the paper's own system template, which this
+arm does not use.
+
+\begin{lstlisting}[style=promptstyle]
+# env: OPENROUTER_PROVIDER=DeepInfra    # else OpenRouter may reroute between providers
+agent:
+  model:
+    name: openrouter/deepseek/deepseek-v4-flash-0731
+    per_instance_cost_limit: 2.0
+    per_instance_call_limit: 100
+    temperature: 0.2                    # Repo2Run App. I.2; SWE-agent default is 0.0
+    completion_kwargs:
+      extra_body:
+        thinking:
+          type: disabled                # DeepSeek v4 enables reasoning by default
+  templates:
+    system_template: |-
+      You are a helpful assistant that can interact with a computer to solve tasks.
+    instance_template: |-
+      We're currently setting up the environment for the following task. Here are the
+      details:
+
+      TASK:
+      {{problem_statement}}
+
+      INSTRUCTIONS:
+      Now, you'll carry out this task on your own. Your terminal session has begun in
+      the repository's root directory. Use the provided commands and any bash commands
+      you need. Edit and check files as needed.
+
+      The goal is to generate a Dockerfile that can successfully build and run the
+      tests in the repository using the command "pytest --collect-only -q".
+
+      NOTE:
+      1. The repository is cloned into /repo.
+      2. The Dockerfile should start with the following lines (if the base image is
+         python:3.10 and repository is adamobeng/wddbfs):
+      ```
+      FROM python:3.10
+      RUN pip install pytest
+      RUN git clone https://github.com/adamobeng/wddbfs.git
+      RUN mkdir /repo
+      RUN git config --global --add safe.directory /repo
+      RUN cp -r /wddbfs/. /repo && rm -rf /wddbfs/
+      RUN rm -rf /wddbfs
+      ```
+
+      Your task includes:
+      0. **Generate Dockerfile**: Create a file named "Dockerfile" in the root path
+         (e.g, the absolute path is /Dockerfile).
+      1. **Read Directory Structure**: Check the folder structure in the root directory.
+      2. **Check the Configuration Files**: Inspect files like "requirements.txt",
+         "setup.py", "setup.cfg", "Pipfile*", etc.
+      3. **Determine Package Dependencies**: Handle dependencies and manage conflicting
+         dependency versions.
+      4. **Testing**: Ensure "pytest /repo --collect-only -q" runs without errors.
+      5. **Generate Dockerfile**: Write necessary installation or setup steps determined
+         from the inspection. If you finish run testing successfully, you should modify
+         the Dockerfile in /Dockerfile.
+
+      IMPORTANT TIPS:
+      * Check the directory and files carefully.
+      * Make sure Dockerfile commands are correct.
+      * Use proper Dockerfile syntax and indentation.
+      * Test the final Dockerfile by running "pytest /repo --collect-only -q".
+    problem_statement_template: |-
+      Set up the environment for the {{language}} repository {{full_name}}
+      ({{repo_url}}) so that its test suite can be collected and run, and record the
+      working setup as a Dockerfile at /Dockerfile.
+    next_step_template: |-
+      OBSERVATION:
+      {{observation}}
+    next_step_no_output_template: |-
+      Your command ran successfully and did not produce any output.
+  tools:
+    execution_timeout: 600              # upstream default: 30
+    total_execution_timeout: 7200       # upstream default: 1800
+    env_variables:
+      PAGER: cat
+      MANPAGER: cat
+      LESS: -R
+      PIP_PROGRESS_BAR: 'off'
+      TQDM_DISABLE: '1'
+      GIT_PAGER: cat
+    bundles:
+      - path: tools/registry
+      - path: tools/edit_anthropic
+      - path: tools/submit              # default.yaml also ships review_on_submit_m;
+                                        # dropped, it gates submit on a git-diff review
+                                        # of /repo, but the deliverable is /Dockerfile
+    registry_variables:
+      USE_FILEMAP: 'true'
+    enable_bash_tool: true
+    parse_function:
+      type: function_calling
+  # cache_control omitted: Anthropic-specific, and this lane is OpenAI-dialect.
+  # history_processors omitted: falls through to full-history passthrough.
+env:
+  deployment:
+    type: docker
+    image: python:3.10                  # not -slim: the container needs git
+    remove_container: false
+    remove_images: false
+  repo:
+    type: local
+    path: <dataset repo, checked out at the pinned base_commit>
+\end{lstlisting}
+
+% ===========================================================================
+\subsection{SetupX}
+\label{app:baseline-setupx}
+
+SetupX emits no Dockerfile. It mutates a live container and records the
+surviving commands to a history file, which we replay onto a pinned clone to
+obtain a comparable build artifact. SetupX is configured entirely through
+environment variables; it has no prompt surface we author or modify, so none is
+reported here.
+
+\begin{table}[h]
+\centering\footnotesize
+\caption{SetupX configuration. All settings are environment variables.}
+\label{tab:setupx-config}
+\begin{tabularx}{\linewidth}{@{}Y{0.95}Y{0.70}Y{1.35}@{}}
+\toprule
+\textbf{Variable} & \textbf{Value} & \textbf{Note} \\
+\midrule
+\texttt{LLM\_PROVIDER} & \texttt{openai} &
+  SetupX issues raw OpenAI-compatible HTTP rather than going through
+  LiteLLM. \\
+\texttt{OPENAI\_BASE\_URL} & \texttt{api.deepseek.\allowbreak com/v1} &
+  DeepSeek's own endpoint. \\
+\texttt{OPENAI\_MODEL} & \texttt{deepseek-v4-flash} &
+  The LiteLLM-style prefix is stripped, since the endpoint expects a bare model
+  name. Note this is the undated slug, whereas the SWE-agent arm pins the dated
+  \texttt{-0731} route; see below. \\
+\texttt{DEEPSEEK\_API\_KEY} & required &
+  Validated at the boundary; the run aborts rather than falling back. \\
+\texttt{SETUPX\_MAX\_LLM\_\allowbreak CALLS} & 100 &
+  Counted in \emph{completions}, not agent steps. See below. \\
+\texttt{DOCKER\_BASE\_IMAGE} & \texttt{python:3.10} &
+  SetupX's own \texttt{.env.example} default. \\
+\texttt{DOCKER\_WORK\_DIR} & \texttt{/workspace} &
+  The agent works in \texttt{/workspace/repo}. \\
+\texttt{SETUPX\_NETWORK\_MODE} & \texttt{bridge} &
+  Host networking shares the host port space, so two concurrent repositories
+  collide as soon as either binds a port. \\
+\texttt{SETUPX\_PHASE1\_\allowbreak TIMEOUT} & 3600\,s &
+  Wall clock for the setup phase. \\
+\texttt{SETUPX\_CKPT\_NS} & per-run token &
+  Namespaces checkpoint images; see below. \\
+\texttt{LOG\_DIR} & per-run &
+  SetupX logs ${\sim}10^4$ lines per run to a file rather than stdout. Unset, it
+  defaults to a shared directory where runs cannot be matched back to rows. \\
+\texttt{SETUPX\_DB\_DSN} & set / unset &
+  Presence enables the XPU experience store; absence pins the arm off. This is
+  the single switch separating our two SetupX conditions. \\
+\texttt{XPU\_ENABLED}, \texttt{XPU\_VECTOR\_ENABLED} & \texttt{1} with DSN &
+  Set explicitly in both directions, so an ambient value cannot leak from one
+  arm into the other. \\
+\texttt{XPU\_READONLY} & \texttt{1} &
+  Skips experience writeback, so concurrent repositories cannot race on
+  deduplication and results do not depend on repository order. \\
+\texttt{FREEZE\_TELEMETRY} & \texttt{1} & Skips telemetry writes. \\
+\texttt{EMBEDDING\_API\_KEY}, \texttt{\_BASE\_URL}, \texttt{\_MODEL} &
+  required with DSN &
+  All three, not just the key: with only the key set, retrieval embeds against
+  the wrong host, the resulting authentication failure is swallowed, and the arm
+  silently degrades to no-XPU while still reporting as XPU-on. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Budget.}
+SetupX's own \texttt{-{}-max-steps} counts agent \emph{steps}, and a single step
+can cost many completions: a verification step runs the verifier's entire
+sub-loop, and the second phase adds a prosecutor and a judge. Steps are
+therefore not comparable with the other arms' budgets. We leave
+\texttt{-{}-max-steps} unbounded and cap completions instead, at the same 100
+the other two arms receive.
+
+\paragraph{Deviations from the published implementation.}
+We apply a small patch to the SetupX source, in three places.
+
+The completion cap above is enforced at the LLM client's entry point; stock
+SetupX exposes no such limit.
+
+Checkpoint images are namespaced per run. SetupX names its snapshot images with
+a single global tag, so two concurrent runs overwrite each other's snapshots and
+the stale-checkpoint sweep deletes the other run's images outright --- after
+which a rollback restores the wrong repository's container, or fails outright.
+
+The read-only mode noted in the table is likewise patched in, since stock SetupX
+always writes back retrieved experience.
+
+\paragraph{Residual difference between arms.}
+The SetupX arm reaches \texttt{deepseek-v4-flash} through the undated model
+slug on DeepSeek's own API, while the SWE-agent arm pins the dated
+\texttt{-0731} route through OpenRouter. \emph{[TODO: confirm whether DeepSeek's
+direct API exposes the dated slug; if it does, pin it and delete this
+paragraph.]}

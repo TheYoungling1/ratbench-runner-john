@@ -21,9 +21,6 @@ ENV_KEYS = AUTH_KEYS + ("ANTHROPIC_BASE_URL",)
 _ANTHROPIC_HOSTS = ("anthropic.com", "claude.ai")
 DOCKERFILE_GEN_PATH = "/testbed/Dockerfile.gen"
 
-# The Claude Code CLI accepts model aliases (sonnet/opus/haiku) or full IDs.
-_CLAUDE_PREFIXES = ("claude", "sonnet", "opus", "haiku")
-
 
 def _as_text(v) -> str:
     """Decode subprocess output that may be str (text mode), bytes, or None."""
@@ -106,19 +103,99 @@ def _deepseek_model(model: str) -> str:
     return "deepseek-v4-pro" if "opus" in m else "deepseek-v4-flash"
 
 
+# ── OpenRouter settled pricing ───────────────────────────────────────────────────────────────
+#
+# OpenRouter's Anthropic skin (ANTHROPIC_BASE_URL=https://openrouter.ai/api, POST
+# /api/v1/messages) reports the real USD figure inline as `usage.cost`, so a settled cost is READ
+# rather than reconstructed — no rate card to go stale. The card below is only the fallback for a
+# stream that ended before reporting one, and covers exactly the slug this lane pins.
+#
+# $/token for the DeepInfra fp8 endpoint of deepseek/deepseek-v4-flash-0731, from
+# openrouter.ai/api/v1/models/deepseek/deepseek-v4-flash-0731/endpoints (read 2026-09-16):
+# prompt $0.06/M, completion $0.18/M, cache read $0.015/M. OpenRouter bills one rate around the
+# clock, so there is no peak window here — unlike DeepSeek direct above.
+_OPENROUTER_RATES = {
+    "deepseek/deepseek-v4-flash-0731": {"hit": 1.5e-8, "miss": 6e-8, "out": 1.8e-7},
+}
+
+
+def is_openrouter(base_url: str) -> bool:
+    """True when ANTHROPIC_BASE_URL points at OpenRouter's Anthropic-compatible skin."""
+    return "openrouter.ai" in (base_url or "")
+
+
+def openrouter_cost(model: str, miss_tokens, hit_tokens, out_tokens):
+    """Fallback cost for an OpenRouter run whose stream never carried `usage.cost`.
+
+    Never returns 0.0 as a fallback, for the same reason as deepseek_cost: a missing cost must not
+    read as a free run.
+    """
+    rate = _OPENROUTER_RATES.get((model or "").lower().removeprefix("openrouter/"))
+    if rate is None or miss_tokens is None or out_tokens is None:
+        return None
+    return (_as_int(miss_tokens) * rate["miss"] + _as_int(hit_tokens) * rate["hit"]
+            + _as_int(out_tokens) * rate["out"])
+
+
 def is_deepseek(base_url: str) -> bool:
     """True when ANTHROPIC_BASE_URL points at DeepSeek's Anthropic-compatible bridge."""
     return "deepseek.com" in (base_url or "")
 
 
+def is_bailian(base_url: str) -> bool:
+    """True when ANTHROPIC_BASE_URL points at Aliyun Bailian's Anthropic-compatible endpoint
+    (`https://<workspace-id>.<region>.maas.aliyuncs.com/apps/anthropic`).
+
+    Verified live against the cn-beijing region on 2026-09-18: it serves the pinned
+    `deepseek-v4-flash-0731` slug exactly (a 1-repo smoke run's `model` field echoed it back on all
+    20 calls, no silent alias substitution). Reasoning is a different story from OpenRouter's same
+    asymmetry but the same net effect: the endpoint DOES honour `thinking: {"type": "disabled"}`
+    when a request carries it (a manual curl got 11 -> 1 output tokens on an identical prompt), but
+    the CLI never puts that field on the wire for this model string in the first place — captured
+    the raw request body with MAX_THINKING_TOKENS=0 set and got no `thinking` key at all, same as
+    on the live OpenRouter route with the same slug (see varieties.toml claudecode-bailian for the
+    full writeup). So reasoning stays ON here in practice, same as claudecode-dockerfile.
+    """
+    return "maas.aliyuncs.com" in (base_url or "")
+
+
+def effective_base_url(env: dict) -> str:
+    """The base URL route detection (settled cost, auth-header quirks) should key off of — the
+    REAL upstream being billed, even when ANTHROPIC_BASE_URL points at a local relay that fronts
+    it (see tools/anthropic_thinking_proxy.py: the CLI never sends `thinking: {"type": "disabled"}`
+    for a non-Claude-branded --model on ANY of these routes — verified on both OpenRouter and
+    Bailian — so a local proxy that rewrites the request in transit is how the pinned model
+    actually gets reasoning disabled). PROXY_UPSTREAM_HOST, when set, names that real host; it is
+    an operator setting for the whole run, not per-container auth, so it is read from the process
+    environment rather than threaded through `env`.
+    """
+    upstream = os.environ.get("PROXY_UPSTREAM_HOST")
+    return f"https://{upstream}" if upstream else env.get("ANTHROPIC_BASE_URL", "")
+
+
 def settled_cost(info: dict, model: str, base_url: str) -> tuple:
     """`(cost_usd, usage_source)` for one Claude Code run.
 
-    On a DeepSeek-routed run the CLI's own figure is discarded: it is Anthropic-priced whatever the
-    base URL says. It is recomputed from the captured billing inputs instead — cache split and peak
-    window — which is `usage_source: "computed"` in the metering plan's vocabulary. Off DeepSeek the
-    CLI's number stands, tagged `"cli"`. Neither branch ever invents a 0.0.
+    The CLI's own figure is Anthropic-priced whatever the base URL says, so it is discarded on any
+    third-party endpoint. OpenRouter reports the settled figure itself -> `usage_source:
+    "provider"`; DeepSeek does not, so it is recomputed from the captured billing inputs (cache
+    split and peak window) -> `"computed"`. Only a genuinely Anthropic run keeps the CLI number,
+    tagged `"cli"`. No branch ever invents a 0.0.
+
+    Bailian has no rate card here yet (its `usage` block carries no `cost` field to read, unlike
+    OpenRouter's skin) -> always `(None, None)`, same "never publish the wrong number" rule as the
+    other two: this discards the CLI's Anthropic-priced figure rather than let it pass as real.
+    Measure Bailian's actual per-token rate from the account's own billing before adding a card.
     """
+    if is_openrouter(base_url):
+        reported = info.get("provider_cost")
+        if reported is not None:
+            return (reported, "provider")
+        cost = openrouter_cost(model, info.get("input_miss_tokens"),
+                               info.get("cache_read_tokens"), info.get("tokens_out"))
+        if cost is not None:
+            return (cost, "computed")
+        return (None, "partial" if info.get("usage_partial") else None)
     if is_deepseek(base_url):
         cost = deepseek_cost(model, info.get("input_miss_tokens"), info.get("cache_read_tokens"),
                              info.get("tokens_out"))
@@ -127,6 +204,8 @@ def settled_cost(info: dict, model: str, base_url: str) -> tuple:
         # A truncated stream has the input half and not the output half. Say so, rather than
         # publishing a knowingly-low figure or an unexplained null.
         return (None, "partial" if info.get("usage_partial") else None)
+    if is_bailian(base_url):
+        return (None, None)
     cost = info.get("cost_usd")
     return (cost, "cli" if cost is not None else None)
 
@@ -148,6 +227,14 @@ def agent_env() -> dict:
     base = env.get("ANTHROPIC_BASE_URL", "")
     if base and not any(host in base for host in _ANTHROPIC_HOSTS):
         env.pop("CLAUDE_CODE_OAUTH_TOKEN", None)
+    if is_openrouter(base):
+        # OpenRouter authenticates `Authorization: Bearer` only. ANTHROPIC_API_KEY goes out as
+        # `x-api-key`, which it ignores — and which is an ANTHROPIC credential shape, so leaving it
+        # set risks authenticating against Anthropic instead of the endpoint we redirected to.
+        # Move it into the header OpenRouter reads rather than sending one it cannot use.
+        key = env.pop("ANTHROPIC_API_KEY", "")
+        if key and not env.get("ANTHROPIC_AUTH_TOKEN"):
+            env["ANTHROPIC_AUTH_TOKEN"] = key
     env.update(inference_env())
     return env
 
@@ -306,13 +393,21 @@ def stop_agent(container: str) -> None:
 
 
 def _normalize_model(llm: str) -> str:
-    """Claude Code needs a Claude model. Fall back to 'sonnet' for non-Claude slugs
-    (e.g. the runner's default deepseek/...), so `bench claudecode` works even if the
-    variety llm wasn't overridden."""
-    low = (llm or "").lower()
-    if low.startswith(_CLAUDE_PREFIXES):
-        return llm
-    return "sonnet"
+    """The value handed to the CLI's `--model` flag.
+
+    Claude aliases and ids pass through unchanged. So does any explicitly-configured
+    third-party slug: OpenRouter's Anthropic skin selects the model by a PROVIDER-QUALIFIED slug
+    in the request body (`deepseek/deepseek-v4-flash-0731`; a leading `openrouter/` is litellm's
+    routing prefix, what varieties.toml hands the sweagent arms, and is stripped first), while
+    Bailian's Anthropic-compatible endpoint selects it by a BARE slug with no provider prefix at
+    all (`deepseek-v4-flash-0731` — verified live: the response's `model` field echoes it back
+    unchanged). Forcing `sonnet` onto either would silently run an Anthropic model instead of the
+    pinned one, so any non-empty configured value passes through as-is.
+
+    Only an unset/empty `llm` falls back to `sonnet`, so `bench claudecode` works unconfigured.
+    """
+    slug = (llm or "").removeprefix("openrouter/")
+    return slug or "sonnet"
 
 
 # ── Language profiles ────────────────────────────────────────────────────────────────────────
@@ -764,6 +859,9 @@ def summarize_stream(stream_text: str) -> dict:
                   # hit 31x cheaper than a miss, so collapsing them makes cost unrecoverable.
                   "input_miss_tokens": None, "cache_read_tokens": None,
                   "llm_calls": 0, "tool_calls": 0, "model_usage": {}, "rate_limited": False,
+                  # The endpoint's OWN settled USD figure when it reports one (OpenRouter's skin
+                  # puts it on `usage.cost`). None when it does not, which is the DeepSeek case.
+                  "provider_cost": None,
                   "dsml_text_blocks": 0, "usage_partial": False}
     seen: set = set()
     # Per-response usage, summed as a FALLBACK for a run with no final `result` event — i.e. every
@@ -814,6 +912,9 @@ def summarize_stream(stream_text: str) -> dict:
                                   + _as_int(usage.get("cache_read_input_tokens")))
                     acc["out"] += _as_int(usage.get("output_tokens"))
                     acc["n"] += 1
+                    reported = usage.get("cost")
+                    if isinstance(reported, (int, float)) and not isinstance(reported, bool):
+                        info["provider_cost"] = (info["provider_cost"] or 0.0) + float(reported)
             for block in _content_blocks(obj):
                 if not isinstance(block, dict):
                     continue

@@ -172,15 +172,26 @@ _TEMPLATE_KEYS = ("system_template", "instance_template", "next_step_template",
                   "next_step_no_output_template", "problem_statement_template")
 
 
+def is_dockerfile_deliverable(spec: dict | None) -> bool:
+    """A spec that only adds context to a Dockerfile-deliverable arm (sweagent_repo2run_modern_graph)."""
+    return bool(spec) and spec.get("deliverable") == "dockerfile"
+
+
 def apply_setup_spec(cfg: dict, spec: dict) -> dict:
     """Graph2Env setup-deliverable mode: substitute the two prompt placeholders and point the
-    deployment and model at what the spec says. Pure; returns a new dict."""
+    deployment and model at what the spec says. Pure; returns a new dict.
+
+    With "deliverable": "dockerfile" only the placeholders are substituted: that arm must keep the
+    baseline's deployment image and model, so the context block is its only difference."""
     cfg = copy.deepcopy(cfg)
-    variables = {"context_block": spec.get("context_block", ""), "base_image": spec["base_image"]}
+    variables = {"context_block": spec.get("context_block", ""),
+                 "base_image": spec.get("base_image", "")}
     templates = cfg.setdefault("agent", {}).setdefault("templates", {})
     for key in _TEMPLATE_KEYS:
         if key in templates:
             templates[key] = _render(templates[key], variables)
+    if is_dockerfile_deliverable(spec):
+        return cfg
     dep = cfg.setdefault("env", {}).setdefault("deployment", {})
     dep["image"] = spec["deploy_image"]
     dep["docker_args"] = list(spec.get("docker_args") or [])
@@ -188,45 +199,19 @@ def apply_setup_spec(cfg: dict, spec: dict) -> dict:
     return cfg
 
 
-# The evaluator (rat_v3_adapter's rendered Dockerfile) installs pytest and puts the repo venv
-# first on PATH before it collects, and the instance prompt promises the agent exactly that.
-# Mirroring it here is not optional: without it a setup.sh that correctly relies on the promise
-# is graded 127 ("pytest: command not found"). Same shape as the Dockerfile's bootstrap, rooted
-# at /repo instead of /testbed — including the uv branch, because a uv-created .venv has no pip.
-_PYTEST_BOOTSTRAP = (
-    "if [ -x /repo/.venv/bin/python ]; then "
-    "if /repo/.venv/bin/python -m pip --version >/dev/null 2>&1; then "
-    "/repo/.venv/bin/python -m pip install -q pytest; "
-    "else command -v uv >/dev/null 2>&1 || "
-    "(python3 -m pip install -q --break-system-packages uv || python3 -m pip install -q uv); "
-    "uv pip install --python /repo/.venv/bin/python pytest; "
-    "fi; "
-    "else python3 -m pip install -q --break-system-packages pytest || "
-    "python3 -m pip install -q pytest; "
-    "fi"
-)
-_VENV_ON_PATH = "[ -d /repo/.venv/bin ] && export PATH=/repo/.venv/bin:$PATH"
+def result_status(dockerfile: str, setup_spec: dict | None, setup_read_error: str) -> str:
+    """`produced` iff the arm's deliverable came back: /g2e/setup.sh for setup-deliverable specs,
+    /Dockerfile otherwise (incl. dockerfile-deliverable specs, which must not be credited for a
+    /g2e readback they never do)."""
+    if setup_spec and not is_dockerfile_deliverable(setup_spec):
+        return "produced" if (dockerfile or not setup_read_error) else "error"
+    return "produced" if dockerfile else "error"
 
 
-def collect_script(handoff: dict, test_command: str) -> str:
-    """One shell line: apply the handoff the way the evaluator does, run the test command,
-    capture its output to /tmp/g2e_collect.txt, print the exit code marker.
-
-    Order mirrors the evaluator: bootstrap pytest, put the repo venv on PATH, THEN apply the
-    handoff environment — a handoff PATH is meant to win, exactly as `docker run --env` overrides
-    the image's baked-in ENV."""
-    parts = ["cd /repo", _PYTEST_BOOTSTRAP, _VENV_ON_PATH]
-    for key, value in sorted((handoff.get("environment") or {}).items()):
-        parts.append(f"export {key}={shlex.quote(str(value))}")
-    for service in handoff.get("services") or []:
-        start = str(service.get("start") or "").strip()
-        check = str(service.get("check") or "").strip()
-        if start:
-            parts.append(start)
-        if check:
-            parts.append(f"for _i in $(seq 1 30); do ({check}) && break; sleep 1; done")
-    parts.append(f"{test_command} > /tmp/g2e_collect.txt 2>&1; echo __G2E_RC=$?")
-    return "; ".join(parts)
+# The in-session grade step (pytest bootstrap, repo venv on PATH, handoff application) is NOT
+# built here. It mirrors Graph2Env's evaluator, so it is rendered THERE -- see that repo's
+# src/ReAct_Version/swe_collect.py -- and arrives as spec["collect_script"], which this runner
+# executes verbatim. Only the exit-code marker below is shared, the way RESULT_MARK is.
 
 
 def parse_collect_rc(output: str) -> int | None:
@@ -275,7 +260,13 @@ def _apply_overrides(cfg: dict, a) -> dict:
         model["per_instance_call_limit"] = a.call_limit
     # Pin the OpenRouter upstream provider the way every other arm does (libkit/llm.py), so a
     # cross-method comparison differs by method and not by which provider served the tokens.
-    providers = [p.strip() for p in os.environ.get("OPENROUTER_PROVIDER", "Alibaba").split(",")
+    # Default matches Graph2Env's envstate/openrouter.py DEFAULT_PROVIDER -- the two must agree or
+    # a cross-method comparison measures which upstream served the tokens. Endpoint tags as
+    # /models/<slug>/endpoints reports them. DeepInfra was the previous pin and throttled this
+    # workload hard; two entries let the router move to the next when the first is not
+    # operational, while allow_fallbacks False still keeps it inside this list.
+    providers = [p.strip()
+                 for p in os.environ.get("OPENROUTER_PROVIDER", "baidu/fp8,streamlake/fp8").split(",")
                  if p.strip()]
     if providers and str(a.llm).startswith("openrouter/"):
         ck = model.setdefault("completion_kwargs", {})
@@ -530,22 +521,22 @@ def main() -> int:
     runner._chooks.on_end()
 
     collect_rc, setup_read_error = None, ""
-    if setup_spec:
+    if setup_spec and not is_dockerfile_deliverable(setup_spec):
         artifacts_dir = setup_spec["artifacts_dir"]
         os.makedirs(artifacts_dir, exist_ok=True)
-        handoff = {}
         for name in ("setup.sh", "runtime_handoff.json"):
             try:
                 content = runner.env.read_file(f"/g2e/{name}") or ""
                 with open(os.path.join(artifacts_dir, name), "w", encoding="utf-8") as fh:
                     fh.write(content)
-                if name == "runtime_handoff.json":
-                    handoff = json.loads(content) if content.strip() else {}
+                if name == "runtime_handoff.json" and content.strip():
+                    json.loads(content)     # validate only; the collect script reads the file
+                                            # itself, but malformed JSON must still be reported
             except Exception as exc:                # noqa: BLE001 — record, do not abort
                 setup_read_error += f"{name}: {type(exc).__name__}: {exc}; "
         try:
             output = runner.env.communicate(
-                collect_script(handoff if isinstance(handoff, dict) else {}, setup_spec["test_command"]),
+                setup_spec["collect_script"],
                 timeout=int(setup_spec.get("collect_timeout", 1800)))
             collect_rc = parse_collect_rc(output)
             with open(os.path.join(artifacts_dir, "container_collect.txt"), "w", encoding="utf-8") as fh:
@@ -589,7 +580,7 @@ def main() -> int:
 
     stats = result.info.get("model_stats") or {}
     payload = {
-        "status": "produced" if (dockerfile or (setup_spec and not setup_read_error)) else "error",
+        "status": result_status(dockerfile, setup_spec, setup_read_error),
         "exit_status": result.info.get("exit_status"),
         "collect_returncode": collect_rc,
         "traj_path": str(out_dir / f"{runner.problem_statement.id}.traj"),
@@ -598,7 +589,7 @@ def main() -> int:
         "agent_settings": {"thinking": eff_thinking, "temperature": (cfg["agent"]["model"]
                                                                      .get("temperature"))},
         "deploy_image_digest": deploy_image_digest,
-        "note": "" if (dockerfile or setup_spec) else (
+        "note": "" if (dockerfile or (setup_spec and not is_dockerfile_deliverable(setup_spec))) else (
             read_error or f"no {DOCKERFILE_PATH} in the container"),
         "economy": {
             "llm_calls": stats.get("api_calls"),

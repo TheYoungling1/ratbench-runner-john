@@ -45,6 +45,18 @@ _KNOWN_MODEL_COSTS = {
         "litellm_provider": "openrouter",
         "mode": "chat",
     },
+    # The dated route this arm is now pinned to (see varieties.toml). Same OpenRouter resale
+    # rate used by producers/sweagent_repo2run_runner.py's _OPENROUTER_COSTS, so the two arms
+    # price identically when they hit the same endpoint.
+    "deepseek/deepseek-v4-flash-0731": {
+        "input_cost_per_token": 6.5e-8,
+        "output_cost_per_token": 1.8e-7,
+        "max_input_tokens": 1048576,
+        "max_output_tokens": 384000,
+        "max_tokens": 384000,
+        "litellm_provider": "openrouter",
+        "mode": "chat",
+    },
 }
 
 
@@ -102,11 +114,15 @@ def _ensure_sweagent_config(root_path: str, rat_root: str) -> None:
                         ck.setdefault("parallel_tool_calls", False)
                         # Pin the OpenRouter upstream provider exactly as the DockerAgent
                         # baseline does (libkit/llm.py: provider order + allow_fallbacks=False),
-                        # so SWE-agent hits the SAME upstream — not just the same key/model. The
-                        # default (Alibaba) also tends to honor parallel_tool_calls, unlike some
-                        # fallback providers that keep batching calls.
+                        # so SWE-agent hits the SAME upstream — not just the same key/model.
+                        # Default is DeepInfra (serves the -0731 endpoint this arm is pinned
+                        # to). Earlier defaults were Alibaba, then Baidu; Alibaba was chosen
+                        # because it tends to honor parallel_tool_calls, unlike some fallback
+                        # providers that keep batching calls — that has not been re-verified
+                        # against DeepInfra, so watch for FunctionCallingFormatError ("included
+                        # multiple tool calls") if this provider changes again.
                         providers = [p.strip() for p in
-                                     os.environ.get("OPENROUTER_PROVIDER", "Alibaba").split(",")
+                                     os.environ.get("OPENROUTER_PROVIDER", "DeepInfra").split(",")
                                      if p.strip()]
                         if providers:
                             ck.setdefault("extra_body", {}).setdefault(

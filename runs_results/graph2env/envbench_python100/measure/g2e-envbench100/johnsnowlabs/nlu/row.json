@@ -1,0 +1,71 @@
+{
+  "agent": "g2e-envbench100",
+  "repo": "johnsnowlabs/nlu",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "python -m pip install pytest;       else         command -v uv >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#14 1.037 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (9.1.1)\n#14 1.045 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#14 1.046 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.11/site-packages (from pytest) (26.3)\n#14 1.047 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#14 1.047 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest) (2.21.0)\n#14 1.473 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#14 DONE 1.7s\n\n#15 [11/11] WORKDIR /testbed\n#15 DONE 0.0s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 121.1s done\n#16 exporting manifest sha256:f2b083c28479abb5f8ea0e6abc2b177e6b5c45b9d1f65a3f0b0bb27efcf280d0 done\n#16 exporting config sha256:6e01f102d530058d473ccb3ad47eb4269e1387a8e4fee5a18726ebab5070f385 done\n#16 exporting attestation manifest sha256:dc408dcc19c16e6b1961f8dc5fc33845e219525c0776fe9addcb15c2d4d8024c done\n#16 exporting manifest list sha256:a59d410992074db68027c4a47edf2ccb759ed6682b613fd9aa35bc3fba524922 done\n#16 naming to docker.io/library/bench-g2e-envbench100-johnsnowlabs-nlu:latest done\n#16 unpacking to docker.io/library/bench-g2e-envbench100-johnsnowlabs-nlu:latest\n#16 unpacking to docker.io/library/bench-g2e-envbench100-johnsnowlabs-nlu:latest 19.0s done\n#16 DONE 140.1s\n",
+  "status": "executed",
+  "py_test_files": 3,
+  "collect_rc": 0,
+  "collect_clean": true,
+  "collect_errors": [],
+  "collect_error_count": 0,
+  "collected_node_ids": [
+    "tests/nlu_core_tests/component_tests/seq2seq/openai_completion_test.py::TestOpenAICompletion::test_openai_completion",
+    "tests/nlu_hc_tests/component_tests/drug_normalizer/drug_normalizer_test.py::DrugNormalizerTests::test_drug_normalizer"
+  ],
+  "executed": true,
+  "total": 2,
+  "passed": 0,
+  "failed": 2,
+  "errors": 0,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [
+    "tests/nlu_core_tests/component_tests/seq2seq/openai_completion_test.py::TestOpenAICompletion::test_openai_completion",
+    "tests/nlu_hc_tests/component_tests/drug_normalizer/drug_normalizer_test.py::DrugNormalizerTests::test_drug_normalizer"
+  ],
+  "error_node_ids": [],
+  "ebsr": true,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 5938.6,
+  "image_delta_mb": null,
+  "image_digest": "bench-g2e-envbench100-johnsnowlabs-nlu@sha256:a59d410992074db68027c4a47edf2ccb759ed6682b613fd9aa35bc3fba524922",
+  "installed_pkg_count": 102,
+  "tokens_in": 648204,
+  "tokens_out": 40350,
+  "llm_calls": 21,
+  "turns_used": null,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 234.97,
+  "test_s": 40.69,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "graph2env",
+    "head_sha": "506860e546076b353969b5a3216c05d080ad923e",
+    "base_image": "python:3.11-slim",
+    "tokens_in": 648204,
+    "tokens_out": 40350,
+    "llm_calls": 21,
+    "runtime_handoff": {
+      "environment": [
+        "JAVA_HOME",
+        "JSL_LICENSE",
+        "PATH"
+      ],
+      "services": [],
+      "services_rc": null
+    }
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

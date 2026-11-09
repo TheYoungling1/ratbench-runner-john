@@ -1,0 +1,75 @@
+{
+  "agent": "repo2run__envbench100-pjy",
+  "repo": "diefenbach/django-lfs",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "packages: windmill\n#33 0.849   Building wheel for windmill (setup.py): started\n#33 1.231   Building wheel for windmill (setup.py): finished with status 'done'\n#33 1.233   Created wheel for windmill: filename=windmill-1.6-py3-none-any.whl size=1698126 sha256=39cfd14677b924dc6df3cf7d3728e277a407f1a0030bd2f22abec34906ac3c83\n#33 1.233   Stored in directory: /root/.cache/pip/wheels/1f/22/fc/97b5e46607342a743a5d2b8e0eef6241233c29892ed59e66e3\n#33 1.237 Successfully built windmill\n#33 1.330 Installing collected packages: windmill\n#33 1.451 Successfully installed windmill-1.6\n#33 1.452 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#33 1.456 \n#33 1.456 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#33 1.456 [notice] To update, run: pip install --upgrade pip\n#33 DONE 1.6s\n\n#34 [31/34] RUN cd /repo && runtest 2>&1 | head -50\n#34 0.171 /bin/sh: 1: runtest: not found\n#34 DONE 0.2s\n\n#35 [32/34] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#35 DONE 0.5s\n\n#36 [33/34] WORKDIR /testbed\n#36 DONE 0.1s\n\n#37 exporting to image\n#37 exporting layers\n#37 exporting layers 2.4s done\n#37 exporting manifest sha256:ac5da5f42c07c435706c26521a873b5f479c605be2a7478fcc1f33c6eeb2eca3 done\n#37 exporting config sha256:40368b64178027c4767b24c39fc83118c478d052abd8fed10d32e684e078c8ee done\n#37 exporting attestation manifest sha256:0ed773d17bba61d7b8bed16c0602c6a3a8111d4b8e06d8082a77d844bb3d7ce5 0.0s done\n#37 exporting manifest list sha256:c355a1a464c58c966a349da3a81f7a35c59d4081074097787c04012f6ac67fcf done\n#37 naming to docker.io/library/bench-repo2run__envbench100-pjy-diefenbach-django-lfs:latest done\n#37 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-diefenbach-django-lfs:latest\n#37 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-diefenbach-django-lfs:latest 4.6s done\n#37 DONE 7.1s\n",
+  "status": "collect_error",
+  "py_test_files": 4,
+  "collect_rc": 2,
+  "collect_clean": false,
+  "collect_errors": [
+    "E   ModuleNotFoundError: No module named 'bin'",
+    "E   ModuleNotFoundError: No module named 'bin'"
+  ],
+  "collect_error_count": 4,
+  "collected_node_ids": [],
+  "executed": true,
+  "total": 4,
+  "passed": 0,
+  "failed": 0,
+  "errors": 4,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [
+    "lfs.checkout.tests.test_addresses",
+    "lfs.checkout.tests.test_checkout",
+    "lfs.integrationtests.windmilltests.grosspricetests.test_pricing",
+    "lfs.integrationtests.windmilltests.managetests.test_manage"
+  ],
+  "ebsr": true,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 607.2,
+  "image_delta_mb": null,
+  "image_digest": "bench-repo2run__envbench100-pjy-diefenbach-django-lfs@sha256:c355a1a464c58c966a349da3a81f7a35c59d4081074097787c04012f6ac67fcf",
+  "installed_pkg_count": 33,
+  "tokens_in": 3536955,
+  "tokens_out": 68911,
+  "llm_calls": null,
+  "turns_used": 100,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 24.25,
+  "test_s": 0.68,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "results_pjy",
+    "tokens_in": 3536955,
+    "tokens_out": 68911,
+    "llm_calls": null,
+    "turns_used": 100,
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

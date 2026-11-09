@@ -1,0 +1,27 @@
+{
+  "derived_merge": true,
+  "merge_date": "2026-09-15",
+  "dataset": {
+    "path": "datasets/envbench_python100.json",
+    "repo_count": 100,
+    "sha256": "dfea1373f96310ff83d580613f5a32369d78e1edd4c68526f4a1dbe3b59e3cac"
+  },
+  "note": "Additive merge of two source runs, filtered to the 100 repos in envbench_python100.json (9 repos present in envbench_python70.json but never part of the canonical 100 were dropped). output/ and measure/ subtrees are hardlinked from the sources, not copied. per_repo_table.json, in_sandbox_score.json, case_studies_summary.json, rat_results.json, and measure/metrics.json were regenerated via the existing report tooling (bench.report.run_tables, bench.report.case_study, runner/benchmark.py --aggregate-only, bench.unified_bench --aggregate-only) against the merged output/measure trees \u2014 no Dockerfile or agent was re-run.",
+  "source_runs": [
+    {
+      "run": "claudecode-dockerfile/envbench70-20260908-203504",
+      "repo_count": 70,
+      "agent_commit": "d7d7fb3",
+      "harness_commit": "d7d7fb3"
+    },
+    {
+      "run": "claudecode-dockerfile/minus70-20260909-083859",
+      "repo_count": 39,
+      "agent_commit": "d7d7fb3",
+      "harness_commit": "d7d7fb3"
+    }
+  ],
+  "harness_commit_consistent_across_sources": true,
+  "variety": "claudecode-dockerfile",
+  "tier": "all"
+}

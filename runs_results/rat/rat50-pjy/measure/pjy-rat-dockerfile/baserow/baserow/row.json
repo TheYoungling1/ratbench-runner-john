@@ -1,0 +1,82 @@
+{
+  "agent": "rat__rat50-pjy",
+  "repo": "baserow/baserow",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": " 2.13.0\n#16 23.68     Uninstalling httpcore2-2.13.0:\n#16 23.73       Successfully uninstalled httpcore2-2.13.0\n#16 23.82   Attempting uninstall: anyio\n#16 23.82     Found existing installation: anyio 4.15.1\n#16 23.84     Uninstalling anyio-4.15.1:\n#16 23.87       Successfully uninstalled anyio-4.15.1\n#16 23.98 \n#16 23.98 Successfully installed Pygments-2.20.0 anyio-4.14.2 distro-1.9.0 exceptiongroup-1.3.1 httpcore2-2.10.0 httpx2-2.10.0 idna-3.18 jiter-0.16.0 netifaces-0.11.0 openai-3.0.0 pydantic-2.13.4 pydantic_core-2.46.4 setuptools-84.0.0 tomli-2.4.1 tqdm-4.70.0 typing-inspection-0.4.3 uv-0.12.5 wheel-0.48.0\n#16 23.98 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#16 DONE 24.2s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 2.0s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.1s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 14.1s done\n#19 exporting manifest sha256:1f9d8e4560dc7e7e555177db9034a90ef4797cd3dd5e37d70ccab146134f134d 0.0s done\n#19 exporting config sha256:b4002d1e735c166f8bc5bd325b3d2f9931aa1ca526ac3f7db5d90eede7f9092a done\n#19 exporting attestation manifest sha256:35a90208b3fd1680ccbd95606044508493a13ece686fc6d01f757f0ef5f64b3e\n#19 exporting attestation manifest sha256:35a90208b3fd1680ccbd95606044508493a13ece686fc6d01f757f0ef5f64b3e 0.0s done\n#19 exporting manifest list sha256:68662849b58fe47c498c63bcc52add37fe87c571dec8fa8e00e49ef4cbb40b92 done\n#19 naming to docker.io/library/bench-rat__rat50-pjy-baserow-baserow:latest done\n#19 unpacking to docker.io/library/bench-rat__rat50-pjy-baserow-baserow:latest\n#19 unpacking to docker.io/library/bench-rat__rat50-pjy-baserow-baserow:latest 8.3s done\n#19 DONE 23.6s\n",
+  "status": "collect_error",
+  "py_test_files": 688,
+  "collect_rc": 2,
+  "collect_clean": false,
+  "collect_errors": [
+    "E   ModuleNotFoundError: No module named 'requests'",
+    "E   ModuleNotFoundError: No module named 'django'",
+    "E   ModuleNotFoundError: No module named 'typer'",
+    "E   ModuleNotFoundError: No module named 'changelog_entry'",
+    "E   ModuleNotFoundError: No module named 'django'",
+    "E   ModuleNotFoundError: No module named 'django'",
+    "ERROR backend/tests - ModuleNotFoundError: No module named 'django'",
+    "ERROR premium/backend/tests/baserow_premium_tests - ModuleNotFoundError: No m..."
+  ],
+  "collect_error_count": 6,
+  "collected_node_ids": [],
+  "executed": true,
+  "total": 6,
+  "passed": 0,
+  "failed": 0,
+  "errors": 6,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [
+    "backend.src.advocate.test_advocate",
+    "backend.tests",
+    "changelog.tests.changelog.test_changelog_add",
+    "changelog.tests.changelog.test_changelog_handler",
+    "enterprise.backend.tests.baserow_enterprise_tests",
+    "premium.backend.tests.baserow_premium_tests"
+  ],
+  "ebsr": true,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 1078.7,
+  "image_delta_mb": null,
+  "image_digest": "bench-rat__rat50-pjy-baserow-baserow@sha256:68662849b58fe47c498c63bcc52add37fe87c571dec8fa8e00e49ef4cbb40b92",
+  "installed_pkg_count": 29,
+  "tokens_in": 3812625,
+  "tokens_out": 93862,
+  "llm_calls": 102,
+  "turns_used": null,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 70.79,
+  "test_s": 1.19,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "results_pjy",
+    "tokens_in": 3812625,
+    "tokens_out": 93862,
+    "llm_calls": 102,
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

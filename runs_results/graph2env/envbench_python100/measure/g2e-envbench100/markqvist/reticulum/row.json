@@ -1,0 +1,75 @@
+{
+  "agent": "graph2env__envbench_python100",
+  "repo": "markqvist/reticulum",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "  python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#14 0.489 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (9.1.1)\n#14 0.495 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#14 0.495 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.11/site-packages (from pytest) (26.3)\n#14 0.495 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#14 0.496 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest) (2.21.0)\n#14 0.540 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#14 DONE 0.6s\n\n#15 [11/11] WORKDIR /testbed\n#15 DONE 0.0s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 14.0s done\n#16 exporting manifest sha256:f043db39f1b161fefb2d2d0f7356cf85954a349c5a66ea93b87c5327a5d4c70a\n#16 exporting manifest sha256:f043db39f1b161fefb2d2d0f7356cf85954a349c5a66ea93b87c5327a5d4c70a 0.0s done\n#16 exporting config sha256:5bb9566c6cd67e335e7a4cdc2deba5ecf32731a8f4754c287d72055d7a933841 0.0s done\n#16 exporting attestation manifest sha256:ffd456e7869e5fd2fa0b7fd0e7a74550ee9a907f3ee3cb0b6457f85c196dffbd 0.0s done\n#16 exporting manifest list sha256:7404f604fbbeb5b8f623be3acf238c59332ea7c9e6efb0c76febe59122c94846\n#16 exporting manifest list sha256:7404f604fbbeb5b8f623be3acf238c59332ea7c9e6efb0c76febe59122c94846 0.0s done\n#16 naming to docker.io/library/bench-graph2env__envbench_python100-markqvist-reticulum:latest done\n#16 unpacking to docker.io/library/bench-graph2env__envbench_python100-markqvist-reticulum:latest\n#16 unpacking to docker.io/library/bench-graph2env__envbench_python100-markqvist-reticulum:latest 6.4s done\n#16 DONE 20.7s\n",
+  "status": "no_tests_collected",
+  "py_test_files": 0,
+  "collect_rc": 5,
+  "collect_clean": true,
+  "collect_errors": [],
+  "collect_error_count": 0,
+  "collected_node_ids": [],
+  "executed": false,
+  "total": 0,
+  "passed": 0,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [],
+  "ebsr": false,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 240.2,
+  "image_delta_mb": null,
+  "image_digest": "bench-graph2env__envbench_python100-markqvist-reticulum@sha256:7404f604fbbeb5b8f623be3acf238c59332ea7c9e6efb0c76febe59122c94846",
+  "installed_pkg_count": 14,
+  "tokens_in": 189417,
+  "tokens_out": 6032,
+  "llm_calls": 11,
+  "turns_used": null,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 61.44,
+  "test_s": 0.23,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "graph2env",
+    "head_sha": "6ded42edd7ae203e5a565cb70138c2d7b4b58b5b",
+    "base_image": "python:3.11-slim",
+    "tokens_in": 189417,
+    "tokens_out": 6032,
+    "llm_calls": 11,
+    "runtime_handoff": {
+      "environment": [
+        "PATH"
+      ],
+      "services": [],
+      "services_rc": null
+    },
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=6ded42edd7ae203e5a565cb70138c2d7b4b58b5b (pinned)\nremoved pytest.ini\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=6ded42edd7ae203e5a565cb70138c2d7b4b58b5b (pinned)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

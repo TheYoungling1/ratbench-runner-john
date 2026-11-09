@@ -1,7 +1,13 @@
 # --setup-spec: template substitution, deployment overrides, in-session collect. No sweagent import.
+#
+# The collect_script tests moved out with the function: the grade step mirrors Graph2Env's
+# evaluator, so it is rendered there (Graph2Env/src/ReAct_Version/swe_collect.py, covered by
+# Graph2Env/tests/test_swe_collect.py) and arrives here as spec["collect_script"]. What stays
+# below is this runner's own half of that contract: the substitution it performs and the
+# exit-code marker it parses back.
 import copy
 
-from producers.sweagent_repo2run_runner import apply_setup_spec, collect_script, parse_collect_rc
+from producers.sweagent_repo2run_runner import apply_setup_spec, parse_collect_rc
 
 _CFG = {
     "agent": {
@@ -41,45 +47,6 @@ def test_apply_setup_spec_substitutes_placeholders_and_overrides_deployment_and_
 def test_apply_setup_spec_with_empty_block_leaves_only_a_blank_line():
     cfg = apply_setup_spec(_CFG, {**_SPEC, "context_block": ""})
     assert "task\n\n(base python:3.11-slim)" in cfg["agent"]["templates"]["instance_template"]
-
-
-def test_collect_script_exports_env_starts_services_and_marks_rc():
-    handoff = {"version": 1,
-               "services": [{"kind": "redis", "start": "redis-server --daemonize yes", "check": "redis-cli ping"}],
-               "environment": {"DJANGO_SETTINGS_MODULE": "app.settings", "PATH": "/repo/.venv/bin:/usr/bin"},
-               "capabilities": []}
-    script = collect_script(handoff, "pytest --collect-only -q --disable-warnings")
-    assert script.startswith("cd /repo; ")
-    assert "export DJANGO_SETTINGS_MODULE=app.settings; " in script
-    assert "export PATH=/repo/.venv/bin:/usr/bin; " in script
-    assert "redis-server --daemonize yes; " in script
-    assert "for _i in $(seq 1 30); do (redis-cli ping) && break; sleep 1; done; " in script
-    assert script.endswith("pytest --collect-only -q --disable-warnings > /tmp/g2e_collect.txt 2>&1; echo __G2E_RC=$?")
-
-
-def test_collect_script_bootstraps_pytest_and_the_repo_venv_like_the_evaluator():
-    # The prompt promises the agent that the evaluator installs pytest and puts /repo/.venv/bin
-    # first on PATH before collecting. Without mirroring that, a setup.sh which correctly relies
-    # on the promise is graded 127 (pytest: command not found).
-    script = collect_script({"version": 1, "services": [], "environment": {}, "capabilities": []}, "pytest -q")
-    assert script.startswith("cd /repo; ")
-    assert "/repo/.venv/bin/python -m pip install -q pytest" in script
-    assert "uv pip install --python /repo/.venv/bin/python pytest" in script
-    assert "python3 -m pip install -q --break-system-packages pytest" in script
-    assert "export PATH=/repo/.venv/bin:$PATH" in script
-    assert script.endswith("pytest -q > /tmp/g2e_collect.txt 2>&1; echo __G2E_RC=$?")
-
-
-def test_collect_script_applies_the_handoff_after_the_venv_path_so_the_handoff_wins():
-    # Evaluator order: image ENV PATH is baked in, then `docker run --env` per handoff entry.
-    handoff = {"version": 1, "services": [], "environment": {"PATH": "/custom/bin"}, "capabilities": []}
-    script = collect_script(handoff, "pytest -q")
-    assert script.index("export PATH=/repo/.venv/bin:$PATH") < script.index("export PATH=/custom/bin")
-
-
-def test_collect_script_installs_pytest_before_the_test_runs():
-    script = collect_script({"version": 1, "services": [], "environment": {}, "capabilities": []}, "pytest -q")
-    assert script.index("pip install") < script.index("> /tmp/g2e_collect.txt")
 
 
 def test_parse_collect_rc():

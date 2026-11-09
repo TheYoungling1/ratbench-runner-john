@@ -1,0 +1,79 @@
+{
+  "agent": "repo2run__envbench100-pjy",
+  "repo": "wpi-lnl/lnldb",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "ango-reversion               3.0.7\n#80 0.718 django-semanticui-forms        1.6.5\n#80 0.718 django-test-without-migrations 0.6\n#80 0.718 django-uuidfield               0.5.0\n#80 0.718 django-watson                  1.5.5\n#80 0.718 djangorestframework            3.18.1\n#80 0.718 pytest                         9.1.1\n#80 0.718 pytest-xdist                   3.8.0\n#80 DONE 0.7s\n\n#81 [78/81] RUN cd /repo && cat /home/tools/runtest.py 2>/dev/null | head -60; echo \"===Django version===\"; pip show Django 2>/dev/null | head -3; echo \"===pytest-django===\"; pip show pytest-django 2>/dev/null | head -3; echo \"===pytest plugins===\"; pip list 2>/dev/null | grep -i \"pytest\\|pluggy\"\n#81 0.149 ===Django version===\n#81 0.864 Name: Django\n#81 0.864 Version: 5.2.17\n#81 0.864 Summary: A high-level Python web framework that encourages rapid development and clean, pragmatic design.\n#81 0.918 ===pytest-django===\n#81 1.252 ===pytest plugins===\n#81 1.784 pluggy                         1.6.0\n#81 1.784 pytest                         9.1.1\n#81 1.784 pytest-xdist                   3.8.0\n#81 DONE 1.9s\n\n#82 [79/81] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#82 DONE 0.9s\n\n#83 [80/81] WORKDIR /testbed\n#83 DONE 0.0s\n\n#84 exporting to image\n#84 exporting layers\n#84 exporting layers 7.3s done\n#84 exporting manifest sha256:80572263c896684c68e7306c68243ec8fe84c563a409371ea5aab00fda847de9 0.0s done\n#84 exporting config sha256:95995a49540e5ae22a837559135bb6127d8548b2a5774ab6acbdbb5a428f0462 0.0s done\n#84 exporting attestation manifest sha256:354dc11d86d0675fb02e629abb53604badd149c909f1c234efd51d3bca9f6f65 done\n#84 exporting manifest list sha256:2618221361a4c2ac5b52e84051609f046d233ea00791dbdf2a34fa088e62ca04 done\n#84 naming to docker.io/library/bench-repo2run__envbench100-pjy-wpi-lnl-lnldb:latest done\n#84 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-wpi-lnl-lnldb:latest\n#84 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-wpi-lnl-lnldb:latest 11.0s done\n#84 DONE 18.4s\n",
+  "status": "collect_error",
+  "py_test_files": 9,
+  "collect_rc": 2,
+  "collect_clean": false,
+  "collect_errors": [],
+  "collect_error_count": 8,
+  "collected_node_ids": [
+    "data/tests/test_fixtures.py::FixtureTestCase::test_all"
+  ],
+  "executed": true,
+  "total": 9,
+  "passed": 0,
+  "failed": 0,
+  "errors": 9,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [
+    "data.tests.test_dirty_checkall",
+    "data.tests.test_views",
+    "events.tests.test_event_view",
+    "events.tests.test_my",
+    "events.tests.test_org_view",
+    "events.tests.test_redirects",
+    "pdfs.tests.test_generators",
+    "pdfs.tests.test_views",
+    "data/tests/test_fixtures.py::FixtureTestCase::test_all"
+  ],
+  "ebsr": true,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 3067.3,
+  "image_delta_mb": null,
+  "image_digest": "bench-repo2run__envbench100-pjy-wpi-lnl-lnldb@sha256:2618221361a4c2ac5b52e84051609f046d233ea00791dbdf2a34fa088e62ca04",
+  "installed_pkg_count": 144,
+  "tokens_in": 513765,
+  "tokens_out": 16764,
+  "llm_calls": null,
+  "turns_used": 24,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 137.22,
+  "test_s": 1.4,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "results_pjy",
+    "tokens_in": 513765,
+    "tokens_out": 16764,
+    "llm_calls": null,
+    "turns_used": 24,
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

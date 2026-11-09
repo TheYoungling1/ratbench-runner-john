@@ -1,0 +1,27 @@
+{
+  "variety": "g2e-rat50",
+  "tier": "all",
+  "adapter": "tools/adapt_graph2env.py",
+  "adapted_from": [
+    "/opt/ratbench/results_pjy/RatBench_Graph2Env/ebsr_evaluation/output"
+  ],
+  "dataset": {
+    "path": "datasets/rat_python50.json",
+    "repo_count": 50,
+    "sha256": "0111697043d2790ce593726c33d9295a002a069f0660d4304aae27d5964b82fb"
+  },
+  "repos_linked": 50,
+  "repos_stubbed": [],
+  "repos_skipped": {
+    "Azure/azure-cli": "no Dockerfile",
+    "mlflow/mlflow": "no Dockerfile",
+    "OpenCTI-Platform/connectors": "no Dockerfile"
+  },
+  "repos_with_dockerfile": 47,
+  "repos_per_source": {
+    "/opt/ratbench/results_pjy/RatBench_Graph2Env/ebsr_evaluation/output": 50
+  },
+  "missing_copy_sources": {},
+  "off_dataset_dropped": [],
+  "note": "Symlink mirror of Graph2Env artifacts. Scores come from bench.unified_bench rebuilding these Dockerfiles, NOT from react_ebsr_results.json."
+}

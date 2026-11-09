@@ -7,7 +7,8 @@ import platform
 import subprocess
 
 MANIFEST_NAME = "_run_manifest.json"
-_SWEAGENT_MODELS = frozenset({"sweagent", "sweagent_repo2run", "sweagent_repo2run_modern"})
+_SWEAGENT_MODELS = frozenset({"sweagent", "sweagent_repo2run", "sweagent_repo2run_modern",
+                             "sweagent_repo2run_modern_graph"})
 
 
 def write_manifest(out_dir: str, **fields) -> str:

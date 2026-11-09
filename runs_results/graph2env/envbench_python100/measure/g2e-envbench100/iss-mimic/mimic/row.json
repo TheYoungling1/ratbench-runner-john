@@ -1,0 +1,75 @@
+{
+  "agent": "graph2env__envbench_python100",
+  "repo": "iss-mimic/mimic",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": " -v uv >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#14 0.441 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (9.1.1)\n#14 0.447 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#14 0.448 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.11/site-packages (from pytest) (26.3)\n#14 0.448 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#14 0.449 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest) (2.21.0)\n#14 0.522 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#14 DONE 0.6s\n\n#15 [11/11] WORKDIR /testbed\n#15 DONE 0.0s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 33.6s done\n#16 exporting manifest sha256:e7326b41af3985ebd760e649afa5cf2d8a952f9a8a4f3603cb2754202045923f 0.0s done\n#16 exporting config sha256:e0cefcf68ba91ff193f508f9af2d15dc246fbd8fd41d03071311cf6f52c52066 0.0s done\n#16 exporting attestation manifest sha256:d92aa713e625a99ddfad58262dac216a8a6c36bbcb42830286a841396aa6f3d5 0.0s done\n#16 exporting manifest list sha256:5852221f3bc7a8e84723f592b8626472fd9cd231e1c6b576b63eace9991d517d 0.0s done\n#16 naming to docker.io/library/bench-graph2env__envbench_python100-iss-mimic-mimic:latest done\n#16 unpacking to docker.io/library/bench-graph2env__envbench_python100-iss-mimic-mimic:latest\n#16 unpacking to docker.io/library/bench-graph2env__envbench_python100-iss-mimic-mimic:latest 9.1s done\n#16 DONE 42.8s\n",
+  "status": "no_tests_collected",
+  "py_test_files": 3,
+  "collect_rc": 5,
+  "collect_clean": true,
+  "collect_errors": [],
+  "collect_error_count": 0,
+  "collected_node_ids": [],
+  "executed": false,
+  "total": 0,
+  "passed": 0,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [],
+  "ebsr": false,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 930.6,
+  "image_delta_mb": null,
+  "image_digest": "bench-graph2env__envbench_python100-iss-mimic-mimic@sha256:5852221f3bc7a8e84723f592b8626472fd9cd231e1c6b576b63eace9991d517d",
+  "installed_pkg_count": 29,
+  "tokens_in": 2108524,
+  "tokens_out": 138165,
+  "llm_calls": 46,
+  "turns_used": null,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 90.55,
+  "test_s": 0.49,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "graph2env",
+    "head_sha": "d3d1b7cbbca38dd039ae47223517587758c1a9d5",
+    "base_image": "python:3.11-slim",
+    "tokens_in": 2108524,
+    "tokens_out": 138165,
+    "llm_calls": 46,
+    "runtime_handoff": {
+      "environment": [
+        "PYTEST_ADDOPTS"
+      ],
+      "services": [],
+      "services_rc": null
+    },
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=d3d1b7cbbca38dd039ae47223517587758c1a9d5 (pinned)\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=d3d1b7cbbca38dd039ae47223517587758c1a9d5 (pinned)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

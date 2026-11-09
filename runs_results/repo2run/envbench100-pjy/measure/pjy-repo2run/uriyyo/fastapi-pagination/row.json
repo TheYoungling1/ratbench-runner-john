@@ -1,0 +1,69 @@
+{
+  "agent": "repo2run__envbench100-pjy",
+  "repo": "uriyyo/fastapi-pagination",
+  "env_status": "produced",
+  "build_ok": true,
+  "setup_compile_ok": true,
+  "build_log_tail": "utils/dist.py:318: BuildBackendWarning: Unknown distribution option: 'tests_require'\n#17 7.924   warnings.warn(msg)\n#17 8.185 <string>:3: BuildBackendWarning: The test command is disabled and references to it are deprecated.\n#17 8.185 !!\n#17 8.185 \n#17 8.185         ********************************************************************************\n#17 8.185         Please remove any references to `setuptools.command.test` in all supported versions of the affected package.\n#17 8.185 \n#17 8.185         This deprecation is overdue, please update your project and remove deprecated\n#17 8.185         calls to avoid build errors in the future.\n#17 8.185         ********************************************************************************\n#17 8.185 \n#17 8.185 !!\n#17 8.185 /tmp/tmpq48v7ra6/.venv/lib/python3.10/site-packages/setuptools/_distutils/dist.py:318: BuildBackendWarning: Unknown distribution option: 'tests_require'\n#17 8.185   warnings.warn(msg)\n#17 12.56 \n#17 12.56 Installing the current project: fastapi-pagination (0.12.26)\n#17 DONE 13.3s\n\n#18 [15/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#18 DONE 0.7s\n\n#19 [16/17] WORKDIR /testbed\n#19 DONE 0.0s\n\n#20 exporting to image\n#20 exporting layers\n#20 exporting layers 36.1s done\n#20 exporting manifest sha256:e73693481ead85b26521ed5e06c2eaf5febace39c2a069acd512cf7343a5d931 done\n#20 exporting config sha256:0ad52c91141392c395b74d6f89074611440fa44a21082e904eec8d7f0622f838 done\n#20 exporting attestation manifest sha256:85c6b23c3d985047f89fa567b2ba27150e46237ddac1470b2f9c1fb5c6f7d6b4 0.0s done\n#20 exporting manifest list sha256:9efcc38133780296359a2ba0cafc8aec2d9977d23621cdd55e1fac4cc0f1ea34 done\n#20 naming to docker.io/library/bench-repo2run__envbench100-pjy-uriyyo-fastapi-pagination:latest done\n#20 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-uriyyo-fastapi-pagination:latest\n#20 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-uriyyo-fastapi-pagination:latest 9.5s done\n#20 DONE 45.7s\n",
+  "status": "collect_error",
+  "py_test_files": 36,
+  "collect_rc": 4,
+  "collect_clean": false,
+  "collect_errors": [
+    "E   ModuleNotFoundError: No module named 'pydantic'"
+  ],
+  "collect_error_count": 0,
+  "collected_node_ids": [],
+  "executed": false,
+  "total": 0,
+  "passed": 0,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "passed_node_ids": [],
+  "failed_node_ids": [],
+  "error_node_ids": [],
+  "ebsr": false,
+  "pass_rate": 0.0,
+  "timed_out": false,
+  "image_size_mb": 757.7,
+  "image_delta_mb": null,
+  "image_digest": "bench-repo2run__envbench100-pjy-uriyyo-fastapi-pagination@sha256:9efcc38133780296359a2ba0cafc8aec2d9977d23621cdd55e1fac4cc0f1ea34",
+  "installed_pkg_count": 27,
+  "tokens_in": 103430,
+  "tokens_out": 4953,
+  "llm_calls": null,
+  "turns_used": 10,
+  "cost_usd": null,
+  "produce_s": null,
+  "build_s": 66.14,
+  "test_s": 0.29,
+  "meta": {
+    "status": "produced",
+    "language": "python",
+    "source": "results_pjy",
+    "tokens_in": 103430,
+    "tokens_out": 4953,
+    "llm_calls": null,
+    "turns_used": 10,
+    "pytest_config_restore": [
+      {
+        "stage": "collect",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      },
+      {
+        "stage": "run",
+        "rc": 0,
+        "log": "REF=HEAD (no_pinned_sha)\n"
+      }
+    ]
+  },
+  "error_surface": "",
+  "error_surface_reason": "",
+  "status_flags": [],
+  "repo_toplevel": [],
+  "run_failed_lines": [],
+  "language": "python",
+  "status_backfilled": false
+}

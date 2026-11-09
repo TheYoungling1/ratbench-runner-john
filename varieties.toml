@@ -87,8 +87,103 @@ measure = "none"                   # live in-place mutation, no static artifact
 
 [variety.claudecode-dockerfile]
 model = "claudecode-dockerfile"
-llm   = "sonnet"                   # Claude Code CLI --model alias
+# Same pinned route as both sweagent arms, reached differently: the Claude Code CLI speaks only the
+# Anthropic wire format, so it is pointed at OpenRouter's Anthropic skin with
+# ANTHROPIC_BASE_URL=https://openrouter.ai/api (key in ANTHROPIC_AUTH_TOKEN, NOT ANTHROPIC_API_KEY)
+# and selects the model by slug in the body.
+#
+# Why not DeepSeek direct any more: the bare `deepseek-v4-flash` name is retired and now serves
+# DeepSeek-V4.1-Flash, so the alias route silently ran a DIFFERENT model from the sweagent arms.
+# The dated slug exists only on OpenRouter.
+#
+# The DeepInfra pin: the CLI cannot send OpenRouter's `provider` field, so it must be carried
+# server-side — either an OpenRouter PRESET referenced from this slug
+# (`deepseek/deepseek-v4-flash-0731@preset/<name>` with order=["DeepInfra"],
+# allow_fallbacks=false) or the account's allowed-providers setting. Without one of those the
+# MODEL is pinned and the PROVIDER is whoever OpenRouter routes to.
+#
+# REASONING: run this through tools/anthropic_thinking_proxy.py or it runs with reasoning ON.
+# The CLI never puts `thinking` on the wire for a non-Claude-branded --model like this dated slug
+# (verified: MAX_THINKING_TOKENS=0 has no effect over this route either — same root cause as the
+# claudecode-bailian entry below, this is not a Bailian-specific gap). RE-VERIFIED LIVE on
+# 2026-09-18 running the proxy for real against OpenRouter (proxy-smoke-openrouter-20260918-102656,
+# kittinan/spotify-github-profile, full 19-call agentic run): 0/19 calls carried a `thinking` block,
+# model still echoed back exactly "deepseek/deepseek-v4-flash-0731" on every call, EBSR 1.0. Unlike
+# Bailian, cost reporting also works end to end here (cost_usd 0.0151, usage_source "computed") —
+# this is the arm to use; claudecode-bailian is a kept-but-unused fallback (see its own entry).
+# To run this way:
+#   PROXY_UPSTREAM_HOST=openrouter.ai python3 tools/anthropic_thinking_proxy.py &
+#   export ANTHROPIC_BASE_URL=http://host.docker.internal:8931/api   # CLI runs in docker, so it
+#     must reach the proxy via the Mac's host.docker.internal, not 127.0.0.1
+#   export ANTHROPIC_AUTH_TOKEN=<OPENROUTER_API_KEY>   # NOT ANTHROPIC_API_KEY — forwarded through
+#     the proxy untouched, and OpenRouter's skin only reads the Bearer header anyway
+#   export PROXY_UPSTREAM_HOST=openrouter.ai            # tells settled_cost()/is_openrouter() the
+#     REAL host, so a proxied run doesn't get miscategorised as plain-Anthropic and publish the
+#     CLI's Anthropic-priced cost_usd again — see effective_base_url() in _claudecode_helpers.py.
+llm   = "deepseek/deepseek-v4-flash-0731"
 num_turn = 100                     # per-instance LLM-call cap; matches sweagent_repo2run
+measure = "conforming"
+
+[variety.claudecode-bailian]
+model = "claudecode-dockerfile"
+# KEPT AS A FALLBACK, NOT the arm in active use (decided 2026-09-18): once the thinking proxy
+# fixed reasoning-off on claudecode-dockerfile's OpenRouter route too, Bailian stopped being
+# strictly necessary — same model, same reasoning fix, but OpenRouter also has working cost
+# reporting (this route does not, see the no-rate-card note below) and is the plumbing every other
+# arm already uses. Revisit only if OpenRouter access/quota/pricing becomes a real constraint.
+#
+# Same producer and task as claudecode-dockerfile, reached over Aliyun Bailian's
+# Anthropic-compatible endpoint instead of OpenRouter's skin:
+#   ANTHROPIC_BASE_URL=https://<workspace-id>.cn-beijing.maas.aliyuncs.com/apps/anthropic
+#   (BAILIAN_API_BASE minus the /compatible-mode/v1 suffix, plus /apps/anthropic — see .env)
+#   key in ANTHROPIC_API_KEY (BAILIAN_API_KEY); either x-api-key or Bearer works, per Aliyun's docs.
+#
+# VERIFIED LIVE against ws-yoer0farw5x7zgc1.cn-beijing.maas.aliyuncs.com on 2026-09-18 (1-repo
+# smoke: kittinan/spotify-github-profile, runs/claudecode-bailian/run-20260918-093448) —
+# CORRECT MODEL, but REASONING STAYS ON, same net asymmetry as OpenRouter (handoff doc §1):
+#   - correct model: the response's `model` field echoes back exactly "deepseek-v4-flash-0731" on
+#     all 20 calls of the smoke run, no silent alias substitution (the failure mode that ruled out
+#     DeepSeek-direct);
+#   - reasoning stays ON: 20/20 calls carried a `thinking` block. Root cause is NOT "Bailian
+#     ignores the disable request" — a direct curl with `thinking: {"type":"disabled"}` in the
+#     body DOES suppress it server-side (11 -> 1 output tokens on an identical prompt). The CLI
+#     itself never puts that field on the wire for an unrecognized (non-Claude-branded) --model
+#     string: captured the raw request body via a local proxy with MAX_THINKING_TOKENS=0 set —
+#     `"deepseek-v4-flash-0731"` and `"deepseek/deepseek-v4-flash-0731"` both produce NO `thinking`
+#     key at all (stderr logs `[claude-code:unrecognized_model]`), while `"claude-sonnet-5"` DOES
+#     get `{"type":"disabled"}` sent. Confirmed this also holds for the LIVE OpenRouter route
+#     (same `deepseek/deepseek-v4-flash-0731` slug): the CLI streamed `thinking_tokens` events past
+#     1100 tokens on a trivial "2+2" prompt with MAX_THINKING_TOKENS=0 set. So the existing
+#     claudecode-dockerfile arm has the same gap — inference_env()'s MAX_THINKING_TOKENS=0 only
+#     ever reaches the wire for a Claude-aliased model, which this pinned dated slug is not.
+#   - Claude aliases are not a workaround here: `--model claude-sonnet-5` against Bailian gets
+#     HTTP 400 "Model not exist" (no DeepSeek-direct-style family remap), so there is no way to
+#     get both the exact pinned model AND a CLI-sent disable through this endpoint today.
+#
+# FIX: tools/anthropic_thinking_proxy.py — a local relay that rewrites `thinking:disabled` into
+# the request in transit, since the CLI won't. RE-VERIFIED LIVE on 2026-09-18 running the proxy
+# for real (proxy-smoke-20260918-095759, same repo, full 26-call agentic run, not just one probe
+# message): 0/26 calls carried a `thinking` block, model still echoed back exactly
+# "deepseek-v4-flash-0731" on every call, EBSR 1.0. To run this way:
+#   PROXY_UPSTREAM_HOST=<workspace-id>.cn-beijing.maas.aliyuncs.com \
+#       python3 tools/anthropic_thinking_proxy.py &
+#   export ANTHROPIC_BASE_URL=http://host.docker.internal:8931/apps/anthropic   # CLI runs in
+#     docker, so it must reach the proxy via the Mac's host.docker.internal, not 127.0.0.1
+#   export ANTHROPIC_API_KEY=<BAILIAN_API_KEY>       # forwarded through the proxy untouched
+#   export PROXY_UPSTREAM_HOST=<same as above>        # tells settled_cost()/is_bailian() the REAL
+#     host, so a proxied run doesn't get miscategorised as a plain-Anthropic one and publish the
+#     CLI's Anthropic-priced cost_usd again — see effective_base_url() in _claudecode_helpers.py.
+# Without the proxy (ANTHROPIC_BASE_URL pointed straight at Bailian, PROXY_UPSTREAM_HOST unset),
+# this arm still runs but with reasoning ON, same asymmetry as claudecode-dockerfile today.
+#
+# The model slug is BARE (no "deepseek/" provider prefix, unlike OpenRouter's) — _normalize_model
+# passes it through unchanged since it is non-empty.
+#
+# No settled-cost rate card yet: Bailian's `usage` block carries no `cost` field to read (unlike
+# OpenRouter's), so settled_cost() returns (None, None) rather than the CLI's Anthropic-priced
+# figure. Measure the account's actual per-token rate before trusting a cost column from this arm.
+llm   = "deepseek-v4-flash-0731"
+num_turn = 100                     # matches claudecode-dockerfile
 measure = "conforming"
 
 # ExecutionAgent (sola-st, ISSTA'25). Its own Dockerfile is only a base (clone + apt); deps are
@@ -135,6 +230,18 @@ llm   = "openrouter/deepseek/deepseek-v4-flash-0731"
 num_turn = 100                     # per_instance_call_limit; matches the baseline arm
 measure = "rehome"
 
+# `sweagent_repo2run_modern` plus Graph2Env's graph context (advisory graph + compiled setup.sh,
+# inlined), and nothing else: same config byte-for-byte except one {{context_block}} line
+# (producers/sweagent_repo2run_graph_config.yaml), same model/route, budget, image, /Dockerfile
+# deliverable and re-home. Needs $SWEAGENT_GRAPH_SPEC_ROOT -> per-repo specs from Graph2Env's
+# scripts/prepare_graph_context_specs.py; a repo without one is an error row, never a silent
+# context-free run.
+[variety.sweagent_repo2run_modern_graph]
+model = "sweagent_repo2run_modern_graph"
+llm   = "openrouter/deepseek/deepseek-v4-flash-0731"
+num_turn = 100
+measure = "rehome"
+
 # SetupX (OpenDataBox/SetupX): XPU experience store + speculative execution (docker-commit
 # snapshots with rollback) + a prosecutor/judge trial that re-checks the agent's own success claim.
 # It emits NO Dockerfile — producers/setupx.py replays the surviving `setup.history` onto a pinned
@@ -142,10 +249,20 @@ measure = "rehome"
 # Needs a checkout at $SETUPX_ROOT and a warm XPU store; see README, "SetupX setup".
 [variety.setupx]
 model = "setupx"
-# DeepSeek's OWN API. SetupX speaks raw OpenAI-compatible HTTP (not litellm), so the producer
-# strips the `deepseek/` prefix and passes the bare model name as OPENAI_MODEL. Reads
-# DEEPSEEK_API_KEY, base https://api.deepseek.com/v1.
-llm   = "deepseek/deepseek-v4-flash"
+# Same pinned route as the sweagent arms: OpenRouter, DeepInfra, the dated -0731 build.
+# SetupX speaks raw OpenAI-compatible HTTP (not litellm), and the producer passes OPENAI_MODEL as
+# `llm.split("/", 1)[-1]` — so the `openrouter/` prefix is stripped and the full OpenRouter slug
+# `deepseek/deepseek-v4-flash-0731` survives, which is exactly what that endpoint wants.
+#
+# Requires SETUPX_BASE_URL=https://openrouter.ai/api/v1 and OPENAI_API_KEY fed from
+# OPENROUTER_API_KEY (the client sends `Authorization: Bearer`, which OpenRouter accepts). The
+# DeepInfra pin and `reasoning: {enabled: false}` ride along as body fields — see
+# producers/setupx.py::child_env and the SETUPX_EXTRA_BODY hunk in tools/setupx-bench.patch.
+#
+# To go back to DeepSeek direct: `deepseek/deepseek-v4-flash` + unset SETUPX_BASE_URL. Note that
+# route is now reasoning-ON and serves V4.1-Flash (the dated build is retired there), so it
+# matches neither the model nor the inference mode of the other arms.
+llm   = "openrouter/deepseek/deepseek-v4-flash-0731"
 # LLM CALLS, not agent steps — forwarded as SETUPX_MAX_LLM_CALLS by the producer, enforced at
 # LLMClientBase.chat by tools/setupx-bench.patch. SetupX's own --max-steps counts steps, and one
 # step can cost many completions (a VERIFY step runs the verifier's whole sub-loop; phase 2 adds

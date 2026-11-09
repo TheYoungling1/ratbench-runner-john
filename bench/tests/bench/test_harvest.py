@@ -100,3 +100,127 @@ def test_discover_defaults_language_to_python_when_absent(tmp_path):
     (repo / "_meta.json").write_text(json.dumps({"status": "produced"}))
     envs = discover({"agentY": str(root)})
     assert len(envs) == 1 and envs[0].repo.language == "python"
+
+
+# ── post-contract runs must not hide a producer failure ───────────────────────────────────
+#
+# `legacy_missing` exists for runs that PREDATE the _meta.json contract: those agents never
+# promised a Dockerfile, so an EBSR-0 would libel them (design §2.5). But metrics.py:55 and :214
+# drop `legacy_missing` from EVERY denominator, so the same status applied to a MODERN run means
+# an agent that crashed before writing _meta.json silently leaves the population instead of
+# scoring 0. Observed on TencentBlueKing/bk-lite (sweagent_repo2run_modern, rat50new): produce died
+# with repo_error, and rat50new EBSR read 28/49 instead of 28/50.
+#
+# A post-contract run is identifiable: the runner writes `_run_manifest.json` at the run root.
+# Its presence is the discriminator — manifest means the run promised artifacts.
+
+def _manifest(root):
+    """Mark `root` as the output/ dir of a post-contract run."""
+    root.mkdir(parents=True, exist_ok=True)
+    (root.parent / "_run_manifest.json").write_text(json.dumps({"variety": "someagent"}))
+
+
+def test_post_contract_run_with_no_dockerfile_is_counted_missing(tmp_path):
+    root = tmp_path / "run1" / "output"
+    _manifest(root)
+    _write(root, "o/crashed", dockerfile=None, meta=None)
+    envs = discover({"a": str(root)})
+    assert len(envs) == 1
+    # "missing" stays IN every denominator -> a counted EBSR 0, which is the honest score for an
+    # agent that was asked for a Dockerfile and produced none.
+    assert envs[0].status == "missing" and envs[0].dockerfile is None
+
+
+def test_post_contract_partial_meta_without_status_still_counts(tmp_path):
+    # bk-lite's shape: the producer wrote SOME metadata but died before recording a status.
+    root = tmp_path / "run2" / "output"
+    _manifest(root)
+    _write(root, "o/halfway", dockerfile=None, meta={"tokens_in": 5})
+    envs = discover({"a": str(root)})
+    assert envs[0].status == "missing" and envs[0].meta["tokens_in"] == 5
+
+
+def test_pre_contract_run_keeps_legacy_missing(tmp_path):
+    # No manifest -> genuinely old data -> unchanged, still excluded from the denominators.
+    root = tmp_path / "oldrun"
+    _write(root, "o/ancient", dockerfile=None, meta={"tokens_in": 5})
+    envs = discover({"a": str(root)})
+    assert envs[0].status == "legacy_missing"
+
+
+def test_an_explicit_meta_status_still_wins_on_a_post_contract_run(tmp_path):
+    # The native lanes (rat, live sweagent, live-claude) declare `unmeasurable` and have no
+    # rebuildable artifact BY DESIGN. They must keep leaving the denominator.
+    root = tmp_path / "run3" / "output"
+    _manifest(root)
+    _write(root, "o/native", dockerfile=None, meta={"status": "unmeasurable"})
+    envs = discover({"a": str(root)})
+    assert envs[0].status == "unmeasurable"
+
+
+def test_post_contract_run_with_a_dockerfile_is_unaffected(tmp_path):
+    root = tmp_path / "run4" / "output"
+    _manifest(root)
+    _write(root, "o/fine", dockerfile="FROM x", meta=None)
+    envs = discover({"a": str(root)})
+    assert envs[0].status == "legacy_ok" and envs[0].dockerfile == "FROM x"
+
+
+# ── COPY of a DIRECTORY must reach the build context ──────────────────────────────────────
+#
+# measure() builds from a fresh tmpdir holding the Dockerfile plus whatever _sibling_scripts
+# inlined, and that used to be `os.path.isfile` only -- so `COPY patch /patch`, where patch/ is a
+# real directory, was dropped WITHOUT A WORD and the build failed on a missing path. Repo2Run does
+# exactly this on 60 of the 100 RAT repos, 35 of which build fine in their own pipeline: those
+# would have scored EBSR 0 and been read as the agent's failure.
+#
+# measure.py already creates parent dirs for nested keys, so carrying a directory is purely a
+# matter of emitting `<dirname>/<relpath>` keys here.
+
+def test_a_copied_directory_is_carried_into_the_build_context(tmp_path):
+    # REWRITTEN 2026-09-23. This originally asserted the directory was INLINED into setup_scripts
+    # as text. That shipped a real defect: errors="replace" corrupted binary content, so RAT's
+    # `COPY repo` git checkout arrived with a mangled .git and the image scored non_conforming.
+    # Directories are now carried as PATHS and copied on disk (see test_copy_dirs.py).
+    root = tmp_path / "run" / "output"
+    _manifest(root)
+    d = root / "o" / "r"
+    (d / "patch" / "nested").mkdir(parents=True)
+    (d / "Dockerfile").write_text("FROM x\nCOPY patch /patch\nRUN ls /patch")
+    (d / "patch" / "a.diff").write_text("--- a\n+++ b\n")
+    (d / "patch" / "nested" / "b.diff").write_text("deep")
+    envs = discover({"a": str(root)})
+    assert envs[0].copy_dirs == {"patch": str(d / "patch")}
+    assert not any(k.startswith("patch/") for k in envs[0].setup_scripts)
+
+
+def test_a_copied_file_still_works_unchanged(tmp_path):
+    # The overwhelmingly common case: no behaviour change for any arm without a directory COPY.
+    root = tmp_path / "run" / "output"
+    _manifest(root)
+    _write(root, "o/r", dockerfile="FROM x\nCOPY setup.sh /tmp/s", scripts={"setup.sh": "echo hi"})
+    envs = discover({"a": str(root)})
+    assert envs[0].setup_scripts == {"setup.sh": "echo hi"}
+
+
+def test_a_copy_source_that_does_not_exist_is_still_omitted(tmp_path):
+    # RAT's `COPY repo /repo` names a checkout that was never shipped. Nothing to carry; the build
+    # fails for a real reason and _check reports it.
+    root = tmp_path / "run" / "output"
+    _manifest(root)
+    _write(root, "o/r", dockerfile="FROM x\nCOPY repo /repo")
+    assert envs_scripts(discover({"a": str(root)})) == {}
+
+
+def envs_scripts(envs):
+    return envs[0].setup_scripts
+
+
+def test_an_empty_copied_directory_does_not_crash(tmp_path):
+    root = tmp_path / "run" / "output"
+    _manifest(root)
+    d = root / "o" / "r"
+    (d / "patch").mkdir(parents=True)
+    (d / "Dockerfile").write_text("FROM x\nCOPY patch /patch")
+    envs = discover({"a": str(root)})
+    assert envs[0].setup_scripts == {}

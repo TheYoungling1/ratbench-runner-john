@@ -24,6 +24,13 @@ class HarvestedEnv:
     # / legacy_missing (none). Producers may also set produced|unmeasurable|error.
     status: str = "ok"
     meta: dict = field(default_factory=dict)   # from bench_meta.json (cost keys None if absent)
+    # runtime_handoff.json beside the Dockerfile (Graph2Env): {"environment": {..}, "services": [..]},
+    # applied at measure time. {} when the agent wrote none.
+    runtime: dict = field(default_factory=dict)
+    # DIRECTORY COPY sources as {context_name: absolute path}, copied into the build context at
+    # measure time. Kept as paths, never inlined: the contents may be binary (a git checkout's
+    # .git/index) and large (a 132MB working tree).
+    copy_dirs: dict = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -39,7 +46,7 @@ class MeasureRow:
     build_log_tail: str = ""
     # Failure taxonomy (design §2.2): exactly one status per measured env. One of
     # {unmeasurable, error, missing, measure_error, build_fail, non_conforming, empty_testbed,
-    #  no_tests_collected, collect_error, timed_out, executed}; "legacy_ok"/"ok" for legacy rows.
+    #  config_restore_failed, no_tests_collected, collect_error, timed_out, executed}; "legacy_ok"/"ok" for legacy rows.
     status: str = "ok"
     py_test_files: int | None = None  # C3 diagnostic: python test files under /testbed (never gates)
     collect_rc: int | None = None
