@@ -85,6 +85,11 @@ def _port_open(port: int) -> bool:
         return s.connect_ex(("127.0.0.1", port)) == 0
 
 
+def measuring() -> bool:
+    # "[b]ench" keeps pgrep from matching the `sh -c` that carries this very pattern.
+    return bool(_sh("pgrep -f '[b]ench.unified_bench --harvest' || true"))
+
+
 def status(run_name: str, log_path: str, dataset_n: int) -> dict:
     roots = sorted(glob.glob(f"{ROOT}/runs/claudecode-dockerfile/{run_name}-*/"))
     root = roots[-1] if roots else None
@@ -98,14 +103,13 @@ def status(run_name: str, log_path: str, dataset_n: int) -> dict:
         classes.append(cls)
         if cls != "ok":
             failures.setdefault(cls, []).append(name)
-    measuring = bool(_sh("pgrep -f 'bench.unified_bench --harvest' || true"))
     rows = len(glob.glob(f"{root}measure/**/row.json", recursive=True)) if root else 0
     du = shutil.disk_usage("/")
     return {
         "time_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "run_root": root, "dataset_n": dataset_n,
         "phase": ("finished" if re.search(r"^EXIT=", log, re.M) else
-                  "measure" if measuring else "produce" if started else "not_started"),
+                  "measure" if measuring() else "produce" if started else "not_started"),
         "exit_line": (re.findall(r"^EXIT=\S+", log, re.M) or [None])[-1],
         "produce": {"started": started, "done": len(done), "ok": classes.count("ok"),
                     "in_flight": started - len(done)},

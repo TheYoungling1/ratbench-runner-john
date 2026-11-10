@@ -47,3 +47,9 @@ def test_parse_done_lines():
            "[scheduler/done  ] a/b  status=success\n"
            "[scheduler/done  ] c/d  status=error\n")
     assert parse_done_lines(log) == [("a/b", "success"), ("c/d", "error")]
+
+
+def test_measuring_does_not_match_its_own_pgrep_shell():
+    # No unified_bench runs under pytest; the pgrep's own `sh -c` must not count.
+    from tools.ccdf_watch import measuring
+    assert measuring() is False
