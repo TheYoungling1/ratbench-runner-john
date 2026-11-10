@@ -4,7 +4,7 @@ Written 2026-11-10 for a fresh agent session. Read this whole file before acting
 `docs/overnight-ccdf-vm-preparation.md` (VM cleanup and the staged dataset) — read that too.
 
 **Goal:** generate and measure Dockerfiles for all 200 repos with the `claudecode-dockerfile` arm on
-DeepSeek V4 Pro through LinkAPI, at **concurrency 3**, and keep it healthy overnight with as little
+DeepSeek V4 Pro through LinkAPI, at **concurrency 2** (changed from 3 at John's request, 2026-11-10 12:51 UTC), and keep it healthy overnight with as little
 of John's time as possible.
 
 ## 1. Readiness (verified 2026-11-10 ~12:30 UTC)
@@ -28,7 +28,7 @@ of John's time as possible.
 - **Provider unpinned:** LinkAPI picks the upstream. The DeepSeek-pinned OpenRouter run had no
   DSML leaks in 16 repos; unpinned OpenRouter had 2 in 9. Watch the `dsml` failure count.
 - **Duration:** it will not finish overnight. Produce took a mean of ~12 min/repo (median 7, large
-  repos 30–40) → **~13–14 h for 200 repos at concurrency 3**. Measure starts only after ALL produce
+  repos 30–40) → **~20 h for 200 repos at concurrency 2**. Measure starts only after ALL produce
   finishes, then rebuilds every Dockerfile (build ≤ 60 min, tests ≤ 30 min each) — estimate another
   8–15 h. Overnight covers produce; expect measure to run into the next day.
 
@@ -46,7 +46,7 @@ docker builder prune -f --filter until=1h          # start clean (proxy/runner i
 
 tmux new -d -s ccdf "cd /opt/ratbench && ./run_bench.sh claudecode-dockerfile \
   --llm '[SP]deepseek-v4-pro' --repos-json datasets/full200_claudecode_v4pro.json \
-  --tier all --num-turn 100 --concurrency 3 --run-name full200-v4pro-linkapi \
+  --tier all --num-turn 100 --concurrency 2 --run-name full200-v4pro-linkapi \
   2>&1 | tee /opt/ratbench/full200_v4pro_linkapi.log; \
   echo EXIT=\${PIPESTATUS[0]} >> /opt/ratbench/full200_v4pro_linkapi.log"
 sleep 20
@@ -55,7 +55,7 @@ tmux new -d -s watch "cd /opt/ratbench && python3 tools/ccdf_watch.py \
 ```
 
 `--tier all` is required (no repo has a tier label; without it zero repos run). Measure inherits
-`--concurrency 3`.
+`--concurrency 2`.
 
 ## 3. Monitoring loop (the agent)
 
@@ -78,7 +78,7 @@ Wake-up pacing: **1200 s** during the first 2 h (problems show early), then **18
 
 Each tick, check:
 1. `watch-status.json` `time_utc` is < 15 min old. If not, the watchdog died → restart it (section 2).
-2. `phase` and progress: `produce.done` should rise ~10–15 per hour at concurrency 3.
+2. `phase` and progress: `produce.done` should rise ~7–10 per hour at concurrency 2.
 3. `failures`: infra classes (`credit`, `rate_limit`, `api_5xx`, `connection`) vs result classes
    (`turn_cap`, `dsml`, `timeout`, `no_dockerfile`, `other`).
 4. `disk_free_gb`, `build_cache`, `mem_available_gb`, `proxy_up`, `run_tmux_alive`, `actions`.
@@ -126,7 +126,7 @@ A=${R%/}-infra-attempts; mkdir -p $A
 for repo in <owner/name ...infra-failed repos from watch-status.json...>; do
   mkdir -p $A/$(dirname $repo); mv $R/output/$repo $A/$repo; done
 cd /opt/ratbench && tmux new -d -s ccdf "bash -c 'source env.sh && python runner/benchmark.py \
-  --model claudecode-dockerfile --tier all --root-path $R --concurrency 3 --num-turn 100 \
+  --model claudecode-dockerfile --tier all --root-path $R --concurrency 2 --num-turn 100 \
   --llm \"[SP]deepseek-v4-pro\" --repos-json datasets/full200_claudecode_v4pro.json \
   2>&1 | tee -a /opt/ratbench/full200_v4pro_linkapi.log'"
 ```
@@ -135,7 +135,7 @@ Then measure, which the CLI would otherwise have done:
 
 ```bash
 cd /opt/ratbench/bench && source ../env.sh && python -m bench.unified_bench \
-  --harvest claudecode-dockerfile=$R/output --out $R/measure --concurrency 3 \
+  --harvest claudecode-dockerfile=$R/output --out $R/measure --concurrency 2 \
   --gold /opt/ratbench/datasets/gold_manifests_combined.json
 ```
 
@@ -194,3 +194,11 @@ copy it to `docs/overnight-ccdf-run-report.md` locally:
 | Proxy | tmux `proxy`; log `/opt/ratbench/proxy.log` |
 | Per-repo detail | `output/<owner>/<repo>/{_meta.json,claude_stream.jsonl,claude_actions.log,run.log}` |
 | Earlier v4-pro runs (do not cite) | `runs/claudecode-dockerfile/rat50-v4pro-20261109-233848` (unpinned, stopped), `rat50-v4pro-deepseek-20261110-000659` (34/50 lost to OpenRouter credit) |
+
+## Run history
+
+- 2026-11-10 12:41 UTC: launched at concurrency 3 (`full200-v4pro-linkapi-20261110-124107`). Stopped at
+  12:50 at John's request to rerun at concurrency 2 (1 repo done, no 429s seen). Folder, log and watch
+  files moved to `/opt/ratbench/overnight-v4pro/aborted-conc3/` — not part of the result.
+- 2026-11-10 12:51 UTC: relaunched at concurrency 2 (`full200-v4pro-linkapi-20261110-125149`) on
+  `e0061d7` (watchdog phase fix deployed while stopped).
