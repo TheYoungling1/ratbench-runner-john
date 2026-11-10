@@ -16,8 +16,8 @@ call). Upgrade path: drop this the day the CLI lets you force `thinking:disabled
 non-Claude model directly.
 
 Usage:
-    PROXY_UPSTREAM_HOST=ws-yoer0farw5x7zgc1.cn-beijing.maas.aliyuncs.com \\
-        python3 tools/anthropic_thinking_proxy.py
+    PROXY_UPSTREAM_HOST=openrouter.ai PROXY_PROVIDER=deepseek \\
+        python3 tools/anthropic_thinking_proxy.py      # PROXY_PROVIDER: OpenRouter only, optional
     # then point the CLI at:
     ANTHROPIC_BASE_URL=http://host.docker.internal:8931/apps/anthropic   # from inside a container
     ANTHROPIC_BASE_URL=http://127.0.0.1:8931/apps/anthropic              # from the host
@@ -32,8 +32,16 @@ import sys
 LISTEN_PORT = int(os.environ.get("PROXY_LISTEN_PORT", "8931"))
 
 
-def _force_thinking_disabled(body: bytes) -> bytes:
-    """Rewrite a /messages request body to carry `thinking: {"type": "disabled"}`.
+def _providers_from_env(value: str) -> list:
+    """PROXY_PROVIDER, e.g. "deepseek" or "deepinfra/fp8,baidu/fp8" -> ["deepinfra/fp8", ...]."""
+    return [p.strip() for p in (value or "").split(",") if p.strip()]
+
+
+def _force_thinking_disabled(body: bytes, providers: list | None = None) -> bytes:
+    """Rewrite a /messages request body to carry `thinking: {"type": "disabled"}`, plus OpenRouter's
+    `provider` pin when `providers` is given — the CLI cannot send that field itself, and OpenRouter
+    honours it on the Anthropic endpoint (verified 2026-11-10: an unknown provider filters out every
+    endpoint). No fallbacks, so a run never silently moves to a provider outside the list.
 
     Returns `body` UNCHANGED if it doesn't parse as the expected JSON object — a proxy must never
     turn a request it doesn't understand into a corrupted one."""
@@ -44,10 +52,12 @@ def _force_thinking_disabled(body: bytes) -> bytes:
     if not isinstance(payload, dict) or "model" not in payload:
         return body
     payload["thinking"] = {"type": "disabled"}
+    if providers:
+        payload["provider"] = {"order": list(providers), "allow_fallbacks": False}
     return json.dumps(payload).encode()
 
 
-def _make_handler(upstream_host: str):
+def _make_handler(upstream_host: str, providers: list | None = None):
     class Handler(http.server.BaseHTTPRequestHandler):
         protocol_version = "HTTP/1.1"
 
@@ -64,7 +74,7 @@ def _make_handler(upstream_host: str):
             length = int(self.headers.get("Content-Length", 0) or 0)
             body = self.rfile.read(length) if length else b""
             if "/messages" in self.path:
-                body = _force_thinking_disabled(body)
+                body = _force_thinking_disabled(body, providers)
 
             headers = {k: v for k, v in self.headers.items()
                        if k.lower() not in ("host", "content-length", "connection")}
@@ -105,6 +115,13 @@ def demo():
     assert json.loads(out)["thinking"] == {"type": "disabled"}
     assert _force_thinking_disabled(b"not json") == b"not json"
     assert _force_thinking_disabled(b'{"no_model": true}') == b'{"no_model": true}'
+    assert "provider" not in json.loads(out)          # no pin unless one is configured
+    pinned = json.loads(_force_thinking_disabled(
+        json.dumps({"model": "m", "messages": []}).encode(), providers=["deepseek", "x/fp8"]))
+    assert pinned["provider"] == {"order": ["deepseek", "x/fp8"], "allow_fallbacks": False}
+    assert pinned["thinking"] == {"type": "disabled"}
+    assert _providers_from_env("deepseek, x/fp8 ,") == ["deepseek", "x/fp8"]
+    assert _providers_from_env("") == []
     print("ok")
 
 
@@ -113,7 +130,10 @@ if __name__ == "__main__":
         demo()
         sys.exit(0)
     UPSTREAM_HOST = os.environ["PROXY_UPSTREAM_HOST"]
-    server = http.server.ThreadingHTTPServer(("0.0.0.0", LISTEN_PORT), _make_handler(UPSTREAM_HOST))
+    PROVIDERS = _providers_from_env(os.environ.get("PROXY_PROVIDER", ""))
+    server = http.server.ThreadingHTTPServer(("0.0.0.0", LISTEN_PORT),
+                                             _make_handler(UPSTREAM_HOST, PROVIDERS))
     print(f"[thinking-proxy] :{LISTEN_PORT} -> https://{UPSTREAM_HOST} "
-          f"(forcing thinking:disabled on /messages)", file=sys.stderr)
+          f"(forcing thinking:disabled on /messages; provider pin: {PROVIDERS or 'none'})",
+          file=sys.stderr)
     server.serve_forever()

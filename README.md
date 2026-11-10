@@ -156,8 +156,12 @@ The CLI can't turn reasoning off for a non-Claude model, so requests go through 
 that does it (`tools/anthropic_thinking_proxy.py`). Start it in its own terminal or `tmux` window:
 
 ```bash
-PROXY_UPSTREAM_HOST=openrouter.ai python3 tools/anthropic_thinking_proxy.py     # listens on :8931
+PROXY_UPSTREAM_HOST=openrouter.ai PROXY_PROVIDER=deepseek \
+  python3 tools/anthropic_thinking_proxy.py                                      # listens on :8931
 ```
+
+`PROXY_PROVIDER` pins the OpenRouter provider (a comma-separated list, no fallbacks), which the CLI
+cannot do itself. Without it, OpenRouter picks a provider per request.
 
 Then run it. It authenticates with `LLM_API_KEY`; the two proxy settings are already in
 `.env.example`:
