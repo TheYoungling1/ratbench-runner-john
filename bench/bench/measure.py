@@ -379,14 +379,16 @@ def measure(env: HarvestedEnv, *, docker, build_timeout: int = 3600, test_timeou
 
         # EBSR gate (per-language). collect_clean uses the language predicate; parse_collect still
         # supplies the diagnostic collect_errors from the gate stdout.
-        grc, gout, _ = docker.exec(name, _sh(lang.gate_cmd(W)))
+        # Collection is bounded like the test run: a collect that never returns (skyrl starts a Ray
+        # cluster at import) otherwise holds a measure slot forever. A timeout reads as rc 124 -> gate fail.
+        grc, gout, _ = docker.exec(name, _sh(lang.gate_cmd(W)), timeout=test_timeout)
         collect = parse_collect(grc, gout)
         collect_clean = lang.gate_pass(grc)
 
         # Node-id collection (Python only; "" => skip). Feeds collected_node_ids + collect_error_count.
         collect_cmd = lang.collect_cmd(W)
         if collect_cmd:
-            _, cout2, _ = docker.exec(name, _sh(collect_cmd))
+            _, cout2, _ = docker.exec(name, _sh(collect_cmd), timeout=test_timeout)
             collected = parse_collected_node_ids(cout2)
             n_collect_errors = cout2.count("ERROR collecting")
         else:

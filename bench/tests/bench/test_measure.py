@@ -191,3 +191,21 @@ def test_image_digest_failure_degrades_to_none_not_a_raise():
     d.image_digest = boom
     row = measure(_env(), docker=d)
     assert row.image_digest is None
+
+
+class _HangingCollectDocker(FakeDocker):
+    """A collect that never returns unless the caller bounds it (skyrl: Ray started at import)."""
+
+    def exec(self, name, argv, timeout=None):
+        cmd = " ".join(argv)
+        if "--co" in cmd and "--junit-xml" not in cmd:
+            if timeout is None:
+                raise AssertionError(f"unbounded collect exec would hang forever: {cmd}")
+            self.calls.append(cmd)
+            return 124, "", True
+        return super().exec(name, argv, timeout)
+
+
+def test_hanging_collect_is_bounded_and_fails_the_gate():
+    row = measure(_env(), docker=_HangingCollectDocker())
+    assert row.collect_clean is False
