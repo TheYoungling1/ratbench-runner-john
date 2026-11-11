@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "alliander-opensource/weather-provider-api",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "st_weather_alert.py::test_weather_alert_wrongly_formatted_page\n#10 23.68 \n#10 23.68 =============================== warnings summary ===============================\n#10 23.68 .venv/lib/python3.13/site-packages/gribapi/__init__.py:23\n#10 23.68   /workspace/repo/.venv/lib/python3.13/site-packages/gribapi/__init__.py:23: UserWarning: ecCodes 2.42.0 or higher is recommended. You are running version 2.41.0\n#10 23.68     warnings.warn(\n#10 23.68 \n#10 23.68 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n#10 23.68 129 tests collected in 0.52s\n#10 DONE 23.8s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 12.2s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.4s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 33.8s done\n#14 exporting manifest sha256:4a4a6aeab0ce5a31af7ecd9c26de2654537dc9c40ed6502e40772ad170c32ff4 done\n#14 exporting config sha256:0d94af188340619601f056ab24b57a33ad2ae43a121a4690245637a8e6c62cff done\n#14 exporting attestation manifest sha256:211e3b5aef1333b9c4493c8f9a377b64ccb699026b6e979f096f418d2e60ae8f done\n#14 exporting manifest list sha256:bc82da3295b55d72fa08608187b1b595207c4dd9b8ec0fea7ca82ce44d2f95ff done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-alliander-opensource-weather-provider-api:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-alliander-opensource-weather-provider-api:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-alliander-opensource-weather-provider-api:latest 20.1s done\n#14 DONE 55.1s\n\n \u001b[33m1 warning found (use docker --debug to expand):\n\u001b[0m - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV \"KNMI_DATA_PLATFORM_KEY\") (line 9)\n",
+  "build_log_tail": "one_aware_time\n#10 18.92 tests/test_weather_alert.py::test_weather_alert_\n#10 18.92 tests/test_weather_alert.py::test_weather_alert_errors\n#10 18.92 tests/test_weather_alert.py::test_weather_alert_wrongly_formatted_page\n#10 18.92 \n#10 18.92 =============================== warnings summary ===============================\n#10 18.92 .venv/lib/python3.13/site-packages/gribapi/__init__.py:23\n#10 18.92   /workspace/repo/.venv/lib/python3.13/site-packages/gribapi/__init__.py:23: UserWarning: ecCodes 2.42.0 or higher is recommended. You are running version 2.41.0\n#10 18.92     warnings.warn(\n#10 18.92 \n#10 18.92 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n#10 18.92 129 tests collected in 0.43s\n#10 DONE 19.4s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 4.6s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 18.4s done\n#14 exporting manifest sha256:79334e9162659cae643e14666ed8b2d41088ab3d63b4914314caab7fb0f9a5db done\n#14 exporting config sha256:15d1af351866d125b620eb54d8e7e771b8bcb56613e9e038589f4ba90e95267e done\n#14 exporting attestation manifest sha256:18978835839ccc9db966e6621cbbf26f54ab79aa13bbe4f45b2592f0fcdab84a done\n#14 exporting manifest list sha256:5712ab3c5e514c98bcc54c838ee7312d1d1aba7183f22e372ce4d9335f98e861 done\n#14 naming to docker.io/library/bench-setupx-alliander-opensource-weather-provider-api:latest done\n#14 unpacking to docker.io/library/bench-setupx-alliander-opensource-weather-provider-api:latest\n#14 unpacking to docker.io/library/bench-setupx-alliander-opensource-weather-provider-api:latest 13.7s done\n#14 DONE 32.2s\n\n \u001b[33m1 warning found (use docker --debug to expand):\n\u001b[0m - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV \"KNMI_DATA_PLATFORM_KEY\") (line 9)\n",
   "status": "executed",
   "py_test_files": 1493,
   "collect_rc": 0,
@@ -283,9 +283,9 @@
   "ebsr": true,
   "pass_rate": 1.0,
   "timed_out": false,
-  "image_size_mb": 2947.6,
-  "image_delta_mb": 1436.9,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-alliander-opensource-weather-provider-api@sha256:bc82da3295b55d72fa08608187b1b595207c4dd9b8ec0fea7ca82ce44d2f95ff",
+  "image_size_mb": 698.9,
+  "image_delta_mb": 311.3,
+  "image_digest": "bench-setupx-alliander-opensource-weather-provider-api@sha256:5712ab3c5e514c98bcc54c838ee7312d1d1aba7183f22e372ce4d9335f98e861",
   "installed_pkg_count": 0,
   "tokens_in": 340527,
   "tokens_out": 11694,
@@ -293,8 +293,8 @@
   "turns_used": 17,
   "cost_usd": null,
   "produce_s": 412.29,
-  "build_s": 97.07,
-  "test_s": 7.74,
+  "build_s": 59.0,
+  "test_s": 6.27,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -329,19 +329,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=70f5d3c9dbc1996182ffbc3da3c41d5b4c058ae8 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=70f5d3c9dbc1996182ffbc3da3c41d5b4c058ae8 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

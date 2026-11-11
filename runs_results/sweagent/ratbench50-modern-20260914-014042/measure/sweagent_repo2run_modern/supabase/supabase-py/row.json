@@ -1,10 +1,10 @@
 {
-  "agent": "sweagent__ratbench50-modern-20260914-014042",
+  "agent": "sweagent_repo2run_modern",
   "repo": "supabase/supabase-py",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "Faker, coverage, colorama, backports-asyncio-runner, attrs, async-timeout, aiohappyeyeballs, aiosignal, pytest-mock, pytest-depends, pytest-cov, pytest-asyncio, aiohttp, respx\n#15 6.357 Successfully installed Faker-40.39.0 aiohappyeyeballs-2.7.1 aiohttp-3.14.3 aiosignal-1.4.0 async-timeout-5.0.1 attrs-26.1.0 backports-asyncio-runner-1.2.0 colorama-0.4.6 coverage-7.16.1 frozenlist-1.8.0 future-fstrings-1.2.0 networkx-3.4.2 pyotp-2.10.0 pytest-asyncio-1.4.0 pytest-cov-7.1.0 pytest-depends-1.0.1 pytest-mock-3.15.1 python-dotenv-1.2.3 respx-0.22.0\n#15 6.358 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#15 6.363 \n#15 6.363 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#15 6.363 [notice] To update, run: pip install --upgrade pip\n#15 DONE 6.8s\n\n#16 [13/15] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#16 DONE 0.7s\n\n#17 [14/15] WORKDIR /testbed\n#17 DONE 0.5s\n\n#18 [15/15] RUN git config --global --add safe.directory /testbed\n#18 DONE 0.2s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 2.4s done\n#19 exporting manifest sha256:9c71f3e378948c4c6c27afc92ebdb19c940c406c4f6eb4e516e2dcafde497a37 done\n#19 exporting config sha256:21b1746cc0eab3e36086ab5a6a93c7ce43ef14cd81bd9327369bcc192aab7882 done\n#19 exporting attestation manifest sha256:596a4fd0fc38d0b4518482ff338213ecd74206aa75b3fa1af2d23d5a1dd60272 0.0s done\n#19 exporting manifest list sha256:3cefcb815a318cc1c0f4bcc9347bce09ac912082ed34951585927ba4fac2d843 done\n#19 naming to docker.io/library/bench-sweagent__ratbench50-modern-20260914-014042-supabase-supabase-py:latest done\n#19 unpacking to docker.io/library/bench-sweagent__ratbench50-modern-20260914-014042-supabase-supabase-py:latest\n#19 unpacking to docker.io/library/bench-sweagent__ratbench50-modern-20260914-014042-supabase-supabase-py:latest 1.7s done\n#19 DONE 4.2s\n",
+  "build_log_tail": " python-dotenv, pyotp, networkx, future-fstrings, frozenlist, Faker, coverage, colorama, backports-asyncio-runner, attrs, async-timeout, aiohappyeyeballs, aiosignal, pytest-mock, pytest-depends, pytest-cov, pytest-asyncio, aiohttp, respx\n#15 5.418 Successfully installed Faker-40.38.0 aiohappyeyeballs-2.7.1 aiohttp-3.14.3 aiosignal-1.4.0 async-timeout-5.0.1 attrs-26.1.0 backports-asyncio-runner-1.2.0 colorama-0.4.6 coverage-7.16.1 frozenlist-1.8.0 future-fstrings-1.2.0 networkx-3.4.2 pyotp-2.10.0 pytest-asyncio-1.4.0 pytest-cov-7.1.0 pytest-depends-1.0.1 pytest-mock-3.15.1 python-dotenv-1.2.3 respx-0.22.0\n#15 5.418 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#15 5.421 \n#15 5.421 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#15 5.421 [notice] To update, run: pip install --upgrade pip\n#15 DONE 5.7s\n\n#16 [13/15] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#16 DONE 0.2s\n\n#17 [14/15] WORKDIR /testbed\n#17 DONE 0.0s\n\n#18 [15/15] RUN git config --global --add safe.directory /testbed\n#18 DONE 0.2s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 1.6s done\n#19 exporting manifest sha256:57088aef258d91796ca8a7791239b8c47be8f013b9d28c320ce82a2172c12c7a done\n#19 exporting config sha256:bc397bb65cb7435469c118536b192599d95972057aa14071c34f4951d6ff596c done\n#19 exporting attestation manifest sha256:b2a36039429020e8a646af0a45f955663dbd0554a720348e2313f06b3c80d6ca done\n#19 exporting manifest list sha256:4337d10c6fd5864b36e6a5912186e15d012df165c5774689be59d15d7c23cd76 done\n#19 naming to docker.io/library/bench-sweagent_repo2run_modern-supabase-supabase-py:latest done\n#19 unpacking to docker.io/library/bench-sweagent_repo2run_modern-supabase-supabase-py:latest\n#19 unpacking to docker.io/library/bench-sweagent_repo2run_modern-supabase-supabase-py:latest 1.2s done\n#19 DONE 2.9s\n",
   "status": "executed",
   "py_test_files": 43,
   "collect_rc": 0,
@@ -1521,9 +1521,9 @@
   "ebsr": true,
   "pass_rate": 0.6,
   "timed_out": false,
-  "image_size_mb": 454.2,
-  "image_delta_mb": null,
-  "image_digest": "bench-sweagent__ratbench50-modern-20260914-014042-supabase-supabase-py@sha256:3cefcb815a318cc1c0f4bcc9347bce09ac912082ed34951585927ba4fac2d843",
+  "image_size_mb": 453.5,
+  "image_delta_mb": 65.9,
+  "image_digest": "bench-sweagent_repo2run_modern-supabase-supabase-py@sha256:4337d10c6fd5864b36e6a5912186e15d012df165c5774689be59d15d7c23cd76",
   "installed_pkg_count": 60,
   "tokens_in": 3988382.0,
   "tokens_out": 1066.0,
@@ -1531,8 +1531,8 @@
   "turns_used": 101,
   "cost_usd": 0.1550408720000001,
   "produce_s": 1341.38,
-  "build_s": 32.23,
-  "test_s": 111.33,
+  "build_s": 23.4,
+  "test_s": 111.52,
   "meta": {
     "contract_version": 1,
     "producer": "sweagent_repo2run_modern",
@@ -1566,19 +1566,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=6f522d35aa94e4a6171cf84931d13e0bbae2ffba (pinned)\nremoved src/auth/auth_tests/conftest.py\nrestored src/auth/tests/conftest.py\nremoved src/storage/storage_tests/_async/conftest.py\nremoved src/storage/storage_tests/_sync/conftest.py\nrestored src/storage/tests/_async/conftest.py\nrestored src/storage/tests/_sync/conftest.py\nremoved src/supabase/supabase_tests/conftest.py\nrestored src/supabase/tests/conftest.py\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=6f522d35aa94e4a6171cf84931d13e0bbae2ffba (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

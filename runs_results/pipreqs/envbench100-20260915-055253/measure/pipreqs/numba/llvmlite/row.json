@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "numba/llvmlite",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "-3.1.6 MarkupSafe-3.0.3 alabaster-1.0.0 asttokens-3.0.2 babel-2.18.0 certifi-2026.7.22 charset_normalizer-3.5.1 coverage-7.16.1 cx_Freeze-8.7.1 decorator-5.3.1 docutils-0.21.2 executing-2.2.1 filelock-4.0.3 freeze-core-0.6.1 graphviz-0.21 idna-3.20 imagesize-2.0.1 ipython-8.39.0 jedi-0.20.0 matplotlib-inline-0.2.2 numpy-2.2.6 parso-0.8.7 patchelf-0.19.1.0 pexpect-4.9.0 prompt_toolkit-3.0.53 ptyprocess-0.7.0 pure-eval-0.2.4 requests-2.34.2 snowballstemmer-3.1.1 sphinx-8.1.3 sphinx_rtd_theme-3.1.0 sphinxcontrib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-jquery-4.1 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 stack_data-0.6.3 traitlets-5.16.1 urllib3-2.8.0 wcwidth-0.9.1 xmlrunner-1.7.7\n#11 12.43 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 12.44 \n#11 12.44 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 12.44 [notice] To update, run: pip install --upgrade pip\n#11 DONE 13.4s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 18.2s done\n#12 exporting manifest sha256:bd90e7dcd38c4169f68c3890bf9cba85e4f13afe45dea9f03bd90a1617d0de3d done\n#12 exporting config sha256:9ba823020741f2abff4a1a6e95fccf9dbc3b1f0514e6cc58f5202544f88bbf6f done\n#12 exporting attestation manifest sha256:eff442f6a52ceddf2223864024e41855157492a709b07835c07be30fda601058 0.0s done\n#12 exporting manifest list sha256:44f5c647c871a67c0e72f477b1a89fe117b8326b3d4c92bc0711d9795f21b914 0.0s done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-numba-llvmlite:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-numba-llvmlite:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-numba-llvmlite:latest 4.2s done\n#12 DONE 22.4s\n",
+  "build_log_tail": "afe-3.0.3 alabaster-1.0.0 asttokens-3.0.2 babel-2.18.0 certifi-2026.7.22 charset_normalizer-3.5.1 coverage-7.16.1 cx_Freeze-8.7.0 decorator-5.3.1 docutils-0.21.2 executing-2.2.1 filelock-3.32.6 freeze-core-0.6.1 graphviz-0.21 idna-3.19 imagesize-2.0.1 ipython-8.39.0 jedi-0.20.0 matplotlib-inline-0.2.2 numpy-2.2.6 parso-0.8.7 patchelf-0.19.1.0 pexpect-4.9.0 prompt_toolkit-3.0.53 ptyprocess-0.7.0 pure-eval-0.2.4 requests-2.34.2 snowballstemmer-3.1.1 sphinx-8.1.3 sphinx_rtd_theme-3.1.0 sphinxcontrib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-jquery-4.1 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 stack_data-0.6.3 traitlets-5.16.1 urllib3-2.7.0 wcwidth-0.8.3 xmlrunner-1.7.7\n#11 11.23 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 11.24 \n#11 11.24 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 11.24 [notice] To update, run: pip install --upgrade pip\n#11 DONE 11.9s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 13.8s done\n#12 exporting manifest sha256:a5de37c000cab0db4630a27e6c21f722f0d5029041d11ff8ba3bc97a4e70b138\n#12 exporting manifest sha256:a5de37c000cab0db4630a27e6c21f722f0d5029041d11ff8ba3bc97a4e70b138 0.0s done\n#12 exporting config sha256:e9040444d3273571210d558ab2f15f87d76ab0b2a831cc34c890a4dc019e459c 0.0s done\n#12 exporting attestation manifest sha256:7034a41db64e58009baa33617131a312fb7ccceaef2fb151b5a4540a87e1ba98 0.0s done\n#12 exporting manifest list sha256:f9279553f8fde892b4ba7fbb49fece02033893b31363d289215a848082c3c538 done\n#12 naming to docker.io/library/bench-pipreqs-numba-llvmlite:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-numba-llvmlite:latest\n#12 unpacking to docker.io/library/bench-pipreqs-numba-llvmlite:latest 4.6s done\n#12 DONE 18.6s\n",
   "status": "collect_error",
   "py_test_files": 5,
   "collect_rc": 3,
@@ -26,9 +26,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 526.0,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-numba-llvmlite@sha256:44f5c647c871a67c0e72f477b1a89fe117b8326b3d4c92bc0711d9795f21b914",
+  "image_size_mb": 525.2,
+  "image_delta_mb": 137.6,
+  "image_digest": "bench-pipreqs-numba-llvmlite@sha256:f9279553f8fde892b4ba7fbb49fece02033893b31363d289215a848082c3c538",
   "installed_pkg_count": 57,
   "tokens_in": null,
   "tokens_out": null,
@@ -36,8 +36,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 6.59,
-  "build_s": 39.26,
-  "test_s": 0.32,
+  "build_s": 34.54,
+  "test_s": 0.47,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -64,19 +64,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=5c181ff3af1de04d4bd70fb0ee287aa81d1fe198 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=5c181ff3af1de04d4bd70fb0ee287aa81d1fe198 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

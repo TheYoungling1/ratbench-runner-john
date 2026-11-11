@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50new-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "kittinan/spotify-github-profile",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "3.14.1 google-crc32c-1.8.0 google-resumable-media-2.10.2 googleapis-common-protos-1.75.3 grpcio-1.84.0 grpcio-status-1.84.0 gunicorn-23.0.0 h2-4.4.1 hpack-4.2.0 httpcore-1.0.9 httpx-0.28.1 hyperframe-6.1.0 idna-3.19 inflection-0.5.1 itsdangerous-2.2.0 msgpack-1.2.2 openai-3.14.0 opentelemetry-api-1.44.0 pillow-12.2.0 profanityfilter-2.1.0 proto-plus-1.28.4 protobuf-7.36.1 pyasn1-0.6.4 pyasn1_modules-0.4.2 pycparser-3.0 pytest-9.0.3 pytest-cov-6.0.0 pytest-mock-3.15.1 python-dotenv-1.2.2 requests-2.33.0 urllib3-2.7.0\n#17 27.34 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#17 27.63 \n#17 27.63 [notice] A new release of pip is available: 25.0.1 -> 26.2.1\n#17 27.63 [notice] To update, run: pip install --upgrade pip\n#17 DONE 28.5s\n\n#18 [14/15] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#18 DONE 0.4s\n\n#19 [15/15] WORKDIR /testbed\n#19 DONE 0.0s\n\n#20 exporting to image\n#20 exporting layers\n#20 exporting layers 7.0s done\n#20 exporting manifest sha256:b91132616bbafed63de62539bcb8f22265a15d45ede2b077358d817ebf47dd0e 0.0s done\n#20 exporting config sha256:e0d03a4a33038e549827cb0462bdcd53557bab463cbf60cf745ddeca6dc7ec7e 0.0s done\n#20 exporting attestation manifest sha256:6b950762bb56ec3049d1fdc1ff75c5f6af9ce5dee35377aeaabb9fe888e58d54 0.0s done\n#20 exporting manifest list sha256:84cbf5f2bdd3e6e04358711048f6f568f1feecdfe092f753d5e9f502cb55a1e5 done\n#20 naming to docker.io/library/bench-rat__rat50new-pjy-kittinan-spotify-github-profile:latest done\n#20 unpacking to docker.io/library/bench-rat__rat50new-pjy-kittinan-spotify-github-profile:latest\n#20 unpacking to docker.io/library/bench-rat__rat50new-pjy-kittinan-spotify-github-profile:latest 3.4s done\n#20 DONE 10.5s\n",
+  "build_log_tail": "-3.14.1 google-crc32c-1.8.0 google-resumable-media-2.10.2 googleapis-common-protos-1.75.3 grpcio-1.84.0 grpcio-status-1.84.0 gunicorn-23.0.0 h2-4.4.1 hpack-4.2.0 httpcore-1.0.9 httpx-0.28.1 hyperframe-6.1.0 idna-3.19 inflection-0.5.1 itsdangerous-2.2.0 msgpack-1.2.2 openai-3.14.0 opentelemetry-api-1.44.0 pillow-12.2.0 profanityfilter-2.1.0 proto-plus-1.28.4 protobuf-7.36.1 pyasn1-0.6.4 pyasn1_modules-0.4.2 pycparser-3.0 pytest-9.0.3 pytest-cov-6.0.0 pytest-mock-3.15.1 python-dotenv-1.2.2 requests-2.33.0 urllib3-2.7.0\n#17 128.1 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#17 128.2 \n#17 128.2 [notice] A new release of pip is available: 25.0.1 -> 26.2.1\n#17 128.2 [notice] To update, run: pip install --upgrade pip\n#17 DONE 128.7s\n\n#18 [14/15] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#18 DONE 0.3s\n\n#19 [15/15] WORKDIR /testbed\n#19 DONE 0.0s\n\n#20 exporting to image\n#20 exporting layers\n#20 exporting layers 5.7s done\n#20 exporting manifest sha256:23b2a18042f1bdcdebe762b5def5e19e4ff97424e7720797785c8f487ff6d63c done\n#20 exporting config sha256:1f539d806621fe2c16ed3c477674ab12273e47dd5634db017c28a5af2718c2b8 done\n#20 exporting attestation manifest sha256:f151013a37e2898a31cc60fdb3b87a8d963abc62688e6a0706c407dd0b38d2d1 0.0s done\n#20 exporting manifest list sha256:341fffed6d66fa16b8c43b7fb303484e25cf9d919fbc7d7c38c4f40a5e194935 0.0s done\n#20 naming to docker.io/library/bench-pjy-rat-dockerfile-kittinan-spotify-github-profile:latest done\n#20 unpacking to docker.io/library/bench-pjy-rat-dockerfile-kittinan-spotify-github-profile:latest\n#20 unpacking to docker.io/library/bench-pjy-rat-dockerfile-kittinan-spotify-github-profile:latest 4.8s done\n#20 DONE 10.6s\n",
   "status": "collect_error",
   "py_test_files": 6,
   "collect_rc": 2,
@@ -128,9 +128,9 @@
   "ebsr": true,
   "pass_rate": 0.6633,
   "timed_out": false,
-  "image_size_mb": 126.8,
+  "image_size_mb": 560.9,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50new-pjy-kittinan-spotify-github-profile@sha256:84cbf5f2bdd3e6e04358711048f6f568f1feecdfe092f753d5e9f502cb55a1e5",
+  "image_digest": "bench-pjy-rat-dockerfile-kittinan-spotify-github-profile@sha256:341fffed6d66fa16b8c43b7fb303484e25cf9d919fbc7d7c38c4f40a5e194935",
   "installed_pkg_count": 68,
   "tokens_in": 199256,
   "tokens_out": 1307,
@@ -138,27 +138,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 68.7,
-  "test_s": 1.6,
+  "build_s": 201.83,
+  "test_s": 1.98,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 199256,
     "tokens_out": 1307,
-    "llm_calls": 17,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 17
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "online-ml/river",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "r.py over existing file\n#25 13.90   - Installing sqlalchemy (2.0.30)\n#25 13.90   - Installing sympy (1.12)\n#25 13.90 /tmp/tmpn87nl9mj/.venv/lib/python3.10/site-packages/setuptools/_distutils/dist.py:318: BuildBackendWarning: Unknown distribution option: 'tests_require'\n#25 13.90   warnings.warn(msg)\n#25 13.90 /tmp/tmpn87nl9mj/.venv/lib/python3.10/site-packages/setuptools/_distutils/dist.py:318: BuildBackendWarning: Unknown distribution option: 'tests_require'\n#25 13.90   warnings.warn(msg)\n#25 DONE 14.4s\n\n#26 [23/27] RUN cd /repo && timeout 1800 poetry install --no-interaction --no-ansi 2>&1 | tail -50\n#26 53.44 Installing dependencies from lock file\n#26 53.44 \n#26 53.44 No dependencies to install or update\n#26 53.44 \n#26 53.44 Installing the current project: river (0.21.1)\n#26 DONE 53.7s\n\n#27 [24/27] RUN cd /repo && poetry run python -c \"from river.stats import _rust_stats; print('rust stats OK:', _rust_stats)\" 2>&1 | tail -20\n#27 1.197 rust stats OK: <module 'river.stats._rust_stats' from '/repo/river/stats/_rust_stats.cpython-310-x86_64-linux-gnu.so'>\n#27 DONE 1.2s\n\n#28 [25/27] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#28 DONE 13.9s\n\n#29 [26/27] WORKDIR /testbed\n#29 DONE 0.2s\n\n#30 exporting to image\n#30 exporting layers\n#30 exporting layers 67.3s done\n#30 exporting manifest sha256:e1e62a3193866ffe383966093da9db86955c0eedfc7508c299895537d5fe7b75 done\n#30 exporting config sha256:bb15e23ca4be35189583fc91bf3422db04f0b5205d19a5ef672b279ca916f918 done\n#30 exporting attestation manifest sha256:0b45f5110831f11a4c0813ea933ac44f3bbd47ba50c60fee7e6add8e2672e547 0.0s done\n#30 exporting manifest list sha256:a02a3ffb22f7cfbdb095c15af68ee262321330f26c0911d6975a1b5706489028 done\n#30 naming to docker.io/library/bench-repo2run__envbench100-pjy-online-ml-river:latest done\n#30 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-online-ml-river:latest\n#30 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-online-ml-river:latest 32.1s done\n#30 DONE 99.6s\n",
+  "build_log_tail": "10/site-packages/jupyter.py over existing file\n#25 14.49   - Installing sqlalchemy (2.0.30)\n#25 14.49   - Installing sympy (1.12)\n#25 14.49 /tmp/tmpas1ybedd/.venv/lib/python3.10/site-packages/setuptools/_distutils/dist.py:318: BuildBackendWarning: Unknown distribution option: 'tests_require'\n#25 14.49   warnings.warn(msg)\n#25 14.49 /tmp/tmpas1ybedd/.venv/lib/python3.10/site-packages/setuptools/_distutils/dist.py:318: BuildBackendWarning: Unknown distribution option: 'tests_require'\n#25 14.49   warnings.warn(msg)\n#25 DONE 15.1s\n\n#26 [23/27] RUN cd /repo && timeout 1800 poetry install --no-interaction --no-ansi 2>&1 | tail -50\n#26 65.29 Installing dependencies from lock file\n#26 65.29 \n#26 65.29 No dependencies to install or update\n#26 65.29 \n#26 65.29 Installing the current project: river (0.21.1)\n#26 DONE 66.0s\n\n#27 [24/27] RUN cd /repo && poetry run python -c \"from river.stats import _rust_stats; print('rust stats OK:', _rust_stats)\" 2>&1 | tail -20\n#27 1.557 rust stats OK: <module 'river.stats._rust_stats' from '/repo/river/stats/_rust_stats.cpython-310-x86_64-linux-gnu.so'>\n#27 DONE 1.7s\n\n#28 [25/27] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#28 DONE 13.9s\n\n#29 [26/27] WORKDIR /testbed\n#29 DONE 0.2s\n\n#30 exporting to image\n#30 exporting layers\n#30 exporting layers 92.3s done\n#30 exporting manifest sha256:45ca2e0ae4b68e0a97e78c43f83db9e3b55732e2bc29c2ec1d44b348df71b5a5 0.0s done\n#30 exporting config sha256:405d5b29bc797cffadf72e84bed710f77dc376cc801271593c2614f1521ed51b 0.0s done\n#30 exporting attestation manifest sha256:6a3b86ca2d549f5a6f4a99ce644b7529867f85a90dce3211d291241b6e9dca3b 0.0s done\n#30 exporting manifest list sha256:2c544a7633c85678e864543769ce4039d8f0556c476430cbfc5121d0df60c5bc 0.0s done\n#30 naming to docker.io/library/bench-pjy-repo2run-online-ml-river:latest done\n#30 unpacking to docker.io/library/bench-pjy-repo2run-online-ml-river:latest\n#30 unpacking to docker.io/library/bench-pjy-repo2run-online-ml-river:latest 51.1s done\n#30 DONE 143.5s\n",
   "status": "collect_error",
   "py_test_files": 2974,
   "collect_rc": 2,
@@ -939,9 +939,9 @@
   "ebsr": true,
   "pass_rate": 0.0021,
   "timed_out": false,
-  "image_size_mb": 3208.5,
+  "image_size_mb": 9905.6,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-online-ml-river@sha256:a02a3ffb22f7cfbdb095c15af68ee262321330f26c0911d6975a1b5706489028",
+  "image_digest": "bench-pjy-repo2run-online-ml-river@sha256:2c544a7633c85678e864543769ce4039d8f0556c476430cbfc5121d0df60c5bc",
   "installed_pkg_count": 27,
   "tokens_in": 252047,
   "tokens_out": 4459,
@@ -949,8 +949,8 @@
   "turns_used": 16,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 236.36,
-  "test_s": 4.1,
+  "build_s": 311.67,
+  "test_s": 5.35,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -958,19 +958,7 @@
     "tokens_in": 252047,
     "tokens_out": 4459,
     "llm_calls": null,
-    "turns_used": 16,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\nremoved build/lib.linux-x86_64-cpython-310/river/conftest.py\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 16
   },
   "error_surface": "",
   "error_surface_reason": "",

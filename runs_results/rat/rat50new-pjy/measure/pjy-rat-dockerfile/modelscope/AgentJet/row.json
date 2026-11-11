@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50new-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "modelscope/AgentJet",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "afetensors-0.8.0 scikit-learn-1.7.2 scipy-1.15.3 semver-3.1.0 sentry-sdk-2.69.2 shellingham-1.5.4 shortuuid-1.0.13 simple-websocket-1.1.0 simplejson-4.1.2 six-1.17.0 smart_open-8.0.1 smmap-5.0.3 sounddevice-0.5.6 soupsieve-2.9.2 sqlparse-0.6.0 sse-starlette-3.4.11 starlette-1.6.0 streamlit-1.64.0 swanlab-0.10.0 sympy-1.14.0 tabulate-0.10.0 tenacity-9.1.4 termcolor-3.3.0 threadpoolctl-3.7.0 tiktoken-0.14.0 tldextract-5.3.2 tokenizers-0.22.2 toml-0.10.2 tomli_w-1.2.0 torch-2.14.0 tqdm-4.70.1 transformers-4.57.6 triton-3.8.0 typer-0.27.2 typeshed_client-2.13.0 tzdata-2026.4 ua-parser-1.0.2 ua-parser-builtins-202606 ujson-6.0.0 uritemplate-4.2.0 urllib3-2.8.0 user-agents-2.2.0 uuid_utils-0.17.1 uv-0.12.17 uvicorn-0.53.0 uvloop-0.22.1 watchdog-6.0.0 watchfiles-1.2.0 wcwidth-0.8.3 webencodings-0.6.1 websocket-client-1.9.2 websockets-16.1.1 wget-3.2 wrapt-2.4.1 wsproto-1.3.2 xmljson-0.2.1 xxhash-4.0.1 yarl-1.25.1 zstandard-0.25.0\n#19 698.7 \n#19 698.7 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#19 698.7 [notice] To update, run: pip install --upgrade pip\n#19 DONE 705.7s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 3.0s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.0s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 338.6s done\n#22 exporting manifest sha256:4edb96e0480fc147b05479e5bbf11ed5c510050344d78cd76f5037b9b95326b4 done\n#22 exporting config sha256:e1d1a60ede3002296483a471f5d69cffd3f8dd42f820ba2490391fabdc00373b done\n#22 exporting attestation manifest sha256:e77f5f8c81a71c266b16a2e88595b927ceb9c13d646700dd9bd951e8f46021a9 0.0s done\n#22 exporting manifest list sha256:35f85548b690cd671f035bb7a936bdec5148177d998349811f4c0f00d7aa49a9 done\n#22 naming to docker.io/library/bench-rat__rat50new-pjy-modelscope-agentjet:latest done\n#22 unpacking to docker.io/library/bench-rat__rat50new-pjy-modelscope-agentjet:latest\n#22 unpacking to docker.io/library/bench-rat__rat50new-pjy-modelscope-agentjet:latest 58.3s done\n#22 DONE 397.0s\n",
+  "build_log_tail": "arlette-3.4.11 starlette-1.6.0 streamlit-1.64.0 swanlab-0.10.0 sympy-1.14.0 tabulate-0.10.0 tenacity-9.1.4 termcolor-3.3.0 threadpoolctl-3.7.0 tiktoken-0.14.0 tldextract-5.3.2 tokenizers-0.22.2 toml-0.10.2 tomli_w-1.2.0 torch-2.14.0 tqdm-4.70.1 transformers-4.57.6 triton-3.8.0 typer-0.27.2 typeshed_client-2.13.0 tzdata-2026.4 ua-parser-1.0.2 ua-parser-builtins-202606 ujson-6.0.0 uritemplate-4.2.0 urllib3-2.8.0 user-agents-2.2.0 uuid_utils-0.17.1 uv-0.12.17 uvicorn-0.53.0 uvloop-0.22.1 watchdog-6.0.0 watchfiles-1.2.0 wcwidth-0.8.3 webencodings-0.6.1 websocket-client-1.9.2 websockets-16.1.1 wget-3.2 wrapt-2.4.1 wsproto-1.3.2 xmljson-0.2.1 xxhash-4.0.1 yarl-1.25.1 zstandard-0.25.0\n#19 884.0 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#19 887.4 \n#19 887.4 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#19 887.4 [notice] To update, run: pip install --upgrade pip\n#19 DONE 895.4s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 1.8s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.1s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 373.7s done\n#22 exporting manifest sha256:31dc1c866eebffdaf87d86e26784a3b45fdf9a865c7ea5835e5618fbf9f90347 0.0s done\n#22 exporting config sha256:635f6c154c2936935d2b5ab7c2a66dc87785067023800391114fab794db9f1ad 0.0s done\n#22 exporting attestation manifest sha256:8b3433d4f79a5158134aa7bfbcf137603b6134330be9479bc22583bd34090538 0.0s done\n#22 exporting manifest list sha256:fe4c243b717247e9b0ad49e394925aa039cee00d7d8ebe7fc266cf60501228e2 0.0s done\n#22 naming to docker.io/library/bench-pjy-rat-dockerfile-modelscope-agentjet:latest done\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-modelscope-agentjet:latest\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-modelscope-agentjet:latest 51.4s done\n#22 DONE 425.3s\n",
   "status": "collect_error",
   "py_test_files": 12,
   "collect_rc": 2,
@@ -114,9 +114,9 @@
   "ebsr": true,
   "pass_rate": 0.5714,
   "timed_out": false,
-  "image_size_mb": 3624.0,
+  "image_size_mb": 11412.1,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50new-pjy-modelscope-agentjet@sha256:35f85548b690cd671f035bb7a936bdec5148177d998349811f4c0f00d7aa49a9",
+  "image_digest": "bench-pjy-rat-dockerfile-modelscope-agentjet@sha256:fe4c243b717247e9b0ad49e394925aa039cee00d7d8ebe7fc266cf60501228e2",
   "installed_pkg_count": 342,
   "tokens_in": 3642351,
   "tokens_out": 17960,
@@ -124,27 +124,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 1114.88,
-  "test_s": 7.41,
+  "build_s": 1332.28,
+  "test_s": 8.7,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 3642351,
     "tokens_out": 17960,
-    "llm_calls": 101,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 101
   },
   "error_surface": "",
   "error_surface_reason": "",

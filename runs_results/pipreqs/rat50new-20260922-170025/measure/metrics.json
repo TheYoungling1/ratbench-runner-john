@@ -1,0 +1,90 @@
+{
+  "pipreqs": {
+    "n": 50,
+    "n_exec": 12,
+    "n_collect_clean": 2,
+    "n_real_success": 1,
+    "n_unmeasurable": 0,
+    "n_legacy_missing": 0,
+    "EBSR": 0.04,
+    "n_ebsr": 2,
+    "EBSR_repo2run_raw": 0.04,
+    "n_raw": 2,
+    "false_green_removed": 0.0,
+    "status_census": {
+      "build_fail": 30,
+      "error": 1,
+      "executed": 2,
+      "collect_error": 17
+    },
+    "n_ebsr_zero_collected": 0,
+    "total_collected": 1177,
+    "mean_collected": 23.54,
+    "total_collect_errors": 389,
+    "mean_collect_errors": 7.78,
+    "real_success": 0.02,
+    "micro": 0.7915,
+    "full_pass_repos": 0,
+    "coverage": 0.24,
+    "ESSR": 0.0619,
+    "ESSR_median": 0.0,
+    "n_gold_scored": 44,
+    "n_gold_zero": 37,
+    "n_gold_no_row": 0,
+    "gold_no_row": [],
+    "n_gold_capped": 0,
+    "gold_capped": [],
+    "n_gold_excluded": 6,
+    "gold_excluded": [
+      [
+        "berriai/litellm",
+        "gold_missing"
+      ],
+      [
+        "meta-pytorch/torchrec",
+        "gold_missing"
+      ],
+      [
+        "modelscope/agentjet",
+        "gold_missing"
+      ],
+      [
+        "nvidia-nemo/rl",
+        "gold_missing"
+      ],
+      [
+        "sgl-project/sglang-jax",
+        "gold_missing"
+      ],
+      [
+        "tencentblueking/bk-lite",
+        "gold_missing"
+      ]
+    ],
+    "n_gold_sha_mismatch": 0,
+    "gold_sha_mismatch": [],
+    "mean_collection_coverage": 1.0,
+    "median_collection_coverage": 1.0,
+    "n_gold_hollow": 0,
+    "gold_hollow": [],
+    "mean_image_delta_mb": null,
+    "mean_installed_pkgs": 82.9474,
+    "mean_tokens": null,
+    "mean_tokens_out": null,
+    "tokens_per_ebsr": null,
+    "tokens_per_real_success": null,
+    "mean_turns": null,
+    "total_cost_usd": null,
+    "mean_cost_usd": null,
+    "cost_per_ebsr": null,
+    "cost_per_real_success": null,
+    "n_cost_reporting": 0,
+    "mean_produce_s": 10.378,
+    "wall_s_per_real_success": 3949.11,
+    "n_token_reporting": 0,
+    "rebuild_ok_rate": 0.38,
+    "setup_compile_rate": 0.38,
+    "n_setup_compile": 19,
+    "unreplayed_rate": 0.0
+  }
+}

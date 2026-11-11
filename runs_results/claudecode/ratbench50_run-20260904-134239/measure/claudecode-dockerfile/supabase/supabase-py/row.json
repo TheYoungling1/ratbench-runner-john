@@ -1,10 +1,10 @@
 {
-  "agent": "claudecode__ratbench50_run-20260904-134239",
+  "agent": "claudecode-dockerfile",
   "repo": "supabase/supabase-py",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": " colorama, attrs, ast-serialize, aiohappyeyeballs, pytest-mock, pytest-depends, pytest-asyncio, mypy, aiosignal, respx, pytest-cov, aiohttp\n#10 3.676   Attempting uninstall: pytest\n#10 3.688     Found existing installation: pytest 9.1.1\n#10 3.696     Uninstalling pytest-9.1.1:\n#10 3.752       Successfully uninstalled pytest-9.1.1\n#10 7.537 Successfully installed Faker-40.39.0 aiohappyeyeballs-2.7.1 aiohttp-3.14.3 aiosignal-1.4.0 ast-serialize-0.11.2 attrs-26.1.0 colorama-0.4.6 coverage-7.16.1 frozenlist-1.8.0 future-fstrings-1.2.0 librt-0.15.0 mypy-2.3.1 mypy_extensions-1.1.0 networkx-3.6.1 pathspec-1.1.1 pyotp-2.10.0 pytest-8.4.2 pytest-asyncio-1.0.0 pytest-cov-7.1.0 pytest-depends-1.0.1 pytest-mock-3.15.1 python-dotenv-1.2.3 respx-0.23.1\n#10 7.537 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#10 7.605 \n#10 7.605 [notice] A new release of pip is available: 24.0 -> 26.2.1\n#10 7.605 [notice] To update, run: pip install --upgrade pip\n#10 DONE 8.2s\n\n#11 exporting to image\n#11 exporting layers\n#11 exporting layers 4.9s done\n#11 exporting manifest sha256:3de99687a58ffcedf59184d437011e027672d85445190ee956048d5b92e32c71 done\n#11 exporting config sha256:3012e6f809d2e31254fdadfdde818c99dc0e45c75cdeb8e3f72edc3dd30cef23 done\n#11 exporting attestation manifest sha256:4a31b642bb460601d738f5ce803b5b967d8a225dca530536476a5031c9b932b2 0.0s done\n#11 exporting manifest list sha256:0bc2345d205ddf890484ec12b31c30155ce3885391af4ac2db4b6051a06f854b 0.0s done\n#11 naming to docker.io/library/bench-claudecode__ratbench50_run-20260904-134239-supabase-supabase-py:latest done\n#11 unpacking to docker.io/library/bench-claudecode__ratbench50_run-20260904-134239-supabase-supabase-py:latest\n#11 unpacking to docker.io/library/bench-claudecode__ratbench50_run-20260904-134239-supabase-supabase-py:latest 1.8s done\n#11 DONE 6.7s\n",
+  "build_log_tail": "s-1.1.0-py3-none-any.whl (5.0 kB)\nDownloading pathspec-1.1.1-py3-none-any.whl (57 kB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 57.3/57.3 kB 393.6 MB/s eta 0:00:00\nDownloading colorama-0.4.6-py2.py3-none-any.whl (25 kB)\nDownloading future_fstrings-1.2.0-py2.py3-none-any.whl (6.1 kB)\nDownloading networkx-3.6.1-py3-none-any.whl (2.1 MB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 2.1/2.1 MB 338.8 MB/s eta 0:00:00\nInstalling collected packages: python-dotenv, pytest, pyotp, pathspec, networkx, mypy_extensions, librt, future-fstrings, frozenlist, Faker, coverage, colorama, attrs, ast-serialize, aiohappyeyeballs, pytest-mock, pytest-depends, pytest-asyncio, mypy, aiosignal, respx, pytest-cov, aiohttp\n  Attempting uninstall: pytest\n    Found existing installation: pytest 9.1.1\n    Uninstalling pytest-9.1.1:\n      Successfully uninstalled pytest-9.1.1\nSuccessfully installed Faker-40.38.0 aiohappyeyeballs-2.7.1 aiohttp-3.14.3 aiosignal-1.4.0 ast-serialize-0.9.0 attrs-26.1.0 colorama-0.4.6 coverage-7.16.0 frozenlist-1.8.0 future-fstrings-1.2.0 librt-0.15.0 mypy-2.3.1 mypy_extensions-1.1.0 networkx-3.6.1 pathspec-1.1.1 pyotp-2.10.0 pytest-8.4.2 pytest-asyncio-1.0.0 pytest-cov-7.1.0 pytest-depends-1.0.1 pytest-mock-3.15.1 python-dotenv-1.2.3 respx-0.23.1\n\u001b[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n\u001b[0m\u001b[91m\n[notice] A new release of pip is available: 24.0 -> 26.2.1\n[notice] To update, run: pip install --upgrade pip\n\u001b[0m ---> Removed intermediate container 659d545d5c2d\n ---> cbac2dffa7b2\nSuccessfully built cbac2dffa7b2\nSuccessfully tagged bench-claudecode-dockerfile-supabase-supabase-py:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 43,
   "collect_rc": 2,
@@ -446,9 +446,9 @@
   "ebsr": true,
   "pass_rate": 0.2754,
   "timed_out": false,
-  "image_size_mb": 448.3,
-  "image_delta_mb": null,
-  "image_digest": "bench-claudecode__ratbench50_run-20260904-134239-supabase-supabase-py@sha256:0bc2345d205ddf890484ec12b31c30155ce3885391af4ac2db4b6051a06f854b",
+  "image_size_mb": 447.9,
+  "image_delta_mb": 68.1,
+  "image_digest": "bench-claudecode-dockerfile-supabase-supabase-py@sha256:cbac2dffa7b22138eb68292a1fda0de5f6d946f278ddec7e358873f36b8d06bf",
   "installed_pkg_count": 61,
   "tokens_in": 2319955,
   "tokens_out": 32048,
@@ -456,8 +456,8 @@
   "turns_used": 39,
   "cost_usd": 0.050550292000000004,
   "produce_s": 371.89,
-  "build_s": 44.25,
-  "test_s": 74.98,
+  "build_s": 44.57,
+  "test_s": 79.31,
   "meta": {
     "contract_version": 1,
     "producer": "claudecode-dockerfile",
@@ -484,19 +484,7 @@
     "usage_source": "computed",
     "dsml_text_blocks": 0,
     "turn_capped": false,
-    "agent_timed_out": false,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "agent_timed_out": false
   },
   "error_surface": "",
   "error_surface_reason": "",

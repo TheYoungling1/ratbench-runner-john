@@ -1,18 +1,19 @@
 {
-  "agent": "graph2env__rat_python50_new",
+  "agent": "g2e-rat50new",
   "repo": "chopratejas/headroom",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "en==0.12.0\n#13 164.4  + tokenizers==0.22.2\n#13 164.4  + tomlkit==0.15.0\n#13 164.4  + torch==2.13.0\n#13 164.4  + tqdm==4.67.1\n#13 164.4  + transformers==5.13.1\n#13 164.4  + triton==3.7.1\n#13 164.4  + typer==0.21.1\n#13 164.4  + typing-extensions==4.15.0\n#13 164.4  + typing-inspection==0.4.2\n#13 164.4  + urllib3==2.7.0\n#13 164.4  + uuid-utils==0.14.0\n#13 164.4  + uvicorn==0.40.0\n#13 164.4  + virtualenv==20.36.1\n#13 164.4  + websockets==16.0\n#13 164.4  + xxhash==3.6.0\n#13 164.4  + yarl==1.22.0\n#13 164.4  + zipp==3.23.0\n#13 164.4  + zstandard==0.25.0\n#13 DONE 164.8s\n\n#14 [10/11] RUN if [ -x /testbed/.venv/bin/python ]; then       if /testbed/.venv/bin/python -m pip --version >/dev/null 2>&1; then         /testbed/.venv/bin/python -m pip install pytest;       else         command -v uv >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#14 1.852 Checked 1 package in 78ms\n#14 DONE 1.9s\n\n#15 [11/11] WORKDIR /testbed\n#15 DONE 0.0s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 374.6s done\n#16 exporting manifest sha256:162301cbe654507be0638099ab1aa0a3726e3cf4b69e78d0116306359d0b2d99 done\n#16 exporting config sha256:8093e2c1bf73c03a0bf6a60d81c63de73e9865895dfe42e6ea18bad72c473758 done\n#16 exporting attestation manifest sha256:de0be9bd2e2b1a1c7f95661be7d39e13ab3c437568d9d8f9da9cffa6ad849961 0.0s done\n#16 exporting manifest list sha256:eca8dca2b7f11df13ea5b7ced733c7e62c2d0b4fedebdd9a9827c01891e6fa21 done\n#16 naming to docker.io/library/bench-graph2env__rat_python50_new-chopratejas-headroom:latest done\n#16 unpacking to docker.io/library/bench-graph2env__rat_python50_new-chopratejas-headroom:latest\n#16 unpacking to docker.io/library/bench-graph2env__rat_python50_new-chopratejas-headroom:latest 77.5s done\n#16 DONE 452.2s\n",
-  "status": "executed",
+  "build_log_tail": " 161.2  + threadpoolctl==3.6.0\n#13 161.2  + tiktoken==0.12.0\n#13 161.2  + tokenizers==0.22.2\n#13 161.2  + tomlkit==0.15.0\n#13 161.2  + torch==2.13.0\n#13 161.2  + tqdm==4.67.1\n#13 161.2  + transformers==5.13.1\n#13 161.2  + triton==3.7.1\n#13 161.2  + typer==0.21.1\n#13 161.2  + typing-extensions==4.15.0\n#13 161.2  + typing-inspection==0.4.2\n#13 161.2  + urllib3==2.7.0\n#13 161.2  + uuid-utils==0.14.0\n#13 161.2  + uvicorn==0.40.0\n#13 161.2  + virtualenv==20.36.1\n#13 161.2  + websockets==16.0\n#13 161.2  + xxhash==3.6.0\n#13 161.2  + yarl==1.22.0\n#13 161.2  + zipp==3.23.0\n#13 161.2  + zstandard==0.25.0\n#13 DONE 161.5s\n\n#14 [10/11] RUN if [ -x /testbed/.venv/bin/python ]; then       if /testbed/.venv/bin/python -m pip --version >/dev/null 2>&1; then         /testbed/.venv/bin/python -m pip install pytest;       else         command -v uv >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#14 2.497 Checked 1 package in 65ms\n#14 DONE 2.6s\n\n#15 [11/11] WORKDIR /testbed\n#15 DONE 0.1s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 343.2s done\n#16 exporting manifest sha256:c9ca6006fda78c3b3a06043fc3a2251ab563c4393c1d5e722150feaa25260cab done\n#16 exporting config sha256:7cfd8d718389c8fa41e6db0bf96f75ab7532e5cbc5c8812292e8d0d79b45862b done\n#16 exporting attestation manifest sha256:11cc31a9c7364d53dfe00471d92b704a00f96d46d5f2bf9da92a128fa0479151 done\n#16 exporting manifest list sha256:0bd01dc0cfe09ba8299954cdce46530d7c1a5f13416013ece63304ec5b912e54 done\n#16 naming to docker.io/library/bench-g2e-rat50new-chopratejas-headroom:latest done\n#16 unpacking to docker.io/library/bench-g2e-rat50new-chopratejas-headroom:latest\n#16 unpacking to docker.io/library/bench-g2e-rat50new-chopratejas-headroom:latest 61.3s done\n#16 DONE 404.6s\n",
+  "status": "collect_error",
   "py_test_files": 2722,
-  "collect_rc": 0,
-  "collect_clean": true,
+  "collect_rc": 2,
+  "collect_clean": false,
   "collect_errors": [
-    "<Function test_templates_reference_no_cdn[<!DOCTYPE html>\\n<html lang=\"en\" class=\"dark\">\\n<head>\\n    <meta charset=\"UTF-8\">\\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    "<Function test_templates_reference_no_cdn[<!DOCTYPE html>\\n<html lang=\"en\" class=\"dark\">\\n<head>\\n    <meta charset=\"UTF-8\">\\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+    "E   ModuleNotFoundError: No module named 'headroom_oauth2'"
   ],
-  "collect_error_count": 0,
+  "collect_error_count": 1,
   "collected_node_ids": [
     "<Function test_is_custom_anthropic_base_url_host_edges[http://[::1]:8787-True]>",
     "<Function test_is_custom_anthropic_base_url_host_edges[http://[::1:8787-False]>",
@@ -12520,9 +12521,9 @@
   "ebsr": true,
   "pass_rate": 0.9983,
   "timed_out": false,
-  "image_size_mb": 3913.9,
+  "image_size_mb": 13048.6,
   "image_delta_mb": null,
-  "image_digest": "bench-graph2env__rat_python50_new-chopratejas-headroom@sha256:eca8dca2b7f11df13ea5b7ced733c7e62c2d0b4fedebdd9a9827c01891e6fa21",
+  "image_digest": "bench-g2e-rat50new-chopratejas-headroom@sha256:0bd01dc0cfe09ba8299954cdce46530d7c1a5f13416013ece63304ec5b912e54",
   "installed_pkg_count": 0,
   "tokens_in": 217364,
   "tokens_out": 209,
@@ -12530,8 +12531,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 634.86,
-  "test_s": 952.95,
+  "build_s": 586.69,
+  "test_s": 929.03,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -12547,19 +12548,7 @@
       ],
       "services": [],
       "services_rc": null
-    },
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=35b11564c6217c358094732618d21eb74503aa47 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=35b11564c6217c358094732618d21eb74503aa47 (pinned)\n"
-      }
-    ]
+    }
   },
   "error_surface": "",
   "error_surface_reason": "",

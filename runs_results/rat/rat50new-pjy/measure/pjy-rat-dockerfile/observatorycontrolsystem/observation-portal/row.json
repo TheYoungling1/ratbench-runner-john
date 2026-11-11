@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50new-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "observatorycontrolsystem/observation-portal",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "se-set-0.6.4 openai-3.14.0 opensearch-protobufs-1.2.0 opensearch-py-3.2.0 prometheus_client-0.26.0 protobuf-7.36.1 psutil-7.2.2 psycopg2-binary-2.9.13 pycparser-3.0 pyslalib-1.0.10 pytest-django-4.14.0 python-dateutil-2.9.0.post0 pytz-2026.3.post1 redis-3.5.3 requests-2.34.2 responses-0.26.3 s3transfer-0.19.2 sentry-sdk-2.69.2 six-1.17.0 soupsieve-2.9.2 sqlparse-0.6.0 time_intervals-1.0.0 tzlocal-5.4.4 uritemplate-4.2.0 urllib3-2.8.0 watchdog-6.0.0 watchdog_gevent-0.2.1 zope.event-6.2 zope.interface-8.6\n#19 92.59 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#19 92.95 \n#19 92.95 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#19 92.95 [notice] To update, run: pip install --upgrade pip\n#19 DONE 94.6s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 0.9s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.1s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 34.8s done\n#22 exporting manifest sha256:39204d588685429164f88a2e2760cc4f56e4bd2b6b51d45ce4bfc239e4837c54 0.0s done\n#22 exporting config sha256:33349d25125f8dc597bcb1a1a02f34be5bf511eb66f8ea40e14cf3ea0bbd3156 0.0s done\n#22 exporting attestation manifest sha256:83bc048e2634765c8a5eb6ca53e4a8bdea12d52ab37cbf269e7fa540e6770414\n#22 exporting attestation manifest sha256:83bc048e2634765c8a5eb6ca53e4a8bdea12d52ab37cbf269e7fa540e6770414 0.0s done\n#22 exporting manifest list sha256:5f6aef39897c16818fed5eb2a721f55cd09427c33aa8b089bc36bf5a1e8275c0 0.0s done\n#22 naming to docker.io/library/bench-rat__rat50new-pjy-observatorycontrolsystem-observation-portal:latest 0.0s done\n#22 unpacking to docker.io/library/bench-rat__rat50new-pjy-observatorycontrolsystem-observation-portal:latest\n#22 unpacking to docker.io/library/bench-rat__rat50new-pjy-observatorycontrolsystem-observation-portal:latest 12.3s done\n#22 DONE 47.3s\n",
+  "build_log_tail": "t-0.6.4 openai-3.14.0 opensearch-protobufs-1.2.0 opensearch-py-3.2.0 prometheus_client-0.26.0 protobuf-7.36.1 psutil-7.2.2 psycopg2-binary-2.9.13 pycparser-3.0 pyslalib-1.0.10 pytest-django-4.14.0 python-dateutil-2.9.0.post0 pytz-2026.3.post1 redis-3.5.3 requests-2.34.2 responses-0.26.3 s3transfer-0.19.2 sentry-sdk-2.69.2 six-1.17.0 soupsieve-2.9.2 sqlparse-0.6.0 time_intervals-1.0.0 tzlocal-5.4.4 uritemplate-4.2.0 urllib3-2.8.0 watchdog-6.0.0 watchdog_gevent-0.2.1 zope.event-6.2 zope.interface-8.6\n#19 389.1 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#19 389.3 \n#19 389.3 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#19 389.3 [notice] To update, run: pip install --upgrade pip\n#19 DONE 391.9s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 1.8s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 1.3s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 36.6s done\n#22 exporting manifest sha256:9cd4e6424e0b41b7c39cc566ccd2e8878855be6f024004ffd1556146b5a2e4a4 0.0s done\n#22 exporting config sha256:7de59be99f8b2f49015ee5121c9a9b5e614c57165af26277bda115721f160871 0.0s done\n#22 exporting attestation manifest sha256:be0b3bb2a596740c61b702431e3bcf179e8da9b7b3462c0d1ad55de7aafcd0a7 0.0s done\n#22 exporting manifest list sha256:178aa266c5de028fd1ae52f5b3d6cca514800398d2725514d3d5cc8bec9607fb 0.0s done\n#22 naming to docker.io/library/bench-pjy-rat-dockerfile-observatorycontrolsystem-observation-portal:latest\n#22 naming to docker.io/library/bench-pjy-rat-dockerfile-observatorycontrolsystem-observation-portal:latest 0.0s done\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-observatorycontrolsystem-observation-portal:latest\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-observatorycontrolsystem-observation-portal:latest 12.7s done\n#22 DONE 49.6s\n",
   "status": "collect_error",
   "py_test_files": 16,
   "collect_rc": 2,
@@ -55,9 +55,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 1675.4,
+  "image_size_mb": 1670.4,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50new-pjy-observatorycontrolsystem-observation-portal@sha256:5f6aef39897c16818fed5eb2a721f55cd09427c33aa8b089bc36bf5a1e8275c0",
+  "image_digest": "bench-pjy-rat-dockerfile-observatorycontrolsystem-observation-portal@sha256:178aa266c5de028fd1ae52f5b3d6cca514800398d2725514d3d5cc8bec9607fb",
   "installed_pkg_count": 95,
   "tokens_in": 1990764,
   "tokens_out": 7796,
@@ -65,27 +65,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 207.99,
-  "test_s": 2.3,
+  "build_s": 557.43,
+  "test_s": 2.64,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 1990764,
     "tokens_out": 7796,
-    "llm_calls": 67,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 67
   },
   "error_surface": "",
   "error_surface_reason": "",

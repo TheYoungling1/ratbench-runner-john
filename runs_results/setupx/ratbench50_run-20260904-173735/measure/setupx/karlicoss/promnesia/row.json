@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__ratbench50_run-20260904-173735",
+  "agent": "setupx",
   "repo": "karlicoss/promnesia",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "p space for panel etc... figure that out properly later\n#10 72.22         titlebar = 32\n#10 72.22         # TODO I think firefox counts position as the actual top left corner, but geometry without the title bar???\n#10 72.22 \n#10 72.22         w = W // 2\n#10 72.22         h = H - margin - titlebar\n#10 72.22 \n#10 72.22         def set_geometry(wid: str):\n#10 72.22             check_call([\n#10 72.22                 'wmctrl',\n#10 72.22                 '-i',\n#10 72.22                 '-r', wid,\n#10 72.22                 '-e', f'0,0,{margin},{w},{h}',\n#10 72.22             ])  # fmt: skip\n#10 72.22 \n#10 72.22         set_geometry(wid=driver_wid)\n#10 72.22 \n#10 72.22         extras = kwargs\n#10 72.22         if 'highlights' not in extras:\n#10 72.22             extras['highlights'] = False\n#10 72.22 \n#10 72.22         configure_extension(\n#10 72.22             driver,\n#10 DONE 72.6s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.8s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 22.4s done\n#14 exporting manifest sha256:ea849ea65492684186c1ffd4f2438fb69044db1a99cbcd17876aa78270709129 done\n#14 exporting config sha256:fb64f28785e298811b38615015f21d799de2bbf09bf99aa40da845fe888321c6 done\n#14 exporting attestation manifest sha256:5fba3a732038855bdc123def3598d9e9724aaa134b8369e59c8116d7ff4aac35 done\n#14 exporting manifest list sha256:d0be47b45def6277a3920e45996fb8ca783719fde3295bb2ed7306e6e3fe7675 done\n#14 naming to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-karlicoss-promnesia:latest done\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-karlicoss-promnesia:latest\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-karlicoss-promnesia:latest 4.7s done\n#14 DONE 27.2s\n",
+  "build_log_tail": "should have a background instead??\n\n    with _test_helper(tmp_path, indexer(), None, browser=browser) as helper:\n        driver = helper.driver\n        driver_wid = get_window_id(driver)\n\n        # full display resolution\n        W = 2560\n        H = 1440\n\n        margin = 28  # make up space for panel etc... figure that out properly later\n        titlebar = 32\n        # TODO I think firefox counts position as the actual top left corner, but geometry without the title bar???\n\n        w = W // 2\n        h = H - margin - titlebar\n\n        def set_geometry(wid: str):\n            check_call([\n                'wmctrl',\n                '-i',\n                '-r', wid,\n                '-e', f'0,0,{margin},{w},{h}',\n            ])  # fmt: skip\n\n        set_geometry(wid=driver_wid)\n\n        extras = kwargs\n        if 'highlights' not in extras:\n            extras['highlights'] = False\n\n        configure_extension(\n            driver,\n ---> Removed intermediate container a657c35532e9\n ---> 5dcf5f12c5b3\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in ea131ce65939\n ---> Removed intermediate container ea131ce65939\n ---> 4715092bdaae\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in 0c96dc7870cb\n ---> Removed intermediate container 0c96dc7870cb\n ---> a111d24d91fe\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in 7e25940b6656\n ---> Removed intermediate container 7e25940b6656\n ---> 319278d914cf\nStep 10/10 : WORKDIR /testbed\n ---> Running in a4415c3b9138\n ---> Removed intermediate container a4415c3b9138\n ---> e0edb0991c6d\nSuccessfully built e0edb0991c6d\nSuccessfully tagged bench-setupx-karlicoss-promnesia:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 21,
   "collect_rc": 2,
@@ -285,9 +285,9 @@
   "ebsr": true,
   "pass_rate": 0.2162,
   "timed_out": false,
-  "image_size_mb": 2265.3,
-  "image_delta_mb": 754.6,
-  "image_digest": "bench-setupx__ratbench50_run-20260904-173735-karlicoss-promnesia@sha256:d0be47b45def6277a3920e45996fb8ca783719fde3295bb2ed7306e6e3fe7675",
+  "image_size_mb": 613.0,
+  "image_delta_mb": 225.4,
+  "image_digest": "bench-setupx-karlicoss-promnesia@sha256:e0edb0991c6decfacd090f1befe87bfccc3191b1a373ac2f9867880b17fc485d",
   "installed_pkg_count": 12,
   "tokens_in": 928791,
   "tokens_out": 147104,
@@ -295,8 +295,8 @@
   "turns_used": 87,
   "cost_usd": null,
   "produce_s": 1298.79,
-  "build_s": 103.35,
-  "test_s": 5.22,
+  "build_s": 133.63,
+  "test_s": 4.66,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -327,19 +327,7 @@
     "turns_used": 87,
     "produce_s": 1298.79,
     "total_tokens": 1075895,
-    "cost_usd": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=5136f0aa3e7a726da477a976644faa0be2509dc1 (pinned)\nremoved tests/testdata/hypexport/conftest.py\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=5136f0aa3e7a726da477a976644faa0be2509dc1 (pinned)\n"
-      }
-    ]
+    "cost_usd": null
   },
   "error_surface": "",
   "error_surface_reason": "",

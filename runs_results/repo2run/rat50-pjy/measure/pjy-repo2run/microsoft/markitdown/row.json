@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__rat50-pjy",
+  "agent": "pjy-repo2run",
   "repo": "microsoft/markitdown",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "anch            e144e0a2be95b34df17433bac904e635f2c5e551 -> FETCH_HEAD\n#14 1.661 HEAD is now at e144e0a Bump version to 0.1.6 (#1914)\n#14 DONE 1.7s\n\n#15 [11/16] RUN cd /repo && pip install -q -e 'packages/markitdown[all]' -e packages/markitdown-ocr -e packages/markitdown-sample-plugin -e packages/markitdown-mcp\n#15 25.81 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable.It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#15 25.83 \n#15 25.83 [notice] A new release of pip is available: 24.2 -> 26.2.1\n#15 25.83 [notice] To update, run: pip install --upgrade pip\n#15 DONE 26.8s\n\n#16 [12/16] RUN cd /repo && touch /repo/testfile\n#16 DONE 0.4s\n\n#17 [13/16] RUN cd /repo && git apply --reject /patch/patch_1.diff --allow-empty\n#17 0.190 Checking patch Dockerfile...\n#17 0.191 Applied patch Dockerfile cleanly.\n#17 DONE 0.2s\n\n#18 [14/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#18 DONE 0.2s\n\n#19 [15/16] WORKDIR /testbed\n#19 DONE 0.0s\n\n#20 exporting to image\n#20 exporting layers\n#20 exporting layers 29.1s done\n#20 exporting manifest sha256:655844539814aad4b9c0b6b446fc874f85c59cac4b8111b282f8573a4c7e968d done\n#20 exporting config sha256:433d94ac6f62d6afd0e04feb7df772c2e2e9070446eede0eb502a9198b260a6c done\n#20 exporting attestation manifest sha256:311ed61e6e8da3befcc00efeb5f75dbed6c894fd640c16bc78d1f4c621103b3d 0.0s done\n#20 exporting manifest list sha256:d8d2d69a5cd03ae3ff520d42b01ec9863beff68d353a58462b293b354d6b2850 0.0s done\n#20 naming to docker.io/library/bench-repo2run__rat50-pjy-microsoft-markitdown:latest done\n#20 unpacking to docker.io/library/bench-repo2run__rat50-pjy-microsoft-markitdown:latest\n#20 unpacking to docker.io/library/bench-repo2run__rat50-pjy-microsoft-markitdown:latest 6.2s done\n#20 DONE 35.4s\n",
+  "build_log_tail": "#14 1.205  * branch            e144e0a2be95b34df17433bac904e635f2c5e551 -> FETCH_HEAD\n#14 1.949 HEAD is now at e144e0a Bump version to 0.1.6 (#1914)\n#14 DONE 2.3s\n\n#15 [11/16] RUN cd /repo && pip install -q -e 'packages/markitdown[all]' -e packages/markitdown-ocr -e packages/markitdown-sample-plugin -e packages/markitdown-mcp\n#15 32.46 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable.It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#15 32.47 \n#15 32.47 [notice] A new release of pip is available: 24.2 -> 26.2.1\n#15 32.47 [notice] To update, run: pip install --upgrade pip\n#15 DONE 33.8s\n\n#16 [12/16] RUN cd /repo && touch /repo/testfile\n#16 DONE 0.4s\n\n#17 [13/16] RUN cd /repo && git apply --reject /patch/patch_1.diff --allow-empty\n#17 0.230 Checking patch Dockerfile...\n#17 0.230 Applied patch Dockerfile cleanly.\n#17 DONE 0.3s\n\n#18 [14/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#18 DONE 0.4s\n\n#19 [15/16] WORKDIR /testbed\n#19 DONE 0.0s\n\n#20 exporting to image\n#20 exporting layers\n#20 exporting layers 38.9s done\n#20 exporting manifest sha256:06fd496324d97323870a3d0866e595c51a9757c9780f90316783be29ac89d65c done\n#20 exporting config sha256:dd3f39de9487e085e99ff0bf88ef3e5493224bd3424134a072a6e723b3dff9ea 0.0s done\n#20 exporting attestation manifest sha256:444353172493c9ff735901dabc45f7588068f71e64b4b22fdbd23909e0caf9a1 0.0s done\n#20 exporting manifest list sha256:bfe81712eae0805031db24507053cc5b9c03667ee5acc387c3cac7c73e409c80 0.0s done\n#20 naming to docker.io/library/bench-pjy-repo2run-microsoft-markitdown:latest done\n#20 unpacking to docker.io/library/bench-pjy-repo2run-microsoft-markitdown:latest\n#20 unpacking to docker.io/library/bench-pjy-repo2run-microsoft-markitdown:latest 13.5s done\n#20 DONE 52.6s\n",
   "status": "collect_error",
   "py_test_files": 14,
   "collect_rc": 2,
@@ -707,9 +707,9 @@
   "ebsr": true,
   "pass_rate": 0.9822,
   "timed_out": false,
-  "image_size_mb": 821.6,
+  "image_size_mb": 2851.8,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__rat50-pjy-microsoft-markitdown@sha256:d8d2d69a5cd03ae3ff520d42b01ec9863beff68d353a58462b293b354d6b2850",
+  "image_digest": "bench-pjy-repo2run-microsoft-markitdown@sha256:bfe81712eae0805031db24507053cc5b9c03667ee5acc387c3cac7c73e409c80",
   "installed_pkg_count": 89,
   "tokens_in": 678558,
   "tokens_out": 14317,
@@ -717,27 +717,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 96.9,
-  "test_s": 109.5,
+  "build_s": 115.3,
+  "test_s": 127.2,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 678558,
     "tokens_out": 14317,
-    "llm_calls": 28,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 28
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50new-20260922-170025",
+  "agent": "pipreqs",
   "repo": "Nitrokey/pynitrokey",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "60\n#11 3.928   Stored in directory: /root/.cache/pip/wheels/85/4c/07/72215c529bd59d67e3dac29711d7aba1b692f543c808ba9e86\n#11 3.929 Successfully built tlv8 crcmod\n#11 3.970 Installing collected packages: tlv8, pyserial, intelhex, crcmod, urllib3, tqdm, semver, pycparser, protobuf, idna, hidapi, click, charset_normalizer, certifi, Requests, cffi, cryptography, fido2, nitrokey\n#11 4.755 Successfully installed Requests-2.34.2 certifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.1 click-8.5.0 crcmod-1.7 cryptography-50.0.1 fido2-2.2.1 hidapi-0.14.0.post4 idna-3.20 intelhex-2.3.0 nitrokey-0.4.2 protobuf-6.33.6 pycparser-3.0 pyserial-3.5 semver-3.1.0 tlv8-0.10.0 tqdm-4.70.1 urllib3-2.8.0\n#11 4.756 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 4.760 \n#11 4.760 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 4.760 [notice] To update, run: pip install --upgrade pip\n#11 DONE 4.9s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 1.8s done\n#12 exporting manifest sha256:f6d5c71dd2ebdc645a9ad6d3a26a23005004fc1ce12cce3630b8187df62fb1ae\n#12 exporting manifest sha256:f6d5c71dd2ebdc645a9ad6d3a26a23005004fc1ce12cce3630b8187df62fb1ae done\n#12 exporting config sha256:e6b9c582f9868bf33ab898e309480b6e1acfa18bdda971b6844be712bba71d97 done\n#12 exporting attestation manifest sha256:7f5d3399460dada6d4b15a9f15cb3ceea65c5f864ec114b67a7cd60ec4c3056a 0.0s done\n#12 exporting manifest list sha256:e4c5303dea50fb610b9c6c90f2937dbc915bcd827aa3d6059bc892d8f9c1b248 done\n#12 naming to docker.io/library/bench-pipreqs__rat50new-20260922-170025-nitrokey-pynitrokey:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-nitrokey-pynitrokey:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-nitrokey-pynitrokey:latest 1.0s done\n#12 DONE 2.9s\n",
+  "build_log_tail": "   Created wheel for crcmod: filename=crcmod-1.7-cp310-cp310-linux_x86_64.whl size=30793 sha256=a350d693a396d4c7ce4db620ac2be043825e6e17d1e37666143f0f31e9faef30\n#11 6.003   Stored in directory: /root/.cache/pip/wheels/85/4c/07/72215c529bd59d67e3dac29711d7aba1b692f543c808ba9e86\n#11 6.005 Successfully built tlv8 crcmod\n#11 6.069 Installing collected packages: tlv8, pyserial, intelhex, crcmod, urllib3, tqdm, semver, pycparser, protobuf, idna, hidapi, click, charset_normalizer, certifi, Requests, cffi, cryptography, fido2, nitrokey\n#11 7.073 Successfully installed Requests-2.34.2 certifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.1 click-8.5.0 crcmod-1.7 cryptography-50.0.1 fido2-2.2.1 hidapi-0.14.0.post4 idna-3.20 intelhex-2.3.0 nitrokey-0.4.2 protobuf-6.33.6 pycparser-3.0 pyserial-3.5 semver-3.1.0 tlv8-0.10.0 tqdm-4.70.1 urllib3-2.8.0\n#11 7.074 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 7.079 \n#11 7.079 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 7.079 [notice] To update, run: pip install --upgrade pip\n#11 DONE 7.5s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 3.6s done\n#12 exporting manifest sha256:9cfc4b42e4eb95ed2563310a6e499f9f235d337627a4946e974fb492b7974038 0.0s done\n#12 exporting config sha256:3af46f8a92bcceffdaad8cc1500142ae188de5a4f4f8fa2525ba47498db41084 0.0s done\n#12 exporting attestation manifest sha256:47c4c049ad7f5e6232bd8e6b06fe99915f3b660182a977afb3c27019d8032f0b 0.0s done\n#12 exporting manifest list sha256:320e9b9ad0ada135accafc4fd0cc7682f410c310d5229f82491a24323d37ddd2 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-nitrokey-pynitrokey:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-nitrokey-pynitrokey:latest\n#12 unpacking to docker.io/library/bench-pipreqs-nitrokey-pynitrokey:latest 0.8s done\n#12 DONE 4.5s\n",
   "status": "collect_error",
   "py_test_files": 2,
   "collect_rc": 2,
@@ -29,9 +29,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 418.2,
+  "image_size_mb": 1613.2,
   "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50new-20260922-170025-nitrokey-pynitrokey@sha256:e4c5303dea50fb610b9c6c90f2937dbc915bcd827aa3d6059bc892d8f9c1b248",
+  "image_digest": "bench-pipreqs-nitrokey-pynitrokey@sha256:320e9b9ad0ada135accafc4fd0cc7682f410c310d5229f82491a24323d37ddd2",
   "installed_pkg_count": 33,
   "tokens_in": null,
   "tokens_out": null,
@@ -39,8 +39,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 3.9,
-  "build_s": 11.83,
-  "test_s": 0.55,
+  "build_s": 16.23,
+  "test_s": 0.83,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -67,19 +67,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=0f3070d52cd5652e439820dee04c1964f24d6557 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=0f3070d52cd5652e439820dee04c1964f24d6557 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

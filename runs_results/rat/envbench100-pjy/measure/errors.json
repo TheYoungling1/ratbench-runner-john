@@ -1,0 +1,156 @@
+{
+  "pjy-rat-dockerfile": {
+    "collect": {
+      "agent": "pjy-rat-dockerfile",
+      "n_repos": 100,
+      "source": "collect",
+      "n_admissible": 61,
+      "n_masked": 22,
+      "n_unobserved": 17,
+      "n_status_derived": 0,
+      "buckets": {
+        "success": 42,
+        "no_tests_collected": 6,
+        "build_fail": 16,
+        "partial": 3,
+        "collect_error": 27,
+        "zero_pass": 4,
+        "missing": 1,
+        "timed_out": 1
+      },
+      "surfaces": {
+        "full": 61,
+        "masked": 22,
+        "unobserved": 17
+      },
+      "token_repos": {
+        "ModuleNotFoundError": 3,
+        "TypeError": 1,
+        "urllib3.exceptions.NewConnectionError": 1,
+        "biothings.utils.configuration.ConfigurationError": 1,
+        "ConnectionRefusedError": 1,
+        "elastic_transport.ConnectionError": 1,
+        "ImportError": 2,
+        "NameError": 1
+      },
+      "token_events": {
+        "ModuleNotFoundError": 35,
+        "TypeError": 1,
+        "ConnectionRefusedError": 1,
+        "urllib3.exceptions.NewConnectionError": 1,
+        "elastic_transport.ConnectionError": 1,
+        "biothings.utils.configuration.ConfigurationError": 1,
+        "ImportError": 3,
+        "NameError": 1
+      },
+      "category_repos": {
+        "module_not_found": 3,
+        "uncategorized": 3,
+        "service_unavailable": 1,
+        "partial_import": 2,
+        "import_failed": 1
+      },
+      "category_events": {
+        "module_not_found": 35,
+        "uncategorized": 3,
+        "service_unavailable": 3,
+        "partial_import": 2,
+        "import_failed": 1
+      },
+      "crosstab": {
+        "collect_error|module_not_found": 2,
+        "collect_error|uncategorized": 3,
+        "collect_error|service_unavailable": 1,
+        "collect_error|partial_import": 2,
+        "collect_error|import_failed": 1,
+        "timed_out|module_not_found": 1
+      },
+      "top_groups": {
+        "module_not_found": [
+          [
+            "sas",
+            1
+          ],
+          [
+            "util2",
+            1
+          ],
+          [
+            "full_activity_dump_helper",
+            1
+          ],
+          [
+            "usgs_pop_driver",
+            1
+          ],
+          [
+            "reference_models",
+            1
+          ],
+          [
+            "sas_test_harness",
+            1
+          ],
+          [
+            "util",
+            1
+          ],
+          [
+            "full_activity_dump",
+            1
+          ],
+          [
+            "unittesting",
+            1
+          ],
+          [
+            "GitSavvy",
+            1
+          ]
+        ],
+        "partial_import": [
+          [
+            "scope2index",
+            1
+          ],
+          [
+            "TrialHistory",
+            1
+          ]
+        ]
+      },
+      "uncategorized_rate": 0.0682
+    },
+    "run": {
+      "agent": "pjy-rat-dockerfile",
+      "n_repos": 100,
+      "source": "run",
+      "n_admissible": 61,
+      "n_masked": 22,
+      "n_unobserved": 17,
+      "n_status_derived": 0,
+      "buckets": {
+        "success": 42,
+        "no_tests_collected": 6,
+        "build_fail": 16,
+        "partial": 3,
+        "collect_error": 27,
+        "zero_pass": 4,
+        "missing": 1,
+        "timed_out": 1
+      },
+      "surfaces": {
+        "full": 61,
+        "masked": 22,
+        "unobserved": 17
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    }
+  }
+}

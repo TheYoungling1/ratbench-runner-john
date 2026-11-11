@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__envbench100-merged-20260915",
+  "agent": "setupx",
   "repo": "pypa/distutils",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "d in Docutils 0.21 or later.:DeprecationWarning:\n#10 21.62 \n#10 21.62 \t# suppress warnings in deprecated compilers\n#10 21.62 \tignore:(bcpp|msvc9?)compiler is deprecated\n#10 21.62 \n#10 21.62 \t# suppress well know deprecation warning\n#10 21.62 \tignore:distutils.log.Log is deprecated\n#10 21.62 ===== .flake8 =====\n#10 21.62 [flake8]\n#10 21.62 max-line-length = 88\n#10 21.62 \n#10 21.62 # jaraco/skeleton#34\n#10 21.62 max-complexity = 10\n#10 21.62 \n#10 21.62 extend-ignore =\n#10 21.62 \t# Black creates whitespace before colon\n#10 21.62 \tE203\n#10 21.62 ===== ruff/pytest config in files =====\n#10 21.63 pyproject.toml:34:\t\"pytest-ruff >= 0.2.1\",\n#10 21.63 pyproject.toml:62:[tool.pytest-enabler.mypy]\n#10 21.63 pytest.ini:3:addopts=\n#10 21.63 ruff.toml:7:\t# https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules\n#10 21.63 ruff.toml:27:# https://docs.astral.sh/ruff/settings/#format-quote-style\n#10 DONE 22.0s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.3s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 12.2s done\n#14 exporting manifest sha256:dd121aa476a171a8924216638c2072b7e8a1c604b8911efd617503163802d851 done\n#14 exporting config sha256:e8d611cc2eb9e13c684f0233df848f88821c6b9d0d0352075fe17e3088965926 done\n#14 exporting attestation manifest sha256:1c77e13140a4a1aa62c605893529715428fa2cb68d761d652aaa980671f42d21 done\n#14 exporting manifest list sha256:731543074987001f25feeb7b729342ba5f032dd0398daba479f55b6b9ff9414d done\n#14 naming to docker.io/library/bench-setupx__envbench100-merged-20260915-pypa-distutils:latest done\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-pypa-distutils:latest\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-pypa-distutils:latest 2.3s done\n#14 DONE 14.6s\n",
+  "build_log_tail": "e:Fallback spawn triggered\n\n\t# ignore spurious and unactionable warnings\n\tignore:The frontend.OptionParser class will be replaced by a subclass of argparse.ArgumentParser in Docutils 0.21 or later.:DeprecationWarning:\n\tignore: The frontend.Option class will be removed in Docutils 0.21 or later.:DeprecationWarning:\n\n\t# suppress warnings in deprecated compilers\n\tignore:(bcpp|msvc9?)compiler is deprecated\n\n\t# suppress well know deprecation warning\n\tignore:distutils.log.Log is deprecated\n===== .flake8 =====\n[flake8]\nmax-line-length = 88\n\n# jaraco/skeleton#34\nmax-complexity = 10\n\nextend-ignore =\n\t# Black creates whitespace before colon\n\tE203\n===== ruff/pytest config in files =====\npyproject.toml:34:\t\"pytest-ruff >= 0.2.1\",\npyproject.toml:62:[tool.pytest-enabler.mypy]\npytest.ini:3:addopts=\nruff.toml:7:\t# https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules\nruff.toml:27:# https://docs.astral.sh/ruff/settings/#format-quote-style\n ---> Removed intermediate container a8d04e083ab8\n ---> ca8207136ec7\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in 3cfe3c931bc2\n ---> Removed intermediate container 3cfe3c931bc2\n ---> 0f6645a6bee5\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in 5331fa6e05ed\n ---> Removed intermediate container 5331fa6e05ed\n ---> 9151d8e8e23c\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in f8f23113f6c1\n ---> Removed intermediate container f8f23113f6c1\n ---> e8c4dcc1545a\nStep 10/10 : WORKDIR /testbed\n ---> Running in 38f93af56581\n ---> Removed intermediate container 38f93af56581\n ---> f537df344a1a\nSuccessfully built f537df344a1a\nSuccessfully tagged bench-setupx-pypa-distutils:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 42,
   "collect_rc": 2,
@@ -845,9 +845,9 @@
   "ebsr": true,
   "pass_rate": 0.4841,
   "timed_out": false,
-  "image_size_mb": 1934.9,
-  "image_delta_mb": 424.2,
-  "image_digest": "bench-setupx__envbench100-merged-20260915-pypa-distutils@sha256:731543074987001f25feeb7b729342ba5f032dd0398daba479f55b6b9ff9414d",
+  "image_size_mb": 521.3,
+  "image_delta_mb": 133.7,
+  "image_digest": "bench-setupx-pypa-distutils@sha256:f537df344a1adcf7fdaa948e486893500de7e9872c0c9a052a974dd34413861a",
   "installed_pkg_count": 79,
   "tokens_in": 2299948,
   "tokens_out": 127443,
@@ -855,8 +855,8 @@
   "turns_used": 11,
   "cost_usd": null,
   "produce_s": 1199.31,
-  "build_s": 40.1,
-  "test_s": 25.67,
+  "build_s": 70.1,
+  "test_s": 24.14,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -887,19 +887,7 @@
     "turns_used": 11,
     "produce_s": 1199.31,
     "total_tokens": 2427391,
-    "cost_usd": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=0de29d3545dd3bf72c7e64bf8a8e53eac2ee50e0 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=0de29d3545dd3bf72c7e64bf8a8e53eac2ee50e0 (pinned)\n"
-      }
-    ]
+    "cost_usd": null
   },
   "error_surface": "",
   "error_surface_reason": "",

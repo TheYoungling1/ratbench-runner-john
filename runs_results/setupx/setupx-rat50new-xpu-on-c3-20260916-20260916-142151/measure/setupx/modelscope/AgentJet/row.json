@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "modelscope/AgentJet",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "olcall']}, 'data': {'train_batch_size': 120}, 'debug': {'debug_max_parallel': 1, 'debug_first_n_tasks': 1}, 'trainer_common': {'save_freq': 99999, 'test_freq': 99999, 'total_epochs': 99999, 'checkpoint_base_dir': '/wow/astuner_checkpoints'}}, 'hydra': {'searchpath': ['file://astuner/default_config', 'file://astuner/default_config/verl', 'file://astuner/default_config/trinity']}, 'defaults': ['verl_default', 'trinity_default', 'astune_default', '_self_']}\n#10 134.1 \n#10 134.1 ajet/utils/config_utils.py:376: ValueError\n#10 134.1 =========================== short test summary info ============================\n#10 134.1 FAILED tests/config_test.py::TestConfigUtils::test_load_config - ValueError: ...\n#10 DONE 134.1s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 4.3s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 1.0s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 2.2s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 91.9s done\n#14 exporting manifest sha256:a540ff7d4b4113d9b92770ba4b0539cf30b8d85d1188eede69ef2d2ed4e33f22\n#14 exporting manifest sha256:a540ff7d4b4113d9b92770ba4b0539cf30b8d85d1188eede69ef2d2ed4e33f22 0.0s done\n#14 exporting config sha256:4f5dcb7f548b30b1bfc1b44e464d842e1b55d0c00b06b26d1ce0678fc0fb72d5 0.0s done\n#14 exporting attestation manifest sha256:03f565a2abb7c064673a9f6bc9929123ad8be266b04446688aa4eb0bcee873de done\n#14 exporting manifest list sha256:67cadec1d7a52077323456afcf429cf212e5bdc40ac201143a83e76a8bd12eb6 done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-modelscope-agentjet:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-modelscope-agentjet:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-modelscope-agentjet:latest 12.3s done\n#14 DONE 104.3s\n",
+  "build_log_tail": "e': 0.7, 'max_env_worker': 256, 'num_repeat': 8, 'agent_madness_reward': -1.0, 'tensor_model_parallel_size': 4, 'max_num_seqs': 256, 'multi_turn': {'max_sample_per_task': 4, 'expected_steps': 2}, 'compute_madness_checklist': ['nonsense', 'wrong_toolcall']}, 'data': {'train_batch_size': 120}, 'debug': {'debug_max_parallel': 1, 'debug_first_n_tasks': 1}, 'trainer_common': {'save_freq': 99999, 'test_freq': 99999, 'total_epochs': 99999, 'checkpoint_base_dir': '/wow/astuner_checkpoints'}}, 'hydra': {'searchpath': ['file://astuner/default_config', 'file://astuner/default_config/verl', 'file://astuner/default_config/trinity']}, 'defaults': ['verl_default', 'trinity_default', 'astune_default', '_self_']}\n#10 123.3 \n#10 123.3 ajet/utils/config_utils.py:376: ValueError\n#10 123.3 =========================== short test summary info ============================\n#10 123.3 FAILED tests/config_test.py::TestConfigUtils::test_load_config - ValueError: ...\n#10 DONE 124.7s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 1.4s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.4s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.1s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 76.4s done\n#14 exporting manifest sha256:e9b5c96e5900be02b3adc1d5638038e732052dfae1b63e3dde691633030278df 0.0s done\n#14 exporting config sha256:17f932562f84b9a40edd3ec9e307bb7b41f0768a3574b37748e95d668ac58ea4 0.0s done\n#14 exporting attestation manifest sha256:cb089aa849bca2b933c8686a3a81e6d6b8915ff8dee3ba0ddd6adda594e7323a 0.0s done\n#14 exporting manifest list sha256:79905edaa7e274b41050ef4fad48e59a39333cafdf17abc0f48753f57556853b done\n#14 naming to docker.io/library/bench-setupx-modelscope-agentjet:latest done\n#14 unpacking to docker.io/library/bench-setupx-modelscope-agentjet:latest\n#14 unpacking to docker.io/library/bench-setupx-modelscope-agentjet:latest 15.0s done\n#14 DONE 91.5s\n",
   "status": "collect_error",
   "py_test_files": 12,
   "collect_rc": 2,
@@ -57,10 +57,10 @@
     "tutorial/opencode_build_openclaw_agent/test_reward.py::test_listwise_composite"
   ],
   "executed": true,
-  "total": 42,
+  "total": 32,
   "passed": 24,
-  "failed": 15,
-  "errors": 3,
+  "failed": 8,
+  "errors": 0,
   "skipped": 0,
   "passed_node_ids": [
     "tests/test_agent_run_v3.py::TestAgentLoopSchemaInstanceSplit::test_api_receives_schema_list_not_instances",
@@ -89,7 +89,6 @@
     "tests/test_dynamic_import.py::TestDynamicImport::test_successful_import5"
   ],
   "failed_node_ids": [
-    "scripts/test_dashscope_api.py::test_dashscope_api",
     "tests/config_test.py::TestConfigUtils::test_config_alignment_trinity",
     "tests/config_test.py::TestConfigUtils::test_config_alignment_verl",
     "tests/config_test.py::TestConfigUtils::test_load_config",
@@ -97,34 +96,24 @@
     "tests/test_dynamic_import.py::TestDynamicImport::test_successful_import2",
     "tests/test_dynamic_import.py::TestDynamicImport::test_successful_import3",
     "tests/test_tracing_reader.py::test_get_training_tasks_new_file",
-    "tests/test_tracing_reader.py::test_get_training_tasks_dedup_and_missing_hash_ignored",
-    "tutorial/opencode_build_openclaw_agent/test_reward.py::test_pointwise_composite",
-    "tutorial/opencode_build_openclaw_agent/test_reward.py::test_relevance_penalty",
-    "tutorial/opencode_build_openclaw_agent/test_reward.py::test_diversity_penalty",
-    "tutorial/opencode_build_openclaw_agent/test_reward.py::test_cross_request_diversity",
-    "tutorial/opencode_build_openclaw_agent/test_reward.py::test_repetition_penalty",
-    "tutorial/opencode_build_openclaw_agent/test_reward.py::test_listwise_composite"
+    "tests/test_tracing_reader.py::test_get_training_tasks_dedup_and_missing_hash_ignored"
   ],
-  "error_node_ids": [
-    "docs.mini_test",
-    "tutorial.opencode_build_aime.test_verl_reward_fn",
-    "tutorial.opencode_build_openclaw_interactive_train.test_interactive"
-  ],
+  "error_node_ids": [],
   "ebsr": true,
-  "pass_rate": 0.5714,
+  "pass_rate": 0.75,
   "timed_out": false,
-  "image_size_mb": 3532.5,
-  "image_delta_mb": 2021.8,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-modelscope-agentjet@sha256:67cadec1d7a52077323456afcf429cf212e5bdc40ac201143a83e76a8bd12eb6",
-  "installed_pkg_count": 173,
+  "image_size_mb": 3528.6,
+  "image_delta_mb": null,
+  "image_digest": "bench-setupx-modelscope-agentjet@sha256:79905edaa7e274b41050ef4fad48e59a39333cafdf17abc0f48753f57556853b",
+  "installed_pkg_count": 171,
   "tokens_in": 982240,
   "tokens_out": 36372,
   "llm_calls": 99,
   "turns_used": 35,
   "cost_usd": null,
   "produce_s": 1310.43,
-  "build_s": 252.28,
-  "test_s": 5.05,
+  "build_s": 225.0,
+  "test_s": 3.82,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -159,19 +148,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=25118bbcb314e0da898bbc0043a1bf4ab74eade7 (pinned)\nrestored pyproject.toml\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=25118bbcb314e0da898bbc0043a1bf4ab74eade7 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

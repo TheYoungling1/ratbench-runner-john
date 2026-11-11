@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "gymrek-lab/TRTools",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "lled argcomplete-3.7.2 attrs-26.1.0 build-1.6.1 click-8.5.0 cloudpickle-3.1.2 coloredlogs-15.0.1 colorlog-6.12.0 contourpy-1.3.2 cycler-0.12.1 cyvcf2-0.34.0 dependency-groups-1.3.2 distlib-0.4.3 filelock-4.0.3 fonttools-4.65.0 formulaic-1.2.2 humanfriendly-10.0 humanize-4.16.0 importlib_metadata-9.0.1 interface-meta-2.0.1 joblib-1.6.0 kiwisolver-1.5.1 matplotlib-3.10.9 narwhals-2.26.0 nox-2026.8.17 nox_poetry-1.2.0 numpy-2.2.6 pandas-2.3.3 patsy-1.0.3 pillow-12.3.0 platformdirs-4.11.15 pyfaidx-0.9.0.4 pyparsing-3.3.3 pyproject_hooks-1.3.3 pysam-0.24.1 python-dateutil-2.9.0.post0 python-discovery-1.6.1 pytz-2026.4 scikit_learn-1.7.2 scipy-1.15.3 six-1.17.0 statsmodels-0.15.0 threadpoolctl-3.7.0 tomlkit-0.15.1 tzdata-2026.4 virtualenv-21.12.1 wrapt-2.4.1 zipp-4.1.0\n#11 22.03 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 22.04 \n#11 22.04 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 22.04 [notice] To update, run: pip install --upgrade pip\n#11 DONE 23.9s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 24.7s done\n#12 exporting manifest sha256:bb6fa1799431dae02e45d382ce12a0c71deaabad92bddb7a35c24468844ebc85 done\n#12 exporting config sha256:c8906e6489703ef89ee0ac4ef48e36511189400e0b5056d12e5f8783658f83a2 done\n#12 exporting attestation manifest sha256:d71840aa9df52f9b4a8c797c846d915a89c2c5528d1721317c5e5b3411ff843d 0.0s done\n#12 exporting manifest list sha256:e631bf6840c48c3ce952e9bb718b7621c572ee5dcd8d82f672fe226121f0809a done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-gymrek-lab-trtools:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-gymrek-lab-trtools:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-gymrek-lab-trtools:latest 6.0s done\n#12 DONE 30.8s\n",
+  "build_log_tail": "f2, nox, formulaic, statsmodels, nox_poetry\n#11 21.79 Successfully installed argcomplete-3.7.2 attrs-26.1.0 build-1.6.1 click-8.5.0 cloudpickle-3.1.2 coloredlogs-15.0.1 colorlog-6.12.0 contourpy-1.3.2 cycler-0.12.1 cyvcf2-0.34.0 dependency-groups-1.3.2 distlib-0.4.3 filelock-3.32.6 fonttools-4.65.0 formulaic-1.2.2 humanfriendly-10.0 humanize-4.16.0 importlib_metadata-9.0.1 interface-meta-2.0.1 joblib-1.6.0 kiwisolver-1.5.1 matplotlib-3.10.9 narwhals-2.26.0 nox-2026.8.17 nox_poetry-1.2.0 numpy-2.2.6 pandas-2.3.3 patsy-1.0.3 pillow-12.3.0 platformdirs-4.11.8 pyfaidx-0.9.0.4 pyparsing-3.3.2 pyproject_hooks-1.2.0 pysam-0.24.1 python-dateutil-2.9.0.post0 python-discovery-1.6.0 pytz-2026.3.post1 scikit_learn-1.7.2 scipy-1.15.3 six-1.17.0 statsmodels-0.15.0 threadpoolctl-3.6.0 tomlkit-0.15.1 tzdata-2026.4 virtualenv-21.7.9 wrapt-2.4.1 zipp-4.1.0\n#11 21.80 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 21.80 \n#11 21.80 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 21.80 [notice] To update, run: pip install --upgrade pip\n#11 DONE 22.8s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 24.8s done\n#12 exporting manifest sha256:a2fee56e4bc3788158cdd6c14ce9921296d52e2cc82cf8a51554043f338ce8a4 0.0s done\n#12 exporting config sha256:34b6689b6f377ecb520fc644472b33145623ceabd777f2b8ceabeae42e8382f6 done\n#12 exporting attestation manifest sha256:c5e0f421cf10ff805013346edce68a8b86f2f406b2a5f0f05bd385a1cc8648b8 0.0s done\n#12 exporting manifest list sha256:d64ded6e2dc71d50222a0e893b3c7c9a078dcd816597d45b10f9c85fd64c5186 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-gymrek-lab-trtools:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-gymrek-lab-trtools:latest\n#12 unpacking to docker.io/library/bench-pipreqs-gymrek-lab-trtools:latest 7.6s done\n#12 DONE 32.5s\n",
   "status": "collect_error",
   "py_test_files": 13,
   "collect_rc": 2,
@@ -497,9 +497,9 @@
   "ebsr": true,
   "pass_rate": 0.9829,
   "timed_out": false,
-  "image_size_mb": 799.1,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-gymrek-lab-trtools@sha256:e631bf6840c48c3ce952e9bb718b7621c572ee5dcd8d82f672fe226121f0809a",
+  "image_size_mb": 798.6,
+  "image_delta_mb": 411.0,
+  "image_digest": "bench-pipreqs-gymrek-lab-trtools@sha256:d64ded6e2dc71d50222a0e893b3c7c9a078dcd816597d45b10f9c85fd64c5186",
   "installed_pkg_count": 61,
   "tokens_in": null,
   "tokens_out": null,
@@ -507,8 +507,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 9.95,
-  "build_s": 60.88,
-  "test_s": 127.03,
+  "build_s": 61.32,
+  "test_s": 108.11,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -535,19 +535,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=99d7fb4ef0a420e4a689bafecba5189127d657ba (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=99d7fb4ef0a420e4a689bafecba5189127d657ba (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

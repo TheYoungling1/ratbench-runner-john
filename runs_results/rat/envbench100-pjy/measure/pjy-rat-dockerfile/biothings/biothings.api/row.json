@@ -1,10 +1,10 @@
 {
-  "agent": "rat__envbench100-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "biothings/biothings.api",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "hon-dateutil-2.9.0.post0 python-discovery-1.6.0 pytokens-0.4.1 referencing-0.37.0 requests-2.34.2 requests-aws4auth-1.3.2 rich-15.0.0 rpds-py-0.30.0 s3transfer-0.19.2 sentry-sdk-2.69.1 shellingham-1.5.4 six-1.17.0 smmap-5.0.3 snowballstemmer-3.1.1 sockjs-tornado-1.0.7 soupsieve-2.9.2 sphinx_reredirects-0.1.6 sphinx_rtd_theme-3.1.0 sphinxcontrib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-jquery-4.1 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 stack-data-0.6.3 toml-0.10.2 tornado-6.4 traitlets-5.16.1 typer-0.27.2 tzlocal-5.4.4 urllib3-2.7.0 virtualenv-21.7.9 wcwidth-0.8.3 yarl-1.24.5\n#18 77.55 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 77.63 \n#18 77.63 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 77.63 [notice] To update, run: pip install --upgrade pip\n#18 DONE 79.6s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.6s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 18.4s done\n#21 exporting manifest sha256:7dd1d806d96e094df33808d36b4e0eea620681d50a9beefbb573633061068a84 0.0s done\n#21 exporting config sha256:80fd9c0ef8b5a8b78470fbcb698dc7c0fe620d38e7b989d4cb20ef43cd96992e 0.0s done\n#21 exporting attestation manifest sha256:85fe2e1f426cf5ec8fc66150832bf938de63ed68c4d56eb710ba20520e25af38 0.0s done\n#21 exporting manifest list sha256:e4115a7e64239746bc246ee0830c7695c64ef0a79f8f916aa676f9ae61d269e0 done\n#21 naming to docker.io/library/bench-rat__envbench100-pjy-biothings-biothings.api:latest done\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-biothings-biothings.api:latest\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-biothings-biothings.api:latest 5.3s done\n#21 DONE 23.9s\n",
+  "build_log_tail": "hon-dateutil-2.9.0.post0 python-discovery-1.6.0 pytokens-0.4.1 referencing-0.37.0 requests-2.34.2 requests-aws4auth-1.3.2 rich-15.0.0 rpds-py-0.30.0 s3transfer-0.19.2 sentry-sdk-2.69.1 shellingham-1.5.4 six-1.17.0 smmap-5.0.3 snowballstemmer-3.1.1 sockjs-tornado-1.0.7 soupsieve-2.9.2 sphinx_reredirects-0.1.6 sphinx_rtd_theme-3.1.0 sphinxcontrib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-jquery-4.1 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 stack-data-0.6.3 toml-0.10.2 tornado-6.4 traitlets-5.16.1 typer-0.27.2 tzlocal-5.4.4 urllib3-2.7.0 virtualenv-21.7.9 wcwidth-0.8.3 yarl-1.24.5\n#18 204.5 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 204.6 \n#18 204.6 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 204.6 [notice] To update, run: pip install --upgrade pip\n#18 DONE 206.5s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.5s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 13.6s done\n#21 exporting manifest sha256:b10290056497fbc1fafdc391622a10df8f2029d84490b076aef4f34561e0165f 0.0s done\n#21 exporting config sha256:ecdcb80badb4d82234959e603b238ccd03a886847687d374c6889745ac40f07e 0.0s done\n#21 exporting attestation manifest sha256:29c4dc2c07ad1d9d1b5170e704c50d849f4de48fce0087510505e4ec6abba7c6 0.0s done\n#21 exporting manifest list sha256:8605f328d1218a4a430ed35825e95214b16e0b18f857efc0720e98e726db7192 0.0s done\n#21 naming to docker.io/library/bench-pjy-rat-dockerfile-biothings-biothings.api:latest done\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-biothings-biothings.api:latest\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-biothings-biothings.api:latest 6.2s done\n#21 DONE 19.9s\n",
   "status": "collect_error",
   "py_test_files": 31,
   "collect_rc": 2,
@@ -449,9 +449,9 @@
   "ebsr": true,
   "pass_rate": 0.5749,
   "timed_out": false,
-  "image_size_mb": 217.0,
+  "image_size_mb": 877.0,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__envbench100-pjy-biothings-biothings.api@sha256:e4115a7e64239746bc246ee0830c7695c64ef0a79f8f916aa676f9ae61d269e0",
+  "image_digest": "bench-pjy-rat-dockerfile-biothings-biothings.api@sha256:8605f328d1218a4a430ed35825e95214b16e0b18f857efc0720e98e726db7192",
   "installed_pkg_count": 136,
   "tokens_in": 1079584,
   "tokens_out": 23418,
@@ -459,27 +459,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 109.12,
-  "test_s": 20.38,
+  "build_s": 231.79,
+  "test_s": 23.51,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 1079584,
     "tokens_out": 23418,
-    "llm_calls": 38,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 38
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50new-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "gip-inclusion/les-emplois",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "pper-0.4.0 redis-8.1.0 referencing-0.37.0 regex-2026.9.10 requests-2.34.2 requests-mock-1.12.1 responses-0.26.3 respx-0.23.1 rfc3339-validator-0.1.4 rpds-py-2026.6.3 ruff-0.16.7 s3transfer-0.19.2 segno-1.6.6 sentry-sdk-2.69.2 shellcheck_py-0.11.0.1 six-1.17.0 slippers-0.7.1 soupsieve-2.9.2 sqlparse-0.6.0 sympy-1.14.0 syrupy-6.1.1 tenacity-9.1.4 tinycss2-1.5.1 typeguard-2.13.3 tzdata-2026.4 unipatch-1.0.1 uritemplate-4.2.0 urllib3-2.8.0 webencodings-0.6.1 wrapt-2.4.1 xlrd-2.0.2 xlsx_streaming-2.0.1 xmltodict-1.0.4 xworkflows-1.1.0 zipstream-1.1.4\n#19 181.5 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#19 181.8 \n#19 181.8 [notice] A new release of pip is available: 25.0.1 -> 26.2.1\n#19 181.8 [notice] To update, run: pip install --upgrade pip\n#19 DONE 183.0s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 2.0s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.0s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 44.9s done\n#22 exporting manifest sha256:52a18f94652a66a858ca5952637406af7df165eb24bfc3b327226db62d915827 done\n#22 exporting config sha256:de0f80ba0ba6ec07f4fcfa189777dc875cb4bf86a996d4c622792904e8b1367b done\n#22 exporting attestation manifest sha256:1aaffdd26eded9a315e028bc726b40f73a859232ee03a5903febf73589cd7efb done\n#22 exporting manifest list sha256:b1ef186ea90fa7b85df9f3bf8066a714a3cd0f50c20eaaa25fbb7036b6a5523b done\n#22 naming to docker.io/library/bench-rat__rat50new-pjy-gip-inclusion-les-emplois:latest done\n#22 unpacking to docker.io/library/bench-rat__rat50new-pjy-gip-inclusion-les-emplois:latest\n#22 unpacking to docker.io/library/bench-rat__rat50new-pjy-gip-inclusion-les-emplois:latest 18.8s done\n#22 DONE 63.8s\n",
+  "build_log_tail": ".1.0 referencing-0.37.0 regex-2026.9.10 requests-2.34.2 requests-mock-1.12.1 responses-0.26.3 respx-0.23.1 rfc3339-validator-0.1.4 rpds-py-2026.6.3 ruff-0.16.7 s3transfer-0.19.2 segno-1.6.6 sentry-sdk-2.69.2 shellcheck_py-0.11.0.1 six-1.17.0 slippers-0.7.1 soupsieve-2.9.2 sqlparse-0.6.0 sympy-1.14.0 syrupy-6.1.1 tenacity-9.1.4 tinycss2-1.5.1 typeguard-2.13.3 tzdata-2026.4 unipatch-1.0.1 uritemplate-4.2.0 urllib3-2.8.0 webencodings-0.6.1 wrapt-2.4.1 xlrd-2.0.2 xlsx_streaming-2.0.1 xmltodict-1.0.4 xworkflows-1.1.0 zipstream-1.1.4\n#19 573.1 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#19 573.2 \n#19 573.2 [notice] A new release of pip is available: 25.0.1 -> 26.2.1\n#19 573.2 [notice] To update, run: pip install --upgrade pip\n#19 DONE 574.5s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 2.8s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.4s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 60.9s done\n#22 exporting manifest sha256:20ad6d9a71598ddcca899d1225086323bbb2de011535cfd28b2c74febfa87e2a 0.0s done\n#22 exporting config sha256:0f67fd128ac9287e945a0cd57ec97f4fde49f464a138a45cdf0d1a5b3c69ccfb done\n#22 exporting attestation manifest sha256:ee60bfe8d736b4fc21378fed4f661e558500f966e2d3dc63e6c5eaa364f0f2a8 0.0s done\n#22 exporting manifest list sha256:fdd03ac9d1fbdec513e0f348a21a440fe4436895961f553fd25de6886d670ff4 0.0s done\n#22 naming to docker.io/library/bench-pjy-rat-dockerfile-gip-inclusion-les-emplois:latest done\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-gip-inclusion-les-emplois:latest\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-gip-inclusion-les-emplois:latest 28.0s done\n#22 DONE 89.1s\n",
   "status": "collect_error",
   "py_test_files": 274,
   "collect_rc": 1,
@@ -26,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 3106.7,
+  "image_size_mb": 3045.1,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50new-pjy-gip-inclusion-les-emplois@sha256:b1ef186ea90fa7b85df9f3bf8066a714a3cd0f50c20eaaa25fbb7036b6a5523b",
+  "image_digest": "bench-pjy-rat-dockerfile-gip-inclusion-les-emplois@sha256:fdd03ac9d1fbdec513e0f348a21a440fe4436895961f553fd25de6886d670ff4",
   "installed_pkg_count": 169,
   "tokens_in": 3567081,
   "tokens_out": 12606,
@@ -36,27 +36,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 360.26,
-  "test_s": 3.69,
+  "build_s": 790.76,
+  "test_s": 3.98,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 3567081,
     "tokens_out": 12606,
-    "llm_calls": 101,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 101
   },
   "error_surface": "",
   "error_surface_reason": "",

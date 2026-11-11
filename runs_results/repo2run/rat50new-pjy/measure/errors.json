@@ -1,0 +1,111 @@
+{
+  "pjy-repo2run": {
+    "collect": {
+      "agent": "pjy-repo2run",
+      "n_repos": 50,
+      "source": "collect",
+      "n_admissible": 26,
+      "n_masked": 5,
+      "n_unobserved": 19,
+      "n_status_derived": 0,
+      "buckets": {
+        "build_fail": 7,
+        "success": 14,
+        "missing": 12,
+        "collect_error": 11,
+        "partial": 5,
+        "no_tests_collected": 1
+      },
+      "surfaces": {
+        "unobserved": 19,
+        "full": 26,
+        "masked": 5
+      },
+      "token_repos": {
+        "ModuleNotFoundError": 5,
+        "ImportError": 1,
+        "SyntaxError": 1
+      },
+      "token_events": {
+        "ModuleNotFoundError": 5,
+        "ImportError": 1,
+        "SyntaxError": 1
+      },
+      "category_repos": {
+        "module_not_found": 5,
+        "partial_import": 1,
+        "syntax_error": 1
+      },
+      "category_events": {
+        "module_not_found": 5,
+        "partial_import": 1,
+        "syntax_error": 1
+      },
+      "crosstab": {
+        "collect_error|module_not_found": 5,
+        "collect_error|partial_import": 1,
+        "collect_error|syntax_error": 1
+      },
+      "top_groups": {
+        "module_not_found": [
+          [
+            "django",
+            1
+          ],
+          [
+            "apigateway.apps.esb.bkcore.models",
+            1
+          ],
+          [
+            "jose",
+            1
+          ],
+          [
+            "cPickle",
+            1
+          ],
+          [
+            "headroom_oauth2",
+            1
+          ]
+        ],
+        "partial_import": [
+          [
+            "serialize",
+            1
+          ]
+        ]
+      },
+      "uncategorized_rate": 0.0
+    },
+    "run": {
+      "agent": "pjy-repo2run",
+      "n_repos": 50,
+      "source": "run",
+      "n_admissible": 26,
+      "n_masked": 5,
+      "n_unobserved": 19,
+      "n_status_derived": 0,
+      "buckets": {
+        "build_fail": 7,
+        "success": 14,
+        "missing": 12,
+        "collect_error": 11,
+        "partial": 5,
+        "no_tests_collected": 1
+      },
+      "surfaces": {
+        "unobserved": 19,
+        "full": 26,
+        "masked": 5
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    }
+  }
+}

@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "datamol-io/datamol",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "filters-1.5.1 parso-0.8.7 pexpect-4.9.0 platformdirs-4.11.15 prometheus-client-0.26.0 prompt_toolkit-3.0.53 psutil-7.2.2 ptyprocess-0.7.0 pure-eval-0.2.4 pycparser-3.0 pyparsing-3.3.3 python-dateutil-2.9.0.post0 python-json-logger-4.2.0 pytz-2026.4 pyyaml-6.0.3 pyzmq-27.2.0 rdkit-2026.3.6 referencing-0.37.0 requests-2.34.2 rfc3339-validator-0.1.4 rfc3986-validator-0.1.1 rfc3987-syntax-1.1.0 rpds-py-0.30.0 scikit_learn-1.7.2 scipy-1.15.3 selfies-2.2.0 send2trash-2.1.0 six-1.17.0 soupsieve-2.10 stack_data-0.6.3 terminado-0.18.1 threadpoolctl-3.7.0 tinycss2-1.5.1 tornado-6.5.10 tqdm-4.70.1 traitlets-5.16.1 tzdata-2026.4 uri-template-1.3.0 urllib3-2.8.0 wcwidth-0.9.1 webcolors-25.10.0 webencodings-0.6.1 websocket-client-1.9.2 widgetsnbextension-4.0.16 zipp-4.1.0\n#11 38.00 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 38.01 \n#11 38.01 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 38.01 [notice] To update, run: pip install --upgrade pip\n#11 DONE 39.4s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 49.2s done\n#12 exporting manifest sha256:5bb17372eb6008928d4a5f9d343995fef1b2d1f9c5bb3b1ba5607aff66ed3947 0.0s done\n#12 exporting config sha256:8070e39f2e3e1e75f58b071beabcb2ba9796dbfca5b074fb88645aa92188fa34 done\n#12 exporting attestation manifest sha256:9d8a3ff4c996da1f5e32cfa152bb950cc4e8125a4ed1818593252504f62fc435 0.0s done\n#12 exporting manifest list sha256:0d2cd2894cbacf823d050e180882df591c1f17baa23921dd99e4ebfd2fe2fae9 done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-datamol-io-datamol:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-datamol-io-datamol:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-datamol-io-datamol:latest 8.8s done\n#12 DONE 58.1s\n",
+  "build_log_tail": "ok-7.6.2 notebook-shim-0.2.4 numpy-2.2.6 overrides-7.7.0 pandas-2.3.3 pandocfilters-1.5.1 parso-0.8.7 pexpect-4.9.0 platformdirs-4.11.8 prometheus-client-0.26.0 prompt_toolkit-3.0.53 psutil-7.2.2 ptyprocess-0.7.0 pure-eval-0.2.4 pycparser-3.0 pyparsing-3.3.2 python-dateutil-2.9.0.post0 python-json-logger-4.2.0 pytz-2026.3.post1 pyyaml-6.0.3 pyzmq-27.2.0 rdkit-2026.3.6 referencing-0.37.0 requests-2.34.2 rfc3339-validator-0.1.4 rfc3986-validator-0.1.1 rfc3987-syntax-1.1.0 rpds-py-0.30.0 scikit_learn-1.7.2 scipy-1.15.3 selfies-2.2.0 send2trash-2.1.0 six-1.17.0 soupsieve-2.9.2 stack_data-0.6.3 terminado-0.18.1 threadpoolctl-3.6.0 tinycss2-1.5.1 tornado-6.5.9 tqdm-4.70.1 traitlets-5.16.1 tzdata-2026.4 uri-template-1.3.0 urllib3-2.7.0 wcwidth-0.8.3 webcolors-25.10.0 webencodings-0.6.1 websocket-client-1.9.2 widgetsnbextension-4.0.16 zipp-4.1.0\n#11 37.58 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 37.58 \n#11 37.58 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 37.58 [notice] To update, run: pip install --upgrade pip\n#11 DONE 39.0s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 40.9s done\n#12 exporting manifest sha256:db6968957d35f499d4a4da807a77b8538212d856818087c47d0aa8572c348785 0.0s done\n#12 exporting config sha256:c95ef35b7940f0c1ce87de8f85335a81e331d9f724793d3964dbf50fbec9dbb0 0.0s done\n#12 exporting attestation manifest sha256:e28cd3be5e453a3e8a7a0556a5cd1fe50d912a6d4e9cacb165ebf2d7cfebdc99 0.0s done\n#12 exporting manifest list sha256:76c8c539b3bc281099ca95a92b9da11396829ab00c0041f539209b086caa431d done\n#12 naming to docker.io/library/bench-pipreqs-datamol-io-datamol:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-datamol-io-datamol:latest\n#12 unpacking to docker.io/library/bench-pipreqs-datamol-io-datamol:latest 13.2s done\n#12 DONE 54.2s\n",
   "status": "collect_error",
   "py_test_files": 28,
   "collect_rc": 4,
@@ -24,9 +24,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 962.6,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-datamol-io-datamol@sha256:0d2cd2894cbacf823d050e180882df591c1f17baa23921dd99e4ebfd2fe2fae9",
+  "image_size_mb": 961.5,
+  "image_delta_mb": 573.9,
+  "image_digest": "bench-pipreqs-datamol-io-datamol@sha256:76c8c539b3bc281099ca95a92b9da11396829ab00c0041f539209b086caa431d",
   "installed_pkg_count": 131,
   "tokens_in": null,
   "tokens_out": null,
@@ -34,8 +34,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 14.66,
-  "build_s": 106.65,
-  "test_s": 0.26,
+  "build_s": 102.7,
+  "test_s": 0.52,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -62,19 +62,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=0312388b956e2b4eeb72d791167cfdb873c7beab (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=0312388b956e2b4eeb72d791167cfdb873c7beab (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

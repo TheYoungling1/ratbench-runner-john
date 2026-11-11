@@ -1,17 +1,22 @@
 {
-  "agent": "graph2env__rat_python50",
+  "agent": "g2e-rat50",
   "repo": "tinygrad/tinygrad",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "    else         command -v uv >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#15 0.548 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (9.1.1)\n#15 0.554 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#15 0.555 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.11/site-packages (from pytest) (26.3)\n#15 0.555 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#15 0.556 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest) (2.21.0)\n#15 1.118 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#15 DONE 1.2s\n\n#16 [12/12] WORKDIR /testbed\n#16 DONE 0.0s\n\n#17 exporting to image\n#17 exporting layers\n#17 exporting layers 475.3s done\n#17 exporting manifest sha256:ed02576b164eee1137e12278aede54e21a92c78af2fa26a83624d6b89f1fafb9 done\n#17 exporting config sha256:eb4fbd5f36ef4a1e7b7ce4c19f270be102876dff121c322c5ce7b3bfb0a8c803 done\n#17 exporting attestation manifest sha256:ee9c1060364b07c196db624b1ee5357223b2f8eddf333ebf1dd75d0df0cb52b3 0.0s done\n#17 exporting manifest list sha256:e75adf1ae278fb886054b14d59112e1a9b7c81367f6d1fcdc0ab0d07fb476fe9 done\n#17 naming to docker.io/library/bench-graph2env__rat_python50-tinygrad-tinygrad:latest done\n#17 unpacking to docker.io/library/bench-graph2env__rat_python50-tinygrad-tinygrad:latest\n#17 unpacking to docker.io/library/bench-graph2env__rat_python50-tinygrad-tinygrad:latest 77.5s done\n#17 DONE 552.8s\n",
-  "status": "executed",
+  "build_log_tail": ".venv/bin/python -m pip install pytest;       else         command -v uv >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#15 0.592 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (9.1.1)\n#15 0.599 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#15 0.600 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.11/site-packages (from pytest) (26.3)\n#15 0.601 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#15 0.602 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest) (2.21.0)\n#15 1.142 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#15 DONE 1.2s\n\n#16 [12/12] WORKDIR /testbed\n#16 DONE 0.0s\n\n#17 exporting to image\n#17 exporting layers\n#17 exporting layers 439.6s done\n#17 exporting manifest sha256:0f893bbdb32e179b2c9f56fcea04553a692643010aac23e1e42aa3143880a13e 0.0s done\n#17 exporting config sha256:c1095cf4ec869c2fc7535a11a5a8a9bb120f6ae0bf21c9ca8ccd8dfc9bf71b18 done\n#17 exporting attestation manifest sha256:4c9769d3ea8d9e78fa93a38793ea70dfdebc917e97b1410d12e42ff5ece1277f done\n#17 exporting manifest list sha256:a0c7a25b2ddd5cc1feba6150ff4277cf539b47b6fa362b896a94a7dfddfce58e done\n#17 naming to docker.io/library/bench-g2e-rat50-tinygrad-tinygrad:latest done\n#17 unpacking to docker.io/library/bench-g2e-rat50-tinygrad-tinygrad:latest\n#17 unpacking to docker.io/library/bench-g2e-rat50-tinygrad-tinygrad:latest 77.2s done\n#17 DONE 516.8s\n",
+  "status": "collect_error",
   "py_test_files": 210,
-  "collect_rc": 0,
-  "collect_clean": true,
-  "collect_errors": [],
-  "collect_error_count": 0,
+  "collect_rc": 2,
+  "collect_clean": false,
+  "collect_errors": [
+    "E   ModuleNotFoundError: No module named 'examples.mlperf.models.llama'"
+  ],
+  "collect_error_count": 1,
   "collected_node_ids": [
+    "examples/mlperf/models/test_apply_grad.py::TestApplyGradE2E::test_e2e_jit",
+    "examples/mlperf/models/test_apply_grad.py::TestApplyGradE2E::test_e2e_multi_step_accumulation",
+    "examples/mlperf/models/test_apply_grad.py::TestApplyGradE2E::test_e2e_single_step",
     "test/amd/hw/test_cdna_sdwa.py::TestCDNASDWA::test_v_add_co_u32_e32_writes_vcc",
     "test/amd/hw/test_cdna_vop3.py::TestCDNAVOP3::test_cvt_pk_bf8_f32_overflow_and_inf",
     "test/amd/hw/test_cdna_vop3.py::TestCDNAVOP3::test_cvt_pk_fp8_f32_preserves_upper_half",
@@ -5482,9 +5487,9 @@
     "test/unit/test_winograd.py::TestWinograd::test_padded_conv2d"
   ],
   "executed": true,
-  "total": 1747,
-  "passed": 288,
-  "failed": 1158,
+  "total": 1739,
+  "passed": 286,
+  "failed": 1152,
   "errors": 1,
   "skipped": 300,
   "passed_node_ids": [
@@ -5773,8 +5778,6 @@
     "test/backend/test_dtype.py::TestFp8e5m2::test_upcast_to_ops",
     "test/backend/test_dtype.py::TestEmulatedFp8e5m2::test_to_np",
     "test/backend/test_dtype.py::TestEmulatedFp8e5m2::test_upcast_to_ops",
-    "test/backend/test_dtype_alu.py::TestDTypeALU::test_emulated_fp8e4m3_unary",
-    "test/backend/test_dtype_alu.py::TestDTypeALU::test_emulated_fp8e4m3fnuz_unary",
     ""
   ],
   "failed_node_ids": [
@@ -6927,23 +6930,17 @@
     "test/backend/test_dtype.py::TestOpsBFloat16::test_cast",
     "test/backend/test_dtype_alu.py::TestDTypeALU::test_bfloat16",
     "test/backend/test_dtype_alu.py::TestDTypeALU::test_bfloat16_unary",
-    "test/backend/test_dtype_alu.py::TestDTypeALU::test_bool",
-    "test/backend/test_dtype_alu.py::TestDTypeALU::test_emulated_bfloat16",
-    "test/backend/test_dtype_alu.py::TestDTypeALU::test_emulated_bfloat16_unary",
-    "test/backend/test_dtype_alu.py::TestDTypeALU::test_emulated_float16",
-    "test/backend/test_dtype_alu.py::TestDTypeALU::test_emulated_float16_unary",
-    "test/backend/test_dtype_alu.py::TestDTypeALU::test_emulated_fp8e4m3",
-    "test/backend/test_dtype_alu.py::TestDTypeALU::test_emulated_fp8e4m3fnuz"
+    "test/backend/test_dtype_alu.py::TestDTypeALU::test_bool"
   ],
   "error_node_ids": [
     "pytest::internal"
   ],
   "ebsr": true,
-  "pass_rate": 0.199,
+  "pass_rate": 0.1987,
   "timed_out": false,
-  "image_size_mb": 8901.0,
+  "image_size_mb": 22117.8,
   "image_delta_mb": null,
-  "image_digest": "bench-graph2env__rat_python50-tinygrad-tinygrad@sha256:e75adf1ae278fb886054b14d59112e1a9b7c81367f6d1fcdc0ab0d07fb476fe9",
+  "image_digest": "bench-g2e-rat50-tinygrad-tinygrad@sha256:a0c7a25b2ddd5cc1feba6150ff4277cf539b47b6fa362b896a94a7dfddfce58e",
   "installed_pkg_count": 126,
   "tokens_in": 105491,
   "tokens_out": 10197,
@@ -6951,8 +6948,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 719.46,
-  "test_s": 1728.47,
+  "build_s": 701.38,
+  "test_s": 1178.97,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -6968,19 +6965,7 @@
       ],
       "services": [],
       "services_rc": null
-    },
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=96b94bbf1d86203076e47b60e2dadc260f4caa0e (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=96b94bbf1d86203076e47b60e2dadc260f4caa0e (pinned)\n"
-      }
-    ]
+    }
   },
   "error_surface": "",
   "error_surface_reason": "",

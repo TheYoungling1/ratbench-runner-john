@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__ratbench50_run-20260904-173735",
+  "agent": "setupx",
   "repo": "tgoai/tgo",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "o/library/python:3.10@sha256:4379c343a93c87429e0ac3e8e09d073a4ee26084d710ac38b686fa34eed12270\n#3 resolve docker.io/library/python:3.10@sha256:4379c343a93c87429e0ac3e8e09d073a4ee26084d710ac38b686fa34eed12270 0.0s done\n#3 DONE 0.0s\n\n#4 [2/9] RUN apt-get update  && apt-get install -y --no-install-recommends git ca-certificates  && rm -rf /var/lib/apt/lists/*\n#4 CACHED\n\n#5 [internal] load .dockerignore\n#5 transferring context: 2B done\n#5 DONE 0.0s\n\n#6 [internal] load build context\n#6 transferring context: 53.45kB done\n#6 DONE 0.0s\n\n#7 [4/9] WORKDIR /workspace/repo\n#7 CACHED\n\n#8 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#8 CACHED\n\n#9 [3/9] RUN git clone https://github.com/tgoai/tgo /workspace/repo  && git -C /workspace/repo fetch --depth 1 origin 995da4577f6f91edb87d0f56fc9ea4c129f1a4eb  && git -C /workspace/repo checkout --detach 995da4577f6f91edb87d0f56fc9ea4c129f1a4eb\n#9 CACHED\n\n#10 [6/9] RUN bash /tmp/setupx_replay.sh\n#10 CACHED\n\n#11 [5/9] COPY setupx_replay.sh /tmp/setupx_replay.sh\n#11 CACHED\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 CACHED\n\n#13 [9/9] WORKDIR /testbed\n#13 CACHED\n\n#14 exporting to image\n#14 exporting layers done\n#14 exporting manifest sha256:705366e609d10c417d2ea4db3af9ebb33ac1ba28ef41c25d5b4fdcb96397a663 done\n#14 exporting config sha256:524c07d167b0f1dba29640176e943f5caab32abf0891ba66ec0647dc19329ba7 done\n#14 exporting attestation manifest sha256:94db1df886d264de4dd360b13a54116e03629f1643fde7fbcd1fd92f66bc2337 0.0s done\n#14 exporting manifest list sha256:2ac67c7fe1014eee88ea5f6fc46251528372b6073cc3c734284c2a952784b3db done\n#14 naming to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-tgoai-tgo:latest done\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-tgoai-tgo:latest\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-tgoai-tgo:latest 6.8s done\n#14 DONE 6.9s\n",
+  "build_log_tail": "ion using Python type hints\"\noptional = false\npython-versions = \">=3.9\"\ngroups = [\"main\"]\nfiles = [\n    {file = \"pydantic-2.12.5-py3-none-any.whl\", hash = \"sha256:e561593fccf61e8a20fc46dfc2dfe075b8be7d0188df33f221ad1f0139180f9d\"},\n    {file = \"pydantic-2.12.5.tar.gz\", hash = \"sha256:4d351024c75c0f085a9febbb665ce8c0c6ec5d30e903bdb6394b7ede26aebb49\"},\n]\n\nname = \"pydantic-settings\"\nversion = \"2.12.0\"\ndescription = \"Settings management using Pydantic\"\noptional = false\npython-versions = \">=3.10\"\ngroups = [\"main\"]\nfiles = [\n    {file = \"pydantic_settings-2.12.0-py3-none-any.whl\", hash = \"sha256:fddb9fd99a5b18da837b29710391e945b1e30c135477f484084ee513adb93809\"},\n    {file = \"pydantic_settings-2.12.0.tar.gz\", hash = \"sha256:005538ef951e3c2a68e1c08b292b5f2e71490def8589d4221b95dab00dafcfd0\"},\n]\n\n\u001b[91mbash: line 13: warning: here-document at line 1 delimited by end-of-file (wanted `PY')\nbash: -c: line 14: syntax error: unexpected end of file\n\u001b[0m ---> Removed intermediate container 5446d1d3924d\n ---> f4053c35dc53\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in 26d86e85e61f\n ---> Removed intermediate container 26d86e85e61f\n ---> 834860d99429\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in 8c199b1c5bf1\n ---> Removed intermediate container 8c199b1c5bf1\n ---> 30b12c276421\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in 67422cb47ddd\n ---> Removed intermediate container 67422cb47ddd\n ---> 41a31dcefafe\nStep 10/10 : WORKDIR /testbed\n ---> Running in d285526466eb\n ---> Removed intermediate container d285526466eb\n ---> 3f3988c68475\nSuccessfully built 3f3988c68475\nSuccessfully tagged bench-setupx-tgoai-tgo:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 39,
   "collect_rc": 2,
@@ -63,9 +63,9 @@
   "ebsr": true,
   "pass_rate": 0.3846,
   "timed_out": false,
-  "image_size_mb": 720.0,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__ratbench50_run-20260904-173735-tgoai-tgo@sha256:2ac67c7fe1014eee88ea5f6fc46251528372b6073cc3c734284c2a952784b3db",
+  "image_size_mb": 717.1,
+  "image_delta_mb": 329.5,
+  "image_digest": "bench-setupx-tgoai-tgo@sha256:3f3988c68475589122ba849b13a1b314b678857fa16ed256075b75c72bb645b0",
   "installed_pkg_count": 123,
   "tokens_in": 817405,
   "tokens_out": 143792,
@@ -73,8 +73,8 @@
   "turns_used": 77,
   "cost_usd": null,
   "produce_s": 1258.87,
-  "build_s": 7.39,
-  "test_s": 7.74,
+  "build_s": 168.83,
+  "test_s": 8.4,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -105,19 +105,7 @@
     "turns_used": 77,
     "produce_s": 1258.87,
     "total_tokens": 961197,
-    "cost_usd": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=995da4577f6f91edb87d0f56fc9ea4c129f1a4eb (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=995da4577f6f91edb87d0f56fc9ea4c129f1a4eb (pinned)\n"
-      }
-    ]
+    "cost_usd": null
   },
   "error_surface": "",
   "error_surface_reason": "",

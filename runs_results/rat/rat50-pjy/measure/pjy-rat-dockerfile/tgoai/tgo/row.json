@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "tgoai/tgo",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ultidict-6.7.1 openai-3.0.0 opentelemetry-api-1.44.0 passlib-1.7.4 prompt_toolkit-3.0.53 propcache-0.5.2 proto-plus-1.28.2 protobuf-5.29.6 pyasn1-0.6.4 pyasn1_modules-0.4.2 pycparser-3.0 pydantic-2.13.4 pydantic-settings-2.15.0 pydantic_core-2.46.4 pyparsing-3.3.2 pytest-asyncio-1.4.0 pytest-cov-7.1.0 pytest-mock-3.15.1 python-dateutil-2.9.0.post0 python-dotenv-1.2.2 python-jose-3.5.0 python-multipart-0.0.32 redis-8.1.0 referencing-0.37.0 requests-2.34.2 rich-15.0.0 rpds-py-2026.6.3 rsa-4.9.1 shellingham-1.5.4 six-1.17.0 sse-starlette-3.4.8 starlette-1.6.0 structlog-26.1.0 tenacity-9.1.4 tqdm-4.70.0 typer-0.27.1 tzdata-2026.3 tzlocal-5.4.4 uritemplate-4.2.0 urllib3-2.7.0 uvicorn-0.52.3 vine-5.1.0 wcwidth-0.8.2 websockets-16.1.1 yarl-1.24.5\n#16 61.34 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#16 61.41 \n#16 61.41 [notice] A new release of pip is available: 24.0 -> 26.2.1\n#16 61.41 [notice] To update, run: pip install --upgrade pip\n#16 DONE 63.5s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 1.0s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.0s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 16.6s done\n#19 exporting manifest sha256:bf8fbf5f713379d95a4ec0663c12d97b4ecb1afc376e87be27cbfeb50f35450c done\n#19 exporting config sha256:73ea1f81ac4a6a5c61979b216728734403d9ffe1a29a2a7b25ce9d083c831057 done\n#19 exporting attestation manifest sha256:d6bb02cb9647ef85ec41f2397fd9f1bf478e1ff2034ba215ce7b9a0c431665a9 0.0s done\n#19 exporting manifest list sha256:13739c9645aa6c61cff7ded07b6224599adefbda7bafc2819e16d279d1a7469d done\n#19 naming to docker.io/library/bench-rat__rat50-pjy-tgoai-tgo:latest done\n#19 unpacking to docker.io/library/bench-rat__rat50-pjy-tgoai-tgo:latest\n#19 unpacking to docker.io/library/bench-rat__rat50-pjy-tgoai-tgo:latest 7.2s done\n#19 DONE 23.8s\n",
+  "build_log_tail": "opentelemetry-api-1.44.0 passlib-1.7.4 prompt_toolkit-3.0.53 propcache-0.5.2 proto-plus-1.28.2 protobuf-5.29.6 pyasn1-0.6.4 pyasn1_modules-0.4.2 pycparser-3.0 pydantic-2.13.4 pydantic-settings-2.15.0 pydantic_core-2.46.4 pyparsing-3.3.2 pytest-asyncio-1.4.0 pytest-cov-7.1.0 pytest-mock-3.15.1 python-dateutil-2.9.0.post0 python-dotenv-1.2.2 python-jose-3.5.0 python-multipart-0.0.32 redis-8.1.0 referencing-0.37.0 requests-2.34.2 rich-15.0.0 rpds-py-2026.6.3 rsa-4.9.1 shellingham-1.5.4 six-1.17.0 sse-starlette-3.4.8 starlette-1.6.0 structlog-26.1.0 tenacity-9.1.4 tqdm-4.70.0 typer-0.27.1 tzdata-2026.3 tzlocal-5.4.4 uritemplate-4.2.0 urllib3-2.7.0 uvicorn-0.52.3 vine-5.1.0 wcwidth-0.8.2 websockets-16.1.1 yarl-1.24.5\n#16 216.5 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#16 216.8 \n#16 216.8 [notice] A new release of pip is available: 24.0 -> 26.2.1\n#16 216.8 [notice] To update, run: pip install --upgrade pip\n#16 DONE 218.9s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.8s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.1s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 13.5s done\n#19 exporting manifest sha256:ddb4aa6cc9d5e6637b118fff664ded98283d9adf3e4f8e3ff18ab5d811e73c7b 0.0s done\n#19 exporting config sha256:1aa2d50ea8d3839a3f5e069678f05bb4a65d9e4c8a5f1b06b34cd8a36e12aaee 0.0s done\n#19 exporting attestation manifest sha256:503c707d2df4713addc55b44f313f0cc5ac1a47cf42ba0b5f801309e9767fb06 0.0s done\n#19 exporting manifest list sha256:515018fae8c7763d5e535b644926495ce2db9e1ba57e5813b8b8d11f60620f01 0.0s done\n#19 naming to docker.io/library/bench-pjy-rat-dockerfile-tgoai-tgo:latest done\n#19 unpacking to docker.io/library/bench-pjy-rat-dockerfile-tgoai-tgo:latest\n#19 unpacking to docker.io/library/bench-pjy-rat-dockerfile-tgoai-tgo:latest 9.3s done\n#19 DONE 22.9s\n",
   "status": "collect_error",
   "py_test_files": 39,
   "collect_rc": 2,
@@ -134,9 +134,9 @@
   "ebsr": true,
   "pass_rate": 0.8627,
   "timed_out": false,
-  "image_size_mb": 317.0,
+  "image_size_mb": 1275.0,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50-pjy-tgoai-tgo@sha256:13739c9645aa6c61cff7ded07b6224599adefbda7bafc2819e16d279d1a7469d",
+  "image_digest": "bench-pjy-rat-dockerfile-tgoai-tgo@sha256:515018fae8c7763d5e535b644926495ce2db9e1ba57e5813b8b8d11f60620f01",
   "installed_pkg_count": 124,
   "tokens_in": 1648930,
   "tokens_out": 35097,
@@ -144,27 +144,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 92.94,
-  "test_s": 5.72,
+  "build_s": 292.83,
+  "test_s": 6.01,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 1648930,
     "tokens_out": 35097,
-    "llm_calls": 51,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 51
   },
   "error_surface": "",
   "error_surface_reason": "",

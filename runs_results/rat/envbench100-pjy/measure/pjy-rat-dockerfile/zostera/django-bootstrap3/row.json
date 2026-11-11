@@ -1,10 +1,10 @@
 {
-  "agent": "rat__envbench100-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "zostera/django-bootstrap3",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "18 8.661     Uninstalling idna-3.20:\n#18 8.668       Successfully uninstalled idna-3.20\n#18 8.703   Attempting uninstall: httpx2\n#18 8.703     Found existing installation: httpx2 2.13.0\n#18 8.713     Uninstalling httpx2-2.13.0:\n#18 8.727       Successfully uninstalled httpx2-2.13.0\n#18 8.779   Attempting uninstall: httpcore2\n#18 8.781     Found existing installation: httpcore2 2.13.0\n#18 8.790     Uninstalling httpcore2-2.13.0:\n#18 8.802       Successfully uninstalled httpcore2-2.13.0\n#18 10.22 Successfully installed Django-5.2.17 asgiref-3.12.1 django-bootstrap3-24.2 httpcore2-2.12.0 httpx2-2.12.0 idna-3.19 jiter-0.16.0 openai-3.11.0 pytest-django-4.14.0 sqlparse-0.6.0\n#18 10.22 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 10.30 \n#18 10.30 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 10.30 [notice] To update, run: pip install --upgrade pip\n#18 DONE 10.6s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.3s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 2.6s done\n#21 exporting manifest sha256:440d663c7f34406c73fb14e4d0153c33251278237b3057559a251a113160a7ba done\n#21 exporting config sha256:22f9af0d7faea3b6cbb89a46c1b0a90828a712f6360fd6a998dd2b103da4aaee 0.0s done\n#21 exporting attestation manifest sha256:72d4440dd9685c79ac292de7cae7aaff45d9371822145695677852e65b05f094 0.0s done\n#21 exporting manifest list sha256:c26a406728a0113aee17caab9de355ad62cfba6ee247f25fbaf449b962c82459 done\n#21 naming to docker.io/library/bench-rat__envbench100-pjy-zostera-django-bootstrap3:latest done\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-zostera-django-bootstrap3:latest\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-zostera-django-bootstrap3:latest 2.1s done\n#21 DONE 4.7s\n",
+  "build_log_tail": "ion: idna 3.20\n#18 22.47     Uninstalling idna-3.20:\n#18 22.48       Successfully uninstalled idna-3.20\n#18 22.53   Attempting uninstall: httpx2\n#18 22.53     Found existing installation: httpx2 2.13.0\n#18 22.54     Uninstalling httpx2-2.13.0:\n#18 22.59       Successfully uninstalled httpx2-2.13.0\n#18 22.65   Attempting uninstall: httpcore2\n#18 22.65     Found existing installation: httpcore2 2.13.0\n#18 22.67     Uninstalling httpcore2-2.13.0:\n#18 22.71       Successfully uninstalled httpcore2-2.13.0\n#18 24.26 Successfully installed Django-5.2.17 asgiref-3.12.1 django-bootstrap3-24.2 httpcore2-2.12.0 httpx2-2.12.0 idna-3.19 jiter-0.16.0 openai-3.11.0 pytest-django-4.14.0 sqlparse-0.6.0\n#18 24.26 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 24.34 \n#18 24.34 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 24.34 [notice] To update, run: pip install --upgrade pip\n#18 DONE 24.8s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.4s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 2.6s done\n#21 exporting manifest sha256:c6ae3436d74577693214eadbdb8057e35a333505683c22a69045682d4da4e09e done\n#21 exporting config sha256:3ebddbeb42ae27060fc648c7120ec86a7906856ad5c52473bad5807f0f3176c3 done\n#21 exporting attestation manifest sha256:3ce60cddd4dc988b9e645e0b4851c6d289ffc8ecc5984363b5148a0a8c8b023d done\n#21 exporting manifest list sha256:1ee9366599303c3adf025f729bc0bd29548f72e87b56980d9bfefd9cf76d4eed done\n#21 naming to docker.io/library/bench-pjy-rat-dockerfile-zostera-django-bootstrap3:latest done\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-zostera-django-bootstrap3:latest\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-zostera-django-bootstrap3:latest 4.4s done\n#21 DONE 7.1s\n",
   "status": "collect_error",
   "py_test_files": 4,
   "collect_rc": 2,
@@ -31,9 +31,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 105.2,
+  "image_size_mb": 486.5,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__envbench100-pjy-zostera-django-bootstrap3@sha256:c26a406728a0113aee17caab9de355ad62cfba6ee247f25fbaf449b962c82459",
+  "image_digest": "bench-pjy-rat-dockerfile-zostera-django-bootstrap3@sha256:1ee9366599303c3adf025f729bc0bd29548f72e87b56980d9bfefd9cf76d4eed",
   "installed_pkg_count": 30,
   "tokens_in": 120300,
   "tokens_out": 2561,
@@ -41,27 +41,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 18.99,
-  "test_s": 0.53,
+  "build_s": 37.7,
+  "test_s": 0.86,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 120300,
     "tokens_out": 2561,
-    "llm_calls": 13,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 13
   },
   "error_surface": "",
   "error_surface_reason": "",

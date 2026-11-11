@@ -1,16 +1,18 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "fonttools/fontbakery",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "e of pip is available: 23.0.1 -> 26.2.1\n#55 0.719 [notice] To update, run: pip install --upgrade pip\n#55 DONE 0.8s\n\n#56 [53/57] RUN pip install munkres==1.1.4\n#56 0.431 Requirement already satisfied: munkres==1.1.4 in /usr/local/lib/python3.10/site-packages (1.1.4)\n#56 0.686 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#56 0.689 \n#56 0.689 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#56 0.689 [notice] To update, run: pip install --upgrade pip\n#56 DONE 0.8s\n\n#57 [54/57] RUN pip list | grep -i -E \"sphinx|fonttools|fontbakery|defcon|glyphsLib\"\n#57 0.562 \n#57 0.562 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#57 0.562 [notice] To update, run: pip install --upgrade pip\n#57 0.624 defcon              0.12.2\n#57 0.624 fontbakery          0.12.8.dev9+ga5177215f /repo\n#57 0.624 fonttools           4.64.0\n#57 0.624 glyphsLib           6.14.0\n#57 DONE 0.7s\n\n#58 [55/57] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#58 DONE 0.9s\n\n#59 [56/57] WORKDIR /testbed\n#59 DONE 0.4s\n\n#60 exporting to image\n#60 exporting layers\n#60 exporting layers 8.3s done\n#60 exporting manifest sha256:df78f5df56c1bbd66eecbb0071f40d2ed338254b94c86f23c5c0fb1a0bebf1f4 0.0s done\n#60 exporting config sha256:6538444141ea9e9c9c39b20490beb76e1436fc815b8ebec4fe6c819f38d56b60 done\n#60 exporting attestation manifest sha256:5343032020c5de26982a2b59053dbf46d395ceffee3e8a75f0cdf545b9116c0a 0.0s done\n#60 exporting manifest list sha256:6d04c641ec0486bd6f5b3e7ab63e7177812c26647e5612f0107b89c3e91474a7 done\n#60 naming to docker.io/library/bench-repo2run__envbench100-pjy-fonttools-fontbakery:latest done\n#60 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-fonttools-fontbakery:latest\n#60 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-fonttools-fontbakery:latest 5.4s done\n#60 DONE 13.9s\n",
-  "status": "executed",
+  "build_log_tail": "s/venv\n#55 0.958 \n#55 0.958 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#55 0.958 [notice] To update, run: pip install --upgrade pip\n#55 DONE 1.2s\n\n#56 [53/57] RUN pip install munkres==1.1.4\n#56 0.760 Requirement already satisfied: munkres==1.1.4 in /usr/local/lib/python3.10/site-packages (1.1.4)\n#56 1.040 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#56 1.043 \n#56 1.043 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#56 1.043 [notice] To update, run: pip install --upgrade pip\n#56 DONE 1.3s\n\n#57 [54/57] RUN pip list | grep -i -E \"sphinx|fonttools|fontbakery|defcon|glyphsLib\"\n#57 0.533 \n#57 0.533 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#57 0.533 [notice] To update, run: pip install --upgrade pip\n#57 0.578 defcon              0.12.2\n#57 0.578 fontbakery          0.12.8.dev9+ga5177215f /repo\n#57 0.578 fonttools           4.64.0\n#57 0.578 glyphsLib           6.14.0\n#57 DONE 0.7s\n\n#58 [55/57] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#58 DONE 1.2s\n\n#59 [56/57] WORKDIR /testbed\n#59 DONE 0.1s\n\n#60 exporting to image\n#60 exporting layers\n#60 exporting layers 8.1s done\n#60 exporting manifest sha256:f6e4e85e705f7dcc56228318430817a48f3fdc350d9ae5e32475ecafe2d5ad95 done\n#60 exporting config sha256:4cc5a935a239e8ae2184067274a4209bbfb318e18344c267884560c0be166430 done\n#60 exporting attestation manifest sha256:d78ca05441afde2ee56a56b3b1d6038dc02416875086324cf019e3a4b14818fb done\n#60 exporting manifest list sha256:3fd2c771cc4a7eb0e457da957838b7f0dfeac7ef3c1363319295664f355a1c6b done\n#60 naming to docker.io/library/bench-pjy-repo2run-fonttools-fontbakery:latest done\n#60 unpacking to docker.io/library/bench-pjy-repo2run-fonttools-fontbakery:latest\n#60 unpacking to docker.io/library/bench-pjy-repo2run-fonttools-fontbakery:latest 6.5s done\n#60 DONE 14.7s\n",
+  "status": "collect_error",
   "py_test_files": 34,
-  "collect_rc": 0,
-  "collect_clean": true,
-  "collect_errors": [],
-  "collect_error_count": 0,
+  "collect_rc": 2,
+  "collect_clean": false,
+  "collect_errors": [
+    "E   ModuleNotFoundError: No module named 'fontbakery-nametable-from-filename'\u001b[0m"
+  ],
+  "collect_error_count": 1,
   "collected_node_ids": [],
   "executed": true,
   "total": 918,
@@ -940,9 +942,9 @@
   "ebsr": true,
   "pass_rate": 0.8818,
   "timed_out": false,
-  "image_size_mb": 959.4,
+  "image_size_mb": 3025.6,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-fonttools-fontbakery@sha256:6d04c641ec0486bd6f5b3e7ab63e7177812c26647e5612f0107b89c3e91474a7",
+  "image_digest": "bench-pjy-repo2run-fonttools-fontbakery@sha256:3fd2c771cc4a7eb0e457da957838b7f0dfeac7ef3c1363319295664f355a1c6b",
   "installed_pkg_count": 107,
   "tokens_in": 714091,
   "tokens_out": 14285,
@@ -950,8 +952,8 @@
   "turns_used": 28,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 79.56,
-  "test_s": 38.21,
+  "build_s": 93.55,
+  "test_s": 47.88,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -959,19 +961,7 @@
     "tokens_in": 714091,
     "tokens_out": 14285,
     "llm_calls": null,
-    "turns_used": 28,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 28
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "mpmath/mpmath",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "pure_eval-0.2.4-py3-none-any.whl (11 kB)\n#11 4.441 Installing collected packages: pure-eval, ptyprocess, wcwidth, traitlets, six, pyparsing, pillow, pexpect, parso, numpy, kiwisolver, gmpy2, fonttools, executing, decorator, cycler, asttokens, stack_data, python-dateutil, prompt_toolkit, matplotlib-inline, jedi, contourpy, matplotlib, ipython\n#11 9.744 Successfully installed asttokens-3.0.2 contourpy-1.3.2 cycler-0.12.1 decorator-5.3.1 executing-2.2.1 fonttools-4.65.0 gmpy2-2.3.1 ipython-8.39.0 jedi-0.20.0 kiwisolver-1.5.1 matplotlib-3.10.9 matplotlib-inline-0.2.2 numpy-2.2.6 parso-0.8.7 pexpect-4.9.0 pillow-12.3.0 prompt_toolkit-3.0.53 ptyprocess-0.7.0 pure-eval-0.2.4 pyparsing-3.3.3 python-dateutil-2.9.0.post0 six-1.17.0 stack_data-0.6.3 traitlets-5.16.1 wcwidth-0.9.1\n#11 9.744 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 9.749 \n#11 9.749 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 9.749 [notice] To update, run: pip install --upgrade pip\n#11 DONE 10.1s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 9.8s done\n#12 exporting manifest sha256:fc6b8f6e0ddabbfe31dcb05f0d05e5794cba37c2949ebd11b0575ab3e7d0e6ba 0.0s done\n#12 exporting config sha256:34c7e11549cf76e52e5b68763ee91cf0d82abfb299b6b045c77aa6a1ec2d0fee done\n#12 exporting attestation manifest sha256:4498a7ca4c6f47d5890887f1ea7277da5fb86dc31bf7af801c2f12827ebb7d6d 0.0s done\n#12 exporting manifest list sha256:68444b3fbb50b92138b8172a2b402ef7508ef6136f5af1453a7ec5211c200f8c 0.0s done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-mpmath-mpmath:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-mpmath-mpmath:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-mpmath-mpmath:latest 3.0s done\n#12 DONE 12.9s\n",
+  "build_log_tail": "al-0.2.4-py3-none-any.whl (11 kB)\n#11 3.807 Installing collected packages: pure-eval, ptyprocess, wcwidth, traitlets, six, pyparsing, pillow, pexpect, parso, numpy, kiwisolver, gmpy2, fonttools, executing, decorator, cycler, asttokens, stack_data, python-dateutil, prompt_toolkit, matplotlib-inline, jedi, contourpy, matplotlib, ipython\n#11 8.796 Successfully installed asttokens-3.0.2 contourpy-1.3.2 cycler-0.12.1 decorator-5.3.1 executing-2.2.1 fonttools-4.65.0 gmpy2-2.3.1 ipython-8.39.0 jedi-0.20.0 kiwisolver-1.5.1 matplotlib-3.10.9 matplotlib-inline-0.2.2 numpy-2.2.6 parso-0.8.7 pexpect-4.9.0 pillow-12.3.0 prompt_toolkit-3.0.53 ptyprocess-0.7.0 pure-eval-0.2.4 pyparsing-3.3.2 python-dateutil-2.9.0.post0 six-1.17.0 stack_data-0.6.3 traitlets-5.16.1 wcwidth-0.8.3\n#11 8.796 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 8.801 \n#11 8.801 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 8.801 [notice] To update, run: pip install --upgrade pip\n#11 DONE 9.4s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 9.7s done\n#12 exporting manifest sha256:06a012c26321531964056ac517d3dbd40aa1206912e425c13b6b93ff2056c0f9\n#12 exporting manifest sha256:06a012c26321531964056ac517d3dbd40aa1206912e425c13b6b93ff2056c0f9 0.0s done\n#12 exporting config sha256:da4e30bb5a6476d59253a89cc776abfe94507d1e25df0a42116e2773002fb321 0.0s done\n#12 exporting attestation manifest sha256:2613b1f0d52d0798fa859f911e4708f6bf9bce64c3c50bd52f9b4339568694b2 0.0s done\n#12 exporting manifest list sha256:21b4603cada51feec01c6ad8c8a558fa3b4a3e8fb9115867852f5dcaff0cf6a8 done\n#12 naming to docker.io/library/bench-pipreqs-mpmath-mpmath:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-mpmath-mpmath:latest\n#12 unpacking to docker.io/library/bench-pipreqs-mpmath-mpmath:latest 4.1s done\n#12 DONE 13.9s\n",
   "status": "collect_error",
   "py_test_files": 37,
   "collect_rc": 4,
@@ -26,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 519.0,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-mpmath-mpmath@sha256:68444b3fbb50b92138b8172a2b402ef7508ef6136f5af1453a7ec5211c200f8c",
+  "image_size_mb": 518.1,
+  "image_delta_mb": 130.5,
+  "image_digest": "bench-pipreqs-mpmath-mpmath@sha256:21b4603cada51feec01c6ad8c8a558fa3b4a3e8fb9115867852f5dcaff0cf6a8",
   "installed_pkg_count": 39,
   "tokens_in": null,
   "tokens_out": null,
@@ -36,8 +36,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 6.56,
-  "build_s": 26.64,
-  "test_s": 0.22,
+  "build_s": 27.33,
+  "test_s": 0.36,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -64,19 +64,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=ee1a8102665a2fba0faba6c2c0f0a064de92b522 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=ee1a8102665a2fba0faba6c2c0f0a064de92b522 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

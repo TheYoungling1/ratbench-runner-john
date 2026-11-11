@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__rat50-pjy",
+  "agent": "pjy-repo2run",
   "repo": "karlicoss/promnesia",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": ".498 ipdb                    0.13.13\n#30 0.498 ipython                 9.17.1\n#30 0.498 ipython_pygments_lexers 1.1.1\n#30 0.498 jedi                    0.20.0\n#30 0.498 kompress                0.3.20260707\n#30 0.498 loguru                  0.7.3\n#30 0.498 logzero                 1.7.0\n#30 0.498 lxml                    6.1.3\n#30 0.498 matplotlib-inline       0.2.2\n#30 0.498 mistletoe               1.6.0\n#30 0.498 more-itertools          11.1.0\n#30 0.498 MouseInfo               0.1.3\n#30 0.498 orgparse                0.4.20251020\n#30 0.498 outcome                 1.3.0.post0\n#30 0.498 packaging               26.3\n#30 0.498 parso                   0.8.7\n#30 0.498 pexpect                 4.9.0\n#30 0.498 pip                     24.2\n#30 0.498 pipdeptree              2.23.4\n#30 0.498 platformdirs            4.11.15\n#30 0.498 pluggy                  1.6.0\n#30 0.498 promnesia               0.0.1.dev1   /repo\n#30 0.498 prompt_toolkit          3.0.53\n#30 0.498 psutil                  7.2.2\n#30 0.498 ptyprocess              0.7.0\n#30 0.498 pure_eval               0.2.4\n#30 DONE 0.6s\n\n#31 [27/29] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#31 DONE 0.6s\n\n#32 [28/29] WORKDIR /testbed\n#32 DONE 0.1s\n\n#33 exporting to image\n#33 exporting layers\n#33 exporting layers 7.2s done\n#33 exporting manifest sha256:88692de210488b5ee685676638d32991a4525e3c97b2836c240f87f7ac83cab9 done\n#33 exporting config sha256:cc9171b8c38c1b586dd55acc68a5a02e9d68ed44e6c406c59c429381112e0d2c done\n#33 exporting attestation manifest sha256:0fba82a57e271775cdcff370ac03e5c970b855387cfc88096c7d35a8dc651533 0.0s done\n#33 exporting manifest list sha256:84d19af0c8ccc293498a68aa6b6068345aae6974b8c40830201c1d1fd1db8922 0.0s done\n#33 naming to docker.io/library/bench-repo2run__rat50-pjy-karlicoss-promnesia:latest done\n#33 unpacking to docker.io/library/bench-repo2run__rat50-pjy-karlicoss-promnesia:latest\n#33 unpacking to docker.io/library/bench-repo2run__rat50-pjy-karlicoss-promnesia:latest 5.9s done\n#33 DONE 13.2s\n",
+  "build_log_tail": "     3.20\n#30 0.736 iniconfig               2.3.0\n#30 0.736 ipdb                    0.13.13\n#30 0.736 ipython                 9.17.1\n#30 0.736 ipython_pygments_lexers 1.1.1\n#30 0.736 jedi                    0.20.0\n#30 0.736 kompress                0.3.20260707\n#30 0.736 loguru                  0.7.3\n#30 0.736 logzero                 1.7.0\n#30 0.736 lxml                    6.1.3\n#30 0.736 matplotlib-inline       0.2.2\n#30 0.736 mistletoe               1.6.0\n#30 0.736 more-itertools          11.1.0\n#30 0.736 MouseInfo               0.1.3\n#30 0.736 orgparse                0.4.20251020\n#30 0.736 outcome                 1.3.0.post0\n#30 0.736 packaging               26.3\n#30 0.736 parso                   0.8.7\n#30 0.736 pexpect                 4.9.0\n#30 0.736 pip                     24.2\n#30 0.736 pipdeptree              2.23.4\n#30 0.736 platformdirs            4.11.12\n#30 0.736 pluggy                  1.6.0\n#30 0.736 promnesia               0.0.1.dev1   /repo\n#30 0.736 prompt_toolkit          3.0.53\n#30 0.736 psutil                  7.2.2\n#30 0.736 ptyprocess              0.7.0\n#30 DONE 0.8s\n\n#31 [27/29] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#31 DONE 1.2s\n\n#32 [28/29] WORKDIR /testbed\n#32 DONE 0.1s\n\n#33 exporting to image\n#33 exporting layers\n#33 exporting layers 18.3s done\n#33 exporting manifest sha256:321bc277e0890fe4fe7e2891732a20a79e732479bbf00a53ddd047ec982c9709 done\n#33 exporting config sha256:36366f914bdf5d5ca39002b31db51ceeba2463fa14e9cab7adb2d8cb0b2952b8 0.0s done\n#33 exporting attestation manifest sha256:e3464aac772459d6860f1e49b85876fac4eb5354ba4dac73fe6e206ffc8dff9f 0.0s done\n#33 exporting manifest list sha256:8ce6ec4b7c2d86e3fa0690b25ff8a521f42171e6a9013f20ae684974be00a78d 0.0s done\n#33 naming to docker.io/library/bench-pjy-repo2run-karlicoss-promnesia:latest done\n#33 unpacking to docker.io/library/bench-pjy-repo2run-karlicoss-promnesia:latest\n#33 unpacking to docker.io/library/bench-pjy-repo2run-karlicoss-promnesia:latest 8.4s done\n#33 DONE 26.9s\n",
   "status": "collect_error",
   "py_test_files": 21,
   "collect_rc": 2,
@@ -189,37 +189,25 @@
   "ebsr": true,
   "pass_rate": 0.5437,
   "timed_out": false,
-  "image_size_mb": 2296.9,
+  "image_size_mb": 2290.3,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__rat50-pjy-karlicoss-promnesia@sha256:84d19af0c8ccc293498a68aa6b6068345aae6974b8c40830201c1d1fd1db8922",
-  "installed_pkg_count": 93,
+  "image_digest": "bench-pjy-repo2run-karlicoss-promnesia@sha256:8ce6ec4b7c2d86e3fa0690b25ff8a521f42171e6a9013f20ae684974be00a78d",
+  "installed_pkg_count": 94,
   "tokens_in": 3426310,
   "tokens_out": 77552,
   "llm_calls": 100,
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 84.74,
-  "test_s": 78.67,
+  "build_s": 116.02,
+  "test_s": 89.21,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 3426310,
     "tokens_out": 77552,
-    "llm_calls": 100,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\nremoved tests/testdata/hypexport/conftest.py\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 100
   },
   "error_surface": "",
   "error_surface_reason": "",

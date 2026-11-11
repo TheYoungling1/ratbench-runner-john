@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__rat50new-pjy",
+  "agent": "pjy-repo2run",
   "repo": "TencentBlueKing/blueking-apigateway",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ject.toml): started\n#31 2.017   Building editable for apigateway-dashboard (pyproject.toml): finished with status 'error'\n#31 2.020   error: subprocess-exited-with-error\n#31 2.020   \n#31 2.020   \u00d7 Building editable for apigateway-dashboard (pyproject.toml) did not run successfully.\n#31 2.020   \u2502 exit code: 1\n#31 2.020   \u2570\u2500> [1 lines of output]\n#31 2.020       Error: Expected a Python module at: src/apigateway_dashboard/__init__.py\n#31 2.020       [end of output]\n#31 2.020   \n#31 2.020   note: This error originates from a subprocess, and is likely not a problem with pip.\n#31 2.020   ERROR: Failed building editable for apigateway-dashboard\n#31 2.020 Failed to build apigateway-dashboard\n#31 2.021 error: failed-wheel-build-for-install\n#31 2.021 \n#31 2.021 \u00d7 Failed to build installable wheels for some pyproject.toml based projects\n#31 2.021 \u2570\u2500> apigateway-dashboard\n#31 DONE 2.3s\n\n#32 [28/31] RUN find /repo/src/esb/esb -name \"*.py\" -exec sed -i 's/force_text/force_str/g; s/smart_text/smart_str/g' {} +\n#32 DONE 0.5s\n\n#33 [29/31] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#33 DONE 1.9s\n\n#34 [30/31] WORKDIR /testbed\n#34 DONE 0.1s\n\n#35 exporting to image\n#35 exporting layers\n#35 exporting layers 22.7s done\n#35 exporting manifest sha256:5dc49dc760034b18a49955b76cb6b3c75fc49119d04b3da2f287f0f33f1d38a6 0.0s done\n#35 exporting config sha256:5bb8c39a1cc9cc4b21cc86075d03065f84d4373c43322f8db2adddf20c81d36f done\n#35 exporting attestation manifest sha256:be9936c95e5210d315d69ff506d1d3e68022bf6f00a0bbd26bf75ffa8b5ec29d 0.0s done\n#35 exporting manifest list sha256:7af016902e8012ae8bbfcd359cdbd7eecdca530ad1c518b4a87fe1c9eaf58633 0.0s done\n#35 naming to docker.io/library/bench-repo2run__rat50new-pjy-tencentblueking-blueking-apigateway:latest done\n#35 unpacking to docker.io/library/bench-repo2run__rat50new-pjy-tencentblueking-blueking-apigateway:latest\n#35 unpacking to docker.io/library/bench-repo2run__rat50new-pjy-tencentblueking-blueking-apigateway:latest 11.9s done\n#35 DONE 35.0s\n",
+  "build_log_tail": "or apigateway-dashboard (pyproject.toml): started\n#31 2.211   Building editable for apigateway-dashboard (pyproject.toml): finished with status 'error'\n#31 2.215   error: subprocess-exited-with-error\n#31 2.215   \n#31 2.215   \u00d7 Building editable for apigateway-dashboard (pyproject.toml) did not run successfully.\n#31 2.215   \u2502 exit code: 1\n#31 2.215   \u2570\u2500> [1 lines of output]\n#31 2.215       Error: Expected a Python module at: src/apigateway_dashboard/__init__.py\n#31 2.215       [end of output]\n#31 2.215   \n#31 2.215   note: This error originates from a subprocess, and is likely not a problem with pip.\n#31 2.215   ERROR: Failed building editable for apigateway-dashboard\n#31 2.215 Failed to build apigateway-dashboard\n#31 2.217 error: failed-wheel-build-for-install\n#31 2.217 \n#31 2.217 \u00d7 Failed to build installable wheels for some pyproject.toml based projects\n#31 2.217 \u2570\u2500> apigateway-dashboard\n#31 DONE 2.3s\n\n#32 [28/31] RUN find /repo/src/esb/esb -name \"*.py\" -exec sed -i 's/force_text/force_str/g; s/smart_text/smart_str/g' {} +\n#32 DONE 0.5s\n\n#33 [29/31] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#33 DONE 2.2s\n\n#34 [30/31] WORKDIR /testbed\n#34 DONE 0.1s\n\n#35 exporting to image\n#35 exporting layers\n#35 exporting layers 25.5s done\n#35 exporting manifest sha256:8387cee77b3be9af1cdef4b6113fd1c181a904e98690ed4b0487c555b7bab7e6 0.0s done\n#35 exporting config sha256:9c0e77beb4c324adfd705c138472dbbf00fe9d35cef4228b4c90bdda589fbbf9 done\n#35 exporting attestation manifest sha256:99672b5ed02838dc33406e469a2ed5f109c426d78536628edeb066cb88cbbd41 0.0s done\n#35 exporting manifest list sha256:1fb4d9d60b4569f5e6edfdc560fd5b69a2bd2338f2c91547fac0ab2e8e47c4ed 0.0s done\n#35 naming to docker.io/library/bench-pjy-repo2run-tencentblueking-blueking-apigateway:latest done\n#35 unpacking to docker.io/library/bench-pjy-repo2run-tencentblueking-blueking-apigateway:latest\n#35 unpacking to docker.io/library/bench-pjy-repo2run-tencentblueking-blueking-apigateway:latest 18.2s done\n#35 DONE 43.9s\n",
   "status": "collect_error",
   "py_test_files": 387,
   "collect_rc": 2,
@@ -191,9 +191,9 @@
   "ebsr": true,
   "pass_rate": 0.6105,
   "timed_out": false,
-  "image_size_mb": 791.0,
+  "image_size_mb": 2842.1,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__rat50new-pjy-tencentblueking-blueking-apigateway@sha256:7af016902e8012ae8bbfcd359cdbd7eecdca530ad1c518b4a87fe1c9eaf58633",
+  "image_digest": "bench-pjy-repo2run-tencentblueking-blueking-apigateway@sha256:1fb4d9d60b4569f5e6edfdc560fd5b69a2bd2338f2c91547fac0ab2e8e47c4ed",
   "installed_pkg_count": 196,
   "tokens_in": 4135383,
   "tokens_out": 20516,
@@ -201,8 +201,8 @@
   "turns_used": 100,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 127.54,
-  "test_s": 2.95,
+  "build_s": 153.9,
+  "test_s": 3.92,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -210,19 +210,7 @@
     "tokens_in": 4135383,
     "tokens_out": 20516,
     "llm_calls": null,
-    "turns_used": 100,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 100
   },
   "error_surface": "",
   "error_surface_reason": "",

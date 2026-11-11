@@ -1,10 +1,10 @@
 {
-  "agent": "sweagent__envbench100-merged-20260915",
+  "agent": "sweagent_repo2run_modern",
   "repo": "mollie/mollie-api-python",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": " 2.648   Created wheel for mollie-api-python: filename=mollie_api_python-3.6.0-0.editable-py3-none-any.whl size=9497 sha256=63e860886db0096f22fc0dcbe9a3c66f26ad04c6cb92921e63b078eacdee878d\n#13 2.648   Stored in directory: /tmp/pip-ephem-wheel-cache-2mxs16tp/wheels/83/05/69/977b54e69478800cfcea8a9437a7ea4a9b1a48db334f824611\n#13 2.651 Successfully built mollie-api-python\n#13 2.827 Installing collected packages: oauthlib, requests_oauthlib, mollie-api-python\n#13 2.926 Successfully installed mollie-api-python-3.6.0 oauthlib-3.3.1 requests_oauthlib-2.0.0\n#13 2.927 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#13 2.928 \n#13 2.928 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#13 2.928 [notice] To update, run: pip install --upgrade pip\n#13 DONE 3.1s\n\n#14 [11/13] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#14 DONE 0.2s\n\n#15 [12/13] WORKDIR /testbed\n#15 DONE 0.0s\n\n#16 [13/13] RUN git config --global --add safe.directory /testbed\n#16 DONE 0.2s\n\n#17 exporting to image\n#17 exporting layers\n#17 exporting layers 7.5s done\n#17 exporting manifest sha256:d6167961a4265f82f64670f7c9dbd83955a17a855b2eb6d14c28b22a364a3f64 done\n#17 exporting config sha256:48dc20fc158d018ae19cb2197633604ed2fd025f5389fd3a576dd342785904f4 done\n#17 exporting attestation manifest sha256:13648cbb0c94a287aadb02a66626d9ee8e0801eaa14903a321383e452eae6fa1 0.0s done\n#17 exporting manifest list sha256:27e69f6b084c2270c3aeb49d18e40cee78dcc8b2c101ac8cdf28b0c2f270cc28 done\n#17 naming to docker.io/library/bench-sweagent__envbench100-merged-20260915-mollie-mollie-api-python:latest done\n#17 unpacking to docker.io/library/bench-sweagent__envbench100-merged-20260915-mollie-mollie-api-python:latest\n#17 unpacking to docker.io/library/bench-sweagent__envbench100-merged-20260915-mollie-mollie-api-python:latest 2.2s done\n#17 DONE 9.7s\n",
+  "build_log_tail": "   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 160.1/160.1 kB 12.3 MB/s eta 0:00:00\nBuilding wheels for collected packages: mollie-api-python\n  Building editable for mollie-api-python (pyproject.toml): started\n  Building editable for mollie-api-python (pyproject.toml): finished with status 'done'\n  Created wheel for mollie-api-python: filename=mollie_api_python-3.6.0-0.editable-py3-none-any.whl size=9497 sha256=cc53b66ecb94d9d7755cd1966235174156c8c70424ec8232a9dcf2a805a63d60\n  Stored in directory: /tmp/pip-ephem-wheel-cache-2knlfl85/wheels/83/05/69/977b54e69478800cfcea8a9437a7ea4a9b1a48db334f824611\nSuccessfully built mollie-api-python\nInstalling collected packages: oauthlib, requests_oauthlib, mollie-api-python\nSuccessfully installed mollie-api-python-3.6.0 oauthlib-3.3.1 requests_oauthlib-2.0.0\n\u001b[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n\u001b[0m\u001b[91m\n[notice] A new release of pip is available: 23.0.1 -> 26.2.1\n[notice] To update, run: pip install --upgrade pip\n\u001b[0m ---> Removed intermediate container e392fa115ee6\n ---> 7a9547b7b90d\nStep 11/13 : RUN mv /repo /testbed && ln -sfn /testbed /repo\n ---> Running in 9e88a8ac143c\n ---> Removed intermediate container 9e88a8ac143c\n ---> 34fbbd6fd5d9\nStep 12/13 : WORKDIR /testbed\n ---> Running in 4d7a0ae20283\n ---> Removed intermediate container 4d7a0ae20283\n ---> 28d3445977ac\nStep 13/13 : RUN git config --global --add safe.directory /testbed\n ---> Running in 62da811e6d45\n ---> Removed intermediate container 62da811e6d45\n ---> 6c0a6ea70a09\nSuccessfully built 6c0a6ea70a09\nSuccessfully tagged bench-sweagent_repo2run_modern-mollie-mollie-api-python:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "executed",
   "py_test_files": 38,
   "collect_rc": 0,
@@ -609,9 +609,9 @@
   "ebsr": true,
   "pass_rate": 0.6656,
   "timed_out": false,
-  "image_size_mb": 483.5,
-  "image_delta_mb": null,
-  "image_digest": "bench-sweagent__envbench100-merged-20260915-mollie-mollie-api-python@sha256:27e69f6b084c2270c3aeb49d18e40cee78dcc8b2c101ac8cdf28b0c2f270cc28",
+  "image_size_mb": 483.3,
+  "image_delta_mb": 95.7,
+  "image_digest": "bench-sweagent_repo2run_modern-mollie-mollie-api-python@sha256:6c0a6ea70a090bfa3f2a4038fc3d2102c4382d031b03cf97edae5072ca60570c",
   "installed_pkg_count": 80,
   "tokens_in": 2116818.0,
   "tokens_out": 27419.0,
@@ -619,8 +619,8 @@
   "turns_used": 76,
   "cost_usd": 0.04536706799999999,
   "produce_s": 336.4,
-  "build_s": 32.1,
-  "test_s": 5.87,
+  "build_s": 58.88,
+  "test_s": 5.23,
   "meta": {
     "contract_version": 1,
     "producer": "sweagent_repo2run_modern",
@@ -654,19 +654,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=957b44fddb9d4d833508120022c7f291f5ca8d06 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=957b44fddb9d4d833508120022c7f291f5ca8d06 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

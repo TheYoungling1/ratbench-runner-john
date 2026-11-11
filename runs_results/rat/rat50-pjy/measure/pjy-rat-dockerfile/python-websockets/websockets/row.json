@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "python-websockets/websockets",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "er to suppress this warning, use --no-warn-script-location.\n#19 14.58   WARNING: The script distro is installed in '/root/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin' which is not on PATH.\n#19 14.58   Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.\n#19 14.70 \n#19 14.70 Successfully installed Pygments-2.20.0 annotated-types-0.8.0 anyio-4.14.2 distro-1.9.0 h11-0.16.0 httpcore2-2.10.0 httpx2-2.10.0 idna-3.18 jiter-0.16.0 openai-3.0.0 pydantic-2.13.4 pydantic_core-2.46.4 setuptools-79.0.1 sniffio-1.3.1 tqdm-4.70.0 truststore-0.10.4 typing-inspection-0.4.3 websockets-16.1.dev24+gff4869b wheel-0.46.3\n#19 14.70 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#19 DONE 15.0s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 0.3s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.0s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 4.4s done\n#22 exporting manifest sha256:9e7a10043b03cd12f50fbc9fb4b67b91313826ce53ce44d9e66b171f2096b635 0.0s done\n#22 exporting config sha256:cac652edef4e66964909ce953b85184fb73e40007f6db9f603b34e257011afd6 done\n#22 exporting attestation manifest sha256:bf0e678a1d116a61a24f7a8bd290fdbe55a606c1dc5f7d265af4f28527f81846 0.0s done\n#22 exporting manifest list sha256:9c9b2a4c8bfcf3c460d34193b40f460258a7df3d8f7828b6320f1b193212463f 0.0s done\n#22 naming to docker.io/library/bench-rat__rat50-pjy-python-websockets-websockets:latest done\n#22 unpacking to docker.io/library/bench-rat__rat50-pjy-python-websockets-websockets:latest\n#22 unpacking to docker.io/library/bench-rat__rat50-pjy-python-websockets-websockets:latest 4.8s done\n#22 DONE 9.3s\n",
+  "build_log_tail": "ing, use --no-warn-script-location.\n#19 53.57   WARNING: The script distro is installed in '/root/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin' which is not on PATH.\n#19 53.57   Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.\n#19 53.67 \n#19 53.68 Successfully installed Pygments-2.20.0 annotated-types-0.8.0 anyio-4.14.2 distro-1.9.0 h11-0.16.0 httpcore2-2.10.0 httpx2-2.10.0 idna-3.18 jiter-0.16.0 openai-3.0.0 pydantic-2.13.4 pydantic_core-2.46.4 setuptools-79.0.1 sniffio-1.3.1 tqdm-4.70.0 truststore-0.10.4 typing-inspection-0.4.3 websockets-16.1.dev24+gff4869b.dirty wheel-0.46.3\n#19 53.68 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#19 DONE 54.0s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 0.4s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.0s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 5.1s done\n#22 exporting manifest sha256:c970f30223bb42038f84e7a8592d310995d1a6e4966f0cd5840611cdaa320d97 0.0s done\n#22 exporting config sha256:bb60b746bc1f823843340b6f0b28f8bf287431a94b42f4d1efacf428f928722f 0.0s done\n#22 exporting attestation manifest sha256:6fc9dd08725486a57eb1ec7dad695b39750a5bc63477e07ceee269b8b3bba0bd 0.0s done\n#22 exporting manifest list sha256:4cecd0ba9498dc43836ba4d5d7d4419ab3419e09181a2d3a8d7b08682302728d 0.0s done\n#22 naming to docker.io/library/bench-pjy-rat-dockerfile-python-websockets-websockets:latest done\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-python-websockets-websockets:latest\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-python-websockets-websockets:latest 5.8s done\n#22 DONE 11.0s\n",
   "status": "timed_out",
   "py_test_files": 41,
   "collect_rc": 2,
@@ -2003,9 +2003,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": true,
-  "image_size_mb": 1889.0,
+  "image_size_mb": 1889.2,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50-pjy-python-websockets-websockets@sha256:9c9b2a4c8bfcf3c460d34193b40f460258a7df3d8f7828b6320f1b193212463f",
+  "image_digest": "bench-pjy-rat-dockerfile-python-websockets-websockets@sha256:4cecd0ba9498dc43836ba4d5d7d4419ab3419e09181a2d3a8d7b08682302728d",
   "installed_pkg_count": 28,
   "tokens_in": 3660811,
   "tokens_out": 82305,
@@ -2013,27 +2013,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 65.24,
-  "test_s": 1800.1,
+  "build_s": 69.51,
+  "test_s": 1800.08,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 3660811,
     "tokens_out": 82305,
-    "llm_calls": 102,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 102
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,16 +1,16 @@
 {
-  "agent": "graph2env__rat_python50_new",
+  "agent": "g2e-rat50new",
   "repo": "insistence/RuoYi-Vue3-FastAPI",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "     (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#14 0.640 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (9.1.1)\n#14 0.647 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#14 0.648 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.11/site-packages (from pytest) (26.3)\n#14 0.649 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#14 0.649 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest) (2.21.0)\n#14 1.182 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#14 DONE 1.3s\n\n#15 [11/11] WORKDIR /testbed\n#15 DONE 0.0s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 40.1s done\n#16 exporting manifest sha256:f022799dd5c419dee1dc98211571df5d67d314ad92346859314e6be6e98587ce 0.0s done\n#16 exporting config sha256:8d9d1850b722c04d9a2bd49439e8eede3016112177816d08e78584f255bf1c56 done\n#16 exporting attestation manifest sha256:6f06b10b2d7fb12ed076de71359225751c3fd4f5fbca892e80f3abe86067c345 0.0s done\n#16 exporting manifest list sha256:1022b78dbf318669db156a77ef2136ca5029ba1f9c4615aed46808d9884367a1 0.0s done\n#16 naming to docker.io/library/bench-graph2env__rat_python50_new-insistence-ruoyi-vue3-fastapi:latest done\n#16 unpacking to docker.io/library/bench-graph2env__rat_python50_new-insistence-ruoyi-vue3-fastapi:latest\n#16 unpacking to docker.io/library/bench-graph2env__rat_python50_new-insistence-ruoyi-vue3-fastapi:latest 6.3s done\n#16 DONE 46.4s\n",
-  "status": "collect_error",
+  "build_log_tail": "lse         command -v uv >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#14 1.842 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (9.1.1)\n#14 1.850 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#14 1.851 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.11/site-packages (from pytest) (26.3)\n#14 1.852 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#14 1.853 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest) (2.21.0)\n#14 2.403 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#14 DONE 2.5s\n\n#15 [11/11] WORKDIR /testbed\n#15 DONE 0.1s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 43.3s done\n#16 exporting manifest sha256:0c27359056034fd60d199c68319d21dd7b6a424b5e96801e623f26d4fcee2619 done\n#16 exporting config sha256:126cf279fdceae9a5bb2049d57cd92a0775c3e10d365694b9f08b397e105beb9 done\n#16 exporting attestation manifest sha256:e5e7bb1a320531ede9268f47732e134cb498c9d3bddcdf166067106e97f5661f 0.0s done\n#16 exporting manifest list sha256:01562edef75cbba8fdfdaf60830672e4989215d19f16161bb62751ae2ce4fa80 0.0s done\n#16 naming to docker.io/library/bench-g2e-rat50new-insistence-ruoyi-vue3-fastapi:latest done\n#16 unpacking to docker.io/library/bench-g2e-rat50new-insistence-ruoyi-vue3-fastapi:latest\n#16 unpacking to docker.io/library/bench-g2e-rat50new-insistence-ruoyi-vue3-fastapi:latest 9.0s done\n#16 DONE 52.5s\n",
+  "status": "executed",
   "py_test_files": 178,
-  "collect_rc": 2,
-  "collect_clean": false,
+  "collect_rc": 0,
+  "collect_clean": true,
   "collect_errors": [],
-  "collect_error_count": 1,
+  "collect_error_count": 0,
   "collected_node_ids": [
     "ruoyi-fastapi-backend/tests/cli/completion/test_installers.py::test_build_source_command_uses_shell_runtime_policy",
     "ruoyi-fastapi-backend/tests/cli/completion/test_installers.py::test_make_bash_completion_script_compatible_wraps_legacy_instructions",
@@ -1493,10 +1493,10 @@
     "ruoyi-fastapi-test/tool/test_swagger.py::test_swagger_page"
   ],
   "executed": true,
-  "total": 1480,
+  "total": 1479,
   "passed": 1316,
   "failed": 112,
-  "errors": 51,
+  "errors": 50,
   "skipped": 1,
   "passed_node_ids": [
     "ruoyi-fastapi-backend/tests/cli/completion/test_installers.py::test_build_source_command_uses_shell_runtime_policy",
@@ -2931,7 +2931,6 @@
     "ruoyi-fastapi-test/tool/test_swagger.py::test_swagger_page"
   ],
   "error_node_ids": [
-    "ruoyi-fastapi-test.common.base_page_test",
     "ruoyi-fastapi-backend/tests/config/test_scheduler_execution_coordination.py::test_two_processes_atomically_enforce_logical_job_limit",
     "ruoyi-fastapi-backend/tests/config/test_scheduler_execution_coordination.py::test_running_process_blocks_new_executor_and_can_finish_after_delete",
     "ruoyi-fastapi-backend/tests/config/test_scheduler_execution_coordination.py::test_expired_dispatch_token_cannot_run_reclaimed_request",
@@ -2984,11 +2983,11 @@
     "ruoyi-fastapi-backend/tests/module_admin/service/test_job_service.py::test_disable_broken_target_remains_possible_but_enable_is_rejected"
   ],
   "ebsr": true,
-  "pass_rate": 0.8898,
+  "pass_rate": 0.8904,
   "timed_out": false,
   "image_size_mb": 1618.6,
   "image_delta_mb": 1440.3,
-  "image_digest": "bench-graph2env__rat_python50_new-insistence-ruoyi-vue3-fastapi@sha256:1022b78dbf318669db156a77ef2136ca5029ba1f9c4615aed46808d9884367a1",
+  "image_digest": "bench-g2e-rat50new-insistence-ruoyi-vue3-fastapi@sha256:01562edef75cbba8fdfdaf60830672e4989215d19f16161bb62751ae2ce4fa80",
   "installed_pkg_count": 111,
   "tokens_in": 4318822,
   "tokens_out": 16948,
@@ -2996,8 +2995,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 101.42,
-  "test_s": 107.8,
+  "build_s": 125.23,
+  "test_s": 114.59,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -3014,19 +3013,7 @@
       ],
       "services": [],
       "services_rc": null
-    },
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=726883f68ad21450ae47120d270895d9a5a9d69e (pinned)\nremoved pytest.ini\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=726883f68ad21450ae47120d270895d9a5a9d69e (pinned)\n"
-      }
-    ]
+    }
   },
   "error_surface": "",
   "error_surface_reason": "",

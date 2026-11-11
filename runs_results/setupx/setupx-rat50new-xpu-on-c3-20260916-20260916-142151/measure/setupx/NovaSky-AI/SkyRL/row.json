@@ -1,5 +1,5 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "NovaSky-AI/SkyRL",
   "env_status": "produced",
   "build_ok": false,
@@ -34,7 +34,7 @@
   "turns_used": 84,
   "cost_usd": null,
   "produce_s": 3619.26,
-  "build_s": 3600.04,
+  "build_s": 3600.11,
   "test_s": null,
   "meta": {
     "contract_version": 1,

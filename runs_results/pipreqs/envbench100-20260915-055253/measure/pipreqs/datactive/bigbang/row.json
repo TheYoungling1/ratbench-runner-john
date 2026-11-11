@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "datactive/bigbang",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "-ratelimiter-0.10.0 rich-15.0.0 rpds-py-0.30.0 safetensors-0.8.0 shellingham-1.5.4 six-1.17.0 smart-open-8.0.1 soupsieve-2.10 spacy-3.8.16 spacy-legacy-3.0.12 spacy-loggers-1.0.5 srsly-2.5.3 testfixtures-8.3.0 textsearch-0.0.24 thinc-8.3.13 tinycss2-1.5.1 tokenizers-0.23.2 tornado-6.5.10 tqdm-4.70.1 traitlets-5.16.1 transformers-5.17.0 typer-0.27.2 types-pytz-2026.4.0.20260926 typing-inspection-0.4.4 tzdata-2026.4 tzlocal-5.4.4 url-normalize-3.0.1 urllib3-2.8.0 validator_collection-1.5.0 wasabi-1.1.3 wcwidth-0.9.1 weasel-1.0.0 webencodings-0.6.1 wrapt-2.4.1\n#11 41.50 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 41.51 \n#11 41.51 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 41.51 [notice] To update, run: pip install --upgrade pip\n#11 DONE 44.0s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 32.4s done\n#12 exporting manifest sha256:792241804ec426822825705001edb1ca895be8867f677a843d9bdc9325af34a7 0.1s done\n#12 exporting config sha256:b15c9a513737cca445122cb9ce909b7bd5c333da55e3e43b3eb5fa1f6d11f9c5\n#12 exporting config sha256:b15c9a513737cca445122cb9ce909b7bd5c333da55e3e43b3eb5fa1f6d11f9c5 0.0s done\n#12 exporting attestation manifest sha256:1eab200572674c4251e69bf9774ad263d6fc5f75589da0f7751c656f48e372bf 0.1s done\n#12 exporting manifest list sha256:f7b746be9d36c382297839d9f47689e64046758831313102abf623de80b346ba 0.1s done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-datactive-bigbang:latest\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-datactive-bigbang:latest 0.0s done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-datactive-bigbang:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-datactive-bigbang:latest 7.3s done\n#12 DONE 40.1s\n",
+  "build_log_tail": "xed-0.9.0 preshed-3.0.13 pyahocorasick-2.3.1 pydantic-2.13.5 pydantic-core-2.46.5 pymongo-4.18.1 pyparsing-3.3.2 pyrate-limiter-4.5.0 python_Levenshtein-0.27.4 python_dateutil-2.9.0.post0 pytz-2026.3.post1 pyzmq-27.2.0 rapidfuzz-3.14.5 referencing-0.37.0 regex-2026.9.10 requests-cache-1.3.3 requests-ratelimiter-0.10.0 rich-15.0.0 rpds-py-0.30.0 safetensors-0.8.0 shellingham-1.5.4 six-1.17.0 smart-open-8.0.1 soupsieve-2.9.2 spacy-3.8.16 spacy-legacy-3.0.12 spacy-loggers-1.0.5 srsly-2.5.3 testfixtures-8.3.0 textsearch-0.0.24 thinc-8.3.13 tinycss2-1.5.1 tokenizers-0.23.2 tornado-6.5.9 tqdm-4.70.1 traitlets-5.16.1 transformers-5.17.0 typer-0.27.2 types-pytz-2026.3.1.20260727 typing-inspection-0.4.4 tzdata-2026.4 tzlocal-5.4.4 url-normalize-3.0.0 urllib3-2.7.0 validator_collection-1.5.0 wasabi-1.1.3 wcwidth-0.8.3 weasel-1.0.0 webencodings-0.6.1 wrapt-2.4.1\n#11 40.53 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 40.53 \n#11 40.53 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 40.53 [notice] To update, run: pip install --upgrade pip\n#11 DONE 43.0s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 36.3s done\n#12 exporting manifest sha256:ba3b11f1858ed49a89ac57ddecae1a00d9a59656ea40437a11e7e10d00c854ab done\n#12 exporting config sha256:54a656f2b63232fcf7697272deac1badaaf00b1bf3731d489abeb47a79bcd029 done\n#12 exporting attestation manifest sha256:66214f0c2f776d666b76a618036e3a97fbeb202e2d59f52fac1490cba0a56734 0.0s done\n#12 exporting manifest list sha256:79651e99bb365cc3981c9e9c5376acdcf4de5579ae5c4a2044dc1582f875d426 done\n#12 naming to docker.io/library/bench-pipreqs-datactive-bigbang:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-datactive-bigbang:latest\n#12 unpacking to docker.io/library/bench-pipreqs-datactive-bigbang:latest 9.5s done\n#12 DONE 45.9s\n",
   "status": "collect_error",
   "py_test_files": 9,
   "collect_rc": 2,
@@ -44,18 +44,18 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 840.3,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-datactive-bigbang@sha256:f7b746be9d36c382297839d9f47689e64046758831313102abf623de80b346ba",
-  "installed_pkg_count": 137,
+  "image_size_mb": 850.1,
+  "image_delta_mb": 462.5,
+  "image_digest": "bench-pipreqs-datactive-bigbang@sha256:79651e99bb365cc3981c9e9c5376acdcf4de5579ae5c4a2044dc1582f875d426",
+  "installed_pkg_count": 138,
   "tokens_in": null,
   "tokens_out": null,
   "llm_calls": null,
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 9.32,
-  "build_s": 90.53,
-  "test_s": 1.27,
+  "build_s": 95.39,
+  "test_s": 1.38,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -82,19 +82,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=42568c20e318bd351a1d42acda21895960646133 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=42568c20e318bd351a1d42acda21895960646133 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

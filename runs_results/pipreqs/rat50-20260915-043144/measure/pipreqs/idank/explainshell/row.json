@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50-20260915-043144",
+  "agent": "pipreqs",
   "repo": "idank/explainshell",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ertifi, cachetools, blinker, bashlex, attrs, async-timeout, annotated-types, aiohappyeyeballs, yarl, werkzeug, pydantic, jinja2, httpcore, cffi, anyio, aiosignal, httpx, Flask, cmarkgfm, aiohttp\n#11 9.077 Successfully installed Flask-3.1.3 MarkupSafe-3.0.3 Pillow-12.3.0 aiohappyeyeballs-2.7.1 aiohttp-3.14.3 aiosignal-1.4.0 annotated-types-0.8.0 anyio-4.15.1 async-timeout-5.0.1 attrs-26.1.0 bashlex-0.18 blinker-1.9.0 cachetools-7.2.0 certifi-2026.7.22 cffi-2.1.1 click-8.5.0 cmarkgfm-2025.10.22 frozenlist-1.8.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 humanize-4.16.0 idna-3.20 itsdangerous-2.2.0 jinja2-3.1.6 loguru-0.7.3 multidict-6.9.1 propcache-0.5.4 protobuf-7.36.2 pycparser-3.0 pydantic-2.13.5 pydantic-core-2.46.5 python-dotenv-1.2.3 typing-inspection-0.4.4 werkzeug-3.1.8 yarl-1.25.1\n#11 9.077 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 9.082 \n#11 9.082 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 9.082 [notice] To update, run: pip install --upgrade pip\n#11 DONE 9.8s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 3.6s done\n#12 exporting manifest sha256:ae18b3894ff71e227ace562a539df83e89d692f6c80e7b4fc0fb03e3fa604be8 done\n#12 exporting config sha256:7af9281d495ae1a24594c0b049d814564367340a91701c1d2b3beaf8db09a2d0 done\n#12 exporting attestation manifest sha256:f220074fbe85d972424ebd3ab2995d7d3cb166ae67cfae54fb51631827dbd0a8 0.0s done\n#12 exporting manifest list sha256:81e6f233da8ce090530eb0348cc0c5e418981a9691cdc455efc96cdb48ab07a6 done\n#12 naming to docker.io/library/bench-pipreqs__rat50-20260915-043144-idank-explainshell:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-idank-explainshell:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-idank-explainshell:latest 1.1s done\n#12 DONE 4.8s\n",
+  "build_log_tail": "inker, bashlex, attrs, async-timeout, annotated-types, aiohappyeyeballs, yarl, werkzeug, pydantic, jinja2, httpcore, cffi, anyio, aiosignal, httpx, Flask, cmarkgfm, aiohttp\n#11 9.972 Successfully installed Flask-3.1.3 MarkupSafe-3.0.3 Pillow-12.3.0 aiohappyeyeballs-2.7.1 aiohttp-3.14.3 aiosignal-1.4.0 annotated-types-0.8.0 anyio-4.15.1 async-timeout-5.0.1 attrs-26.1.0 bashlex-0.18 blinker-1.9.0 cachetools-7.1.8 certifi-2026.7.22 cffi-2.1.1 click-8.5.0 cmarkgfm-2025.10.22 frozenlist-1.8.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 humanize-4.16.0 idna-3.19 itsdangerous-2.2.0 jinja2-3.1.6 loguru-0.7.3 multidict-6.8.0 propcache-0.5.2 protobuf-7.36.1 pycparser-3.0 pydantic-2.13.5 pydantic-core-2.46.5 python-dotenv-1.2.3 typing-inspection-0.4.4 werkzeug-3.1.8 yarl-1.24.5\n#11 9.972 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 9.978 \n#11 9.978 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 9.978 [notice] To update, run: pip install --upgrade pip\n#11 DONE 11.0s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 2.7s done\n#12 exporting manifest sha256:315378765d6271eecd5ed4de68b6a41d55d0e14db5770ea2a4aed710f3952df2\n#12 exporting manifest sha256:315378765d6271eecd5ed4de68b6a41d55d0e14db5770ea2a4aed710f3952df2 done\n#12 exporting config sha256:6769b55814dbbb017059f2e64e43d947fe850419597c736d1d564888a86f3007 done\n#12 exporting attestation manifest sha256:d76e73fa0c4cbbd972469db8e9774ba38de81e63791095ed6a605c91005b8657 done\n#12 exporting manifest list sha256:8279c1d9e323f1f99bb7227f2d7b40ac9aba27d5533131b417505376db700934 done\n#12 naming to docker.io/library/bench-pipreqs-idank-explainshell:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-idank-explainshell:latest\n#12 unpacking to docker.io/library/bench-pipreqs-idank-explainshell:latest 0.9s done\n#12 DONE 3.7s\n",
   "status": "collect_error",
   "py_test_files": 18,
   "collect_rc": 2,
@@ -1096,9 +1096,9 @@
   "ebsr": true,
   "pass_rate": 0.9981,
   "timed_out": false,
-  "image_size_mb": 450.6,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50-20260915-043144-idank-explainshell@sha256:81e6f233da8ce090530eb0348cc0c5e418981a9691cdc455efc96cdb48ab07a6",
+  "image_size_mb": 450.0,
+  "image_delta_mb": 62.4,
+  "image_digest": "bench-pipreqs-idank-explainshell@sha256:8279c1d9e323f1f99bb7227f2d7b40ac9aba27d5533131b417505376db700934",
   "installed_pkg_count": 50,
   "tokens_in": null,
   "tokens_out": null,
@@ -1106,8 +1106,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 9.01,
-  "build_s": 18.64,
-  "test_s": 6.87,
+  "build_s": 17.87,
+  "test_s": 5.35,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -1134,19 +1134,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=e961c8763a472139c9c5d22e62071946af9bdb48 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=e961c8763a472139c9c5d22e62071946af9bdb48 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

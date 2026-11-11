@@ -1,0 +1,193 @@
+{
+  "setupx": {
+    "collect": {
+      "agent": "setupx",
+      "n_repos": 50,
+      "source": "collect",
+      "n_admissible": 30,
+      "n_masked": 18,
+      "n_unobserved": 2,
+      "n_status_derived": 0,
+      "buckets": {
+        "success": 14,
+        "collect_error": 30,
+        "error": 2,
+        "timed_out": 2,
+        "partial": 2
+      },
+      "surfaces": {
+        "full": 30,
+        "masked": 18,
+        "unobserved": 2
+      },
+      "token_repos": {
+        "ImportError": 5,
+        "ModuleNotFoundError": 8,
+        "ValueError": 1,
+        "ConnectionRefusedError": 1,
+        "redis.exceptions.ConnectionError": 1,
+        "playwright._impl._errors.TargetClosedError": 1,
+        "patchright._impl._errors.TargetClosedError": 1,
+        "RuntimeError": 1,
+        "SyntaxError": 1,
+        "_pytest.pathlib.ImportPathMismatchError": 1,
+        "AttributeError": 1,
+        "Error": 1,
+        "subprocess.CalledProcessError": 1
+      },
+      "token_events": {
+        "ImportError": 13,
+        "ModuleNotFoundError": 178,
+        "ValueError": 1,
+        "ConnectionRefusedError": 1,
+        "redis.exceptions.ConnectionError": 1,
+        "playwright._impl._errors.TargetClosedError": 1,
+        "patchright._impl._errors.TargetClosedError": 1,
+        "RuntimeError": 1,
+        "SyntaxError": 1,
+        "_pytest.pathlib.ImportPathMismatchError": 1,
+        "AttributeError": 1,
+        "subprocess.CalledProcessError": 1,
+        "Error": 1
+      },
+      "category_repos": {
+        "module_not_found": 8,
+        "partial_import": 5,
+        "uncategorized": 5,
+        "import_failed": 2,
+        "service_unavailable": 1,
+        "syntax_error": 1,
+        "harness_error": 1
+      },
+      "category_events": {
+        "partial_import": 11,
+        "module_not_found": 178,
+        "uncategorized": 7,
+        "import_failed": 2,
+        "service_unavailable": 2,
+        "syntax_error": 1,
+        "harness_error": 1
+      },
+      "crosstab": {
+        "collect_error|module_not_found": 8,
+        "collect_error|partial_import": 5,
+        "collect_error|uncategorized": 5,
+        "collect_error|import_failed": 2,
+        "collect_error|service_unavailable": 1,
+        "collect_error|syntax_error": 1,
+        "collect_error|harness_error": 1
+      },
+      "top_groups": {
+        "partial_import": [
+          [
+            "Self",
+            3
+          ],
+          [
+            "bigquery",
+            1
+          ],
+          [
+            "KasperskyConnector",
+            1
+          ],
+          [
+            "StrEnum",
+            1
+          ],
+          [
+            "ConnectorSettings",
+            1
+          ],
+          [
+            "eval_type_backport",
+            1
+          ],
+          [
+            "UOp",
+            1
+          ],
+          [
+            "genai",
+            1
+          ],
+          [
+            "MlflowClient",
+            1
+          ]
+        ],
+        "module_not_found": [
+          [
+            "pydantic",
+            3
+          ],
+          [
+            "tensorflow",
+            2
+          ],
+          [
+            "numpy",
+            2
+          ],
+          [
+            "torch",
+            2
+          ],
+          [
+            "llama_index",
+            2
+          ],
+          [
+            "sqlalchemy",
+            2
+          ],
+          [
+            "fastapi",
+            2
+          ],
+          [
+            "langchain_core",
+            2
+          ],
+          [
+            "connector.hive_observable_transform",
+            1
+          ],
+          [
+            "proofpoint_tap",
+            1
+          ]
+        ]
+      },
+      "uncategorized_rate": 0.0347
+    },
+    "run": {
+      "agent": "setupx",
+      "n_repos": 50,
+      "source": "run",
+      "n_admissible": 30,
+      "n_masked": 18,
+      "n_unobserved": 2,
+      "n_status_derived": 0,
+      "buckets": {
+        "success": 14,
+        "collect_error": 30,
+        "error": 2,
+        "timed_out": 2,
+        "partial": 2
+      },
+      "surfaces": {
+        "full": 30,
+        "masked": 18,
+        "unobserved": 2
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    }
+  }
+}

@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50new-20260922-170025",
+  "agent": "pipreqs",
   "repo": "zscole/gru",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "verrides-7.7.0 playwright-1.63.0 propcache-0.5.4 proto-plus-1.28.4 protobuf-7.36.2 pyasn1-0.6.4 pyasn1-modules-0.4.2 pybase64-1.5.0 pycparser-3.0 pydantic-2.13.5 pydantic-core-2.46.5 pydantic-settings-2.15.0 pydub-0.25.1 pyee-13.0.1 pyparsing-3.3.3 pypika-0.51.1 pyproject_hooks-1.3.3 python-dotenv-1.2.3 python-telegram-bot-22.8 python_dateutil-2.9.0.post0 pyyaml-6.0.3 referencing-0.37.0 requests-2.34.2 requests-oauthlib-2.0.0 rich-15.0.0 rpds-py-0.30.0 shellingham-1.5.4 six-1.17.0 slack_bolt-1.30.0 slack_sdk-3.44.1 sympy-1.14.0 tabulate-0.10.0 tenacity-9.1.4 tokenizers-0.23.2 tqdm-4.70.1 twilio-9.11.1 typer-0.27.2 typing-inspection-0.4.4 uritemplate-4.2.0 urllib3-2.8.0 uvicorn-0.54.0 uvloop-0.22.1 watchfiles-1.3.0 websocket-client-1.9.2 websockets-16.1.1 whisper-1.1.10 yarl-1.25.1\n#11 36.53 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 36.53 \n#11 36.53 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 36.53 [notice] To update, run: pip install --upgrade pip\n#11 DONE 38.9s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 41.2s done\n#12 exporting manifest sha256:404f36897fdcd7a608ec0356f2958b12780dda9c42f0c761ba27bdcf95b0a664 0.0s done\n#12 exporting config sha256:9c282501de7f4235e47c88cc11ad27cf433cbe94883c826fc5d38c0e12751178 0.0s done\n#12 exporting attestation manifest sha256:30d8acb54b78e781a966dbfc470b8c97a68584fa883c8b832f22e02589ab88b3 0.0s done\n#12 exporting manifest list sha256:da44ddee9a479e544fa138e42ddc9bbc312538f476fe66df6b03bebaa3a4f71b 0.0s done\n#12 naming to docker.io/library/bench-pipreqs__rat50new-20260922-170025-zscole-gru:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-zscole-gru:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-zscole-gru:latest 6.7s done\n#12 DONE 48.0s\n",
+  "build_log_tail": "mmh3-5.3.0 mpmath-1.3.0 multidict-6.9.1 numpy-2.2.6 oauthlib-3.3.1 onnxruntime-1.23.2 opentelemetry-api-1.44.0 opentelemetry-exporter-otlp-proto-common-1.44.0 opentelemetry-exporter-otlp-proto-grpc-1.44.0 opentelemetry-proto-1.44.0 opentelemetry-sdk-1.44.0 opentelemetry-semantic-conventions-0.65b0 orjson-3.12.0 overrides-7.7.0 playwright-1.63.0 propcache-0.5.4 proto-plus-1.28.4 protobuf-7.36.2 pyasn1-0.6.4 pyasn1-modules-0.4.2 pybase64-1.5.0 pycparser-3.0 pydantic-2.13.5 pydantic-core-2.46.5 pydantic-settings-2.15.0 pydub-0.25.1 pyee-13.0.1 pyparsing-3.3.3 pypika-0.51.1 pyproject_hooks-1.3.3 python-dotenv-1.2.3 python-telegram-bot-22.8 python_dateutil-2.9.0.post0 pyyaml-6.0.3 referencing-0.37.0 requests-2.34.2 requests-oauthlib-2.0.0 rich-15.0.0 rpds-py-0.30.0 shellingham-1.5.4 six-1.17.0 slack_bolt-1.30.0 slack_sdk-3.44.1 sympy-1.14.0 tabulate-0.10.0 tenacity-9.1.4 tokenizers-0.23.2 tqdm-4.70.1 twilio-9.11.1 typer-0.27.2 typing-inspection-0.4.4 uritemplate-4.2.0 urllib3-2.8.0 uvicorn-0.53.0 uvloop-0.22.1 watchfiles-1.3.0 websocket-client-1.9.2 websockets-16.1.1 whisper-1.1.10 yarl-1.25.1\n#11 41.94 \n#11 41.94 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 41.94 [notice] To update, run: pip install --upgrade pip\n#11 DONE 44.1s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 47.0s done\n#12 exporting manifest sha256:c8ff0b9083b3f2ced5d67d4ad274d6281eab50be762dda346967a4b7422eda84 0.0s done\n#12 exporting config sha256:f79dc10c187434f952db5e30a3a513fc917e87725d75ffddb26570dfeb9ce260 done\n#12 exporting attestation manifest sha256:2c2cca61511084ad372da78366b4303a3f117fde24a2a21e841626880d5a5927 0.0s done\n#12 exporting manifest list sha256:290d4e48c84be113f3f9ed0d2cc2756d6e78ec3a84226e7751d754303356ec38 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-zscole-gru:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-zscole-gru:latest\n#12 unpacking to docker.io/library/bench-pipreqs-zscole-gru:latest 12.1s done\n#12 DONE 59.2s\n",
   "status": "collect_error",
   "py_test_files": 24,
   "collect_rc": 2,
@@ -74,18 +74,18 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 2880.3,
-  "image_delta_mb": 1369.6,
-  "image_digest": "bench-pipreqs__rat50new-20260922-170025-zscole-gru@sha256:da44ddee9a479e544fa138e42ddc9bbc312538f476fe66df6b03bebaa3a4f71b",
-  "installed_pkg_count": 125,
+  "image_size_mb": 2879.7,
+  "image_delta_mb": null,
+  "image_digest": "bench-pipreqs-zscole-gru@sha256:290d4e48c84be113f3f9ed0d2cc2756d6e78ec3a84226e7751d754303356ec38",
+  "installed_pkg_count": 124,
   "tokens_in": null,
   "tokens_out": null,
   "llm_calls": null,
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 4.55,
-  "build_s": 89.13,
-  "test_s": 0.66,
+  "build_s": 105.95,
+  "test_s": 0.93,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -112,19 +112,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=67c9b6fff71ccbca275686dd955923ef00da8f1d (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=67c9b6fff71ccbca275686dd955923ef00da8f1d (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

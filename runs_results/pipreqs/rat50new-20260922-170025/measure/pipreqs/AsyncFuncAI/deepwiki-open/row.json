@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50new-20260922-170025",
+  "agent": "pipreqs",
   "repo": "AsyncFuncAI/deepwiki-open",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": " backoff-2.2.1 backports-asyncio-runner-1.2.0 boto3-1.43.103 botocore-1.43.103 certifi-2026.7.22 charset_normalizer-3.5.1 click-8.5.0 colorama-0.4.6 diskcache-5.6.3 fastapi-0.141.1 frozenlist-1.8.0 gitdb-4.0.12 h11-0.16.0 httpcore-1.0.9 httpcore2-2.13.1 httpx-0.28.1 httpx2-2.13.1 idna-3.20 jinja2-3.1.6 jiter-0.17.0 jmespath-1.1.0 jsonlines-4.0.0 multidict-6.9.1 nest-asyncio-1.6.0 numpy-2.2.6 openai-3.19.2 propcache-0.5.4 protobuf-7.36.2 pydantic-2.13.5 pydantic-core-2.46.5 pytest-asyncio-1.4.0 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 regex-2026.9.10 s3transfer-0.19.2 six-1.17.0 smmap-5.0.3 sniffio-1.3.1 starlette-1.7.0 tiktoken-0.14.0 tqdm-4.70.1 truststore-0.10.4 typing-inspection-0.4.4 urllib3-2.8.0 uvicorn-0.54.0 watchfiles-1.3.0 yarl-1.25.1\n#11 17.68 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 17.68 \n#11 17.68 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 17.68 [notice] To update, run: pip install --upgrade pip\n#11 DONE 19.1s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 11.4s done\n#12 exporting manifest sha256:cc44fefc39de0776789eb8988dd20df614ee10fb5f754951cf9e8b9cf6e00266 done\n#12 exporting config sha256:00d5760d6c36d84079e0ae218d5e5d7305e2ad5ada6806b1b679799fac15cb8a done\n#12 exporting attestation manifest sha256:6e8f2a831581cf5f2ef8d865e4b1b8e262359882da7b61bb2d6232ca66d1225e 0.0s done\n#12 exporting manifest list sha256:afeae52b34498716e3cea90898c8fbf801d68e175db338779e33e09f02c5662a done\n#12 naming to docker.io/library/bench-pipreqs__rat50new-20260922-170025-asyncfuncai-deepwiki-open:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-asyncfuncai-deepwiki-open:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-asyncfuncai-deepwiki-open:latest 2.6s done\n#12 DONE 14.0s\n",
+  "build_log_tail": "ted-types-0.8.0 anyio-4.15.1 async-timeout-5.0.1 asyncstdlib-3.14.0 attrs-26.1.0 backoff-2.2.1 backports-asyncio-runner-1.2.0 boto3-1.43.99 botocore-1.43.99 certifi-2026.7.22 charset_normalizer-3.5.1 click-8.5.0 colorama-0.4.6 diskcache-5.6.3 fastapi-0.141.1 frozenlist-1.8.0 gitdb-4.0.12 h11-0.16.0 httpcore-1.0.9 httpcore2-2.13.0 httpx-0.28.1 httpx2-2.13.0 idna-3.20 jinja2-3.1.6 jiter-0.17.0 jmespath-1.1.0 jsonlines-4.0.0 multidict-6.9.1 nest-asyncio-1.6.0 numpy-2.2.6 openai-3.17.0 propcache-0.5.4 protobuf-7.36.2 pydantic-2.13.5 pydantic-core-2.46.5 pytest-asyncio-1.4.0 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 regex-2026.9.10 s3transfer-0.19.2 six-1.17.0 smmap-5.0.3 sniffio-1.3.1 starlette-1.6.0 tiktoken-0.14.0 tqdm-4.70.1 truststore-0.10.4 typing-inspection-0.4.4 urllib3-2.8.0 uvicorn-0.53.0 watchfiles-1.3.0 yarl-1.25.1\n#11 22.82 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 22.82 \n#11 22.82 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 22.82 [notice] To update, run: pip install --upgrade pip\n#11 DONE 24.5s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 14.2s done\n#12 exporting manifest sha256:537372af992a0aa802e5deb5e59b06e9ee77106bc34ddf51635dcb876fd557f1 done\n#12 exporting config sha256:cb8d2fd784980a8140aaa38d4c939b0635a0352be28000f65cf4959f35aa634e done\n#12 exporting attestation manifest sha256:fdfe8dd8e613ae517e31ab60ef64e2ad7148290b923af9b3bd93308a5154d734 0.0s done\n#12 exporting manifest list sha256:45a79ee5917a2072284441a6315e0a703ae6d0be4a600d9382faa9a904bfbeca done\n#12 naming to docker.io/library/bench-pipreqs-asyncfuncai-deepwiki-open:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-asyncfuncai-deepwiki-open:latest\n#12 unpacking to docker.io/library/bench-pipreqs-asyncfuncai-deepwiki-open:latest 4.7s done\n#12 DONE 19.0s\n",
   "status": "collect_error",
   "py_test_files": 16,
   "collect_rc": 2,
@@ -131,9 +131,9 @@
   "ebsr": true,
   "pass_rate": 0.549,
   "timed_out": false,
-  "image_size_mb": 507.5,
+  "image_size_mb": 1898.3,
   "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50new-20260922-170025-asyncfuncai-deepwiki-open@sha256:afeae52b34498716e3cea90898c8fbf801d68e175db338779e33e09f02c5662a",
+  "image_digest": "bench-pipreqs-asyncfuncai-deepwiki-open@sha256:45a79ee5917a2072284441a6315e0a703ae6d0be4a600d9382faa9a904bfbeca",
   "installed_pkg_count": 75,
   "tokens_in": null,
   "tokens_out": null,
@@ -141,8 +141,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 4.85,
-  "build_s": 35.83,
-  "test_s": 4.58,
+  "build_s": 46.93,
+  "test_s": 5.92,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -169,19 +169,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=d92819a9c9f3b99416e3580ff235fc9d3adf8b89 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=d92819a9c9f3b99416e3580ff235fc9d3adf8b89 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "sweagent__ratbench50-modern-20260914-014042",
+  "agent": "sweagent_repo2run_modern",
   "repo": "D4Vinci/Scrapling",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": ".\n#17 5.839 Setting up fonts-liberation (1:2.1.5-3) ...\n#17 5.843 Setting up libxcomposite1:amd64 (1:0.4.6-1) ...\n#17 5.847 Setting up fonts-unifont (1:15.1.01-1) ...\n#17 5.852 Setting up libxkbcommon0:amd64 (1.7.0-2) ...\n#17 5.858 Setting up libatk1.0-0t64:amd64 (2.56.2-1+deb13u2) ...\n#17 5.862 Setting up libavahi-common3:amd64 (0.8-16) ...\n#17 5.866 Setting up libnss3:amd64 (2:3.110-1+deb13u4) ...\n#17 5.871 Setting up xfonts-utils (1:7.7+7) ...\n#17 5.879 Setting up libatspi2.0-0t64:amd64 (2.56.2-1+deb13u2) ...\n#17 5.884 Setting up libavahi-client3:amd64 (0.8-16) ...\n#17 5.889 Setting up xfonts-scalable (1:1.0.3-1.3) ...\n#17 5.938 Setting up libatk-bridge2.0-0t64:amd64 (2.56.2-1+deb13u2) ...\n#17 5.942 Setting up libcups2t64:amd64 (2.4.10-3+deb13u2) ...\n#17 5.946 Processing triggers for libc-bin (2.41-12+deb13u4) ...\n#17 5.983 Processing triggers for fontconfig (2.15.0-2.3) ...\n#17 DONE 6.5s\n\n#18 [15/18] WORKDIR /repo\n#18 DONE 0.0s\n\n#19 [16/18] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.3s\n\n#20 [17/18] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 [18/18] RUN git config --global --add safe.directory /testbed\n#21 DONE 0.2s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 24.9s done\n#22 exporting manifest sha256:3e64ab92f1f296dda460383ddbfaea0ade23b3e00a6f9c41d285bbf1005dee8f done\n#22 exporting config sha256:66690bd4ce20acf9ca6366bc894a663717c706d72eacac32c0b0782787e0a9aa done\n#22 exporting attestation manifest sha256:97910aabb92f1f80e997230ff4c42ba17b76a2d383a0428f79501343123822a2 0.0s done\n#22 exporting manifest list sha256:5d370de566ca773d4f6c19423d1b4424915b22af94f15bea69d34dedc5645250 done\n#22 naming to docker.io/library/bench-sweagent__ratbench50-modern-20260914-014042-d4vinci-scrapling:latest done\n#22 unpacking to docker.io/library/bench-sweagent__ratbench50-modern-20260914-014042-d4vinci-scrapling:latest\n#22 unpacking to docker.io/library/bench-sweagent__ratbench50-modern-20260914-014042-d4vinci-scrapling:latest 8.5s done\n#22 DONE 33.5s\n",
+  "build_log_tail": "b13u2) ...\n#17 7.623 Setting up libgirepository-2.0-0:amd64 (2.84.4-3~deb13u5) ...\n#17 7.626 Setting up libavahi-common3:amd64 (0.8-16) ...\n#17 7.629 Setting up libglib2.0-bin (2.84.4-3~deb13u5) ...\n#17 7.632 Setting up libnss3:amd64 (2:3.110-1+deb13u4) ...\n#17 7.636 Setting up xfonts-utils (1:7.7+7) ...\n#17 7.642 Setting up libatspi2.0-0t64:amd64 (2.56.2-1+deb13u2) ...\n#17 7.645 Setting up libavahi-client3:amd64 (0.8-16) ...\n#17 7.648 Setting up xfonts-scalable (1:1.0.3-1.3) ...\n#17 7.682 Setting up libatk-bridge2.0-0t64:amd64 (2.56.2-1+deb13u2) ...\n#17 7.685 Setting up girepository-tools:amd64 (2.84.4-3~deb13u5) ...\n#17 7.688 Setting up libcups2t64:amd64 (2.4.10-3+deb13u2) ...\n#17 7.690 Setting up libglib2.0-dev-bin (2.84.4-3~deb13u5) ...\n#17 7.693 Setting up libglib2.0-dev:amd64 (2.84.4-3~deb13u5) ...\n#17 7.696 Processing triggers for libc-bin (2.41-12+deb13u3) ...\n#17 7.801 Processing triggers for fontconfig (2.15.0-2.3) ...\n#17 DONE 8.0s\n\n#18 [15/18] WORKDIR /repo\n#18 DONE 0.0s\n\n#19 [16/18] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.3s\n\n#20 [17/18] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 [18/18] RUN git config --global --add safe.directory /testbed\n#21 DONE 0.2s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 21.4s done\n#22 exporting manifest sha256:8b1c59c6cd063e3d0a12629ae2968e6c30f063de59def499de4d8e0e0dc39d5d done\n#22 exporting config sha256:b6f3a3202ed4ed4e353e42481860b86c63f0541c5ce50af5e5d08c3b95c75984 done\n#22 exporting attestation manifest sha256:08b0110c18c3f45c3f8661770b2b4b4715a76822f765dc8eb56bf186073d5a45 0.0s done\n#22 exporting manifest list sha256:16a3d73dbaf350d2450fe7d5ce848986950c50762eba0c4a24df3625b774bb2e 0.0s done\n#22 naming to docker.io/library/bench-sweagent_repo2run_modern-d4vinci-scrapling:latest done\n#22 unpacking to docker.io/library/bench-sweagent_repo2run_modern-d4vinci-scrapling:latest\n#22 unpacking to docker.io/library/bench-sweagent_repo2run_modern-d4vinci-scrapling:latest 9.8s done\n#22 DONE 31.4s\n",
   "status": "collect_error",
   "py_test_files": 45,
   "collect_rc": 2,
@@ -804,9 +804,9 @@
   "ebsr": true,
   "pass_rate": 0.9883,
   "timed_out": false,
-  "image_size_mb": 1160.9,
-  "image_delta_mb": null,
-  "image_digest": "bench-sweagent__ratbench50-modern-20260914-014042-d4vinci-scrapling@sha256:5d370de566ca773d4f6c19423d1b4424915b22af94f15bea69d34dedc5645250",
+  "image_size_mb": 1166.7,
+  "image_delta_mb": 779.1,
+  "image_digest": "bench-sweagent_repo2run_modern-d4vinci-scrapling@sha256:16a3d73dbaf350d2450fe7d5ce848986950c50762eba0c4a24df3625b774bb2e",
   "installed_pkg_count": 118,
   "tokens_in": 755048.0,
   "tokens_out": 1573.0,
@@ -814,8 +814,8 @@
   "turns_used": 51,
   "cost_usd": 0.036801875000000005,
   "produce_s": 401.97,
-  "build_s": 108.16,
-  "test_s": 51.02,
+  "build_s": 97.5,
+  "test_s": 52.82,
   "meta": {
     "contract_version": 1,
     "producer": "sweagent_repo2run_modern",
@@ -849,19 +849,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=8e7bc99ebc05f0e38f7c1426ca6ff861da6cad36 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=8e7bc99ebc05f0e38f7c1426ca6ff861da6cad36 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "librephotos/librephotos",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ead -60; echo \"===PIP LIST===\"; pip list 2>/dev/null | head -40\n#15 0.167 ===PIP LIST===\n#15 0.521 Package           Version\n#15 0.521 ----------------- -------\n#15 0.521 build             1.6.1\n#15 0.521 exceptiongroup    1.3.1\n#15 0.521 execnet           2.1.2\n#15 0.521 iniconfig         2.3.0\n#15 0.521 installer         1.0.1\n#15 0.521 nab               0.0.18\n#15 0.521 nab-index         0.0.18\n#15 0.521 nab-markersets    0.0.18\n#15 0.521 nab-project       0.0.18\n#15 0.521 nab-provider      0.0.18\n#15 0.521 nab-resolver      0.0.18\n#15 0.521 packaging         26.3\n#15 0.521 pip               23.0.1\n#15 0.521 pipdeptree        4.2.5\n#15 0.521 pluggy            1.6.0\n#15 0.521 Pygments          2.21.0\n#15 0.521 pyproject_hooks   1.3.3\n#15 0.521 pytest            9.1.1\n#15 0.521 pytest-xdist      3.8.0\n#15 0.521 setuptools        79.0.1\n#15 0.521 tomli             2.4.1\n#15 0.521 tomli_w           1.2.0\n#15 0.521 truststore        0.10.4\n#15 0.521 typing_extensions 4.16.0\n#15 0.521 urllib3           2.8.0\n#15 0.521 wheel             0.46.3\n#15 DONE 0.5s\n\n#16 [13/15] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#16 DONE 0.3s\n\n#17 [14/15] WORKDIR /testbed\n#17 DONE 0.0s\n\n#18 exporting to image\n#18 exporting layers\n#18 exporting layers 5.1s done\n#18 exporting manifest sha256:b549c2cdf4c64ce3b57c683ffb90d48adeb91f93ec8d6c48ae4bc8dd1ae02b71 done\n#18 exporting config sha256:14dee472cec5164d05d9e2ac375ab690ad821a6fab49a5801f0d356e72e31480 done\n#18 exporting attestation manifest sha256:d41e456fdf624065a3ffebe9ba688f1ef638a52a77e2de1fb480679560397731 done\n#18 exporting manifest list sha256:449b8ea8f684b3cb9ebee0b198bff5ad9f2fa6febf2e3fc019737cb55845b277 done\n#18 naming to docker.io/library/bench-repo2run__envbench100-pjy-librephotos-librephotos:latest done\n#18 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-librephotos-librephotos:latest\n#18 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-librephotos-librephotos:latest 3.8s done\n#18 DONE 9.0s\n",
+  "build_log_tail": "ead -40\n#15 0.169 ===PIP LIST===\n#15 0.739 Package           Version\n#15 0.739 ----------------- -------\n#15 0.739 build             1.6.1\n#15 0.739 exceptiongroup    1.3.1\n#15 0.739 execnet           2.1.2\n#15 0.739 iniconfig         2.3.0\n#15 0.739 installer         1.0.1\n#15 0.739 nab               0.0.18\n#15 0.739 nab-index         0.0.18\n#15 0.739 nab-markersets    0.0.18\n#15 0.739 nab-project       0.0.18\n#15 0.739 nab-provider      0.0.18\n#15 0.739 nab-resolver      0.0.18\n#15 0.739 packaging         26.3\n#15 0.739 pip               23.0.1\n#15 0.739 pipdeptree        4.2.5\n#15 0.739 pluggy            1.6.0\n#15 0.739 Pygments          2.21.0\n#15 0.739 pyproject_hooks   1.3.3\n#15 0.739 pytest            9.1.1\n#15 0.739 pytest-xdist      3.8.0\n#15 0.739 setuptools        79.0.1\n#15 0.739 tomli             2.4.1\n#15 0.739 tomli_w           1.2.0\n#15 0.739 truststore        0.10.4\n#15 0.739 typing_extensions 4.16.0\n#15 0.739 urllib3           2.8.0\n#15 0.739 wheel             0.46.3\n#15 DONE 0.8s\n\n#16 [13/15] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#16 DONE 0.4s\n\n#17 [14/15] WORKDIR /testbed\n#17 DONE 0.0s\n\n#18 exporting to image\n#18 exporting layers\n#18 exporting layers 5.4s done\n#18 exporting manifest sha256:18c2372ea11d9569705657e79a41eca697ed5f5e09e25c1afa61713b9c9ebedd\n#18 exporting manifest sha256:18c2372ea11d9569705657e79a41eca697ed5f5e09e25c1afa61713b9c9ebedd done\n#18 exporting config sha256:5d1e0bd737145ab5645739807468719427ba53b3bcbeaec5cb3c210ec2bf9f70 done\n#18 exporting attestation manifest sha256:c7c56cad30bdd0fbf022418f747461c2fa764a59d0c9678ec39fe3b9c4ac7950 done\n#18 exporting manifest list sha256:64f9b276e927357aea92f6b378fedc546ea2462dc4f84752fce302b7ba109f44 done\n#18 naming to docker.io/library/bench-pjy-repo2run-librephotos-librephotos:latest done\n#18 unpacking to docker.io/library/bench-pjy-repo2run-librephotos-librephotos:latest\n#18 unpacking to docker.io/library/bench-pjy-repo2run-librephotos-librephotos:latest 2.7s done\n#18 DONE 8.1s\n",
   "status": "collect_error",
   "py_test_files": 28,
   "collect_rc": 2,
@@ -84,7 +84,7 @@
   "timed_out": false,
   "image_size_mb": 2654.7,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-librephotos-librephotos@sha256:449b8ea8f684b3cb9ebee0b198bff5ad9f2fa6febf2e3fc019737cb55845b277",
+  "image_digest": "bench-pjy-repo2run-librephotos-librephotos@sha256:64f9b276e927357aea92f6b378fedc546ea2462dc4f84752fce302b7ba109f44",
   "installed_pkg_count": 27,
   "tokens_in": 187523,
   "tokens_out": 2282,
@@ -92,8 +92,8 @@
   "turns_used": 14,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 21.83,
-  "test_s": 0.42,
+  "build_s": 25.86,
+  "test_s": 0.64,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -101,19 +101,7 @@
     "tokens_in": 187523,
     "tokens_out": 2282,
     "llm_calls": null,
-    "turns_used": 14,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 14
   },
   "error_surface": "",
   "error_surface_reason": "",

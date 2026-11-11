@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50new-20260922-170025",
+  "agent": "pipreqs",
   "repo": "GoogleCloudPlatform/ramble",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": ".1.3 matplotlib-3.10.9 matplotlib-inline-0.2.2 mock-5.2.0 nltk-3.10.3 numpy-2.2.6 ordereddict-1.1 pandas-2.3.3 parso-0.8.7 pexpect-4.9.0 pillow-12.3.0 pretty-0.1 prompt_toolkit-3.0.53 protobuf-7.36.2 ptyprocess-0.7.0 pure-eval-0.2.4 pycparser-3.0 pyparsing-3.3.3 python-dateutil-2.9.0.post0 pytz-2026.4 regex-2026.9.10 requests-2.34.2 rfc3987-1.3.8 s3transfer-0.19.2 scipy-1.15.3 sets-0.3.2 six-1.17.0 snowballstemmer-3.1.1 sphinxcontrib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 stack_data-0.6.3 strict_rfc3339-0.7 tqdm-4.70.1 traceback2-1.4.0 traitlets-5.16.1 tzdata-2026.4 unittest2-1.1.0 urllib3-2.8.0 wcwidth-0.9.1 webcolors-25.10.0\n#11 40.07 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 40.08 \n#11 40.08 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 40.08 [notice] To update, run: pip install --upgrade pip\n#11 DONE 41.3s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 34.8s done\n#12 exporting manifest sha256:da180f816213d518364c842b296536a8d5d9cbde0b1e8139f9902f05f8c96f29 done\n#12 exporting config sha256:5b69dded5faa446a6421be82ddac5291b3488848f1852621ee6156c13685b98f done\n#12 exporting attestation manifest sha256:ee1aaa646ac995f632f62e04cc653dc5d0151196300b6173dc2b764aa579b297 0.0s done\n#12 exporting manifest list sha256:4ffaacc5a9dd758a2e7cc713d6967e7dbf1f71fd79db18c255fd113cbb70806d done\n#12 naming to docker.io/library/bench-pipreqs__rat50new-20260922-170025-googlecloudplatform-ramble:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-googlecloudplatform-ramble:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-googlecloudplatform-ramble:latest 7.8s done\n#12 DONE 42.6s\n",
+  "build_log_tail": "2.3.3 parso-0.8.7 pexpect-4.9.0 pillow-12.3.0 pretty-0.1 prompt_toolkit-3.0.53 protobuf-7.36.2 ptyprocess-0.7.0 pure-eval-0.2.4 pycparser-3.0 pyparsing-3.3.3 python-dateutil-2.9.0.post0 pytz-2026.3.post1 regex-2026.9.10 requests-2.34.2 rfc3987-1.3.8 s3transfer-0.19.2 scipy-1.15.3 sets-0.3.2 six-1.17.0 snowballstemmer-3.1.1 sphinxcontrib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 stack_data-0.6.3 strict_rfc3339-0.7 tqdm-4.70.1 traceback2-1.4.0 traitlets-5.16.1 tzdata-2026.4 unittest2-1.1.0 urllib3-2.8.0 wcwidth-0.8.4 webcolors-25.10.0\n#11 52.33 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 52.34 \n#11 52.34 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 52.34 [notice] To update, run: pip install --upgrade pip\n#11 DONE 53.9s\n\n#12 exporting to image\n#12 exporting layers\n#12 ...\n\n#3 [ 1/43] FROM docker.io/library/python:3.10@sha256:4379c343a93c87429e0ac3e8e09d073a4ee26084d710ac38b686fa34eed12270\n#3 CACHED\n\n#12 exporting to image\n#12 exporting layers 55.3s done\n#12 exporting manifest sha256:4217cc3b488c6c09a5ff06475a27a01950155658d4fbfb47c48b7ea2b9b0f22e 0.0s done\n#12 exporting config sha256:a34908e1b216e9e00148107b5df03ab32aeaad749030e69b97af378f9bf1a37f 0.0s done\n#12 exporting attestation manifest sha256:af34442e899a423d335c6a24985e5fe70685bd2be79999abaf766d0054110a09 0.0s done\n#12 exporting manifest list sha256:f50e0903b56310ca95758c3245240e7bd5704c91c9c43f87abdc8e8b96ccc043 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-googlecloudplatform-ramble:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-googlecloudplatform-ramble:latest\n#12 unpacking to docker.io/library/bench-pipreqs-googlecloudplatform-ramble:latest 13.1s done\n#12 DONE 68.6s\n",
   "status": "collect_error",
   "py_test_files": 21,
   "collect_rc": 4,
@@ -26,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 910.7,
+  "image_size_mb": 2994.9,
   "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50new-20260922-170025-googlecloudplatform-ramble@sha256:4ffaacc5a9dd758a2e7cc713d6967e7dbf1f71fd79db18c255fd113cbb70806d",
+  "image_digest": "bench-pipreqs-googlecloudplatform-ramble@sha256:f50e0903b56310ca95758c3245240e7bd5704c91c9c43f87abdc8e8b96ccc043",
   "installed_pkg_count": 96,
   "tokens_in": null,
   "tokens_out": null,
@@ -36,8 +36,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 9.15,
-  "build_s": 97.3,
-  "test_s": 0.26,
+  "build_s": 142.48,
+  "test_s": 0.43,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -64,19 +64,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=9ac5894ee31d00dcdd07382f84114adfe3996cb3 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=9ac5894ee31d00dcdd07382f84114adfe3996cb3 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

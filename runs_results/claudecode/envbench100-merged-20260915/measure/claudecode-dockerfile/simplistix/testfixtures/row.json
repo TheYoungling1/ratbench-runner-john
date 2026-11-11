@@ -1,10 +1,10 @@
 {
-  "agent": "claudecode__envbench100-merged-20260915",
+  "agent": "claudecode-dockerfile",
   "repo": "simplistix/testfixtures",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ling collected packages: zope-interface, typing_extensions, testfixtures, sybil, sqlparse, pathspec, mypy_extensions, librt, incremental, idna, coverage, constantly, automat, attrs, ast-serialize, asgiref, pytest-django, mypy, hyperlink, django, twisted, pytest-cov\n#9 9.220 Successfully installed asgiref-3.12.1 ast-serialize-0.11.2 attrs-26.1.0 automat-25.4.16 constantly-23.10.4 coverage-7.16.1 django-5.2.17 hyperlink-21.0.0 idna-3.20 incremental-24.11.0 librt-0.15.0 mypy-2.3.1 mypy_extensions-1.1.0 pathspec-1.1.1 pytest-cov-7.1.0 pytest-django-4.14.0 sqlparse-0.6.0 sybil-10.1.0 testfixtures-8.3.0 twisted-26.4.0 typing_extensions-4.16.0 zope-interface-8.6\n#9 9.221 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#9 9.229 \n#9 9.229 [notice] A new release of pip is available: 24.0 -> 26.2.1\n#9 9.229 [notice] To update, run: pip install --upgrade pip\n#9 DONE 9.6s\n\n#10 exporting to image\n#10 exporting layers\n#10 exporting layers 9.5s done\n#10 exporting manifest sha256:3ddd7b9fc14348351e0b128831a01cab484d79d4b6fd9d235253b2a9cb9a370c\n#10 exporting manifest sha256:3ddd7b9fc14348351e0b128831a01cab484d79d4b6fd9d235253b2a9cb9a370c done\n#10 exporting config sha256:710deb9f8cf6f82c58fb012e34b12449b1fbfeafbaf4da16009a57f7eb901503 done\n#10 exporting attestation manifest sha256:d20d47dc6d655095ddc38c277be2b36224055691df6bd685ea18f3c8ea3a22c9 0.0s done\n#10 exporting manifest list sha256:1c216cfbcb2c5b4f0f0f2809955327e96ae2ad2334314176bda32437e5ae1943 done\n#10 naming to docker.io/library/bench-claudecode__envbench100-merged-20260915-simplistix-testfixtures:latest done\n#10 unpacking to docker.io/library/bench-claudecode__envbench100-merged-20260915-simplistix-testfixtures:latest\n#10 unpacking to docker.io/library/bench-claudecode__envbench100-merged-20260915-simplistix-testfixtures:latest 3.5s done\n#10 DONE 13.2s\n",
+  "build_log_tail": "none-any.whl (68 kB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 68.5/68.5 kB 25.7 MB/s eta 0:00:00\nBuilding wheels for collected packages: testfixtures\n  Building wheel for testfixtures (setup.py): started\n  Building wheel for testfixtures (setup.py): finished with status 'done'\n  Created wheel for testfixtures: filename=testfixtures-8.3.0-py3-none-any.whl size=103203 sha256=2033f690fe293f0ef9c61d8cee9bb384aa37b37e2da9b44143b7e7f8d1d4966d\n  Stored in directory: /tmp/pip-ephem-wheel-cache-cpsqt4t8/wheels/49/5f/4f/01b7d31ea6ddac9643da788242d33e5fd3467d95d17b032c6b\nSuccessfully built testfixtures\nInstalling collected packages: zope-interface, typing_extensions, testfixtures, sybil, sqlparse, pathspec, mypy_extensions, librt, incremental, idna, coverage, constantly, automat, attrs, ast-serialize, asgiref, pytest-django, mypy, hyperlink, django, twisted, pytest-cov\nSuccessfully installed asgiref-3.12.1 ast-serialize-0.11.0 attrs-26.1.0 automat-25.4.16 constantly-23.10.4 coverage-7.16.0 django-5.2.17 hyperlink-21.0.0 idna-3.19 incremental-24.11.0 librt-0.15.0 mypy-2.3.1 mypy_extensions-1.1.0 pathspec-1.1.1 pytest-cov-7.1.0 pytest-django-4.14.0 sqlparse-0.6.0 sybil-10.1.0 testfixtures-8.3.0 twisted-26.4.0 typing_extensions-4.16.0 zope-interface-8.6\n\u001b[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n\u001b[0m\u001b[91m\n[notice] A new release of pip is available: 24.0 -> 26.2.1\n[notice] To update, run: pip install --upgrade pip\n\u001b[0m ---> Removed intermediate container c11caddbd2be\n ---> 2060f39baa9e\nSuccessfully built 2060f39baa9e\nSuccessfully tagged bench-claudecode-dockerfile-simplistix-testfixtures:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 59,
   "collect_rc": 2,
@@ -2985,9 +2985,9 @@
   "ebsr": true,
   "pass_rate": 0.9805,
   "timed_out": false,
-  "image_size_mb": 470.6,
-  "image_delta_mb": null,
-  "image_digest": "bench-claudecode__envbench100-merged-20260915-simplistix-testfixtures@sha256:1c216cfbcb2c5b4f0f0f2809955327e96ae2ad2334314176bda32437e5ae1943",
+  "image_size_mb": 470.4,
+  "image_delta_mb": 90.6,
+  "image_digest": "bench-claudecode-dockerfile-simplistix-testfixtures@sha256:2060f39baa9e98fb78ddeac3855e7c350d9f585494eaf27db87ed7e6f4a3ca26",
   "installed_pkg_count": 31,
   "tokens_in": 273163,
   "tokens_out": 1764,
@@ -2995,8 +2995,8 @@
   "turns_used": 8,
   "cost_usd": 0.010930756,
   "produce_s": 38.25,
-  "build_s": 27.22,
-  "test_s": 3.97,
+  "build_s": 24.66,
+  "test_s": 3.75,
   "meta": {
     "contract_version": 1,
     "producer": "claudecode-dockerfile",
@@ -3023,19 +3023,7 @@
     "usage_source": "computed",
     "dsml_text_blocks": 0,
     "turn_capped": false,
-    "agent_timed_out": false,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "agent_timed_out": false
   },
   "error_surface": "",
   "error_surface_reason": "",

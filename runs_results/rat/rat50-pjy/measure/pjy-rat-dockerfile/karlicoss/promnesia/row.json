@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "karlicoss/promnesia",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": " pure_eval-0.2.3 pydantic-2.13.4 pydantic_core-2.46.4 pyperclip-1.11.0 pytest-repeat-0.9.4 pytest-timeout-2.4.0 pytest-xdist-3.8.0 python-dotenv-1.2.3 python-magic-0.4.27 python3-xlib-0.15 pytweening-1.2.0 pytz-2026.3.post1 requests-2.34.2 selenium-4.47.0 sortedcontainers-2.4.0 soupsieve-2.9.2 stack-data-0.6.3 starlette-1.6.0 tqdm-4.70.0 traitlets-5.16.1 trio-0.34.0 trio-websocket-0.12.2 tzlocal-5.4.4 uritools-6.1.3 urlextract-1.9.0 urllib3-2.7.0 uvicorn-0.52.3 uvloop-0.22.1 watchfiles-1.2.0 wcwidth-0.8.2 websocket-client-1.9.0 websockets-17.0.1 wsproto-1.3.2\n#16 77.58 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#16 77.66 \n#16 77.66 [notice] A new release of pip is available: 25.0.1 -> 26.2.1\n#16 77.66 [notice] To update, run: pip install --upgrade pip\n#16 DONE 79.1s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.8s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.0s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 11.7s done\n#19 exporting manifest sha256:4f8bc00aeed7e8a5b0e1bf3091fdbd98bb5a924f26e071712584946740f7db5c 0.0s done\n#19 exporting config sha256:5765d381eed40eff2ae104de0438ff48e7a1e39022fb9844dfa62458e5c56754 done\n#19 exporting attestation manifest sha256:d2fd186cc1b84ba6f9b81fd09a4d41a2251a83232e2c905012a45adc13b3dc22 0.0s done\n#19 exporting manifest list sha256:bdd84c4424e68ea90962bf409c58019b52bd570f6e9c261381d4f53228264fab 0.0s done\n#19 naming to docker.io/library/bench-rat__rat50-pjy-karlicoss-promnesia:latest done\n#19 unpacking to docker.io/library/bench-rat__rat50-pjy-karlicoss-promnesia:latest\n#19 unpacking to docker.io/library/bench-rat__rat50-pjy-karlicoss-promnesia:latest 3.9s done\n#19 DONE 15.7s\n",
+  "build_log_tail": "2.3 pydantic-2.13.4 pydantic_core-2.46.4 pyperclip-1.11.0 pytest-repeat-0.9.4 pytest-timeout-2.4.0 pytest-xdist-3.8.0 python-dotenv-1.2.3 python-magic-0.4.27 python3-xlib-0.15 pytweening-1.2.0 pytz-2026.3.post1 requests-2.34.2 selenium-4.47.0 sortedcontainers-2.4.0 soupsieve-2.9.2 stack-data-0.6.3 starlette-1.6.0 tqdm-4.70.0 traitlets-5.16.1 trio-0.34.0 trio-websocket-0.12.2 tzlocal-5.4.4 uritools-6.1.3 urlextract-1.9.0 urllib3-2.7.0 uvicorn-0.52.3 uvloop-0.22.1 watchfiles-1.2.0 wcwidth-0.8.2 websocket-client-1.9.0 websockets-17.0.1 wsproto-1.3.2\n#16 282.1 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#16 282.2 \n#16 282.2 [notice] A new release of pip is available: 25.0.1 -> 26.2.1\n#16 282.2 [notice] To update, run: pip install --upgrade pip\n#16 DONE 283.4s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.4s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.0s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 10.1s done\n#19 exporting manifest sha256:e6ac2c75f58c4c6009cdcc029c8bd873272d5d3a8740522999482eeda909d118 0.0s done\n#19 exporting config sha256:885956167d586f7eb376d31829ad06926b358ea88bc063a58fae347c331ed5d7 done\n#19 exporting attestation manifest sha256:5e4c31bfb695cb1f9b15e51aa523def7b9ddca81fd6f4ddc068279df07a361be 0.0s done\n#19 exporting manifest list sha256:df062a3412fee68f5440d8ff4fd7e69f7c1992aac971df588cc900f6097fb987 0.0s done\n#19 naming to docker.io/library/bench-pjy-rat-dockerfile-karlicoss-promnesia:latest done\n#19 unpacking to docker.io/library/bench-pjy-rat-dockerfile-karlicoss-promnesia:latest\n#19 unpacking to docker.io/library/bench-pjy-rat-dockerfile-karlicoss-promnesia:latest 7.4s done\n#19 DONE 17.7s\n",
   "status": "collect_error",
   "py_test_files": 20,
   "collect_rc": 2,
@@ -195,7 +195,7 @@
   "timed_out": false,
   "image_size_mb": 705.6,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50-pjy-karlicoss-promnesia@sha256:bdd84c4424e68ea90962bf409c58019b52bd570f6e9c261381d4f53228264fab",
+  "image_digest": "bench-pjy-rat-dockerfile-karlicoss-promnesia@sha256:df062a3412fee68f5440d8ff4fd7e69f7c1992aac971df588cc900f6097fb987",
   "installed_pkg_count": 101,
   "tokens_in": 4406292,
   "tokens_out": 51868,
@@ -203,27 +203,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 101.46,
-  "test_s": 78.6,
+  "build_s": 358.62,
+  "test_s": 77.98,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 4406292,
     "tokens_out": 51868,
-    "llm_calls": 102,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 102
   },
   "error_surface": "",
   "error_surface_reason": "",

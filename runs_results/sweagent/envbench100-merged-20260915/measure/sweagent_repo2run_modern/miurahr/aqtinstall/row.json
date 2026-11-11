@@ -1,10 +1,10 @@
 {
-  "agent": "sweagent__envbench100-merged-20260915",
+  "agent": "sweagent_repo2run_modern",
   "repo": "miurahr/aqtinstall",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "28 Successfully installed aqtinstall-0.1.dev1 backports.zstd-1.7.0 beautifulsoup4-4.15.0 brotli-1.2.0 bs4-0.0.2 certifi-2026.7.22 charset_normalizer-3.5.1 coverage-7.16.1 defusedxml-0.7.1 execnet-2.1.2 humanize-4.16.0 idna-3.20 inflate64-1.0.4 multivolumefile-0.2.3 patch-1.16 pep8-1.7.1 psutil-7.2.2 py7zr-1.1.3 pybcj-1.0.8 pycryptodomex-3.23.0 pympler-1.1 pyppmd-1.3.1 pytest-cache-1.0 pytest-cov-7.1.0 pytest-pep8-1.0.6 pytest-remotedata-0.4.2 pytest-socket-0.8.1 pytest-timeout-2.4.0 requests-2.34.2 semantic-version-2.10.0 soupsieve-2.10 texttable-1.7.0 urllib3-2.8.0\n#12 9.529 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#12 9.531 \n#12 9.531 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#12 9.531 [notice] To update, run: pip install --upgrade pip\n#12 DONE 10.0s\n\n#13 [10/12] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#13 DONE 0.3s\n\n#14 [11/12] WORKDIR /testbed\n#14 DONE 0.0s\n\n#15 [12/12] RUN git config --global --add safe.directory /testbed\n#15 DONE 0.2s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 1.5s done\n#16 exporting manifest sha256:417fcf89e9b26e502ccb43c49dd25d21db988b71a5e977ceb551772488e08f1e done\n#16 exporting config sha256:afe1dc8806b62d8e4acc5a1c89fe894f6df126082cd28989c4e1d99ae31cc177 done\n#16 exporting attestation manifest sha256:46ee111ac682d2874bb50f39406e00d52c606a810107503ccca70e2f9bd75758 0.0s done\n#16 exporting manifest list sha256:d682f5273840b4c8a18322c09d3d006d4f10b8241044b81c8e51b6d34058fab6 done\n#16 naming to docker.io/library/bench-sweagent__envbench100-merged-20260915-miurahr-aqtinstall:latest done\n#16 unpacking to docker.io/library/bench-sweagent__envbench100-merged-20260915-miurahr-aqtinstall:latest\n#16 unpacking to docker.io/library/bench-sweagent__envbench100-merged-20260915-miurahr-aqtinstall:latest 1.2s done\n#16 DONE 2.8s\n",
+  "build_log_tail": "ate64, idna, humanize, execnet, defusedxml, coverage, charset_normalizer, certifi, backports.zstd, requests, py7zr, beautifulsoup4, pytest-timeout, pytest-socket, pytest-remotedata, pytest-cov, pytest-cache, bs4, pytest-pep8, aqtinstall\nSuccessfully installed aqtinstall-0.1.dev1 backports.zstd-1.7.0 beautifulsoup4-4.15.0 brotli-1.2.0 bs4-0.0.2 certifi-2026.7.22 charset_normalizer-3.5.1 coverage-7.16.0 defusedxml-0.7.1 execnet-2.1.2 humanize-4.16.0 idna-3.19 inflate64-1.0.4 multivolumefile-0.2.3 patch-1.16 pep8-1.7.1 psutil-7.2.2 py7zr-1.1.3 pybcj-1.0.8 pycryptodomex-3.23.0 pympler-1.1 pyppmd-1.3.1 pytest-cache-1.0 pytest-cov-7.1.0 pytest-pep8-1.0.6 pytest-remotedata-0.4.2 pytest-socket-0.8.1 pytest-timeout-2.4.0 requests-2.34.2 semantic-version-2.10.0 soupsieve-2.9.2 texttable-1.7.0 urllib3-2.7.0\n\u001b[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n\u001b[0m\u001b[91m\n[notice] A new release of pip is available: 23.0.1 -> 26.2.1\n[notice] To update, run: pip install --upgrade pip\n\u001b[0m ---> Removed intermediate container cb081339ecf3\n ---> ce740b9afacd\nStep 10/12 : RUN mv /repo /testbed && ln -sfn /testbed /repo\n ---> Running in 3374a017b783\n ---> Removed intermediate container 3374a017b783\n ---> e0d5d16e50fa\nStep 11/12 : WORKDIR /testbed\n ---> Running in 7b7c9fe08bbb\n ---> Removed intermediate container 7b7c9fe08bbb\n ---> ecf3bc74db79\nStep 12/12 : RUN git config --global --add safe.directory /testbed\n ---> Running in ebd19fe0d955\n ---> Removed intermediate container ebd19fe0d955\n ---> ac5436173a5a\nSuccessfully built ac5436173a5a\nSuccessfully tagged bench-sweagent_repo2run_modern-miurahr-aqtinstall:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "executed",
   "py_test_files": 9,
   "collect_rc": 0,
@@ -761,9 +761,9 @@
   "ebsr": true,
   "pass_rate": 1.0,
   "timed_out": false,
-  "image_size_mb": 493.1,
-  "image_delta_mb": null,
-  "image_digest": "bench-sweagent__envbench100-merged-20260915-miurahr-aqtinstall@sha256:d682f5273840b4c8a18322c09d3d006d4f10b8241044b81c8e51b6d34058fab6",
+  "image_size_mb": 493.0,
+  "image_delta_mb": 105.4,
+  "image_digest": "bench-sweagent_repo2run_modern-miurahr-aqtinstall@sha256:ac5436173a5a1890e87d0aee6a6d32d70387f1ae4cd5e14587b6d652d00373c8",
   "installed_pkg_count": 43,
   "tokens_in": 3313456.0,
   "tokens_out": 18349.0,
@@ -771,8 +771,8 @@
   "turns_used": 101,
   "cost_usd": 0.057241995999999996,
   "produce_s": 328.34,
-  "build_s": 20.37,
-  "test_s": 9.65,
+  "build_s": 42.11,
+  "test_s": 10.17,
   "meta": {
     "contract_version": 1,
     "producer": "sweagent_repo2run_modern",
@@ -806,19 +806,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=ac7da38299fc56ae4818ff1c19b96e4e2d6f36c8 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=ac7da38299fc56ae4818ff1c19b96e4e2d6f36c8 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

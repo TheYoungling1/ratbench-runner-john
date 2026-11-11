@@ -1,15 +1,17 @@
 {
-  "agent": "setupx__envbench100-merged-20260915",
+  "agent": "setupx",
   "repo": "Quantum-Accelerators/quacc",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "396-        return self.get_energies() / units.invcm\n#10 361.5 397-\n#10 361.5 398-    def get_zero_point_energy(self) -> float:\n#10 361.5 399-        \"\"\"Diagonalise the Hessian and sum hw/2 to obtain zero-point energy\n#10 361.5 400-\n#10 361.5 401-        Args:\n#10 361.5 402-            energies:\n#10 361.5 403-                Pre-computed energy eigenvalues. Use if available to avoid\n#10 361.5 404-                re-calculating these from the Hessian.\n#10 361.5 405-\n#10 361.5 406-        Returns:\n#10 361.5 === git status/log ===\n#10 361.5 f6bc96ca Delete .sourcery.yaml\n#10 361.5 === pip freeze npm alternatives? ===\n#10 361.7 ase==3.23.0\n#10 361.7 emmet-core==0.83.6\n#10 361.7 maggma==0.68.6\n#10 361.7 monty==2024.5.24\n#10 361.7 numpy==1.26.4\n#10 361.7 pymatgen==2024.6.10\n#10 361.7 pytest==9.1.1\n#10 361.7 pytest-cov==7.1.0\n#10 361.7 scipy==1.13.1\n#10 DONE 362.0s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 1.0s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 47.9s done\n#14 exporting manifest sha256:65a2234afad23f1a5f4f9ca894c60675180e3236e29369e21046514727caee88 done\n#14 exporting config sha256:3bbb21babd159dd08228ad8849cc76e4e6df7b1b99041e06fb95756b4ffc7716 done\n#14 exporting attestation manifest sha256:142f1c2c1d8e4edf561df5df6340976f3407d45f94ddfe7c5a98d8cca18305cd 0.0s done\n#14 exporting manifest list sha256:6f17335a0c3ff477721ff7a57c2cdffb6b24c592028d4a655afd464d5169af5a done\n#14 naming to docker.io/library/bench-setupx__envbench100-merged-20260915-quantum-accelerators-quacc:latest done\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-quantum-accelerators-quacc:latest\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-quantum-accelerators-quacc:latest 9.8s done\n#14 DONE 57.8s\n",
-  "status": "executed",
+  "build_log_tail": "      \"\"\"Diagonalise the Hessian to obtain frequencies in cm^-1\n387-\n388-        Results are cached so diagonalization will only be performed once for\n389-        this object instance.\n390-\n391-        Returns:\n392-            Harmonic mode frequencies in units of cm^-1\n393-\n394-        \"\"\"\n395-\n396-        return self.get_energies() / units.invcm\n397-\n398-    def get_zero_point_energy(self) -> float:\n399-        \"\"\"Diagonalise the Hessian and sum hw/2 to obtain zero-point energy\n400-\n401-        Args:\n402-            energies:\n403-                Pre-computed energy eigenvalues. Use if available to avoid\n404-                re-calculating these from the Hessian.\n405-\n406-        Returns:\n=== git status/log ===\nf6bc96ca Delete .sourcery.yaml\n=== pip freeze npm alternatives? ===\nase==3.23.0\nemmet-core==0.83.6\nmaggma==0.68.6\nmonty==2024.5.24\nnumpy==1.26.4\npymatgen==2024.6.10\npytest==9.1.1\npytest-cov==7.1.0\nscipy==1.13.1\n ---> Removed intermediate container cad74c31381b\n ---> c8f847367208\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in 1a39575c2d31\n ---> Removed intermediate container 1a39575c2d31\n ---> ea7e7f753389\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in 03fe3745afd5\n ---> Removed intermediate container 03fe3745afd5\n ---> 66ec93d87bcd\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in f7eaf2f9dc0c\n ---> Removed intermediate container f7eaf2f9dc0c\n ---> 97403e6497ed\nStep 10/10 : WORKDIR /testbed\n ---> Running in 1ae983e62ab1\n ---> Removed intermediate container 1ae983e62ab1\n ---> ff562cb4cdb3\nSuccessfully built ff562cb4cdb3\nSuccessfully tagged bench-setupx-quantum-accelerators-quacc:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
+  "status": "collect_error",
   "py_test_files": 89,
-  "collect_rc": 0,
-  "collect_clean": true,
-  "collect_errors": [],
+  "collect_rc": 1,
+  "collect_clean": false,
+  "collect_errors": [
+    "NameError: name 'parsl' is not defined. Did you mean: 'vars'?"
+  ],
   "collect_error_count": 0,
   "collected_node_ids": [
     "tests/core/atoms/test_atoms_core.py::test_init",
@@ -536,9 +538,9 @@
   "ebsr": true,
   "pass_rate": 0.9955,
   "timed_out": false,
-  "image_size_mb": 1073.8,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__envbench100-merged-20260915-quantum-accelerators-quacc@sha256:6f17335a0c3ff477721ff7a57c2cdffb6b24c592028d4a655afd464d5169af5a",
+  "image_size_mb": 1068.1,
+  "image_delta_mb": 680.5,
+  "image_digest": "bench-setupx-quantum-accelerators-quacc@sha256:ff562cb4cdb38cfb7457b2c06efc96ac1dfb07b2ba6f9a51d0abb88cb22af031",
   "installed_pkg_count": 98,
   "tokens_in": 825907,
   "tokens_out": 113750,
@@ -546,8 +548,8 @@
   "turns_used": 82,
   "cost_usd": null,
   "produce_s": 1348.92,
-  "build_s": 428.97,
-  "test_s": 108.03,
+  "build_s": 418.7,
+  "test_s": 97.82,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -578,19 +580,7 @@
     "turns_used": 82,
     "produce_s": 1348.92,
     "total_tokens": 939657,
-    "cost_usd": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=f6bc96ca8f169e2474a09e96cb84f2dc14227ff2 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=f6bc96ca8f169e2474a09e96cb84f2dc14227ff2 (pinned)\n"
-      }
-    ]
+    "cost_usd": null
   },
   "error_surface": "",
   "error_surface_reason": "",

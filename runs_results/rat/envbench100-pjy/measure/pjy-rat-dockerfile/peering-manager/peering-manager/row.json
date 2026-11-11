@@ -1,10 +1,10 @@
 {
-  "agent": "rat__envbench100-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "peering-manager/peering-manager",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "netutils-1.8.1 ntc_templates-5.1.0 oauthlib-3.2.2 openai-3.11.0 packaging-23.2 paramiko-3.4.0 prometheus_client-0.20.0 psycopg-3.1.19 psycopg-binary-3.1.19 psycopg-pool-3.2.2 pycparser-2.22 pyeapi-1.0.2 pyixapi-0.2.3 pynetbox-7.3.3 pyparsing-3.1.2 pyserial-3.5 pytest-django-4.14.0 python3-openid-3.2.0 redis-5.0.6 referencing-0.35.1 requests-2.32.3 requests-oauthlib-2.0.0 rpds-py-0.18.1 rq-1.16.2 scp-0.15.0 six-1.16.0 social-auth-app-django-5.4.1 social-auth-core-4.5.4 sqlparse-0.5.0 textfsm-1.1.3 transitions-0.9.1 ttp-0.9.5 ttp-templates-0.3.6 typing_extensions-4.12.2 tzdata-2024.1 uritemplate-4.1.1 urllib3-2.2.2 yamlordereddictloader-0.4.2\n#18 72.72 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 72.84 \n#18 72.84 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 72.84 [notice] To update, run: pip install --upgrade pip\n#18 DONE 73.7s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 2.1s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.1s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 15.0s done\n#21 exporting manifest sha256:7a99a3c23a66e251ca38c7a45526a441cf92cfffeceaf910bbb5c1c58bdcadb5 0.0s done\n#21 exporting config sha256:96297ce2aeea23c50558238fc95939aca1a09ade8c9abe5f5c8e2a6f061ea049 0.0s done\n#21 exporting attestation manifest sha256:9e1ac5a808c72b78b05c718b8a400d05065146ff16a7c421d1858b543fb729b5 0.0s done\n#21 exporting manifest list sha256:a54e8d571f1e02bd80c3e87582666bc4b7b24f112f7ccdf127b9d722400af933 0.0s done\n#21 naming to docker.io/library/bench-rat__envbench100-pjy-peering-manager-peering-manager:latest done\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-peering-manager-peering-manager:latest\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-peering-manager-peering-manager:latest 8.0s done\n#21 DONE 23.1s\n",
+  "build_log_tail": ".3.0 netutils-1.8.1 ntc_templates-5.1.0 oauthlib-3.2.2 openai-3.11.0 packaging-23.2 paramiko-3.4.0 prometheus_client-0.20.0 psycopg-3.1.19 psycopg-binary-3.1.19 psycopg-pool-3.2.2 pycparser-2.22 pyeapi-1.0.2 pyixapi-0.2.3 pynetbox-7.3.3 pyparsing-3.1.2 pyserial-3.5 pytest-django-4.14.0 python3-openid-3.2.0 redis-5.0.6 referencing-0.35.1 requests-2.32.3 requests-oauthlib-2.0.0 rpds-py-0.18.1 rq-1.16.2 scp-0.15.0 six-1.16.0 social-auth-app-django-5.4.1 social-auth-core-4.5.4 sqlparse-0.5.0 textfsm-1.1.3 transitions-0.9.1 ttp-0.9.5 ttp-templates-0.3.6 typing_extensions-4.12.2 tzdata-2024.1 uritemplate-4.1.1 urllib3-2.2.2 yamlordereddictloader-0.4.2\n#18 149.6 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 149.9 \n#18 149.9 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 149.9 [notice] To update, run: pip install --upgrade pip\n#18 DONE 151.2s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.9s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.1s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 13.4s done\n#21 exporting manifest sha256:7a373d88729f1f6fe4f50005018989a41581d6f3c13418db287bea02542f9751 0.0s done\n#21 exporting config sha256:bcc79e0ea1e03423d6a908e4c25e996f64e457e8027f02c576de0290b7d50daf 0.0s done\n#21 exporting attestation manifest sha256:6a5f553a8aa395d1b659d7a40683a60d53f16c111d7881dccb6442bc5d83b95f 0.0s done\n#21 exporting manifest list sha256:1c19f9a5aa9f7d545b3c3d0436f74a7c35ef6446410dc3974d62758c1448cc03 0.0s done\n#21 naming to docker.io/library/bench-pjy-rat-dockerfile-peering-manager-peering-manager:latest done\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-peering-manager-peering-manager:latest\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-peering-manager-peering-manager:latest 8.4s done\n#21 DONE 21.9s\n",
   "status": "collect_error",
   "py_test_files": 48,
   "collect_rc": 2,
@@ -79,9 +79,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 269.2,
+  "image_size_mb": 1197.2,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__envbench100-pjy-peering-manager-peering-manager@sha256:a54e8d571f1e02bd80c3e87582666bc4b7b24f112f7ccdf127b9d722400af933",
+  "image_digest": "bench-pjy-rat-dockerfile-peering-manager-peering-manager@sha256:1c19f9a5aa9f7d545b3c3d0436f74a7c35ef6446410dc3974d62758c1448cc03",
   "installed_pkg_count": 100,
   "tokens_in": 257377,
   "tokens_out": 3385,
@@ -89,27 +89,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 119.44,
-  "test_s": 4.8,
+  "build_s": 195.58,
+  "test_s": 5.01,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 257377,
     "tokens_out": 3385,
-    "llm_calls": 20,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 20
   },
   "error_surface": "",
   "error_surface_reason": "",

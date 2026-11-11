@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__rat50-pjy",
+  "agent": "pjy-repo2run",
   "repo": "coderamp-labs/gitingest",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ml): started\n#36 2.333   Building editable for gitingest (pyproject.toml): finished with status 'done'\n#36 2.334   Created wheel for gitingest: filename=gitingest-0.3.1-0.editable-py3-none-any.whl size=8640 sha256=f7e6deab36a6dc27e657995b4f9ffcb62ba99c0f906b0c634bbd353363996f35\n#36 2.335   Stored in directory: /tmp/pip-ephem-wheel-cache-qliotrxp/wheels/83/05/69/977b54e69478800cfcea8a9437a7ea4a9b1a48db334f824611\n#36 2.340 Successfully built gitingest\n#36 2.398 Installing collected packages: gitingest\n#36 2.414 Successfully installed gitingest-0.3.1\n#36 2.414 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable.It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#36 2.422 \n#36 2.422 [notice] A new release of pip is available: 24.2 -> 26.2.1\n#36 2.422 [notice] To update, run: pip install --upgrade pip\n#36 DONE 2.5s\n\n#37 [33/35] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#37 DONE 0.3s\n\n#38 [34/35] WORKDIR /testbed\n#38 DONE 0.0s\n\n#39 exporting to image\n#39 exporting layers\n#39 exporting layers 6.3s done\n#39 exporting manifest sha256:5dc646c6253cc7aa7f007a782b7bff597fd559bf34a55467eccaca0e37813f50 done\n#39 exporting config sha256:6cb577f96d9259aa50bbc1ee252c5b2728d7023d7ce8ab41512d4a5ecb162649 done\n#39 exporting attestation manifest sha256:f3919bf9216f82c24ad71f5edd9b82917c1c1b06b476428268d4ec1318721039 0.0s done\n#39 exporting manifest list sha256:ae91d74d8f1b0452900b16ca604887f80c383f70f29eacd4b7aa174fb29a13b0 done\n#39 naming to docker.io/library/bench-repo2run__rat50-pjy-coderamp-labs-gitingest:latest done\n#39 unpacking to docker.io/library/bench-repo2run__rat50-pjy-coderamp-labs-gitingest:latest\n#39 unpacking to docker.io/library/bench-repo2run__rat50-pjy-coderamp-labs-gitingest:latest 4.9s done\n#39 DONE 11.3s\n",
+  "build_log_tail": "pt * 5)); done\n#18 CACHED\n\n#19 [ 2/35] COPY patch /patch\n#19 CACHED\n\n#20 [ 3/35] RUN apt-get update && apt-get install -y curl\n#20 CACHED\n\n#21 [15/35] RUN pip install pathspec==1.1.1\n#21 CACHED\n\n#22 [29/35] RUN pip install gitpython==3.1.59\n#22 CACHED\n\n#23 [17/35] RUN pip install pydantic==2.13.4\n#23 CACHED\n\n#24 [31/35] RUN pip install requests==2.34.2\n#24 CACHED\n\n#25 [25/35] RUN pip install pytest==9.1.1\n#25 CACHED\n\n#26 [28/35] RUN pip install pytest-mock==3.15.1\n#26 CACHED\n\n#27 [11/35] RUN pip install boto3==1.43.69\n#27 CACHED\n\n#28 [20/35] RUN pip install starlette==1.6.0\n#28 CACHED\n\n#29 [23/35] RUN pip install eval-type-backport==0.4.0\n#29 CACHED\n\n#30 [14/35] RUN pip install loguru==0.7.3\n#30 CACHED\n\n#31 [26/35] RUN pip install pytest-asyncio==1.4.0\n#31 CACHED\n\n#32 [ 9/35] RUN git config --global --add safe.directory /repo\n#32 CACHED\n\n#33 [ 7/35] RUN python -m pip install --only-binary=:all: pipdeptree==2.23.4\n#33 CACHED\n\n#34 [21/35] RUN pip install tiktoken==0.13.0\n#34 CACHED\n\n#35 [27/35] RUN pip install pytest-cov==7.1.0\n#35 CACHED\n\n#36 [32/35] RUN cd /repo && pip install -e .\n#36 CACHED\n\n#37 [33/35] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#37 DONE 0.4s\n\n#38 [34/35] WORKDIR /testbed\n#38 DONE 0.0s\n\n#39 exporting to image\n#39 exporting layers 0.1s done\n#39 exporting manifest sha256:7b5a8a55f539c8c9b0e0f7c2e22d62d4cace7a2b6fecd0d2646e697a6ca5acd4 0.0s done\n#39 exporting config sha256:aa6a78a6cace59b13949837d21a980e4c5e6273b1f2df66bfaafaede34cf9024 0.0s done\n#39 exporting attestation manifest sha256:8222736c351c6ae51295a183ec3255fbfa6d13581957758a2904cab4dd96b53a 0.0s done\n#39 exporting manifest list sha256:8c3832b3db82b080fe4599e4433156669778dabb1c4af2a127666a1377d752e9 0.0s done\n#39 naming to docker.io/library/bench-pjy-repo2run-coderamp-labs-gitingest:latest done\n#39 unpacking to docker.io/library/bench-pjy-repo2run-coderamp-labs-gitingest:latest\n#39 unpacking to docker.io/library/bench-pjy-repo2run-coderamp-labs-gitingest:latest 4.7s done\n#39 DONE 4.9s\n",
   "status": "collect_error",
   "py_test_files": 12,
   "collect_rc": 2,
@@ -339,9 +339,9 @@
   "ebsr": true,
   "pass_rate": 0.9742,
   "timed_out": false,
-  "image_size_mb": 530.4,
+  "image_size_mb": 1948.5,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__rat50-pjy-coderamp-labs-gitingest@sha256:ae91d74d8f1b0452900b16ca604887f80c383f70f29eacd4b7aa174fb29a13b0",
+  "image_digest": "bench-pjy-repo2run-coderamp-labs-gitingest@sha256:8c3832b3db82b080fe4599e4433156669778dabb1c4af2a127666a1377d752e9",
   "installed_pkg_count": 68,
   "tokens_in": 1304845,
   "tokens_out": 36117,
@@ -349,27 +349,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 59.13,
-  "test_s": 71.13,
+  "build_s": 6.26,
+  "test_s": 76.03,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 1304845,
     "tokens_out": 36117,
-    "llm_calls": 50,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 50
   },
   "error_surface": "",
   "error_surface_reason": "",

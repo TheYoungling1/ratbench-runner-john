@@ -1,0 +1,177 @@
+{
+  "pipreqs": {
+    "collect": {
+      "agent": "pipreqs",
+      "n_repos": 100,
+      "source": "collect",
+      "n_admissible": 25,
+      "n_masked": 36,
+      "n_unobserved": 39,
+      "n_status_derived": 0,
+      "buckets": {
+        "build_fail": 32,
+        "collect_error": 49,
+        "error": 7,
+        "zero_pass": 2,
+        "success": 8,
+        "no_tests_collected": 2
+      },
+      "surfaces": {
+        "unobserved": 39,
+        "full": 25,
+        "masked": 36
+      },
+      "token_repos": {
+        "NameError": 1,
+        "ImportError": 7,
+        "ModuleNotFoundError": 7,
+        "SyntaxError": 1,
+        "subprocess.CalledProcessError": 1
+      },
+      "token_events": {
+        "NameError": 1,
+        "ImportError": 13,
+        "ModuleNotFoundError": 10,
+        "SyntaxError": 1,
+        "subprocess.CalledProcessError": 1
+      },
+      "category_repos": {
+        "uncategorized": 2,
+        "module_not_found": 7,
+        "partial_import": 7,
+        "import_failed": 1,
+        "syntax_error": 1
+      },
+      "category_events": {
+        "uncategorized": 2,
+        "partial_import": 12,
+        "module_not_found": 10,
+        "import_failed": 1,
+        "syntax_error": 1
+      },
+      "crosstab": {
+        "collect_error|uncategorized": 2,
+        "collect_error|module_not_found": 7,
+        "collect_error|partial_import": 7,
+        "collect_error|import_failed": 1,
+        "collect_error|syntax_error": 1
+      },
+      "top_groups": {
+        "module_not_found": [
+          [
+            "jaraco.path",
+            1
+          ],
+          [
+            "test",
+            1
+          ],
+          [
+            "aqt.version",
+            1
+          ],
+          [
+            "notfound",
+            1
+          ],
+          [
+            "omegaconf.vendor",
+            1
+          ],
+          [
+            "utils",
+            1
+          ],
+          [
+            "github_link",
+            1
+          ],
+          [
+            "lightkurve",
+            1
+          ],
+          [
+            "astropy.stats.bls",
+            1
+          ],
+          [
+            "bootstrap3",
+            1
+          ]
+        ],
+        "partial_import": [
+          [
+            "register",
+            1
+          ],
+          [
+            "check_warnings",
+            1
+          ],
+          [
+            "upload",
+            1
+          ],
+          [
+            "requires_zlib",
+            1
+          ],
+          [
+            "PyPIRCCommand",
+            1
+          ],
+          [
+            "EnvironmentVarGuard",
+            1
+          ],
+          [
+            "camelize",
+            1
+          ],
+          [
+            "TrialHistory",
+            1
+          ],
+          [
+            "scope2index",
+            1
+          ],
+          [
+            "AsyncElasticsearch",
+            1
+          ]
+        ]
+      },
+      "uncategorized_rate": 0.0769
+    },
+    "run": {
+      "agent": "pipreqs",
+      "n_repos": 100,
+      "source": "run",
+      "n_admissible": 25,
+      "n_masked": 36,
+      "n_unobserved": 39,
+      "n_status_derived": 0,
+      "buckets": {
+        "build_fail": 32,
+        "collect_error": 49,
+        "error": 7,
+        "zero_pass": 2,
+        "success": 8,
+        "no_tests_collected": 2
+      },
+      "surfaces": {
+        "unobserved": 39,
+        "full": 25,
+        "masked": 36
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    }
+  }
+}

@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "yihong0618/bilingual_book_maker",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "::TestTheTimestampRule::test_a_text_with_no_i_gets_a_plain_timestamp\n#10 28.93 tests/test_vendored_deeplx.py::TestTheTimestampRule::test_the_timestamp_is_a_multiple_of_i_count_plus_one\n#10 28.93 tests/test_vendored_deeplx.py::TestTheTimestampRule::test_the_request_id_sits_in_the_range_the_client_uses\n#10 28.93 tests/test_vendored_deeplx.py::TestThePackageIsGone::test_the_route_imports_the_vendored_module\n#10 28.93 tests/test_vendored_deeplx.py::TestThePackageIsGone::test_nothing_imports_it\n#10 28.93 tests/test_vendored_deeplx.py::TestThePackageIsGone::test_it_is_not_declared_anywhere\n#10 28.93 tests/test_vendored_deeplx.py::TestThePackageIsGone::test_the_licence_travelled_with_the_code\n#10 28.93 \n#10 28.93 2293/2343 tests collected (50 deselected) in 1.58s\n#10 DONE 29.1s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.3s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 13.0s done\n#14 exporting manifest sha256:41ba39726c3457dfbd4f8399641bdd5ed85cf5f73abc547a126ada15a6cc18da done\n#14 exporting config sha256:037bcca7daa62e290cce28c4c2868ba95cf208c9e32ebeee79fb65d1fdadada0 done\n#14 exporting attestation manifest sha256:349cc5a2a6487c2d4d6d818fda87582f1b54de8607192c9e3f30cd45a63ced83 0.0s done\n#14 exporting manifest list sha256:9ebb986fd746078ffa5a80979f429a5d67baa36972d146be0f22b2552696ad33 0.0s done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-yihong0618-bilingual_book_maker:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-yihong0618-bilingual_book_maker:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-yihong0618-bilingual_book_maker:latest 2.6s done\n#14 DONE 15.7s\n",
+  "build_log_tail": "30.79 tests/test_vendored_deeplx.py::TestWhatTheEndpointRefuses::test_any_other_failure_answers_none_as_upstream_did\n#10 30.79 tests/test_vendored_deeplx.py::TestTheTimestampRule::test_a_text_with_no_i_gets_a_plain_timestamp\n#10 30.79 tests/test_vendored_deeplx.py::TestTheTimestampRule::test_the_timestamp_is_a_multiple_of_i_count_plus_one\n#10 30.79 tests/test_vendored_deeplx.py::TestTheTimestampRule::test_the_request_id_sits_in_the_range_the_client_uses\n#10 30.79 tests/test_vendored_deeplx.py::TestThePackageIsGone::test_the_route_imports_the_vendored_module\n#10 30.79 tests/test_vendored_deeplx.py::TestThePackageIsGone::test_nothing_imports_it\n#10 30.79 tests/test_vendored_deeplx.py::TestThePackageIsGone::test_it_is_not_declared_anywhere\n#10 30.79 tests/test_vendored_deeplx.py::TestThePackageIsGone::test_the_licence_travelled_with_the_code\n#10 30.79 \n#10 30.79 2293/2343 tests collected (50 deselected) in 1.82s\n#10 DONE 31.1s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.5s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 11.2s done\n#14 exporting manifest sha256:59723d156e1e3dbb8e4ceedee571fe034d588ca928488fd265f7410c15f3dd59 0.0s done\n#14 exporting config sha256:f0e6cf8cff00db5ed0a23e57283f562f03a5d230602c94023823d0572c658a1a done\n#14 exporting attestation manifest sha256:cba0441fb295d861af02c4f972cd10ab043a4c310164dd5ac9d9dd8f8bc1ec5f done\n#14 exporting manifest list sha256:dd45a7b76809543274ce4559d7d9c258cad45d8d7c0eda3660770d0da7b04adb 0.0s done\n#14 naming to docker.io/library/bench-setupx-yihong0618-bilingual_book_maker:latest done\n#14 unpacking to docker.io/library/bench-setupx-yihong0618-bilingual_book_maker:latest\n#14 unpacking to docker.io/library/bench-setupx-yihong0618-bilingual_book_maker:latest 2.6s done\n#14 DONE 13.9s\n",
   "status": "executed",
   "py_test_files": 57,
   "collect_rc": 0,
@@ -4577,9 +4577,9 @@
   "ebsr": true,
   "pass_rate": 1.0,
   "timed_out": false,
-  "image_size_mb": 512.3,
+  "image_size_mb": 1899.5,
   "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-yihong0618-bilingual_book_maker@sha256:9ebb986fd746078ffa5a80979f429a5d67baa36972d146be0f22b2552696ad33",
+  "image_digest": "bench-setupx-yihong0618-bilingual_book_maker@sha256:dd45a7b76809543274ce4559d7d9c258cad45d8d7c0eda3660770d0da7b04adb",
   "installed_pkg_count": 56,
   "tokens_in": 361643,
   "tokens_out": 7570,
@@ -4587,8 +4587,8 @@
   "turns_used": 15,
   "cost_usd": null,
   "produce_s": 1195.32,
-  "build_s": 48.96,
-  "test_s": 282.94,
+  "build_s": 49.45,
+  "test_s": 311.61,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -4623,19 +4623,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=3f7fc1e21687146e7e3de1d6facdb56960b993a0 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=3f7fc1e21687146e7e3de1d6facdb56960b993a0 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

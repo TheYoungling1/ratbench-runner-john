@@ -1,10 +1,10 @@
 {
-  "agent": "claudecode__ratbench50_run-20260904-134239",
+  "agent": "claudecode-dockerfile",
   "repo": "OpenCTI-Platform/connectors",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "m vcrpy) (1.17.3)\n#12 1.467 Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.11/site-packages (from python-dateutil>=2.7->freezegun) (1.17.0)\n#12 1.474 Requirement already satisfied: charset_normalizer<4,>=2 in /usr/local/lib/python3.11/site-packages (from requests<3.0,>=2.30.0->responses) (3.5.1)\n#12 1.474 Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.11/site-packages (from requests<3.0,>=2.30.0->responses) (3.18)\n#12 1.476 Requirement already satisfied: certifi>=2023.5.7 in /usr/local/lib/python3.11/site-packages (from requests<3.0,>=2.30.0->responses) (2025.11.12)\n#12 2.572 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#12 2.713 \n#12 2.713 [notice] A new release of pip is available: 24.0 -> 26.2.1\n#12 2.713 [notice] To update, run: pip install --upgrade pip\n#12 DONE 2.8s\n\n#13 exporting to image\n#13 exporting layers\n#13 exporting layers 69.7s done\n#13 exporting manifest sha256:daa1a512d8f8ebfa2095a884b8f9b8a7dc33e17abd64dbe88e1ebbc30a0c7e67 0.0s done\n#13 exporting config sha256:d7ab9744157b0d6296b5ecd07235e9e1f34485284355d4fdbd564fdbc7a63a3f 0.0s done\n#13 exporting attestation manifest sha256:2ccb6ab4dfbb4e907b6e829b5fc4d04a8df6d14d2f927becb7dbcee1de71e304 0.1s done\n#13 exporting manifest list sha256:ee4efe6ff16d3015faaae81a0e3527735af5516b6d2702c16faf92ac6b9caa0a\n#13 exporting manifest list sha256:ee4efe6ff16d3015faaae81a0e3527735af5516b6d2702c16faf92ac6b9caa0a 0.0s done\n#13 naming to docker.io/library/bench-claudecode__ratbench50_run-20260904-134239-opencti-platform-connectors:latest done\n#13 unpacking to docker.io/library/bench-claudecode__ratbench50_run-20260904-134239-opencti-platform-connectors:latest\n#13 unpacking to docker.io/library/bench-claudecode__ratbench50_run-20260904-134239-opencti-platform-connectors:latest 66.0s done\n#13 DONE 136.0s\n",
+  "build_log_tail": ">=2.30.0 in /usr/local/lib/python3.11/site-packages (from responses) (2.33.0)\nRequirement already satisfied: urllib3<3.0,>=1.25.10 in /usr/local/lib/python3.11/site-packages (from responses) (2.7.0)\nRequirement already satisfied: pyyaml in /usr/local/lib/python3.11/site-packages (from responses) (6.0.3)\nRequirement already satisfied: python-dateutil>=2.7 in /usr/local/lib/python3.11/site-packages (from freezegun) (2.9.0.post0)\nRequirement already satisfied: wrapt in /usr/local/lib/python3.11/site-packages (from vcrpy) (1.17.3)\nRequirement already satisfied: six>=1.5 in /usr/local/lib/python3.11/site-packages (from python-dateutil>=2.7->freezegun) (1.17.0)\nRequirement already satisfied: charset_normalizer<4,>=2 in /usr/local/lib/python3.11/site-packages (from requests<3.0,>=2.30.0->responses) (3.5.1)\nRequirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.11/site-packages (from requests<3.0,>=2.30.0->responses) (3.18)\nRequirement already satisfied: certifi>=2023.5.7 in /usr/local/lib/python3.11/site-packages (from requests<3.0,>=2.30.0->responses) (2025.11.12)\n\u001b[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n\u001b[0m\u001b[91m\n[notice] A new release of pip is available: 24.0 -> 26.2.1\n[notice] To update, run: pip install --upgrade pip\n\u001b[0m ---> Removed intermediate container 033ec531e955\n ---> 80d62015f796\nStep 10/10 : CMD [\"python\", \"-m\", \"pytest\", \"/testbed\", \"--co\", \"-q\"]\n ---> Running in 0fc4d6d47ef3\n ---> Removed intermediate container 0fc4d6d47ef3\n ---> fa476be747a4\nSuccessfully built fa476be747a4\nSuccessfully tagged bench-claudecode-dockerfile-opencti-platform-connectors:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 899,
   "collect_rc": 2,
@@ -7082,9 +7082,9 @@
   "ebsr": true,
   "pass_rate": 0.9078,
   "timed_out": false,
-  "image_size_mb": 1655.7,
-  "image_delta_mb": null,
-  "image_digest": "bench-claudecode__ratbench50_run-20260904-134239-opencti-platform-connectors@sha256:ee4efe6ff16d3015faaae81a0e3527735af5516b6d2702c16faf92ac6b9caa0a",
+  "image_size_mb": 1657.4,
+  "image_delta_mb": 1277.6,
+  "image_digest": "bench-claudecode-dockerfile-opencti-platform-connectors@sha256:fa476be747a4cee2cb41379b0fe15fa927b43ad30bc401c64eb8e70f3cd1dfd6",
   "installed_pkg_count": 427,
   "tokens_in": 5375378,
   "tokens_out": 45336,
@@ -7092,8 +7092,8 @@
   "turns_used": 74,
   "cost_usd": 0.084838616,
   "produce_s": 496.62,
-  "build_s": 1046.64,
-  "test_s": 67.67,
+  "build_s": 1147.83,
+  "test_s": 68.57,
   "meta": {
     "contract_version": 1,
     "producer": "claudecode-dockerfile",
@@ -7120,19 +7120,7 @@
     "usage_source": "computed",
     "dsml_text_blocks": 0,
     "turn_capped": false,
-    "agent_timed_out": false,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\nremoved external-import/tenable-security-center/build/lib/tests/conftest.py\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "agent_timed_out": false
   },
   "error_surface": "",
   "error_surface_reason": "",

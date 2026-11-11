@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "Donkie/Spoolman",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "te-0.22.1 alembic-1.19.1 annotated-doc-0.0.5 anyio-4.14.2 anysqlite-0.0.5 async-timeout-5.0.1 asyncpg-0.31.0 certifi-2026.7.22 cffi-2.1.1 click-8.4.2 cryptography-50.0.0 distro-1.9.0 fastapi-0.141.1 greenlet-3.5.5 hishel-0.1.5 httpcore-1.0.9 httpcore2-2.10.0 httptools-0.8.0 httpx-0.28.1 httpx2-2.10.0 idna-3.18 jiter-0.16.0 msgpack-1.2.1 openai-3.0.0 pastel-0.2.1 platformdirs-4.11.3 poethepoet-0.48.0 prometheus_client-0.26.0 psycopg2-binary-2.9.12 pycparser-3.0 pydantic-2.13.4 pydantic_core-2.46.4 pytest-8.3.5 pytest-asyncio-0.25.3 scheduler-0.8.11 setuptools-78.1.1 sqlalchemy-cockroachdb-2.0.4 starlette-1.6.0 tqdm-4.70.0 typeguard-4.6.0 typing-inspection-0.4.3 uvicorn-0.52.3 uvloop-0.22.1 websockets-15.0.1\n#16 26.31 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#16 26.39 \n#16 26.39 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#16 26.39 [notice] To update, run: pip install --upgrade pip\n#16 DONE 27.5s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.6s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.1s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 5.5s done\n#19 exporting manifest sha256:33828cc0f3ec40d5c1828198f36283a1af7c2cebad0ea19b99bb77b732b65f49 0.0s done\n#19 exporting config sha256:029c1f43458c360d0c6db90de0e3f1a094723d4ed92e0ed43083ea3a4d47d67a 0.0s done\n#19 exporting attestation manifest sha256:c496d1bce8a2d76c4b12b8792cdbd66f3af5d5125da72bfcedad6b1e27a10363 0.0s done\n#19 exporting manifest list sha256:e5ab126d0a62656f69f74776493da2e3fc94e324a389c8eb0372f61dccb454e4 0.0s done\n#19 naming to docker.io/library/bench-rat__rat50-pjy-donkie-spoolman:latest done\n#19 unpacking to docker.io/library/bench-rat__rat50-pjy-donkie-spoolman:latest\n#19 unpacking to docker.io/library/bench-rat__rat50-pjy-donkie-spoolman:latest 5.0s done\n#19 DONE 10.6s\n",
+  "build_log_tail": "mbic-1.19.1 annotated-doc-0.0.5 anyio-4.14.2 anysqlite-0.0.5 async-timeout-5.0.1 asyncpg-0.31.0 certifi-2026.7.22 cffi-2.1.1 click-8.4.2 cryptography-50.0.0 distro-1.9.0 fastapi-0.141.1 greenlet-3.5.5 hishel-0.1.5 httpcore-1.0.9 httpcore2-2.10.0 httptools-0.8.0 httpx-0.28.1 httpx2-2.10.0 idna-3.18 jiter-0.16.0 msgpack-1.2.1 openai-3.0.0 pastel-0.2.1 platformdirs-4.11.3 poethepoet-0.48.0 prometheus_client-0.26.0 psycopg2-binary-2.9.12 pycparser-3.0 pydantic-2.13.4 pydantic_core-2.46.4 pytest-8.3.5 pytest-asyncio-0.25.3 scheduler-0.8.11 setuptools-78.1.1 sqlalchemy-cockroachdb-2.0.4 starlette-1.6.0 tqdm-4.70.0 typeguard-4.6.0 typing-inspection-0.4.3 uvicorn-0.52.3 uvloop-0.22.1 websockets-15.0.1\n#16 143.9 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#16 144.5 \n#16 144.5 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#16 144.5 [notice] To update, run: pip install --upgrade pip\n#16 DONE 145.7s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.4s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.0s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 8.1s done\n#19 exporting manifest sha256:80c780ab1e197bd36e5051a940345b0117c9cac93936e97fa59dd68286d9767a 0.0s done\n#19 exporting config sha256:2140a01698bdfad19d778b80d094d6de6be2429c3a35c24ef93c47679aa7da8d 0.0s done\n#19 exporting attestation manifest sha256:27bd51a2089eb72f32395e84387f4d0503e5863eafc98c2d01da1405e2408450 0.0s done\n#19 exporting manifest list sha256:4d1973fec33710b9043fe3321b5274008f05e9d594eac1bcf1d927db117d33d5 0.0s done\n#19 naming to docker.io/library/bench-pjy-rat-dockerfile-donkie-spoolman:latest done\n#19 unpacking to docker.io/library/bench-pjy-rat-dockerfile-donkie-spoolman:latest\n#19 unpacking to docker.io/library/bench-pjy-rat-dockerfile-donkie-spoolman:latest 5.5s done\n#19 DONE 13.7s\n",
   "status": "collect_error",
   "py_test_files": 25,
   "collect_rc": 2,
@@ -30,9 +30,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 136.0,
+  "image_size_mb": 601.1,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50-pjy-donkie-spoolman@sha256:e5ab126d0a62656f69f74776493da2e3fc94e324a389c8eb0372f61dccb454e4",
+  "image_digest": "bench-pjy-rat-dockerfile-donkie-spoolman@sha256:4d1973fec33710b9043fe3321b5274008f05e9d594eac1bcf1d927db117d33d5",
   "installed_pkg_count": 64,
   "tokens_in": 4214131,
   "tokens_out": 31678,
@@ -40,27 +40,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 39.51,
-  "test_s": 0.33,
+  "build_s": 163.55,
+  "test_s": 0.49,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 4214131,
     "tokens_out": 31678,
-    "llm_calls": 102,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 102
   },
   "error_surface": "",
   "error_surface_reason": "",

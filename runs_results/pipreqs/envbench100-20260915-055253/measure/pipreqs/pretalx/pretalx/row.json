@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "pretalx/pretalx",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "-3.0.53 psutil-7.2.2 publicsuffixlist-1.0.2.20260925 pyarrow-23.0.1 pydantic-2.13.5 pydantic-core-2.46.5 pyenchant-3.3.0 python_dateutil-2.9.0.post0 pytz-2026.4 pyyaml-6.0.3 qrcode-8.2 rcssmin-1.2.2 referencing-0.37.0 reportlab-5.0.1 responses-0.26.3 rich-15.0.0 rjsmin-1.2.5 rpds-py-0.30.0 ruamel.yaml-0.19.1 rules-3.5 six-1.17.0 soupsieve-2.10 sqlalchemy-2.0.54 sqlparse-0.6.0 static3-0.7.0 typing-inspection-0.4.4 tzdata-2026.4 tzlocal-5.4.4 urllib3-2.8.0 urlman-2.0.3 vine-5.1.0 vobject-0.9.9 wcwidth-0.9.1 webencodings-0.6.1 wrapt-2.4.1 zxcvbn-4.5.0\n#11 29.58 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 29.59 \n#11 29.59 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 29.59 [notice] To update, run: pip install --upgrade pip\n#11 DONE 31.7s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 44.7s done\n#12 exporting manifest sha256:40e02d96c1c28c71ddd505402ba29bb10cbad2775edf631917a863365dff1a00 0.0s done\n#12 exporting config sha256:67698a5bf91b7ff5ccd433c2fc4388c0fef5dd214fdb202eade22d95c1a91fcc 0.0s done\n#12 exporting attestation manifest sha256:506facc2afd8acf24cd116ddbb3777f4bfc5e19ed0ebd8c722c99be1068365e5\n#12 exporting attestation manifest sha256:506facc2afd8acf24cd116ddbb3777f4bfc5e19ed0ebd8c722c99be1068365e5 0.4s done\n#12 exporting manifest list sha256:8db2a8da564ae2994cbe5663e37a157be5e02131e98ced170bfda5bdf119dd5c\n#12 exporting manifest list sha256:8db2a8da564ae2994cbe5663e37a157be5e02131e98ced170bfda5bdf119dd5c 0.1s done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-pretalx-pretalx:latest 0.0s done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-pretalx-pretalx:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-pretalx-pretalx:latest 11.1s done\n#12 DONE 56.5s\n",
+  "build_log_tail": "3.0 lxml-6.1.3 markdown-it-py-4.2.0 mdurl-0.1.2 more_itertools-11.1.0 numpy-2.2.6 pandas-2.3.3 prompt-toolkit-3.0.53 psutil-7.2.2 publicsuffixlist-1.0.2.20260910 pyarrow-23.0.1 pydantic-2.13.5 pydantic-core-2.46.5 pyenchant-3.3.0 python_dateutil-2.9.0.post0 pytz-2026.3.post1 pyyaml-6.0.3 qrcode-8.2 rcssmin-1.2.2 referencing-0.37.0 reportlab-5.0.1 responses-0.26.3 rich-15.0.0 rjsmin-1.2.5 rpds-py-0.30.0 ruamel.yaml-0.19.1 rules-3.5 six-1.17.0 soupsieve-2.9.2 sqlalchemy-2.0.53 sqlparse-0.6.0 static3-0.7.0 typing-inspection-0.4.4 tzdata-2026.4 tzlocal-5.4.4 urllib3-2.7.0 urlman-2.0.3 vine-5.1.0 vobject-0.9.9 wcwidth-0.8.3 webencodings-0.6.1 wrapt-2.4.1 zxcvbn-4.5.0\n#11 28.14 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 28.16 \n#11 28.16 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 28.16 [notice] To update, run: pip install --upgrade pip\n#11 DONE 29.9s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 33.9s done\n#12 exporting manifest sha256:7ad7b944930abe3b288e8a448dde0717e1d6a38eedb89777618baf8732648605\n#12 exporting manifest sha256:7ad7b944930abe3b288e8a448dde0717e1d6a38eedb89777618baf8732648605 0.2s done\n#12 exporting config sha256:813796b08108a6f4ee333608e19694e0cbf13b219ff020eb3be62b33047a5104\n#12 exporting config sha256:813796b08108a6f4ee333608e19694e0cbf13b219ff020eb3be62b33047a5104 done\n#12 exporting attestation manifest sha256:2941c41029280d52b5e7abc43157ba77405d92e82d1658e4e330b222004649de 0.0s done\n#12 exporting manifest list sha256:6efb20ffc4edb0292be4dad7a59a39546d4c1b03c6f5a4d152c5fd48ee33d6f2 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-pretalx-pretalx:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-pretalx-pretalx:latest\n#12 unpacking to docker.io/library/bench-pipreqs-pretalx-pretalx:latest 11.3s done\n#12 DONE 45.4s\n",
   "status": "collect_error",
   "py_test_files": 92,
   "collect_rc": 2,
@@ -29,9 +29,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 862.9,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-pretalx-pretalx@sha256:8db2a8da564ae2994cbe5663e37a157be5e02131e98ced170bfda5bdf119dd5c",
+  "image_size_mb": 861.6,
+  "image_delta_mb": 474.0,
+  "image_digest": "bench-pipreqs-pretalx-pretalx@sha256:6efb20ffc4edb0292be4dad7a59a39546d4c1b03c6f5a4d152c5fd48ee33d6f2",
   "installed_pkg_count": 99,
   "tokens_in": null,
   "tokens_out": null,
@@ -39,8 +39,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 11.63,
-  "build_s": 98.15,
-  "test_s": 0.8,
+  "build_s": 88.07,
+  "test_s": 0.86,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -67,19 +67,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=64e72619ce413bbcbbe5b838d0bc8cf690d1c3a8 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=64e72619ce413bbcbbe5b838d0bc8cf690d1c3a8 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

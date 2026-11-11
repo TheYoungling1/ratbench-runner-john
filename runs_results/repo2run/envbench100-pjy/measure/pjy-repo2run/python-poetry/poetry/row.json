@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "python-poetry/poetry",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "tion: 'tests_require'\n#15 4.960   warnings.warn(msg)\n#15 4.960 /tmp/tmp6jl4257j/.venv/lib/python3.10/site-packages/setuptools/_distutils/dist.py:318: BuildBackendWarning: Unknown distribution option: 'test_suite'\n#15 4.960   warnings.warn(msg)\n#15 4.960 /tmp/tmp6jl4257j/.venv/lib/python3.10/site-packages/setuptools/dist.py:765: BuildBackendWarning: License classifiers are deprecated.\n#15 4.960 !!\n#15 4.960 \n#15 4.960         ********************************************************************************\n#15 4.960         Please consider removing the following classifiers in favor of a SPDX license expression:\n#15 4.960 \n#15 4.960         License :: OSI Approved :: MIT License\n#15 4.960 \n#15 4.960         See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.\n#15 4.960         ********************************************************************************\n#15 4.960 \n#15 4.960 !!\n#15 4.960   self._finalize_license_expression()\n#15 5.005 \n#15 5.005 Installing the current project: poetry (1.9.0.dev0)\n#15 DONE 5.4s\n\n#16 [13/15] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#16 DONE 0.5s\n\n#17 [14/15] WORKDIR /testbed\n#17 DONE 0.0s\n\n#18 exporting to image\n#18 exporting layers\n#18 exporting layers 8.1s done\n#18 exporting manifest sha256:94f02c732f56469fe887a0a2c677d92280a36ba60f1bd4e429dbae067b48b186 0.0s done\n#18 exporting config sha256:61a8b16370e124f55b903e1028fc99218b01f1b0da3ff5be1a35af4e33e3eda2 done\n#18 exporting attestation manifest sha256:1464f14f0c0d03cd687ea2f7067a258d6eba220f518edb8af7ef9256d20d709b 0.0s done\n#18 exporting manifest list sha256:b07840d496fd04a8240ab89c28e752542d1374f7268dd540c7ae46b7e0512e35 done\n#18 naming to docker.io/library/bench-repo2run__envbench100-pjy-python-poetry-poetry:latest done\n#18 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-python-poetry-poetry:latest\n#18 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-python-poetry-poetry:latest 2.7s done\n#18 DONE 11.0s\n",
+  "build_log_tail": "ning: Unknown distribution option: 'tests_require'\n#15 5.968   warnings.warn(msg)\n#15 5.968 /tmp/tmp_7anbzw9/.venv/lib/python3.10/site-packages/setuptools/_distutils/dist.py:318: BuildBackendWarning: Unknown distribution option: 'test_suite'\n#15 5.968   warnings.warn(msg)\n#15 5.968 /tmp/tmp_7anbzw9/.venv/lib/python3.10/site-packages/setuptools/dist.py:765: BuildBackendWarning: License classifiers are deprecated.\n#15 5.968 !!\n#15 5.968 \n#15 5.968         ********************************************************************************\n#15 5.968         Please consider removing the following classifiers in favor of a SPDX license expression:\n#15 5.968 \n#15 5.968         License :: OSI Approved :: MIT License\n#15 5.968 \n#15 5.968         See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.\n#15 5.968         ********************************************************************************\n#15 5.968 \n#15 5.968 !!\n#15 5.968   self._finalize_license_expression()\n#15 6.004 \n#15 6.004 Installing the current project: poetry (1.9.0.dev0)\n#15 DONE 6.3s\n\n#16 [13/15] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#16 DONE 1.0s\n\n#17 [14/15] WORKDIR /testbed\n#17 DONE 0.0s\n\n#18 exporting to image\n#18 exporting layers\n#18 exporting layers 9.7s done\n#18 exporting manifest sha256:bf31eeceefb21b4d6ca112de57f9ef4e594ab29453b5de9de11cea9a808894f6 0.0s done\n#18 exporting config sha256:d5d7566ba9098fcea7bb440c3763c0bac611c75649f9db09b167ca4ae33ac709 0.0s done\n#18 exporting attestation manifest sha256:1fd8390c397eca01292a6dbe280543f48ccffd74a506125505f83c179a6110fc 0.0s done\n#18 exporting manifest list sha256:f1a7ee502e3a7042b1981dbdffa6a20265ba24fb84f8e07be62c88f10d1fe685 0.0s done\n#18 naming to docker.io/library/bench-pjy-repo2run-python-poetry-poetry:latest done\n#18 unpacking to docker.io/library/bench-pjy-repo2run-python-poetry-poetry:latest\n#18 unpacking to docker.io/library/bench-pjy-repo2run-python-poetry-poetry:latest 3.4s done\n#18 DONE 13.3s\n",
   "status": "collect_error",
   "py_test_files": 111,
   "collect_rc": 4,
@@ -26,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 655.7,
+  "image_size_mb": 2258.1,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-python-poetry-poetry@sha256:b07840d496fd04a8240ab89c28e752542d1374f7268dd540c7ae46b7e0512e35",
+  "image_digest": "bench-pjy-repo2run-python-poetry-poetry@sha256:f1a7ee502e3a7042b1981dbdffa6a20265ba24fb84f8e07be62c88f10d1fe685",
   "installed_pkg_count": 27,
   "tokens_in": 121753,
   "tokens_out": 3616,
@@ -36,8 +36,8 @@
   "turns_used": 10,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 21.14,
-  "test_s": 0.27,
+  "build_s": 26.0,
+  "test_s": 0.51,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -45,19 +45,7 @@
     "tokens_in": 121753,
     "tokens_out": 3616,
     "llm_calls": null,
-    "turns_used": 10,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 10
   },
   "error_surface": "",
   "error_surface_reason": "",

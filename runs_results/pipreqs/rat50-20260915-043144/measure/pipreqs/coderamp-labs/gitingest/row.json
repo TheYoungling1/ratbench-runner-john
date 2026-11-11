@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50-20260915-043144",
+  "agent": "pipreqs",
   "repo": "coderamp-labs/gitingest",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": ", tiktoken, starlette, pytest_mock, limits, GitPython, botocore, slowapi, s3transfer, fastapi, boto3\n#11 10.41 Successfully installed GitPython-3.1.62 Requests-2.34.2 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 boto3-1.43.103 botocore-1.43.103 certifi-2026.7.22 charset_normalizer-3.5.1 click-8.5.0 deprecated-1.3.1 fastapi-0.141.1 gitdb-4.0.12 h11-0.16.0 idna-3.20 jmespath-1.1.0 limits-5.8.0 loguru-0.7.3 pathspec-1.1.1 prometheus_client-0.26.0 pydantic-2.13.5 pydantic-core-2.46.5 pytest_mock-3.15.1 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 regex-2026.9.10 s3transfer-0.19.2 sentry_sdk-2.70.0 six-1.17.0 slowapi-0.1.10 smmap-5.0.3 starlette-1.7.0 strenum-0.4.15 tiktoken-0.14.0 typing-inspection-0.4.4 urllib3-2.8.0 uvicorn-0.54.0 wrapt-2.4.1\n#11 10.41 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 10.42 \n#11 10.42 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 10.42 [notice] To update, run: pip install --upgrade pip\n#11 DONE 11.4s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 3.7s done\n#12 exporting manifest sha256:cae611715646b9a449e30d5ceab598300e14a7d29b81a842b40cd90961c0d8d2 0.0s done\n#12 exporting config sha256:fbebccdf474a222b98c7296fafbd12fd95f8e68e0ca7cdd975fd81ed8fb45da4 0.0s done\n#12 exporting attestation manifest sha256:5806a62fa7050892e41bf1eb2137fd16835b96e57824195678ae1b26b6ba2575 0.0s done\n#12 exporting manifest list sha256:8d95521c304d17619b65db4801a98339160e52bc172b9491b6ec818416a29573 0.0s done\n#12 naming to docker.io/library/bench-pipreqs__rat50-20260915-043144-coderamp-labs-gitingest:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-coderamp-labs-gitingest:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-coderamp-labs-gitingest:latest 1.1s done\n#12 DONE 4.9s\n",
+  "build_log_tail": "ated-doc, uvicorn, sentry_sdk, Requests, python-dateutil, pydantic, gitdb, deprecated, anyio, tiktoken, starlette, pytest_mock, limits, GitPython, botocore, slowapi, s3transfer, fastapi, boto3\n#11 9.026 Successfully installed GitPython-3.1.62 Requests-2.34.2 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 boto3-1.43.94 botocore-1.43.94 certifi-2026.7.22 charset_normalizer-3.5.1 click-8.5.0 deprecated-1.3.1 fastapi-0.141.1 gitdb-4.0.12 h11-0.16.0 idna-3.19 jmespath-1.1.0 limits-5.8.0 loguru-0.7.3 pathspec-1.1.1 prometheus_client-0.26.0 pydantic-2.13.5 pydantic-core-2.46.5 pytest_mock-3.15.1 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 regex-2026.9.10 s3transfer-0.19.2 sentry_sdk-2.69.1 six-1.17.0 slowapi-0.1.10 smmap-5.0.3 starlette-1.6.0 strenum-0.4.15 tiktoken-0.14.0 typing-inspection-0.4.4 urllib3-2.7.0 uvicorn-0.53.0 wrapt-2.4.1\n#11 9.027 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 9.032 \n#11 9.032 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 9.032 [notice] To update, run: pip install --upgrade pip\n#11 DONE 9.9s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 3.2s done\n#12 exporting manifest sha256:6f88a90150dbbc237cccb113a539bb828a6851c9b13068e0acfea2821e9e2d2f done\n#12 exporting config sha256:47f80b135b7a8a68d4c4495ab1a52c0d521ea54cc3e73be14d9d5d4e7cac4e7b done\n#12 exporting attestation manifest sha256:0d406d378276c168f86aa213bb75a011e2fe94d5f03511c018bd90401f10c4de done\n#12 exporting manifest list sha256:f810a667c64a598899dd096e9617e02ade585e69dec350e4be60fdfa541a18c7 done\n#12 naming to docker.io/library/bench-pipreqs-coderamp-labs-gitingest:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-coderamp-labs-gitingest:latest\n#12 unpacking to docker.io/library/bench-pipreqs-coderamp-labs-gitingest:latest 1.3s done\n#12 DONE 4.5s\n",
   "status": "collect_error",
   "py_test_files": 12,
   "collect_rc": 2,
@@ -340,9 +340,9 @@
   "ebsr": true,
   "pass_rate": 0.5419,
   "timed_out": false,
-  "image_size_mb": 1696.9,
-  "image_delta_mb": 186.2,
-  "image_digest": "bench-pipreqs__rat50-20260915-043144-coderamp-labs-gitingest@sha256:8d95521c304d17619b65db4801a98339160e52bc172b9491b6ec818416a29573",
+  "image_size_mb": 449.6,
+  "image_delta_mb": 62.0,
+  "image_digest": "bench-pipreqs-coderamp-labs-gitingest@sha256:f810a667c64a598899dd096e9617e02ade585e69dec350e4be60fdfa541a18c7",
   "installed_pkg_count": 52,
   "tokens_in": null,
   "tokens_out": null,
@@ -350,8 +350,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 8.7,
-  "build_s": 18.77,
-  "test_s": 45.16,
+  "build_s": 16.63,
+  "test_s": 43.92,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -378,19 +378,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=4e259a02fe72115bee538271622f1234a81c8e1a (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=4e259a02fe72115bee538271622f1234a81c8e1a (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

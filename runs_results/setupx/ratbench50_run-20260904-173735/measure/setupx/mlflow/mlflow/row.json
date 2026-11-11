@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__ratbench50_run-20260904-173735",
+  "agent": "setupx",
   "repo": "mlflow/mlflow",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "-r-- 1 root root   3524 Sep 26 04:56 registry.py\n#10 105.4 drwxr-xr-x 1 root root   4096 Sep 26 05:05 request_auth\n#10 105.4 drwxr-xr-x 1 root root   4096 Sep 26 05:05 request_header\n#10 105.4 -rw-r--r-- 1 root root 266929 Sep 26 04:56 mlflow/tracking/client.py\n#10 105.4 === installed package metadata for mlflow ===\n#10 105.5 ['', '/usr/local/lib/python310.zip', '/usr/local/lib/python3.10', '/usr/local/lib/python3.10/lib-dynload', '/usr/local/lib/python3.10/site-packages']\n#10 105.5 mlflow dist error PackageNotFoundError No package metadata was found for mlflow\n#10 105.5 skinny err PackageNotFoundError\n#10 105.5 === direct details from try ===\n#10 105.5   File \"<stdin>\", line 1\n#10 105.5     from mlflow.tracking import __all__ if '__all__' in vars(mlflow.tracking) else []\n#10 105.5                                         ^^\n#10 105.5 SyntaxError: invalid syntax\n#10 DONE 106.1s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 9.4s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.2s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 65.2s done\n#14 exporting manifest sha256:3552b135d7937dd464b04c383491c7348ac88da2413aa8abe2170af332a83c35 0.0s done\n#14 exporting config sha256:303da58969efcf5f58f82ddbee9fcde99e13e78503227fa9ed1530399d10f782 0.0s done\n#14 exporting attestation manifest sha256:7c5399f573d2a06db107aec515e849cf135bb8253fe9230491ba378d595f81e1 0.0s done\n#14 exporting manifest list sha256:0b2088d459e7af910089347b1e3fa14201c00ec360cb9ac7069950e7b4abaa39 done\n#14 naming to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-mlflow-mlflow:latest done\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-mlflow-mlflow:latest\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-mlflow-mlflow:latest 30.7s done\n#14 DONE 96.0s\n",
+  "build_log_tail": " 1 root root 155583 Sep  4 22:00 fluent.py\n-rw-r--r-- 1 root root   2249 Sep  4 22:00 metric_value_conversion_utils.py\n-rw-r--r-- 1 root root   6266 Sep  4 22:00 multimedia.py\n-rw-r--r-- 1 root root   3524 Sep  4 22:00 registry.py\ndrwxr-xr-x 1 root root   4096 Sep  4 22:02 request_auth\ndrwxr-xr-x 1 root root   4096 Sep  4 22:02 request_header\n-rw-r--r-- 1 root root 266929 Sep  4 22:00 mlflow/tracking/client.py\n=== installed package metadata for mlflow ===\n['', '/usr/local/lib/python310.zip', '/usr/local/lib/python3.10', '/usr/local/lib/python3.10/lib-dynload', '/usr/local/lib/python3.10/site-packages']\nmlflow dist error PackageNotFoundError No package metadata was found for mlflow\nskinny err PackageNotFoundError\n=== direct details from try ===\n\u001b[91m  File \"<stdin>\", line 1\n    from mlflow.tracking import __all__ if '__all__' in vars(mlflow.tracking) else []\n                                        ^^\nSyntaxError: invalid syntax\n\u001b[0m ---> Removed intermediate container d0b67ee0e6a1\n ---> bbcc4fb36bd3\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in 0978cb1e26a9\n ---> Removed intermediate container 0978cb1e26a9\n ---> e19c4548f75d\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in d713eb3e8336\n ---> Removed intermediate container d713eb3e8336\n ---> 1eac152105d5\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in c67dfe3a624c\n ---> Removed intermediate container c67dfe3a624c\n ---> 51b5166ba25d\nStep 10/10 : WORKDIR /testbed\n ---> Running in 7896308881d0\n ---> Removed intermediate container 7896308881d0\n ---> 62ec8f16f95e\nSuccessfully built 62ec8f16f95e\nSuccessfully tagged bench-setupx-mlflow-mlflow:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 854,
   "collect_rc": 2,
@@ -4674,18 +4674,18 @@
   "ebsr": true,
   "pass_rate": 0.6582,
   "timed_out": false,
-  "image_size_mb": 4018.8,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__ratbench50_run-20260904-173735-mlflow-mlflow@sha256:0b2088d459e7af910089347b1e3fa14201c00ec360cb9ac7069950e7b4abaa39",
-  "installed_pkg_count": 0,
+  "image_size_mb": 4007.9,
+  "image_delta_mb": 3620.3,
+  "image_digest": "bench-setupx-mlflow-mlflow@sha256:62ec8f16f95e59935275256f6d4c6d53018b94b3206f87cadbf9204ac1188d50",
+  "installed_pkg_count": 83,
   "tokens_in": 926499,
   "tokens_out": 120196,
   "llm_calls": 101,
   "turns_used": 85,
   "cost_usd": null,
   "produce_s": 1277.91,
-  "build_s": 212.92,
-  "test_s": 1334.31,
+  "build_s": 316.69,
+  "test_s": 1275.58,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -4716,19 +4716,7 @@
     "turns_used": 85,
     "produce_s": 1277.91,
     "total_tokens": 1046695,
-    "cost_usd": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=6dcba5418220557ca2256ac4252cb6b58aad89b3 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=6dcba5418220557ca2256ac4252cb6b58aad89b3 (pinned)\n"
-      }
-    ]
+    "cost_usd": null
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__envbench100-merged-20260915",
+  "agent": "setupx",
   "repo": "neurogym/neurogym",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "st_seeding returned <class 'tuple'>.\n#10 90.29   Did you mean to use `assert` instead of `return`?\n#10 90.29   See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.\n#10 90.29     warnings.warn(\n#10 90.29 \n#10 90.29 neurogym/tests/test_envs.py::test_plot_envs\n#10 90.29   /workspace/repo/neurogym/utils/plotting.py:199: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.\n#10 90.29     f, axes = plt.subplots(n_row, 1, **fig_kwargs)\n#10 90.29 \n#10 90.29 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n#10 90.29 17 passed, 35 warnings in 6.16s\n#10 DONE 90.3s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.4s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 9.5s done\n#14 exporting manifest sha256:a8fba03a9c6c4a759189809a40a13110c666f2de665466d3dd81af97787d62bf 0.0s done\n#14 exporting config sha256:d338143ccccebc2a245bfbbecfeeade4aa8e46d1b04c129a62e238f703411f24 0.0s done\n#14 exporting attestation manifest sha256:b72aca4677e8c6a47e92ba4cd66b224d8b29794542cfebf9f9c76e28a94c017b 0.0s done\n#14 exporting manifest list sha256:6959d851a1f617b9075501588356a53faf6b897e41a9766bbca60f1da9021721 0.0s done\n#14 naming to docker.io/library/bench-setupx__envbench100-merged-20260915-neurogym-neurogym:latest done\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-neurogym-neurogym:latest\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-neurogym-neurogym:latest 2.2s done\n#14 DONE 11.8s\n",
+  "build_log_tail": "_seeding\n  /usr/local/lib/python3.10/site-packages/_pytest/python.py:171: PytestReturnNotNoneWarning: Test functions should return None, but neurogym/tests/test_envs.py::test_seeding returned <class 'tuple'>.\n  Did you mean to use `assert` instead of `return`?\n  See https://docs.pytest.org/en/stable/how-to/assert.html#return-not-none for more information.\n    warnings.warn(\n\nneurogym/tests/test_envs.py::test_plot_envs\n  /workspace/repo/neurogym/utils/plotting.py:199: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.\n    f, axes = plt.subplots(n_row, 1, **fig_kwargs)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n17 passed, 35 warnings in 5.49s\n ---> Removed intermediate container e079ccfe66bf\n ---> aa3bd6576ff6\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in 50c945868228\n ---> Removed intermediate container 50c945868228\n ---> 589b04fbd0eb\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in e337bdeaa30f\n ---> Removed intermediate container e337bdeaa30f\n ---> 213d0eafce3f\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in 38632458650e\n ---> Removed intermediate container 38632458650e\n ---> 79860e114fcd\nStep 10/10 : WORKDIR /testbed\n ---> Running in 4a2aa8a40a1d\n ---> Removed intermediate container 4a2aa8a40a1d\n ---> 3f468c7aa678\nSuccessfully built 3f468c7aa678\nSuccessfully tagged bench-setupx-neurogym-neurogym:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 8,
   "collect_rc": 2,
@@ -44,18 +44,12 @@
     "neurogym/tests/test_speed.py::test_speed_dataset_all"
   ],
   "executed": true,
-  "total": 29,
-  "passed": 25,
+  "total": 17,
+  "passed": 17,
   "failed": 0,
-  "errors": 4,
+  "errors": 0,
   "skipped": 0,
   "passed_node_ids": [
-    "neurogym/tests/test_core.py::test_one_step_mismatch",
-    "neurogym/tests/test_core.py::test_addob_instep",
-    "neurogym/tests/test_data.py::test_registered_env",
-    "neurogym/tests/test_data.py::test_examples_different_registered_env",
-    "neurogym/tests/test_data.py::test_examples_different_made_env",
-    "neurogym/tests/test_data.py::test_examples_different_custom_env",
     "neurogym/tests/test_envs.py::test_run",
     "neurogym/tests/test_envs.py::test_run_all",
     "neurogym/tests/test_envs.py::test_dataset",
@@ -66,29 +60,22 @@
     "neurogym/tests/test_envs.py::test_seeding",
     "neurogym/tests/test_envs.py::test_seeding_all",
     "neurogym/tests/test_envs.py::test_plot_envs",
-    "neurogym/tests/test_random.py::test_truncexp",
-    "neurogym/tests/test_random.py::test_randomschedule",
+    "neurogym/tests/test_core.py::test_one_step_mismatch",
+    "neurogym/tests/test_core.py::test_addob_instep",
     "neurogym/tests/test_reset_step.py::test_wrapper_new_trial",
     "neurogym/tests/test_reset_step.py::test_wrapper_reset",
     "neurogym/tests/test_reset_step.py::test_wrapper_step",
     "neurogym/tests/test_reset_step.py::test_reset_with_scheduler",
-    "neurogym/tests/test_reset_step.py::test_schedule_envs",
-    "neurogym/tests/test_speed.py::test_speed_all",
-    "neurogym/tests/test_speed.py::test_speed_dataset_all"
+    "neurogym/tests/test_reset_step.py::test_schedule_envs"
   ],
   "failed_node_ids": [],
-  "error_node_ids": [
-    "neurogym.tests.test_wrappers",
-    "neurogym/tests/test_speed.py::test_speed",
-    "neurogym/tests/test_speed.py::test_speed_with_new_trial",
-    "neurogym/tests/test_speed.py::test_speed_dataset"
-  ],
+  "error_node_ids": [],
   "ebsr": true,
-  "pass_rate": 0.8621,
+  "pass_rate": 1.0,
   "timed_out": false,
-  "image_size_mb": 507.0,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__envbench100-merged-20260915-neurogym-neurogym@sha256:6959d851a1f617b9075501588356a53faf6b897e41a9766bbca60f1da9021721",
+  "image_size_mb": 506.9,
+  "image_delta_mb": 119.3,
+  "image_digest": "bench-setupx-neurogym-neurogym@sha256:3f468c7aa6785a81ef17db599a4aa80ec4e7f8ef2ab983b0fcc35a13f503a944",
   "installed_pkg_count": 30,
   "tokens_in": 847157,
   "tokens_out": 74868,
@@ -96,8 +83,8 @@
   "turns_used": 29,
   "cost_usd": null,
   "produce_s": 987.88,
-  "build_s": 103.76,
-  "test_s": 43.04,
+  "build_s": 108.09,
+  "test_s": 6.99,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -132,19 +119,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=ee0a140cf2c6f14f36f524997c269cf110afc73d (pinned)\nremoved pytest.ini\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=ee0a140cf2c6f14f36f524997c269cf110afc73d (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

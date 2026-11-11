@@ -1,0 +1,267 @@
+{
+  "pjy-rat-dockerfile": {
+    "n": 50,
+    "n_exec": 37,
+    "n_collect_clean": 21,
+    "n_real_success": 24,
+    "n_unmeasurable": 0,
+    "n_legacy_missing": 0,
+    "EBSR": 0.42,
+    "n_ebsr": 21,
+    "EBSR_repo2run_raw": 0.42,
+    "n_raw": 21,
+    "false_green_removed": 0.0,
+    "status_census": {
+      "collect_error": 22,
+      "executed": 21,
+      "timed_out": 2,
+      "build_fail": 3,
+      "missing": 2
+    },
+    "n_ebsr_zero_collected": 5,
+    "total_collected": 114981,
+    "mean_collected": 2299.62,
+    "total_collect_errors": 693,
+    "mean_collect_errors": 13.86,
+    "real_success": 0.48,
+    "micro": 0.1522,
+    "full_pass_repos": 10,
+    "coverage": 0.74,
+    "ESSR": null,
+    "ESSR_median": null,
+    "n_gold_scored": 0,
+    "n_gold_zero": 0,
+    "n_gold_no_row": 0,
+    "gold_no_row": [],
+    "n_gold_capped": 0,
+    "gold_capped": [],
+    "n_gold_excluded": 50,
+    "gold_excluded": [
+      [
+        "aiidateam/aiida-core",
+        "gold_missing"
+      ],
+      [
+        "anthropics/anthropic-sdk-python",
+        "gold_missing"
+      ],
+      [
+        "archipelagomw/archipelago",
+        "gold_missing"
+      ],
+      [
+        "azure/azure-cli",
+        "gold_missing"
+      ],
+      [
+        "baserow/baserow",
+        "gold_missing"
+      ],
+      [
+        "beehiveinnovations/pal-mcp-server",
+        "gold_missing"
+      ],
+      [
+        "bruin-data/ingestr",
+        "gold_missing"
+      ],
+      [
+        "checkmk/checkmk",
+        "gold_missing"
+      ],
+      [
+        "cloud-cv/evalai",
+        "gold_missing"
+      ],
+      [
+        "coderamp-labs/gitingest",
+        "gold_missing"
+      ],
+      [
+        "containers/podman-compose",
+        "gold_missing"
+      ],
+      [
+        "copier-org/copier",
+        "gold_missing"
+      ],
+      [
+        "crystaldba/postgres-mcp",
+        "gold_missing"
+      ],
+      [
+        "crytic/slither",
+        "gold_missing"
+      ],
+      [
+        "d4vinci/scrapling",
+        "gold_missing"
+      ],
+      [
+        "django-oauth/django-oauth-toolkit",
+        "gold_missing"
+      ],
+      [
+        "donkie/spoolman",
+        "gold_missing"
+      ],
+      [
+        "fastapi/typer",
+        "gold_missing"
+      ],
+      [
+        "feast-dev/feast",
+        "gold_missing"
+      ],
+      [
+        "frappe/press",
+        "gold_missing"
+      ],
+      [
+        "googlecloudplatform/perfkitbenchmarker",
+        "gold_missing"
+      ],
+      [
+        "hitsz-ids/synthetic-data-generator",
+        "gold_missing"
+      ],
+      [
+        "idank/explainshell",
+        "gold_missing"
+      ],
+      [
+        "jhao104/proxy_pool",
+        "gold_missing"
+      ],
+      [
+        "karlicoss/promnesia",
+        "gold_missing"
+      ],
+      [
+        "mckinsey/vizro",
+        "gold_missing"
+      ],
+      [
+        "microsoft/markitdown",
+        "gold_missing"
+      ],
+      [
+        "mlflow/mlflow",
+        "gold_missing"
+      ],
+      [
+        "mozilla/addons-server",
+        "gold_missing"
+      ],
+      [
+        "mvt-project/mvt",
+        "gold_missing"
+      ],
+      [
+        "newfuture/ddns",
+        "gold_missing"
+      ],
+      [
+        "nginx-proxy/nginx-proxy",
+        "gold_missing"
+      ],
+      [
+        "opencti-platform/connectors",
+        "gold_missing"
+      ],
+      [
+        "polarsource/polar",
+        "gold_missing"
+      ],
+      [
+        "posthog/posthog",
+        "gold_missing"
+      ],
+      [
+        "pre-commit/pre-commit",
+        "gold_missing"
+      ],
+      [
+        "pretix/pretix",
+        "gold_missing"
+      ],
+      [
+        "pycontribs/jira",
+        "gold_missing"
+      ],
+      [
+        "python-websockets/websockets",
+        "gold_missing"
+      ],
+      [
+        "qiskit/qiskit",
+        "gold_missing"
+      ],
+      [
+        "rq/rq",
+        "gold_missing"
+      ],
+      [
+        "sooperset/mcp-atlassian",
+        "gold_missing"
+      ],
+      [
+        "supabase/supabase-py",
+        "gold_missing"
+      ],
+      [
+        "testcontainers/testcontainers-python",
+        "gold_missing"
+      ],
+      [
+        "tgoai/tgo",
+        "gold_missing"
+      ],
+      [
+        "tinygrad/tinygrad",
+        "gold_missing"
+      ],
+      [
+        "trailofbits/algo",
+        "gold_missing"
+      ],
+      [
+        "unit8co/darts",
+        "gold_missing"
+      ],
+      [
+        "wecode-ai/wegent",
+        "gold_missing"
+      ],
+      [
+        "xuwei95/ezdata",
+        "gold_missing"
+      ]
+    ],
+    "n_gold_sha_mismatch": 0,
+    "gold_sha_mismatch": [],
+    "mean_collection_coverage": null,
+    "median_collection_coverage": null,
+    "n_gold_hollow": 0,
+    "gold_hollow": [],
+    "mean_image_delta_mb": null,
+    "mean_installed_pkgs": 96.5111,
+    "mean_tokens": 2918737.7,
+    "mean_tokens_out": 57213.6,
+    "tokens_per_ebsr": 6949375.4762,
+    "tokens_per_real_success": 6080703.5417,
+    "mean_turns": null,
+    "total_cost_usd": null,
+    "mean_cost_usd": null,
+    "cost_per_ebsr": null,
+    "cost_per_real_success": null,
+    "n_cost_reporting": 0,
+    "mean_produce_s": null,
+    "wall_s_per_real_success": 1471.6217,
+    "n_token_reporting": 50,
+    "rebuild_ok_rate": 0.9,
+    "setup_compile_rate": 0.9,
+    "n_setup_compile": 45,
+    "unreplayed_rate": 0.0
+  }
+}

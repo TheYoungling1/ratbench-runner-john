@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__rat50-pjy",
+  "agent": "pjy-repo2run",
   "repo": "PostHog/posthog",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ry==0.26.18\n#34 0.152 dagster-docker==0.26.18\n#34 0.152 dagster-k8s==0.26.18\n#34 0.152 dagster-pipes==1.10.18\n#34 0.152 dagster-postgres==0.26.18\n#34 0.152 dagster-slack==0.26.18\n#34 0.152 dagster-webserver==1.10.18\n#34 0.152 dagster==1.10.18\n#34 0.152 dagster-cloud==1.10.18\n#34 0.152 dagster-aws==0.26.18\n#34 0.152 dagster-celery==0.26.18\n#34 0.152 dagster-docker==0.26.18\n#34 0.152 dagster-k8s==0.26.18\n#34 0.152 dagster-pipes==1.10.18\n#34 0.152 dagster-postgres==0.26.18\n#34 0.152 dagster-slack==0.26.18\n#34 0.152 dagster-webserver==1.10.18\n#34 0.152 dagster==1.10.18\n#34 0.152 dagster-cloud==1.10.18\n#34 0.152 dagster-aws==0.26.18\n#34 0.152 dagster-celery==0.26.18\n#34 0.152 dagster-docker==0.26.18\n#34 0.152 dagster-k8s==0.26.18\n#34 0.152 dagster-pipes==1.10.18\n#34 0.152 dagster-postgres==0.26.18\n#34 0.152 dagster-slack==0.26.18\n#34 0.152 dagster-webserver==1.10.18\n#34 0.152 ---\n#34 0.154 /bin/sh: 1: runtest: not found\n#34 DONE 0.3s\n\n#35 [31/34] RUN grep -vE '^[A-Za-z0-9._-]+([<>=!~]=?[^,]*)?(,[<>=!~]=?[^,]*)*$' /tmp/deps_sanitized.txt | head -20; echo \"EXIT:$?\"\n#35 0.163 EXIT:0\n#35 DONE 0.2s\n\n#36 [32/34] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#36 DONE 14.8s\n\n#37 [33/34] WORKDIR /testbed\n#37 DONE 0.3s\n\n#38 exporting to image\n#38 exporting layers\n#38 exporting layers 190.8s done\n#38 exporting manifest sha256:e7d20777290d999e1c6da70dc0190c74c79612cabcea89989c00659b56943812 done\n#38 exporting config sha256:11d69ab1b3d30f37ac1e1be6da4290e62b97f0eb9b501d7521124cf3ca969855 done\n#38 exporting attestation manifest sha256:c1ca3e137e43504a9cc008b424c221d30db3795aa14320cc866a75c4c2ccd683 done\n#38 exporting manifest list sha256:edc801ae040ecdca21daad7422255dc6a0bb20062543e04ae92dcd8f09996356 done\n#38 naming to docker.io/library/bench-repo2run__rat50-pjy-posthog-posthog:latest done\n#38 unpacking to docker.io/library/bench-repo2run__rat50-pjy-posthog-posthog:latest\n#38 unpacking to docker.io/library/bench-repo2run__rat50-pjy-posthog-posthog:latest 44.6s done\n#38 DONE 235.5s\n",
+  "build_log_tail": "9 dagster-webserver==1.10.18\n#34 0.209 dagster==1.10.18\n#34 0.209 dagster-cloud==1.10.18\n#34 0.209 dagster-aws==0.26.18\n#34 0.209 dagster-celery==0.26.18\n#34 0.209 dagster-docker==0.26.18\n#34 0.209 dagster-k8s==0.26.18\n#34 0.209 dagster-pipes==1.10.18\n#34 0.209 dagster-postgres==0.26.18\n#34 0.209 dagster-slack==0.26.18\n#34 0.209 dagster-webserver==1.10.18\n#34 0.209 dagster==1.10.18\n#34 0.209 dagster-cloud==1.10.18\n#34 0.209 dagster-aws==0.26.18\n#34 0.209 dagster-celery==0.26.18\n#34 0.209 dagster-docker==0.26.18\n#34 0.209 dagster-k8s==0.26.18\n#34 0.209 dagster-pipes==1.10.18\n#34 0.209 dagster-postgres==0.26.18\n#34 0.209 dagster-slack==0.26.18\n#34 0.209 dagster-webserver==1.10.18\n#34 0.210 ---\n#34 0.212 /bin/sh: 1: runtest: not found\n#34 DONE 0.2s\n\n#35 [31/34] RUN grep -vE '^[A-Za-z0-9._-]+([<>=!~]=?[^,]*)?(,[<>=!~]=?[^,]*)*$' /tmp/deps_sanitized.txt | head -20; echo \"EXIT:$?\"\n#35 0.231 EXIT:0\n#35 DONE 0.2s\n\n#36 [32/34] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#36 DONE 17.5s\n\n#37 [33/34] WORKDIR /testbed\n#37 DONE 0.3s\n\n#38 exporting to image\n#38 exporting layers\n#38 exporting layers 251.8s done\n#38 exporting manifest sha256:6bc391084f07250b881763a2df2594a7d595157a289157a6bb2e0f04c7a5a427\n#38 exporting manifest sha256:6bc391084f07250b881763a2df2594a7d595157a289157a6bb2e0f04c7a5a427 1.1s done\n#38 exporting config sha256:c5dd0924c50cee75ac146ce9b4c807090b3e487f4178b27f2b0c2946e68073e4\n#38 exporting config sha256:c5dd0924c50cee75ac146ce9b4c807090b3e487f4178b27f2b0c2946e68073e4 0.0s done\n#38 exporting attestation manifest sha256:729dad1a0579089689d3eae7c87753a22734bd29d072b0efab6729aa4d65be73 0.0s done\n#38 exporting manifest list sha256:2909b08b85e42145403c37a59f53f68fcac77814401a52b9d0eb9966985e8f3a 0.0s done\n#38 naming to docker.io/library/bench-pjy-repo2run-posthog-posthog:latest done\n#38 unpacking to docker.io/library/bench-pjy-repo2run-posthog-posthog:latest\n#38 unpacking to docker.io/library/bench-pjy-repo2run-posthog-posthog:latest 63.8s done\n#38 DONE 316.8s\n",
   "status": "collect_error",
   "py_test_files": 3218,
   "collect_rc": 1,
@@ -24,37 +24,25 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 10989.4,
+  "image_size_mb": 10977.3,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__rat50-pjy-posthog-posthog@sha256:edc801ae040ecdca21daad7422255dc6a0bb20062543e04ae92dcd8f09996356",
-  "installed_pkg_count": 399,
+  "image_digest": "bench-pjy-repo2run-posthog-posthog@sha256:2909b08b85e42145403c37a59f53f68fcac77814401a52b9d0eb9966985e8f3a",
+  "installed_pkg_count": 400,
   "tokens_in": 3821418,
   "tokens_out": 79348,
   "llm_calls": 100,
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 1217.81,
-  "test_s": 1.58,
+  "build_s": 1289.24,
+  "test_s": 1.76,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 3821418,
     "tokens_out": 79348,
-    "llm_calls": 100,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 100
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "uploadcare/pyuploadcare",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ormdirs (4.3.6)\n#18 23.88   - Installing pydantic-core (2.27.2)\n#18 23.89   - Installing pytest (7.4.4)\n#18 23.91   - Installing sphinx (7.1.2)\n#18 23.93   - Installing sqlparse (0.5.5)\n#18 23.95   - Installing vcrpy (5.1.0)\n#18 24.35   - Installing black (24.8.0)\n#18 24.35   - Installing django (4.2.30)\n#18 24.35   - Installing flake8-print (5.0.0)\n#18 24.36   - Installing httpx (0.25.2)\n#18 24.36   - Installing isort (5.13.2)\n#18 24.36   - Installing mypy (1.14.1)\n#18 24.36   - Installing pydantic (2.10.6)\n#18 24.36   - Installing pytest-cov (4.1.0)\n#18 24.36   - Installing pytest-freezer (0.4.9)\n#18 24.36   - Installing pytest-vcr (1.0.2)\n#18 24.37   - Installing python-coveralls (2.9.3)\n#18 24.38   - Installing sphinx-argparse (0.4.0)\n#18 24.48   - Installing types-dataclasses (0.6.6)\n#18 24.50   - Installing types-python-dateutil (2.9.0.20241206)\n#18 24.50   - Installing types-pytz (2023.4.0.20240130)\n#18 26.62 \n#18 26.62 Writing lock file\n#18 26.63 \n#18 26.63 Installing the current project: pyuploadcare (5.1.0)\n#18 DONE 27.7s\n\n#19 [16/18] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.8s\n\n#20 [17/18] WORKDIR /testbed\n#20 DONE 0.1s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 15.2s done\n#21 exporting manifest sha256:72c3b024949ee0ba43507a4090be5d2138a4114742b3fb7711dc2a6d62058f1b 0.0s done\n#21 exporting config sha256:7073ce49c073f542c55cacd731a93b3f90521da4e394c19d4b197330c6fd59bb 0.0s done\n#21 exporting attestation manifest sha256:4e7db61a08d74509623dfe99b822d69735743e85dd469b0f981c44ded0acf72b 0.0s done\n#21 exporting manifest list sha256:c2a2f9780f71edbe3f6a5b2190eab86b3cad156897a5fb32ca802f598fecbb55 0.0s done\n#21 naming to docker.io/library/bench-repo2run__envbench100-pjy-uploadcare-pyuploadcare:latest done\n#21 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-uploadcare-pyuploadcare:latest\n#21 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-uploadcare-pyuploadcare:latest 6.0s done\n#21 DONE 21.3s\n",
+  "build_log_tail": " pathspec (0.12.1)\n#18 23.71   - Installing platformdirs (4.3.6)\n#18 23.84   - Installing pydantic-core (2.27.2)\n#18 23.87   - Installing pytest (7.4.4)\n#18 23.91   - Installing sphinx (7.1.2)\n#18 23.91   - Installing sqlparse (0.5.5)\n#18 23.92   - Installing vcrpy (5.1.0)\n#18 24.46   - Installing black (24.8.0)\n#18 24.46   - Installing django (4.2.30)\n#18 24.46   - Installing flake8-print (5.0.0)\n#18 24.46   - Installing httpx (0.25.2)\n#18 24.46   - Installing isort (5.13.2)\n#18 24.46   - Installing mypy (1.14.1)\n#18 24.46   - Installing pydantic (2.10.6)\n#18 24.47   - Installing pytest-cov (4.1.0)\n#18 24.47   - Installing pytest-freezer (0.4.9)\n#18 24.47   - Installing pytest-vcr (1.0.2)\n#18 24.47   - Installing python-coveralls (2.9.3)\n#18 24.48   - Installing sphinx-argparse (0.4.0)\n#18 24.63   - Installing types-dataclasses (0.6.6)\n#18 24.64   - Installing types-python-dateutil (2.9.0.20241206)\n#18 24.66   - Installing types-pytz (2023.4.0.20240130)\n#18 27.30 \n#18 27.30 Writing lock file\n#18 27.31 \n#18 27.31 Installing the current project: pyuploadcare (5.1.0)\n#18 DONE 28.2s\n\n#19 [16/18] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.7s\n\n#20 [17/18] WORKDIR /testbed\n#20 DONE 0.7s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 18.5s done\n#21 exporting manifest sha256:ef6adb66be57411af0b1a60f9e3dc822720b9562daaad4a973dc859897c0b29e done\n#21 exporting config sha256:d0f5aa86203d35c1ce2f67dbc0f6332c9eae19e9ed557e1a11a14a94d00d2cd4 done\n#21 exporting attestation manifest sha256:70501a247b62f7027744fdf508d5a487f8d1be4f7915caa1f454133581e568ec 0.0s done\n#21 exporting manifest list sha256:02aab2cc893ed1e7a484b52c1a99945addb6c813ffe9bd264525c2d7f8bc2eef 0.0s done\n#21 naming to docker.io/library/bench-pjy-repo2run-uploadcare-pyuploadcare:latest done\n#21 unpacking to docker.io/library/bench-pjy-repo2run-uploadcare-pyuploadcare:latest\n#21 unpacking to docker.io/library/bench-pjy-repo2run-uploadcare-pyuploadcare:latest 5.8s done\n#21 DONE 24.4s\n",
   "status": "collect_error",
   "py_test_files": 38,
   "collect_rc": 4,
@@ -26,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 624.3,
+  "image_size_mb": 2274.7,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-uploadcare-pyuploadcare@sha256:c2a2f9780f71edbe3f6a5b2190eab86b3cad156897a5fb32ca802f598fecbb55",
+  "image_digest": "bench-pjy-repo2run-uploadcare-pyuploadcare@sha256:02aab2cc893ed1e7a484b52c1a99945addb6c813ffe9bd264525c2d7f8bc2eef",
   "installed_pkg_count": 27,
   "tokens_in": 249376,
   "tokens_out": 8071,
@@ -36,8 +36,8 @@
   "turns_used": 17,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 53.84,
-  "test_s": 0.3,
+  "build_s": 59.87,
+  "test_s": 0.44,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -45,19 +45,7 @@
     "tokens_in": 249376,
     "tokens_out": 8071,
     "llm_calls": null,
-    "turns_used": 17,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 17
   },
   "error_surface": "",
   "error_surface_reason": "",

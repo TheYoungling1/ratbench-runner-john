@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "xuwei95/ezdata",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": ".2.2 pycparser-3.0 pydantic-2.13.4 pydantic-extra-types-2.11.1 pydantic-settings-2.15.0 pydantic-validation-decorator-0.1.5 pydantic_core-2.46.4 pyee-13.0.1 pytest-asyncio-1.4.0 pytest-base-url-2.1.0 pytest-playwright-0.9.0 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 python-multipart-0.0.32 python-slugify-8.0.4 pytz-2026.3.post1 redis-7.1.0 requests-2.34.2 rich-15.0.0 rich-toolkit-0.20.3 rignore-0.8.1 ruff-0.16.3 sentry-sdk-2.68.0 shellingham-1.5.4 six-1.17.0 starlette-0.50.0 text-unidecode-1.3 tqdm-4.70.0 typer-0.27.1 typing-inspection-0.4.3 tzdata-2026.3 ua-parser-1.0.2 ua-parser-builtins-202606 ujson-5.13.0 urllib3-2.7.0 user-agents-2.2.0 uvicorn-0.52.3 uvloop-0.22.1 watchfiles-1.2.0 websockets-16.1.1\n#18 63.23 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 63.69 \n#18 63.69 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 63.69 [notice] To update, run: pip install --upgrade pip\n#18 DONE 65.2s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 1.5s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.1s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 23.4s done\n#21 exporting manifest sha256:fceba6caba98a04d10cb704668ddd34f72d3739a7a8668075b83f356c5b3a645 0.0s done\n#21 exporting config sha256:9fe8335f41838e192564f2e29d30a8c0c638ffe086a69b97136f92b854410098 0.0s done\n#21 exporting attestation manifest sha256:0547662cbe009ba42780c91fd656c5ed65d711bf90c33a37b84d090249aa38ac 0.0s done\n#21 exporting manifest list sha256:488b39774405035a4604b23ae2fe48ccb3947a36faf119731c19114de30ab512 0.0s done\n#21 naming to docker.io/library/bench-rat__rat50-pjy-xuwei95-ezdata:latest done\n#21 unpacking to docker.io/library/bench-rat__rat50-pjy-xuwei95-ezdata:latest\n#21 unpacking to docker.io/library/bench-rat__rat50-pjy-xuwei95-ezdata:latest 5.5s done\n#21 DONE 29.0s\n",
+  "build_log_tail": "ools-0.8.0 httpx-0.28.1 httpx2-2.10.0 idna-3.18 itsdangerous-2.2.0 jiter-0.16.0 loguru-0.7.3 markdown-it-py-4.2.0 mdurl-0.1.2 numpy-2.2.6 openai-3.0.0 openpyxl-3.1.5 orjson-3.12.0 pandas-2.3.3 playwright-1.62.0 psutil-7.2.2 pycparser-3.0 pydantic-2.13.4 pydantic-extra-types-2.11.1 pydantic-settings-2.15.0 pydantic-validation-decorator-0.1.5 pydantic_core-2.46.4 pyee-13.0.1 pytest-asyncio-1.4.0 pytest-base-url-2.1.0 pytest-playwright-0.9.0 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 python-multipart-0.0.32 python-slugify-8.0.4 pytz-2026.3.post1 redis-7.1.0 requests-2.34.2 rich-15.0.0 rich-toolkit-0.20.3 rignore-0.8.1 ruff-0.16.3 sentry-sdk-2.68.0 shellingham-1.5.4 six-1.17.0 starlette-0.50.0 text-unidecode-1.3 tqdm-4.70.0 typer-0.27.1 typing-inspection-0.4.3 tzdata-2026.3 ua-parser-1.0.2 ua-parser-builtins-202606 ujson-5.13.0 urllib3-2.7.0 user-agents-2.2.0 uvicorn-0.52.3 uvloop-0.22.1 watchfiles-1.2.0 websockets-16.1.1\n#18 318.8 \n#18 318.8 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 318.8 [notice] To update, run: pip install --upgrade pip\n#18 DONE 320.5s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.7s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.1s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 20.2s done\n#21 exporting manifest sha256:7dea3213b407ba74e5fc182d465112dda43ac40a56b348d6de965e94346950e2 0.0s done\n#21 exporting config sha256:35fa102e0a0d84a20796076d5aba09ef5af791df0838b34cf1a57dd92b76930e 0.0s done\n#21 exporting attestation manifest sha256:dcd0cfb9e8ca03a1b60d2417ec8bdcf7aa09a3399fc91307e3bcb32fcb81cca0 0.0s done\n#21 exporting manifest list sha256:9743f28a99f1c8b2a72ec25b5220ec576edf82ba50aa40c732fa02a4506448b9 0.0s done\n#21 naming to docker.io/library/bench-pjy-rat-dockerfile-xuwei95-ezdata:latest done\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-xuwei95-ezdata:latest\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-xuwei95-ezdata:latest 8.7s done\n#21 DONE 29.1s\n",
   "status": "collect_error",
   "py_test_files": 69,
   "collect_rc": 2,
@@ -466,7 +466,7 @@
   "timed_out": false,
   "image_size_mb": 1031.2,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50-pjy-xuwei95-ezdata@sha256:488b39774405035a4604b23ae2fe48ccb3947a36faf119731c19114de30ab512",
+  "image_digest": "bench-pjy-rat-dockerfile-xuwei95-ezdata@sha256:9743f28a99f1c8b2a72ec25b5220ec576edf82ba50aa40c732fa02a4506448b9",
   "installed_pkg_count": 99,
   "tokens_in": 4196454,
   "tokens_out": 73274,
@@ -474,27 +474,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 103.05,
-  "test_s": 39.46,
+  "build_s": 354.78,
+  "test_s": 37.42,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 4196454,
     "tokens_out": 73274,
-    "llm_calls": 102,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 102
   },
   "error_surface": "",
   "error_surface_reason": "",

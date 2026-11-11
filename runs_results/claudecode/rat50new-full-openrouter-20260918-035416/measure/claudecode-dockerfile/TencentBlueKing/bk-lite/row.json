@@ -1,19 +1,38 @@
 {
-  "agent": "claudecode__rat50new-full-openrouter-20260918-035416",
+  "agent": "claudecode-dockerfile",
   "repo": "TencentBlueKing/bk-lite",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": " = settings'     'pythonpath = server'     'testpaths = server/apps'     'norecursedirs = web webchat mobile docs algorithms agents deploy spec specs enterprise openspec .claude .cursor .git images staticfiles node_modules util browsers .tox build dist scripts'     'addopts = -s -v --import-mode=importlib --color=yes --reuse-db --ignore=server/apps/cmdb/tests/e2e/test_pc_discovery_pipeline.py --ignore=server/apps/cmdb/tests/test_winsphere_snapshot_metadata.py'     'filterwarnings ='     '    ignore::Warning'     '    ignore::DeprecationWarning'     '    ignore::UserWarning'     '    ignore::RuntimeWarning'     > /testbed/pytest.ini\n#18 DONE 0.2s\n\n#19 [16/16] WORKDIR /testbed\n#19 DONE 0.0s\n\n#20 exporting to image\n#20 exporting layers\n#20 exporting layers 47.4s done\n#20 exporting manifest sha256:ab1c627dc53713326cc4000eb294aa9e9618f36270842d5aa9ff138e0fd29f16 done\n#20 exporting config sha256:9e2315c2d66f77d82af48bd03fb1a7209c566f7880091e8ee04d62b362639f48 done\n#20 exporting attestation manifest sha256:24b9f4b993eab83d50a5451630fc596edfa8a17093a50d4d7a4960f4012c0a5e 0.0s done\n#20 exporting manifest list sha256:ccbcc9a19bbef0415a9cb152d597214d6d8424bab6c3cd7f626c4a56a61ecc50 done\n#20 naming to docker.io/library/bench-claudecode__rat50new-full-openrouter-20260918-035416-tencentblueking-bk-lite:latest done\n#20 unpacking to docker.io/library/bench-claudecode__rat50new-full-openrouter-20260918-035416-tencentblueking-bk-lite:latest\n#20 unpacking to docker.io/library/bench-claudecode__rat50new-full-openrouter-20260918-035416-tencentblueking-bk-lite:latest 25.8s done\n#20 DONE 73.3s\n\n \u001b[33m3 warnings found (use docker --debug to expand):\n\u001b[0m - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV \"SECRET_KEY\") (line 196)\n - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV \"MINIO_ACCESS_KEY\") (line 196)\n - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV \"MINIO_SECRET_KEY\") (line 196)\n",
-  "status": "collect_error",
+  "build_log_tail": "ning.\n#17 DONE 1.4s\n\n#18 [15/16] RUN printf '%s\\n'     '[pytest]'     'DJANGO_SETTINGS_MODULE = settings'     'pythonpath = server'     'testpaths = server/apps'     'norecursedirs = web webchat mobile docs algorithms agents deploy spec specs enterprise openspec .claude .cursor .git images staticfiles node_modules util browsers .tox build dist scripts'     'addopts = -s -v --import-mode=importlib --color=yes --reuse-db --ignore=server/apps/cmdb/tests/e2e/test_pc_discovery_pipeline.py --ignore=server/apps/cmdb/tests/test_winsphere_snapshot_metadata.py'     'filterwarnings ='     '    ignore::Warning'     '    ignore::DeprecationWarning'     '    ignore::UserWarning'     '    ignore::RuntimeWarning'     > /testbed/pytest.ini\n#18 DONE 0.2s\n\n#19 [16/16] WORKDIR /testbed\n#19 DONE 0.0s\n\n#20 exporting to image\n#20 exporting layers\n#20 exporting layers 35.5s done\n#20 exporting manifest sha256:2cee84f14ad9224497e1c57b1f9615fb8f6f96c6aac346ff2e2c59f1ff59148e done\n#20 exporting config sha256:085e537e8074111c3084c8a2750004134563a396a2b3fcfd0742e4a6f1b60b36 done\n#20 exporting attestation manifest sha256:3e88d1ee5a91db2a13fa2f7d97e7847f0daec3984603dfa23c82601c1467f4ad 0.0s done\n#20 exporting manifest list sha256:0ab0f8ed23c94b73a595cd1a7433eb0953985468beb641ca1f2e06003a7bac1c done\n#20 naming to docker.io/library/bench-claudecode-dockerfile-tencentblueking-bk-lite:latest done\n#20 unpacking to docker.io/library/bench-claudecode-dockerfile-tencentblueking-bk-lite:latest\n#20 unpacking to docker.io/library/bench-claudecode-dockerfile-tencentblueking-bk-lite:latest 20.4s done\n#20 DONE 56.0s\n\n \u001b[33m3 warnings found (use docker --debug to expand):\n\u001b[0m - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV \"SECRET_KEY\") (line 196)\n - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV \"MINIO_ACCESS_KEY\") (line 196)\n - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV \"MINIO_SECRET_KEY\") (line 196)\n",
+  "status": "timed_out",
   "py_test_files": 2121,
-  "collect_rc": 1,
-  "collect_clean": false,
+  "collect_rc": 0,
+  "collect_clean": true,
   "collect_errors": [
-    "ImportError: No module named 'settings'"
+    "<Function test_nats_request_preserves_structured_error_contract[payload0-RemoteError: request rejected-request]>",
+    "<Function test_nats_request_preserves_structured_error_contract[payload0-RemoteError: request rejected-request_v2]>",
+    "<Function test_nats_request_preserves_structured_error_contract[payload1-RemoteError: request rejected | Output: trace-request]>",
+    "<Function test_nats_request_preserves_structured_error_contract[payload1-RemoteError: request rejected | Output: trace-request_v2]>"
   ],
   "collect_error_count": 0,
-  "collected_node_ids": [],
+  "collected_node_ids": [
+    "<Function test_resolve_falls_back_to_node_server_url_hostname[https://[2001:db8::8]:8011-2001:db8::8]>",
+    "<Function test_model_rejects_forbidden_supernets[::/0]>",
+    "<Function test_get_ip_location_\u672c\u5730[::1-\\u672c\\u5730]>",
+    "<Function test_winsphere_serializer_rejects_non_host_management_address[2001:db8::1]>",
+    "<Function test_normalize_image_registry_prefix_accepts_supported_formats[[fd00::8]:5000/platform/bklite-[fd00::8]:5000/platform/bklite]>",
+    "<Function test_algorithm_config_serializer_accepts_legacy_image_references[[2001:db8::1]:5000/team/service:v1]>",
+    "<Function test_init_algorithm_config_accepts_legacy_image_references[[2001:db8::1]:5000/team/service:v1]>",
+    "<Function test_webhookd_validator_accepts_legacy_image_references[[2001:db8::1]:5000/team/service:v1]>",
+    "<Function test_kubernetes_entrypoint_keeps_legacy_image_reference_working[[2001:db8::1]:5000/team/service:v1-train.sh]>",
+    "<Function test_kubernetes_entrypoint_keeps_legacy_image_reference_working[[2001:db8::1]:5000/team/service:v1-serve.sh]>",
+    "<Function test_extract_default_address[https://[2001:db8::1]:443-[2001:db8::1]]>",
+    "<Function test_proxy_address_accepts_only_ip_or_domain[2001:db8::8-True]>",
+    "<Function test_proxy_address_is_normalized_at_the_api_boundary[2001:db8::8-[2001:db8::8]]>",
+    "<Function test_proxy_address_is_normalized_at_the_api_boundary[[2001:db8::8]-[2001:db8::8]]>",
+    "<Function test_sanitize_url_for_log_only_keeps_valid_http_origin[http://[2001:db8::1]:8080/private-secret-http://[2001:db8::1]:8080]>"
+  ],
   "executed": false,
   "total": 0,
   "passed": 0,
@@ -25,10 +44,10 @@
   "error_node_ids": [],
   "ebsr": false,
   "pass_rate": 0.0,
-  "timed_out": false,
-  "image_size_mb": 1467.5,
-  "image_delta_mb": null,
-  "image_digest": "bench-claudecode__rat50new-full-openrouter-20260918-035416-tencentblueking-bk-lite@sha256:ccbcc9a19bbef0415a9cb152d597214d6d8424bab6c3cd7f626c4a56a61ecc50",
+  "timed_out": true,
+  "image_size_mb": 1465.0,
+  "image_delta_mb": 1076.9,
+  "image_digest": "bench-claudecode-dockerfile-tencentblueking-bk-lite@sha256:0ab0f8ed23c94b73a595cd1a7433eb0953985468beb641ca1f2e06003a7bac1c",
   "installed_pkg_count": 355,
   "tokens_in": 4556719,
   "tokens_out": 40082,
@@ -36,8 +55,8 @@
   "turns_used": 71,
   "cost_usd": 0.09003101999999999,
   "produce_s": 2311.04,
-  "build_s": 205.73,
-  "test_s": 0.82,
+  "build_s": 183.44,
+  "test_s": 1800.0,
   "meta": {
     "contract_version": 1,
     "producer": "claudecode-dockerfile",
@@ -64,19 +83,7 @@
     "usage_source": "computed",
     "dsml_text_blocks": 1,
     "turn_capped": false,
-    "agent_timed_out": false,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\nremoved pytest.ini\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "agent_timed_out": false
   },
   "error_surface": "",
   "error_surface_reason": "",

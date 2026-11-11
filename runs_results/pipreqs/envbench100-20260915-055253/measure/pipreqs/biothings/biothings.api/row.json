@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "biothings/biothings.api",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "-extensions-1.1.0 nest-asyncio2-1.7.3 networkx-3.4.2 orjson-3.12.0 parso-0.8.7 pathspec-1.1.1 pexpect-4.9.0 platformdirs-4.11.15 prettytable-3.18.0 prompt_toolkit-3.0.53 psutil-7.2.2 ptyprocess-0.7.0 pure-eval-0.2.4 pycparser-3.0 pycrypto-2.6.1 pydantic-2.13.5 pydantic-core-2.46.5 pymongo-4.18.2 pytest_mock-3.15.1 python_dateutil-2.9.0.post0 pytokens-0.4.1 pyzmq-27.2.0 requests_aws4auth-1.3.2 rich-15.0.0 s3transfer-0.19.2 sentry_sdk-2.70.0 shellingham-1.5.4 singledispatchmethod-1.0 six-1.17.0 smmap-5.0.3 sniffio-1.3.1 sockjs_tornado-1.0.7 soupsieve-2.10 stack_data-0.6.3 starlette-1.7.0 tornado-6.5.10 tqdm-4.70.1 traitlets-5.16.1 typer-0.27.2 typing-inspection-0.4.4 tzlocal-5.4.4 urllib3-2.8.0 wcwidth-0.9.1 websocket-client-1.9.2 werkzeug-3.1.8\n#11 34.59 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 34.60 \n#11 34.60 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 34.60 [notice] To update, run: pip install --upgrade pip\n#11 DONE 36.0s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 18.2s done\n#12 exporting manifest sha256:3e83dedb4bbe4ed1d5642b3fd08230a7c56769dddc9661fad8b12758fee04bd3 0.0s done\n#12 exporting config sha256:7cd8a557a6853216c6d80bc64bffdc33207f9e826135fb33e0f051dce04b4db7 done\n#12 exporting attestation manifest sha256:0b509fba2d632d33a14a661f6d1c28c712d2e4a5381ec38bd69cd497adaee12e 0.0s done\n#12 exporting manifest list sha256:c31ece319f2f6d7195788ac50c045161f3ac2d44859167a5791a5273bc5175fb done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-biothings-biothings.api:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-biothings-biothings.api:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-biothings-biothings.api:latest 4.0s done\n#12 DONE 22.3s\n",
+  "build_log_tail": "greenlet-3.5.6 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.19 ipykernel-7.3.0 ipyparallel-9.2.0 ipython-8.39.0 itsdangerous-2.2.0 jedi-0.20.0 jinja2-3.1.6 jmespath-1.1.0 jsonpointer-3.1.1 jupyter-client-8.10.0 jupyter-core-5.9.1 markdown-it-py-4.2.0 markupsafe-3.0.3 matplotlib-inline-0.2.2 mdurl-0.1.2 msgpack_python-0.5.6 mypy-extensions-1.1.0 nest-asyncio2-1.7.2 networkx-3.4.2 orjson-3.12.0 parso-0.8.7 pathspec-1.1.1 pexpect-4.9.0 platformdirs-4.11.8 prettytable-3.18.0 prompt_toolkit-3.0.53 psutil-7.2.2 ptyprocess-0.7.0 pure-eval-0.2.4 pycparser-3.0 pycrypto-2.6.1 pydantic-2.13.5 pydantic-core-2.46.5 pymongo-4.18.1 pytest_mock-3.15.1 python_dateutil-2.9.0.post0 pytokens-0.4.1 pyzmq-27.2.0 requests_aws4auth-1.3.2 rich-15.0.0 s3transfer-0.19.2 sentry_sdk-2.69.1 shellingham-1.5.4 singledispatchmethod-1.0 six-1.17.0 smmap-5.0.3 sniffio-1.3.1 sockjs_tornado-1.0.7 soupsieve-2.9.2 stack_data-0.6.3 starlette-1.6.0 tornado-6.5.9 tqdm-4.70.1 traitlets-5.16.1 typer-0.27.2 typing-inspection-0.4.4 tzlocal-5.4.4 urllib3-2.7.0 wcwidth-0.8.3 websocket-client-1.9.2 werkzeug-3.1.8\n#11 37.26 \n#11 37.26 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 37.26 [notice] To update, run: pip install --upgrade pip\n#11 DONE 38.9s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 15.4s done\n#12 exporting manifest sha256:ba6fbc7da8c7c0769a152985ccd00f25f29453fc040c345111bccc8fa2c1538b done\n#12 exporting config sha256:660a31fa56428e50cef32b265fef30dd908b829c48ab570f93772540fc1c8b2c done\n#12 exporting attestation manifest sha256:5b8ac5cc702bfdd00eb88b3b528336b01e2155aeec2b925d55d4fe30514a80a0 done\n#12 exporting manifest list sha256:7fb8d6806fc472024c2c8fef371895bb47254de444456349954c388552133287 done\n#12 naming to docker.io/library/bench-pipreqs-biothings-biothings.api:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-biothings-biothings.api:latest\n#12 unpacking to docker.io/library/bench-pipreqs-biothings-biothings.api:latest 5.8s done\n#12 DONE 21.2s\n",
   "status": "collect_error",
   "py_test_files": 31,
   "collect_rc": 2,
@@ -252,9 +252,9 @@
   "ebsr": true,
   "pass_rate": 0.7706,
   "timed_out": false,
-  "image_size_mb": 585.2,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-biothings-biothings.api@sha256:c31ece319f2f6d7195788ac50c045161f3ac2d44859167a5791a5273bc5175fb",
+  "image_size_mb": 583.8,
+  "image_delta_mb": 196.2,
+  "image_digest": "bench-pipreqs-biothings-biothings.api@sha256:7fb8d6806fc472024c2c8fef371895bb47254de444456349954c388552133287",
   "installed_pkg_count": 116,
   "tokens_in": null,
   "tokens_out": null,
@@ -262,8 +262,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 16.11,
-  "build_s": 63.39,
-  "test_s": 1.61,
+  "build_s": 65.14,
+  "test_s": 1.98,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -290,19 +290,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=6573562773ed66b9428aead1ba7ac187005bb031 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=6573562773ed66b9428aead1ba7ac187005bb031 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

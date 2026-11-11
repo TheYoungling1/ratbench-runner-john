@@ -1,0 +1,154 @@
+{
+  "pjy-repo2run": {
+    "collect": {
+      "agent": "pjy-repo2run",
+      "n_repos": 100,
+      "source": "collect",
+      "n_admissible": 51,
+      "n_masked": 28,
+      "n_unobserved": 21,
+      "n_status_derived": 0,
+      "buckets": {
+        "success": 29,
+        "no_tests_collected": 5,
+        "collect_error": 33,
+        "build_fail": 17,
+        "partial": 8,
+        "timed_out": 1,
+        "missing": 4,
+        "zero_pass": 3
+      },
+      "surfaces": {
+        "full": 51,
+        "masked": 28,
+        "unobserved": 21
+      },
+      "token_repos": {
+        "ModuleNotFoundError": 6,
+        "ImportError": 3,
+        "AttributeError": 1,
+        "RuntimeError": 1,
+        "TypeError": 1,
+        "NameError": 1
+      },
+      "token_events": {
+        "ModuleNotFoundError": 20,
+        "AttributeError": 1,
+        "ImportError": 4,
+        "RuntimeError": 1,
+        "TypeError": 1,
+        "NameError": 1
+      },
+      "category_repos": {
+        "module_not_found": 6,
+        "partial_import": 3,
+        "uncategorized": 4,
+        "import_failed": 1
+      },
+      "category_events": {
+        "module_not_found": 20,
+        "uncategorized": 4,
+        "partial_import": 3,
+        "import_failed": 1
+      },
+      "crosstab": {
+        "collect_error|module_not_found": 6,
+        "timed_out|partial_import": 1,
+        "timed_out|uncategorized": 1,
+        "collect_error|uncategorized": 3,
+        "collect_error|import_failed": 1,
+        "collect_error|partial_import": 2
+      },
+      "top_groups": {
+        "module_not_found": [
+          [
+            "matplotlib",
+            1
+          ],
+          [
+            "astropy",
+            1
+          ],
+          [
+            "numpy",
+            1
+          ],
+          [
+            "lightkurve",
+            1
+          ],
+          [
+            "cv2",
+            1
+          ],
+          [
+            "genericm2m",
+            1
+          ],
+          [
+            "unittesting",
+            1
+          ],
+          [
+            "sublime",
+            1
+          ],
+          [
+            "GitSavvy",
+            1
+          ],
+          [
+            "folioclient",
+            1
+          ]
+        ],
+        "partial_import": [
+          [
+            "filter",
+            1
+          ],
+          [
+            "scope2index",
+            1
+          ],
+          [
+            "TrialHistory",
+            1
+          ]
+        ]
+      },
+      "uncategorized_rate": 0.1429
+    },
+    "run": {
+      "agent": "pjy-repo2run",
+      "n_repos": 100,
+      "source": "run",
+      "n_admissible": 51,
+      "n_masked": 28,
+      "n_unobserved": 21,
+      "n_status_derived": 0,
+      "buckets": {
+        "success": 29,
+        "no_tests_collected": 5,
+        "collect_error": 33,
+        "build_fail": 17,
+        "partial": 8,
+        "timed_out": 1,
+        "missing": 4,
+        "zero_pass": 3
+      },
+      "surfaces": {
+        "full": 51,
+        "masked": 28,
+        "unobserved": 21
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    }
+  }
+}

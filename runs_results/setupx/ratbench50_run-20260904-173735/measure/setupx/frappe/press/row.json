@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__ratbench50_run-20260904-173735",
+  "agent": "setupx",
   "repo": "frappe/press",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": " 154.3 \n#10 154.3 https://github.com/frappe/press/blob/6dd6b2c8193b04f1aec1601d52ba09ce9dca8dfe/press/tests/test_audit.py#L97-L102\n#10 154.3 === /workspace ===\n#10 154.3 total 20\n#10 154.3 drwxr-xr-x 1 root root 4096 Sep 26 04:55 .\n#10 154.3 drwxr-xr-x 1 root root 4096 Sep 26 05:49 ..\n#10 154.3 drwxr-xr-x 1 root root 4096 Sep 26 04:55 repo\n#10 154.3 \n#10 154.3 === /workspace mounts ===\n#10 154.3 \n#10 154.3 === bench CLI ===\n#10 154.3 /usr/local/bin/bench\n#10 154.4 5.31.0\n#10 154.5 /usr/local/lib/python3.10/site-packages\n#10 154.5 \n#10 154.5 === ~/.bench ===\n#10 154.5 ls: cannot access '/root/.bench': No such file or directory\n#10 154.5 \n#10 154.5 === possible bench dirs ===\n#10 154.6 \n#10 154.6 === current frappe / sites / env vars ===\n#10 154.6 PWD=/workspace/repo\n#10 154.6 OLDPWD=/workspace/repo\n#10 154.6 \n#10 154.6 === which python and pip packages full frappe ===\n#10 DONE 155.3s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 3.4s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.7s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.1s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 103.3s done\n#14 exporting manifest sha256:c8c333c514406d50cf6f0d08a48bad0e7e3fd82857d09afa830f41579aa81167 done\n#14 exporting config sha256:22e0c2381763d028e6d4fde85701e0bfe2ba191e85e057cc8c6cd5ddec7b30c5 done\n#14 exporting attestation manifest sha256:f88863564e88115e95409007f9957c4ac8bb6ad0d2b333520ce990a3db80fe29 0.0s done\n#14 exporting manifest list sha256:36ff8fb729cf4c0dff90a1f21dc622c17d9279e4a5fa2c9229b149a64ac64a07 0.0s done\n#14 naming to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-frappe-press:latest done\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-frappe-press:latest\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-frappe-press:latest 38.3s done\n#14 DONE 141.7s\n",
+  "build_log_tail": "52ba09ce9dca8dfe/press/tests/test_cleanup.py#L280-L290\nThe decorator passes the mocked function (which is a `Mock()` object) along as\nan argument, so you can later do asserts on it (if you want to).\n\nYou can even use the decorator as context manager if you don't want to mock\nthings for the entirety of the test.\n\nhttps://github.com/frappe/press/blob/6dd6b2c8193b04f1aec1601d52ba09ce9dca8dfe/press/tests/test_audit.py#L97-L102\n=== /workspace ===\ntotal 20\ndrwxr-xr-x 1 root root 4096 Sep  4 21:44 .\ndrwxr-xr-x 1 root root 4096 Sep  4 21:45 ..\ndrwxr-xr-x 1 root root 4096 Sep  4 21:44 repo\n\n=== /workspace mounts ===\n\n=== bench CLI ===\n/usr/local/bin/bench\n5.31.0\n/usr/local/lib/python3.10/site-packages\n\n=== ~/.bench ===\nls: cannot access '/root/.bench': No such file or directory\n\n=== possible bench dirs ===\n\n=== current frappe / sites / env vars ===\nPWD=/workspace/repo\nOLDPWD=/workspace/repo\n\n=== which python and pip packages full frappe ===\n ---> Removed intermediate container 24c21023a5b0\n ---> dac1ebe8f024\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in 92e192a9afba\n ---> Removed intermediate container 92e192a9afba\n ---> 91b1e7b8bcbf\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in 23a25adc0fb7\n ---> Removed intermediate container 23a25adc0fb7\n ---> d95c523dbcd4\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in bb28ef1c3546\n ---> Removed intermediate container bb28ef1c3546\n ---> c72db7528c22\nStep 10/10 : WORKDIR /testbed\n ---> Running in 70b01e04390c\n ---> Removed intermediate container 70b01e04390c\n ---> 102d11bbc9dc\nSuccessfully built 102d11bbc9dc\nSuccessfully tagged bench-setupx-frappe-press:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 291,
   "collect_rc": 2,
@@ -608,9 +608,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 5296.6,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__ratbench50_run-20260904-173735-frappe-press@sha256:36ff8fb729cf4c0dff90a1f21dc622c17d9279e4a5fa2c9229b149a64ac64a07",
+  "image_size_mb": 1325.6,
+  "image_delta_mb": 938.0,
+  "image_digest": "bench-setupx-frappe-press@sha256:102d11bbc9dce33b85a7efea7aa194c192661c1eba3f18fa2568d1906dc2488a",
   "installed_pkg_count": 30,
   "tokens_in": 782448,
   "tokens_out": 149632,
@@ -618,8 +618,8 @@
   "turns_used": 75,
   "cost_usd": null,
   "produce_s": 1332.34,
-  "build_s": 301.99,
-  "test_s": 2.36,
+  "build_s": 305.61,
+  "test_s": 2.0,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -650,19 +650,7 @@
     "turns_used": 75,
     "produce_s": 1332.34,
     "total_tokens": 932080,
-    "cost_usd": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=73a2a4117e16ec70eb18ee360c1f7db4ceb19508 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=73a2a4117e16ec70eb18ee360c1f7db4ceb19508 (pinned)\n"
-      }
-    ]
+    "cost_usd": null
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "karlicoss/hpi",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "lunardate-0.3.0 lxml-6.1.3 lz4-4.4.5 matplotlib-3.10.9 matplotlib-inline-0.2.2 more_itertools-11.1.0 mypy-2.3.1 mypy_extensions-1.1.0 numpy-2.2.6 orgparse-0.4.20251020 orjson-3.12.0 parso-0.8.7 pathspec-1.1.1 pdfannots-0.5 pdfminer-six-20260107 pexpect-4.9.0 platformdirs-4.11.15 prefixed-0.9.0 prompt_toolkit-3.0.53 ptyprocess-0.7.0 pure-eval-0.2.4 pushshift_comment_export-0.1.4 pycparser-3.0 pyfzf-0.3.1 pyluach-2.3.0 pymeeus-0.5.12 pyparsing-3.3.3 python_dateutil-2.9.0.post0 python_magic-0.4.27 pytz-2026.4 regex-2026.9.10 requests-2.34.2 simplejson-4.1.2 six-1.17.0 smmap-5.0.3 soupsieve-2.10 sqlalchemy-2.0.54 sqlite_backup-0.1.8 stack_data-0.6.3 timezonefinder-8.2.0 traitlets-5.16.1 tzdata-2026.4 tzlocal-5.4.4 urllib3-2.8.0 wcwidth-0.9.1 workalendar-17.0.0 zstandard-0.25.0\n#11 25.88 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 25.88 \n#11 25.88 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 25.88 [notice] To update, run: pip install --upgrade pip\n#11 DONE 26.9s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 25.3s done\n#12 exporting manifest sha256:43e8d8a9d1e6472cbe83c1d52765cd63cbce5d27fa9631d521e7c84ee90b4113 done\n#12 exporting config sha256:52dd45dcd55ce603746aa605c49f674340cd8e8b67d8ed2daa43eb494f27e438 0.0s done\n#12 exporting attestation manifest sha256:8921e1be1adb55e09ba49b16b07c882e09c673dcc7cb5a2ded4c683ca9b05ee1 0.0s done\n#12 exporting manifest list sha256:b25e6c00cd815dbb947afe1654ac4d66f0ea21c34a113c2eadcbdb56162536f7 done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-karlicoss-hpi:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-karlicoss-hpi:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-karlicoss-hpi:latest 5.4s done\n#12 DONE 30.8s\n",
+  "build_log_tail": "l-6.1.3 lz4-4.4.5 matplotlib-3.10.9 matplotlib-inline-0.2.2 more_itertools-11.1.0 mypy-2.3.1 mypy_extensions-1.1.0 numpy-2.2.6 orgparse-0.4.20251020 orjson-3.12.0 parso-0.8.7 pathspec-1.1.1 pdfannots-0.5 pdfminer-six-20260107 pexpect-4.9.0 platformdirs-4.11.8 prefixed-0.9.0 prompt_toolkit-3.0.53 ptyprocess-0.7.0 pure-eval-0.2.4 pushshift_comment_export-0.1.4 pycparser-3.0 pyfzf-0.3.1 pyluach-2.3.0 pymeeus-0.5.12 pyparsing-3.3.2 python_dateutil-2.9.0.post0 python_magic-0.4.27 pytz-2026.3.post1 regex-2026.9.10 requests-2.34.2 simplejson-4.1.2 six-1.17.0 smmap-5.0.3 soupsieve-2.9.2 sqlalchemy-2.0.53 sqlite_backup-0.1.8 stack_data-0.6.3 timezonefinder-8.2.0 traitlets-5.16.1 tzdata-2026.4 tzlocal-5.4.4 urllib3-2.7.0 wcwidth-0.8.3 workalendar-17.0.0 zstandard-0.25.0\n#11 24.98 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 24.98 \n#11 24.98 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 24.98 [notice] To update, run: pip install --upgrade pip\n#11 DONE 26.3s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 24.2s done\n#12 exporting manifest sha256:ef4f3060600039d239f7741e452fd26aa6b22a495549d0754cde70fc4da4dbe7\n#12 exporting manifest sha256:ef4f3060600039d239f7741e452fd26aa6b22a495549d0754cde70fc4da4dbe7 0.0s done\n#12 exporting config sha256:78687abc1f03b432a35af09a7d9cf09e9baca387d17cfd5591e64025299bdbb7 0.0s done\n#12 exporting attestation manifest sha256:94e8fc2313977fcf0f4e4db113a1f669b0526ed0df9ada5562d8a2b4cbaaf80d 0.0s done\n#12 exporting manifest list sha256:97ed051f6c1b68740da42e249a9fb7ad2c5faef4b410e488ef1cbf2f527cc208 done\n#12 naming to docker.io/library/bench-pipreqs-karlicoss-hpi:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-karlicoss-hpi:latest\n#12 unpacking to docker.io/library/bench-pipreqs-karlicoss-hpi:latest 8.2s done\n#12 DONE 32.5s\n",
   "status": "collect_error",
   "py_test_files": 4,
   "collect_rc": 1,
@@ -527,9 +527,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 718.7,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-karlicoss-hpi@sha256:b25e6c00cd815dbb947afe1654ac4d66f0ea21c34a113c2eadcbdb56162536f7",
+  "image_size_mb": 717.8,
+  "image_delta_mb": 330.2,
+  "image_digest": "bench-pipreqs-karlicoss-hpi@sha256:97ed051f6c1b68740da42e249a9fb7ad2c5faef4b410e488ef1cbf2f527cc208",
   "installed_pkg_count": 107,
   "tokens_in": null,
   "tokens_out": null,
@@ -537,8 +537,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 10.97,
-  "build_s": 60.56,
-  "test_s": 3.88,
+  "build_s": 61.41,
+  "test_s": 3.65,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -565,19 +565,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=35dd5d82a0e399f684fb3d09763bab44146927fc (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=35dd5d82a0e399f684fb3d09763bab44146927fc (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

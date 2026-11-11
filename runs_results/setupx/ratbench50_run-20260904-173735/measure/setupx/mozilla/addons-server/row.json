@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__ratbench50_run-20260904-173735",
+  "agent": "setupx",
   "repo": "mozilla/addons-server",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "orator exceptiongroup jedi pexpect Pygments stack-data executing asttokens pure_eval traitlets typing_extensions parso PyYAML Markdown pyuwsgi django-vite drf-spectacular uritemplate inflection jsonschema attrs referencing rpds-py jsonschema-specifications drf-spectacular-sidecar tzlocal psutil justhtml \n#10 21.27 === make local install refs ===\n#10 21.27 Makefile-os:189:\t\t--no-deps \\\n#10 21.27 Makefile-docker:5:# globally installed version. This will take `$PYTHONUSERBASE` and `$PIP_USER`\n#10 21.27 Makefile-docker:8:export PIP_COMMAND=$(PYTHON_COMMAND) -m pip\n#10 21.27 Makefile-docker:55:.PHONY: update_deps\n#10 21.27 Makefile-docker:56:update_deps: ## Update the dependencies\n#10 21.27 Makefile-docker:57:\t$(HOME)/scripts/install_deps.py $(DEPS)\n#10 21.27 Makefile-docker:174:\t$(PIP_COMMAND) install --progress-bar=off --no-deps -r requirements/locale.txt\n#10 DONE 21.4s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 5.1s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.4s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 78.3s done\n#14 exporting manifest sha256:11f1c144463d05416abd33bdd2ec9dce0f82548b576c65d693a04544324f9839 done\n#14 exporting config sha256:3ca5347d039bdd7b8c0d550acfbcbdc72380b871e794eb50a6635a703b0ec153 done\n#14 exporting attestation manifest sha256:657a978209e21d561914df138538d49b37b3051c7ce9adaab5cc55be5b38b53d done\n#14 exporting manifest list sha256:d93a2d7c753bf152474c16be582e5809f4edc2d1dbdcea6bf04d717cf762e591 done\n#14 naming to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-mozilla-addons-server:latest done\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-mozilla-addons-server:latest\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-mozilla-addons-server:latest 25.2s done\n#14 DONE 103.5s\n",
+  "build_log_tail": "proto-plus protobuf googleapis-common-protos wrapt wcwidth publicsuffix2 grpcio drf-yasg uritemplate inflection ipdb ipython ipython_pygments_lexers decorator exceptiongroup jedi pexpect Pygments stack-data executing asttokens pure_eval traitlets typing_extensions parso PyYAML Markdown pyuwsgi django-vite drf-spectacular uritemplate inflection jsonschema attrs referencing rpds-py jsonschema-specifications drf-spectacular-sidecar tzlocal psutil justhtml \n=== make local install refs ===\nMakefile-os:189:\t\t--no-deps \\\nMakefile-docker:5:# globally installed version. This will take `$PYTHONUSERBASE` and `$PIP_USER`\nMakefile-docker:8:export PIP_COMMAND=$(PYTHON_COMMAND) -m pip\nMakefile-docker:55:.PHONY: update_deps\nMakefile-docker:56:update_deps: ## Update the dependencies\nMakefile-docker:57:\t$(HOME)/scripts/install_deps.py $(DEPS)\nMakefile-docker:174:\t$(PIP_COMMAND) install --progress-bar=off --no-deps -r requirements/locale.txt\n ---> Removed intermediate container 98ab35b3dcb9\n ---> 10ab10e66a5c\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in 54d875127c5c\n ---> Removed intermediate container 54d875127c5c\n ---> dbe20abe7e30\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in a49777e0b278\n ---> Removed intermediate container a49777e0b278\n ---> dc6197056b4a\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in 7886a4ca7b6b\n ---> Removed intermediate container 7886a4ca7b6b\n ---> 29cc3e2d5622\nStep 10/10 : WORKDIR /testbed\n ---> Running in bbc399188e0b\n ---> Removed intermediate container bbc399188e0b\n ---> dd5be34daf0d\nSuccessfully built dd5be34daf0d\nSuccessfully tagged bench-setupx-mozilla-addons-server:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 224,
   "collect_rc": 4,
@@ -26,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 12365.1,
-  "image_delta_mb": 10854.4,
-  "image_digest": "bench-setupx__ratbench50_run-20260904-173735-mozilla-addons-server@sha256:d93a2d7c753bf152474c16be582e5809f4edc2d1dbdcea6bf04d717cf762e591",
+  "image_size_mb": 5736.4,
+  "image_delta_mb": 5348.8,
+  "image_digest": "bench-setupx-mozilla-addons-server@sha256:dd5be34daf0dec237ea12283acbfe633bdc206f6400f28f48373259c8eeaab69",
   "installed_pkg_count": 12,
   "tokens_in": 895760,
   "tokens_out": 160726,
@@ -36,8 +36,8 @@
   "turns_used": 82,
   "cost_usd": null,
   "produce_s": 1507.18,
-  "build_s": 281.24,
-  "test_s": 0.27,
+  "build_s": 303.77,
+  "test_s": 0.32,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -68,19 +68,7 @@
     "turns_used": 82,
     "produce_s": 1507.18,
     "total_tokens": 1056486,
-    "cost_usd": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=6ff48bc803ba4f9e8a0e7ace9d0ad88f8e8292ad (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=6ff48bc803ba4f9e8a0e7ace9d0ad88f8e8292ad (pinned)\n"
-      }
-    ]
+    "cost_usd": null
   },
   "error_surface": "",
   "error_surface_reason": "",

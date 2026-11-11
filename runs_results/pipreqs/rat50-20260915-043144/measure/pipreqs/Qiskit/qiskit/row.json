@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50-20260915-043144",
+  "agent": "pipreqs",
   "repo": "Qiskit/qiskit",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": " contourpy-1.3.2 cvxpy-1.7.5 cycler-0.12.1 ddt-1.7.2 decorator-5.3.1 dill-0.4.1 executing-2.2.1 extras-1.0.0 fixtures-4.3.2 fonttools-4.65.0 hypothesis-6.168.1 idna-3.20 ipython-8.39.0 isort-9.0.1 jedi-0.20.0 jinja2-3.1.6 joblib-1.6.0 junitxml-0.7 kiwisolver-1.5.1 matplotlib-3.10.9 matplotlib-inline-0.2.2 mccabe-0.7.0 mpmath-1.3.0 mypy-extensions-1.1.0 numpy-2.2.6 openqasm3-1.0.1 osqp-1.1.3 pandas-2.3.3 parso-0.8.7 pexpect-4.9.0 platformdirs-4.11.15 prompt_toolkit-3.0.53 psutil-7.2.2 ptyprocess-0.7.0 pure-eval-0.2.4 pycparser-3.0 pydot-4.0.1 pylatexenc-2.11 pylint-4.0.9 pyparsing-3.3.3 python-constraint-1.4.0 python-dateutil-2.9.0.post0 pytz-2026.4 qiskit-2.5.2 qiskit_aer-0.17.2 qiskit_qasm3_import-0.6.0 rustworkx-0.18.1 scipy-1.15.3 scs-3.3.1 seaborn-0.13.2 semantic_version-2.10.0 setuptools_rust-1.13.0 six-1.17.0 sortedcontainers-2.4.0 stack_data-0.6.3 stevedore-5.8.0 subunit-0.0.0a0 symengine-0.14.1 sympy-1.14.0 testtools-2.9.1 tomlkit-0.15.1 traitlets-5.16.1 tzdata-2026.4 urllib3-2.8.0 wcwidth-0.9.1 z3-0.2.0\n#11 35.82 \n#11 35.82 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 35.82 [notice] To update, run: pip install --upgrade pip\n#11 DONE 37.9s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 59.6s done\n#12 exporting manifest sha256:f14148069b9a27aa16b842291708d5e34cfd35601e75d1fb380a7f7978e7d895 0.0s done\n#12 exporting config sha256:7963c69ffefcee326342d29dcedf7ea02e3f6170ada9333daef65ccce95c20a3 0.0s done\n#12 exporting attestation manifest sha256:1f46ef984895585e800fcf20305136ead7b087dba86180638006ef3bf1c94436 0.0s done\n#12 exporting manifest list sha256:ea6bf07a80852048811008b8adaee092a6ad046186010e6a8349104700df74d4 done\n#12 naming to docker.io/library/bench-pipreqs__rat50-20260915-043144-qiskit-qiskit:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-qiskit-qiskit:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-qiskit-qiskit:latest 10.8s done\n#12 DONE 70.4s\n",
+  "build_log_tail": "6.168.0 idna-3.19 ipython-8.39.0 isort-9.0.1 jedi-0.20.0 jinja2-3.1.6 joblib-1.6.0 junitxml-0.7 kiwisolver-1.5.1 matplotlib-3.10.9 matplotlib-inline-0.2.2 mccabe-0.7.0 mpmath-1.3.0 mypy-extensions-1.1.0 numpy-2.2.6 openqasm3-1.0.1 osqp-1.1.3 pandas-2.3.3 parso-0.8.7 pexpect-4.9.0 platformdirs-4.11.8 prompt_toolkit-3.0.53 psutil-7.2.2 ptyprocess-0.7.0 pure-eval-0.2.4 pycparser-3.0 pydot-4.0.1 pylatexenc-2.11 pylint-4.0.8 pyparsing-3.3.2 python-constraint-1.4.0 python-dateutil-2.9.0.post0 pytz-2026.3.post1 qiskit-2.5.2 qiskit_aer-0.17.2 qiskit_qasm3_import-0.6.0 rustworkx-0.18.1 scipy-1.15.3 scs-3.3.1 seaborn-0.13.2 semantic_version-2.10.0 setuptools_rust-1.13.0 six-1.17.0 sortedcontainers-2.4.0 stack_data-0.6.3 stevedore-5.8.0 subunit-0.0.0a0 symengine-0.14.1 sympy-1.14.0 testtools-2.9.1 tomlkit-0.15.1 traitlets-5.16.1 tzdata-2026.4 urllib3-2.7.0 wcwidth-0.8.3 z3-0.2.0\n#11 29.18 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 29.19 \n#11 29.19 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 29.19 [notice] To update, run: pip install --upgrade pip\n#11 DONE 30.5s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 34.4s done\n#12 exporting manifest sha256:1b64f209bd31ffc6881109cb4a89899d194332e9d3753a457e1c64ba6e93a6a6 done\n#12 exporting config sha256:cfa2f35ca933b629e5a1ed66841980c282d39f755ee187739bd114a8754c3a91 done\n#12 exporting attestation manifest sha256:a0dc26ef8c22c8b35e29bbaec565c0601f127c0ac974e58a202a258de1c830a4 done\n#12 exporting manifest list sha256:2f04c80f7e21f1cee57ebc0e1a5b2f9f7b3194b87d6d5b72ffe0a5b2b58b4cfc done\n#12 naming to docker.io/library/bench-pipreqs-qiskit-qiskit:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-qiskit-qiskit:latest\n#12 unpacking to docker.io/library/bench-pipreqs-qiskit-qiskit:latest 9.7s done\n#12 DONE 44.2s\n",
   "status": "collect_error",
   "py_test_files": 358,
   "collect_rc": 2,
@@ -743,9 +743,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 1067.2,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50-20260915-043144-qiskit-qiskit@sha256:ea6bf07a80852048811008b8adaee092a6ad046186010e6a8349104700df74d4",
+  "image_size_mb": 1065.7,
+  "image_delta_mb": 678.1,
+  "image_digest": "bench-pipreqs-qiskit-qiskit@sha256:2f04c80f7e21f1cee57ebc0e1a5b2f9f7b3194b87d6d5b72ffe0a5b2b58b4cfc",
   "installed_pkg_count": 92,
   "tokens_in": null,
   "tokens_out": null,
@@ -753,8 +753,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 13.73,
-  "build_s": 121.55,
-  "test_s": 3.61,
+  "build_s": 85.48,
+  "test_s": 3.32,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -781,19 +781,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=655dfbbdf359ce9e2588f736131f7dd567ef6def (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=655dfbbdf359ce9e2588f736131f7dd567ef6def (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

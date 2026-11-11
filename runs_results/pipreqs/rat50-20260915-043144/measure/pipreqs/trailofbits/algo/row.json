@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50-20260915-043144",
+  "agent": "pipreqs",
   "repo": "trailofbits/algo",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "hl (17 kB)\n#11 4.443 Collecting pycparser\n#11 4.452   Downloading pycparser-3.0-py3-none-any.whl (48 kB)\n#11 4.459      \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 48.2/48.2 kB 10.5 MB/s eta 0:00:00\n#11 4.518 Collecting six>=1.5\n#11 4.526   Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)\n#11 4.926 Installing collected packages: resolvelib, urllib3, six, PyYAML, pycparser, MarkupSafe, jmespath, python-dateutil, Jinja2, cffi, cryptography, botocore, s3transfer, ansible-core, boto3, ansible\n#11 22.51 Successfully installed Jinja2-3.1.6 MarkupSafe-3.0.3 PyYAML-6.0.3 ansible-10.7.0 ansible-core-2.17.14 boto3-1.43.103 botocore-1.43.103 cffi-2.1.1 cryptography-50.0.1 jmespath-1.1.0 pycparser-3.0 python-dateutil-2.9.0.post0 resolvelib-1.0.1 s3transfer-0.19.2 six-1.17.0 urllib3-2.8.0\n#11 22.51 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 22.52 \n#11 22.52 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 22.52 [notice] To update, run: pip install --upgrade pip\n#11 DONE 23.0s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 16.1s done\n#12 exporting manifest sha256:cca2b6e39082d2537cdd4a076bbdf8e31472c6048fa7c71d532c1e6a7ce5abda 0.0s done\n#12 exporting config sha256:5872c160bf05be0e2e6d1cc30d9b47ac6e7b16e402f0741f862b47980380a7fe done\n#12 exporting attestation manifest sha256:6f7cc0903f628fcf9402abbe467ed726bc368f093219457a1c340ba9e4b9bf63 0.0s done\n#12 exporting manifest list sha256:14a22b1dadc551f9c010697d129c54399d668f6193f3483a28c8ed8eed7ea1cf 0.0s done\n#12 naming to docker.io/library/bench-pipreqs__rat50-20260915-043144-trailofbits-algo:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-trailofbits-algo:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-trailofbits-algo:latest 11.2s done\n#12 DONE 27.3s\n",
+  "build_log_tail": "ng resolvelib<1.1.0,>=0.5.3\n#11 3.402   Downloading resolvelib-1.0.1-py2.py3-none-any.whl (17 kB)\n#11 3.426 Collecting pycparser\n#11 3.434   Downloading pycparser-3.0-py3-none-any.whl (48 kB)\n#11 3.436      \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 48.2/48.2 kB 27.2 MB/s eta 0:00:00\n#11 3.466 Collecting six>=1.5\n#11 3.472   Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)\n#11 3.743 Installing collected packages: resolvelib, urllib3, six, PyYAML, pycparser, MarkupSafe, jmespath, python-dateutil, Jinja2, cffi, cryptography, botocore, s3transfer, ansible-core, boto3, ansible\n#11 20.87 Successfully installed Jinja2-3.1.6 MarkupSafe-3.0.3 PyYAML-6.0.3 ansible-10.7.0 ansible-core-2.17.14 boto3-1.43.94 botocore-1.43.94 cffi-2.1.1 cryptography-50.0.1 jmespath-1.1.0 pycparser-3.0 python-dateutil-2.9.0.post0 resolvelib-1.0.1 s3transfer-0.19.2 six-1.17.0 urllib3-2.7.0\n#11 20.87 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 20.88 \n#11 20.88 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 20.88 [notice] To update, run: pip install --upgrade pip\n#11 DONE 21.4s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 16.2s done\n#12 exporting manifest sha256:d54746d138f1bde54119b5b9b988fa696bac5a0b7bf2e0d1cf9ca0ebe77274c2 done\n#12 exporting config sha256:f10d3918718b837a65047941ae55cbb93a86735e602416750699566c24b9b833 done\n#12 exporting attestation manifest sha256:3804a8686372b686b4ceb482f5aeaa2523d9dbeda9bff428e1feaadfd2a34803 done\n#12 exporting manifest list sha256:679bfe1e0a16e071eba5ea7621ca8424a56fdb30ef7502dc2c8862811831152d done\n#12 naming to docker.io/library/bench-pipreqs-trailofbits-algo:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-trailofbits-algo:latest\n#12 unpacking to docker.io/library/bench-pipreqs-trailofbits-algo:latest 7.3s done\n#12 DONE 23.6s\n",
   "status": "collect_error",
   "py_test_files": 23,
   "collect_rc": 2,
@@ -143,9 +143,9 @@
   "ebsr": true,
   "pass_rate": 0.9649,
   "timed_out": false,
-  "image_size_mb": 548.2,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50-20260915-043144-trailofbits-algo@sha256:14a22b1dadc551f9c010697d129c54399d668f6193f3483a28c8ed8eed7ea1cf",
+  "image_size_mb": 547.8,
+  "image_delta_mb": 160.2,
+  "image_digest": "bench-pipreqs-trailofbits-algo@sha256:679bfe1e0a16e071eba5ea7621ca8424a56fdb30ef7502dc2c8862811831152d",
   "installed_pkg_count": 30,
   "tokens_in": null,
   "tokens_out": null,
@@ -153,8 +153,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 8.22,
-  "build_s": 53.68,
-  "test_s": 3.23,
+  "build_s": 47.21,
+  "test_s": 3.16,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -181,19 +181,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=f6931db17043545b03b602b038f746b66594b1e7 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=f6931db17043545b03b602b038f746b66594b1e7 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "censys/censys-python",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "aml (6.0.1)\n#16 1.909   - Installing requests (2.31.0)\n#16 2.070   - Installing tokenize-rt (5.1.0)\n#16 2.402   - Installing argcomplete (3.1.6)\n#16 2.403   - Installing backoff (2.2.1)\n#16 2.404   - Installing blacken-docs (1.16.0)\n#16 2.404   - Installing darglint (1.8.1)\n#16 2.405   - Installing flake8-black (0.3.6)\n#16 2.405   - Installing flake8-comprehensions (3.14.0)\n#16 2.406   - Installing flake8-docstrings (1.7.0)\n#16 2.407   - Installing flake8-isort (6.1.1)\n#16 2.407   - Installing flake8-pytest-style (1.7.2)\n#16 2.409   - Installing flake8-simplify (0.21.0)\n#16 2.410   - Installing mypy (1.6.1)\n#16 2.411   - Installing parameterized (0.9.0)\n#16 2.439   - Installing pep8-naming (0.13.3)\n#16 2.441   - Installing pytest-cov (4.1.0)\n#16 2.465   - Installing pytest-mock (3.12.0)\n#16 2.485   - Installing pyupgrade (3.8.0)\n#16 2.670   - Installing responses (0.24.1)\n#16 2.674   - Installing rich (13.7.0)\n#16 2.689   - Installing types-requests (2.31.0.10)\n#16 3.432 \n#16 3.432 Installing the current project: censys (2.2.12)\n#16 DONE 3.8s\n\n#17 [14/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.3s\n\n#18 [15/16] WORKDIR /testbed\n#18 DONE 0.0s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 5.9s done\n#19 exporting manifest sha256:9b4177db08156f365f940abdfaea455cca52ba5a4b154b52474922d19ae3e5a1 0.0s done\n#19 exporting config sha256:dc7deb2c7e61ffcbf356c1d8d96ce407cc40f056ae158d7d06aa9b3b669ae0fb 0.0s done\n#19 exporting attestation manifest sha256:f6f7b393c67d9f28a8e97bed9ec9edb490468a02c8de2124e127931b8ce8351a 0.0s done\n#19 exporting manifest list sha256:0a18e0877d6577ff10e35c39e32853337c34c2bcd9cc9c1fcab91b37421b8ad2 0.0s done\n#19 naming to docker.io/library/bench-repo2run__envbench100-pjy-censys-censys-python:latest done\n#19 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-censys-censys-python:latest\n#19 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-censys-censys-python:latest 3.3s done\n#19 DONE 9.3s\n",
+  "build_log_tail": "pytest (7.4.3)\n#16 2.565   - Installing pyyaml (6.0.1)\n#16 2.565   - Installing requests (2.31.0)\n#16 2.782   - Installing tokenize-rt (5.1.0)\n#16 3.320   - Installing argcomplete (3.1.6)\n#16 3.320   - Installing backoff (2.2.1)\n#16 3.323   - Installing blacken-docs (1.16.0)\n#16 3.323   - Installing darglint (1.8.1)\n#16 3.324   - Installing flake8-black (0.3.6)\n#16 3.325   - Installing flake8-comprehensions (3.14.0)\n#16 3.328   - Installing flake8-docstrings (1.7.0)\n#16 3.329   - Installing flake8-isort (6.1.1)\n#16 3.333   - Installing flake8-pytest-style (1.7.2)\n#16 3.335   - Installing mypy (1.6.1)\n#16 3.336   - Installing parameterized (0.9.0)\n#16 3.338   - Installing flake8-simplify (0.21.0)\n#16 3.414   - Installing pep8-naming (0.13.3)\n#16 3.417   - Installing pytest-cov (4.1.0)\n#16 3.437   - Installing pytest-mock (3.12.0)\n#16 3.451   - Installing pyupgrade (3.8.0)\n#16 3.573   - Installing responses (0.24.1)\n#16 3.595   - Installing rich (13.7.0)\n#16 3.604   - Installing types-requests (2.31.0.10)\n#16 4.314 \n#16 4.314 Installing the current project: censys (2.2.12)\n#16 DONE 4.6s\n\n#17 [14/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.4s\n\n#18 [15/16] WORKDIR /testbed\n#18 DONE 0.0s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 7.4s done\n#19 exporting manifest sha256:0f4e6e95f717d7da88d4fc9d796406ddf318fc9df5666175183de9dee3ae4025 0.0s done\n#19 exporting config sha256:4b99236fd60f84ff27176d51eacbff6c1ebf9355aaa152159814b980867b61dd 0.0s done\n#19 exporting attestation manifest sha256:5219e17cd6c97bd5d7adf59792440dfd24b7549ca7a283b87339796f93782d1e 0.0s done\n#19 exporting manifest list sha256:a6176cb10b4103f502a2863dba56b29e0572ec0b8d24075b8dad0862b2cc0f7b done\n#19 naming to docker.io/library/bench-pjy-repo2run-censys-censys-python:latest done\n#19 unpacking to docker.io/library/bench-pjy-repo2run-censys-censys-python:latest\n#19 unpacking to docker.io/library/bench-pjy-repo2run-censys-censys-python:latest 4.1s done\n#19 DONE 11.6s\n",
   "status": "collect_error",
   "py_test_files": 29,
   "collect_rc": 4,
@@ -24,9 +24,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 535.5,
+  "image_size_mb": 1975.2,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-censys-censys-python@sha256:0a18e0877d6577ff10e35c39e32853337c34c2bcd9cc9c1fcab91b37421b8ad2",
+  "image_digest": "bench-pjy-repo2run-censys-censys-python@sha256:a6176cb10b4103f502a2863dba56b29e0572ec0b8d24075b8dad0862b2cc0f7b",
   "installed_pkg_count": 27,
   "tokens_in": 52919,
   "tokens_out": 1848,
@@ -34,8 +34,8 @@
   "turns_used": 6,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 35.15,
-  "test_s": 0.21,
+  "build_s": 21.18,
+  "test_s": 0.42,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -43,19 +43,7 @@
     "tokens_in": 52919,
     "tokens_out": 1848,
     "llm_calls": null,
-    "turns_used": 6,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 6
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "graph2env__rat_python50",
+  "agent": "g2e-rat50",
   "repo": "supabase/supabase-py",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "th-error\n#14 3.492 \n#14 3.492 \u00d7 Getting requirements to build editable did not run successfully.\n#14 3.492 \u2502 exit code: 1\n#14 3.492 \u2570\u2500> See above for output.\n#14 3.492 \n#14 3.492 note: This error originates from a subprocess, and is likely not a problem with pip.\n#14 DONE 3.6s\n\n#15 [11/12] RUN if [ -x /testbed/.venv/bin/python ]; then       if /testbed/.venv/bin/python -m pip --version >/dev/null 2>&1; then         /testbed/.venv/bin/python -m pip install pytest;       else         command -v uv >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#15 0.763 Audited 1 package in 163ms\n#15 DONE 0.8s\n\n#16 [12/12] WORKDIR /testbed\n#16 DONE 0.0s\n\n#17 exporting to image\n#17 exporting layers\n#17 exporting layers 35.9s done\n#17 exporting manifest sha256:2851df87849bc7334845756bb0da1a5be3ee8fb379cbf593581367dc228cb135\n#17 exporting manifest sha256:2851df87849bc7334845756bb0da1a5be3ee8fb379cbf593581367dc228cb135 0.2s done\n#17 exporting config sha256:e35e5978828d4201e1f1e6e26b6cf2bb29ba098a6cec7abca08dd9b1325101f1\n#17 exporting config sha256:e35e5978828d4201e1f1e6e26b6cf2bb29ba098a6cec7abca08dd9b1325101f1 0.0s done\n#17 exporting attestation manifest sha256:6dd797d5871f5307113602ed795cc649c72092632742a122af9ce7996f41511a 0.1s done\n#17 exporting manifest list sha256:2bca92a740516d1a801585bb982dd844edaf967b501d0d47def67a1f2dd5294f\n#17 exporting manifest list sha256:2bca92a740516d1a801585bb982dd844edaf967b501d0d47def67a1f2dd5294f 0.0s done\n#17 naming to docker.io/library/bench-graph2env__rat_python50-supabase-supabase-py:latest done\n#17 unpacking to docker.io/library/bench-graph2env__rat_python50-supabase-supabase-py:latest\n#17 unpacking to docker.io/library/bench-graph2env__rat_python50-supabase-supabase-py:latest 12.5s done\n#17 DONE 48.8s\n",
+  "build_log_tail": "04   \u2502 exit code: 1\n#14 3.804   \u2570\u2500> [2 lines of output]\n#14 3.804       running egg_info\n#14 3.804       error: Invalid distribution name or version syntax: __init__-0.0.0\n#14 3.804       [end of output]\n#14 3.804   \n#14 3.804   note: This error originates from a subprocess, and is likely not a problem with pip.\n#14 3.806 error: subprocess-exited-with-error\n#14 3.806 \n#14 3.806 \u00d7 Getting requirements to build editable did not run successfully.\n#14 3.806 \u2502 exit code: 1\n#14 3.806 \u2570\u2500> See above for output.\n#14 3.806 \n#14 3.806 note: This error originates from a subprocess, and is likely not a problem with pip.\n#14 DONE 3.9s\n\n#15 [11/12] RUN if [ -x /testbed/.venv/bin/python ]; then       if /testbed/.venv/bin/python -m pip --version >/dev/null 2>&1; then         /testbed/.venv/bin/python -m pip install pytest;       else         command -v uv >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#15 0.995 Audited 1 package in 191ms\n#15 DONE 1.0s\n\n#16 [12/12] WORKDIR /testbed\n#16 DONE 0.0s\n\n#17 exporting to image\n#17 exporting layers\n#17 exporting layers 35.0s done\n#17 exporting manifest sha256:63f0b753b36420049a5775072217582880cc6b19b2c3eb5e8ccbe7d6842a3c38 done\n#17 exporting config sha256:22a758dbd8e552b48fc7735eedb87ff18d3ef72cad5b666f37c502fe58c6edc0 done\n#17 exporting attestation manifest sha256:2834b1a38a781708f5635b3748e2214fbbccd93ba56b195eea06f3e7ccc7f6bb done\n#17 exporting manifest list sha256:2378c97268b2561ecb48a9330335487f7dfce55839fb9a8f0b827a26c1d8d782 done\n#17 naming to docker.io/library/bench-g2e-rat50-supabase-supabase-py:latest done\n#17 unpacking to docker.io/library/bench-g2e-rat50-supabase-supabase-py:latest\n#17 unpacking to docker.io/library/bench-g2e-rat50-supabase-supabase-py:latest 9.1s done\n#17 DONE 44.2s\n",
   "status": "executed",
   "py_test_files": 475,
   "collect_rc": 0,
@@ -1521,9 +1521,9 @@
   "ebsr": true,
   "pass_rate": 0.6,
   "timed_out": false,
-  "image_size_mb": 342.7,
+  "image_size_mb": 1354.2,
   "image_delta_mb": null,
-  "image_digest": "bench-graph2env__rat_python50-supabase-supabase-py@sha256:2bca92a740516d1a801585bb982dd844edaf967b501d0d47def67a1f2dd5294f",
+  "image_digest": "bench-g2e-rat50-supabase-supabase-py@sha256:2378c97268b2561ecb48a9330335487f7dfce55839fb9a8f0b827a26c1d8d782",
   "installed_pkg_count": 0,
   "tokens_in": 1053450,
   "tokens_out": 54777,
@@ -1531,8 +1531,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 93.14,
-  "test_s": 109.3,
+  "build_s": 89.95,
+  "test_s": 112.41,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -1549,19 +1549,7 @@
       ],
       "services": [],
       "services_rc": null
-    },
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=6f522d35aa94e4a6171cf84931d13e0bbae2ffba (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=6f522d35aa94e4a6171cf84931d13e0bbae2ffba (pinned)\n"
-      }
-    ]
+    }
   },
   "error_surface": "",
   "error_surface_reason": "",

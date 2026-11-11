@@ -1,10 +1,10 @@
 {
-  "agent": "claudecode__envbench100-merged-20260915",
+  "agent": "claudecode-dockerfile",
   "repo": "skrub-data/skrub",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": " with status 'done'\n#10 2.784 Building wheels for collected packages: skrub\n#10 2.787   Building editable for skrub (pyproject.toml): started\n#10 3.032   Building editable for skrub (pyproject.toml): finished with status 'done'\n#10 3.032   Created wheel for skrub: filename=skrub-0.2.0.dev0-0.editable-py3-none-any.whl size=6027 sha256=1080afe588c7096ae2a28d2a3e0ba688d32a43dc4b208826e24be210badda6df\n#10 3.035   Stored in directory: /tmp/pip-ephem-wheel-cache-1x9ktxzv/wheels/49/5f/4f/01b7d31ea6ddac9643da788242d33e5fd3467d95d17b032c6b\n#10 3.035 Successfully built skrub\n#10 3.197 Installing collected packages: skrub\n#10 3.208 Successfully installed skrub-0.2.0.dev0\n#10 3.209 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#10 3.213 \n#10 3.213 [notice] A new release of pip is available: 24.0 -> 26.2.1\n#10 3.213 [notice] To update, run: pip install --upgrade pip\n#10 DONE 3.3s\n\n#11 exporting to image\n#11 exporting layers\n#11 exporting layers 20.0s done\n#11 exporting manifest sha256:ea45c399e1fd1dab9b86d30b3390b5f5be4059b488b30a03cbcc108bfce3a2ad\n#11 exporting manifest sha256:ea45c399e1fd1dab9b86d30b3390b5f5be4059b488b30a03cbcc108bfce3a2ad 0.0s done\n#11 exporting config sha256:97a47f2de0712e02e83087f2578374d3e7f79e74e6fa59fde078abb8f362a890 0.0s done\n#11 exporting attestation manifest sha256:efa48a81bdcede3dcf95502eadf3b23df60c19a56ae6d37f9a61978e4f09fca8 0.0s done\n#11 exporting manifest list sha256:bdcdd41fce932374e7b473a21817a4c603f42e884684d8d0e530be0ced958103 done\n#11 naming to docker.io/library/bench-claudecode__envbench100-merged-20260915-skrub-data-skrub:latest done\n#11 unpacking to docker.io/library/bench-claudecode__envbench100-merged-20260915-skrub-data-skrub:latest\n#11 unpacking to docker.io/library/bench-claudecode__envbench100-merged-20260915-skrub-data-skrub:latest 4.6s done\n#11 DONE 24.6s\n",
+  "build_log_tail": "s (from requests>=2.30.0->sphinx>=6->numpydoc->skrub==0.2.0.dev0) (3.5.1)\nRequirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.11/site-packages (from requests>=2.30.0->sphinx>=6->numpydoc->skrub==0.2.0.dev0) (3.19)\nRequirement already satisfied: urllib3<3,>=1.26 in /usr/local/lib/python3.11/site-packages (from requests>=2.30.0->sphinx>=6->numpydoc->skrub==0.2.0.dev0) (2.7.0)\nRequirement already satisfied: certifi>=2023.5.7 in /usr/local/lib/python3.11/site-packages (from requests>=2.30.0->sphinx>=6->numpydoc->skrub==0.2.0.dev0) (2026.7.22)\nChecking if build backend supports build_editable: started\nChecking if build backend supports build_editable: finished with status 'done'\nBuilding wheels for collected packages: skrub\n  Building editable for skrub (pyproject.toml): started\n  Building editable for skrub (pyproject.toml): finished with status 'done'\n  Created wheel for skrub: filename=skrub-0.2.0.dev0-0.editable-py3-none-any.whl size=6027 sha256=00121b469b7275f5b5685b2dc56fb71b8a1e6b042327c0c8343b9160fa39f8ff\n  Stored in directory: /tmp/pip-ephem-wheel-cache-n450l63m/wheels/49/5f/4f/01b7d31ea6ddac9643da788242d33e5fd3467d95d17b032c6b\nSuccessfully built skrub\nInstalling collected packages: skrub\nSuccessfully installed skrub-0.2.0.dev0\n\u001b[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n\u001b[0m\u001b[91m\n[notice] A new release of pip is available: 24.0 -> 26.2.1\n[notice] To update, run: pip install --upgrade pip\n\u001b[0m ---> Removed intermediate container 26380736539f\n ---> 71b7ebc83384\nSuccessfully built 71b7ebc83384\nSuccessfully tagged bench-claudecode-dockerfile-skrub-data-skrub:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 42,
   "collect_rc": 2,
@@ -31,9 +31,12 @@
     "E   ModuleNotFoundError: No module named 'matplotlib'",
     "E   ModuleNotFoundError: No module named 'pyarrow'",
     "E   ImportError: Missing optional dependency 'pyarrow'. pyarrow is required for parquet support. Use pip or conda to install pyarrow.",
-    "E   ModuleNotFoundError: No module named 'seaborn'",
+    "E   ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)",
+    "E   urllib.error.URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)>",
+    "E   UnboundLocalError: cannot access local variable 'tmp_file' where it is not associated with a value",
     "E   ModuleNotFoundError: No module named 'pyarrow'",
-    "E   ImportError: Missing optional dependency 'pyarrow'. pyarrow is required for parquet support. Use pip or conda to install pyarrow."
+    "E   ImportError: Missing optional dependency 'pyarrow'. pyarrow is required for parquet support. Use pip or conda to install pyarrow.",
+    "ERROR examples/08_join_aggregation.py - UnboundLocalError: cannot access loca..."
   ],
   "collect_error_count": 22,
   "collected_node_ids": [
@@ -1255,8 +1258,8 @@
   ],
   "executed": true,
   "total": 1239,
-  "passed": 1008,
-  "failed": 0,
+  "passed": 1007,
+  "failed": 1,
   "errors": 22,
   "skipped": 209,
   "passed_node_ids": [
@@ -1526,7 +1529,6 @@
     "skrub/datasets/tests/test_fetching.py::test_openml_fetching",
     "skrub/datasets/tests/test_fetching.py::test_openml_datasets_calls",
     "skrub/datasets/tests/test_fetching.py::test_fetch_world_bank_indicator",
-    "skrub/datasets/tests/test_fetching.py::test_fetch_movielens",
     "skrub/datasets/tests/test_generating.py::test_make_deduplication_data",
     "skrub/datasets/tests/test_ken_embeddings.py::test_fetch_ken_table_aliases",
     "skrub/datasets/tests/test_utils.py::test_get_data_dir[string]",
@@ -2269,7 +2271,9 @@
     "skrub/tests/test_utils.py::test_import_optional_dependency",
     "skrub/tests/test_wrap_transformer.py::test_wrap_transformer"
   ],
-  "failed_node_ids": [],
+  "failed_node_ids": [
+    "skrub/datasets/tests/test_fetching.py::test_fetch_movielens"
+  ],
   "error_node_ids": [
     "benchmarks.bench_fuzzy_join_count_vs_hash",
     "benchmarks.bench_fuzzy_join_sparse_vs_dense",
@@ -2295,11 +2299,11 @@
     "examples.09_interpolation_join"
   ],
   "ebsr": true,
-  "pass_rate": 0.9786,
+  "pass_rate": 0.9777,
   "timed_out": false,
-  "image_size_mb": 652.1,
-  "image_delta_mb": null,
-  "image_digest": "bench-claudecode__envbench100-merged-20260915-skrub-data-skrub@sha256:bdcdd41fce932374e7b473a21817a4c603f42e884684d8d0e530be0ced958103",
+  "image_size_mb": 651.8,
+  "image_delta_mb": 272.0,
+  "image_digest": "bench-claudecode-dockerfile-skrub-data-skrub@sha256:71b7ebc833848c483fd83b0050d7703c9befd40edfa9109989463fa8e78f1e75",
   "installed_pkg_count": 46,
   "tokens_in": 784810,
   "tokens_out": 6686,
@@ -2307,8 +2311,8 @@
   "turns_used": 20,
   "cost_usd": 0.038152160000000004,
   "produce_s": 382.16,
-  "build_s": 51.0,
-  "test_s": 92.54,
+  "build_s": 60.62,
+  "test_s": 128.65,
   "meta": {
     "contract_version": 1,
     "producer": "claudecode-dockerfile",
@@ -2335,19 +2339,7 @@
     "usage_source": "computed",
     "dsml_text_blocks": 0,
     "turn_capped": false,
-    "agent_timed_out": false,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "agent_timed_out": false
   },
   "error_surface": "",
   "error_surface_reason": "",

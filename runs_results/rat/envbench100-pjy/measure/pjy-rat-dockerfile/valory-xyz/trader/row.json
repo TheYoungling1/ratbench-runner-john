@@ -1,10 +1,10 @@
 {
-  "agent": "rat__envbench100-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "valory-xyz/trader",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "t-0.20.0 pytest-7.2.1 pytest-asyncio-0.21.2 pytest-cov-4.0.0 pytest-randomly-3.12.0 pytest-rerunfailures-11.0 python-baseconv-1.2.2 python-dateutil-2.9.0.post0 python-discovery-1.6.0 python-dotenv-0.21.1 pytz-2022.2.1 pyunormalize-15.1.0 regex-2024.5.15 requests-2.28.1 requests-toolbelt-1.0.0 rlp-3.0.0 semver-2.13.0 shellingham-1.5.4 six-1.16.0 sortedcontainers-2.4.0 texttable-1.6.7 toml-0.10.2 tomli-2.0.1 tomlkit-0.15.1 tomte-0.2.17 toolz-0.12.1 tox-3.28.0 trader-0.1.0 trove-classifiers-2026.6.1.19 typing_extensions-4.12.2 urllib3-1.26.16 valory-docker-compose-1.29.3 varint-1.0.2 virtualenv-20.26.2 watchdog-4.0.1 web3-6.19.0 websocket-client-0.59.0 websockets-12.0 yarl-1.9.4 zipp-4.1.0\n#18 177.3 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 180.3 \n#18 180.3 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 180.3 [notice] To update, run: pip install --upgrade pip\n#18 DONE 184.2s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.4s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 9.8s done\n#21 exporting manifest sha256:cc649bee18d6f9577d45ca03f8ad0d578ff57dd4f4eaef81b1753494a4cacaa1 done\n#21 exporting config sha256:c058249b8ea656b0905d16bab5365ed46531571a8dca3327cae0b29d7613eedb 0.0s done\n#21 exporting attestation manifest sha256:d472c83ab890fd8ea6ab8363ac4f5a1cce4e62ade50fccf37d9845be69c2a0ba 0.0s done\n#21 exporting manifest list sha256:67dedb4bf22ce23553cf0dbacfb261878f5bbaec741b554413d3c08d04f19c98 0.0s done\n#21 naming to docker.io/library/bench-rat__envbench100-pjy-valory-xyz-trader:latest done\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-valory-xyz-trader:latest\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-valory-xyz-trader:latest 3.0s done\n#21 DONE 12.9s\n",
+  "build_log_tail": "istent-0.20.0 pytest-7.2.1 pytest-asyncio-0.21.2 pytest-cov-4.0.0 pytest-randomly-3.12.0 pytest-rerunfailures-11.0 python-baseconv-1.2.2 python-dateutil-2.9.0.post0 python-discovery-1.6.0 python-dotenv-0.21.1 pytz-2022.2.1 pyunormalize-15.1.0 regex-2024.5.15 requests-2.28.1 requests-toolbelt-1.0.0 rlp-3.0.0 semver-2.13.0 shellingham-1.5.4 six-1.16.0 sortedcontainers-2.4.0 texttable-1.6.7 toml-0.10.2 tomli-2.0.1 tomlkit-0.15.1 tomte-0.2.17 toolz-0.12.1 tox-3.28.0 trader-0.1.0 trove-classifiers-2026.6.1.19 typing_extensions-4.12.2 urllib3-1.26.16 valory-docker-compose-1.29.3 varint-1.0.2 virtualenv-20.26.2 watchdog-4.0.1 web3-6.19.0 websocket-client-0.59.0 websockets-12.0 yarl-1.9.4 zipp-4.1.0\n#18 184.7 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 187.8 \n#18 187.8 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 187.8 [notice] To update, run: pip install --upgrade pip\n#18 DONE 192.1s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.6s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 10.9s done\n#21 exporting manifest sha256:5712b53912df6d120758100c3aa6066b0b46efb38c5a3faed13a4d36aaa64833 done\n#21 exporting config sha256:6859ef3a790dd54b53576eebe241b635bcb358d60012477395ab08b93ff3e9b1 0.0s done\n#21 exporting attestation manifest sha256:a29558b9d568b2ea6085819c0a843cb426a04d42a09a18c6ae67187b8bd363a2 0.0s done\n#21 exporting manifest list sha256:23a8e3cf98c8632bca284c051a4616e98ab37c2c07bbb9410e926d7815a5c7e6 0.0s done\n#21 naming to docker.io/library/bench-pjy-rat-dockerfile-valory-xyz-trader:latest done\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-valory-xyz-trader:latest\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-valory-xyz-trader:latest 6.1s done\n#21 DONE 17.2s\n",
   "status": "collect_error",
   "py_test_files": 2,
   "collect_rc": 2,
@@ -30,7 +30,7 @@
   "timed_out": false,
   "image_size_mb": 721.9,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__envbench100-pjy-valory-xyz-trader@sha256:67dedb4bf22ce23553cf0dbacfb261878f5bbaec741b554413d3c08d04f19c98",
+  "image_digest": "bench-pjy-rat-dockerfile-valory-xyz-trader@sha256:23a8e3cf98c8632bca284c051a4616e98ab37c2c07bbb9410e926d7815a5c7e6",
   "installed_pkg_count": 169,
   "tokens_in": 875869,
   "tokens_out": 7002,
@@ -38,27 +38,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 209.14,
-  "test_s": 1.43,
+  "build_s": 221.92,
+  "test_s": 1.61,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 875869,
     "tokens_out": 7002,
-    "llm_calls": 31,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 31
   },
   "error_surface": "",
   "error_surface_reason": "",

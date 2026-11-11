@@ -1,10 +1,10 @@
 {
-  "agent": "claudecode__envbench100-merged-20260915",
+  "agent": "claudecode-dockerfile",
   "repo": "yourlabs/django-autocomplete-light",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "e-light: filename=django_autocomplete_light-3.11.0-0.editable-py3-none-any.whl size=4773 sha256=e20d29d71830f0a154d07a439e08d53f956abf8368451a5b12cb7f26530e1443\n#10 2.054   Stored in directory: /tmp/pip-ephem-wheel-cache-wi4j54yh/wheels/49/5f/4f/01b7d31ea6ddac9643da788242d33e5fd3467d95d17b032c6b\n#10 2.058 Successfully built django-autocomplete-light\n#10 2.109 Installing collected packages: django-autocomplete-light\n#10 2.118 Successfully installed django-autocomplete-light-3.11.0\n#10 2.118 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#10 DONE 2.2s\n\n#11 [ 8/10] RUN python -c \"import site; p=site.getsitepackages()[0]; open(p+'/test_project.pth','a').write('/testbed/test_project\\n')\"\n#11 DONE 0.2s\n\n#12 [ 9/10] RUN python - <<'PY'\n#12 DONE 0.2s\n\n#13 [10/10] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 4.4s done\n#14 exporting manifest sha256:43f7ea21389102e3be32b1ac150b13301677eb76e7d290728ff112abbd91a889 done\n#14 exporting config sha256:ab817fda3bf82ce13f175213702a88691f30ccbb8c89e30bc42f442e1a6d8d51 done\n#14 exporting attestation manifest sha256:bf6330aea38383f8fc0ccfabff74f560a553ad523789ca19a96890bf93975635 done\n#14 exporting manifest list sha256:32018dc6d3e2787ff1e1e39f0bfe094e651a7fc262394c80fe121aa2e4f8dada done\n#14 naming to docker.io/library/bench-claudecode__envbench100-merged-20260915-yourlabs-django-autocomplete-light:latest done\n#14 unpacking to docker.io/library/bench-claudecode__envbench100-merged-20260915-yourlabs-django-autocomplete-light:latest\n#14 unpacking to docker.io/library/bench-claudecode__envbench100-merged-20260915-yourlabs-django-autocomplete-light:latest 2.5s done\n#14 DONE 7.0s\n",
+  "build_log_tail": "r django-autocomplete-light (pyproject.toml): finished with status 'done'\n  Created wheel for django-autocomplete-light: filename=django_autocomplete_light-3.11.0-0.editable-py3-none-any.whl size=4773 sha256=c137dd1b617ff8f6615d0c2afcfa58c2314a9b7c5d6abb41001d0b8e9d96d614\n  Stored in directory: /tmp/pip-ephem-wheel-cache-46xz_9w4/wheels/49/5f/4f/01b7d31ea6ddac9643da788242d33e5fd3467d95d17b032c6b\nSuccessfully built django-autocomplete-light\nInstalling collected packages: django-autocomplete-light\nSuccessfully installed django-autocomplete-light-3.11.0\n\u001b[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n\u001b[0m ---> Removed intermediate container e8f9e0136666\n ---> e9b66467200e\nStep 8/11 : RUN python -c \"import site; p=site.getsitepackages()[0]; open(p+'/test_project.pth','a').write('/testbed/test_project\\n')\"\n ---> Running in 770921918bff\n ---> Removed intermediate container 770921918bff\n ---> 4e5d1d385966\nStep 9/11 : RUN python - <<'PY'\n ---> Running in ed455dd80012\n ---> Removed intermediate container ed455dd80012\n ---> 90e8d93d34fb\nStep 10/11 : WORKDIR /testbed\n ---> Running in af8f36f62903\n ---> Removed intermediate container af8f36f62903\n ---> dc12e4550fb1\nStep 11/11 : CMD [\"python\", \"-m\", \"pytest\", \"/testbed\", \"--collect-only\", \"-q\"]\n ---> Running in 0817f1ea63f4\n ---> Removed intermediate container 0817f1ea63f4\n ---> 069fe44bde0a\nSuccessfully built 069fe44bde0a\nSuccessfully tagged bench-claudecode-dockerfile-yourlabs-django-autocomplete-light:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 28,
   "collect_rc": 2,
@@ -193,9 +193,9 @@
   "ebsr": true,
   "pass_rate": 0.4557,
   "timed_out": false,
-  "image_size_mb": 1703.1,
-  "image_delta_mb": null,
-  "image_digest": "bench-claudecode__envbench100-merged-20260915-yourlabs-django-autocomplete-light@sha256:32018dc6d3e2787ff1e1e39f0bfe094e651a7fc262394c80fe121aa2e4f8dada",
+  "image_size_mb": 425.5,
+  "image_delta_mb": 45.7,
+  "image_digest": "bench-claudecode-dockerfile-yourlabs-django-autocomplete-light@sha256:069fe44bde0a6c2206ca4589d3c009f9f4f5e11dcdd4e8931bde15ab78171b4a",
   "installed_pkg_count": 48,
   "tokens_in": 4888745,
   "tokens_out": 32130,
@@ -203,8 +203,8 @@
   "turns_used": 80,
   "cost_usd": 0.069858404,
   "produce_s": 482.58,
-  "build_s": 29.15,
-  "test_s": 13.45,
+  "build_s": 43.45,
+  "test_s": 11.94,
   "meta": {
     "contract_version": 1,
     "producer": "claudecode-dockerfile",
@@ -231,19 +231,7 @@
     "usage_source": "computed",
     "dsml_text_blocks": 0,
     "turn_capped": false,
-    "agent_timed_out": false,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\nrestored pytest.ini\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "agent_timed_out": false
   },
   "error_surface": "",
   "error_surface_reason": "",

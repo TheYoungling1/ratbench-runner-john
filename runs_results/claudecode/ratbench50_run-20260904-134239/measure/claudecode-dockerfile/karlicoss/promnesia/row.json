@@ -1,10 +1,10 @@
 {
-  "agent": "claudecode__ratbench50_run-20260904-134239",
+  "agent": "claudecode-dockerfile",
   "repo": "karlicoss/promnesia",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "4.99 Successfully installed asttokens-3.0.2 attrs-26.1.0 execnet-2.1.2 executing-2.2.1 ipdb-0.13.13 ipython-9.17.1 ipython-pygments-lexers-1.1.1 jedi-0.20.0 loguru-0.7.3 matplotlib-inline-0.2.2 mouseinfo-0.1.3 outcome-1.3.0.post0 parso-0.8.7 pexpect-4.9.0 prompt_toolkit-3.0.53 ptyprocess-0.7.0 pure-eval-0.2.4 pyautogui-0.9.54 pygetwindow-0.0.9 pymsgbox-2.0.1 pyperclip-1.11.0 pyrect-0.2.0 pyscreeze-1.0.1 pysocks-1.7.1 pytest-repeat-0.9.4 pytest-timeout-2.4.0 pytest-xdist-3.8.0 python3-Xlib-0.15 pytweening-1.2.0 selenium-4.49.0 sniffio-1.3.1 stack_data-0.6.3 traitlets-5.16.1 trio-0.34.0 trio-websocket-0.12.2 wcwidth-0.9.1 websocket-client-1.9.2 wsproto-1.3.2\n#13 14.99 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#13 DONE 15.5s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 6.7s done\n#14 exporting manifest sha256:3a8ad0a1fac1d1458c36d5d58bb971492d2249553939a06689f1c1f087e59b92\n#14 exporting manifest sha256:3a8ad0a1fac1d1458c36d5d58bb971492d2249553939a06689f1c1f087e59b92 done\n#14 exporting config sha256:5d9af5d920b9b5ee118a38d2c5199b93bed88b32ee3f5271f9bd39d732ecbdb9 done\n#14 exporting attestation manifest sha256:947b852bbda4f8be15a9de1be1b4bb22f575479f5ebe3e3c1ac01ee7af9287db done\n#14 exporting manifest list sha256:e6a4c91f145237a660f665e0115d473ecd650fbc0c454389ea73e1c2d5121227 done\n#14 naming to docker.io/library/bench-claudecode__ratbench50_run-20260904-134239-karlicoss-promnesia:latest done\n#14 unpacking to docker.io/library/bench-claudecode__ratbench50_run-20260904-134239-karlicoss-promnesia:latest\n#14 unpacking to docker.io/library/bench-claudecode__ratbench50_run-20260904-134239-karlicoss-promnesia:latest 3.9s done\n#14 DONE 10.6s\n",
+  "build_log_tail": "025befb30084e73af761d007ac5c7b3\nSuccessfully built pyautogui pygetwindow pyscreeze pytweening mouseinfo pyrect python3-Xlib\nInstalling collected packages: pytweening, python3-Xlib, pyscreeze, pyrect, pyperclip, pure-eval, ptyprocess, wsproto, websocket-client, wcwidth, traitlets, sniffio, pysocks, pymsgbox, pygetwindow, pexpect, parso, mouseinfo, loguru, ipython-pygments-lexers, executing, execnet, attrs, asttokens, stack_data, pytest-xdist, pytest-timeout, pytest-repeat, pyautogui, prompt_toolkit, outcome, matplotlib-inline, jedi, trio, ipython, trio-websocket, ipdb, selenium\n\nSuccessfully installed asttokens-3.0.2 attrs-26.1.0 execnet-2.1.2 executing-2.2.1 ipdb-0.13.13 ipython-9.17.1 ipython-pygments-lexers-1.1.1 jedi-0.20.0 loguru-0.7.3 matplotlib-inline-0.2.2 mouseinfo-0.1.3 outcome-1.3.0.post0 parso-0.8.7 pexpect-4.9.0 prompt_toolkit-3.0.53 ptyprocess-0.7.0 pure-eval-0.2.3 pyautogui-0.9.54 pygetwindow-0.0.9 pymsgbox-2.0.1 pyperclip-1.11.0 pyrect-0.2.0 pyscreeze-1.0.1 pysocks-1.7.1 pytest-repeat-0.9.4 pytest-timeout-2.4.0 pytest-xdist-3.8.0 python3-Xlib-0.15 pytweening-1.2.0 selenium-4.48.0 sniffio-1.3.1 stack_data-0.6.3 traitlets-5.16.1 trio-0.34.0 trio-websocket-0.12.2 wcwidth-0.8.3 websocket-client-1.9.2 wsproto-1.3.2\n\u001b[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n\u001b[0m ---> Removed intermediate container 22138831e1d1\n ---> 50467df892d6\nSuccessfully built 50467df892d6\nSuccessfully tagged bench-claudecode-dockerfile-karlicoss-promnesia:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 21,
   "collect_rc": 2,
@@ -189,18 +189,18 @@
   "ebsr": true,
   "pass_rate": 0.5437,
   "timed_out": false,
-  "image_size_mb": 1990.6,
-  "image_delta_mb": null,
-  "image_digest": "bench-claudecode__ratbench50_run-20260904-134239-karlicoss-promnesia@sha256:e6a4c91f145237a660f665e0115d473ecd650fbc0c454389ea73e1c2d5121227",
-  "installed_pkg_count": 89,
+  "image_size_mb": 524.7,
+  "image_delta_mb": 144.9,
+  "image_digest": "bench-claudecode-dockerfile-karlicoss-promnesia@sha256:50467df892d62166dfbc4c246c520c1d73cb49090a8dc18a511386c3a5fc2c8c",
+  "installed_pkg_count": 90,
   "tokens_in": 2192064,
   "tokens_out": 20944,
   "llm_calls": 42,
   "turns_used": 42,
   "cost_usd": 0.040986432,
   "produce_s": 264.92,
-  "build_s": 57.87,
-  "test_s": 87.05,
+  "build_s": 87.1,
+  "test_s": 72.95,
   "meta": {
     "contract_version": 1,
     "producer": "claudecode-dockerfile",
@@ -227,19 +227,7 @@
     "usage_source": "computed",
     "dsml_text_blocks": 0,
     "turn_capped": false,
-    "agent_timed_out": false,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\nremoved tests/testdata/hypexport/conftest.py\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "agent_timed_out": false
   },
   "error_surface": "",
   "error_surface_reason": "",

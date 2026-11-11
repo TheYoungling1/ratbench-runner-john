@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50-20260915-043144",
+  "agent": "pipreqs",
   "repo": "tgoai/tgo",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "referencing-0.37.0 regex-2026.9.10 requests-toolbelt-1.0.0 rich-15.0.0 rpds-py-0.30.0 rtree-1.4.1 s3transfer-0.19.2 scipy-1.15.3 shapely-2.1.2 shellingham-1.5.4 simpleeval-1.0.8 six-1.17.0 slack_bolt-1.30.0 slack_sdk-3.44.1 sniffio-1.3.1 snowballstemmer-2.2.0 soupsieve-2.10 starlette-1.7.0 tenacity-9.1.4 testcontainers-4.15.0 tiktoken-0.14.0 tokenizers-0.23.2 tqdm-4.70.1 trimesh-5.1.0 truststore-0.10.4 typer-0.27.2 typing-inspection-0.4.4 unclecode-litellm-1.81.13 urllib3-2.8.0 uuid-utils-0.17.1 uvicorn-0.54.0 wcwidth-0.9.1 websockets-16.1.1 wrapt-2.4.1 xxhash-3.8.1 yarl-1.25.1 zipp-4.1.0 zstandard-0.25.0\n#11 55.84 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 55.84 \n#11 55.84 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 55.84 [notice] To update, run: pip install --upgrade pip\n#11 DONE 58.2s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 65.0s done\n#12 exporting manifest sha256:07e49b07e1de8bbf26e6702d102327d9d8076435df211b7157fc9eb9e106091a\n#12 exporting manifest sha256:07e49b07e1de8bbf26e6702d102327d9d8076435df211b7157fc9eb9e106091a 0.0s done\n#12 exporting config sha256:4094ec0bdd00571206f98f76d2da7d8a1e235301b94bf21fdb52a538fe2b60fc 0.0s done\n#12 exporting attestation manifest sha256:907cd35505120a39174a3447cd7a254f87820473ce2b68f0ac99ad1a2267dd3f 0.1s done\n#12 exporting manifest list sha256:5616b677ddc59b24802c4f6a98ce267f35fb514ce4a0af9a7904c3ea02d9b731\n#12 exporting manifest list sha256:5616b677ddc59b24802c4f6a98ce267f35fb514ce4a0af9a7904c3ea02d9b731 done\n#12 naming to docker.io/library/bench-pipreqs__rat50-20260915-043144-tgoai-tgo:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-tgoai-tgo:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-tgoai-tgo:latest 11.5s done\n#12 DONE 76.7s\n",
+  "build_log_tail": "SSL-26.4.0 pycparser-3.0 pycryptodome-3.23.0 pydantic-2.13.5 pydantic-core-2.46.5 pydantic_settings-2.15.0 pyee-13.0.1 pytest_asyncio-1.4.0 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 python_bcrypt-0.3.2 python_json_logger-4.2.0 questionary-2.1.1 rank-bm25-0.2.2 redis-8.1.0 referencing-0.37.0 regex-2026.9.10 requests-toolbelt-1.0.0 rich-15.0.0 rpds-py-0.30.0 rtree-1.4.1 s3transfer-0.19.2 scipy-1.15.3 shapely-2.1.2 shellingham-1.5.4 simpleeval-1.0.8 six-1.17.0 slack_bolt-1.30.0 slack_sdk-3.44.1 sniffio-1.3.1 snowballstemmer-2.2.0 soupsieve-2.9.2 starlette-1.6.0 tenacity-9.1.4 testcontainers-4.15.0 tiktoken-0.14.0 tokenizers-0.23.2 tqdm-4.70.1 trimesh-5.1.0 truststore-0.10.4 typer-0.27.2 typing-inspection-0.4.4 unclecode-litellm-1.81.13 urllib3-2.7.0 uuid-utils-0.17.1 uvicorn-0.53.0 wcwidth-0.8.3 websockets-16.1.1 wrapt-2.4.1 xxhash-3.8.1 yarl-1.24.5 zipp-4.1.0 zstandard-0.25.0\n#11 50.73 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 50.73 \n#11 50.73 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 50.73 [notice] To update, run: pip install --upgrade pip\n#11 DONE 53.9s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 42.4s done\n#12 exporting manifest sha256:66ea88fa62e032f8af81b6fe137ca8e1f3d953296d4492a4dab8ce8fb640bc08 done\n#12 exporting config sha256:0894278598c57e26553bc2de87913a19c57f68cf452422aeea890cf50c4d45ef done\n#12 exporting attestation manifest sha256:956ee6526e0fa2b02c539365d96e3f00dbf72a11b70ebd7827ba8d37750bbf4b done\n#12 exporting manifest list sha256:70313f7ce238c886d02d92c2aa27c6363d76946fe23781f21323678848c02472 done\n#12 naming to docker.io/library/bench-pipreqs-tgoai-tgo:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-tgoai-tgo:latest\n#12 unpacking to docker.io/library/bench-pipreqs-tgoai-tgo:latest 8.9s done\n#12 DONE 51.4s\n",
   "status": "collect_error",
   "py_test_files": 39,
   "collect_rc": 2,
@@ -55,9 +55,9 @@
   "ebsr": true,
   "pass_rate": 0.3846,
   "timed_out": false,
-  "image_size_mb": 1054.7,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50-20260915-043144-tgoai-tgo@sha256:5616b677ddc59b24802c4f6a98ce267f35fb514ce4a0af9a7904c3ea02d9b731",
+  "image_size_mb": 1050.3,
+  "image_delta_mb": 662.7,
+  "image_digest": "bench-pipreqs-tgoai-tgo@sha256:70313f7ce238c886d02d92c2aa27c6363d76946fe23781f21323678848c02472",
   "installed_pkg_count": 177,
   "tokens_in": null,
   "tokens_out": null,
@@ -65,8 +65,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 12.82,
-  "build_s": 141.76,
-  "test_s": 1.61,
+  "build_s": 109.98,
+  "test_s": 1.73,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -93,19 +93,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=995da4577f6f91edb87d0f56fc9ea4c129f1a4eb (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=995da4577f6f91edb87d0f56fc9ea4c129f1a4eb (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "supabase/supabase-py",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": ".15.4 cryptography-50.0.0 deprecation-2.1.0 distro-1.9.0 frozenlist-1.8.0 future-fstrings-1.2.0 h2-4.4.1 hpack-4.2.0 httpcore-1.0.9 httpcore2-2.10.0 httpx-0.28.1 httpx2-2.10.0 hyperframe-6.1.0 idna-3.18 jiter-0.16.0 librt-0.15.0 multidict-6.7.1 mypy-2.3.1 mypy_extensions-1.1.0 networkx-3.4.2 openai-3.0.0 pathspec-1.1.1 postgrest-2.31.0 propcache-0.5.2 pycparser-3.0 pydantic-2.13.4 pydantic_core-2.46.4 pytest-8.4.2 pytest-asyncio-1.1.1 pytest-cov-6.3.0 pytest-depends-1.0.1 pytest-mock-3.15.1 python-dotenv-1.2.3 realtime-2.31.0 respx-0.22.0 storage3-2.31.0 supabase-2.31.0 supabase-auth-2.31.0 supabase-functions-2.31.0 tqdm-4.70.0 typing-inspection-0.4.3 uv-0.12.5 websockets-15.0.1 yarl-1.24.5\n#16 69.46 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#16 69.57 \n#16 69.57 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#16 69.57 [notice] To update, run: pip install --upgrade pip\n#16 DONE 71.2s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.4s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.0s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 13.3s done\n#19 exporting manifest sha256:dbdadcdff7ac29f54c365fd60b1903b3291712c0af85574ad942cdce8b6080ff 0.0s done\n#19 exporting config sha256:edd4b505391fb209a6fa66a31da3e85b5e730a5ba8afdd622bd75d70182c45ec 0.0s done\n#19 exporting attestation manifest sha256:556278d31404ce8948133bd2ebe8c2cfb71f2acf75583f670077b0463585629d 0.0s done\n#19 exporting manifest list sha256:bd8eaa5408939e1fb50d955e14bf1ecef5d8b61be7491ba09b1183bbf60a4e0a 0.0s done\n#19 naming to docker.io/library/bench-rat__rat50-pjy-supabase-supabase-py:latest done\n#19 unpacking to docker.io/library/bench-rat__rat50-pjy-supabase-supabase-py:latest\n#19 unpacking to docker.io/library/bench-rat__rat50-pjy-supabase-supabase-py:latest 4.1s done\n#19 DONE 17.5s\n",
+  "build_log_tail": "raphy-50.0.0 deprecation-2.1.0 distro-1.9.0 frozenlist-1.8.0 future-fstrings-1.2.0 h2-4.4.1 hpack-4.2.0 httpcore-1.0.9 httpcore2-2.10.0 httpx-0.28.1 httpx2-2.10.0 hyperframe-6.1.0 idna-3.18 jiter-0.16.0 librt-0.15.0 multidict-6.7.1 mypy-2.3.1 mypy_extensions-1.1.0 networkx-3.4.2 openai-3.0.0 pathspec-1.1.1 postgrest-2.31.0 propcache-0.5.2 pycparser-3.0 pydantic-2.13.4 pydantic_core-2.46.4 pytest-8.4.2 pytest-asyncio-1.1.1 pytest-cov-6.3.0 pytest-depends-1.0.1 pytest-mock-3.15.1 python-dotenv-1.2.3 realtime-2.31.0 respx-0.22.0 storage3-2.31.0 supabase-2.31.0 supabase-auth-2.31.0 supabase-functions-2.31.0 tqdm-4.70.0 typing-inspection-0.4.3 uv-0.12.5 websockets-15.0.1 yarl-1.24.5\n#16 291.5 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#16 291.9 \n#16 291.9 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#16 291.9 [notice] To update, run: pip install --upgrade pip\n#16 DONE 293.4s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.4s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.0s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 12.8s done\n#19 exporting manifest sha256:bb2ee9513f07b99a8936b0b2ced9726a3e9e28a9251d3c3897d85c5f9352753b 0.0s done\n#19 exporting config sha256:47bf897a9e23dda0dd866aecae80521772ac6f119601cd2879809fcc4451565e 0.0s done\n#19 exporting attestation manifest sha256:3db753c12e7d2caec36a043bc9365cc950da77f8b20dba8353417b2863f8557b 0.0s done\n#19 exporting manifest list sha256:fc221bb353c9bc8888e84cf8d4511e5c70ac9a766ab37f8db6915a3a11b94125 0.0s done\n#19 naming to docker.io/library/bench-pjy-rat-dockerfile-supabase-supabase-py:latest done\n#19 unpacking to docker.io/library/bench-pjy-rat-dockerfile-supabase-supabase-py:latest\n#19 unpacking to docker.io/library/bench-pjy-rat-dockerfile-supabase-supabase-py:latest 6.4s done\n#19 DONE 19.4s\n",
   "status": "collect_error",
   "py_test_files": 43,
   "collect_rc": 2,
@@ -446,9 +446,9 @@
   "ebsr": true,
   "pass_rate": 0.2754,
   "timed_out": false,
-  "image_size_mb": 165.2,
+  "image_size_mb": 721.1,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50-pjy-supabase-supabase-py@sha256:bd8eaa5408939e1fb50d955e14bf1ecef5d8b61be7491ba09b1183bbf60a4e0a",
+  "image_digest": "bench-pjy-rat-dockerfile-supabase-supabase-py@sha256:fc221bb353c9bc8888e84cf8d4511e5c70ac9a766ab37f8db6915a3a11b94125",
   "installed_pkg_count": 74,
   "tokens_in": 3696059,
   "tokens_out": 41083,
@@ -456,27 +456,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 118.07,
-  "test_s": 76.64,
+  "build_s": 317.07,
+  "test_s": 78.4,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 3696059,
     "tokens_out": 41083,
-    "llm_calls": 94,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 94
   },
   "error_surface": "",
   "error_surface_reason": "",

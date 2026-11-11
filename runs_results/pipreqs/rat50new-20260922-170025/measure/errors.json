@@ -1,0 +1,140 @@
+{
+  "pipreqs": {
+    "collect": {
+      "agent": "pipreqs",
+      "n_repos": 50,
+      "source": "collect",
+      "n_admissible": 6,
+      "n_masked": 13,
+      "n_unobserved": 31,
+      "n_status_derived": 0,
+      "buckets": {
+        "build_fail": 30,
+        "error": 1,
+        "partial": 2,
+        "collect_error": 17
+      },
+      "surfaces": {
+        "unobserved": 31,
+        "full": 6,
+        "masked": 13
+      },
+      "token_repos": {
+        "pydantic_core._pydantic_core.ValidationError": 1,
+        "ModuleNotFoundError": 3,
+        "ImportError": 2,
+        "ValueError": 1,
+        "AttributeError": 1
+      },
+      "token_events": {
+        "pydantic_core._pydantic_core.ValidationError": 1,
+        "ModuleNotFoundError": 7,
+        "ValueError": 4,
+        "AttributeError": 1,
+        "ImportError": 3
+      },
+      "category_repos": {
+        "uncategorized": 2,
+        "module_not_found": 3,
+        "partial_import": 1,
+        "import_failed": 1
+      },
+      "category_events": {
+        "uncategorized": 6,
+        "module_not_found": 7,
+        "partial_import": 2,
+        "import_failed": 1
+      },
+      "crosstab": {
+        "collect_error|uncategorized": 2,
+        "collect_error|module_not_found": 3,
+        "collect_error|partial_import": 1,
+        "collect_error|import_failed": 1
+      },
+      "top_groups": {
+        "module_not_found": [
+          [
+            "anthropic",
+            1
+          ],
+          [
+            "openai",
+            1
+          ],
+          [
+            "concurrent_log_handler",
+            1
+          ],
+          [
+            "headroom._core",
+            1
+          ],
+          [
+            "opentelemetry.sdk",
+            1
+          ],
+          [
+            "headroom_oauth2",
+            1
+          ],
+          [
+            "tomllib",
+            1
+          ]
+        ],
+        "uncategorized": [
+          [
+            "concurrent_log_handler",
+            1
+          ],
+          [
+            "GeneralMemCubeConfig",
+            1
+          ],
+          [
+            "BaseConfig",
+            1
+          ]
+        ],
+        "partial_import": [
+          [
+            "BaseConfig",
+            1
+          ],
+          [
+            "GeneralMemCubeConfig",
+            1
+          ]
+        ]
+      },
+      "uncategorized_rate": 0.375
+    },
+    "run": {
+      "agent": "pipreqs",
+      "n_repos": 50,
+      "source": "run",
+      "n_admissible": 6,
+      "n_masked": 13,
+      "n_unobserved": 31,
+      "n_status_derived": 0,
+      "buckets": {
+        "build_fail": 30,
+        "error": 1,
+        "partial": 2,
+        "collect_error": 17
+      },
+      "surfaces": {
+        "unobserved": 31,
+        "full": 6,
+        "masked": 13
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    }
+  }
+}

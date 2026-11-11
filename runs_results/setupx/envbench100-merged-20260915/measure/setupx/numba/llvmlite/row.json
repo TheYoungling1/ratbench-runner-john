@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__envbench100-merged-20260915",
+  "agent": "setupx",
   "repo": "numba/llvmlite",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "b2185b946cd2afbe6cbee05 6af5f888ba3187b7d53cd342a3083670f348e22e\n#10 47.92 78181e3b9d185af8168530324ea929cb87171213 201997a3ab60a37d4b2185b946cd2afbe6cbee05\n#10 47.92 a3d41402228c8a657f5db65d3917246dd71d0e82 78181e3b9d185af8168530324ea929cb87171213 bb4a247d71abd5a3dc809ec37d1060531ac320f6 d18089686de1603560fbf13c908a39b5330a9e78 39d6f2ac80eb8705ca0fa86b60ab57f4a854105a\n#10 47.92 01528db9ecd181ef174358a80f9d97765ad986bd a3d41402228c8a657f5db65d3917246dd71d0e82\n#10 47.92 789fefca55b5236e264808d7a66b7a8416e985f0 a3d41402228c8a657f5db65d3917246dd71d0e82\n#10 47.92 18cfd93f8b07629074c8dafae044798f757fc2e8 789fefca55b5236e264808d7a66b7a8416e985f0 01528db9ecd181ef174358a80f9d97765ad986bd\n#10 47.92 d1823be03aa1ae04e5c605a66812823dffe61f89 18cfd93f8b07629074c8dafae044798f757fc2e8\n#10 47.92 9a6edb48ba70e9864676aa468dc22aaff702d8d6 01528db9ecd181ef174358a80f9d97765ad986bd\n#10 47.92 \n#10 DONE 48.1s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.5s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 116.3s done\n#14 exporting manifest sha256:287a23078e219d7363894bf2e45e47ca85a8377c9746b766b7ba23167038e839 done\n#14 exporting config sha256:0a236184c63a6003886ed715c10138e8404da0182bbe6d7393f80cf0e4bdea62 0.0s done\n#14 exporting attestation manifest sha256:fe75352cf5a96ae8549d6617e227aa5f83cf5756f8e7f531f01b4bc875c2dc63 0.0s done\n#14 exporting manifest list sha256:fe9049f2231d7058861999b56fc3b7949c4c8cae646e6a0390c1e8f0f41de21d done\n#14 naming to docker.io/library/bench-setupx__envbench100-merged-20260915-numba-llvmlite:latest done\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-numba-llvmlite:latest\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-numba-llvmlite:latest 13.0s done\n#14 DONE 129.4s\n",
+  "build_log_tail": "41f881a0cf96efa18f6d99d5938971603e955a11 3e0006aafb6943c6c0288088f942b2992252cba0\n76b60a2d23b9f31a772b756b1296296daff070e5 41f881a0cf96efa18f6d99d5938971603e955a11\nab54bdcdb03b35b7d31be5e4c4e4b6fed6cfb4b2 76b60a2d23b9f31a772b756b1296296daff070e5\nddc83fa50ee3c72dec671baf2504e5cc0133aae2 ab54bdcdb03b35b7d31be5e4c4e4b6fed6cfb4b2\n748a59c45b04889e2a561c453374c7499da6bfe9 ddc83fa50ee3c72dec671baf2504e5cc0133aae2\n79d1ac7f519fbb6513641bf3c4c158a42f584eee 748a59c45b04889e2a561c453374c7499da6bfe9 df5460a53c52d29a6afad17d3d65b98810a4391b\nd6dd0db14bd256db70ca04097620dcb677e82efa df5460a53c52d29a6afad17d3d65b98810a4391b\nb649f1b5094804f56602710f85fde05a866a12e9 79d1ac7f519fbb6513641bf3c4c158a42f584eee\necbc2e5952b2de66e48e3a1216cb3699f76300be d6dd0db14bd256db70ca04097620dcb677e82efa\n342405c762bfba69e261a5091371d4e4a848c1d4 79d1ac7f519fbb6513641bf3c4c158a42f584eee\n7c5c15df4f23a5cda8c2f71aa9a892d60b5b14a3 b649f1b5094804f56602710f85fde05a866a12e9\n\n ---> Removed intermediate container 3afc59f098dd\n ---> 8ac0a7379589\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in 6a48d36654d1\n ---> Removed intermediate container 6a48d36654d1\n ---> 82bc4516ec25\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in e3988a4b44b2\n ---> Removed intermediate container e3988a4b44b2\n ---> 01c715f61ffc\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in c0764f360363\n ---> Removed intermediate container c0764f360363\n ---> 747a5791a7a6\nStep 10/10 : WORKDIR /testbed\n ---> Running in 078aa8050298\n ---> Removed intermediate container 078aa8050298\n ---> d72ec6c1f299\nSuccessfully built d72ec6c1f299\nSuccessfully tagged bench-setupx-numba-llvmlite:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 5,
   "collect_rc": 3,
@@ -26,9 +26,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 2136.1,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__envbench100-merged-20260915-numba-llvmlite@sha256:fe9049f2231d7058861999b56fc3b7949c4c8cae646e6a0390c1e8f0f41de21d",
+  "image_size_mb": 2136.0,
+  "image_delta_mb": 1748.4,
+  "image_digest": "bench-setupx-numba-llvmlite@sha256:d72ec6c1f2993040e0320fb1e38aba580b8cdcc6ddea24d0043f224c4bdf1bfe",
   "installed_pkg_count": 12,
   "tokens_in": 1064651,
   "tokens_out": 202302,
@@ -36,8 +36,8 @@
   "turns_used": 73,
   "cost_usd": null,
   "produce_s": 1617.52,
-  "build_s": 181.09,
-  "test_s": 0.31,
+  "build_s": 227.75,
+  "test_s": 0.42,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -68,19 +68,7 @@
     "turns_used": 73,
     "produce_s": 1617.52,
     "total_tokens": 1266953,
-    "cost_usd": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=5c181ff3af1de04d4bd70fb0ee287aa81d1fe198 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=5c181ff3af1de04d4bd70fb0ee287aa81d1fe198 (pinned)\n"
-      }
-    ]
+    "cost_usd": null
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,15 +1,16 @@
 {
-  "agent": "pipreqs__rat50new-20260922-170025",
+  "agent": "pipreqs",
   "repo": "rfsbraz/deleterr",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "Installing collected packages: urllib3, tzlocal, typing-inspection, PyYAML, pydantic-core, overrides, markupsafe, itsdangerous, idna, h11, click, charset_normalizer, certifi, blinker, annotated-types, werkzeug, types-requests, Requests, pydantic, Jinja2, httpcore, apscheduler, anyio, pyarr, plexapi, httpx, Flask\n#11 5.249 Successfully installed Flask-3.1.3 Jinja2-3.1.6 PyYAML-6.0.3 Requests-2.34.2 annotated-types-0.8.0 anyio-4.15.1 apscheduler-3.11.3 blinker-1.9.0 certifi-2026.7.22 charset_normalizer-3.5.1 click-8.5.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 itsdangerous-2.2.0 markupsafe-3.0.3 overrides-7.7.0 plexapi-4.18.2 pyarr-5.2.0 pydantic-2.13.5 pydantic-core-2.46.5 types-requests-2.33.0.20260906 typing-inspection-0.4.4 tzlocal-5.4.4 urllib3-2.8.0 werkzeug-3.1.8\n#11 5.250 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 5.260 \n#11 5.260 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 5.260 [notice] To update, run: pip install --upgrade pip\n#11 DONE 5.7s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 1.8s done\n#12 exporting manifest sha256:afc6e4d9b1c9bf75a2b806716430c1ca29f83d811c06c3ecbd0aeb991df2a9e8 done\n#12 exporting config sha256:89f32cc7587f6c119eb039f0856c9cace0d8bb0385ffb577559d3130c5108c5a done\n#12 exporting attestation manifest sha256:b5f0fdb6612925a8fe8ac6fed702c298e34493dbc6c48524fc965b9aa5c62c0c 0.0s done\n#12 exporting manifest list sha256:85244f6a8039fa1b361735937ab306e7f6616ea7abdf7eb8be024af9c62b8f50 0.0s done\n#12 naming to docker.io/library/bench-pipreqs__rat50new-20260922-170025-rfsbraz-deleterr:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-rfsbraz-deleterr:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-rfsbraz-deleterr:latest 0.6s done\n#12 DONE 2.5s\n",
+  "build_log_tail": "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 135.7/135.7 kB 30.9 MB/s eta 0:00:00\n#11 5.282 Installing collected packages: urllib3, tzlocal, typing-inspection, PyYAML, pydantic-core, overrides, markupsafe, itsdangerous, idna, h11, click, charset_normalizer, certifi, blinker, annotated-types, werkzeug, types-requests, Requests, pydantic, Jinja2, httpcore, apscheduler, anyio, pyarr, plexapi, httpx, Flask\n#11 6.602 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 6.602 Successfully installed Flask-3.1.3 Jinja2-3.1.6 PyYAML-6.0.3 Requests-2.34.2 annotated-types-0.8.0 anyio-4.15.1 apscheduler-3.11.3 blinker-1.9.0 certifi-2026.7.22 charset_normalizer-3.5.1 click-8.5.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 itsdangerous-2.2.0 markupsafe-3.0.3 overrides-7.7.0 plexapi-4.18.2 pyarr-5.2.0 pydantic-2.13.5 pydantic-core-2.46.5 types-requests-2.33.0.20260906 typing-inspection-0.4.4 tzlocal-5.4.4 urllib3-2.8.0 werkzeug-3.1.8\n#11 6.609 \n#11 6.609 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 6.609 [notice] To update, run: pip install --upgrade pip\n#11 DONE 7.6s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 2.4s done\n#12 exporting manifest sha256:e087bb7c83d12e3af26fdf0ba46a169e815a5b6a43d3193e0517937ec99f8346 0.0s done\n#12 exporting config sha256:3f9c7e9949b467fbadd2521e8287bbee2da08bbdc2792610d8ff370186951458 0.0s done\n#12 exporting attestation manifest sha256:30332aa3298f0aa0d3d3367ad6cebaba24e950339d913c0a3b0984060bdc3dfc 0.0s done\n#12 exporting manifest list sha256:f85405fc93014cba64b92fa0aedee45f7426b1ac63655220fa4e535b16015c0b 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-rfsbraz-deleterr:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-rfsbraz-deleterr:latest\n#12 unpacking to docker.io/library/bench-pipreqs-rfsbraz-deleterr:latest 1.3s done\n#12 DONE 3.8s\n",
   "status": "collect_error",
   "py_test_files": 42,
   "collect_rc": 2,
   "collect_clean": false,
   "collect_errors": [
+    "E   ModuleNotFoundError: No module named 'tautulli'",
     "E   ModuleNotFoundError: No module named 'tautulli'",
     "E   ModuleNotFoundError: No module named 'simplejustwatchapi'",
     "E   ModuleNotFoundError: No module named 'simplejustwatchapi'",
@@ -27,7 +28,7 @@
     "E   ModuleNotFoundError: No module named 'tautulli'",
     "E   ModuleNotFoundError: No module named 'simplejustwatchapi'"
   ],
-  "collect_error_count": 16,
+  "collect_error_count": 17,
   "collected_node_ids": [],
   "executed": true,
   "total": 374,
@@ -418,9 +419,9 @@
   "ebsr": true,
   "pass_rate": 0.7299,
   "timed_out": false,
-  "image_size_mb": 412.4,
+  "image_size_mb": 1597.6,
   "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50new-20260922-170025-rfsbraz-deleterr@sha256:85244f6a8039fa1b361735937ab306e7f6616ea7abdf7eb8be024af9c62b8f50",
+  "image_digest": "bench-pipreqs-rfsbraz-deleterr@sha256:f85405fc93014cba64b92fa0aedee45f7426b1ac63655220fa4e535b16015c0b",
   "installed_pkg_count": 41,
   "tokens_in": null,
   "tokens_out": null,
@@ -428,8 +429,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 3.16,
-  "build_s": 11.65,
-  "test_s": 5.41,
+  "build_s": 14.91,
+  "test_s": 6.8,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -456,19 +457,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=b64a08ac4e97d3a8a041814a1f13484c20bd3982 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=b64a08ac4e97d3a8a041814a1f13484c20bd3982 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__envbench100-merged-20260915",
+  "agent": "setupx",
   "repo": "google/trax",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "mmary = tf.compat.v1.Summary(\n#10 9.902 256:        value=[tf.compat.v1.Summary.Value(tag=tag, audio=audio)])\n#10 9.902 286:    histo = tf.compat.v1.HistogramProto(\n#10 9.902 294:    summary = tf.compat.v1.Summary(\n#10 9.902 295:        value=[tf.compat.v1.Summary.Value(tag=tag, histo=histo)])\n#10 9.902 311:    smd = tf.compat.v1.SummaryMetadata(\n#10 9.902 312:        plugin_data=tf.compat.v1.SummaryMetadata.PluginData(plugin_name='text'))\n#10 9.902 329:    summary = tf.compat.v1.Summary(\n#10 9.902 330:        value=[tf.compat.v1.Summary.Value(\n#10 9.902 26:from tensorflow.compat.v2 import test\n#10 9.902 24:from tensorflow.compat.v2 import test\n#10 9.902 25:import tensorflow.compat.v2 as tf\n#10 9.902 554:  tf.compat.v1.enable_eager_execution()\n#10 9.902 34:import tensorflow.compat.v2 as tf\n#10 9.902 29:import tensorflow.compat.v2 as tf\n#10 9.902 43:    tf.compat.v1.enable_eager_execution()\n#10 DONE 10.0s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 1.0s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 7.6s done\n#14 exporting manifest sha256:c8d00c182210b6075f9ad77151b5c1ee0c1f316573088450b0a14c42d5e992be done\n#14 exporting config sha256:9766b7c00342474e970faa9edd62367107a9beaa6d07f5cf42285256275f7cf9 done\n#14 exporting attestation manifest sha256:42e2d13bcc0c536709332d2d6884387f9a49c6bb82e5cdf4f979e2eb1157a6b9 0.0s done\n#14 exporting manifest list sha256:f711d269cd3d7e80ccc012b54925de4662c740d618b90f02e6aaa8922c037011 done\n#14 naming to docker.io/library/bench-setupx__envbench100-merged-20260915-google-trax:latest done\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-google-trax:latest\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-google-trax:latest 1.9s done\n#14 DONE 9.6s\n",
+  "build_log_tail": "pat.v1.Summary.Image(\n213:    summary = tf.compat.v1.Summary(\n214:        value=[tf.compat.v1.Summary.Value(tag=tag, image=image_summary)])\n249:    audio = tf.compat.v1.Summary.Audio(\n255:    summary = tf.compat.v1.Summary(\n256:        value=[tf.compat.v1.Summary.Value(tag=tag, audio=audio)])\n286:    histo = tf.compat.v1.HistogramProto(\n294:    summary = tf.compat.v1.Summary(\n295:        value=[tf.compat.v1.Summary.Value(tag=tag, histo=histo)])\n311:    smd = tf.compat.v1.SummaryMetadata(\n312:        plugin_data=tf.compat.v1.SummaryMetadata.PluginData(plugin_name='text'))\n329:    summary = tf.compat.v1.Summary(\n330:        value=[tf.compat.v1.Summary.Value(\n26:from tensorflow.compat.v2 import test\n24:from tensorflow.compat.v2 import test\n25:import tensorflow.compat.v2 as tf\n554:  tf.compat.v1.enable_eager_execution()\n34:import tensorflow.compat.v2 as tf\n29:import tensorflow.compat.v2 as tf\n43:    tf.compat.v1.enable_eager_execution()\n ---> Removed intermediate container acb8382271d4\n ---> 142c76e9dc44\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in a6ee41019fca\n ---> Removed intermediate container a6ee41019fca\n ---> 1c1d41d6ea64\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in e6080f944eb1\n ---> Removed intermediate container e6080f944eb1\n ---> 5a24aa50bb92\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in ea9e6eaf56b1\n ---> Removed intermediate container ea9e6eaf56b1\n ---> a7bfac07fd31\nStep 10/10 : WORKDIR /testbed\n ---> Running in 5c4b0c2a1620\n ---> Removed intermediate container 5c4b0c2a1620\n ---> 521114ae1f03\nSuccessfully built 521114ae1f03\nSuccessfully tagged bench-setupx-google-trax:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 87,
   "collect_rc": 2,
@@ -200,9 +200,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 945.7,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__envbench100-merged-20260915-google-trax@sha256:f711d269cd3d7e80ccc012b54925de4662c740d618b90f02e6aaa8922c037011",
+  "image_size_mb": 945.6,
+  "image_delta_mb": 558.0,
+  "image_digest": "bench-setupx-google-trax@sha256:521114ae1f0335d0f284cdb3d6d1150f6a8dec4e6de54854532fd205fdc304dd",
   "installed_pkg_count": 12,
   "tokens_in": 799819,
   "tokens_out": 102303,
@@ -210,8 +210,8 @@
   "turns_used": 95,
   "cost_usd": null,
   "produce_s": 974.15,
-  "build_s": 28.94,
-  "test_s": 0.76,
+  "build_s": 44.97,
+  "test_s": 0.92,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -246,19 +246,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=14514794eb03247c3a4426032607e1f7547e6f63 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=14514794eb03247c3a4426032607e1f7547e6f63 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

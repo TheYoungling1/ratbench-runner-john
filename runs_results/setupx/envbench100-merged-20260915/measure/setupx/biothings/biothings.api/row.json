@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__envbench100-merged-20260915",
+  "agent": "setupx",
   "repo": "biothings/biothings.api",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "56 ]\n#10 94.56 \n#10 94.56 [tool.isort]\n#10 94.56 profile = \"black\"\n#10 94.56 combine_as_imports = true\n#10 94.56 line_length = 120\n#10 94.56 src_paths = [\".\"]\n#10 94.56 extend_skip = [\n#10 94.56     # 3rd party code, don't touch\n#10 94.56     \"biothings/utils/jsondiff.py\",\n#10 94.56     \"biothings/utils/jsonpatch.py\",\n#10 94.56     # deprecated code, don't touch\n#10 94.56     \"biothings/utils/parallel.py\",\n#10 94.56     \"biothings/utils/parallel_mp.py\",\n#10 94.56     \"biothings/utils/shelve.py\",\n#10 94.56     \"biothings/hub/dataload/sync.py\",\n#10 94.56     \"biothings/hub/dataload/validator.py\",\n#10 94.56 ]\n#10 94.56 \n#10 94.56 [tool.pytest.ini_options]\n#10 94.56 markers = [\n#10 94.56     \"ReleaseNoteSrcBuildReaderAdapter\",\n#10 94.56     \"ReleaseNoteSrcBuildReader\",\n#10 94.56     \"ReleaseNoteSource\",\n#10 94.56     \"ReleaseNoteTxt\",\n#10 94.56 ]\n#10 DONE 94.7s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.8s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 17.2s done\n#14 exporting manifest sha256:23a55318b8628ad5b87cdde3b6f287b93febf6d547da330f360d0a995cbbfa0b 0.0s done\n#14 exporting config sha256:6820f2b21c349bf77133583fc1bf59656ea488ffadf055dd7470e86f7a42450e done\n#14 exporting attestation manifest sha256:bf34eec4e52ae769e55dfa94c47d0233ee31c7e069b802b7eda9034d5d33e06b 0.0s done\n#14 exporting manifest list sha256:916dc897912c6d91865d298630a31199161068348d2ce6f0a0596b7f21f7ca4f 0.0s done\n#14 naming to docker.io/library/bench-setupx__envbench100-merged-20260915-biothings-biothings.api:latest done\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-biothings-biothings.api:latest\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-biothings-biothings.api:latest 6.2s done\n#14 DONE 23.4s\n",
+  "build_log_tail": "e = [\n    # 3rd party code, don't touch\n    \"biothings/utils/jsondiff.py\",\n    \"biothings/utils/jsonpatch.py\",\n    # deprecated code, don't touch\n    \"biothings/utils/parallel.py\",\n    \"biothings/utils/parallel_mp.py\",\n    \"biothings/utils/shelve.py\",\n    \"biothings/hub/dataload/sync.py\",\n    \"biothings/hub/dataload/validator.py\",\n]\n\n[tool.isort]\nprofile = \"black\"\ncombine_as_imports = true\nline_length = 120\nsrc_paths = [\".\"]\nextend_skip = [\n    # 3rd party code, don't touch\n    \"biothings/utils/jsondiff.py\",\n    \"biothings/utils/jsonpatch.py\",\n    # deprecated code, don't touch\n    \"biothings/utils/parallel.py\",\n    \"biothings/utils/parallel_mp.py\",\n    \"biothings/utils/shelve.py\",\n    \"biothings/hub/dataload/sync.py\",\n    \"biothings/hub/dataload/validator.py\",\n]\n\n[tool.pytest.ini_options]\nmarkers = [\n    \"ReleaseNoteSrcBuildReaderAdapter\",\n    \"ReleaseNoteSrcBuildReader\",\n    \"ReleaseNoteSource\",\n    \"ReleaseNoteTxt\",\n]\n ---> Removed intermediate container d3a146967b3e\n ---> d89938ecfd81\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in 37b9355932ed\n ---> Removed intermediate container 37b9355932ed\n ---> 7fa3d3adaae8\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in b7ce821d5977\n ---> Removed intermediate container b7ce821d5977\n ---> 1ce2986c45f5\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in 27f2e7311fd4\n ---> Removed intermediate container 27f2e7311fd4\n ---> 7d1af4812ea2\nStep 10/10 : WORKDIR /testbed\n ---> Running in 6b4f730fb76c\n ---> Removed intermediate container 6b4f730fb76c\n ---> d2bf051c4991\nSuccessfully built d2bf051c4991\nSuccessfully tagged bench-setupx-biothings-biothings.api:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 31,
   "collect_rc": 2,
@@ -449,9 +449,9 @@
   "ebsr": true,
   "pass_rate": 0.5749,
   "timed_out": false,
-  "image_size_mb": 2249.8,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__envbench100-merged-20260915-biothings-biothings.api@sha256:916dc897912c6d91865d298630a31199161068348d2ce6f0a0596b7f21f7ca4f",
+  "image_size_mb": 635.9,
+  "image_delta_mb": 248.3,
+  "image_digest": "bench-setupx-biothings-biothings.api@sha256:d2bf051c4991586ed231b48ccc29e60b7857b37f657206c062566456b56272b6",
   "installed_pkg_count": 126,
   "tokens_in": 897454,
   "tokens_out": 154406,
@@ -459,8 +459,8 @@
   "turns_used": 86,
   "cost_usd": null,
   "produce_s": 1358.89,
-  "build_s": 124.05,
-  "test_s": 24.18,
+  "build_s": 127.74,
+  "test_s": 20.45,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -491,19 +491,7 @@
     "turns_used": 86,
     "produce_s": 1358.89,
     "total_tokens": 1051860,
-    "cost_usd": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=6573562773ed66b9428aead1ba7ac187005bb031 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=6573562773ed66b9428aead1ba7ac187005bb031 (pinned)\n"
-      }
-    ]
+    "cost_usd": null
   },
   "error_surface": "",
   "error_surface_reason": "",

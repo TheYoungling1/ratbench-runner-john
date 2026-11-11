@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "jaehyeon-kim/flink-demos",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "10 54.11 OpenJDK Runtime Environment Temurin-11.0.32.1+1 (build 11.0.32.1+1)\n#10 54.12 === re-run failing test ===\n#10 63.27   Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages\n#10 63.27     declare_namespace(pkg)\n#10 63.27 \n#10 63.27 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n#10 63.27 =========================== short test summary info ============================\n#10 63.27 FAILED test_app.py::test_define_workflow_should_aggregate_values_by_id - Asse...\n#10 63.27 !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n#10 63.27 1 failed, 11 warnings in 8.67s\n#10 DONE 63.4s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.6s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 66.4s done\n#14 exporting manifest sha256:dc3f5b91453445ee9d4a3a67a11ca7ce2b09921a0cdd6a96f24a3ba32231404d 0.0s done\n#14 exporting config sha256:d8f313c4a63e901b9cea2328f1e11612910b10435f17468164e2793fd6d0b18e 0.0s done\n#14 exporting attestation manifest sha256:94215619a2d0347feef01c0025ddcd4367cd7b17b13d7023c5e744bec6fcfce9 0.0s done\n#14 exporting manifest list sha256:e522ca5e4770e5c8e99452d49c603fbe57d3eed23584d83757cbd8e93c234045 done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-jaehyeon-kim-flink-demos:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-jaehyeon-kim-flink-demos:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-jaehyeon-kim-flink-demos:latest 10.5s done\n#14 DONE 77.0s\n",
+  "build_log_tail": "1 (build 11.0.32.1+1, mixed mode)\n#10 67.33 Removing openjdk-21-jre-headless:amd64 (21.0.12.1+1-1~deb13u1) ...\n#10 67.33 /opt/jdk-11/bin/java\n#10 67.39 openjdk version \"11.0.32.1\" 2026-08-18\n#10 67.39 OpenJDK Runtime Environment Temurin-11.0.32.1+1 (build 11.0.32.1+1)\n#10 67.39 === re-run failing test ===\n#10 75.16 \n#10 75.16 test_app.py::test_define_workflow_should_aggregate_values_by_id\n#10 75.16   /usr/local/lib/python3.10/site-packages/pkg_resources/__init__.py:3147: DeprecationWarning: Deprecated call to `pkg_resources.declare_namespace('google')`.\n#10 75.16   Implementing implicit namespace packages (as specified in PEP 420) is preferred to `pkg_resources.declare_namespace`. See https://setuptools.pypa.io/en/latest/references/keywords.html#keyword-namespace-packages\n#10 75.16     declare_namespace(pkg)\n#10 75.16 \n#10 75.16 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n#10 75.16 1 passed, 11 warnings in 7.25s\n#10 DONE 75.4s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.4s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.1s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 38.8s done\n#14 exporting manifest sha256:e4c14c4c65b604c849c94fdd1f576a0d27ca5a80c354107acb8f36301ea7381a done\n#14 exporting config sha256:b46485a3ee095d135ac2dd380dd9dfe1078395172513c798eff85aac93c92c04 done\n#14 exporting attestation manifest sha256:58dbe1be623f3a40b1b770be017c11aef41c420de1a5e2cf9114cb1405a612fe done\n#14 exporting manifest list sha256:d30b4db7b5d0285f6352526152c8560713f23a2960878f1b10a97afed1a863c0 done\n#14 naming to docker.io/library/bench-setupx-jaehyeon-kim-flink-demos:latest done\n#14 unpacking to docker.io/library/bench-setupx-jaehyeon-kim-flink-demos:latest\n#14 unpacking to docker.io/library/bench-setupx-jaehyeon-kim-flink-demos:latest 6.4s done\n#14 DONE 45.3s\n",
   "status": "collect_error",
   "py_test_files": 13,
   "collect_rc": 2,
@@ -72,9 +72,9 @@
   "ebsr": true,
   "pass_rate": 0.5909,
   "timed_out": false,
-  "image_size_mb": 1513.6,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-jaehyeon-kim-flink-demos@sha256:e522ca5e4770e5c8e99452d49c603fbe57d3eed23584d83757cbd8e93c234045",
+  "image_size_mb": 1513.5,
+  "image_delta_mb": 1125.9,
+  "image_digest": "bench-setupx-jaehyeon-kim-flink-demos@sha256:d30b4db7b5d0285f6352526152c8560713f23a2960878f1b10a97afed1a863c0",
   "installed_pkg_count": 57,
   "tokens_in": 491154,
   "tokens_out": 12642,
@@ -82,8 +82,8 @@
   "turns_used": 19,
   "cost_usd": null,
   "produce_s": 691.43,
-  "build_s": 145.0,
-  "test_s": 34.4,
+  "build_s": 123.18,
+  "test_s": 34.08,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -118,19 +118,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=fe228c3cfe15dcc1248d9b828e49e201c5297187 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=fe228c3cfe15dcc1248d9b828e49e201c5297187 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

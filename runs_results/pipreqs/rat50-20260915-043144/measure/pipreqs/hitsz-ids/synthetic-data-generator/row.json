@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50-20260915-043144",
+  "agent": "pipreqs",
   "repo": "hitsz-ids/synthetic-data-generator",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": ".6 nvidia-cublas-13.1.1.3 nvidia-cuda-cupti-13.0.85 nvidia-cuda-nvrtc-13.0.88 nvidia-cuda-runtime-13.0.96 nvidia-cudnn-cu13-9.24.0.43 nvidia-cufft-12.0.0.61 nvidia-cufile-1.15.1.6 nvidia-curand-10.4.0.35 nvidia-cusolver-12.0.4.66 nvidia-cusparse-12.6.3.3 nvidia-cusparselt-cu13-0.8.1 nvidia-nccl-cu13-2.30.7 nvidia-nvjitlink-13.4.92 nvidia-nvshmem-cu13-3.4.5 nvidia-nvtx-13.0.85 openai-3.19.2 pandas-2.3.3 pillow-12.3.0 psutil-7.2.2 pydantic-2.13.5 pydantic-core-2.46.5 pyparsing-3.3.3 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 pytz-2026.4 scikit_learn-1.7.2 scipy-1.15.3 six-1.17.0 sniffio-1.3.1 sympy-1.14.0 threadpoolctl-3.7.0 torch-2.14.0 tqdm-4.70.1 triton-3.8.0 truststore-0.10.4 typing-inspection-0.4.4 tzdata-2026.4 zipp-4.1.0\n#11 80.68 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 80.69 \n#11 80.69 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 80.69 [notice] To update, run: pip install --upgrade pip\n#11 DONE 82.2s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 431.9s done\n#12 exporting manifest sha256:3c88809ba7008e75346cb5de46ab84cb45fe58459cf81ac1870909bc5e632f38 done\n#12 exporting config sha256:7bbe2346b043ae716fcf32ef775aec4769352fdb6129918c34c15bd46cf35d3b done\n#12 exporting attestation manifest sha256:bd5cf68c37f01fea6e74ac1b6a65e322b5f9a81338cf54a9671cfdf0ad020766 0.0s done\n#12 exporting manifest list sha256:d180405f1bba2970470c6d06df6f3de26907a789e2062f97dbd22a4e8205e3cf done\n#12 naming to docker.io/library/bench-pipreqs__rat50-20260915-043144-hitsz-ids-synthetic-data-generator:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-hitsz-ids-synthetic-data-generator:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-hitsz-ids-synthetic-data-generator:latest 43.0s done\n#12 DONE 475.0s\n",
+  "build_log_tail": "u-0.7.3 matplotlib-3.10.9 mpmath-1.3.0 networkx-3.4.2 numpy-2.2.6 nvidia-cublas-13.1.1.3 nvidia-cuda-cupti-13.0.85 nvidia-cuda-nvrtc-13.0.88 nvidia-cuda-runtime-13.0.96 nvidia-cudnn-cu13-9.24.0.43 nvidia-cufft-12.0.0.61 nvidia-cufile-1.15.1.6 nvidia-curand-10.4.0.35 nvidia-cusolver-12.0.4.66 nvidia-cusparse-12.6.3.3 nvidia-cusparselt-cu13-0.8.1 nvidia-nccl-cu13-2.30.7 nvidia-nvjitlink-13.4.52 nvidia-nvshmem-cu13-3.4.5 nvidia-nvtx-13.0.85 openai-3.14.0 pandas-2.3.3 pillow-12.3.0 psutil-7.2.2 pydantic-2.13.5 pydantic-core-2.46.5 pyparsing-3.3.2 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 pytz-2026.3.post1 scikit_learn-1.7.2 scipy-1.15.3 six-1.17.0 sniffio-1.3.1 sympy-1.14.0 threadpoolctl-3.6.0 torch-2.14.0 tqdm-4.70.1 triton-3.8.0 truststore-0.10.4 typing-inspection-0.4.4 tzdata-2026.4 zipp-4.1.0\n#11 71.57 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 71.58 \n#11 71.58 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 71.58 [notice] To update, run: pip install --upgrade pip\n#11 DONE 72.7s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 220.0s done\n#12 exporting manifest sha256:9c0644ce174a62dedd593d89d32a9088579d321852676cb740b49149a4b346cb done\n#12 exporting config sha256:0d1c42adefb86ce641497e5e228486e21ed6dfe3da9781aa8033e396a4a5e0b6 done\n#12 exporting attestation manifest sha256:a952aeb195265a37682906d2a09b54b0f415bedc0f7c87d78cebc82fa99bd79b 0.0s done\n#12 exporting manifest list sha256:c13fbda89e4f4e4e7028a4701706070ffc352df6c16c92e00515b9afd55c57cd done\n#12 naming to docker.io/library/bench-pipreqs-hitsz-ids-synthetic-data-generator:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-hitsz-ids-synthetic-data-generator:latest\n#12 unpacking to docker.io/library/bench-pipreqs-hitsz-ids-synthetic-data-generator:latest 34.1s done\n#12 DONE 254.2s\n",
   "status": "collect_error",
   "py_test_files": 64,
   "collect_rc": 2,
@@ -380,9 +380,9 @@
   "ebsr": true,
   "pass_rate": 0.7803,
   "timed_out": false,
-  "image_size_mb": 6401.3,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50-20260915-043144-hitsz-ids-synthetic-data-generator@sha256:d180405f1bba2970470c6d06df6f3de26907a789e2062f97dbd22a4e8205e3cf",
+  "image_size_mb": 6400.9,
+  "image_delta_mb": 6013.3,
+  "image_digest": "bench-pipreqs-hitsz-ids-synthetic-data-generator@sha256:c13fbda89e4f4e4e7028a4701706070ffc352df6c16c92e00515b9afd55c57cd",
   "installed_pkg_count": 81,
   "tokens_in": null,
   "tokens_out": null,
@@ -390,8 +390,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 9.02,
-  "build_s": 564.08,
-  "test_s": 33.66,
+  "build_s": 329.09,
+  "test_s": 32.58,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -418,19 +418,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=f3684582b2f490f50f85f8ffc8d619a7777aed67 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=f3684582b2f490f50f85f8ffc8d619a7777aed67 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

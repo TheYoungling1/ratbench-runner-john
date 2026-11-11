@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "scylladb/sphinx-scylladb-theme",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "Installing pre-commit (3.7.0)\n#17 3.717   - Installing pytest (8.2.0)\n#17 3.717   - Installing redirects-cli (0.1.3)\n#17 3.717   - Installing sphinx-autobuild (2024.4.16)\n#17 3.719   - Installing sphinx-collapse (0.1.3)\n#17 3.719   - Installing sphinx-copybutton (0.5.2)\n#17 3.719   - Installing sphinx-multiversion-scylla (0.3.1)\n#17 3.719   - Installing sphinx-notfound-page (1.0.0)\n#17 3.725   - Installing sphinx-sitemap (2.6.0)\n#17 3.786   - Installing sphinx-substitution-extensions (2022.2.16)\n#17 3.795   - Installing sphinx-tabs (3.4.5)\n#17 3.953 \n#17 3.953 Installing the current project: sphinx-scylladb-theme (1.7.2)\n#17 DONE 4.3s\n\n#18 [15/18] RUN cd /repo && poetry install\n#18 0.572 The \"poetry.dev-dependencies\" section is deprecated and will be removed in a future version. Use \"poetry.group.dev.dependencies\" instead.\n#18 0.746 Installing dependencies from lock file\n#18 0.901 \n#18 0.901 No dependencies to install or update\n#18 0.908 \n#18 0.908 Installing the current project: sphinx-scylladb-theme (1.7.2)\n#18 DONE 1.0s\n\n#19 [16/18] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.3s\n\n#20 [17/18] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 6.8s done\n#21 exporting manifest sha256:bf214b153609b70c748e609faf53d37c1076090b86ba70e47436c4ec73c49b44 0.0s done\n#21 exporting config sha256:5c855a24f0e1c89c7b2a2d9c8af534430f1fa2c6f7c3c7d669e637a6bc7ffd7e done\n#21 exporting attestation manifest sha256:19f14c0d29c3ac74b804b5e4268449831523d65b394ecd087181726d802bcf10 0.1s done\n#21 exporting manifest list sha256:68377a89cc44abece4d79fb06f50e1119e41a3d601c1842d61b2ccdc1e9e4077 done\n#21 naming to docker.io/library/bench-repo2run__envbench100-pjy-scylladb-sphinx-scylladb-theme:latest done\n#21 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-scylladb-sphinx-scylladb-theme:latest\n#21 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-scylladb-sphinx-scylladb-theme:latest 2.6s done\n#21 DONE 9.5s\n",
+  "build_log_tail": "rser (2.0.0)\n#17 5.067   - Installing pre-commit (3.7.0)\n#17 5.068   - Installing pytest (8.2.0)\n#17 5.070   - Installing redirects-cli (0.1.3)\n#17 5.071   - Installing sphinx-autobuild (2024.4.16)\n#17 5.072   - Installing sphinx-copybutton (0.5.2)\n#17 5.075   - Installing sphinx-multiversion-scylla (0.3.1)\n#17 5.081   - Installing sphinx-collapse (0.1.3)\n#17 5.081   - Installing sphinx-notfound-page (1.0.0)\n#17 5.081   - Installing sphinx-sitemap (2.6.0)\n#17 5.148   - Installing sphinx-substitution-extensions (2022.2.16)\n#17 5.155   - Installing sphinx-tabs (3.4.5)\n#17 5.479 \n#17 5.479 Installing the current project: sphinx-scylladb-theme (1.7.2)\n#17 DONE 5.9s\n\n#18 [15/18] RUN cd /repo && poetry install\n#18 0.976 The \"poetry.dev-dependencies\" section is deprecated and will be removed in a future version. Use \"poetry.group.dev.dependencies\" instead.\n#18 1.254 Installing dependencies from lock file\n#18 1.430 \n#18 1.430 No dependencies to install or update\n#18 1.435 \n#18 1.435 Installing the current project: sphinx-scylladb-theme (1.7.2)\n#18 DONE 1.7s\n\n#19 [16/18] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.5s\n\n#20 [17/18] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 10.2s done\n#21 exporting manifest sha256:5dcb02e50ccb7886dbb185b0af11f9d10745d16c2c31318f5bf791691880784a 0.0s done\n#21 exporting config sha256:dd66278d2c782ba718e14c8629df8bfa669d7aa6dd2c6fce97d5ea53ad1d8dfc 0.0s done\n#21 exporting attestation manifest sha256:cedb5a37a06c6b0624dfc358af27ba83c2cf7d5dc7520943ce2e17539d1682f9 0.0s done\n#21 exporting manifest list sha256:dc14ee4a1bee5cbc8f16ad48d8519fa682f6e4fe60e664a9b9e178b72ec0c6bf 0.0s done\n#21 naming to docker.io/library/bench-pjy-repo2run-scylladb-sphinx-scylladb-theme:latest done\n#21 unpacking to docker.io/library/bench-pjy-repo2run-scylladb-sphinx-scylladb-theme:latest\n#21 unpacking to docker.io/library/bench-pjy-repo2run-scylladb-sphinx-scylladb-theme:latest 3.3s done\n#21 DONE 13.6s\n",
   "status": "collect_error",
   "py_test_files": 9,
   "collect_rc": 2,
@@ -44,9 +44,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 721.8,
+  "image_size_mb": 2376.7,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-scylladb-sphinx-scylladb-theme@sha256:68377a89cc44abece4d79fb06f50e1119e41a3d601c1842d61b2ccdc1e9e4077",
+  "image_digest": "bench-pjy-repo2run-scylladb-sphinx-scylladb-theme@sha256:dc14ee4a1bee5cbc8f16ad48d8519fa682f6e4fe60e664a9b9e178b72ec0c6bf",
   "installed_pkg_count": 27,
   "tokens_in": 81221,
   "tokens_out": 2268,
@@ -54,8 +54,8 @@
   "turns_used": 7,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 22.52,
-  "test_s": 0.35,
+  "build_s": 31.22,
+  "test_s": 0.53,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -63,19 +63,7 @@
     "tokens_in": 81221,
     "tokens_out": 2268,
     "llm_calls": null,
-    "turns_used": 7,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 7
   },
   "error_surface": "",
   "error_surface_reason": "",

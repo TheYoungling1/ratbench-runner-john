@@ -1,18 +1,16 @@
 {
-  "agent": "claudecode__rat50new-full-openrouter-20260918-035416",
+  "agent": "claudecode-dockerfile",
   "repo": "insistence/RuoYi-Vue3-FastAPI",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ma-0.6.2 openai-2.52.0 opentelemetry-api-1.39.1 opentelemetry-semantic-conventions-0.60b1 portkey-ai-2.3.4 prompt_toolkit-3.0.53 propcache-0.5.4 pyasn1-0.6.4 pyasn1-modules-0.4.2 questionary-2.1.1 referencing-0.37.0 regex-2026.9.10 rpds-py-2026.6.3 sniffio-1.3.1 tenacity-9.1.4 tiktoken-0.14.0 tokenizers-0.23.2 tqdm-4.70.1 types-requests-2.33.0.20260906 wcwidth-0.9.1 websockets-16.1.1 yarl-1.25.1 zipp-4.1.0\n#12 19.72 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#12 19.78 \n#12 19.78 [notice] A new release of pip is available: 24.0 -> 26.2.1\n#12 19.78 [notice] To update, run: pip install --upgrade pip\n#12 DONE 21.2s\n\n#13 [10/12] RUN rm -f /testbed/ruoyi-fastapi-test/common/__init__.py\n#13 DONE 0.4s\n\n#14 [11/12] RUN cat > /testbed/conftest.py <<'PYEOF'\n#14 DONE 0.2s\n\n#15 [12/12] RUN python -m pytest /testbed --co -q >/dev/null 2>&1 || { echo 'COLLECTION FAILED'; exit 1; }\n#15 DONE 8.9s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 28.5s done\n#16 exporting manifest sha256:1b63a17e5ec1c4d732886686d3ffd1bced42579712480d4e70ebe227cb2b9bd5 done\n#16 exporting config sha256:f9c16538f1f6ac1cee574a8b54c4f148dcbcffaa04700067de16a149c4aef54d done\n#16 exporting attestation manifest sha256:24e871a74c99de23117a1543b21ea77336457672e67fc5cc08552232cff32437 0.0s done\n#16 exporting manifest list sha256:c0229e870c904c47b0525fff9064e7ec2b019f0b2c75878750ab80d6585a1ae1 0.0s done\n#16 naming to docker.io/library/bench-claudecode__rat50new-full-openrouter-20260918-035416-insistence-ruoyi-vue3-fastapi:latest 0.0s done\n#16 unpacking to docker.io/library/bench-claudecode__rat50new-full-openrouter-20260918-035416-insistence-ruoyi-vue3-fastapi:latest\n#16 unpacking to docker.io/library/bench-claudecode__rat50new-full-openrouter-20260918-035416-insistence-ruoyi-vue3-fastapi:latest 10.9s done\n#16 DONE 39.5s\n",
-  "status": "collect_error",
+  "build_log_tail": "jsonschema-specifications-2025.9.1 litellm-1.94.0 llama-api-client-0.6.0 mistralai-2.8.0 multidict-6.8.0 ollama-0.6.2 openai-2.52.0 opentelemetry-api-1.39.1 opentelemetry-semantic-conventions-0.60b1 portkey-ai-2.3.4 prompt_toolkit-3.0.53 propcache-0.5.4 pyasn1-0.6.4 pyasn1-modules-0.4.2 questionary-2.1.1 referencing-0.37.0 regex-2026.9.10 rpds-py-2026.6.3 sniffio-1.3.1 tenacity-9.1.4 tiktoken-0.14.0 tokenizers-0.23.2 tqdm-4.70.1 types-requests-2.33.0.20260906 wcwidth-0.8.4 websockets-16.1.1 yarl-1.25.1 zipp-4.1.0\n#12 20.41 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#12 20.48 \n#12 20.48 [notice] A new release of pip is available: 24.0 -> 26.2.1\n#12 20.48 [notice] To update, run: pip install --upgrade pip\n#12 DONE 22.2s\n\n#13 [10/12] RUN rm -f /testbed/ruoyi-fastapi-test/common/__init__.py\n#13 DONE 0.3s\n\n#14 [11/12] RUN cat > /testbed/conftest.py <<'PYEOF'\n#14 DONE 0.2s\n\n#15 [12/12] RUN python -m pytest /testbed --co -q >/dev/null 2>&1 || { echo 'COLLECTION FAILED'; exit 1; }\n#15 DONE 8.8s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 14.7s done\n#16 exporting manifest sha256:3cc2a05cfd4281edcb982c10724b585f4753fb52b66c09dba5483b86179b22f4 done\n#16 exporting config sha256:35eca6b1ac8920e0dd239d9969e0c5cfa0d78b6db3b559e66b32760595db4d35 done\n#16 exporting attestation manifest sha256:e51e239a7d7c50b1f91a0cee4ebac66e243bed441cfd3ad7f15a994b3a5c9161 done\n#16 exporting manifest list sha256:a633f3ba465cf02d5d793c431100c337940065154b413ddd01d05949cfe40c55 done\n#16 naming to docker.io/library/bench-claudecode-dockerfile-insistence-ruoyi-vue3-fastapi:latest done\n#16 unpacking to docker.io/library/bench-claudecode-dockerfile-insistence-ruoyi-vue3-fastapi:latest\n#16 unpacking to docker.io/library/bench-claudecode-dockerfile-insistence-ruoyi-vue3-fastapi:latest 7.4s done\n#16 DONE 22.2s\n",
+  "status": "executed",
   "py_test_files": 178,
-  "collect_rc": 2,
-  "collect_clean": false,
-  "collect_errors": [
-    "E   ModuleNotFoundError: No module named 'common.config'"
-  ],
-  "collect_error_count": 1,
+  "collect_rc": 0,
+  "collect_clean": true,
+  "collect_errors": [],
+  "collect_error_count": 0,
   "collected_node_ids": [
     "ruoyi-fastapi-backend/tests/cli/completion/test_installers.py::test_build_source_command_uses_shell_runtime_policy",
     "ruoyi-fastapi-backend/tests/cli/completion/test_installers.py::test_make_bash_completion_script_compatible_wraps_legacy_instructions",
@@ -1495,10 +1493,10 @@
     "ruoyi-fastapi-test/tool/test_swagger.py::test_swagger_page"
   ],
   "executed": true,
-  "total": 1480,
+  "total": 1479,
   "passed": 1423,
   "failed": 55,
-  "errors": 1,
+  "errors": 0,
   "skipped": 1,
   "passed_node_ids": [
     "ruoyi-fastapi-backend/tests/cli/completion/test_installers.py::test_build_source_command_uses_shell_runtime_policy",
@@ -2982,15 +2980,13 @@
     "ruoyi-fastapi-test/tool/test_code_gen.py::test_gen_table_page",
     "ruoyi-fastapi-test/tool/test_swagger.py::test_swagger_page"
   ],
-  "error_node_ids": [
-    "ruoyi-fastapi-test.common.base_page_test"
-  ],
+  "error_node_ids": [],
   "ebsr": true,
-  "pass_rate": 0.9621,
+  "pass_rate": 0.9628,
   "timed_out": false,
-  "image_size_mb": 663.9,
-  "image_delta_mb": null,
-  "image_digest": "bench-claudecode__rat50new-full-openrouter-20260918-035416-insistence-ruoyi-vue3-fastapi@sha256:c0229e870c904c47b0525fff9064e7ec2b019f0b2c75878750ab80d6585a1ae1",
+  "image_size_mb": 663.2,
+  "image_delta_mb": 275.1,
+  "image_digest": "bench-claudecode-dockerfile-insistence-ruoyi-vue3-fastapi@sha256:a633f3ba465cf02d5d793c431100c337940065154b413ddd01d05949cfe40c55",
   "installed_pkg_count": 160,
   "tokens_in": 2555955,
   "tokens_out": 30566,
@@ -2998,8 +2994,8 @@
   "turns_used": 52,
   "cost_usd": 0.05627357999999999,
   "produce_s": 884.76,
-  "build_s": 106.22,
-  "test_s": 133.74,
+  "build_s": 89.3,
+  "test_s": 139.01,
   "meta": {
     "contract_version": 1,
     "producer": "claudecode-dockerfile",
@@ -3026,19 +3022,7 @@
     "usage_source": "computed",
     "dsml_text_blocks": 0,
     "turn_capped": false,
-    "agent_timed_out": false,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\nremoved conftest.py\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "agent_timed_out": false
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,15 +1,17 @@
 {
-  "agent": "graph2env__envbench_python100",
+  "agent": "g2e-envbench100",
   "repo": "Quantum-Accelerators/quacc",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "|           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#14 0.766 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (9.1.1)\n#14 0.773 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#14 0.773 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.11/site-packages (from pytest) (26.3)\n#14 0.774 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#14 0.775 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest) (2.21.0)\n#14 1.196 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#14 DONE 1.3s\n\n#15 [11/11] WORKDIR /testbed\n#15 DONE 0.0s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 56.5s done\n#16 exporting manifest sha256:11f8a3453e585d3823b0d5fd9070825c1e41d26ae669c614526719a24659dd63 0.0s done\n#16 exporting config sha256:b9bba186557b62b09a12bf4421132f3b912d02e8b5f59517765722d9b9196d45 done\n#16 exporting attestation manifest sha256:6fcbc5155a10349ed5dbac301121bb165ce8743582b53090ae443b894ca14a97 0.0s done\n#16 exporting manifest list sha256:34550632ac8dae5f1a57458a6d6ebe0efaa3d199198c5dca88a7179f2fcb6cad done\n#16 naming to docker.io/library/bench-graph2env__envbench_python100-quantum-accelerators-quacc:latest done\n#16 unpacking to docker.io/library/bench-graph2env__envbench_python100-quantum-accelerators-quacc:latest\n#16 unpacking to docker.io/library/bench-graph2env__envbench_python100-quantum-accelerators-quacc:latest 12.3s done\n#16 DONE 68.9s\n",
-  "status": "executed",
+  "build_log_tail": "ges uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#14 0.848 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (9.1.1)\n#14 0.855 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#14 0.856 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.11/site-packages (from pytest) (26.3)\n#14 0.856 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#14 0.857 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest) (2.21.0)\n#14 1.303 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#14 DONE 1.4s\n\n#15 [11/11] WORKDIR /testbed\n#15 DONE 0.0s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 58.5s done\n#16 exporting manifest sha256:0bd4ccdab46a37ad01805e15f534d06f903b4476ce5bc6d346c4d5474f7c0e2f 0.0s done\n#16 exporting config sha256:144805d6a60dddb838b3ce2210f59382167981acca57547925e3966f94b2d982 0.1s done\n#16 exporting attestation manifest sha256:50ac75dff50961b74cca8faf0d3c7ac5a004d7c237ead4dd84febe88a67abef9 0.0s done\n#16 exporting manifest list sha256:d9e4e19ac8cf19d86217fd4747689c74c7672705b79400a43de7532a4ea13675 0.1s done\n#16 naming to docker.io/library/bench-g2e-envbench100-quantum-accelerators-quacc:latest\n#16 naming to docker.io/library/bench-g2e-envbench100-quantum-accelerators-quacc:latest done\n#16 unpacking to docker.io/library/bench-g2e-envbench100-quantum-accelerators-quacc:latest\n#16 unpacking to docker.io/library/bench-g2e-envbench100-quantum-accelerators-quacc:latest 13.0s done\n#16 DONE 71.9s\n",
+  "status": "collect_error",
   "py_test_files": 89,
-  "collect_rc": 0,
-  "collect_clean": true,
-  "collect_errors": [],
+  "collect_rc": 1,
+  "collect_clean": false,
+  "collect_errors": [
+    "NameError: name 'parsl' is not defined. Did you mean: 'vars'?"
+  ],
   "collect_error_count": 0,
   "collected_node_ids": [
     "tests/core/atoms/test_atoms_core.py::test_init",
@@ -250,7 +252,7 @@
     "tests/core/schemas/test_cclib_schema.py::test_cclib_summarize_run",
     "tests/core/schemas/test_cclib_schema.py::test_errors",
     "tests/core/schemas/test_cclib_schema.py::test_cclib_taskdoc",
-    "tests/core/schemas/test_cclib_schema.py::test_cclib_calculate",
+    "tests/core/schemas/test_cclib_schema.py::test_cclib_calculateTraceback (most recent call last):",
     "tests/core/schemas/test_cclib_schema.py::test_monkeypatches",
     "tests/core/schemas/test_prep.py::test_init",
     "tests/core/schemas/test_prep.py::test_get_atoms_id",
@@ -421,7 +423,7 @@
     "tests/core/schemas/test_atoms.py::test_atoms_to_metadata",
     "tests/core/schemas/test_cclib_schema.py::test_errors",
     "tests/core/schemas/test_cclib_schema.py::test_cclib_taskdoc",
-    "tests/core/schemas/test_cclib_schema.py::test_cclib_calculate",
+    "tests.core.schemas.test_cclib_schema::test_cclib_calculate",
     "tests/core/schemas/test_cclib_schema.py::test_monkeypatches",
     "tests/core/schemas/test_prep.py::test_init",
     "tests/core/schemas/test_prep.py::test_get_atoms_id",
@@ -536,9 +538,9 @@
   "ebsr": true,
   "pass_rate": 0.6909,
   "timed_out": false,
-  "image_size_mb": 687.2,
+  "image_size_mb": 2355.5,
   "image_delta_mb": null,
-  "image_digest": "bench-graph2env__envbench_python100-quantum-accelerators-quacc@sha256:34550632ac8dae5f1a57458a6d6ebe0efaa3d199198c5dca88a7179f2fcb6cad",
+  "image_digest": "bench-g2e-envbench100-quantum-accelerators-quacc@sha256:d9e4e19ac8cf19d86217fd4747689c74c7672705b79400a43de7532a4ea13675",
   "installed_pkg_count": 108,
   "tokens_in": 788520,
   "tokens_out": 89275,
@@ -546,8 +548,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 155.57,
-  "test_s": 67.19,
+  "build_s": 159.43,
+  "test_s": 68.48,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -563,19 +565,7 @@
       ],
       "services": [],
       "services_rc": null
-    },
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=f6bc96ca8f169e2474a09e96cb84f2dc14227ff2 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=f6bc96ca8f169e2474a09e96cb84f2dc14227ff2 (pinned)\n"
-      }
-    ]
+    }
   },
   "error_surface": "",
   "error_surface_reason": "",

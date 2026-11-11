@@ -1,0 +1,239 @@
+{
+  "pjy-rat-dockerfile": {
+    "n": 43,
+    "n_exec": 22,
+    "n_collect_clean": 9,
+    "n_real_success": 10,
+    "n_unmeasurable": 0,
+    "n_legacy_missing": 0,
+    "EBSR": 0.2093,
+    "n_ebsr": 9,
+    "EBSR_repo2run_raw": 0.2093,
+    "n_raw": 9,
+    "false_green_removed": 0.0,
+    "status_census": {
+      "collect_error": 21,
+      "build_fail": 10,
+      "missing": 2,
+      "executed": 8,
+      "timed_out": 2
+    },
+    "n_ebsr_zero_collected": 1,
+    "total_collected": 179486,
+    "mean_collected": 4174.093,
+    "total_collect_errors": 848,
+    "mean_collect_errors": 19.7209,
+    "real_success": 0.2326,
+    "micro": 0.896,
+    "full_pass_repos": 4,
+    "coverage": 0.5116,
+    "ESSR": null,
+    "ESSR_median": null,
+    "n_gold_scored": 0,
+    "n_gold_zero": 0,
+    "n_gold_no_row": 0,
+    "gold_no_row": [],
+    "n_gold_capped": 0,
+    "gold_capped": [],
+    "n_gold_excluded": 43,
+    "gold_excluded": [
+      [
+        "alliander-opensource/weather-provider-api",
+        "gold_missing"
+      ],
+      [
+        "anthropics/claude-quickstarts",
+        "gold_missing"
+      ],
+      [
+        "asyncfuncai/deepwiki-open",
+        "gold_missing"
+      ],
+      [
+        "azure/azure-iot-ops-cli-extension",
+        "gold_missing"
+      ],
+      [
+        "berriai/litellm",
+        "gold_missing"
+      ],
+      [
+        "chopratejas/headroom",
+        "gold_missing"
+      ],
+      [
+        "co-me-tokens/come",
+        "gold_missing"
+      ],
+      [
+        "devopness/devopness",
+        "gold_missing"
+      ],
+      [
+        "gip-inclusion/les-emplois",
+        "gold_missing"
+      ],
+      [
+        "google/nsscache",
+        "gold_missing"
+      ],
+      [
+        "googlecloudplatform/gcpdiag",
+        "gold_missing"
+      ],
+      [
+        "googlecloudplatform/ramble",
+        "gold_missing"
+      ],
+      [
+        "grycap/im",
+        "gold_missing"
+      ],
+      [
+        "huggingface/transformers",
+        "gold_missing"
+      ],
+      [
+        "ifrcgo/go-api",
+        "gold_missing"
+      ],
+      [
+        "insistence/ruoyi-vue3-fastapi",
+        "gold_missing"
+      ],
+      [
+        "jaehyeon-kim/flink-demos",
+        "gold_missing"
+      ],
+      [
+        "jonbunator/enterr",
+        "gold_missing"
+      ],
+      [
+        "kittinan/spotify-github-profile",
+        "gold_missing"
+      ],
+      [
+        "m0wer/joinmarket-ng",
+        "gold_missing"
+      ],
+      [
+        "memtensor/memos",
+        "gold_missing"
+      ],
+      [
+        "meta-pytorch/torchrec",
+        "gold_missing"
+      ],
+      [
+        "modelscope/agentjet",
+        "gold_missing"
+      ],
+      [
+        "netneurolab/netneurotools",
+        "gold_missing"
+      ],
+      [
+        "nikita-filonov/ai-review",
+        "gold_missing"
+      ],
+      [
+        "nikolasmarkou/dl_techniques",
+        "gold_missing"
+      ],
+      [
+        "nitrokey/pynitrokey",
+        "gold_missing"
+      ],
+      [
+        "nomadkaraoke/karaoke-gen",
+        "gold_missing"
+      ],
+      [
+        "novasky-ai/skyrl",
+        "gold_missing"
+      ],
+      [
+        "nutti/fake-bpy-module",
+        "gold_missing"
+      ],
+      [
+        "nvidia-nemo/rl",
+        "gold_missing"
+      ],
+      [
+        "observatorycontrolsystem/observation-portal",
+        "gold_missing"
+      ],
+      [
+        "onyx-dot-app/onyx",
+        "gold_missing"
+      ],
+      [
+        "opendcai/dataflow",
+        "gold_missing"
+      ],
+      [
+        "opengisch/pum",
+        "gold_missing"
+      ],
+      [
+        "pathintegral-institute/mcpm.sh",
+        "gold_missing"
+      ],
+      [
+        "perplexityai/perplexity-py",
+        "gold_missing"
+      ],
+      [
+        "resend/resend-python",
+        "gold_missing"
+      ],
+      [
+        "rfsbraz/deleterr",
+        "gold_missing"
+      ],
+      [
+        "scylladb/scylla-cluster-tests",
+        "gold_missing"
+      ],
+      [
+        "tencentblueking/bk-lite",
+        "gold_missing"
+      ],
+      [
+        "tencentblueking/blueking-apigateway",
+        "gold_missing"
+      ],
+      [
+        "tencentblueking/blueking-dbm",
+        "gold_missing"
+      ]
+    ],
+    "n_gold_sha_mismatch": 0,
+    "gold_sha_mismatch": [],
+    "mean_collection_coverage": null,
+    "median_collection_coverage": null,
+    "n_gold_hollow": 0,
+    "gold_hollow": [],
+    "mean_image_delta_mb": null,
+    "mean_installed_pkgs": 126.5667,
+    "mean_tokens": 1944557.381,
+    "mean_tokens_out": 11965.0,
+    "tokens_per_ebsr": 9074601.1111,
+    "tokens_per_real_success": 8167141.0,
+    "mean_turns": null,
+    "total_cost_usd": null,
+    "mean_cost_usd": null,
+    "cost_per_ebsr": null,
+    "cost_per_real_success": null,
+    "n_cost_reporting": 0,
+    "mean_produce_s": null,
+    "wall_s_per_real_success": 3002.69,
+    "n_token_reporting": 42,
+    "rebuild_ok_rate": 0.7209,
+    "setup_compile_rate": 0.7209,
+    "n_setup_compile": 31,
+    "unreplayed_rate": 0.0
+  }
+}

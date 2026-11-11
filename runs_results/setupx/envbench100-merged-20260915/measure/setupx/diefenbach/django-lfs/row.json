@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__envbench100-merged-20260915",
+  "agent": "setupx",
   "repo": "diefenbach/django-lfs",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "'/mirror': No such file or directory\n#10 13.40 === requirements under main tree ===\n#10 13.40 fatal: cannot change to '/mirror': No such file or directory\n#10 13.40 === main tests top 300 files ===\n#10 13.40 fatal: cannot change to '/mirror': No such file or directory\n#10 13.41 === count main tests vs pinned ===\n#10 13.41 fatal: cannot change to '/mirror': No such file or directory\n#10 13.41 0\n#10 13.41 fatal: cannot change to '/mirror': No such file or directory\n#10 13.41 0\n#10 13.41 === main manage requirements test full ===\n#10 13.42 fatal: cannot change to '/mirror': No such file or directory\n#10 13.42 === main conftest selected ===\n#10 13.42 --- lfs/manage/tests/conftest.py\n#10 13.42 fatal: cannot change to '/mirror': No such file or directory\n#10 13.42 --- lfs/manage/tests/__init__.py\n#10 13.42 fatal: cannot change to '/mirror': No such file or directory\n#10 DONE 13.6s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.8s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 1.5s done\n#14 exporting manifest sha256:051c6e396ba3a0f46ee75a1c53edaca09f012d71349495d5026aad2202243751 done\n#14 exporting config sha256:61da2efffd9a0688f6372d0afa89bd75ab938f7283d10284fcf98eccd4332b5f done\n#14 exporting attestation manifest sha256:22dcfc051ea74d1b7f2828f6210c73a9a8306f1ed90c17476603f83f3cc78eca 0.0s done\n#14 exporting manifest list sha256:3f082204c32423f48a05d48a453a00bc27f07934050bfe03a43f09393e6d36a7 done\n#14 naming to docker.io/library/bench-setupx__envbench100-merged-20260915-diefenbach-django-lfs:latest done\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-diefenbach-django-lfs:latest\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-diefenbach-django-lfs:latest 1.0s done\n#14 DONE 2.6s\n",
+  "build_log_tail": "p.py pyproject requirements ===\n\u001b[91mfatal: cannot change to '/mirror': No such file or directory\n\u001b[0m--- if pyproject/main ---\n\u001b[91mfatal: cannot change to '/mirror': No such file or directory\n\u001b[0m=== requirements under main tree ===\n\u001b[91mfatal: cannot change to '/mirror': No such file or directory\n\u001b[0m=== main tests top 300 files ===\n\u001b[91mfatal: cannot change to '/mirror': No such file or directory\n\u001b[0m=== count main tests vs pinned ===\n\u001b[91mfatal: cannot change to '/mirror': No such file or directory\n\u001b[0m0\n\u001b[91mfatal: cannot change to '/mirror': No such file or directory\n\u001b[0m0\n=== main manage requirements test full ===\n\u001b[91mfatal: cannot change to '/mirror': No such file or directory\n\u001b[0m=== main conftest selected ===\n--- lfs/manage/tests/conftest.py\n\u001b[91mfatal: cannot change to '/mirror': No such file or directory\n\u001b[0m--- lfs/manage/tests/__init__.py\n\u001b[91mfatal: cannot change to '/mirror': No such file or directory\n\u001b[0m ---> Removed intermediate container 00982bcf7904\n ---> e95c3e56a5cc\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in 9160150c4b4e\n ---> Removed intermediate container 9160150c4b4e\n ---> 6db1385de2b2\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in 9012c3f0946b\n ---> Removed intermediate container 9012c3f0946b\n ---> 0922636a71f2\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in 94b431e63d59\n ---> Removed intermediate container 94b431e63d59\n ---> fa36c79ad281\nStep 10/10 : WORKDIR /testbed\n ---> Running in da98d307865d\n ---> Removed intermediate container da98d307865d\n ---> 2bd7525809a1\nSuccessfully built 2bd7525809a1\nSuccessfully tagged bench-setupx-diefenbach-django-lfs:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 4,
   "collect_rc": 2,
@@ -34,9 +34,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 464.3,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__envbench100-merged-20260915-diefenbach-django-lfs@sha256:3f082204c32423f48a05d48a453a00bc27f07934050bfe03a43f09393e6d36a7",
+  "image_size_mb": 460.5,
+  "image_delta_mb": 72.9,
+  "image_digest": "bench-setupx-diefenbach-django-lfs@sha256:2bd7525809a194f64f26b0e2ee516a46b7fba1c6cf89b0173ffd6600834ac5f1",
   "installed_pkg_count": 12,
   "tokens_in": 988994,
   "tokens_out": 147006,
@@ -44,8 +44,8 @@
   "turns_used": 88,
   "cost_usd": null,
   "produce_s": 1324.81,
-  "build_s": 21.87,
-  "test_s": 0.42,
+  "build_s": 32.85,
+  "test_s": 0.56,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -76,19 +76,7 @@
     "turns_used": 88,
     "produce_s": 1324.81,
     "total_tokens": 1136000,
-    "cost_usd": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=3e6e96ec223a8184ae84fdeabd984745ea29e27f (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=3e6e96ec223a8184ae84fdeabd984745ea29e27f (pinned)\n"
-      }
-    ]
+    "cost_usd": null
   },
   "error_surface": "",
   "error_surface_reason": "",

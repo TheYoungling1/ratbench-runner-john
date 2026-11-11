@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__rat50-pjy",
+  "agent": "pjy-repo2run",
   "repo": "GoogleCloudPlatform/PerfKitBenchmarker",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "eptiongroup, flexcache, flexparser, grpcio, keystoneauth1, openstacksdk, opentelemetry-api, opentelemetry-sdk, opentelemetry-semantic-conventions, optree, os-service-types, Pint, pyink, pyOpenSSL, tensorflow\n#90 DONE 0.6s\n\n#91 [87/93] RUN cd /repo && python -c \"import typing_extensions; print(hasattr(typing_extensions, 'Self'), hasattr(typing_extensions, 'override'))\"\n#91 0.250 True True\n#91 DONE 0.3s\n\n#92 [88/93] RUN cd /repo && printf 'import typing\\ntry:\\n    from typing import Self, override\\nexcept ImportError:\\n    from typing_extensions import Self, override\\n    typing.Self = Self\\n    typing.override = override\\n' > /usr/local/lib/python3.10/site-packages/sitecustomize.py\n#92 DONE 0.2s\n\n#93 [89/93] RUN cd /repo && python -c \"import typing; print(hasattr(typing, 'Self'), hasattr(typing, 'override'))\"\n#93 0.186 True True\n#93 DONE 0.2s\n\n#94 [90/93] RUN cd /repo && python /home/tools/runtest.py 2>&1 | grep -E \"ModuleNotFoundError|ImportError|cannot import\" | sort | uniq -c | sort -rn | head -40\n#94 DONE 0.2s\n\n#95 [91/93] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#95 DONE 1.0s\n\n#96 [92/93] WORKDIR /testbed\n#96 DONE 0.1s\n\n#97 exporting to image\n#97 exporting layers\n#97 exporting layers 97.9s done\n#97 exporting manifest sha256:29d1a2d7181829b090bfac2ef4c2270752af6ea75142d547945e6818282d9cbd done\n#97 exporting config sha256:e0dc8b38250d7e409f2675b20e9e09e396b4684d9bb0c690e05b49c191bf8a47 done\n#97 exporting attestation manifest sha256:c5f3606e334695b3b7c5a7016b4fa8ff6680a91f3cb4ed4d2ebc34030d121426 0.0s done\n#97 exporting manifest list sha256:82aa10e790fe7cbc3a7afce608910893cd87ccf0cb5ce4ce399afdf6f72c3475 0.0s done\n#97 naming to docker.io/library/bench-repo2run__rat50-pjy-googlecloudplatform-perfkitbenchmarker:latest done\n#97 unpacking to docker.io/library/bench-repo2run__rat50-pjy-googlecloudplatform-perfkitbenchmarker:latest\n#97 unpacking to docker.io/library/bench-repo2run__rat50-pjy-googlecloudplatform-perfkitbenchmarker:latest 31.3s done\n#97 DONE 129.4s\n",
+  "build_log_tail": "p install -q azure-storage==0.20.3 google-cloud-bigquery==3.43.0 tensorflow==2.21.0 typing-extensions==4.16.0\n#85 CACHED\n\n#86 [28/93] RUN pip install requests==2.34.2\n#86 CACHED\n\n#87 [66/93] RUN cd /repo && python /home/tools/runtest.py 2>&1 | grep -oP \"No module named '\\K[^']+\" | sort -u\n#87 CACHED\n\n#88 [52/93] RUN pip install colorama==0.4.6\n#88 CACHED\n\n#89 [13/93] RUN pip install absl-py==2.5.0\n#89 CACHED\n\n#90 [68/93] RUN cd /repo && pip show azure-storage 2>&1 | head -3\n#90 CACHED\n\n#91 [73/93] RUN cd /repo && printf 'import typing\\ntry:\\n    from typing import override\\nexcept ImportError:\\n    from typing_extensions import override\\n    typing.override = override\\n' > /usr/local/lib/python3.10/site-packages/sitecustomize.py\n#91 CACHED\n\n#92 [27/93] RUN pip install pywinrm==0.5.0\n#92 CACHED\n\n#93 [ 6/93] RUN python -m pip install --only-binary=:all: pip==24.2\n#93 CACHED\n\n#94 [90/93] RUN cd /repo && python /home/tools/runtest.py 2>&1 | grep -E \"ModuleNotFoundError|ImportError|cannot import\" | sort | uniq -c | sort -rn | head -40\n#94 CACHED\n\n#95 [91/93] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#95 DONE 1.5s\n\n#96 [92/93] WORKDIR /testbed\n#96 DONE 0.1s\n\n#97 exporting to image\n#97 exporting layers\n#97 exporting layers 1.6s done\n#97 exporting manifest sha256:3a88b94186e03b26a1037174dff4e4990c633d543499f5137b215b7950f120f4 done\n#97 exporting config sha256:187aa1687842702d592633129fd387fd90266eaad2f79285590abfcb875acdd3 done\n#97 exporting attestation manifest sha256:6b15cc59a050a954131bae773a71be0b3aed471413197a3f5a3effeadd204fef 0.0s done\n#97 exporting manifest list sha256:90a7af56e52332e0744b19835feccca89d6c380d71de30f0f4b928bd81774f09 done\n#97 naming to docker.io/library/bench-pjy-repo2run-googlecloudplatform-perfkitbenchmarker:latest done\n#97 unpacking to docker.io/library/bench-pjy-repo2run-googlecloudplatform-perfkitbenchmarker:latest\n#97 unpacking to docker.io/library/bench-pjy-repo2run-googlecloudplatform-perfkitbenchmarker:latest 32.8s done\n#97 DONE 34.6s\n",
   "status": "collect_error",
   "py_test_files": 290,
   "collect_rc": 2,
@@ -1275,9 +1275,9 @@
   "ebsr": true,
   "pass_rate": 0.6141,
   "timed_out": false,
-  "image_size_mb": 1978.3,
+  "image_size_mb": 6828.8,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__rat50-pjy-googlecloudplatform-perfkitbenchmarker@sha256:82aa10e790fe7cbc3a7afce608910893cd87ccf0cb5ce4ce399afdf6f72c3475",
+  "image_digest": "bench-pjy-repo2run-googlecloudplatform-perfkitbenchmarker@sha256:90a7af56e52332e0744b19835feccca89d6c380d71de30f0f4b928bd81774f09",
   "installed_pkg_count": 170,
   "tokens_in": 3376220,
   "tokens_out": 81401,
@@ -1285,27 +1285,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 259.37,
-  "test_s": 32.16,
+  "build_s": 38.58,
+  "test_s": 41.13,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 3376220,
     "tokens_out": 81401,
-    "llm_calls": 100,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 100
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "claudecode__envbench100-merged-20260915",
+  "agent": "claudecode-dockerfile",
   "repo": "miurahr/aqtinstall",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": " can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#5 8.038 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#5 DONE 8.6s\n\n#6 [3/5] RUN git clone https://github.com/miurahr/aqtinstall.git /testbed\n#6 0.234 Cloning into '/testbed'...\n#6 DONE 2.0s\n\n#7 [4/5] RUN git -C /testbed fetch --depth 1 origin ac7da38299fc56ae4818ff1c19b96e4e2d6f36c8 && git -C /testbed checkout --detach ac7da38299fc56ae4818ff1c19b96e4e2d6f36c8\n#7 0.910 From https://github.com/miurahr/aqtinstall\n#7 0.910  * branch            ac7da38299fc56ae4818ff1c19b96e4e2d6f36c8 -> FETCH_HEAD\n#7 1.009 HEAD is now at ac7da38 Merge pull request #800 from miurahr/topic/miurahr/issues/796/windows-6-8-0-path\n#7 DONE 1.2s\n\n#8 [5/5] WORKDIR /testbed\n#8 DONE 0.0s\n\n#9 exporting to image\n#9 exporting layers\n#9 exporting layers 4.2s done\n#9 exporting manifest sha256:ae7f8303a6a5996bbdad772599429c47b484c99ab39075a82e54ba92f952c298 done\n#9 exporting config sha256:f1ac56699238dba7fe8be7ac0056747b9d5297d26888f3f5488106f463419d93 done\n#9 exporting attestation manifest sha256:4d3ed3193faca18f7c732ab2a10bf9a4941267743b3f3fdb1da35b86ebf5da4a done\n#9 exporting manifest list sha256:c525dcd76de60b1db364bbde80b9d2df6f3555acc7ebc233118a9e03a9d999d1 0.0s done\n#9 naming to docker.io/library/bench-claudecode__envbench100-merged-20260915-miurahr-aqtinstall:latest done\n#9 unpacking to docker.io/library/bench-claudecode__envbench100-merged-20260915-miurahr-aqtinstall:latest\n#9 unpacking to docker.io/library/bench-claudecode__envbench100-merged-20260915-miurahr-aqtinstall:latest 1.1s done\n#9 DONE 5.4s\n",
+  "build_log_tail": "pting uninstall: pip\n    Found existing installation: pip 24.0\n    Uninstalling pip-24.0:\n      Successfully uninstalled pip-24.0\nSuccessfully installed pip-26.2.1\n\u001b[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n\u001b[0m\u001b[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n\u001b[0m ---> Removed intermediate container ce7e15554ff6\n ---> 08a40a2ef99b\nStep 3/5 : RUN git clone https://github.com/miurahr/aqtinstall.git /testbed\n ---> Running in 985f94e4712f\n\u001b[91mCloning into '/testbed'...\n\u001b[0m ---> Removed intermediate container 985f94e4712f\n ---> 33fda3913220\nStep 4/5 : RUN git -C /testbed fetch --depth 1 origin ac7da38299fc56ae4818ff1c19b96e4e2d6f36c8 && git -C /testbed checkout --detach ac7da38299fc56ae4818ff1c19b96e4e2d6f36c8\n ---> Running in 656d90370a32\n\u001b[91mFrom https://github.com/miurahr/aqtinstall\n * branch            ac7da38299fc56ae4818ff1c19b96e4e2d6f36c8 -> FETCH_HEAD\n\u001b[0m\u001b[91mHEAD is now at ac7da38 Merge pull request #800 from miurahr/topic/miurahr/issues/796/windows-6-8-0-path\n\u001b[0m ---> Removed intermediate container 656d90370a32\n ---> cc068c0e6b13\nStep 5/5 : WORKDIR /testbed\n ---> Running in e801fdd1b127\n ---> Removed intermediate container e801fdd1b127\n ---> e6f8e0782745\nSuccessfully built e6f8e0782745\nSuccessfully tagged bench-claudecode-dockerfile-miurahr-aqtinstall:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 9,
   "collect_rc": 2,
@@ -635,9 +635,9 @@
   "ebsr": true,
   "pass_rate": 0.7228,
   "timed_out": false,
-  "image_size_mb": 1705.6,
-  "image_delta_mb": null,
-  "image_digest": "bench-claudecode__envbench100-merged-20260915-miurahr-aqtinstall@sha256:c525dcd76de60b1db364bbde80b9d2df6f3555acc7ebc233118a9e03a9d999d1",
+  "image_size_mb": 457.3,
+  "image_delta_mb": 77.5,
+  "image_digest": "bench-claudecode-dockerfile-miurahr-aqtinstall@sha256:e6f8e07827459eb61c4726adc8538147eb5d3e98e7195af522131703a67a53c2",
   "installed_pkg_count": 33,
   "tokens_in": 949666,
   "tokens_out": 5621,
@@ -645,8 +645,8 @@
   "turns_used": 22,
   "cost_usd": 0.020888668,
   "produce_s": 88.84,
-  "build_s": 17.65,
-  "test_s": 8.92,
+  "build_s": 20.66,
+  "test_s": 7.23,
   "meta": {
     "contract_version": 1,
     "producer": "claudecode-dockerfile",
@@ -673,19 +673,7 @@
     "usage_source": "computed",
     "dsml_text_blocks": 0,
     "turn_capped": false,
-    "agent_timed_out": false,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "agent_timed_out": false
   },
   "error_surface": "",
   "error_surface_reason": "",

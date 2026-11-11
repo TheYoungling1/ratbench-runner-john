@@ -1,15 +1,17 @@
 {
-  "agent": "rat__envbench100-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "Quantum-Accelerators/quacc",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "das-2.3.3 paramiko-5.0.0 periodictable-2.1.0 pillow-12.3.0 plotly-7.0.0 psutil-5.9.8 pybtex-0.26.1 pycparser-3.0 pydantic-2.7.4 pydantic-settings-2.3.3 pydantic_core-2.18.4 pydash-8.1.0 pymatgen-2024.6.10 pymongo-4.8.0 pyparsing-3.3.2 pytest-cov-7.1.0 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 pytz-2026.3.post1 pyzmq-27.2.0 quacc-0.10.0 referencing-0.37.0 requests-2.34.2 rich-15.0.0 rpds-py-0.30.0 ruamel.yaml-0.18.6 ruamel.yaml.clib-0.2.15 ruff-0.16.6 s3transfer-0.19.2 scipy-1.15.3 sentinels-1.1.1 shellingham-1.5.4 six-1.17.0 spglib-2.7.0 sshtunnel-0.4.0 sympy-1.14.0 tabulate-0.10.0 tqdm-4.70.0 typer-0.12.3 tzdata-2026.3 uncertainties-3.2.3 urllib3-2.7.0\n#18 133.1 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 133.2 \n#18 133.2 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 133.2 [notice] To update, run: pip install --upgrade pip\n#18 DONE 136.3s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.9s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 33.5s done\n#21 exporting manifest sha256:da501937bff1e76eb79bf84b8dfabfac0f5e671a62656a281f4cdaa5dce38314 0.0s done\n#21 exporting config sha256:debf944940d45707f9694c6fc6fb072a65ab885534f9dadd5b2f72fb95ccae6b done\n#21 exporting attestation manifest sha256:9ab6eb134c7516fd175adf2b10f2ee4b92424e2b3f2f19763f0a28279e3a01c8 0.0s done\n#21 exporting manifest list sha256:6588587e0559f7ea57bfdd6d430e61c70257b75ed7985402d2892b429047f627 0.0s done\n#21 naming to docker.io/library/bench-rat__envbench100-pjy-quantum-accelerators-quacc:latest done\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-quantum-accelerators-quacc:latest\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-quantum-accelerators-quacc:latest 8.2s done\n#21 DONE 41.8s\n",
-  "status": "executed",
+  "build_log_tail": "-0.26.1 pycparser-3.0 pydantic-2.7.4 pydantic-settings-2.3.3 pydantic_core-2.18.4 pydash-8.1.0 pymatgen-2024.6.10 pymongo-4.8.0 pyparsing-3.3.2 pytest-cov-7.1.0 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 pytz-2026.3.post1 pyzmq-27.2.0 quacc-0.10.0 referencing-0.37.0 requests-2.34.2 rich-15.0.0 rpds-py-0.30.0 ruamel.yaml-0.18.6 ruamel.yaml.clib-0.2.15 ruff-0.16.6 s3transfer-0.19.2 scipy-1.15.3 sentinels-1.1.1 shellingham-1.5.4 six-1.17.0 spglib-2.7.0 sshtunnel-0.4.0 sympy-1.14.0 tabulate-0.10.0 tqdm-4.70.0 typer-0.12.3 tzdata-2026.3 uncertainties-3.2.3 urllib3-2.7.0\n#18 405.8 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 406.1 \n#18 406.1 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 406.1 [notice] To update, run: pip install --upgrade pip\n#18 DONE 408.9s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.7s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 33.4s done\n#21 exporting manifest sha256:539d70e357fe0c16e11f991e59212ee2930b08abc1c78c0c21c9658c4ef2d989 0.0s done\n#21 exporting config sha256:adcdf955c2a3757d924567ccdf91b02b7d8aaca0d92b5471310fb826b8ff710c 0.0s done\n#21 exporting attestation manifest sha256:e88634150aac9156d14667b982e82d6536ce149c86d1bb87cf2b32561063d5cf 0.1s done\n#21 exporting manifest list sha256:c28d4e85b39ac734ff1be381dcceba951818894c75960a439d8cb6dff0b35ece 0.0s done\n#21 naming to docker.io/library/bench-pjy-rat-dockerfile-quantum-accelerators-quacc:latest\n#21 naming to docker.io/library/bench-pjy-rat-dockerfile-quantum-accelerators-quacc:latest done\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-quantum-accelerators-quacc:latest\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-quantum-accelerators-quacc:latest 10.0s done\n#21 DONE 43.5s\n",
+  "status": "collect_error",
   "py_test_files": 89,
-  "collect_rc": 0,
-  "collect_clean": true,
-  "collect_errors": [],
+  "collect_rc": 1,
+  "collect_clean": false,
+  "collect_errors": [
+    "NameError: name 'parsl' is not defined. Did you mean: 'vars'?"
+  ],
   "collect_error_count": 0,
   "collected_node_ids": [
     "tests/core/atoms/test_atoms_core.py::test_init",
@@ -536,9 +538,9 @@
   "ebsr": true,
   "pass_rate": 0.9955,
   "timed_out": false,
-  "image_size_mb": 432.2,
+  "image_size_mb": 1619.4,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__envbench100-pjy-quantum-accelerators-quacc@sha256:6588587e0559f7ea57bfdd6d430e61c70257b75ed7985402d2892b429047f627",
+  "image_digest": "bench-pjy-rat-dockerfile-quantum-accelerators-quacc@sha256:c28d4e85b39ac734ff1be381dcceba951818894c75960a439d8cb6dff0b35ece",
   "installed_pkg_count": 108,
   "tokens_in": 2708337,
   "tokens_out": 68838,
@@ -546,27 +548,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 183.7,
-  "test_s": 104.07,
+  "build_s": 492.02,
+  "test_s": 121.69,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 2708337,
     "tokens_out": 68838,
-    "llm_calls": 77,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 77
   },
   "error_surface": "",
   "error_surface_reason": "",

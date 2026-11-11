@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50new-20260922-170025",
+  "agent": "pipreqs",
   "repo": "insistence/RuoYi-Vue3-FastAPI",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "y-2.2.6 openpyxl-3.1.5 pandas-2.3.3 platformdirs-4.11.15 playwright-1.63.0 prompt_toolkit-3.0.53 psutil-7.2.2 psycopg2-2.9.13 pycparser-3.0 pydantic-2.13.5 pydantic-core-2.46.5 pydantic_settings-2.15.0 pydantic_validation_decorator-0.1.5 pyee-13.0.1 pymysql-1.2.3 pytest_asyncio-1.4.0 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 python_bcrypt-0.3.2 pytz-2026.4 questionary-2.1.1 redis-8.1.0 rich-15.0.0 shellingham-1.5.4 six-1.17.0 sqlglot-30.19.0 starlette-1.7.0 textual-8.2.8 typer-0.27.2 typing-inspection-0.4.4 tzdata-2026.4 tzlocal-5.4.4 ua-parser-1.0.2 ua-parser-builtins-202606 urllib3-2.8.0 user_agents-2.2.0 uvicorn-0.54.0 wcwidth-0.9.1\n#11 31.96 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 31.96 \n#11 31.96 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 31.96 [notice] To update, run: pip install --upgrade pip\n#11 DONE 33.0s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 23.2s done\n#12 exporting manifest sha256:f3079ecc410252ed4172032fbc67a2d045daf7bc1e32b154a5407f455bec6383\n#12 exporting manifest sha256:f3079ecc410252ed4172032fbc67a2d045daf7bc1e32b154a5407f455bec6383 done\n#12 exporting config sha256:9a6be823c93575b599691b09742f84dd38d24294806a702e01137c2c842706f6 0.0s done\n#12 exporting attestation manifest sha256:95e96efcea29bf88792506a942f45919d0103fab386baae95c1347e61c0d4ac2 0.0s done\n#12 exporting manifest list sha256:c6623fd515eb5035b396e4dc30f3088f5cb09b7246e50bd3f5f0628125364358 done\n#12 naming to docker.io/library/bench-pipreqs__rat50new-20260922-170025-insistence-ruoyi-vue3-fastapi:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-insistence-ruoyi-vue3-fastapi:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-insistence-ruoyi-vue3-fastapi:latest 5.6s done\n#12 DONE 28.9s\n",
+  "build_log_tail": "-runner-1.2.0 certifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.1 click-8.5.0 cryptography-50.0.1 dnspython-2.8.0 docstring-parser-0.18.0 email-validator-2.3.0 et-xmlfile-2.0.0 fastapi-0.141.1 greenlet-3.5.6 h11-0.16.0 h2-4.4.1 hpack-4.2.0 httpcore-1.0.9 httpx-0.28.1 hyperframe-6.1.0 idna-3.20 linkify-it-py-2.2.0 loguru-0.7.3 markdown-it-py-4.2.0 mdit-py-plugins-0.6.1 mdurl-0.1.2 numpy-2.2.6 openpyxl-3.1.5 pandas-2.3.3 platformdirs-4.11.12 playwright-1.63.0 prompt_toolkit-3.0.53 psutil-7.2.2 psycopg2-2.9.13 pycparser-3.0 pydantic-2.13.5 pydantic-core-2.46.5 pydantic_settings-2.15.0 pydantic_validation_decorator-0.1.5 pyee-13.0.1 pymysql-1.2.3 pytest_asyncio-1.4.0 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 python_bcrypt-0.3.2 pytz-2026.3.post1 questionary-2.1.1 redis-8.1.0 rich-15.0.0 shellingham-1.5.4 six-1.17.0 sqlglot-30.19.0 starlette-1.6.0 textual-8.2.8 typer-0.27.2 typing-inspection-0.4.4 tzdata-2026.4 tzlocal-5.4.4 ua-parser-1.0.2 ua-parser-builtins-202606 urllib3-2.8.0 user_agents-2.2.0 uvicorn-0.53.0 wcwidth-0.8.4\n#11 40.70 \n#11 40.70 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 40.70 [notice] To update, run: pip install --upgrade pip\n#11 DONE 42.1s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 28.9s done\n#12 exporting manifest sha256:b21e413006f398db991aab34fffe5c4db407294526026e36736bee834fa79e8c 0.0s done\n#12 exporting config sha256:7f8ad3c45b516c10ce63302b30b15409472e42c74c9f53f73110078a23f9f2d6 0.0s done\n#12 exporting attestation manifest sha256:82ba7408f8fef1c0023e3a63653f3249947b5d5cb2c267a9a3be245d63eb6a42 0.0s done\n#12 exporting manifest list sha256:056817c46145cdd68e85dde8132bee066dc1329a1ec6435dca5492d1eb95744f 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-insistence-ruoyi-vue3-fastapi:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-insistence-ruoyi-vue3-fastapi:latest\n#12 unpacking to docker.io/library/bench-pipreqs-insistence-ruoyi-vue3-fastapi:latest 8.7s done\n#12 DONE 37.7s\n",
   "status": "collect_error",
   "py_test_files": 177,
   "collect_rc": 2,
@@ -88,9 +88,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 643.0,
+  "image_size_mb": 2367.5,
   "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50new-20260922-170025-insistence-ruoyi-vue3-fastapi@sha256:c6623fd515eb5035b396e4dc30f3088f5cb09b7246e50bd3f5f0628125364358",
+  "image_digest": "bench-pipreqs-insistence-ruoyi-vue3-fastapi@sha256:056817c46145cdd68e85dde8132bee066dc1329a1ec6435dca5492d1eb95744f",
   "installed_pkg_count": 92,
   "tokens_in": null,
   "tokens_out": null,
@@ -98,8 +98,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 7.83,
-  "build_s": 65.65,
-  "test_s": 10.3,
+  "build_s": 83.31,
+  "test_s": 12.81,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -126,19 +126,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=726883f68ad21450ae47120d270895d9a5a9d69e (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=726883f68ad21450ae47120d270895d9a5a9d69e (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "yourlabs/django-autocomplete-light",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ation: /usr/local/lib/python3.10/site-packages\n#41 0.629 Requires: asgiref, pytz, sqlparse\n#41 0.629 Required-by: django-autocomplete-light, django-debug-toolbar, django-extensions, django-gm2m, django-querysetsequence, django-taggit\n#41 DONE 0.7s\n\n#42 [39/44] RUN cd /repo && python -c \"import django; print(django.get_version())\"\n#42 0.215 3.2.25\n#42 DONE 0.2s\n\n#43 [40/44] RUN cd /repo && pip install -q Django==3.2.25\n#43 0.592 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#43 0.596 \n#43 0.596 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#43 0.596 [notice] To update, run: pip install --upgrade pip\n#43 DONE 0.7s\n\n#44 [41/44] RUN cd /repo && python -c \"import django; print(django.get_version()); from django.utils.encoding import force_text, smart_text; print('funcs ok')\"\n#44 0.333 3.2.25\n#44 0.333 funcs ok\n#44 DONE 0.4s\n\n#45 [42/44] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#45 DONE 0.6s\n\n#46 [43/44] WORKDIR /testbed\n#46 DONE 0.0s\n\n#47 exporting to image\n#47 exporting layers\n#47 exporting layers 3.8s done\n#47 exporting manifest sha256:ba3a6dc6933d04db191b5b24c3339c3c092ac0912c579ed8e02df994a224e122 0.0s done\n#47 exporting config sha256:b51dc10dba5d49c8f62a170476f164074aa32d92a324b7a917f438989ef8cd40 done\n#47 exporting attestation manifest sha256:de7ae1213c9d1b9a2c0c6b3170b2ac2563e456c2e55ad66f8bf444d3704ad0b2 0.0s done\n#47 exporting manifest list sha256:95c64ab5f6c147464c62df997d68cb7b27ff9c4ce2495450af2012a009f5a3cf 0.0s done\n#47 naming to docker.io/library/bench-repo2run__envbench100-pjy-yourlabs-django-autocomplete-light:latest done\n#47 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-yourlabs-django-autocomplete-light:latest\n#47 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-yourlabs-django-autocomplete-light:latest 5.7s done\n#47 DONE 9.7s\n",
+  "build_log_tail": "om\n#41 0.623 License: BSD-3-Clause\n#41 0.623 Location: /usr/local/lib/python3.10/site-packages\n#41 0.623 Requires: asgiref, pytz, sqlparse\n#41 0.623 Required-by: django-autocomplete-light, django-debug-toolbar, django-extensions, django-gm2m, django-querysetsequence, django-taggit\n#41 DONE 0.7s\n\n#42 [39/44] RUN cd /repo && python -c \"import django; print(django.get_version())\"\n#42 0.271 3.2.25\n#42 DONE 0.3s\n\n#43 [40/44] RUN cd /repo && pip install -q Django==3.2.25\n#43 0.603 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#43 0.606 \n#43 0.606 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#43 0.606 [notice] To update, run: pip install --upgrade pip\n#43 DONE 0.7s\n\n#44 [41/44] RUN cd /repo && python -c \"import django; print(django.get_version()); from django.utils.encoding import force_text, smart_text; print('funcs ok')\"\n#44 0.282 3.2.25\n#44 0.282 funcs ok\n#44 DONE 0.3s\n\n#45 [42/44] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#45 DONE 0.6s\n\n#46 [43/44] WORKDIR /testbed\n#46 DONE 0.0s\n\n#47 exporting to image\n#47 exporting layers\n#47 exporting layers 4.2s done\n#47 exporting manifest sha256:89a4479ee00d8bf5210dd9567e3343ab2034f941726d99c80b064a6495ff0821 done\n#47 exporting config sha256:d0653aae841f4d9ac60870164b612048b2fd152b31c17c0c66435e42a2b33f3d done\n#47 exporting attestation manifest sha256:9d61e315491814a2407d0d9aa1315e4086dd3d184233c16bcf837a0cd55c5146 0.0s done\n#47 exporting manifest list sha256:63ededd493693ed76420da579749d88649621076a0b9d07931199513db24cb30 done\n#47 naming to docker.io/library/bench-pjy-repo2run-yourlabs-django-autocomplete-light:latest done\n#47 unpacking to docker.io/library/bench-pjy-repo2run-yourlabs-django-autocomplete-light:latest\n#47 unpacking to docker.io/library/bench-pjy-repo2run-yourlabs-django-autocomplete-light:latest 5.9s done\n#47 DONE 10.2s\n",
   "status": "collect_error",
   "py_test_files": 28,
   "collect_rc": 2,
@@ -189,9 +189,9 @@
   "ebsr": true,
   "pass_rate": 0.4557,
   "timed_out": false,
-  "image_size_mb": 574.6,
+  "image_size_mb": 2113.9,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-yourlabs-django-autocomplete-light@sha256:95c64ab5f6c147464c62df997d68cb7b27ff9c4ce2495450af2012a009f5a3cf",
+  "image_digest": "bench-pjy-repo2run-yourlabs-django-autocomplete-light@sha256:63ededd493693ed76420da579749d88649621076a0b9d07931199513db24cb30",
   "installed_pkg_count": 62,
   "tokens_in": 2828630,
   "tokens_out": 79824,
@@ -199,8 +199,8 @@
   "turns_used": 100,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 52.8,
-  "test_s": 13.61,
+  "build_s": 55.07,
+  "test_s": 15.81,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -208,19 +208,7 @@
     "tokens_in": 2828630,
     "tokens_out": 79824,
     "llm_calls": null,
-    "turns_used": 100,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 100
   },
   "error_surface": "",
   "error_surface_reason": "",

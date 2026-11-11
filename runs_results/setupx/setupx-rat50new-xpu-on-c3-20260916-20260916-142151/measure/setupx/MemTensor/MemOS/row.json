@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "MemTensor/MemOS",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ruststore-0.10.4 tzdata-2026.4 uuid-utils-0.17.1 volcengine-python-sdk-4.0.45 xlrd-2.0.2 xxhash-4.0.1 zstandard-0.25.0\n#10 140.8 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#10 140.8 \n#10 140.8 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#10 140.8 [notice] To update, run: pip install --upgrade pip\n#10 151.4 all ok\n#10 DONE 151.5s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 4.1s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 148.9s done\n#14 exporting manifest sha256:722b95ac5926b5e224d272ad1abac2566b63490ebd7ec32dc4be0a413d91f5c0\n#14 exporting manifest sha256:722b95ac5926b5e224d272ad1abac2566b63490ebd7ec32dc4be0a413d91f5c0 1.4s done\n#14 exporting config sha256:e44b1be4f6b74e93b0c593256c0a927d09d75d8b28c68a2f11a1ce61c8824346\n#14 exporting config sha256:e44b1be4f6b74e93b0c593256c0a927d09d75d8b28c68a2f11a1ce61c8824346 3.1s done\n#14 exporting attestation manifest sha256:d8c94ac90b5da1aa1c84d932ba6efb89ace8ebdf68aa5250bdecf5930c4de47e\n#14 exporting attestation manifest sha256:d8c94ac90b5da1aa1c84d932ba6efb89ace8ebdf68aa5250bdecf5930c4de47e 0.0s done\n#14 exporting manifest list sha256:339b36c42b8e9cf9e88cc1ee9757e151cd3f99c5848f416b01672eebf5ab289d done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-memtensor-memos:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-memtensor-memos:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-memtensor-memos:latest 28.2s done\n#14 DONE 192.4s\n",
+  "build_log_tail": "-1.2.3 markitdown-0.1.7 neo4j-5.28.6 nltk-3.10.3 onnxruntime-1.23.2 openpyxl-3.1.5 pandas-2.3.3 pdfminer-six-20260107 pdfplumber-0.11.10 pika-1.4.4 portalocker-3.2.0 protobuf-7.36.2 pycryptodome-3.23.0 pymilvus-2.6.17 pypdfium2-5.13.0 python-pptx-1.0.2 pytz-2026.3.post1 qdrant-client-1.19.1 rake-nltk-1.0.6 rank-bm25-0.2.2 redis-6.4.0 requests-toolbelt-1.0.0 schedule-1.2.2 sentence-transformers-4.1.0 soupsieve-2.9.2 tavily-python-0.8.4 tiktoken-0.14.0 tokie-0.1.4 truststore-0.10.4 tzdata-2026.4 uuid-utils-0.17.1 volcengine-python-sdk-4.0.45 xlrd-2.0.2 xxhash-4.0.1 zstandard-0.25.0\n#10 113.3 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#10 113.3 \n#10 113.3 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#10 113.3 [notice] To update, run: pip install --upgrade pip\n#10 120.4 all ok\n#10 DONE 120.7s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 1.5s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.5s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 73.8s done\n#14 exporting manifest sha256:063674f79c2a7aab73314139acd80ce812d0de2bb32b5f4d34cdb3e07a9bd465 done\n#14 exporting config sha256:222b72d89fac2d86f21045990b2cd2662a00457419260425b2c0fd47157fb47f done\n#14 exporting attestation manifest sha256:b792a4004740290647066211319cd239e9d93e40fc0ce8a96bb2d97f1967b712 done\n#14 exporting manifest list sha256:f5de174b0645f6843e5ba98e727baffaad36e7d0d5c7f33d0500c1658f800fe4 done\n#14 naming to docker.io/library/bench-setupx-memtensor-memos:latest done\n#14 unpacking to docker.io/library/bench-setupx-memtensor-memos:latest\n#14 unpacking to docker.io/library/bench-setupx-memtensor-memos:latest 16.8s done\n#14 DONE 90.7s\n",
   "status": "executed",
   "py_test_files": 124,
   "collect_rc": 0,
@@ -1915,9 +1915,9 @@
   "ebsr": true,
   "pass_rate": 0.9979,
   "timed_out": false,
-  "image_size_mb": 1546.3,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-memtensor-memos@sha256:339b36c42b8e9cf9e88cc1ee9757e151cd3f99c5848f416b01672eebf5ab289d",
+  "image_size_mb": 1523.9,
+  "image_delta_mb": 1136.3,
+  "image_digest": "bench-setupx-memtensor-memos@sha256:f5de174b0645f6843e5ba98e727baffaad36e7d0d5c7f33d0500c1658f800fe4",
   "installed_pkg_count": 213,
   "tokens_in": 1218277,
   "tokens_out": 29764,
@@ -1925,8 +1925,8 @@
   "turns_used": 16,
   "cost_usd": null,
   "produce_s": 1338.24,
-  "build_s": 354.89,
-  "test_s": 29.3,
+  "build_s": 217.87,
+  "test_s": 28.02,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -1961,19 +1961,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=de8069428a9247bfa7a3d35f59a9b39fa8f231d2 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=de8069428a9247bfa7a3d35f59a9b39fa8f231d2 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "conan-io/conan-package-tools",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": " Collecting pycparser\n#11 2.920   Downloading pycparser-3.0-py3-none-any.whl (48 kB)\n#11 2.926      \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 48.2/48.2 kB 11.9 MB/s eta 0:00:00\n#11 3.074 Installing collected packages: bottle, WebOb, waitress, urllib3, tabulate, soupsieve, six, pyjwt, pycparser, mock, idna, charset_normalizer, certifi, Requests, cffi, beautifulsoup4, WebTest, pynacl, cryptography, PyGithub\n#11 3.937 Successfully installed PyGithub-2.10.0 Requests-2.34.2 WebOb-1.8.11 WebTest-3.0.7 beautifulsoup4-4.15.0 bottle-0.13.4 certifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.1 cryptography-50.0.1 idna-3.20 mock-5.2.0 pycparser-3.0 pyjwt-2.15.0 pynacl-1.6.2 six-1.17.0 soupsieve-2.10 tabulate-0.10.0 urllib3-2.8.0 waitress-3.0.2\n#11 3.937 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 3.943 \n#11 3.943 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 3.943 [notice] To update, run: pip install --upgrade pip\n#11 DONE 4.5s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 2.3s done\n#12 exporting manifest sha256:6fb47e6bb37b6cde2a377184191abfbc3c2fd00de4096e94fcadc131b5155f73 done\n#12 exporting config sha256:b2e3d64d94bd720752fd4267b3bcc0e0a445e850cacd8213b79bf1903525fe00 done\n#12 exporting attestation manifest sha256:f4f059125995a9a72d1a317ebb34b551bef67369be562a9e86ee9ce688f90477 0.0s done\n#12 exporting manifest list sha256:2c71aa045acf2b5573c5a4f040e4e82eba65a6b8899fc72f1901aa057d202dfa 0.0s done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-conan-io-conan-package-tools:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-conan-io-conan-package-tools:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-conan-io-conan-package-tools:latest 1.0s done\n#12 DONE 3.4s\n",
+  "build_log_tail": "soupsieve>=1.6.1\n#11 2.325   Downloading soupsieve-2.9.2-py3-none-any.whl (37 kB)\n#11 2.348 Collecting pycparser\n#11 2.356   Downloading pycparser-3.0-py3-none-any.whl (48 kB)\n#11 2.359      \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 48.2/48.2 kB 26.0 MB/s eta 0:00:00\n#11 2.485 Installing collected packages: bottle, WebOb, waitress, urllib3, tabulate, soupsieve, six, pyjwt, pycparser, mock, idna, charset_normalizer, certifi, Requests, cffi, beautifulsoup4, WebTest, pynacl, cryptography, PyGithub\n#11 3.416 Successfully installed PyGithub-2.10.0 Requests-2.34.2 WebOb-1.8.11 WebTest-3.0.7 beautifulsoup4-4.15.0 bottle-0.13.4 certifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.1 cryptography-50.0.1 idna-3.19 mock-5.2.0 pycparser-3.0 pyjwt-2.14.0 pynacl-1.6.2 six-1.17.0 soupsieve-2.9.2 tabulate-0.10.0 urllib3-2.7.0 waitress-3.0.2\n#11 3.416 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 3.422 \n#11 3.422 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 3.422 [notice] To update, run: pip install --upgrade pip\n#11 DONE 3.8s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 1.4s done\n#12 exporting manifest sha256:56b5c6bfabea762fab42ed65e17b65871686943a3db50df72379b7518495e4b6 0.0s done\n#12 exporting config sha256:3cb506ec12491d87a891ebb7829ae853550993fdf29aeaeabc205ff79274c7bb done\n#12 exporting attestation manifest sha256:7e29b6c2d029b7b4cbf01521e75e5ba0b5d7d2fb203486e764b2e878ce7ea1a4 done\n#12 exporting manifest list sha256:69dfa5ca8b099487173a158d4bf87066346c3ded84feae22d7f9bf7871e1e4a3 done\n#12 naming to docker.io/library/bench-pipreqs-conan-io-conan-package-tools:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-conan-io-conan-package-tools:latest\n#12 unpacking to docker.io/library/bench-pipreqs-conan-io-conan-package-tools:latest 0.7s done\n#12 DONE 2.2s\n",
   "status": "collect_error",
   "py_test_files": 21,
   "collect_rc": 2,
@@ -68,9 +68,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 414.9,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-conan-io-conan-package-tools@sha256:2c71aa045acf2b5573c5a4f040e4e82eba65a6b8899fc72f1901aa057d202dfa",
+  "image_size_mb": 414.8,
+  "image_delta_mb": 27.2,
+  "image_digest": "bench-pipreqs-conan-io-conan-package-tools@sha256:69dfa5ca8b099487173a158d4bf87066346c3ded84feae22d7f9bf7871e1e4a3",
   "installed_pkg_count": 34,
   "tokens_in": null,
   "tokens_out": null,
@@ -78,8 +78,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 6.04,
-  "build_s": 11.2,
-  "test_s": 0.6,
+  "build_s": 8.62,
+  "test_s": 0.62,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -106,19 +106,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=decb63a1a470a5ffd5adf3ae6074b740f086aef2 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=decb63a1a470a5ffd5adf3ae6074b740f086aef2 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

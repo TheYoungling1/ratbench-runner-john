@@ -1,10 +1,10 @@
 {
-  "agent": "sweagent__ratbench50-modern-20260914-014042",
+  "agent": "sweagent_repo2run_modern",
   "repo": "django-oauth/django-oauth-toolkit",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "o, cffi, pytest-xdist, pytest-mock, pytest-django, pytest-cov, djangorestframework, cryptography, jwcrypto\n#12 6.654 Successfully installed asgiref-3.12.1 certifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.1 coverage-7.16.1 cryptography-50.0.1 django-5.2.17 djangorestframework-3.18.1 execnet-2.1.2 idna-3.20 jwcrypto-1.6.1 oauthlib-3.3.1 pycparser-3.0 pytest-cov-7.1.0 pytest-django-4.14.0 pytest-mock-3.15.1 pytest-xdist-3.8.0 requests-2.34.2 sqlparse-0.6.0 urllib3-2.8.0\n#12 6.654 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#12 6.660 \n#12 6.660 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#12 6.660 [notice] To update, run: pip install --upgrade pip\n#12 DONE 6.9s\n\n#13 [10/13] WORKDIR /repo\n#13 DONE 0.1s\n\n#14 [11/13] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#14 DONE 0.2s\n\n#15 [12/13] WORKDIR /testbed\n#15 DONE 0.0s\n\n#16 [13/13] RUN git config --global --add safe.directory /testbed\n#16 DONE 0.1s\n\n#17 exporting to image\n#17 exporting layers\n#17 exporting layers 2.7s done\n#17 exporting manifest sha256:e2b762dbd5c711652c52154dc693c245aa1357907b16553324a6abaad8e34dbf done\n#17 exporting config sha256:1951e924426a7a7eae4a43badfdae540d59d3ef349b8f8f8d3963f65a7fc710b done\n#17 exporting attestation manifest sha256:322b8b9cccd38fddf09330738ac7cf9f83a2e9909d71583944a9fc890931a4de done\n#17 exporting manifest list sha256:c7be1c4579c72f9515f0670981757a2184818006996cc6ebeda28bf30a960cb9 done\n#17 naming to docker.io/library/bench-sweagent__ratbench50-modern-20260914-014042-django-oauth-django-oauth-toolkit:latest done\n#17 unpacking to docker.io/library/bench-sweagent__ratbench50-modern-20260914-014042-django-oauth-django-oauth-toolkit:latest\n#17 unpacking to docker.io/library/bench-sweagent__ratbench50-modern-20260914-014042-django-oauth-django-oauth-toolkit:latest 2.1s done\n#17 DONE 4.9s\n",
+  "build_log_tail": "ge, charset_normalizer, certifi, asgiref, requests, django, cffi, pytest-xdist, pytest-mock, pytest-django, pytest-cov, djangorestframework, cryptography, jwcrypto\n#12 5.000 Successfully installed asgiref-3.12.1 certifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.1 coverage-7.16.1 cryptography-50.0.1 django-5.2.17 djangorestframework-3.18.1 execnet-2.1.2 idna-3.19 jwcrypto-1.6.0 oauthlib-3.3.1 pycparser-3.0 pytest-cov-7.1.0 pytest-django-4.14.0 pytest-mock-3.15.1 pytest-xdist-3.8.0 requests-2.34.2 sqlparse-0.6.0 urllib3-2.7.0\n#12 5.000 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#12 5.005 \n#12 5.005 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#12 5.005 [notice] To update, run: pip install --upgrade pip\n#12 DONE 5.4s\n\n#13 [10/13] WORKDIR /repo\n#13 DONE 0.1s\n\n#14 [11/13] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#14 DONE 0.2s\n\n#15 [12/13] WORKDIR /testbed\n#15 DONE 0.0s\n\n#16 [13/13] RUN git config --global --add safe.directory /testbed\n#16 DONE 0.1s\n\n#17 exporting to image\n#17 exporting layers\n#17 exporting layers 2.3s done\n#17 exporting manifest sha256:b1789ec4bebdda42990d4429104a2505e9688a9b4d481f976ea3674075ab6559 done\n#17 exporting config sha256:cb694077b2e70fc706c72bf2ab79294d7628c780658f16e27bb36d602c59b30f done\n#17 exporting attestation manifest sha256:02d45db6050316b351fd949bf4419b073c2ee80d9a1f2aab790210cfb40f8f53 done\n#17 exporting manifest list sha256:df74d675a7f12980ebfa00ec2d56581e0ba50b1966c9504187dfac4bbd8d96e0 done\n#17 naming to docker.io/library/bench-sweagent_repo2run_modern-django-oauth-django-oauth-toolkit:latest done\n#17 unpacking to docker.io/library/bench-sweagent_repo2run_modern-django-oauth-django-oauth-toolkit:latest\n#17 unpacking to docker.io/library/bench-sweagent_repo2run_modern-django-oauth-django-oauth-toolkit:latest 1.5s done\n#17 DONE 3.8s\n",
   "status": "executed",
   "py_test_files": 33,
   "collect_rc": 0,
@@ -1140,9 +1140,9 @@
   "ebsr": true,
   "pass_rate": 0.268,
   "timed_out": false,
-  "image_size_mb": 1721.8,
-  "image_delta_mb": 211.1,
-  "image_digest": "bench-sweagent__ratbench50-modern-20260914-014042-django-oauth-django-oauth-toolkit@sha256:c7be1c4579c72f9515f0670981757a2184818006996cc6ebeda28bf30a960cb9",
+  "image_size_mb": 446.8,
+  "image_delta_mb": 59.2,
+  "image_digest": "bench-sweagent_repo2run_modern-django-oauth-django-oauth-toolkit@sha256:df74d675a7f12980ebfa00ec2d56581e0ba50b1966c9504187dfac4bbd8d96e0",
   "installed_pkg_count": 32,
   "tokens_in": 100361.0,
   "tokens_out": 167.0,
@@ -1150,8 +1150,8 @@
   "turns_used": 18,
   "cost_usd": 0.005170731,
   "produce_s": 100.15,
-  "build_s": 16.2,
-  "test_s": 144.06,
+  "build_s": 12.97,
+  "test_s": 131.18,
   "meta": {
     "contract_version": 1,
     "producer": "sweagent_repo2run_modern",
@@ -1185,19 +1185,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=74b10062939ba9edc8f6414c887fff7630372d26 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=74b10062939ba9edc8f6414c887fff7630372d26 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "OpenCTI-Platform/connectors",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "me-4.13.2 anyio-4.14.2 boto3-1.43.72 botocore-1.43.72 cachetools-7.0.6 certifi-2026.7.22 cffi-2.1.1 charset-normalizer-3.5.1 click-8.4.2 cryptography-50.0.0 datefinder-0.7.3 deprecation-2.1.0 distro-1.9.0 exceptiongroup-1.3.1 fastapi-0.141.1 filigran_sseclient-1.0.2 h11-0.16.0 httpcore2-2.10.0 httptools-0.8.0 httpx2-2.10.0 idna-3.18 importlib_metadata-8.7.1 jiter-0.16.0 jmespath-1.1.0 openai-3.0.0 opentelemetry-api-1.35.0 opentelemetry-sdk-1.35.0 opentelemetry-semantic-conventions-0.56b0 pika-1.3.2 prometheus_client-0.25.0 pycparser-3.0 pycti-7.260701.0 pydantic-2.13.4 pydantic_core-2.46.4 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 python-json-logger-4.0.0 python-magic-0.4.27 pytz-2026.3.post1 regex-2026.7.19 requests-2.33.1 s3transfer-0.19.2 setuptools-82.0.1 simplejson-4.1.1 six-1.17.0 sniffio-1.3.1 starlette-1.6.0 stix2-3.0.1 stix2-patterns-2.1.2 tomli-2.4.1 tqdm-4.70.0 truststore-0.10.4 typing-inspection-0.4.3 typing_extensions-4.16.0 urllib3-2.7.0 uv-0.12.5 uvicorn-0.52.3 uvloop-0.22.1 watchfiles-1.2.0 websockets-16.1.1 wheel-0.46.3 zipp-4.1.0\n#19 DONE 26.8s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 1.6s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.1s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 8.7s done\n#22 exporting manifest sha256:a989cc1740c5fd61aa84149507a31a90042dec1e6be8af50988b2c5ba58e0e7f done\n#22 exporting config sha256:6fe3065ef5c47c6b03f842a2b7e09c449363e634f1783af8a6adcdc7a6164fc0 done\n#22 exporting attestation manifest sha256:bc0dcb3516c36ccd7185b51de98127221ef22175e5d38b1a60c4d1c3d4f10b61 0.0s done\n#22 exporting manifest list sha256:b212d0fe6360d8d9e8c576117f7c96a2e042c4d5530f0936a97e912a76fc19d8 done\n#22 naming to docker.io/library/bench-rat__rat50-pjy-opencti-platform-connectors:latest done\n#22 unpacking to docker.io/library/bench-rat__rat50-pjy-opencti-platform-connectors:latest\n#22 unpacking to docker.io/library/bench-rat__rat50-pjy-opencti-platform-connectors:latest 8.1s done\n#22 DONE 16.8s\n",
+  "build_log_tail": "3-1.43.72 botocore-1.43.72 cachetools-7.0.6 certifi-2026.7.22 cffi-2.1.1 charset-normalizer-3.5.1 click-8.4.2 cryptography-50.0.0 datefinder-0.7.3 deprecation-2.1.0 distro-1.9.0 exceptiongroup-1.3.1 fastapi-0.141.1 filigran_sseclient-1.0.2 h11-0.16.0 httpcore2-2.10.0 httptools-0.8.0 httpx2-2.10.0 idna-3.18 importlib_metadata-8.7.1 jiter-0.16.0 jmespath-1.1.0 openai-3.0.0 opentelemetry-api-1.35.0 opentelemetry-sdk-1.35.0 opentelemetry-semantic-conventions-0.56b0 pika-1.3.2 prometheus_client-0.25.0 pycparser-3.0 pycti-7.260701.0 pydantic-2.13.4 pydantic_core-2.46.4 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 python-json-logger-4.0.0 python-magic-0.4.27 pytz-2026.3.post1 regex-2026.7.19 requests-2.33.1 s3transfer-0.19.2 setuptools-82.0.1 simplejson-4.1.1 six-1.17.0 sniffio-1.3.1 starlette-1.6.0 stix2-3.0.1 stix2-patterns-2.1.2 tomli-2.4.1 tqdm-4.70.0 truststore-0.10.4 typing-inspection-0.4.3 typing_extensions-4.16.0 urllib3-2.7.0 uv-0.12.5 uvicorn-0.52.3 uvloop-0.22.1 watchfiles-1.2.0 websockets-16.1.1 wheel-0.46.3 zipp-4.1.0\n#19 DONE 43.0s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 1.9s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.2s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 9.0s done\n#22 exporting manifest sha256:1bcaf95b2859b2809304a201f4adaf92e9fe307acd87a45b00fb699265f3a3bf 0.0s done\n#22 exporting config sha256:8a075003228544051f999455d7001682debca5033c1bd14f25ca43d0a9789339 0.0s done\n#22 exporting attestation manifest sha256:1850c2dd5ebd93767dcf4a783cb5ac9191e65b2304bc543916ebfd92ce5de6e2 0.0s done\n#22 exporting manifest list sha256:9faefaf6f3a1d2dc7ab4b6dd5cf448fd59a972d980a4447c0cce9035dad7f9e6 0.0s done\n#22 naming to docker.io/library/bench-pjy-rat-dockerfile-opencti-platform-connectors:latest done\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-opencti-platform-connectors:latest\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-opencti-platform-connectors:latest 9.7s done\n#22 DONE 18.8s\n",
   "status": "collect_error",
   "py_test_files": 895,
   "collect_rc": 2,
@@ -4329,9 +4329,9 @@
   "ebsr": true,
   "pass_rate": 0.8013,
   "timed_out": false,
-  "image_size_mb": 477.6,
+  "image_size_mb": 1588.3,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50-pjy-opencti-platform-connectors@sha256:b212d0fe6360d8d9e8c576117f7c96a2e042c4d5530f0936a97e912a76fc19d8",
+  "image_digest": "bench-pjy-rat-dockerfile-opencti-platform-connectors@sha256:9faefaf6f3a1d2dc7ab4b6dd5cf448fd59a972d980a4447c0cce9035dad7f9e6",
   "installed_pkg_count": 73,
   "tokens_in": 4015397,
   "tokens_out": 95319,
@@ -4339,27 +4339,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 50.92,
-  "test_s": 14.47,
+  "build_s": 84.37,
+  "test_s": 16.71,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 4015397,
     "tokens_out": 95319,
-    "llm_calls": 102,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 102
   },
   "error_surface": "",
   "error_surface_reason": "",

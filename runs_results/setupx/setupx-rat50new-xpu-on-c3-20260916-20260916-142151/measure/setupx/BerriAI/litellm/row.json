@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "BerriAI/litellm",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": " root    4096 Sep 26 08:54 __pycache__\n#10 466.6 -rw-r--r--   2 root root    1761 Sep 26 08:49 _async_http.py\n#10 466.6 -rw-r--r--   2 root root    8880 Sep 26 08:49 _compat.py\n#10 466.6 -rw-r--r--   2 root root    4106 Sep 26 08:49 _config.py\n#10 466.6 -rw-r--r--   2 root root     570 Sep 26 08:49 _constants.py\n#10 466.6 ls: cannot access '.venv/lib/python3.10/site-packages/prisma/generated/': No such file or directory\n#10 466.6 === generated client files present? ===\n#10 466.6 _types.py\n#10 466.6 client.py\n#10 466.6 errors.py\n#10 466.6 models.py\n#10 466.6 partials.py\n#10 466.6 types.py\n#10 466.6 === find generated dirs in venv ===\n#10 466.8 === reproduce the exact failing test ===\n#10 482.2 .                                                                        [100%]\n#10 482.2 1 passed in 0.65s\n#10 DONE 482.5s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 52.9s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 1.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 297.2s done\n#14 exporting manifest sha256:521f5fd7fb8b082a6c52f974ebccff12e304287d36d63570072292c6d67dcaa8 0.0s done\n#14 exporting config sha256:2f62a575d02f23bba70583a2d21e208e9da5afeb496af2fe1e3b5b77f00ad772 done\n#14 exporting attestation manifest sha256:b4175f1d7cfa5532e7bfbc096bbd2c9788867d16577656978f724f0f852df513 0.0s done\n#14 exporting manifest list sha256:f952e94a842ccd41af9c0bbf8f2d62af7f856a7d28cb5361621fe326f126c1ec done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-berriai-litellm:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-berriai-litellm:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-berriai-litellm:latest 90.2s done\n#14 DONE 387.5s\n",
+  "build_log_tail": "\n#10 454.8 -rw-r--r--   2 root root    1921 Sep 19 07:18 __init__.py\n#10 454.8 -rw-r--r--   2 root root      86 Sep 19 07:18 __main__.py\n#10 454.8 drwxr-xr-x   2 root root    4096 Sep 19 07:23 __pycache__\n#10 454.8 -rw-r--r--   2 root root    1761 Sep 19 07:18 _async_http.py\n#10 454.8 -rw-r--r--   2 root root    8880 Sep 19 07:18 _compat.py\n#10 454.8 -rw-r--r--   2 root root    4106 Sep 19 07:18 _config.py\n#10 454.8 -rw-r--r--   2 root root     570 Sep 19 07:18 _constants.py\n#10 454.8 ls: cannot access '.venv/lib/python3.10/site-packages/prisma/generated/': No such file or directory\n#10 454.8 === generated client files present? ===\n#10 454.8 _types.py\n#10 454.8 client.py\n#10 454.8 errors.py\n#10 454.8 models.py\n#10 454.8 partials.py\n#10 454.8 types.py\n#10 454.8 === find generated dirs in venv ===\n#10 454.8 === reproduce the exact failing test ===\n#10 469.4 .                                                                        [100%]\n#10 469.4 1 passed in 0.51s\n#10 DONE 469.6s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 24.7s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.7s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 195.1s done\n#14 exporting manifest sha256:8c8c3529038df1b1c32d3147f16bcb2577eacd9b742904bbb47c6e492aa24487 done\n#14 exporting config sha256:218bc1af36f0638c68e774a2fd52f432e525b83e1f2b884847031dea1efe7870 done\n#14 exporting attestation manifest sha256:0d3b719e5323aff393f6c1f0cba0af19a482397b1080b2e9989c2c1ad346acea done\n#14 exporting manifest list sha256:73702394724b01fb80a419c6766294eb3b56ce5c1ebee33e22c54dffe1687e8b done\n#14 naming to docker.io/library/bench-setupx-berriai-litellm:latest done\n#14 unpacking to docker.io/library/bench-setupx-berriai-litellm:latest\n#14 unpacking to docker.io/library/bench-setupx-berriai-litellm:latest 60.4s done\n#14 DONE 255.5s\n",
   "status": "collect_error",
   "py_test_files": 3497,
   "collect_rc": 2,
@@ -14,9 +14,9 @@
     "E   openai.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable",
     "E   litellm.llms.openai.common_utils.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable",
     "E   litellm.exceptions.AuthenticationError: litellm.AuthenticationError: AuthenticationError: OpenAIException - The api_key client option must be set either by passing api_key to the client or by sett",
-    "E   openai.OpenAIError: Missing credentials. Please pass one of `api_key`, `azure_ad_token`, `azure_ad_token_provider`, or the `AZURE_OPENAI_API_KEY` or `AZURE_OPENAI_AD_TOKEN` environment variables.",
-    "E   litellm.llms.azure.common_utils.AzureOpenAIError: Missing credentials. Please pass one of `api_key`, `azure_ad_token`, `azure_ad_token_provider`, or the `AZURE_OPENAI_API_KEY` or `AZURE_OPENAI_AD_",
-    "E   litellm.exceptions.APIError: litellm.APIError: AzureException APIError - Missing credentials. Please pass one of `api_key`, `azure_ad_token`, `azure_ad_token_provider`, or the `AZURE_OPENAI_API_KE",
+    "E   openai.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable",
+    "E   litellm.llms.openai.common_utils.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable",
+    "E   litellm.exceptions.AuthenticationError: litellm.AuthenticationError: AuthenticationError: OpenAIException - The api_key client option must be set either by passing api_key to the client or by sett",
     "E   httpcore.ConnectError: [Errno 111] Connection refused",
     "E   httpx.ConnectError: [Errno 111] Connection refused",
     "E   openai.APIConnectionError: Connection error.",
@@ -4479,9 +4479,9 @@
   "ebsr": true,
   "pass_rate": 0.7948,
   "timed_out": false,
-  "image_size_mb": 7120.2,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-berriai-litellm@sha256:f952e94a842ccd41af9c0bbf8f2d62af7f856a7d28cb5361621fe326f126c1ec",
+  "image_size_mb": 6941.1,
+  "image_delta_mb": 6553.5,
+  "image_digest": "bench-setupx-berriai-litellm@sha256:73702394724b01fb80a419c6766294eb3b56ce5c1ebee33e22c54dffe1687e8b",
   "installed_pkg_count": 0,
   "tokens_in": 865455,
   "tokens_out": 43298,
@@ -4489,8 +4489,8 @@
   "turns_used": 56,
   "cost_usd": null,
   "produce_s": 2049.12,
-  "build_s": 1000.17,
-  "test_s": 1466.25,
+  "build_s": 826.66,
+  "test_s": 1436.27,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -4525,19 +4525,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=a8979fe05466346d78ab4573c8a61b53a4dd9cf6 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=a8979fe05466346d78ab4573c8a61b53a4dd9cf6 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

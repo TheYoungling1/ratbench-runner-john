@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "pathintegral-institute/mcpm.sh",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "t_update.py::TestSourceHooks::test_uninstall_cleans_source\n#10 9.663 tests/test_virtual_profiles.py::test_virtual_profile_creation\n#10 9.663 tests/test_virtual_profiles.py::test_adding_server_to_virtual_profile\n#10 9.663 tests/test_virtual_profiles.py::test_server_in_multiple_profiles\n#10 9.663 tests/test_virtual_profiles.py::test_profile_metadata\n#10 9.663 tests/test_virtual_profiles.py::test_profile_deletion\n#10 9.663 tests/test_virtual_profiles.py::test_list_profiles\n#10 9.663 tests/test_virtual_profiles.py::test_complete_profile_info\n#10 9.663 tests/test_virtual_profiles.py::test_no_data_duplication\n#10 9.663 \n#10 9.663 298 tests collected in 3.17s\n#10 DONE 9.9s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 3.1s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.4s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 15.4s done\n#14 exporting manifest sha256:1be9bb866052ba7aae59f2f2a35ec4d815f6925e20367c706e7b607429d5d986 0.0s done\n#14 exporting config sha256:87a21b61c44235cd35a53a5e34c134b0e86baecd442b9c0faf6beeec02f1f51d 0.0s done\n#14 exporting attestation manifest sha256:332e5e5cbefd993884d0662bf9127dce559e5c3a720a049d9c3683f13cef90fa 0.1s done\n#14 exporting manifest list sha256:e9c83d6507627cca1da5501618db9a8cff411d25907b2e2f795c61b331533922\n#14 exporting manifest list sha256:e9c83d6507627cca1da5501618db9a8cff411d25907b2e2f795c61b331533922 0.0s done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-pathintegral-institute-mcpm.sh:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-pathintegral-institute-mcpm.sh:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-pathintegral-institute-mcpm.sh:latest 8.2s done\n#14 DONE 23.7s\n",
+  "build_log_tail": "pdate_failure\n#10 8.611 tests/test_update.py::TestUpdateApply::test_apply_pull_fails\n#10 8.611 tests/test_update.py::TestSourceHooks::test_new_populates_source\n#10 8.611 tests/test_update.py::TestSourceHooks::test_new_populates_remote_source\n#10 8.611 tests/test_update.py::TestSourceHooks::test_uninstall_cleans_source\n#10 8.611 tests/test_virtual_profiles.py::test_virtual_profile_creation\n#10 8.611 tests/test_virtual_profiles.py::test_adding_server_to_virtual_profile\n#10 8.611 tests/test_virtual_profiles.py::test_server_in_multiple_profiles\n#10 8.611 tests/test_virtual_profiles.py::test_profile_metadata\n#10 8.611 tests/test_virtual_profiles.py::test_profile_deletion\n#10 8.611 tests/test_virtual_profiles.py::test_list_profiles\n#10 8.611 tests/test_virtual_profiles.py::test_complete_profile_info\n#10 8.611 tests/test_virtual_profiles.py::test_no_data_duplication\n#10 8.611 \n#10 8.611 298 tests collected in 2.56s\n#10 DONE 9.2s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 2.3s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 13.3s done\n#14 exporting manifest sha256:43b20725a20889ba49ef7cf95c991afb73995022e8a836244929155776e1ea6c 0.0s done\n#14 exporting config sha256:ec9d85bf30aab4813c99a51fe4ca4c9eca0b7283f505a3fdbae30dc0c30f2e2a 0.0s done\n#14 exporting attestation manifest sha256:2b616c5ccbea43c1763906f5966e8d6cbff53e0bc1e6ffc64f4932f00e8afa79 0.0s done\n#14 exporting manifest list sha256:e1ef298d4847189df8dec1476d1f1f19e6fd20b87e288dc8af281458e020627c done\n#14 naming to docker.io/library/bench-setupx-pathintegral-institute-mcpm.sh:latest done\n#14 unpacking to docker.io/library/bench-setupx-pathintegral-institute-mcpm.sh:latest\n#14 unpacking to docker.io/library/bench-setupx-pathintegral-institute-mcpm.sh:latest 7.2s done\n#14 DONE 20.6s\n",
   "status": "executed",
   "py_test_files": 87,
   "collect_rc": 0,
@@ -616,9 +616,9 @@
   "ebsr": true,
   "pass_rate": 1.0,
   "timed_out": false,
-  "image_size_mb": 2248.6,
+  "image_size_mb": 2248.4,
   "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-pathintegral-institute-mcpm.sh@sha256:e9c83d6507627cca1da5501618db9a8cff411d25907b2e2f795c61b331533922",
+  "image_digest": "bench-setupx-pathintegral-institute-mcpm.sh@sha256:e1ef298d4847189df8dec1476d1f1f19e6fd20b87e288dc8af281458e020627c",
   "installed_pkg_count": 122,
   "tokens_in": 100128,
   "tokens_out": 3657,
@@ -626,8 +626,8 @@
   "turns_used": 7,
   "cost_usd": null,
   "produce_s": 188.07,
-  "build_s": 40.09,
-  "test_s": 5.58,
+  "build_s": 36.61,
+  "test_s": 8.48,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -662,19 +662,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=6a92e54c748766973add4b8c153fcc85738d2d89 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=6a92e54c748766973add4b8c153fcc85738d2d89 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

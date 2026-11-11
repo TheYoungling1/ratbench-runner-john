@@ -1,0 +1,104 @@
+{
+  "g2e-rat50new": {
+    "n": 50,
+    "n_exec": 37,
+    "n_collect_clean": 35,
+    "n_real_success": 25,
+    "n_unmeasurable": 0,
+    "n_legacy_missing": 0,
+    "EBSR": 0.7,
+    "n_ebsr": 35,
+    "EBSR_repo2run_raw": 0.7,
+    "n_raw": 35,
+    "false_green_removed": 0.0,
+    "status_census": {
+      "executed": 31,
+      "missing": 8,
+      "timed_out": 2,
+      "collect_error": 6,
+      "no_tests_collected": 3
+    },
+    "n_ebsr_zero_collected": 2,
+    "total_collected": 266807,
+    "mean_collected": 5336.14,
+    "total_collect_errors": 290,
+    "mean_collect_errors": 5.8,
+    "real_success": 0.5,
+    "micro": 0.8019,
+    "full_pass_repos": 10,
+    "coverage": 0.74,
+    "ESSR": 0.6028,
+    "ESSR_median": 0.8796,
+    "n_gold_scored": 44,
+    "n_gold_zero": 13,
+    "n_gold_no_row": 0,
+    "gold_no_row": [],
+    "n_gold_capped": 0,
+    "gold_capped": [],
+    "n_gold_excluded": 6,
+    "gold_excluded": [
+      [
+        "berriai/litellm",
+        "gold_missing"
+      ],
+      [
+        "meta-pytorch/torchrec",
+        "gold_missing"
+      ],
+      [
+        "modelscope/agentjet",
+        "gold_missing"
+      ],
+      [
+        "nvidia-nemo/rl",
+        "gold_missing"
+      ],
+      [
+        "sgl-project/sglang-jax",
+        "gold_missing"
+      ],
+      [
+        "tencentblueking/bk-lite",
+        "gold_missing"
+      ]
+    ],
+    "n_gold_sha_mismatch": 0,
+    "gold_sha_mismatch": [],
+    "mean_collection_coverage": 0.922,
+    "median_collection_coverage": 1.0,
+    "n_gold_hollow": 2,
+    "gold_hollow": [
+      [
+        "kittinan/spotify-github-profile",
+        0,
+        134,
+        0.0
+      ],
+      [
+        "rfsbraz/deleterr",
+        0,
+        880,
+        0.0
+      ]
+    ],
+    "mean_image_delta_mb": 1136.6875,
+    "mean_installed_pkgs": 98.9286,
+    "mean_tokens": 2579845.36,
+    "mean_tokens_out": 11141.7,
+    "tokens_per_ebsr": 3685493.3714,
+    "tokens_per_real_success": 5159690.72,
+    "mean_turns": null,
+    "total_cost_usd": null,
+    "mean_cost_usd": null,
+    "cost_per_ebsr": null,
+    "cost_per_real_success": null,
+    "n_cost_reporting": 0,
+    "mean_produce_s": null,
+    "wall_s_per_real_success": 875.5796,
+    "n_token_reporting": 50,
+    "rebuild_ok_rate": 0.84,
+    "setup_compile_rate": 0.84,
+    "n_setup_compile": 42,
+    "unreplayed_rate": 0.0
+  }
+}

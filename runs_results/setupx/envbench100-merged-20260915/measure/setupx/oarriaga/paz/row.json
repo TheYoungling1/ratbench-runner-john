@@ -1,17 +1,17 @@
 {
-  "agent": "setupx__envbench100-merged-20260915",
+  "agent": "setupx",
   "repo": "oarriaga/paz",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "est.cpython-310-pytest-9.1.1.pyc\n#10 41.65 tests/paz/processors/__pycache__/pose_test.cpython-310-pytest-9.1.1.pyc\n#10 41.65 tests/paz/processors/__pycache__/processors_test.cpython-310-pytest-9.1.1.pyc\n#10 41.65 tests/paz/processors/__pycache__/standard_test.cpython-310-pytest-9.1.1.pyc\n#10 41.65 tests/paz/processors/draw_test.py\n#10 41.65 tests/paz/processors/geometric_test.py\n#10 41.65 tests/paz/processors/image_test.py\n#10 41.65 tests/paz/processors/pose_test.py\n#10 41.65 tests/paz/processors/processors_test.py\n#10 41.65 tests/paz/processors/standard_test.py\n#10 41.65 tests/paz/utils/__pycache__/documentation_test.cpython-310-pytest-9.1.1.pyc\n#10 41.65 tests/paz/utils/documentation_test.py\n#10 43.46 tf.keras is keras module re-export? keras.api._v2.keras keras\n#10 43.46 Input identity True\n#10 43.46 Conv2D identity True\n#10 43.46 mini xception test\n#10 43.46 model_1 45\n#10 DONE 44.1s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 2.7s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 93.1s done\n#14 exporting manifest sha256:a90eedcd540707d405adb910d872d6c74874cc9426ae93e9febdbba2673c3e58 0.0s done\n#14 exporting config sha256:4ac0bca60904259b4dbf3d416e93d3dc946e8201d575d0b610bb23645ae7a15f done\n#14 exporting attestation manifest sha256:260ff9f773737916d289e510805ac1b74578410f73239af43b2d1aaad04fc905 0.0s done\n#14 exporting manifest list sha256:3b03882e2567337e43858bff839546c4d5b24e14e3c772cabd15898cf2ccd525 0.0s done\n#14 naming to docker.io/library/bench-setupx__envbench100-merged-20260915-oarriaga-paz:latest done\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-oarriaga-paz:latest\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-oarriaga-paz:latest 14.7s done\n#14 DONE 107.8s\n",
-  "status": "collect_error",
+  "build_log_tail": "che__/__init__.cpython-310.pyc\ntests/paz/processors/__pycache__/draw_test.cpython-310-pytest-9.1.1.pyc\ntests/paz/processors/__pycache__/geometric_test.cpython-310-pytest-9.1.1.pyc\ntests/paz/processors/__pycache__/image_test.cpython-310-pytest-9.1.1.pyc\ntests/paz/processors/__pycache__/pose_test.cpython-310-pytest-9.1.1.pyc\ntests/paz/processors/__pycache__/processors_test.cpython-310-pytest-9.1.1.pyc\ntests/paz/processors/__pycache__/standard_test.cpython-310-pytest-9.1.1.pyc\ntests/paz/processors/draw_test.py\ntests/paz/processors/geometric_test.py\ntests/paz/processors/image_test.py\ntests/paz/processors/pose_test.py\ntests/paz/processors/processors_test.py\ntests/paz/processors/standard_test.py\ntests/paz/utils/__pycache__/documentation_test.cpython-310-pytest-9.1.1.pyc\ntests/paz/utils/documentation_test.py\ntf.keras is keras module re-export? keras.api._v2.keras keras\nInput identity True\nConv2D identity True\nmini xception test\nmodel_1 45\n ---> Removed intermediate container 8e571860895d\n ---> 4028604c52aa\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in 651a7b72c29f\n ---> Removed intermediate container 651a7b72c29f\n ---> 2a5a2b92e778\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in eebf8d29fbc8\n ---> Removed intermediate container eebf8d29fbc8\n ---> 599434d31864\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in 2ed2dd0a68a9\n ---> Removed intermediate container 2ed2dd0a68a9\n ---> d6cb8f7d32f1\nStep 10/10 : WORKDIR /testbed\n ---> Running in c2c66e8559d5\n ---> Removed intermediate container c2c66e8559d5\n ---> 1f36b11120a9\nSuccessfully built 1f36b11120a9\nSuccessfully tagged bench-setupx-oarriaga-paz:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
+  "status": "timed_out",
   "py_test_files": 45,
   "collect_rc": 2,
   "collect_clean": false,
   "collect_errors": [
     "E   ModuleNotFoundError: No module named 'keras.utils.layer_utils'",
-    "2026-09-26 05:28:18.926630: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT",
+    "2026-09-09 07:31:26.823513: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT",
     "E   ModuleNotFoundError: No module named 'paz.datasets.linemod'",
     "E   ModuleNotFoundError: No module named 'trimesh'",
     "E   ModuleNotFoundError: No module named 'pipelines'",
@@ -306,10 +306,10 @@
   "error_node_ids": [],
   "ebsr": false,
   "pass_rate": 0.0,
-  "timed_out": false,
-  "image_size_mb": 1056.4,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__envbench100-merged-20260915-oarriaga-paz@sha256:3b03882e2567337e43858bff839546c4d5b24e14e3c772cabd15898cf2ccd525",
+  "timed_out": true,
+  "image_size_mb": 1056.5,
+  "image_delta_mb": 668.9,
+  "image_digest": "bench-setupx-oarriaga-paz@sha256:1f36b11120a937682477e944a3785e847cfe65d5c797422d983ae07040017a2b",
   "installed_pkg_count": 52,
   "tokens_in": 1099540,
   "tokens_out": 81767,
@@ -317,8 +317,8 @@
   "turns_used": 48,
   "cost_usd": null,
   "produce_s": 1274.94,
-  "build_s": 158.5,
-  "test_s": 1461.03,
+  "build_s": 154.73,
+  "test_s": 1800.1,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -353,19 +353,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=cede0aee7b0ce78357f884b916f96803f1cea202 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=cede0aee7b0ce78357f884b916f96803f1cea202 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

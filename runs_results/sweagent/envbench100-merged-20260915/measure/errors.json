@@ -1,0 +1,64 @@
+{
+  "sweagent_repo2run_modern": {
+    "collect": {
+      "agent": "sweagent_repo2run_modern",
+      "n_repos": 100,
+      "source": "collect",
+      "n_admissible": 41,
+      "n_masked": 4,
+      "n_unobserved": 55,
+      "n_status_derived": 0,
+      "buckets": {
+        "error": 51,
+        "success": 31,
+        "partial": 10,
+        "collect_error": 2,
+        "build_fail": 4,
+        "zero_pass": 1,
+        "no_tests_collected": 1
+      },
+      "surfaces": {
+        "unobserved": 55,
+        "full": 41,
+        "masked": 4
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    },
+    "run": {
+      "agent": "sweagent_repo2run_modern",
+      "n_repos": 100,
+      "source": "run",
+      "n_admissible": 41,
+      "n_masked": 4,
+      "n_unobserved": 55,
+      "n_status_derived": 0,
+      "buckets": {
+        "error": 51,
+        "success": 31,
+        "partial": 10,
+        "collect_error": 2,
+        "build_fail": 4,
+        "zero_pass": 1,
+        "no_tests_collected": 1
+      },
+      "surfaces": {
+        "unobserved": 55,
+        "full": 41,
+        "masked": 4
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    }
+  }
+}

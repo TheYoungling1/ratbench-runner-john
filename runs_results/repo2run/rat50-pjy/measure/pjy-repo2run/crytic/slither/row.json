@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__rat50-pjy",
+  "agent": "pjy-repo2run",
   "repo": "crytic/slither",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "0, 1.16.6, 1.16.5, 1.16.4, 1.16.3, 1.16.2, 1.16.1, 1.16.0, 1.15.4, 1.15.3, 1.15.2, 1.15.1, 1.15.0, 1.14.6, 1.14.5, 1.14.4, 1.14.3, 1.14.2, 1.14.1, 1.14.0, 1.13.3, 1.13.1, 1.13.0, 1.12.1, 1.12.0, 1.11.3, 1.11.2, 1.11.1, 1.11.0, 1.10.4, 1.10.2, 1.10.1, 1.10.0.post2, 1.9.3, 1.9.2, 1.9.1, 1.9.0, 1.8.2, 1.8.1, 1.8.0, 1.7.2, 1.7.1, 1.7.0, 1.6.2, 1.6.1, 1.6.0, 1.5.1, 1.5.0, 1.4.1, 1.3.0\n#37 0.714   INSTALLED: 2.2.6\n#37 0.714   LATEST:    2.2.6\n#37 DONE 0.7s\n\n#38 [34/37] RUN pip index versions scikit-learn --python-version 3.10 2>/dev/null | head -5\n#38 0.609 scikit-learn (1.7.2)\n#38 0.609 Available versions: 1.7.2, 1.7.1, 1.7.0, 1.6.1, 1.6.0, 1.5.2, 1.5.1, 1.5.0, 1.4.2, 1.4.1.post1, 1.4.0, 1.3.2, 1.3.1, 1.3.0, 1.2.2, 1.2.1, 1.2.0, 1.1.3, 1.1.2, 1.1.1, 1.1.0, 1.0.2, 1.0.1, 1.0, 0.24.2, 0.24.1, 0.24.0, 0.23.2, 0.23.1, 0.23.0, 0.22.2.post1, 0.22.1, 0.22, 0.21.3, 0.21.2, 0.21.1, 0.20.4, 0.20.3, 0.20.2, 0.20.1, 0.20.0, 0.19.2, 0.19.1, 0.19.0, 0.18.2, 0.18.1, 0.18, 0.17.1, 0.17, 0.16.1, 0.16.0, 0.15.2, 0.15.1, 0.15.0, 0.14.1, 0.14, 0.13.1, 0.13, 0.12.1, 0.12, 0.11, 0.10, 0.9\n#38 DONE 0.6s\n\n#39 [35/37] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#39 DONE 2.3s\n\n#40 [36/37] WORKDIR /testbed\n#40 DONE 0.2s\n\n#41 exporting to image\n#41 exporting layers\n#41 exporting layers 5.9s done\n#41 exporting manifest sha256:8c109120f9216676309baf53bd902fe36c3b90ebb41715c1c6fba88cb0bbb957 0.0s done\n#41 exporting config sha256:5df8a5bd50571592d3f94656d78ed92f80ae3185b8d4d26529dfb796d1d2c270 0.0s done\n#41 exporting attestation manifest sha256:2833e29bd2b983be9fb0919a3d678eb5d0523a87016d37379d203505db43420e 0.0s done\n#41 exporting manifest list sha256:0ba900e1b97c3b7563bfadb3a2ded9eae87867effacfc8ee67c6b4eb0875f6ae 0.0s done\n#41 naming to docker.io/library/bench-repo2run__rat50-pjy-crytic-slither:latest done\n#41 unpacking to docker.io/library/bench-repo2run__rat50-pjy-crytic-slither:latest\n#41 unpacking to docker.io/library/bench-repo2run__rat50-pjy-crytic-slither:latest 13.6s done\n#41 DONE 19.7s\n",
+  "build_log_tail": ".5, 1.17.4, 1.17.3, 1.17.2, 1.17.1, 1.17.0, 1.16.6, 1.16.5, 1.16.4, 1.16.3, 1.16.2, 1.16.1, 1.16.0, 1.15.4, 1.15.3, 1.15.2, 1.15.1, 1.15.0, 1.14.6, 1.14.5, 1.14.4, 1.14.3, 1.14.2, 1.14.1, 1.14.0, 1.13.3, 1.13.1, 1.13.0, 1.12.1, 1.12.0, 1.11.3, 1.11.2, 1.11.1, 1.11.0, 1.10.4, 1.10.2, 1.10.1, 1.10.0.post2, 1.9.3, 1.9.2, 1.9.1, 1.9.0, 1.8.2, 1.8.1, 1.8.0, 1.7.2, 1.7.1, 1.7.0, 1.6.2, 1.6.1, 1.6.0, 1.5.1, 1.5.0, 1.4.1, 1.3.0\n#37 0.863   INSTALLED: 2.2.6\n#37 0.863   LATEST:    2.2.6\n#37 DONE 1.0s\n\n#38 [34/37] RUN pip index versions scikit-learn --python-version 3.10 2>/dev/null | head -5\n#38 0.982 scikit-learn (1.7.2)\n#38 0.982 Available versions: 1.7.2, 1.7.1, 1.7.0, 1.6.1, 1.6.0, 1.5.2, 1.5.1, 1.5.0, 1.4.2, 1.4.1.post1, 1.4.0, 1.3.2, 1.3.1, 1.3.0, 1.2.2, 1.2.1, 1.2.0, 1.1.3, 1.1.2, 1.1.1, 1.1.0, 1.0.2, 1.0.1, 1.0, 0.24.2, 0.24.1, 0.24.0, 0.23.2, 0.23.1, 0.23.0, 0.22.2.post1, 0.22.1, 0.22, 0.21.3, 0.21.2, 0.21.1, 0.20.4, 0.20.3, 0.20.2, 0.20.1, 0.20.0, 0.19.2, 0.19.1, 0.19.0, 0.18.2, 0.18.1, 0.18, 0.17.1, 0.17, 0.16.1, 0.16.0, 0.15.2, 0.15.1, 0.15.0, 0.14.1, 0.14, 0.13.1, 0.13, 0.12.1, 0.12, 0.11, 0.10, 0.9\n#38 DONE 1.1s\n\n#39 [35/37] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#39 DONE 7.0s\n\n#40 [36/37] WORKDIR /testbed\n#40 DONE 0.3s\n\n#41 exporting to image\n#41 exporting layers\n#41 exporting layers 8.2s done\n#41 exporting manifest sha256:286884e3a9c0b485285e14baaf750ac14d6cc9c6b3af3ac3f4b3efe3d3d73825 done\n#41 exporting config sha256:3e1f232110e7278168e37fc02272dfa8ac094aa14b36dff124ce7b6fede0a53c done\n#41 exporting attestation manifest sha256:e90ddd34071a46303c020cb67ca2ec7ee46a75c97a2b0a6d4bd9cfabe36b588c done\n#41 exporting manifest list sha256:b7648d62be59832f9e78e4032dbd244e332e2dbb9481e51706de896dde4b3c13 done\n#41 naming to docker.io/library/bench-pjy-repo2run-crytic-slither:latest done\n#41 unpacking to docker.io/library/bench-pjy-repo2run-crytic-slither:latest\n#41 unpacking to docker.io/library/bench-pjy-repo2run-crytic-slither:latest 11.1s done\n#41 DONE 19.4s\n",
   "status": "collect_error",
   "py_test_files": 58,
   "collect_rc": 2,
@@ -14551,9 +14551,9 @@
   "ebsr": true,
   "pass_rate": 0.9458,
   "timed_out": false,
-  "image_size_mb": 647.9,
+  "image_size_mb": 2453.3,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__rat50-pjy-crytic-slither@sha256:0ba900e1b97c3b7563bfadb3a2ded9eae87867effacfc8ee67c6b4eb0875f6ae",
+  "image_digest": "bench-pjy-repo2run-crytic-slither@sha256:b7648d62be59832f9e78e4032dbd244e332e2dbb9481e51706de896dde4b3c13",
   "installed_pkg_count": 120,
   "tokens_in": 3549166,
   "tokens_out": 75517,
@@ -14561,27 +14561,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 117.64,
-  "test_s": 83.1,
+  "build_s": 142.37,
+  "test_s": 99.52,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 3549166,
     "tokens_out": 75517,
-    "llm_calls": 100,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 100
   },
   "error_surface": "",
   "error_surface_reason": "",

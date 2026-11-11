@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "perplexityai/perplexity-py",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "/{v}#frag-kwargs13]\n#10 7.872 tests/test_utils/test_proxy.py::test_recursive_proxy\n#10 7.872 tests/test_utils/test_proxy.py::test_isinstance_does_not_error\n#10 7.872 tests/test_utils/test_typing.py::test_extract_type_var\n#10 7.872 tests/test_utils/test_typing.py::test_extract_type_var_generic_subclass\n#10 7.872 tests/test_utils/test_typing.py::test_extract_type_var_multiple\n#10 7.872 tests/test_utils/test_typing.py::test_extract_type_var_generic_subclass_multiple\n#10 7.872 tests/test_utils/test_typing.py::test_extract_type_var_generic_subclass_different_ordering_multiple\n#10 7.872 \n#10 7.872 806 tests collected in 0.24s\n#10 8.911 tests/test_utils/test_typing.py::test_extract_type_var_generic_subclass_different_ordering_multiple\n#10 8.911 \n#10 8.911 806 tests collected in 0.24s\n#10 DONE 9.2s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.9s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 10.7s done\n#14 exporting manifest sha256:7af715c62d3909cbaadce08325a21eacc5bfed7a4e4a0649efd4565c6c95f767 done\n#14 exporting config sha256:2a345284179ac101a03767004c8f4267cde047ce4128fa0a32efcfd699e8cb9e done\n#14 exporting attestation manifest sha256:4c6f4647bff23af88d4197744a8f6a4a80a8e5c75a557adf3170c0be261d726a 0.0s done\n#14 exporting manifest list sha256:50dde4ab2b930fb960ff9a0d14aec1740e259b9d266f26a823095c32fdc39cd6 done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-perplexityai-perplexity-py:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-perplexityai-perplexity-py:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-perplexityai-perplexity-py:latest 2.8s done\n#14 DONE 13.6s\n",
+  "build_log_tail": " tests/test_utils/test_path.py::test_dot_segment_rejected[/v1/{v}?q=1-kwargs12]\n#10 9.705 tests/test_utils/test_path.py::test_dot_segment_rejected[/v1/{v}#frag-kwargs13]\n#10 9.705 tests/test_utils/test_proxy.py::test_recursive_proxy\n#10 9.705 tests/test_utils/test_proxy.py::test_isinstance_does_not_error\n#10 9.705 tests/test_utils/test_typing.py::test_extract_type_var\n#10 9.705 tests/test_utils/test_typing.py::test_extract_type_var_generic_subclass\n#10 9.705 tests/test_utils/test_typing.py::test_extract_type_var_multiple\n#10 9.705 tests/test_utils/test_typing.py::test_extract_type_var_generic_subclass_multiple\n#10 9.705 tests/test_utils/test_typing.py::test_extract_type_var_generic_subclass_different_ordering_multiple\n#10 9.705 \n#10 9.705 806 tests collected in 0.25s\n#10 10.86 tests/test_utils/test_typing.py::test_extract_type_var_generic_subclass_different_ordering_multiple\n#10 10.86 \n#10 10.86 806 tests collected in 0.26s\n#10 DONE 11.9s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 2.7s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 10.8s done\n#14 exporting manifest sha256:a8aca82f84578bd85a9c107db8296b987ddfe604968219f30b775f093b6507f3 0.0s done\n#14 exporting config sha256:c8c3fb334a29659ae55522ce4b240f17b2e161c97b5b35da24ab5613450f4eda 0.0s done\n#14 exporting attestation manifest sha256:375ecee437284ca4b912af32e39dbc6b9a7e06be2784642021ffd146f660c4ef done\n#14 exporting manifest list sha256:482b9b5ba6c16966b40a8e52d4a164a00f839b3b31e077df514b27d65829700a done\n#14 naming to docker.io/library/bench-setupx-perplexityai-perplexity-py:latest done\n#14 unpacking to docker.io/library/bench-setupx-perplexityai-perplexity-py:latest\n#14 unpacking to docker.io/library/bench-setupx-perplexityai-perplexity-py:latest 3.5s done\n#14 DONE 14.4s\n",
   "status": "executed",
   "py_test_files": 77,
   "collect_rc": 0,
@@ -12,6 +12,15 @@
   "collect_errors": [],
   "collect_error_count": 0,
   "collected_node_ids": [
+    "e2e/live/test_async_chat_completion.py::test_async_chat_completion",
+    "e2e/live/test_chat_completion.py::test_chat_completion",
+    "e2e/live/test_contextualized_embeddings.py::test_contextualized_embeddings",
+    "e2e/live/test_embeddings.py::test_embeddings",
+    "e2e/live/test_responses.py::test_responses",
+    "e2e/live/test_search.py::test_search",
+    "e2e/live/test_streaming_chat.py::test_streaming_chat",
+    "e2e/live/test_streaming_responses.py::test_streaming_responses",
+    "e2e/wheel_conformance_test.py::test_wheel_conformance",
     "tests/api_resources/async_/chat/test_completions.py::TestCompletions::test_method_create[loose]",
     "tests/api_resources/async_/chat/test_completions.py::TestCompletions::test_method_create_with_all_params[loose]",
     "tests/api_resources/async_/chat/test_completions.py::TestCompletions::test_raw_response_create[loose]",
@@ -1339,9 +1348,9 @@
   "ebsr": true,
   "pass_rate": 0.998,
   "timed_out": false,
-  "image_size_mb": 521.8,
+  "image_size_mb": 1999.2,
   "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-perplexityai-perplexity-py@sha256:50dde4ab2b930fb960ff9a0d14aec1740e259b9d266f26a823095c32fdc39cd6",
+  "image_digest": "bench-setupx-perplexityai-perplexity-py@sha256:482b9b5ba6c16966b40a8e52d4a164a00f839b3b31e077df514b27d65829700a",
   "installed_pkg_count": 0,
   "tokens_in": 417167,
   "tokens_out": 11337,
@@ -1349,8 +1358,8 @@
   "turns_used": 12,
   "cost_usd": null,
   "produce_s": 399.38,
-  "build_s": 29.54,
-  "test_s": 8.36,
+  "build_s": 33.2,
+  "test_s": 8.68,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -1385,19 +1394,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=299016a3f057dda9f50986ed72e5534559d3272e (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=299016a3f057dda9f50986ed72e5534559d3272e (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

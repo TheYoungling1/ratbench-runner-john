@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "resend/resend-python",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "when_no_content\n#10 7.909 tests/audiences_async_test.py::TestResendAudiencesAsync::test_audiences_get_async\n#10 7.909 tests/audiences_async_test.py::TestResendAudiencesAsync::test_audiences_get_async_raises_when_no_content\n#10 7.909 tests/audiences_async_test.py::TestResendAudiencesAsync::test_audiences_remove_async\n#10 7.909 tests/audiences_async_test.py::TestResendAudiencesAsync::test_audiences_remove_async_raises_when_no_content\n#10 7.909 tests/audiences_async_test.py::TestResendAudiencesAsync::test_audiences_list_async\n#10 7.909 tests/audiences_async_test.py::TestResendAudiencesAsync::test_audiences_list_async_raises_when_no_content\n#10 7.909 tests/audiences_test.py::TestResendAudiences::test_audiences_create\n#10 7.909 tests/audiences_test.py::TestResendAudiences::test_audiences_get\n#10 DONE 8.2s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.3s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 1.4s done\n#14 exporting manifest sha256:2c60d31b4f2420ed2ae5b1ab121a66e01d16f8b944c84fae88b7d5612f8b0a63 done\n#14 exporting config sha256:8f0e07f589640ade224f94efb429b37ead8e06f02aeca077e7b5d2a695d4ff54 0.0s done\n#14 exporting attestation manifest sha256:ed34fd7a2a2c1dab5b7af6cc1ea6b49fdc3b70a0bff4de802b1a6f728d8cb969 0.0s done\n#14 exporting manifest list sha256:da543a15acbe8233996e4d91dc2f88740a251a8e3cc3dceb21b109b0bb719a2f 0.0s done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-resend-resend-python:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-resend-resend-python:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-resend-resend-python:latest 0.6s done\n#14 DONE 2.1s\n",
+  "build_log_tail": "TestResendAudiencesAsync::test_audiences_create_async\n#10 7.382 tests/audiences_async_test.py::TestResendAudiencesAsync::test_audiences_create_async_raises_when_no_content\n#10 7.382 tests/audiences_async_test.py::TestResendAudiencesAsync::test_audiences_get_async\n#10 7.382 tests/audiences_async_test.py::TestResendAudiencesAsync::test_audiences_get_async_raises_when_no_content\n#10 7.382 tests/audiences_async_test.py::TestResendAudiencesAsync::test_audiences_remove_async\n#10 7.382 tests/audiences_async_test.py::TestResendAudiencesAsync::test_audiences_remove_async_raises_when_no_content\n#10 7.382 tests/audiences_async_test.py::TestResendAudiencesAsync::test_audiences_list_async\n#10 7.382 tests/audiences_async_test.py::TestResendAudiencesAsync::test_audiences_list_async_raises_when_no_content\n#10 7.382 tests/audiences_test.py::TestResendAudiences::test_audiences_create\n#10 7.382 tests/audiences_test.py::TestResendAudiences::test_audiences_get\n#10 DONE 8.5s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.6s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.1s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 1.6s done\n#14 exporting manifest sha256:d1215a5f434dc1e36071a9fabf9356c0b4371ea4317b141eb7fa943077913971 0.0s done\n#14 exporting config sha256:261b4809ccef1b9d9f61bee1d78a87dd995bcb5ccc0e4e9496af3548de34ba30 0.0s done\n#14 exporting attestation manifest sha256:2a798ac09666a6a0163a0649d7cda9886d086b9b4cd5369804ad5887fd6617e7 done\n#14 exporting manifest list sha256:d4b0d970b10410db30f0600af8c6075c1c3cc2a88299b8075ef3f73db79e1efd 0.0s done\n#14 naming to docker.io/library/bench-setupx-resend-resend-python:latest done\n#14 unpacking to docker.io/library/bench-setupx-resend-resend-python:latest\n#14 unpacking to docker.io/library/bench-setupx-resend-resend-python:latest 0.6s done\n#14 DONE 2.3s\n",
   "status": "executed",
   "py_test_files": 52,
   "collect_rc": 0,
@@ -1416,9 +1416,9 @@
   "ebsr": true,
   "pass_rate": 1.0,
   "timed_out": false,
-  "image_size_mb": 1563.7,
+  "image_size_mb": 1563.6,
   "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-resend-resend-python@sha256:da543a15acbe8233996e4d91dc2f88740a251a8e3cc3dceb21b109b0bb719a2f",
+  "image_digest": "bench-setupx-resend-resend-python@sha256:d4b0d970b10410db30f0600af8c6075c1c3cc2a88299b8075ef3f73db79e1efd",
   "installed_pkg_count": 23,
   "tokens_in": 137215,
   "tokens_out": 6469,
@@ -1426,8 +1426,8 @@
   "turns_used": 8,
   "cost_usd": null,
   "produce_s": 217.45,
-  "build_s": 13.44,
-  "test_s": 2.03,
+  "build_s": 14.53,
+  "test_s": 1.82,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -1462,19 +1462,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=fbc4223ce5c17bb1ff481c5e53740c45511ebfd2 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=fbc4223ce5c17bb1ff481c5e53740c45511ebfd2 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

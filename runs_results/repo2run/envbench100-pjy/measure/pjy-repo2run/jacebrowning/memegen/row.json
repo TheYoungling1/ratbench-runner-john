@@ -1,17 +1,15 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "jacebrowning/memegen",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "pression()\n#15 12.32 /tmp/tmp_kg3itu4/.venv/lib/python3.12/site-packages/setuptools/dist.py:765: BuildBackendWarning: License classifiers are deprecated.\n#15 12.32 !!\n#15 12.32 \n#15 12.32         ********************************************************************************\n#15 12.32         Please consider removing the following classifiers in favor of a SPDX license expression:\n#15 12.32 \n#15 12.32         License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)\n#15 12.32 \n#15 12.32         See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.\n#15 12.32         ********************************************************************************\n#15 12.32 \n#15 12.32 !!\n#15 12.32   self._finalize_license_expression()\n#15 12.36 Warning: The file chosen for install of requests 2.32.0 (requests-2.32.0-py3-none-any.whl) is yanked. Reason for being yanked: Yanked due to conflicts with CVE-2024-35195 mitigation\n#15 12.36 \n#15 12.36 Installing the current project: memegen (11.0)\n#15 DONE 12.8s\n\n#16 [13/15] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#16 DONE 2.0s\n\n#17 [14/15] WORKDIR /testbed\n#17 DONE 0.0s\n\n#18 exporting to image\n#18 exporting layers\n#18 exporting layers 19.7s done\n#18 exporting manifest sha256:9021f517c3a7b21bde99edbc4a8f5084aef43afdbba2822736e9a8f464595a38 done\n#18 exporting config sha256:d7875bb492c5598696655812ac2eeb75c5001ad77fe089c54b8ff83969408922 0.0s done\n#18 exporting attestation manifest sha256:d3d1541e1dfb0ecda6d14b767365545b2dff09d2b51b7353a6d2650ce9be9749 0.0s done\n#18 exporting manifest list sha256:56165f135f774d255981c798176398363ea9ff0e3b473fc6f79450785e4181d7 done\n#18 naming to docker.io/library/bench-repo2run__envbench100-pjy-jacebrowning-memegen:latest done\n#18 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-jacebrowning-memegen:latest\n#18 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-jacebrowning-memegen:latest 9.3s done\n#18 DONE 29.1s\n",
+  "build_log_tail": "14.91   self._finalize_license_expression()\n#15 15.17 /tmp/tmplbr1avww/.venv/lib/python3.12/site-packages/setuptools/dist.py:765: BuildBackendWarning: License classifiers are deprecated.\n#15 15.17 !!\n#15 15.17 \n#15 15.17         ********************************************************************************\n#15 15.17         Please consider removing the following classifiers in favor of a SPDX license expression:\n#15 15.17 \n#15 15.17         License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)\n#15 15.17 \n#15 15.17         See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.\n#15 15.17         ********************************************************************************\n#15 15.17 \n#15 15.17 !!\n#15 15.17   self._finalize_license_expression()\n#15 15.23 Warning: The file chosen for install of requests 2.32.0 (requests-2.32.0-py3-none-any.whl) is yanked. Reason for being yanked: Yanked due to conflicts with CVE-2024-35195 mitigation\n#15 15.23 \n#15 15.23 Installing the current project: memegen (11.0)\n#15 DONE 16.0s\n\n#16 [13/15] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#16 DONE 1.6s\n\n#17 [14/15] WORKDIR /testbed\n#17 DONE 0.1s\n\n#18 exporting to image\n#18 exporting layers\n#18 exporting layers 23.7s done\n#18 exporting manifest sha256:056ed361efe4f945fee2655f7ebe185df4b59b9148d1dc9780d8e968ea04c529 0.0s done\n#18 exporting config sha256:bcfc508f7a4bfd99ab84cbb001bfd23ae872ec518207f5af05f7ddeb8621841a 0.0s done\n#18 exporting attestation manifest sha256:376bcc8945839d9e0dc65dbd7153579f7d7648bfc6eb6716b5d887072cd9c35e 0.0s done\n#18 exporting manifest list sha256:f25ebad41036f31b3c75ed43998331ded371a993fffa6947c98e8096480c75e5 done\n#18 naming to docker.io/library/bench-pjy-repo2run-jacebrowning-memegen:latest done\n#18 unpacking to docker.io/library/bench-pjy-repo2run-jacebrowning-memegen:latest\n#18 unpacking to docker.io/library/bench-pjy-repo2run-jacebrowning-memegen:latest 13.9s done\n#18 DONE 37.7s\n",
   "status": "collect_error",
   "py_test_files": 15,
   "collect_rc": 4,
   "collect_clean": false,
-  "collect_errors": [
-    "E   ModuleNotFoundError: No module named 'log'"
-  ],
+  "collect_errors": [],
   "collect_error_count": 0,
   "collected_node_ids": [],
   "executed": false,
@@ -26,9 +24,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 5864.6,
+  "image_size_mb": 5864.5,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-jacebrowning-memegen@sha256:56165f135f774d255981c798176398363ea9ff0e3b473fc6f79450785e4181d7",
+  "image_digest": "bench-pjy-repo2run-jacebrowning-memegen@sha256:f25ebad41036f31b3c75ed43998331ded371a993fffa6947c98e8096480c75e5",
   "installed_pkg_count": 26,
   "tokens_in": 63508,
   "tokens_out": 2177,
@@ -36,8 +34,8 @@
   "turns_used": 6,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 94.4,
-  "test_s": 0.28,
+  "build_s": 116.6,
+  "test_s": 0.46,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -45,19 +43,7 @@
     "tokens_in": 63508,
     "tokens_out": 2177,
     "llm_calls": null,
-    "turns_used": 6,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 6
   },
   "error_surface": "",
   "error_surface_reason": "",

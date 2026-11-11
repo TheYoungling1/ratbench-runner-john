@@ -1,10 +1,10 @@
 {
-  "agent": "rat__envbench100-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "basxsoftwareassociation/basxconnect",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ango-haystack-3.4.0 django-money-3.6.1 django-phonenumber-field-8.5.0 django-simple-history-3.13.0 django_celery_results-2.6.0 djangoql-0.19.1 djangorestframework-3.18.1 et_xmlfile-2.0.0 htmlgenerator-1.2.33 httpcore2-2.12.0 httpx2-2.12.0 hypothesis-6.168.0 idna-3.19 jiter-0.16.0 kombu-5.6.2 openai-3.11.0 openpyxl-3.1.5 persisting-theory-1.0 phonenumbers-9.0.39 pillow-12.3.0 ply-3.11 prompt_toolkit-3.0.53 py-moneyed-3.0 pytest-django-4.14.0 python-dateutil-2.9.0.post0 pytz-2026.3.post1 regex-2026.9.3 requests-2.34.2 six-1.17.0 sortedcontainers-2.4.0 sqlparse-0.6.0 tablib-3.10.0 tzdata-2026.3 tzlocal-5.4.4 urllib3-2.7.0 vine-5.1.0 wcwidth-0.8.3\n#18 78.07 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 78.33 \n#18 78.33 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 78.33 [notice] To update, run: pip install --upgrade pip\n#18 DONE 79.5s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.4s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 10.8s done\n#21 exporting manifest sha256:c91091519d864270f52c07c36b385ce326c2ca811a48a699bb6976b3bcef797c done\n#21 exporting config sha256:50634a2a9f579e45d721189ccc3e9290e044a3e833ce4ee7544826686851cc53 done\n#21 exporting attestation manifest sha256:5755279fedb563db01c6d4634c41637b1b9adcc16dce5b5e43e44bb1afbb6562 0.0s done\n#21 exporting manifest list sha256:bb456e482f3a33a5388d9f6df75b689baf883d1a1eff0d4a02ba6e981c7f7cb2 done\n#21 naming to docker.io/library/bench-rat__envbench100-pjy-basxsoftwareassociation-basxconnect:latest done\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-basxsoftwareassociation-basxconnect:latest\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-basxsoftwareassociation-basxconnect:latest 5.7s done\n#21 DONE 16.6s\n",
+  "build_log_tail": "ack-3.4.0 django-money-3.6.1 django-phonenumber-field-8.5.0 django-simple-history-3.13.0 django_celery_results-2.6.0 djangoql-0.19.1 djangorestframework-3.18.1 et_xmlfile-2.0.0 htmlgenerator-1.2.33 httpcore2-2.12.0 httpx2-2.12.0 hypothesis-6.168.0 idna-3.19 jiter-0.16.0 kombu-5.6.2 openai-3.11.0 openpyxl-3.1.5 persisting-theory-1.0 phonenumbers-9.0.39 pillow-12.3.0 ply-3.11 prompt_toolkit-3.0.53 py-moneyed-3.0 pytest-django-4.14.0 python-dateutil-2.9.0.post0 pytz-2026.3.post1 regex-2026.9.3 requests-2.34.2 six-1.17.0 sortedcontainers-2.4.0 sqlparse-0.6.0 tablib-3.10.0 tzdata-2026.3 tzlocal-5.4.4 urllib3-2.7.0 vine-5.1.0 wcwidth-0.8.3\n#18 156.6 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 156.8 \n#18 156.8 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 156.8 [notice] To update, run: pip install --upgrade pip\n#18 DONE 157.7s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.6s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 11.4s done\n#21 exporting manifest sha256:fcf3bd6f66d0f6f7985000309b0a7b9dbff40b215ea4ae1021034feea99bd906 0.0s done\n#21 exporting config sha256:076ffe88d7139f1205d637239d8d3011289dda2b8e71141658b5bd7bd8a0d3b7 0.0s done\n#21 exporting attestation manifest sha256:94d4f6b6923af16cf0b5c7a453f60c2a2da27c97f858254044fc2b6745698dae 0.0s done\n#21 exporting manifest list sha256:54ca0f6d7f848480cfc05042fd25a82759c5a91a2d1b4bcd467e01763e037a19 0.0s done\n#21 naming to docker.io/library/bench-pjy-rat-dockerfile-basxsoftwareassociation-basxconnect:latest done\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-basxsoftwareassociation-basxconnect:latest\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-basxsoftwareassociation-basxconnect:latest 6.3s done\n#21 DONE 17.7s\n",
   "status": "collect_error",
   "py_test_files": 1,
   "collect_rc": 2,
@@ -26,9 +26,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 152.3,
+  "image_size_mb": 782.0,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__envbench100-pjy-basxsoftwareassociation-basxconnect@sha256:bb456e482f3a33a5388d9f6df75b689baf883d1a1eff0d4a02ba6e981c7f7cb2",
+  "image_digest": "bench-pjy-rat-dockerfile-basxsoftwareassociation-basxconnect@sha256:54ca0f6d7f848480cfc05042fd25a82759c5a91a2d1b4bcd467e01763e037a19",
   "installed_pkg_count": 84,
   "tokens_in": 259390,
   "tokens_out": 3870,
@@ -36,27 +36,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 100.83,
-  "test_s": 0.64,
+  "build_s": 180.45,
+  "test_s": 0.81,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 259390,
     "tokens_out": 3870,
-    "llm_calls": 24,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 24
   },
   "error_surface": "",
   "error_surface_reason": "",

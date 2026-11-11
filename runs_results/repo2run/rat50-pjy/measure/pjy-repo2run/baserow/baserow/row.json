@@ -1,11 +1,11 @@
 {
-  "agent": "repo2run__rat50-pjy",
+  "agent": "pjy-repo2run",
   "repo": "baserow/baserow",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "pip list 2>/dev/null | grep -iE 'pytest|syrupy'\n#23 0.655 pytest                                       9.1.1\n#23 0.655 pytest-asyncio                               1.3.0\n#23 0.655 pytest-cov                                   7.0.0\n#23 0.655 pytest-django                                4.12.0\n#23 0.655 pytest-env                                   1.2.0\n#23 0.655 pytest-html                                  4.2.0\n#23 0.655 pytest-icdiff                                0.9\n#23 0.655 pytest-metadata                              3.1.1\n#23 0.655 pytest-mock                                  3.15.1\n#23 0.655 pytest-ordering                              0.6\n#23 0.655 pytest-retry                                 1.7.0\n#23 0.655 pytest-split                                 0.11.0\n#23 0.655 pytest-testmon                               2.2.0\n#23 0.655 pytest-unordered                             0.7.0\n#23 0.655 pytest-xdist                                 3.8.0\n#23 DONE 0.7s\n\n#24 [21/23] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#24 DONE 5.9s\n\n#25 [22/23] WORKDIR /testbed\n#25 DONE 0.1s\n\n#26 exporting to image\n#26 exporting layers\n#26 exporting layers 35.7s done\n#26 exporting manifest sha256:3eed3f255583a2231b68a19f27c01e56ca43dd64f370d777ea1082a05f81f812 done\n#26 exporting config sha256:58f042a56dbc24b14dec12e1e9e699945f2c025e8f44a358831f7c54e4ff9560 done\n#26 exporting attestation manifest sha256:009b510679805e613444f977740f077afde839b8a6f0004121944e0389a52f2e 0.0s done\n#26 exporting manifest list sha256:baecea66aeaeee58c0b59d7a065dbecad61638a8414d0e125add47ce337ac1d2 done\n#26 naming to docker.io/library/bench-repo2run__rat50-pjy-baserow-baserow:latest done\n#26 unpacking to docker.io/library/bench-repo2run__rat50-pjy-baserow-baserow:latest\n#26 unpacking to docker.io/library/bench-repo2run__rat50-pjy-baserow-baserow:latest 16.7s done\n#26 DONE 52.5s\n\n \u001b[33m1 warning found (use docker --debug to expand):\n\u001b[0m - UndefinedVar: Usage of undefined variable '$PYTHONPATH' (line 22)\n",
-  "status": "collect_error",
+  "build_log_tail": "chdog==6.0.0 argh==0.31.3 snoop==0.6.0 debugpy==1.8.21 graphviz==0.21 backports.cached-property==1.0.2 coverage==7.13.5 pytest-html==4.2.0 pytest-cov==7.0.0 pytest-split==0.11.0 pytest-unordered==0.7.0 pytest-retry==1.7.0 pytest-testmon==2.2.0\n#18 CACHED\n\n#19 [ 7/23] RUN mkdir /repo && cd /repo && git init && git remote add origin https://github.com/baserow/baserow.git\n#19 CACHED\n\n#20 [11/23] RUN python --version\n#20 CACHED\n\n#21 [ 4/23] RUN pip install pytest pytest-xdist\n#21 CACHED\n\n#22 [ 9/23] RUN cd /repo && for attempt in 1 2 3; do git -c http.version=HTTP/1.1 fetch --depth=1 --filter=blob:none origin 0621bcde8f27cc08765147d19e20c42611de51fa && git checkout --detach FETCH_HEAD && break; git reset --hard; git clean -fdx; [ \"$attempt\" = 3 ] && exit 1; sleep $((attempt * 5)); done\n#22 CACHED\n\n#23 [20/23] RUN cd /repo && pip list 2>/dev/null | grep -iE 'pytest|syrupy'\n#23 CACHED\n\n#24 [21/23] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#24 DONE 6.4s\n\n#25 [22/23] WORKDIR /testbed\n#25 DONE 0.1s\n\n#26 exporting to image\n#26 exporting layers\n#26 exporting layers 14.8s done\n#26 exporting manifest sha256:1a0548c366344acacd6d648ef21cbe499becdb9f748bbdc257954b611b4d07b8\n#26 exporting manifest sha256:1a0548c366344acacd6d648ef21cbe499becdb9f748bbdc257954b611b4d07b8 0.0s done\n#26 exporting config sha256:17c4e8e1a9e95f5fb7962b9046b44d387cf2f0db98ef03ebd42cb5d3e1798d88 done\n#26 exporting attestation manifest sha256:d1b3b27d1e108ca2be55f45975501629b976f9f1488f1e9efa9d565384e9d29c 0.0s done\n#26 exporting manifest list sha256:2806b1772f4da0abc79506c13709ea02280104eb21e05ec1ab232e5abd462b21 0.0s done\n#26 naming to docker.io/library/bench-pjy-repo2run-baserow-baserow:latest done\n#26 unpacking to docker.io/library/bench-pjy-repo2run-baserow-baserow:latest\n#26 unpacking to docker.io/library/bench-pjy-repo2run-baserow-baserow:latest 21.4s done\n#26 DONE 36.3s\n\n \u001b[33m1 warning found (use docker --debug to expand):\n\u001b[0m - UndefinedVar: Usage of undefined variable '$PYTHONPATH' (line 22)\n",
+  "status": "timed_out",
   "py_test_files": 688,
   "collect_rc": 2,
   "collect_clean": false,
@@ -22525,10 +22525,10 @@
   ],
   "ebsr": true,
   "pass_rate": 0.0114,
-  "timed_out": false,
-  "image_size_mb": 1348.6,
+  "timed_out": true,
+  "image_size_mb": 4283.7,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__rat50-pjy-baserow-baserow@sha256:baecea66aeaeee58c0b59d7a065dbecad61638a8414d0e125add47ce337ac1d2",
+  "image_digest": "bench-pjy-repo2run-baserow-baserow@sha256:2806b1772f4da0abc79506c13709ea02280104eb21e05ec1ab232e5abd462b21",
   "installed_pkg_count": 263,
   "tokens_in": 3591045,
   "tokens_out": 84418,
@@ -22536,27 +22536,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 159.13,
-  "test_s": 1565.54,
+  "build_s": 44.08,
+  "test_s": 1800.19,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 3591045,
     "tokens_out": 84418,
-    "llm_calls": 100,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 100
   },
   "error_surface": "",
   "error_surface_reason": "",

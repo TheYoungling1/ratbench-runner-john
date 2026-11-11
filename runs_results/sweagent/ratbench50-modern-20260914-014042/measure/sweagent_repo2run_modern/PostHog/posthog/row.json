@@ -1,10 +1,10 @@
 {
-  "agent": "sweagent__ratbench50-modern-20260914-014042",
+  "agent": "sweagent_repo2run_modern",
   "repo": "PostHog/posthog",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "production_event_activation.py::TestTeamsMeetingCriterion::test_team_with_no_events_does_not_qualify\n#13 113.0 posthog/models/team/test_production_event_activation.py::TestTeamsMeetingCriterion::test_web_lib_users_do_not_count_toward_server_leg\n#13 113.0 posthog/models/team/test_production_event_activation.py::TestTeamsMeetingCriterion::test_web_signal_carries_earliest_production_event_timestamp\n#13 113.0 posthog/models/team/test_production_event_activation.py::TestMarkTeamsIngestedProductionEvent::test_already_flagged_team_is_noop\n#13 113.0 posthog/models/team/test_production_event_activation.py::TestMarkTeamsIngestedProductionEvent::test_capture_failure_for_one_team_does_not_drop_the_rest\n#13 113.0 posthog/models/team/test_production_event_activation.py::TestMarkTeamsIngestedProductionEvent::test_empty_input_returns_zero\n#13 113.0 posthog/models/team/test_pro\n#13 113.0 [output clipped, log limit 2MiB reached]\n#13 DONE 150.5s\n\n#14 [11/13] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#14 DONE 112.3s\n\n#15 [12/13] WORKDIR /testbed\n#15 DONE 1.7s\n\n#16 [13/13] RUN git config --global --add safe.directory /testbed\n#16 DONE 0.3s\n\n#17 exporting to image\n#17 exporting layers\n#17 exporting layers 483.2s done\n#17 exporting manifest sha256:550e1211939873d8195985ab50cd0315ddece3c0cf5aff9152ee3c30a17d21c4 done\n#17 exporting config sha256:0793468e5f9dcd8aee9cacc192e8a8cb25a75de0be47fb95b123b8f39c0a7c4d done\n#17 exporting attestation manifest sha256:91df3ba7155797d1a03459b8739deedcbee4bd09d8fe2332e3b5a2f5fbdefd1b 0.0s done\n#17 exporting manifest list sha256:4e6e2c3ec15b7a9be91f53daae1d75a53e43f371fe5974fba610b26499b72840 0.0s done\n#17 naming to docker.io/library/bench-sweagent__ratbench50-modern-20260914-014042-posthog-posthog:latest done\n#17 unpacking to docker.io/library/bench-sweagent__ratbench50-modern-20260914-014042-posthog-posthog:latest\n#17 unpacking to docker.io/library/bench-sweagent__ratbench50-modern-20260914-014042-posthog-posthog:latest 175.5s done\n#17 DONE 658.8s\n",
+  "build_log_tail": "ingle_production_event_qualifies\n#13 112.4 posthog/models/team/test_production_event_activation.py::TestTeamsMeetingCriterion::test_team_with_no_events_does_not_qualify\n#13 112.4 posthog/models/team/test_production_event_activation.py::TestTeamsMeetingCriterion::test_web_lib_users_do_not_count_toward_server_leg\n#13 112.4 posthog/models/team/test_production_event_activation.py::TestTeamsMeetingCriterion::test_web_signal_carries_earliest_production_event_timestamp\n#13 112.4 posthog/models/team/test_production_event_activation.py::TestMarkTeamsIngestedProductionEvent::test_already_flagged_team_is_noop\n#13 112.4 posthog/models/team/test_production_event_activation.py::TestMarkTeamsIngestedProductionEvent::test_capture_failure_for_one_team_does_not_drop_the_rest\n#13 112.4 posthog/models/team/test_production_event_activation.py::TestMarkTeamsIngestedProductionEvent::test_empty_input_returns_zero\n#13 112.4 posthog/models/team/test_pro\n#13 112.4 [output clipped, log limit 2MiB reached]\n#13 DONE 156.3s\n\n#14 [11/13] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#14 DONE 55.0s\n\n#15 [12/13] WORKDIR /testbed\n#15 DONE 1.5s\n\n#16 [13/13] RUN git config --global --add safe.directory /testbed\n#16 DONE 0.2s\n\n#17 exporting to image\n#17 exporting layers\n#17 exporting layers 295.4s done\n#17 exporting manifest sha256:eb386c01a0d79987c3edea080eff0400e053360f79dbdf67162f8d56d5e8b040 done\n#17 exporting config sha256:d1a3c16e29c1f1be5dd09d364dc37263a6131bc1d880581857430184457eaa73 done\n#17 exporting attestation manifest sha256:0b1cf5fd7c6a09e5d3439dd7b4998318f50938de44e298f98a5a48222fc42e6b done\n#17 exporting manifest list sha256:296420cee7b4e58645aea6ffdc03eddf69d74d2ed5b36caf6ec60010e56676c2 done\n#17 naming to docker.io/library/bench-sweagent_repo2run_modern-posthog-posthog:latest done\n#17 unpacking to docker.io/library/bench-sweagent_repo2run_modern-posthog-posthog:latest\n#17 unpacking to docker.io/library/bench-sweagent_repo2run_modern-posthog-posthog:latest 115.9s done\n#17 DONE 411.4s\n",
   "status": "collect_error",
   "py_test_files": 6650,
   "collect_rc": 4,
@@ -24,9 +24,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 19212.4,
-  "image_delta_mb": null,
-  "image_digest": "bench-sweagent__ratbench50-modern-20260914-014042-posthog-posthog@sha256:4e6e2c3ec15b7a9be91f53daae1d75a53e43f371fe5974fba610b26499b72840",
+  "image_size_mb": 18373.7,
+  "image_delta_mb": 17986.1,
+  "image_digest": "bench-sweagent_repo2run_modern-posthog-posthog@sha256:296420cee7b4e58645aea6ffdc03eddf69d74d2ed5b36caf6ec60010e56676c2",
   "installed_pkg_count": 13,
   "tokens_in": 2039452.0,
   "tokens_out": 1050.0,
@@ -34,8 +34,8 @@
   "turns_used": 80,
   "cost_usd": 0.09040521399999997,
   "produce_s": 2026.47,
-  "build_s": 1274.62,
-  "test_s": 0.24,
+  "build_s": 927.6,
+  "test_s": 0.3,
   "meta": {
     "contract_version": 1,
     "producer": "sweagent_repo2run_modern",
@@ -69,19 +69,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=682044c77671509a4cbe30b5adfe352678e5a332 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=682044c77671509a4cbe30b5adfe352678e5a332 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "rat__envbench100-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "marimo-team/marimo",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "bformat-5.11.1 numpy-1.26.4 openai-1.12.0 pandas-2.3.3 parso-0.8.7 pathspec-1.1.1 pexpect-4.9.0 pickleshare-0.7.5 pillow-10.2.0 platformdirs-4.11.8 polars-0.20.30 prompt_toolkit-3.0.53 psutil-7.2.2 psygnal-0.15.1 ptyprocess-0.7.0 pure_eval-0.2.3 pyarrow-15.0.2 pymdown-extensions-10.8.1 pyparsing-3.3.2 pytest-7.4.4 pytest-asyncio-0.23.8 pytest-codecov-0.5.1 pytest-cov-7.1.0 python-dateutil-2.9.0.post0 pytokens-0.4.1 pytz-2026.3.post1 referencing-0.37.0 requests-2.34.2 rpds-py-0.30.0 six-1.17.0 stack-data-0.6.3 starlette-0.37.2 tomlkit-0.15.1 toolz-1.1.0 tqdm-4.70.0 traitlets-5.16.1 tzdata-2026.3 urllib3-2.7.0 uvicorn-0.52.4 watchdog-6.0.0 wcwidth-0.8.3 websockets-12.0 widgetsnbextension-4.0.16\n#18 200.1 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 200.2 \n#18 200.2 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 200.2 [notice] To update, run: pip install --upgrade pip\n#18 DONE 201.3s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.8s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.1s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 24.9s done\n#21 exporting manifest sha256:9e8d5977f36ef5bc22462240d861192fabcca9bb98b5bfb8bc68737ac22184a0 done\n#21 exporting config sha256:614de3643d9e3d1bab9ed3625085cf9b6ed10cdcad5b59ba0193e0ec166b2200 done\n#21 exporting attestation manifest sha256:d8feb7bd3f13ff76c1697f1f015faf33d953bfaf8ee29fbf3c2867f58db2285b 0.0s done\n#21 exporting manifest list sha256:ded971f053f3f4521221ff89207034aa28246d8cc1193ce13a02277dba291c0d done\n#21 naming to docker.io/library/bench-rat__envbench100-pjy-marimo-team-marimo:latest done\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-marimo-team-marimo:latest\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-marimo-team-marimo:latest 9.3s done\n#21 DONE 34.3s\n",
+  "build_log_tail": "6.0 nbformat-5.11.1 numpy-1.26.4 openai-1.12.0 pandas-2.3.3 parso-0.8.7 pathspec-1.1.1 pexpect-4.9.0 pickleshare-0.7.5 pillow-10.2.0 platformdirs-4.11.8 polars-0.20.30 prompt_toolkit-3.0.53 psutil-7.2.2 psygnal-0.15.1 ptyprocess-0.7.0 pure_eval-0.2.3 pyarrow-15.0.2 pymdown-extensions-10.8.1 pyparsing-3.3.2 pytest-7.4.4 pytest-asyncio-0.23.8 pytest-codecov-0.5.1 pytest-cov-7.1.0 python-dateutil-2.9.0.post0 pytokens-0.4.1 pytz-2026.3.post1 referencing-0.37.0 requests-2.34.2 rpds-py-0.30.0 six-1.17.0 stack-data-0.6.3 starlette-0.37.2 tomlkit-0.15.1 toolz-1.1.0 tqdm-4.70.0 traitlets-5.16.1 tzdata-2026.3 urllib3-2.7.0 uvicorn-0.52.4 watchdog-6.0.0 wcwidth-0.8.3 websockets-12.0 widgetsnbextension-4.0.16\n#18 228.7 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 228.8 \n#18 228.8 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 228.8 [notice] To update, run: pip install --upgrade pip\n#18 DONE 230.5s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.9s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.1s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 27.2s done\n#21 exporting manifest sha256:d710789897fdf8b0e0bea8f32f3c7f546245f1526bc26e2cd2c7ecaeb62870eb done\n#21 exporting config sha256:5b2d22fd6cf9e9e7e774d2f38416d60bccb45eccd9dcac35c8e45e2f7d92f3dd done\n#21 exporting attestation manifest sha256:79f7ca3ddac275534814320cea35db4445dbcb1235c5afe371a304d9706093f6 0.0s done\n#21 exporting manifest list sha256:d688d3f4089242beb562b16d4913634dc2176395087f9977c3b822d503cffcfd done\n#21 naming to docker.io/library/bench-pjy-rat-dockerfile-marimo-team-marimo:latest done\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-marimo-team-marimo:latest\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-marimo-team-marimo:latest 11.2s done\n#21 DONE 38.5s\n",
   "status": "collect_error",
   "py_test_files": 146,
   "collect_rc": 2,
@@ -29,9 +29,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 516.6,
+  "image_size_mb": 1700.6,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__envbench100-pjy-marimo-team-marimo@sha256:ded971f053f3f4521221ff89207034aa28246d8cc1193ce13a02277dba291c0d",
+  "image_digest": "bench-pjy-rat-dockerfile-marimo-team-marimo@sha256:d688d3f4089242beb562b16d4913634dc2176395087f9977c3b822d503cffcfd",
   "installed_pkg_count": 105,
   "tokens_in": 2298768,
   "tokens_out": 26099,
@@ -39,27 +39,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 270.82,
-  "test_s": 0.75,
+  "build_s": 276.79,
+  "test_s": 0.89,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 2298768,
     "tokens_out": 26099,
-    "llm_calls": 69,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 69
   },
   "error_surface": "",
   "error_surface_reason": "",

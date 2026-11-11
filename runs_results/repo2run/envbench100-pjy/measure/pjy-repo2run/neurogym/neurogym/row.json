@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "neurogym/neurogym",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "t log --all --oneline -S \"class Combine\" -- neurogym/ | head -5\n#49 0.267 3dd745b1 rm old wrappers\n#49 0.267 836240bd minor\n#49 0.267 c30b6233 wrapper for transfer learning (1st commit)\n#49 0.267 5692931f modifications in combine wrapper\n#49 DONE 0.3s\n\n#50 [47/52] RUN cd /repo && git status\n#50 0.206 HEAD detached at ee0a140c\n#50 0.206 nothing to commit, working tree clean\n#50 DONE 0.2s\n\n#51 [48/52] RUN cd /repo && git rev-parse --show-toplevel\n#51 0.160 /repo\n#51 DONE 0.2s\n\n#52 [49/52] RUN cd /repo && git ls-tree -r --name-only 3dd745b1^ -- neurogym/wrappers/ | head -60\n#52 0.169 neurogym/wrappers/__init__.py\n#52 0.169 neurogym/wrappers/block.py\n#52 0.169 neurogym/wrappers/combine.py\n#52 0.169 neurogym/wrappers/identity.py\n#52 0.169 neurogym/wrappers/monitor.py\n#52 0.169 neurogym/wrappers/noise.py\n#52 0.169 neurogym/wrappers/pass_action.py\n#52 0.169 neurogym/wrappers/pass_reward.py\n#52 0.169 neurogym/wrappers/reaction_time.py\n#52 0.169 neurogym/wrappers/side_bias.py\n#52 0.169 neurogym/wrappers/transfer_learning.py\n#52 0.169 neurogym/wrappers/trial_hist.py\n#52 DONE 0.2s\n\n#53 [50/52] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#53 DONE 0.3s\n\n#54 [51/52] WORKDIR /testbed\n#54 DONE 0.0s\n\n#55 exporting to image\n#55 exporting layers\n#55 exporting layers 8.6s done\n#55 exporting manifest sha256:3c729597617f29b6ec6605a4bf11d64568974b784c73a2e7cbba922f6d05e598 done\n#55 exporting config sha256:57781b30c637ac553e206527ee39069ad74573a542cd3e52f95480f0e8e961dd done\n#55 exporting attestation manifest sha256:11620a70915c2eec444b4b994ec9e7be19aa8415c019c3a38a1c04606f4a5ad0 done\n#55 exporting manifest list sha256:8bc9633fd885872afc76b015b9083e20da03c0a023841516329ec6f7ab5f67c4 done\n#55 naming to docker.io/library/bench-repo2run__envbench100-pjy-neurogym-neurogym:latest done\n#55 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-neurogym-neurogym:latest\n#55 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-neurogym-neurogym:latest 3.7s done\n#55 DONE 12.4s\n",
+  "build_log_tail": "s\n\n#49 [46/52] RUN cd /repo && git log --all --oneline -S \"class Combine\" -- neurogym/ | head -5\n#49 0.320 3dd745b1 rm old wrappers\n#49 0.320 836240bd minor\n#49 0.320 c30b6233 wrapper for transfer learning (1st commit)\n#49 0.320 5692931f modifications in combine wrapper\n#49 DONE 0.4s\n\n#50 [47/52] RUN cd /repo && git status\n#50 0.172 HEAD detached at ee0a140c\n#50 0.172 nothing to commit, working tree clean\n#50 DONE 0.2s\n\n#51 [48/52] RUN cd /repo && git rev-parse --show-toplevel\n#51 0.223 /repo\n#51 DONE 0.2s\n\n#52 [49/52] RUN cd /repo && git ls-tree -r --name-only 3dd745b1^ -- neurogym/wrappers/ | head -60\n#52 0.182 neurogym/wrappers/__init__.py\n#52 0.182 neurogym/wrappers/block.py\n#52 0.182 neurogym/wrappers/combine.py\n#52 0.182 neurogym/wrappers/identity.py\n#52 0.182 neurogym/wrappers/monitor.py\n#52 0.182 neurogym/wrappers/noise.py\n#52 0.182 neurogym/wrappers/pass_action.py\n#52 0.182 neurogym/wrappers/pass_reward.py\n#52 0.182 neurogym/wrappers/reaction_time.py\n#52 0.182 neurogym/wrappers/side_bias.py\n#52 0.182 neurogym/wrappers/transfer_learning.py\n#52 0.182 neurogym/wrappers/trial_hist.py\n#52 DONE 0.2s\n\n#53 [50/52] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#53 DONE 0.4s\n\n#54 [51/52] WORKDIR /testbed\n#54 DONE 0.0s\n\n#55 exporting to image\n#55 exporting layers\n#55 exporting layers 10.8s done\n#55 exporting manifest sha256:ef983115e97a5d73f38d02f401bc2fe6a5ee5c7ac871049cc1a2914653ccab38 done\n#55 exporting config sha256:ef38714fcc6e23dd9744abfcd331f3e9a7d5a7fd74bde28e4859f3f7fb5c79db 0.0s done\n#55 exporting attestation manifest sha256:e5ee5c3f65387897b73feea1c55b6d331fe54eb92d70dfda010e08c07a5f1be6 done\n#55 exporting manifest list sha256:16a517fb4b3656cd3a1bebefe9feaaac57cd782d720bf8d6082bd599e98bc2e7 done\n#55 naming to docker.io/library/bench-pjy-repo2run-neurogym-neurogym:latest done\n#55 unpacking to docker.io/library/bench-pjy-repo2run-neurogym-neurogym:latest\n#55 unpacking to docker.io/library/bench-pjy-repo2run-neurogym-neurogym:latest 3.7s done\n#55 DONE 14.5s\n",
   "status": "collect_error",
   "py_test_files": 8,
   "collect_rc": 2,
@@ -89,7 +89,7 @@
   "timed_out": false,
   "image_size_mb": 2417.5,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-neurogym-neurogym@sha256:8bc9633fd885872afc76b015b9083e20da03c0a023841516329ec6f7ab5f67c4",
+  "image_digest": "bench-pjy-repo2run-neurogym-neurogym@sha256:16a517fb4b3656cd3a1bebefe9feaaac57cd782d720bf8d6082bd599e98bc2e7",
   "installed_pkg_count": 62,
   "tokens_in": 3545471,
   "tokens_out": 75359,
@@ -97,8 +97,8 @@
   "turns_used": 100,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 52.02,
-  "test_s": 27.96,
+  "build_s": 56.55,
+  "test_s": 28.18,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -106,19 +106,7 @@
     "tokens_in": 3545471,
     "tokens_out": 75359,
     "llm_calls": null,
-    "turns_used": 100,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 100
   },
   "error_surface": "",
   "error_surface_reason": "",

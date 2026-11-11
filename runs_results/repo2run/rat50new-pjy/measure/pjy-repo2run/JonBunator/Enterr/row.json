@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__rat50new-pjy",
+  "agent": "pjy-repo2run",
   "repo": "JonBunator/Enterr",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "0)\n#32 0.737 Collecting mypy-extensions>=0.3.0 (from typing-inspect>=0.4.0->fastapi-filters==0.3.2)\n#32 0.748   Downloading mypy_extensions-1.1.0-py3-none-any.whl.metadata (1.1 kB)\n#32 0.773 Downloading fastapi_filters-0.3.2-py3-none-any.whl (21 kB)\n#32 0.787 Downloading typing_inspect-0.9.0-py3-none-any.whl (8.8 kB)\n#32 0.800 Downloading mypy_extensions-1.1.0-py3-none-any.whl (5.0 kB)\n#32 0.918 Installing collected packages: mypy-extensions, typing-inspect, fastapi-filters\n#32 0.969 \n#32 0.977 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#32 0.978 Successfully installed fastapi-filters-0.3.2 mypy-extensions-1.1.0 typing-inspect-0.9.0\n#32 DONE 1.2s\n\n#33 [29/31] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#33 DONE 0.4s\n\n#34 [30/31] WORKDIR /testbed\n#34 DONE 0.1s\n\n#35 exporting to image\n#35 exporting layers\n#35 exporting layers 9.9s done\n#35 exporting manifest sha256:3428005827f58ef10a83ace85ce28eb61a63d37d552297d8fddc077a9f4f149b 0.0s done\n#35 exporting config sha256:1b89122fc84527125994c9e272e629922d7a3a6779e88f060df86a7b794f2323 0.0s done\n#35 exporting attestation manifest sha256:1086202dd09508fc94d6f6b4d5577033fbb738b94981e9cb31a245d36e0cb9c2 0.0s done\n#35 exporting manifest list sha256:da5344ef858ced1c8c7166937e03e88889736f2eb088b6f3108c2d6693d6ffbf\n#35 exporting manifest list sha256:da5344ef858ced1c8c7166937e03e88889736f2eb088b6f3108c2d6693d6ffbf 0.0s done\n#35 naming to docker.io/library/bench-repo2run__rat50new-pjy-jonbunator-enterr:latest done\n#35 unpacking to docker.io/library/bench-repo2run__rat50new-pjy-jonbunator-enterr:latest\n#35 unpacking to docker.io/library/bench-repo2run__rat50new-pjy-jonbunator-enterr:latest 8.7s done\n#35 DONE 18.8s\n",
+  "build_log_tail": "i>=0.100.0->fastapi-filters==0.3.2) (3.20)\n#32 0.852 Collecting mypy-extensions>=0.3.0 (from typing-inspect>=0.4.0->fastapi-filters==0.3.2)\n#32 0.861   Downloading mypy_extensions-1.1.0-py3-none-any.whl.metadata (1.1 kB)\n#32 0.884 Downloading fastapi_filters-0.3.2-py3-none-any.whl (21 kB)\n#32 0.903 Downloading typing_inspect-0.9.0-py3-none-any.whl (8.8 kB)\n#32 0.922 Downloading mypy_extensions-1.1.0-py3-none-any.whl (5.0 kB)\n#32 1.051 Installing collected packages: mypy-extensions, typing-inspect, fastapi-filters\n#32 1.087 \n#32 1.101 Successfully installed fastapi-filters-0.3.2 mypy-extensions-1.1.0 typing-inspect-0.9.0\n#32 1.101 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#32 DONE 1.2s\n\n#33 [29/31] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#33 DONE 0.4s\n\n#34 [30/31] WORKDIR /testbed\n#34 DONE 0.1s\n\n#35 exporting to image\n#35 exporting layers\n#35 exporting layers 7.9s done\n#35 exporting manifest sha256:93494645505df7b7026c5f5374a2af350219e0a2252df9ed550f1b2cf94798cf\n#35 exporting manifest sha256:93494645505df7b7026c5f5374a2af350219e0a2252df9ed550f1b2cf94798cf done\n#35 exporting config sha256:021bf3dc7c1a3106379fa674a2bcb6c1b54cc50f558abf35db76a9e789c7fc1f 0.0s done\n#35 exporting attestation manifest sha256:7f117d7a0657e55ee117f6ecd710e4209a74a8cf6d7cc11887bd216304dc4512 0.0s done\n#35 exporting manifest list sha256:6f2c8b3a9a9396e1f4db65991cf099e99044502b78b5a9de2f1cf2890cdff5ee 0.0s done\n#35 naming to docker.io/library/bench-pjy-repo2run-jonbunator-enterr:latest done\n#35 unpacking to docker.io/library/bench-pjy-repo2run-jonbunator-enterr:latest\n#35 unpacking to docker.io/library/bench-pjy-repo2run-jonbunator-enterr:latest 5.9s done\n#35 DONE 13.9s\n",
   "status": "collect_error",
   "py_test_files": 3,
   "collect_rc": 2,
@@ -24,42 +24,30 @@
     "src/backend/tests/endpoints/test_find_form_automatically.py::test_find_login_automatically[find_by_name.html]",
     "src/backend/tests/endpoints/test_find_form_automatically.py::test_find_login_automatically[find_by_id.html]"
   ],
-  "executed": true,
-  "total": 10,
-  "passed": 8,
+  "executed": false,
+  "total": 0,
+  "passed": 0,
   "failed": 0,
-  "errors": 2,
+  "errors": 0,
   "skipped": 0,
-  "passed_node_ids": [
-    "src/backend/tests/endpoints/test_find_form_automatically.py::test_find_login_automatically[find_by_label.html]",
-    "src/backend/tests/endpoints/test_find_form_automatically.py::test_find_login_automatically[find_by_placeholder.html]",
-    "src/backend/tests/endpoints/test_find_form_automatically.py::test_find_login_automatically[find_by_type.html]",
-    "src/backend/tests/endpoints/test_find_form_automatically.py::test_find_login_automatically[find_by_form_parent.html]",
-    "src/backend/tests/endpoints/test_find_form_automatically.py::test_find_login_automatically[ignore_hidden_elements.html]",
-    "src/backend/tests/endpoints/test_find_form_automatically.py::test_find_login_automatically[find_button_by_text.html]",
-    "src/backend/tests/endpoints/test_find_form_automatically.py::test_find_login_automatically[find_by_name.html]",
-    "src/backend/tests/endpoints/test_find_form_automatically.py::test_find_login_automatically[find_by_id.html]"
-  ],
+  "passed_node_ids": [],
   "failed_node_ids": [],
-  "error_node_ids": [
-    "src.backend.tests.database.test_add_entries",
-    "src.backend.tests.execution.login.test_parser.test_parser"
-  ],
-  "ebsr": true,
-  "pass_rate": 0.8,
+  "error_node_ids": [],
+  "ebsr": false,
+  "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 582.7,
+  "image_size_mb": 2142.9,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__rat50new-pjy-jonbunator-enterr@sha256:da5344ef858ced1c8c7166937e03e88889736f2eb088b6f3108c2d6693d6ffbf",
-  "installed_pkg_count": 116,
+  "image_digest": "bench-pjy-repo2run-jonbunator-enterr@sha256:6f2c8b3a9a9396e1f4db65991cf099e99044502b78b5a9de2f1cf2890cdff5ee",
+  "installed_pkg_count": 117,
   "tokens_in": 317344,
   "tokens_out": 1523,
   "llm_calls": null,
   "turns_used": 20,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 83.78,
-  "test_s": 1.34,
+  "build_s": 78.32,
+  "test_s": 0.89,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -67,19 +55,7 @@
     "tokens_in": 317344,
     "tokens_out": 1523,
     "llm_calls": null,
-    "turns_used": 20,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 20
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__rat50-pjy",
+  "agent": "pjy-repo2run",
   "repo": "crystaldba/postgres-mcp",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "#34 [30/35] RUN cd /repo && pip install -q 'mcp[cli]>=1.25,<2'\n#34 0.605 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable.It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#34 0.619 \n#34 0.619 [notice] A new release of pip is available: 24.2 -> 26.2.1\n#34 0.619 [notice] To update, run: pip install --upgrade pip\n#34 DONE 0.7s\n\n#35 [31/35] RUN cd /repo && pip show mcp | head -3\n#35 0.449 Name: mcp\n#35 0.449 Version: 1.29.0\n#35 0.449 Summary: Model Context Protocol SDK\n#35 0.450 ERROR: Pipe to stdout was broken\n#35 0.450 Exception ignored in: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>\n#35 0.450 BrokenPipeError: [Errno 32] Broken pipe\n#35 DONE 0.5s\n\n#36 [32/35] RUN cd /repo && python -c \"from mcp.server.fastmcp import FastMCP; print('fastmcp OK')\"\n#36 0.593 fastmcp OK\n#36 DONE 0.7s\n\n#37 [33/35] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#37 DONE 0.2s\n\n#38 [34/35] WORKDIR /testbed\n#38 DONE 0.0s\n\n#39 exporting to image\n#39 exporting layers\n#39 exporting layers 5.7s done\n#39 exporting manifest sha256:71a5042971c937043890709ef025aaaaeccf15e3ce64cadfe4984f9ac9557b50 0.0s done\n#39 exporting config sha256:f6ecfab14beb7e48761e298e847add3a0725018c1edac17dce93554cd57c562e 0.0s done\n#39 exporting attestation manifest sha256:38042a7c24d0bbfa311aa519f66eafbc877ed68aecc8f50a66652d7af1c766a7 0.0s done\n#39 exporting manifest list sha256:6e83c6f32704549ebd320bdf207251c298d80d97567ca8a56f6bb342ef65c515 done\n#39 naming to docker.io/library/bench-repo2run__rat50-pjy-crystaldba-postgres-mcp:latest done\n#39 unpacking to docker.io/library/bench-repo2run__rat50-pjy-crystaldba-postgres-mcp:latest\n#39 unpacking to docker.io/library/bench-repo2run__rat50-pjy-crystaldba-postgres-mcp:latest 5.2s done\n#39 DONE 11.0s\n",
+  "build_log_tail": "lidation']\n#33 DONE 1.1s\n\n#34 [30/35] RUN cd /repo && pip install -q 'mcp[cli]>=1.25,<2'\n#34 0.635 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable.It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#34 0.648 \n#34 0.648 [notice] A new release of pip is available: 24.2 -> 26.2.1\n#34 0.648 [notice] To update, run: pip install --upgrade pip\n#34 DONE 0.7s\n\n#35 [31/35] RUN cd /repo && pip show mcp | head -3\n#35 0.526 Name: mcp\n#35 0.526 Version: 1.29.0\n#35 0.526 Summary: Model Context Protocol SDK\n#35 0.526 ERROR: Pipe to stdout was broken\n#35 0.528 Exception ignored in: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>\n#35 0.528 BrokenPipeError: [Errno 32] Broken pipe\n#35 DONE 0.6s\n\n#36 [32/35] RUN cd /repo && python -c \"from mcp.server.fastmcp import FastMCP; print('fastmcp OK')\"\n#36 0.717 fastmcp OK\n#36 DONE 0.8s\n\n#37 [33/35] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#37 DONE 0.3s\n\n#38 [34/35] WORKDIR /testbed\n#38 DONE 0.0s\n\n#39 exporting to image\n#39 exporting layers\n#39 exporting layers 7.1s done\n#39 exporting manifest sha256:b24d50dd8072c91befcfd78a09e94fc5e7bee2577b951a4afffc0e57432c33d2 done\n#39 exporting config sha256:d227da77423e03825588263dbcfd37bb63fc12995c33c805692df7919ed370b4 done\n#39 exporting attestation manifest sha256:bbe6a55bfb53beff464873c6bc48fef895c93e00096344dd95d4b28d648c0642 0.0s done\n#39 exporting manifest list sha256:c604f1d12fd625777af3c68506a75c3fd91b44c7033046592242d9924a08016a 0.0s done\n#39 naming to docker.io/library/bench-pjy-repo2run-crystaldba-postgres-mcp:latest done\n#39 unpacking to docker.io/library/bench-pjy-repo2run-crystaldba-postgres-mcp:latest\n#39 unpacking to docker.io/library/bench-pjy-repo2run-crystaldba-postgres-mcp:latest 6.8s done\n#39 DONE 14.0s\n",
   "status": "collect_error",
   "py_test_files": 18,
   "collect_rc": 4,
@@ -26,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 2106.0,
+  "image_size_mb": 2102.8,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__rat50-pjy-crystaldba-postgres-mcp@sha256:6e83c6f32704549ebd320bdf207251c298d80d97567ca8a56f6bb342ef65c515",
+  "image_digest": "bench-pjy-repo2run-crystaldba-postgres-mcp@sha256:c604f1d12fd625777af3c68506a75c3fd91b44c7033046592242d9924a08016a",
   "installed_pkg_count": 109,
   "tokens_in": 595390,
   "tokens_out": 14335,
@@ -36,27 +36,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 71.46,
-  "test_s": 0.99,
+  "build_s": 79.8,
+  "test_s": 1.15,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 595390,
     "tokens_out": 14335,
-    "llm_calls": 28,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 28
   },
   "error_surface": "",
   "error_surface_reason": "",

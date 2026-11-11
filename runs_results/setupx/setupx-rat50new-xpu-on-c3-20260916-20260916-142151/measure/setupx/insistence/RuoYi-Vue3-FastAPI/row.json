@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "insistence/RuoYi-Vue3-FastAPI",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "7.3 test_login.py::test_login_flow_with_playwright\n#10 367.3 test_login.py::test_protected_routes_require_auth\n#10 367.3 test_login.py::test_authenticated_access\n#10 367.3 test_pages.py::test_dashboard_page\n#10 367.3 test_pages.py::test_druid_page\n#10 367.3 test_pages.py::test_build_page\n#10 367.3 test_timezone.py::test_authenticated_profile_uses_user_timezone_and_cron_keeps_its_zone[UTC]\n#10 367.3 test_timezone.py::test_authenticated_profile_uses_user_timezone_and_cron_keeps_its_zone[Asia/Shanghai]\n#10 367.3 test_timezone.py::test_authenticated_profile_uses_user_timezone_and_cron_keeps_its_zone[America/New_York]\n#10 367.3 tool/test_code_gen.py::test_gen_table_page\n#10 367.3 tool/test_swagger.py::test_swagger_page\n#10 367.3 \n#10 367.3 28 tests collected in 0.16s\n#10 DONE 367.8s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 35.0s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.9s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 162.3s done\n#14 exporting manifest sha256:1c76da88eddc32a3b46935637fdd1f85c2ffc1fb0b2a57e36faa96e10aa567f4 done\n#14 exporting config sha256:80a6aac8347ae2874b880abd71e126725e40e229936423866da7082ce64ed165 done\n#14 exporting attestation manifest sha256:c34b92517b5e5186fad181ce3f8ca132ba3593e7872d3a585b94915b54aa437b 0.0s done\n#14 exporting manifest list sha256:7ff13a5563a5c1e86f3a5bb483f2984336daf020e0c4dcea5df741f5921b4195 done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-insistence-ruoyi-vue3-fastapi:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-insistence-ruoyi-vue3-fastapi:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-insistence-ruoyi-vue3-fastapi:latest 42.7s done\n#14 DONE 205.1s\n",
+  "build_log_tail": "t_page\n#10 297.1 test_login.py::test_login_page_loads\n#10 297.1 test_login.py::test_captcha_generation\n#10 297.1 test_login.py::test_login_without_captcha\n#10 297.1 test_login.py::test_login_flow_with_playwright\n#10 297.1 test_login.py::test_protected_routes_require_auth\n#10 297.1 test_login.py::test_authenticated_access\n#10 297.1 test_pages.py::test_dashboard_page\n#10 297.1 test_pages.py::test_druid_page\n#10 297.1 test_pages.py::test_build_page\n#10 297.1 test_timezone.py::test_authenticated_profile_uses_user_timezone_and_cron_keeps_its_zone[UTC]\n#10 297.1 test_timezone.py::test_authenticated_profile_uses_user_timezone_and_cron_keeps_its_zone[Asia/Shanghai]\n#10 297.1 test_timezone.py::test_authenticated_profile_uses_user_timezone_and_cron_keeps_its_zone[America/New_York]\n#10 297.1 tool/test_code_gen.py::test_gen_table_page\n#10 297.1 tool/test_swagger.py::test_swagger_page\n#10 297.1 \n#10 297.1 28 tests collected in 0.13s\n#10 DONE 297.6s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 22.3s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.6s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 110.1s done\n#14 exporting manifest sha256:f684865c12748f30e37dbe79c1a295f0db6284a953ddc1d560f98faaf9508982 done\n#14 exporting config sha256:bd30d4f0d18eecfeb267a85a8766f63a6559a441c3c2af916feaf59ad7f1bf1e done\n#14 exporting attestation manifest sha256:fb6ca07da3c5b357b5827f7b8fa4946ea83d0635133c1873fd9a4c3777efe667 done\n#14 exporting manifest list sha256:7760fe4fba3bf7a3e8e804ab0bff12a910ff5b63fb615cff9f6594b40dafee96 done\n#14 naming to docker.io/library/bench-setupx-insistence-ruoyi-vue3-fastapi:latest done\n#14 unpacking to docker.io/library/bench-setupx-insistence-ruoyi-vue3-fastapi:latest\n#14 unpacking to docker.io/library/bench-setupx-insistence-ruoyi-vue3-fastapi:latest 36.2s done\n#14 DONE 146.4s\n",
   "status": "collect_error",
   "py_test_files": 177,
   "collect_rc": 2,
@@ -88,9 +88,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 7722.2,
-  "image_delta_mb": 6211.5,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-insistence-ruoyi-vue3-fastapi@sha256:7ff13a5563a5c1e86f3a5bb483f2984336daf020e0c4dcea5df741f5921b4195",
+  "image_size_mb": 1803.4,
+  "image_delta_mb": 1415.8,
+  "image_digest": "bench-setupx-insistence-ruoyi-vue3-fastapi@sha256:7760fe4fba3bf7a3e8e804ab0bff12a910ff5b63fb615cff9f6594b40dafee96",
   "installed_pkg_count": 106,
   "tokens_in": 1106390,
   "tokens_out": 43467,
@@ -98,8 +98,8 @@
   "turns_used": 65,
   "cost_usd": null,
   "produce_s": 1845.5,
-  "build_s": 614.4,
-  "test_s": 12.95,
+  "build_s": 469.22,
+  "test_s": 10.38,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -134,19 +134,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=726883f68ad21450ae47120d270895d9a5a9d69e (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=726883f68ad21450ae47120d270895d9a5a9d69e (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

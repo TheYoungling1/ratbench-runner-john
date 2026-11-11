@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "mad-lab-fau/biopsykit",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "b-4.1.2 numpy-2.2.6 pandas-2.3.3 pandas_flavor-0.8.1 parso-0.8.7 patsy-1.0.3 pexpect-4.9.0 pillow-12.3.0 pingouin-0.6.1 platformdirs-4.11.15 pooch-1.9.0 prompt_toolkit-3.0.53 ptyprocess-0.7.0 pure-eval-0.2.4 pyparsing-3.3.3 python-dateutil-2.9.0.post0 pytz-2026.4 pywavelets-1.8.0 recommonmark-0.7.1 requests-2.34.2 scikit_learn-1.7.2 scipy-1.15.3 seaborn-0.13.2 six-1.17.0 snowballstemmer-3.1.1 sphinxcontrib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 stack_data-0.6.3 statannot-0.2.3 statsmodels-0.15.0 tabulate-0.10.0 threadpoolctl-3.7.0 tqdm-4.70.1 traitlets-5.16.1 tzdata-2026.4 urllib3-2.8.0 wcwidth-0.9.1 wrapt-2.4.1 xarray-2025.6.1\n#11 30.13 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 30.14 \n#11 30.14 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 30.14 [notice] To update, run: pip install --upgrade pip\n#11 DONE 31.0s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 33.3s done\n#12 exporting manifest sha256:ee7fbb758510d47ea6ef124941a383dd785034ec74ced03962f9fe86eed0c086 0.0s done\n#12 exporting config sha256:dc7bf79847da2c415d797070005f67c05228897fbabfe588821df8c1103f2bb4 done\n#12 exporting attestation manifest sha256:c2b552a10f42a7944034213f40fcfbce084442bd180bb843d9d797aa55e5f32e 0.0s done\n#12 exporting manifest list sha256:c8b6071d40d85b899068d0610b228347fc8fa81ca94819b983164c3b7d8f6f8c done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-mad-lab-fau-biopsykit:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-mad-lab-fau-biopsykit:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-mad-lab-fau-biopsykit:latest 8.1s done\n#12 DONE 41.5s\n",
+  "build_log_tail": "b-3.10.9 matplotlib-inline-0.2.2 mne-1.12.1 narwhals-2.26.0 neurokit2-0.2.13 nilspodlib-4.1.2 numpy-2.2.6 pandas-2.3.3 pandas_flavor-0.8.1 parso-0.8.7 patsy-1.0.3 pexpect-4.9.0 pillow-12.3.0 pingouin-0.6.1 platformdirs-4.11.8 pooch-1.9.0 prompt_toolkit-3.0.53 ptyprocess-0.7.0 pure-eval-0.2.4 pyparsing-3.3.2 python-dateutil-2.9.0.post0 pytz-2026.3.post1 pywavelets-1.8.0 recommonmark-0.7.1 requests-2.34.2 scikit_learn-1.7.2 scipy-1.15.3 seaborn-0.13.2 six-1.17.0 snowballstemmer-3.1.1 sphinxcontrib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 stack_data-0.6.3 statannot-0.2.3 statsmodels-0.15.0 tabulate-0.10.0 threadpoolctl-3.6.0 tqdm-4.70.1 traitlets-5.16.1 tzdata-2026.4 urllib3-2.7.0 wcwidth-0.8.3 wrapt-2.4.1 xarray-2025.6.1\n#11 29.22 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 29.23 \n#11 29.23 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 29.23 [notice] To update, run: pip install --upgrade pip\n#11 DONE 30.3s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 36.8s done\n#12 exporting manifest sha256:80bb1517ab7ee44a7a0d8e53e8401aa6190e8307b58ad0e0657b6dc4e5733448 done\n#12 exporting config sha256:accd91f3dfb6cc2121c0b865ff39f1f1cc65958c11d1ee90e8d264a01484f3a9 done\n#12 exporting attestation manifest sha256:e32ece9baddfeb557d978d881602e521003cfadba06f6f6813ac689e19a8e0c8 0.0s done\n#12 exporting manifest list sha256:4a82a38b31bd7d47f3c82d8e8d803ec54ded4274f48b7fb6020f75e8aa73b4be done\n#12 naming to docker.io/library/bench-pipreqs-mad-lab-fau-biopsykit:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-mad-lab-fau-biopsykit:latest\n#12 unpacking to docker.io/library/bench-pipreqs-mad-lab-fau-biopsykit:latest 11.1s done\n#12 DONE 47.9s\n",
   "status": "collect_error",
   "py_test_files": 14,
   "collect_rc": 2,
@@ -52,9 +52,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 832.1,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-mad-lab-fau-biopsykit@sha256:c8b6071d40d85b899068d0610b228347fc8fa81ca94819b983164c3b7d8f6f8c",
+  "image_size_mb": 831.1,
+  "image_delta_mb": 443.5,
+  "image_digest": "bench-pipreqs-mad-lab-fau-biopsykit@sha256:4a82a38b31bd7d47f3c82d8e8d803ec54ded4274f48b7fb6020f75e8aa73b4be",
   "installed_pkg_count": 91,
   "tokens_in": null,
   "tokens_out": null,
@@ -62,8 +62,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 9.71,
-  "build_s": 77.99,
-  "test_s": 1.14,
+  "build_s": 83.3,
+  "test_s": 1.6,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -90,19 +90,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=2ad99fba5f55328109c72bd3cbb72ba2444da078 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=2ad99fba5f55328109c72bd3cbb72ba2444da078 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

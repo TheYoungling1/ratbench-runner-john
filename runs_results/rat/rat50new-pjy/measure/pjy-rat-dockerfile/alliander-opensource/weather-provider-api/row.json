@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50new-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "alliander-opensource/weather-provider-api",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "py-2.5.0 gunicorn-26.2.0 idna-3.19 limits-5.8.0 locket-1.0.0 loguru-0.7.3 lxml-6.1.3 multiurl-0.3.9 netCDF4-1.7.4 numpy-2.5.3 openai-3.14.0 pandas-3.0.5 partd-1.4.2 prometheus_client-0.26.0 pycparser-3.0 pytest-cov-7.1.0 pytest-xdist-3.8.0 python-dateutil-2.9.0.post0 pytz-2026.3.post1 requests-2.34.2 six-1.17.0 slowapi-0.1.10 starlette-1.6.0 starlette-prometheus-0.10.0 toolz-1.1.0 tqdm-4.70.1 urllib3-2.7.0 uv-0.12.15 uvicorn-0.51.0 weather_provider_api-2.91 wrapt-2.4.1 xarray-2026.7.0\n#16 74.56 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#16 74.64 \n#16 74.64 [notice] A new release of pip is available: 25.0.1 -> 26.2.1\n#16 74.64 [notice] To update, run: pip install --upgrade pip\n#16 DONE 75.1s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.4s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.0s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 22.8s done\n#19 exporting manifest sha256:b09c6cad2426c516d1160367b69df0f6e78c203e17cb40b99041fb70c4001293 0.0s done\n#19 exporting config sha256:4dd14e35682379b6e8b64d7d6a5d8d3a345184fbebf9ec4f1cc15fcedc5b09f7 done\n#19 exporting attestation manifest sha256:8a7eed28783d5830d2d96003ba6d58355639c823e4ad938d028ff8ca88024f2a 0.0s done\n#19 exporting manifest list sha256:b251f2ac58f72bc319905727c4f2453695a40fdb811d04855290e21fc199eb64 0.0s done\n#19 naming to docker.io/library/bench-rat__rat50new-pjy-alliander-opensource-weather-provider-api:latest done\n#19 unpacking to docker.io/library/bench-rat__rat50new-pjy-alliander-opensource-weather-provider-api:latest\n#19 unpacking to docker.io/library/bench-rat__rat50new-pjy-alliander-opensource-weather-provider-api:latest 14.0s done\n#19 DONE 36.9s\n",
+  "build_log_tail": "gunicorn-26.2.0 idna-3.19 limits-5.8.0 locket-1.0.0 loguru-0.7.3 lxml-6.1.3 multiurl-0.3.9 netCDF4-1.7.4 numpy-2.5.3 openai-3.14.0 pandas-3.0.5 partd-1.4.2 prometheus_client-0.26.0 pycparser-3.0 pytest-cov-7.1.0 pytest-xdist-3.8.0 python-dateutil-2.9.0.post0 pytz-2026.3.post1 requests-2.34.2 six-1.17.0 slowapi-0.1.10 starlette-1.6.0 starlette-prometheus-0.10.0 toolz-1.1.0 tqdm-4.70.1 urllib3-2.7.0 uv-0.12.15 uvicorn-0.51.0 weather_provider_api-2.91 wrapt-2.4.1 xarray-2026.7.0\n#16 475.3 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#16 475.5 \n#16 475.5 [notice] A new release of pip is available: 25.0.1 -> 26.2.1\n#16 475.5 [notice] To update, run: pip install --upgrade pip\n#16 DONE 476.2s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.4s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.0s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 21.8s done\n#19 exporting manifest sha256:280e551c087a5b6f4d1ff9dbc648e7375fddea56dd84ec8cd6b419594157648a 0.0s done\n#19 exporting config sha256:7e26f99c1a0e51bea217e5d37ff27ffb99c505701c332fc6bf1f95a7243bf55e 0.0s done\n#19 exporting attestation manifest sha256:1a2920f2470cdc7a17b3e31c85e96134a862af7d876f259f22310c2c602c2e77 0.0s done\n#19 exporting manifest list sha256:1a2805b0f18f8661f15e9fa6a7c93b546559fd79eeade152340c0718adcec860 0.0s done\n#19 naming to docker.io/library/bench-pjy-rat-dockerfile-alliander-opensource-weather-provider-api:latest done\n#19 unpacking to docker.io/library/bench-pjy-rat-dockerfile-alliander-opensource-weather-provider-api:latest\n#19 unpacking to docker.io/library/bench-pjy-rat-dockerfile-alliander-opensource-weather-provider-api:latest 14.3s done\n#19 DONE 36.2s\n",
   "status": "collect_error",
   "py_test_files": 23,
   "collect_rc": 2,
@@ -260,9 +260,9 @@
   "ebsr": true,
   "pass_rate": 0.9737,
   "timed_out": false,
-  "image_size_mb": 1384.9,
+  "image_size_mb": 1383.5,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50new-pjy-alliander-opensource-weather-provider-api@sha256:b251f2ac58f72bc319905727c4f2453695a40fdb811d04855290e21fc199eb64",
+  "image_digest": "bench-pjy-rat-dockerfile-alliander-opensource-weather-provider-api@sha256:1a2805b0f18f8661f15e9fa6a7c93b546559fd79eeade152340c0718adcec860",
   "installed_pkg_count": 75,
   "tokens_in": 680119,
   "tokens_out": 2405,
@@ -270,27 +270,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 149.25,
-  "test_s": 6.45,
+  "build_s": 582.06,
+  "test_s": 7.18,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 680119,
     "tokens_out": 2405,
-    "llm_calls": 26,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 26
   },
   "error_surface": "",
   "error_surface_reason": "",

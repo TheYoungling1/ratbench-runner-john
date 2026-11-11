@@ -1,10 +1,10 @@
 {
-  "agent": "graph2env__rat_python50",
+  "agent": "g2e-rat50",
   "repo": "wecode-ai/Wegent",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": " subprocess-exited-with-error\n#14 5.052 \n#14 5.052 \u00d7 Getting requirements to build editable did not run successfully.\n#14 5.052 \u2502 exit code: 1\n#14 5.052 \u2570\u2500> See above for output.\n#14 5.052 \n#14 5.052 note: This error originates from a subprocess, and is likely not a problem with pip.\n#14 DONE 5.2s\n\n#15 [11/12] RUN if [ -x /testbed/.venv/bin/python ]; then       if /testbed/.venv/bin/python -m pip --version >/dev/null 2>&1; then         /testbed/.venv/bin/python -m pip install pytest;       else         command -v uv >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#15 0.290 Resolved 5 packages in 64ms\n#15 0.297 Downloading pygments (1.2MiB)\n#15 0.377  Downloaded pygments\n#15 0.378 Prepared 2 packages in 86ms\n#15 0.426 Installed 5 packages in 47ms\n#15 0.426  + iniconfig==2.3.0\n#15 0.426  + packaging==26.3\n#15 0.426  + pluggy==1.6.0\n#15 0.426  + pygments==2.21.0\n#15 0.426  + pytest==9.1.1\n#15 DONE 0.5s\n\n#16 [12/12] WORKDIR /testbed\n#16 DONE 0.0s\n\n#17 exporting to image\n#17 exporting layers\n#17 exporting layers 114.4s done\n#17 exporting manifest sha256:41f013cedc88106ca971d2264c311f8c4e4a962e5fde8fdcce93f8fc0e6880b8 done\n#17 exporting config sha256:cecff3e77f1425c3d98ed4500af97752f57eabe4fc7fc46f59988c4e3256cd0f done\n#17 exporting attestation manifest sha256:78f8e14fa82ea7c62d15c424557ee6a966fadc52da222608dc31f36c82e2156f 0.0s done\n#17 exporting manifest list sha256:23adb9c03f183225e16fc19eeb7781df4cd53b766d116ebd70592d99bcc7b670 done\n#17 naming to docker.io/library/bench-graph2env__rat_python50-wecode-ai-wegent:latest done\n#17 unpacking to docker.io/library/bench-graph2env__rat_python50-wecode-ai-wegent:latest\n#17 unpacking to docker.io/library/bench-graph2env__rat_python50-wecode-ai-wegent:latest 36.5s done\n#17 DONE 151.0s\n",
+  "build_log_tail": "a problem with pip.\n#14 4.961 error: subprocess-exited-with-error\n#14 4.961 \n#14 4.961 \u00d7 Getting requirements to build editable did not run successfully.\n#14 4.961 \u2502 exit code: 1\n#14 4.961 \u2570\u2500> See above for output.\n#14 4.961 \n#14 4.961 note: This error originates from a subprocess, and is likely not a problem with pip.\n#14 DONE 5.1s\n\n#15 [11/12] RUN if [ -x /testbed/.venv/bin/python ]; then       if /testbed/.venv/bin/python -m pip --version >/dev/null 2>&1; then         /testbed/.venv/bin/python -m pip install pytest;       else         command -v uv >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#15 0.305 Resolved 5 packages in 73ms\n#15 0.313 Downloading pygments (1.2MiB)\n#15 0.408  Downloaded pygments\n#15 0.408 Prepared 2 packages in 101ms\n#15 0.446 Installed 5 packages in 37ms\n#15 0.446  + iniconfig==2.3.0\n#15 0.446  + packaging==26.3\n#15 0.446  + pluggy==1.6.0\n#15 0.446  + pygments==2.21.0\n#15 0.446  + pytest==9.1.1\n#15 DONE 0.5s\n\n#16 [12/12] WORKDIR /testbed\n#16 DONE 0.0s\n\n#17 exporting to image\n#17 exporting layers\n#17 exporting layers 104.6s done\n#17 exporting manifest sha256:ea2f5240f9c08059c18fcc05b95350ea7b2aed494f4bbbc5464e375fe307d755 0.0s done\n#17 exporting config sha256:45674dde001d6901efb6bcd22ae458ebcf90b3a5a826c809f63c43f5350a03c5 done\n#17 exporting attestation manifest sha256:554fb39732ea17d741d09b10a69369eae750725961440825ed09508c0c8669e9 0.0s done\n#17 exporting manifest list sha256:a1f5c3ab2142a58ff4056b0ec424d4d49024920afeadf3f34b47e981b4b350a3 done\n#17 naming to docker.io/library/bench-g2e-rat50-wecode-ai-wegent:latest done\n#17 unpacking to docker.io/library/bench-g2e-rat50-wecode-ai-wegent:latest\n#17 unpacking to docker.io/library/bench-g2e-rat50-wecode-ai-wegent:latest 39.4s done\n#17 DONE 144.0s\n",
   "status": "collect_error",
   "py_test_files": 8739,
   "collect_rc": 2,
@@ -461,9 +461,9 @@
   "ebsr": true,
   "pass_rate": 0.5421,
   "timed_out": false,
-  "image_size_mb": 3647.5,
-  "image_delta_mb": 3469.2,
-  "image_digest": "bench-graph2env__rat_python50-wecode-ai-wegent@sha256:23adb9c03f183225e16fc19eeb7781df4cd53b766d116ebd70592d99bcc7b670",
+  "image_size_mb": 3647.3,
+  "image_delta_mb": null,
+  "image_digest": "bench-g2e-rat50-wecode-ai-wegent@sha256:a1f5c3ab2142a58ff4056b0ec424d4d49024920afeadf3f34b47e981b4b350a3",
   "installed_pkg_count": 18,
   "tokens_in": 1561104,
   "tokens_out": 106043,
@@ -471,8 +471,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 206.74,
-  "test_s": 1.22,
+  "build_s": 202.05,
+  "test_s": 1.44,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -489,19 +489,7 @@
       ],
       "services": [],
       "services_rc": null
-    },
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=f296d38818500b5250032c5dd3fea7472022da0e (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=f296d38818500b5250032c5dd3fea7472022da0e (pinned)\n"
-      }
-    ]
+    }
   },
   "error_surface": "",
   "error_surface_reason": "",

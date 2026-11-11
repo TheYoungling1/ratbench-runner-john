@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "online-ml/river",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ntrib-serializinghtml-2.0.0 stack_data-0.6.3 starlette-1.7.0 sympy-1.14.0 tabulate-0.10.0 threadpoolctl-3.7.0 toolz-1.1.0 torch-2.14.0 tornado-6.5.10 tqdm-4.70.1 traitlets-5.16.1 traittypes-0.2.3 triton-3.8.0 typing-inspection-0.4.4 tzdata-2026.4 urllib3-2.8.0 uvicorn-0.54.0 uvloop-0.22.1 vaex-4.19.0 vaex-astro-0.10.0 vaex-core-4.19.0 vaex-hdf5-0.15.0 vaex-jupyter-0.9.0 vaex-ml-0.19.0 vaex-server-0.10.0 vaex-viz-0.6.0 vectordict-1.0.0 vowpalwabbit-9.11.6 watchfiles-1.3.0 watermark-2.6.0 wcwidth-0.9.1 websockets-16.1.1 widgetsnbextension-4.0.16 xarray-2025.6.1 xgboost-3.2.0 xyzservices-2026.9.1 zipp-4.1.0\n#11 136.1 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 136.1 \n#11 136.1 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 136.1 [notice] To update, run: pip install --upgrade pip\n#11 DONE 138.0s\n\n#12 exporting to image\n#12 exporting layers\n#12 ...\n\n#1 [1/8] FROM docker.io/library/python:3.10@sha256:4379c343a93c87429e0ac3e8e09d073a4ee26084d710ac38b686fa34eed12270\n#1 DONE 0.1s\n\n#12 exporting to image\n#12 exporting layers 384.9s done\n#12 exporting manifest sha256:886c55b5414c4d259aba68a9dba1d3d4e21b87f6cbfeb878d783651405a6e1b8 done\n#12 exporting config sha256:9e7ecea70908becd0e697caac3632384fedb69b3cbac9e2b7eabc362ba58314b done\n#12 exporting attestation manifest sha256:a33862f64cefcf78a9ac29116ca409fc880c7ba02c4527e5bf5eb2723f8e675c 0.0s done\n#12 exporting manifest list sha256:a7cbe623344bb68bfeafd1e07c224acb69fcac5e9c0798ab1dc296d359f80fa2 0.0s done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-online-ml-river:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-online-ml-river:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-online-ml-river:latest 57.7s done\n#12 DONE 442.6s\n",
+  "build_log_tail": "trib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 stack_data-0.6.3 starlette-1.6.0 sympy-1.14.0 tabulate-0.10.0 threadpoolctl-3.6.0 toolz-1.1.0 torch-2.14.0 tornado-6.5.9 tqdm-4.70.1 traitlets-5.16.1 traittypes-0.2.3 triton-3.8.0 typing-inspection-0.4.4 tzdata-2026.4 urllib3-2.7.0 uvicorn-0.53.0 uvloop-0.22.1 vaex-4.19.0 vaex-astro-0.10.0 vaex-core-4.19.0 vaex-hdf5-0.15.0 vaex-jupyter-0.9.0 vaex-ml-0.19.0 vaex-server-0.10.0 vaex-viz-0.6.0 vectordict-1.0.0 vowpalwabbit-9.11.2 watchfiles-1.2.0 watermark-2.6.0 wcwidth-0.8.3 websockets-16.1.1 widgetsnbextension-4.0.16 xarray-2025.6.1 xgboost-3.2.0 xyzservices-2026.9.1 zipp-4.1.0\n#11 122.1 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 122.1 \n#11 122.1 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 122.1 [notice] To update, run: pip install --upgrade pip\n#11 DONE 123.9s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 328.4s done\n#12 exporting manifest sha256:858f56c3de978a137497b8379a978a839ad289ac9c38fed64421c8e7a459f474 0.0s done\n#12 exporting config sha256:4de9cdf7ffb3e0c015e5c9e2f9cec5bf7698c0a1a5d4ddb1bd0c55ccc5a012a4 0.0s done\n#12 exporting attestation manifest sha256:016b70174683f0bf65db522b8c332b1880c54358db718fe88f3d90e77032915c 0.0s done\n#12 exporting manifest list sha256:ddc60054581a31c5c09a6176c0de00007b42623593a8e9aaab325dee4f742e0b\n#12 exporting manifest list sha256:ddc60054581a31c5c09a6176c0de00007b42623593a8e9aaab325dee4f742e0b 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-online-ml-river:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-online-ml-river:latest\n#12 unpacking to docker.io/library/bench-pipreqs-online-ml-river:latest 57.8s done\n#12 DONE 386.4s\n",
   "status": "collect_error",
   "py_test_files": 51,
   "collect_rc": 2,
@@ -908,9 +908,9 @@
   "ebsr": true,
   "pass_rate": 0.0207,
   "timed_out": false,
-  "image_size_mb": 21195.2,
-  "image_delta_mb": 19684.5,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-online-ml-river@sha256:a7cbe623344bb68bfeafd1e07c224acb69fcac5e9c0798ab1dc296d359f80fa2",
+  "image_size_mb": 8241.4,
+  "image_delta_mb": 7853.8,
+  "image_digest": "bench-pipreqs-online-ml-river@sha256:ddc60054581a31c5c09a6176c0de00007b42623593a8e9aaab325dee4f742e0b",
   "installed_pkg_count": 181,
   "tokens_in": null,
   "tokens_out": null,
@@ -918,8 +918,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 8.28,
-  "build_s": 615.36,
-  "test_s": 15.39,
+  "build_s": 551.42,
+  "test_s": 12.95,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -946,19 +946,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=6995f1522a9136fd3982890afac5c4a178e4cd57 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=6995f1522a9136fd3982890afac5c4a178e4cd57 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

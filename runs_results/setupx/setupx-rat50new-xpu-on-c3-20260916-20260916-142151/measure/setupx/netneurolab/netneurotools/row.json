@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "netneurolab/netneurotools",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "::test_make_correlated_xy_errors[-1.5]\n#10 35.09 netneurotools/stats/tests/test_correlation.py::test_make_correlated_xy_errors[corr2]\n#10 35.09 netneurotools/stats/tests/test_correlation.py::test_make_correlated_xy_errors[corr3]\n#10 35.09 netneurotools/stats/tests/test_correlation.py::test_make_correlated_xy_errors[corr4]\n#10 35.09 netneurotools/stats/tests/test_correlation.py::test_make_correlated_xy_errors[corr5]\n#10 35.09 netneurotools/stats/tests/test_permutation.py::test_permtest_1samp\n#10 35.09 netneurotools/stats/tests/test_permutation.py::test_permtest_rel\n#10 35.09 netneurotools/stats/tests/test_permutation.py::test_permtest_pearsonr\n#10 35.09 netneurotools/stats/tests/test_regression.py::test_add_constant\n#10 35.09 \n#10 35.09 205 tests collected in 1.19s\n#10 DONE 35.2s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.5s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 27.1s done\n#14 exporting manifest sha256:68855eac3092c6f60b7b4ba70467d7239df8969c72412bb6082b3cbe142d8c34 0.0s done\n#14 exporting config sha256:d441e9ae700e65a952da9333602ace2563ea6188246ac85c7f988b23855acd97 0.0s done\n#14 exporting attestation manifest sha256:c0616975e9366ea83676bfe16b548b3157cbb6f62f778aac1beffc200895921e 0.0s done\n#14 exporting manifest list sha256:e21e35ad199f22295bbfe334a6c10a90a31114acbd79410c90f3b1f26c392d64 0.0s done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-netneurolab-netneurotools:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-netneurolab-netneurotools:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-netneurolab-netneurotools:latest 5.5s done\n#14 DONE 32.7s\n",
+  "build_log_tail": "5-1234]\n#10 39.07 netneurotools/stats/tests/test_correlation.py::test_make_correlated_xy_errors[1.5]\n#10 39.07 netneurotools/stats/tests/test_correlation.py::test_make_correlated_xy_errors[-1.5]\n#10 39.07 netneurotools/stats/tests/test_correlation.py::test_make_correlated_xy_errors[corr2]\n#10 39.07 netneurotools/stats/tests/test_correlation.py::test_make_correlated_xy_errors[corr3]\n#10 39.07 netneurotools/stats/tests/test_correlation.py::test_make_correlated_xy_errors[corr4]\n#10 39.07 netneurotools/stats/tests/test_correlation.py::test_make_correlated_xy_errors[corr5]\n#10 39.07 netneurotools/stats/tests/test_permutation.py::test_permtest_1samp\n#10 39.07 netneurotools/stats/tests/test_permutation.py::test_permtest_rel\n#10 39.07 netneurotools/stats/tests/test_permutation.py::test_permtest_pearsonr\n#10 39.07 netneurotools/stats/tests/test_regression.py::test_add_constant\n#10 39.07 \n#10 39.07 205 tests collected in 1.30s\n#10 DONE 39.6s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.4s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 26.8s done\n#14 exporting manifest sha256:b71eb75fccbc6de921ff1befc476c6456cadf58c8ebe7c856ace74e33ad7eb98 0.0s done\n#14 exporting config sha256:fe7ea4b556612acd52d6cdf0de2f85097349e47a76e0f93743e69ba671c83912 0.0s done\n#14 exporting attestation manifest sha256:93368773f81a41d0cbe5e9efa09d59d6ba2812e9361825d3923fef58cf551890 0.0s done\n#14 exporting manifest list sha256:95e1e546dcb6e6d8db82cebce8517271cb1f0889e0a442c9e5fa6a1a1b7aab92 0.0s done\n#14 naming to docker.io/library/bench-setupx-netneurolab-netneurotools:latest done\n#14 unpacking to docker.io/library/bench-setupx-netneurolab-netneurotools:latest\n#14 unpacking to docker.io/library/bench-setupx-netneurolab-netneurotools:latest 5.6s done\n#14 DONE 32.5s\n",
   "status": "executed",
   "py_test_files": 48,
   "collect_rc": 0,
@@ -432,9 +432,9 @@
   "ebsr": true,
   "pass_rate": 0.96,
   "timed_out": false,
-  "image_size_mb": 653.9,
+  "image_size_mb": 2385.0,
   "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-netneurolab-netneurotools@sha256:e21e35ad199f22295bbfe334a6c10a90a31114acbd79410c90f3b1f26c392d64",
+  "image_digest": "bench-setupx-netneurolab-netneurotools@sha256:95e1e546dcb6e6d8db82cebce8517271cb1f0889e0a442c9e5fa6a1a1b7aab92",
   "installed_pkg_count": 46,
   "tokens_in": 414205,
   "tokens_out": 11064,
@@ -442,8 +442,8 @@
   "turns_used": 8,
   "cost_usd": null,
   "produce_s": 1855.54,
-  "build_s": 71.36,
-  "test_s": 497.13,
+  "build_s": 75.51,
+  "test_s": 504.24,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -478,19 +478,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=49f83c023022ab606581cb10aec6a6282a306c48 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=49f83c023022ab606581cb10aec6a6282a306c48 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

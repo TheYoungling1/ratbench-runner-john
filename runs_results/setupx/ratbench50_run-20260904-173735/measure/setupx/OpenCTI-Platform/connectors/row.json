@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__ratbench50_run-20260904-173735",
+  "agent": "setupx",
   "repo": "OpenCTI-Platform/connectors",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "used dependency warnings::For each warning: (1) if the package IS used but under a different import name (e.g. 'PyYAML' -> 'yaml'), add a mapping line to .github/deptry-package-map.txt. (2) if the package is truly unused, remove it from the connector's requirements.txt.\"\n#10 97.92 .github/workflows/unused-deps.yml:113:            const body = `${marker}\\n\u26a0\ufe0f **Unused dependencies detected**\\n\\nThe following packages appear to be unused:\\n\\n${process.env.WARNINGS}\\n> **How to fix:** (1) if the package is used but under a different import name (e.g. \\`PyYAML\\` \u2192 \\`yaml\\`), add a mapping line to \\`.github/deptry-package-map.txt\\`. (2) if truly unused, remove it from the connector's \\`requirements.txt\\`.`;\n#10 97.92 === README testing section ===\n#10 97.92 9:the [dedicated documentation](https://docs.opencti.io/latest/deployment/connectors).\n#10 DONE 98.1s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 5.6s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 26.0s done\n#14 exporting manifest sha256:9727c76cebc99b2eae890bbb7936d310ba8c0073c9d608ec2f192e4b039da4b9 done\n#14 exporting config sha256:86ec6fcd25b234f02be330b31b7c748477b7a163f3c0ce2b35ad9f1646e5cae0 done\n#14 exporting attestation manifest sha256:52c23980f05bcf9617192132c637b625eb2993b75c6f67d3433902f812388cb7 done\n#14 exporting manifest list sha256:cba176f445b5603d66fa329e34b278d77c58a181f63df46d6238115aedd8fd52 done\n#14 naming to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-opencti-platform-connectors:latest done\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-opencti-platform-connectors:latest\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-opencti-platform-connectors:latest 9.5s done\n#14 DONE 35.7s\n",
+  "build_log_tail": " package in requirements.txt\n.github/workflows/unused-deps.yml:97:            echo \"::notice title=How to fix unused dependency warnings::For each warning: (1) if the package IS used but under a different import name (e.g. 'PyYAML' -> 'yaml'), add a mapping line to .github/deptry-package-map.txt. (2) if the package is truly unused, remove it from the connector's requirements.txt.\"\n.github/workflows/unused-deps.yml:113:            const body = `${marker}\\n\u26a0\ufe0f **Unused dependencies detected**\\n\\nThe following packages appear to be unused:\\n\\n${process.env.WARNINGS}\\n> **How to fix:** (1) if the package is used but under a different import name (e.g. \\`PyYAML\\` \u2192 \\`yaml\\`), add a mapping line to \\`.github/deptry-package-map.txt\\`. (2) if truly unused, remove it from the connector's \\`requirements.txt\\`.`;\n=== README testing section ===\n9:the [dedicated documentation](https://docs.opencti.io/latest/deployment/connectors).\n ---> Removed intermediate container 3335d67e6806\n ---> bd4d664b9bfd\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in 7aa06b21f82b\n ---> Removed intermediate container 7aa06b21f82b\n ---> aba6511b4a45\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in 783fa1145ee4\n ---> Removed intermediate container 783fa1145ee4\n ---> 3309eae3303f\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in d8845ea45128\n ---> Removed intermediate container d8845ea45128\n ---> 0999e137db34\nStep 10/10 : WORKDIR /testbed\n ---> Running in 449e4036f7f9\n ---> Removed intermediate container 449e4036f7f9\n ---> 223771085d24\nSuccessfully built 223771085d24\nSuccessfully tagged bench-setupx-opencti-platform-connectors:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 895,
   "collect_rc": 2,
@@ -3667,9 +3667,9 @@
   "ebsr": true,
   "pass_rate": 0.7414,
   "timed_out": false,
-  "image_size_mb": 5106.2,
-  "image_delta_mb": 3595.5,
-  "image_digest": "bench-setupx__ratbench50_run-20260904-173735-opencti-platform-connectors@sha256:cba176f445b5603d66fa329e34b278d77c58a181f63df46d6238115aedd8fd52",
+  "image_size_mb": 2059.6,
+  "image_delta_mb": 1672.0,
+  "image_digest": "bench-setupx-opencti-platform-connectors@sha256:223771085d2452cc8bd0b2bd18558b8c4a60b72a6234108aa49cb35a9362887e",
   "installed_pkg_count": 12,
   "tokens_in": 957387,
   "tokens_out": 135087,
@@ -3677,8 +3677,8 @@
   "turns_used": 90,
   "cost_usd": null,
   "produce_s": 1391.06,
-  "build_s": 186.14,
-  "test_s": 17.76,
+  "build_s": 176.58,
+  "test_s": 15.64,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -3709,19 +3709,7 @@
     "turns_used": 90,
     "produce_s": 1391.06,
     "total_tokens": 1092474,
-    "cost_usd": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=0de8b827849a5357746cd0656ddf366bdeaeab8f (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=0de8b827849a5357746cd0656ddf366bdeaeab8f (pinned)\n"
-      }
-    ]
+    "cost_usd": null
   },
   "error_surface": "",
   "error_surface_reason": "",

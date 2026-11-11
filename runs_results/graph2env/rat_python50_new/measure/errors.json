@@ -1,0 +1,142 @@
+{
+  "g2e-rat50new": {
+    "collect": {
+      "agent": "g2e-rat50new",
+      "n_repos": 50,
+      "source": "collect",
+      "n_admissible": 40,
+      "n_masked": 2,
+      "n_unobserved": 8,
+      "n_status_derived": 0,
+      "buckets": {
+        "partial": 7,
+        "missing": 8,
+        "timed_out": 2,
+        "success": 20,
+        "zero_pass": 4,
+        "collect_error": 6,
+        "no_tests_collected": 3
+      },
+      "surfaces": {
+        "full": 40,
+        "unobserved": 8,
+        "masked": 2
+      },
+      "token_repos": {
+        "ImportError": 2,
+        "IsADirectoryError": 1,
+        "ValueError": 1,
+        "ModuleNotFoundError": 4
+      },
+      "token_events": {
+        "ModuleNotFoundError": 47,
+        "IsADirectoryError": 1,
+        "ValueError": 1,
+        "ImportError": 3
+      },
+      "category_repos": {
+        "partial_import": 1,
+        "module_not_found": 4,
+        "uncategorized": 1,
+        "import_failed": 1
+      },
+      "category_events": {
+        "module_not_found": 47,
+        "uncategorized": 2,
+        "partial_import": 2,
+        "import_failed": 1
+      },
+      "crosstab": {
+        "collect_error|partial_import": 1,
+        "collect_error|module_not_found": 4,
+        "collect_error|uncategorized": 1,
+        "collect_error|import_failed": 1
+      },
+      "top_groups": {
+        "module_not_found": [
+          [
+            "spack.detection",
+            1
+          ],
+          [
+            "spack.relocate",
+            1
+          ],
+          [
+            "jwt",
+            1
+          ],
+          [
+            "docutils",
+            1
+          ],
+          [
+            "tests.test_security_workflows",
+            1
+          ],
+          [
+            "tests.test_flatpak_manifest",
+            1
+          ],
+          [
+            "tests.test_update_flatpak_deps_script",
+            1
+          ],
+          [
+            "tests.test_tui_wallet_info",
+            1
+          ],
+          [
+            "tests.test_directory_server_deployment",
+            1
+          ],
+          [
+            "tests.test_install_orderbook_watcher",
+            1
+          ]
+        ],
+        "partial_import": [
+          [
+            "MultiProcessFd",
+            1
+          ],
+          [
+            "caller_locals",
+            1
+          ]
+        ]
+      },
+      "uncategorized_rate": 0.0385
+    },
+    "run": {
+      "agent": "g2e-rat50new",
+      "n_repos": 50,
+      "source": "run",
+      "n_admissible": 40,
+      "n_masked": 2,
+      "n_unobserved": 8,
+      "n_status_derived": 0,
+      "buckets": {
+        "partial": 7,
+        "missing": 8,
+        "timed_out": 2,
+        "success": 20,
+        "zero_pass": 4,
+        "collect_error": 6,
+        "no_tests_collected": 3
+      },
+      "surfaces": {
+        "full": 40,
+        "unobserved": 8,
+        "masked": 2
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    }
+  }
+}

@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50new-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "Nikita-Filonov/ai-review",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ing uninstall: openai\n#19 9.919     Found existing installation: openai 3.17.0\n#19 10.07     Uninstalling openai-3.17.0:\n#19 10.69       Successfully uninstalled openai-3.17.0\n#19 12.21   Attempting uninstall: idna\n#19 12.22     Found existing installation: idna 3.20\n#19 12.22     Uninstalling idna-3.20:\n#19 12.23       Successfully uninstalled idna-3.20\n#19 12.50 Successfully installed PyYAML-6.0.3 aiofiles-25.1.0 annotated-doc-0.0.5 certifi-2026.7.22 httpcore-1.0.9 httpx-0.28.1 idna-3.19 loguru-0.7.3 markdown-it-py-4.2.0 mdurl-0.1.2 openai-3.14.1 pydantic-settings-2.15.0 pytest-asyncio-1.4.0 python-dotenv-1.2.3 rich-15.0.0 shellingham-1.5.4 typer-0.27.2 xai-review-0.77.0\n#19 12.50 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#19 12.58 \n#19 12.58 [notice] A new release of pip is available: 24.0 -> 26.2.1\n#19 12.58 [notice] To update, run: pip install --upgrade pip\n#19 DONE 12.8s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 0.4s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.0s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 7.6s done\n#22 exporting manifest sha256:59a31734ef20d1965c882c518dd29baf9dfbe678c6f6b060043b212a5a3649c4 0.0s done\n#22 exporting config sha256:38aeeee52a4ce4915d13a9563cf9666117aa6a9f28d3235cc0a814532840f2f3 0.0s done\n#22 exporting attestation manifest sha256:ba24c0b33eb8e2251511585974e6e814e380ff44203b224070a255c350aff9bc 0.0s done\n#22 exporting manifest list sha256:0fbb5910893e80864ac9e87bcd86297aa95bebb9f964f96b3431b1e801d4dace 0.0s done\n#22 naming to docker.io/library/bench-rat__rat50new-pjy-nikita-filonov-ai-review:latest done\n#22 unpacking to docker.io/library/bench-rat__rat50new-pjy-nikita-filonov-ai-review:latest\n#22 unpacking to docker.io/library/bench-rat__rat50new-pjy-nikita-filonov-ai-review:latest 4.4s done\n#22 DONE 12.1s\n",
+  "build_log_tail": "g uninstall: openai\n#19 19.43     Found existing installation: openai 3.17.0\n#19 19.57     Uninstalling openai-3.17.0:\n#19 20.21       Successfully uninstalled openai-3.17.0\n#19 21.58   Attempting uninstall: idna\n#19 21.58     Found existing installation: idna 3.20\n#19 21.59     Uninstalling idna-3.20:\n#19 21.60       Successfully uninstalled idna-3.20\n#19 21.82 Successfully installed PyYAML-6.0.3 aiofiles-25.1.0 annotated-doc-0.0.5 certifi-2026.7.22 httpcore-1.0.9 httpx-0.28.1 idna-3.19 loguru-0.7.3 markdown-it-py-4.2.0 mdurl-0.1.2 openai-3.14.1 pydantic-settings-2.15.0 pytest-asyncio-1.4.0 python-dotenv-1.2.3 rich-15.0.0 shellingham-1.5.4 typer-0.27.2 xai-review-0.77.0\n#19 21.82 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#19 21.91 \n#19 21.91 [notice] A new release of pip is available: 24.0 -> 26.2.1\n#19 21.91 [notice] To update, run: pip install --upgrade pip\n#19 DONE 22.2s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 0.4s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.0s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 1.9s done\n#22 exporting manifest sha256:48c6fb310db7ea08668cfa5e45a04560d4bd7a6a189616810513de30295ceb82 0.0s done\n#22 exporting config sha256:df6c22bbf0bfe123fa719790fda7f0c8694856f57c5b899eaa0d26aab8448dc3 0.0s done\n#22 exporting attestation manifest sha256:e71cf32275c9bf7292929af575009ac2b0ed40efd9271bf23768f7c309fc80e9 0.0s done\n#22 exporting manifest list sha256:bb65859b971cd02e3cef5e7934d133ea448f451e543a8280a1e675ae06067861 0.0s done\n#22 naming to docker.io/library/bench-pjy-rat-dockerfile-nikita-filonov-ai-review:latest done\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-nikita-filonov-ai-review:latest\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-nikita-filonov-ai-review:latest 4.3s done\n#22 DONE 6.2s\n",
   "status": "collect_error",
   "py_test_files": 106,
   "collect_rc": 1,
@@ -26,37 +26,25 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 468.9,
+  "image_size_mb": 467.9,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50new-pjy-nikita-filonov-ai-review@sha256:0fbb5910893e80864ac9e87bcd86297aa95bebb9f964f96b3431b1e801d4dace",
-  "installed_pkg_count": 38,
+  "image_digest": "bench-pjy-rat-dockerfile-nikita-filonov-ai-review@sha256:bb65859b971cd02e3cef5e7934d133ea448f451e543a8280a1e675ae06067861",
+  "installed_pkg_count": 39,
   "tokens_in": 148218,
   "tokens_out": 993,
   "llm_calls": 13,
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 77.04,
-  "test_s": 0.47,
+  "build_s": 33.31,
+  "test_s": 0.63,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 148218,
     "tokens_out": 993,
-    "llm_calls": 13,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 13
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,0 +1,94 @@
+{
+  "pipreqs": {
+    "n": 100,
+    "n_exec": 41,
+    "n_collect_clean": 12,
+    "n_real_success": 10,
+    "n_unmeasurable": 0,
+    "n_legacy_missing": 0,
+    "EBSR": 0.12,
+    "n_ebsr": 12,
+    "EBSR_repo2run_raw": 0.12,
+    "n_raw": 12,
+    "false_green_removed": 0.0,
+    "status_census": {
+      "build_fail": 32,
+      "collect_error": 49,
+      "error": 7,
+      "executed": 10,
+      "no_tests_collected": 2
+    },
+    "n_ebsr_zero_collected": 3,
+    "total_collected": 6491,
+    "mean_collected": 64.91,
+    "total_collect_errors": 1548,
+    "mean_collect_errors": 15.48,
+    "real_success": 0.1,
+    "micro": 0.6828,
+    "full_pass_repos": 1,
+    "coverage": 0.41,
+    "ESSR": 0.1039,
+    "ESSR_median": 0.0,
+    "n_gold_scored": 98,
+    "n_gold_zero": 81,
+    "n_gold_no_row": 0,
+    "gold_no_row": [],
+    "n_gold_capped": 0,
+    "gold_capped": [],
+    "n_gold_excluded": 2,
+    "gold_excluded": [
+      [
+        "neurogym/neurogym",
+        "gold_missing"
+      ],
+      [
+        "pypa/distutils",
+        "gold_missing"
+      ]
+    ],
+    "n_gold_sha_mismatch": 0,
+    "gold_sha_mismatch": [],
+    "mean_collection_coverage": 0.7339,
+    "median_collection_coverage": 1.0,
+    "n_gold_hollow": 3,
+    "gold_hollow": [
+      [
+        "wilcoxjay/mypyvy",
+        0,
+        8,
+        0.0
+      ],
+      [
+        "revoxhere/duino-coin",
+        0,
+        130,
+        0.0
+      ],
+      [
+        "jageo/lobsterpy",
+        0,
+        135,
+        0.0
+      ]
+    ],
+    "mean_image_delta_mb": 826.5705,
+    "mean_installed_pkgs": 69.623,
+    "mean_tokens": null,
+    "mean_tokens_out": null,
+    "tokens_per_ebsr": null,
+    "tokens_per_real_success": null,
+    "mean_turns": null,
+    "total_cost_usd": null,
+    "mean_cost_usd": null,
+    "cost_per_ebsr": null,
+    "cost_per_real_success": null,
+    "n_cost_reporting": 0,
+    "mean_produce_s": 9.0456,
+    "wall_s_per_real_success": 814.035,
+    "n_token_reporting": 0,
+    "rebuild_ok_rate": 0.61,
+    "setup_compile_rate": 0.61,
+    "n_setup_compile": 61,
+    "unreplayed_rate": 0.0
+  }
+}

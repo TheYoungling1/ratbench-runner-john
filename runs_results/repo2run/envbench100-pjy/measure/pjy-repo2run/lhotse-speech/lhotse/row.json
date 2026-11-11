@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "lhotse-speech/lhotse",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "n: pip install --upgrade pip\n#20 0.816 numpy                  2.2.6\n#20 0.816 torch                  2.14.0\n#20 0.816 torchaudio             2.11.0\n#20 DONE 0.8s\n\n#21 [18/23] RUN cd /repo && pip install -q hypothesis==6.56.0\n#21 2.046 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#21 2.048 \n#21 2.048 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#21 2.048 [notice] To update, run: pip install --upgrade pip\n#21 DONE 2.2s\n\n#22 [19/23] RUN cd /repo && python -c \"import torch, inspect; from torch.utils.data import Sampler; print(torch.__version__); print(inspect.signature(Sampler.__init__))\"\n#22 2.090 2.14.0+cu130\n#22 2.090 (self, /, *args, **kwargs)\n#22 DONE 2.8s\n\n#23 [20/23] RUN cd /repo && python -c \"from torch.utils.data import Sampler; print(Sampler.__mro__)\"\n#23 1.305 (<class 'torch.utils.data.sampler.Sampler'>, <class 'typing.Generic'>, <class 'object'>)\n#23 DONE 1.7s\n\n#24 [21/23] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#24 DONE 0.5s\n\n#25 [22/23] WORKDIR /testbed\n#25 DONE 0.0s\n\n#26 exporting to image\n#26 exporting layers\n#26 exporting layers 266.9s done\n#26 exporting manifest sha256:ff4c55fae571041cc6bcddf9702283d73d74aa3a93b84841bf8a804047229530 done\n#26 exporting config sha256:68bc2b3004e2671e7bc4da9f9feffbba10c26ad9983faaf2a08474165721063a done\n#26 exporting attestation manifest sha256:2e9e675c4f02189945c389c676af22ceec66221908413f692c977d8e8b0a8839 done\n#26 exporting manifest list sha256:935f41fd1f9125d0e5aa36f23cc1682d512b673fe51bb8c0f30b5bf187b37d3c done\n#26 naming to docker.io/library/bench-repo2run__envbench100-pjy-lhotse-speech-lhotse:latest done\n#26 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-lhotse-speech-lhotse:latest\n#26 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-lhotse-speech-lhotse:latest 36.1s done\n#26 DONE 303.1s\n",
+  "build_log_tail": "tice] To update, run: pip install --upgrade pip\n#20 0.790 numpy                  2.2.6\n#20 0.790 torch                  2.14.0\n#20 0.790 torchaudio             2.11.0\n#20 DONE 0.8s\n\n#21 [18/23] RUN cd /repo && pip install -q hypothesis==6.56.0\n#21 2.086 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#21 2.089 \n#21 2.089 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#21 2.089 [notice] To update, run: pip install --upgrade pip\n#21 DONE 2.2s\n\n#22 [19/23] RUN cd /repo && python -c \"import torch, inspect; from torch.utils.data import Sampler; print(torch.__version__); print(inspect.signature(Sampler.__init__))\"\n#22 1.582 2.14.0+cu130\n#22 1.582 (self, /, *args, **kwargs)\n#22 DONE 2.0s\n\n#23 [20/23] RUN cd /repo && python -c \"from torch.utils.data import Sampler; print(Sampler.__mro__)\"\n#23 1.492 (<class 'torch.utils.data.sampler.Sampler'>, <class 'typing.Generic'>, <class 'object'>)\n#23 DONE 2.0s\n\n#24 [21/23] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#24 DONE 0.5s\n\n#25 [22/23] WORKDIR /testbed\n#25 DONE 0.0s\n\n#26 exporting to image\n#26 exporting layers\n#26 exporting layers 385.7s done\n#26 exporting manifest sha256:8985220c2e4910ba4bf54f0f269254b62fee32c998dd211a12cc2345d725a0c3 0.0s done\n#26 exporting config sha256:2d70697c4b57e6f631f3562a215d9c016afa50beb0ae20b7448f36e483baee0f 0.0s done\n#26 exporting attestation manifest sha256:3e14f1fc5b4db690082e974cc9aeabf16fc82796f1ec1ae426f7e8a504b31a6f 0.0s done\n#26 exporting manifest list sha256:3f587c616f9f81d42d79db787bfaa72249039ca0cb141a6b4507ebc57c7719c7 0.0s done\n#26 naming to docker.io/library/bench-pjy-repo2run-lhotse-speech-lhotse:latest done\n#26 unpacking to docker.io/library/bench-pjy-repo2run-lhotse-speech-lhotse:latest\n#26 unpacking to docker.io/library/bench-pjy-repo2run-lhotse-speech-lhotse:latest 40.1s done\n#26 DONE 425.9s\n",
   "status": "collect_error",
   "py_test_files": 92,
   "collect_rc": 2,
@@ -1651,10 +1651,10 @@
   ],
   "executed": true,
   "total": 1640,
-  "passed": 979,
+  "passed": 978,
   "failed": 422,
   "errors": 87,
-  "skipped": 152,
+  "skipped": 153,
   "passed_node_ids": [
     "test/audio/test_audio_backend.py::test_default_audio_backend",
     "test/audio/test_audio_backend.py::test_list_available_audio_backends",
@@ -2633,8 +2633,7 @@
     "test/test_utils.py::test_click_literal_option[2-None]",
     "test/test_utils.py::test_click_literal_option[3-3]",
     "test/test_utils.py::test_click_literal_option[(4, 5)-expected2]",
-    "test/test_utils.py::test_click_literal_option[[6, 7]-expected3]",
-    "test/workflows/test_activity_detection.py::test_silero_vad_in_parallel"
+    "test/test_utils.py::test_click_literal_option[[6, 7]-expected3]"
   ],
   "failed_node_ids": [
     "test/audio/test_audio_backend.py::test_save_and_load[wav-TorchaudioDefaultBackend]",
@@ -3150,11 +3149,11 @@
     "test/video/test_video_recording.py::test_video_recording_load_video_over_duration"
   ],
   "ebsr": true,
-  "pass_rate": 0.6579,
+  "pass_rate": 0.6577,
   "timed_out": false,
-  "image_size_mb": 16334.0,
+  "image_size_mb": 16333.7,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-lhotse-speech-lhotse@sha256:935f41fd1f9125d0e5aa36f23cc1682d512b673fe51bb8c0f30b5bf187b37d3c",
+  "image_digest": "bench-pjy-repo2run-lhotse-speech-lhotse@sha256:3f587c616f9f81d42d79db787bfaa72249039ca0cb141a6b4507ebc57c7719c7",
   "installed_pkg_count": 72,
   "tokens_in": 3681733,
   "tokens_out": 80568,
@@ -3162,8 +3161,8 @@
   "turns_used": 100,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 383.45,
-  "test_s": 91.3,
+  "build_s": 514.22,
+  "test_s": 71.87,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -3171,19 +3170,7 @@
     "tokens_in": 3681733,
     "tokens_out": 80568,
     "llm_calls": null,
-    "turns_used": 100,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 100
   },
   "error_surface": "",
   "error_surface_reason": "",

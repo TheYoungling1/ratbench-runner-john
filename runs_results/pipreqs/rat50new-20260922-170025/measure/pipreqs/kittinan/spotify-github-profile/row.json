@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50new-20260922-170025",
+  "agent": "pipreqs",
   "repo": "kittinan/spotify-github-profile",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "tography-50.0.1 firebase_admin-7.7.0 google-api-core-2.39.0 google-auth-2.58.1 google-cloud-core-2.7.0 google-cloud-firestore-2.32.0 google-cloud-storage-3.15.0 google-crc32c-1.9.0 google-resumable-media-2.10.2 googleapis-common-protos-1.75.4 grpcio-1.84.0 grpcio-status-1.84.0 h11-0.16.0 h2-4.4.1 hpack-4.2.0 httpcore-1.0.9 httpx-0.28.1 hyperframe-6.1.0 idna-3.20 inflection-0.5.1 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.3 msgpack-1.2.2 opentelemetry-api-1.45.0 profanityfilter-2.1.0 proto-plus-1.28.4 protobuf-7.36.2 pyasn1-0.6.4 pyasn1-modules-0.4.2 pycparser-3.0 pyjwt-2.15.0 python-dotenv-1.2.3 urllib3-2.8.0 werkzeug-3.1.8\n#11 10.50 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 10.50 \n#11 10.50 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 10.50 [notice] To update, run: pip install --upgrade pip\n#11 DONE 11.3s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 4.4s done\n#12 exporting manifest sha256:3c3f0428c1291457e115d99f78f8029aee7dd481aa31e8a483dc5e892c144e9f\n#12 exporting manifest sha256:3c3f0428c1291457e115d99f78f8029aee7dd481aa31e8a483dc5e892c144e9f 0.0s done\n#12 exporting config sha256:b4ce7504795239922df5de8df13aae04af7d6bc831c4bcc1513a5a3267b1e76a 0.0s done\n#12 exporting attestation manifest sha256:3dbac10c04ec8e40626d8d14461e7d68251d5342c7c420a4ade4968b5a9b5a92 0.0s done\n#12 exporting manifest list sha256:56fec2e9bc078be99088e4050261dff94b06c5674a06eef48b52a39c7ee8b6e7 0.0s done\n#12 naming to docker.io/library/bench-pipreqs__rat50new-20260922-170025-kittinan-spotify-github-profile:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-kittinan-spotify-github-profile:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-kittinan-spotify-github-profile:latest 4.4s done\n#12 DONE 9.1s\n",
+  "build_log_tail": "ng pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 9.857 Successfully installed Flask-3.1.3 Pillow-12.3.0 Requests-2.34.2 anyio-4.15.1 blinker-1.9.0 cachecontrol-0.14.4 certifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.1 click-8.5.0 cryptography-50.0.1 firebase_admin-7.6.0 google-api-core-2.38.0 google-auth-2.58.0 google-cloud-core-2.7.0 google-cloud-firestore-2.31.0 google-cloud-storage-3.14.1 google-crc32c-1.8.0 google-resumable-media-2.10.2 googleapis-common-protos-1.75.3 grpcio-1.84.0 grpcio-status-1.84.0 h11-0.16.0 h2-4.4.1 hpack-4.2.0 httpcore-1.0.9 httpx-0.28.1 hyperframe-6.1.0 idna-3.20 inflection-0.5.1 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.3 msgpack-1.2.2 opentelemetry-api-1.44.0 profanityfilter-2.1.0 proto-plus-1.28.4 protobuf-7.36.2 pyasn1-0.6.4 pyasn1-modules-0.4.2 pycparser-3.0 pyjwt-2.14.0 python-dotenv-1.2.3 urllib3-2.8.0 werkzeug-3.1.8\n#11 9.862 \n#11 9.862 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 9.862 [notice] To update, run: pip install --upgrade pip\n#11 DONE 10.7s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 4.8s done\n#12 exporting manifest sha256:973c1f7210bb9b5103e7493aac1cc32a9dca719cbc8cc8c6be0f03e675430264 0.0s done\n#12 exporting config sha256:858fce230148bc5a9939fdab825bcf7d331448cc47e08c4039fc78e4c71d6a35 0.0s done\n#12 exporting attestation manifest sha256:769322707bb523751ef02e7172c3e8605a5290ff9d4a6bd866bcfaa708284137 0.0s done\n#12 exporting manifest list sha256:3ff0135e9822b449944b01f0b4c3385fb9fd41deabecc01881da3c7e84776d43 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-kittinan-spotify-github-profile:latest 0.0s done\n#12 unpacking to docker.io/library/bench-pipreqs-kittinan-spotify-github-profile:latest\n#12 unpacking to docker.io/library/bench-pipreqs-kittinan-spotify-github-profile:latest 2.0s done\n#12 DONE 7.0s\n",
   "status": "collect_error",
   "py_test_files": 6,
   "collect_rc": 2,
@@ -127,9 +127,9 @@
   "ebsr": true,
   "pass_rate": 0.6633,
   "timed_out": false,
-  "image_size_mb": 1717.1,
+  "image_size_mb": 1716.7,
   "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50new-20260922-170025-kittinan-spotify-github-profile@sha256:56fec2e9bc078be99088e4050261dff94b06c5674a06eef48b52a39c7ee8b6e7",
+  "image_digest": "bench-pipreqs-kittinan-spotify-github-profile@sha256:3ff0135e9822b449944b01f0b4c3385fb9fd41deabecc01881da3c7e84776d43",
   "installed_pkg_count": 59,
   "tokens_in": null,
   "tokens_out": null,
@@ -137,8 +137,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 2.66,
-  "build_s": 25.07,
-  "test_s": 1.62,
+  "build_s": 20.18,
+  "test_s": 1.72,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -165,19 +165,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=0f605fac8dbaac17000b40c6bb8df7c3b89839db (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=0f605fac8dbaac17000b40c6bb8df7c3b89839db (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

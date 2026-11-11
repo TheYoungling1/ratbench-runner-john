@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50-20260915-043144",
+  "agent": "pipreqs",
   "repo": "Donkie/Spoolman",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "linux_2_28_x86_64.whl (20 kB)\n#11 4.784 Installing collected packages: typing-inspection, typeguard, pydantic-core, prometheus_client, platformdirs, msgpack, MarkupSafe, idna, h11, greenlet, click, certifi, annotated-types, annotated-doc, uvicorn, SQLAlchemy, scheduler, pydantic, Mako, httpcore, hishel, anyio, starlette, httpx, alembic, fastapi\n#11 6.630 Successfully installed Mako-1.4.3 MarkupSafe-3.0.3 SQLAlchemy-2.0.54 alembic-1.20.0 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 certifi-2026.7.22 click-8.5.0 fastapi-0.141.1 greenlet-3.5.6 h11-0.16.0 hishel-1.4.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 msgpack-1.2.2 platformdirs-4.11.15 prometheus_client-0.26.0 pydantic-2.13.5 pydantic-core-2.46.5 scheduler-0.8.11 starlette-1.7.0 typeguard-4.6.0 typing-inspection-0.4.4 uvicorn-0.54.0\n#11 6.630 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 6.634 \n#11 6.634 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 6.634 [notice] To update, run: pip install --upgrade pip\n#11 DONE 7.1s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 2.1s done\n#12 exporting manifest sha256:7327ced9b97e1b181695ffb075421ecb804cbc5690fff35c2f8e6140b9937a2e done\n#12 exporting config sha256:e519a96f18ae3f63987db110ea33a22c117014a74e3fc06fbdfedf99eba1ef3b done\n#12 exporting attestation manifest sha256:b475a9f2ea24abef0b8c92b133177f41bfec672d11aa95c3ad876c3e6e903ec9 0.0s done\n#12 exporting manifest list sha256:4c1c96f0716f9ea04cbf8e6815af6f90cd6a0a584f7fc216fce7f85c4966775f done\n#12 naming to docker.io/library/bench-pipreqs__rat50-20260915-043144-donkie-spoolman:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-donkie-spoolman:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-donkie-spoolman:latest 0.9s done\n#12 DONE 3.1s\n",
+  "build_log_tail": "arkupsafe-3.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (20 kB)\n#11 4.264 Installing collected packages: typing-inspection, typeguard, pydantic-core, prometheus_client, platformdirs, msgpack, MarkupSafe, idna, h11, greenlet, click, certifi, annotated-types, annotated-doc, uvicorn, SQLAlchemy, scheduler, pydantic, Mako, httpcore, hishel, anyio, starlette, httpx, alembic, fastapi\n#11 5.917 Successfully installed Mako-1.4.1 MarkupSafe-3.0.3 SQLAlchemy-2.0.53 alembic-1.20.0 annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 certifi-2026.7.22 click-8.5.0 fastapi-0.141.1 greenlet-3.5.6 h11-0.16.0 hishel-1.3.1 httpcore-1.0.9 httpx-0.28.1 idna-3.19 msgpack-1.2.2 platformdirs-4.11.8 prometheus_client-0.26.0 pydantic-2.13.5 pydantic-core-2.46.5 scheduler-0.8.11 starlette-1.6.0 typeguard-4.6.0 typing-inspection-0.4.4 uvicorn-0.53.0\n#11 5.917 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 5.921 \n#11 5.921 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 5.921 [notice] To update, run: pip install --upgrade pip\n#11 DONE 6.4s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 1.6s done\n#12 exporting manifest sha256:c8048b1d4015b1d4a9d4ca1522e2452fd7dc850e775fb404d88468a0a0f7a8d2 done\n#12 exporting config sha256:16bebe04f6fb25ab7120050d4e8a6bb3178b6eca1945db4b6613a31a3ce54ed6 done\n#12 exporting attestation manifest sha256:efdc0c3cda3a7a8ded86f60f7953a4cba37c06ede8940f4225c9d3820bf65f9f done\n#12 exporting manifest list sha256:97b862386e3f304ec581808aaad773236bbe42c9a5864e9dc62097ceace7e147 done\n#12 naming to docker.io/library/bench-pipreqs-donkie-spoolman:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-donkie-spoolman:latest\n#12 unpacking to docker.io/library/bench-pipreqs-donkie-spoolman:latest 0.5s done\n#12 DONE 2.2s\n",
   "status": "collect_error",
   "py_test_files": 25,
   "collect_rc": 2,
@@ -29,9 +29,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 429.7,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50-20260915-043144-donkie-spoolman@sha256:4c1c96f0716f9ea04cbf8e6815af6f90cd6a0a584f7fc216fce7f85c4966775f",
+  "image_size_mb": 429.2,
+  "image_delta_mb": 41.6,
+  "image_digest": "bench-pipreqs-donkie-spoolman@sha256:97b862386e3f304ec581808aaad773236bbe42c9a5864e9dc62097ceace7e147",
   "installed_pkg_count": 40,
   "tokens_in": null,
   "tokens_out": null,
@@ -39,8 +39,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 9.27,
-  "build_s": 16.81,
-  "test_s": 0.38,
+  "build_s": 11.83,
+  "test_s": 0.48,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -67,19 +67,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=eafbc64937b30993a0d9cc790820eb1db9e44d51 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=eafbc64937b30993a0d9cc790820eb1db9e44d51 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

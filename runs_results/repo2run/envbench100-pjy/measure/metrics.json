@@ -1,0 +1,468 @@
+{
+  "pjy-repo2run": {
+    "n": 100,
+    "n_exec": 63,
+    "n_collect_clean": 45,
+    "n_real_success": 31,
+    "n_unmeasurable": 0,
+    "n_legacy_missing": 0,
+    "EBSR": 0.44,
+    "n_ebsr": 44,
+    "EBSR_repo2run_raw": 0.45,
+    "n_raw": 45,
+    "false_green_removed": 0.01,
+    "status_census": {
+      "executed": 40,
+      "no_tests_collected": 5,
+      "collect_error": 33,
+      "build_fail": 17,
+      "timed_out": 1,
+      "missing": 4
+    },
+    "n_ebsr_zero_collected": 8,
+    "total_collected": 28653,
+    "mean_collected": 286.53,
+    "total_collect_errors": 1215,
+    "mean_collect_errors": 12.15,
+    "real_success": 0.31,
+    "micro": 0.8649,
+    "full_pass_repos": 10,
+    "coverage": 0.63,
+    "ESSR": null,
+    "ESSR_median": null,
+    "n_gold_scored": 0,
+    "n_gold_zero": 0,
+    "n_gold_no_row": 0,
+    "gold_no_row": [],
+    "n_gold_capped": 0,
+    "gold_capped": [],
+    "n_gold_excluded": 100,
+    "gold_excluded": [
+      [
+        "adamchainz/django-mysql",
+        "gold_missing"
+      ],
+      [
+        "apiflask/apiflask",
+        "gold_missing"
+      ],
+      [
+        "avaiga/taipy-core",
+        "gold_missing"
+      ],
+      [
+        "basxsoftwareassociation/basxconnect",
+        "gold_missing"
+      ],
+      [
+        "beeware/briefcase",
+        "gold_missing"
+      ],
+      [
+        "benadida/helios-server",
+        "gold_missing"
+      ],
+      [
+        "benthayer/git-gud",
+        "gold_missing"
+      ],
+      [
+        "biothings/biothings.api",
+        "gold_missing"
+      ],
+      [
+        "brightway-lca/brightway2-io",
+        "gold_missing"
+      ],
+      [
+        "catalystneuro/roiextractors",
+        "gold_missing"
+      ],
+      [
+        "censys/censys-python",
+        "gold_missing"
+      ],
+      [
+        "centre-for-humanities-computing/dacy",
+        "gold_missing"
+      ],
+      [
+        "cityofzion/neo3-boa",
+        "gold_missing"
+      ],
+      [
+        "columnflow/columnflow",
+        "gold_missing"
+      ],
+      [
+        "conan-io/conan-package-tools",
+        "gold_missing"
+      ],
+      [
+        "convexengineering/gpkit",
+        "gold_missing"
+      ],
+      [
+        "datactive/bigbang",
+        "gold_missing"
+      ],
+      [
+        "datamol-io/datamol",
+        "gold_missing"
+      ],
+      [
+        "diefenbach/django-lfs",
+        "gold_missing"
+      ],
+      [
+        "dtmilano/androidviewclient",
+        "gold_missing"
+      ],
+      [
+        "eastsidepreparatoryschool/epschedule",
+        "gold_missing"
+      ],
+      [
+        "ecds/readux",
+        "gold_missing"
+      ],
+      [
+        "ellmetha/django-machina",
+        "gold_missing"
+      ],
+      [
+        "facebookresearch/hydra",
+        "gold_missing"
+      ],
+      [
+        "fhempy/fhempy",
+        "gold_missing"
+      ],
+      [
+        "folio-fse/folio_migration_tools",
+        "gold_missing"
+      ],
+      [
+        "fonttools/fontbakery",
+        "gold_missing"
+      ],
+      [
+        "google/trax",
+        "gold_missing"
+      ],
+      [
+        "googlecloudplatform/gsutil",
+        "gold_missing"
+      ],
+      [
+        "guardrails-ai/guardrails",
+        "gold_missing"
+      ],
+      [
+        "gymrek-lab/trtools",
+        "gold_missing"
+      ],
+      [
+        "hhursev/recipe-scrapers",
+        "gold_missing"
+      ],
+      [
+        "ibm/ibmi-bob",
+        "gold_missing"
+      ],
+      [
+        "idaholab/civet",
+        "gold_missing"
+      ],
+      [
+        "intake/intake",
+        "gold_missing"
+      ],
+      [
+        "iss-mimic/mimic",
+        "gold_missing"
+      ],
+      [
+        "jacebrowning/memegen",
+        "gold_missing"
+      ],
+      [
+        "jackdewinter/pymarkdown",
+        "gold_missing"
+      ],
+      [
+        "jageo/lobsterpy",
+        "gold_missing"
+      ],
+      [
+        "jaraco/keyring",
+        "gold_missing"
+      ],
+      [
+        "jazzband/tablib",
+        "gold_missing"
+      ],
+      [
+        "johnsnowlabs/nlu",
+        "gold_missing"
+      ],
+      [
+        "karlicoss/hpi",
+        "gold_missing"
+      ],
+      [
+        "lhotse-speech/lhotse",
+        "gold_missing"
+      ],
+      [
+        "librephotos/librephotos",
+        "gold_missing"
+      ],
+      [
+        "lightkurve/lightkurve",
+        "gold_missing"
+      ],
+      [
+        "mad-lab-fau/biopsykit",
+        "gold_missing"
+      ],
+      [
+        "marimo-team/marimo",
+        "gold_missing"
+      ],
+      [
+        "markqvist/reticulum",
+        "gold_missing"
+      ],
+      [
+        "materialsvirtuallab/monty",
+        "gold_missing"
+      ],
+      [
+        "mdolab/openaerostruct",
+        "gold_missing"
+      ],
+      [
+        "menpo/menpo",
+        "gold_missing"
+      ],
+      [
+        "microsoft/torchgeo",
+        "gold_missing"
+      ],
+      [
+        "microsoftgraph/msgraph-sdk-python-core",
+        "gold_missing"
+      ],
+      [
+        "mirascope/mirascope",
+        "gold_missing"
+      ],
+      [
+        "miurahr/aqtinstall",
+        "gold_missing"
+      ],
+      [
+        "mne-tools/mne-lsl",
+        "gold_missing"
+      ],
+      [
+        "modalities/modalities",
+        "gold_missing"
+      ],
+      [
+        "mollie/mollie-api-python",
+        "gold_missing"
+      ],
+      [
+        "mpmath/mpmath",
+        "gold_missing"
+      ],
+      [
+        "neurogym/neurogym",
+        "gold_missing"
+      ],
+      [
+        "nixtla/neuralforecast",
+        "gold_missing"
+      ],
+      [
+        "numba/llvmlite",
+        "gold_missing"
+      ],
+      [
+        "oarriaga/paz",
+        "gold_missing"
+      ],
+      [
+        "online-ml/river",
+        "gold_missing"
+      ],
+      [
+        "open-cas/open-cas-linux",
+        "gold_missing"
+      ],
+      [
+        "pajbot/pajbot",
+        "gold_missing"
+      ],
+      [
+        "pastas/pastas",
+        "gold_missing"
+      ],
+      [
+        "peering-manager/peering-manager",
+        "gold_missing"
+      ],
+      [
+        "piccolo-orm/piccolo",
+        "gold_missing"
+      ],
+      [
+        "pretalx/pretalx",
+        "gold_missing"
+      ],
+      [
+        "pypa/distutils",
+        "gold_missing"
+      ],
+      [
+        "pytest-dev/pytest-xdist",
+        "gold_missing"
+      ],
+      [
+        "python-control/python-control",
+        "gold_missing"
+      ],
+      [
+        "python-markdown/markdown",
+        "gold_missing"
+      ],
+      [
+        "python-poetry/poetry",
+        "gold_missing"
+      ],
+      [
+        "qiboteam/qibocal",
+        "gold_missing"
+      ],
+      [
+        "quantum-accelerators/quacc",
+        "gold_missing"
+      ],
+      [
+        "revoxhere/duino-coin",
+        "gold_missing"
+      ],
+      [
+        "rstcheck/rstcheck",
+        "gold_missing"
+      ],
+      [
+        "sassoftware/python-sasctl",
+        "gold_missing"
+      ],
+      [
+        "scitools/iris-grib",
+        "gold_missing"
+      ],
+      [
+        "scylladb/sphinx-scylladb-theme",
+        "gold_missing"
+      ],
+      [
+        "simplistix/testfixtures",
+        "gold_missing"
+      ],
+      [
+        "skrub-data/skrub",
+        "gold_missing"
+      ],
+      [
+        "spacetelescope/pysiaf",
+        "gold_missing"
+      ],
+      [
+        "stan-dev/cmdstanpy",
+        "gold_missing"
+      ],
+      [
+        "sublimelinter/sublimelinter",
+        "gold_missing"
+      ],
+      [
+        "the-openroad-project/openlane",
+        "gold_missing"
+      ],
+      [
+        "theislab/cellrank",
+        "gold_missing"
+      ],
+      [
+        "timbrel/gitsavvy",
+        "gold_missing"
+      ],
+      [
+        "ucoproject/uco",
+        "gold_missing"
+      ],
+      [
+        "uploadcare/pyuploadcare",
+        "gold_missing"
+      ],
+      [
+        "uriyyo/fastapi-pagination",
+        "gold_missing"
+      ],
+      [
+        "valory-xyz/trader",
+        "gold_missing"
+      ],
+      [
+        "wilcoxjay/mypyvy",
+        "gold_missing"
+      ],
+      [
+        "wireless-innovation-forum/spectrum-access-system",
+        "gold_missing"
+      ],
+      [
+        "wpi-lnl/lnldb",
+        "gold_missing"
+      ],
+      [
+        "yourlabs/django-autocomplete-light",
+        "gold_missing"
+      ],
+      [
+        "zostera/django-bootstrap3",
+        "gold_missing"
+      ]
+    ],
+    "n_gold_sha_mismatch": 0,
+    "gold_sha_mismatch": [],
+    "mean_collection_coverage": null,
+    "median_collection_coverage": null,
+    "n_gold_hollow": 0,
+    "gold_hollow": [],
+    "mean_image_delta_mb": null,
+    "mean_installed_pkgs": 62.2278,
+    "mean_tokens": 952456.5938,
+    "mean_tokens_out": 22130.875,
+    "tokens_per_ebsr": 2078087.1136,
+    "tokens_per_real_success": 2949543.0,
+    "mean_turns": 33.7083,
+    "total_cost_usd": null,
+    "mean_cost_usd": null,
+    "cost_per_ebsr": null,
+    "cost_per_real_success": null,
+    "n_cost_reporting": 0,
+    "mean_produce_s": null,
+    "wall_s_per_real_success": 507.2132,
+    "n_token_reporting": 96,
+    "rebuild_ok_rate": 0.79,
+    "setup_compile_rate": 0.79,
+    "n_setup_compile": 79,
+    "unreplayed_rate": 0.0
+  }
+}

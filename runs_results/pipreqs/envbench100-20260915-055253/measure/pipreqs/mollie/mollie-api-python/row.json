@@ -1,15 +1,17 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "mollie/mollie-api-python",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": ".3.1-py3-none-any.whl (160 kB)\n#11 1.698      \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 160.1/160.1 kB 50.8 MB/s eta 0:00:00\n#11 1.719 Requirement already satisfied: typing-extensions>=4.6.0 in /usr/local/lib/python3.10/site-packages (from exceptiongroup>=1->pytest->-r /requirements_pipreqs.txt (line 2)) (4.16.0)\n#11 1.816 Installing collected packages: urllib3, oauthlib, markupsafe, itsdangerous, idna, click, charset_normalizer, certifi, blinker, werkzeug, Requests, jinja2, requests_oauthlib, Flask\n#11 2.356 Successfully installed Flask-3.1.3 Requests-2.34.2 blinker-1.9.0 certifi-2026.7.22 charset_normalizer-3.5.1 click-8.5.0 idna-3.20 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.3 oauthlib-3.3.1 requests_oauthlib-2.0.0 urllib3-2.8.0 werkzeug-3.1.8\n#11 2.357 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 2.370 \n#11 2.370 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 2.370 [notice] To update, run: pip install --upgrade pip\n#11 DONE 2.6s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 0.7s done\n#12 exporting manifest sha256:4c23660e016d7973e2d192595d1e936be02312b3f85552d1c524a09ee9e51dae done\n#12 exporting config sha256:b2d393060bd81e87b6955e9b70601d9e9a48f2188d03a220d86d0241be30d3cd done\n#12 exporting attestation manifest sha256:baff09090e7b2f2778c492ad9e4c7dea1c3d9eba21439e2ce585f719f4376d21 0.0s done\n#12 exporting manifest list sha256:216e2b68e0803892e9a1014bd2e4671f34486ca565d5731648e2797df1784464 done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-mollie-mollie-api-python:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-mollie-mollie-api-python:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-mollie-mollie-api-python:latest 0.2s done\n#12 DONE 1.0s\n",
+  "build_log_tail": "-any.whl (160 kB)\n#11 1.429      \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 160.1/160.1 kB 68.5 MB/s eta 0:00:00\n#11 1.439 Requirement already satisfied: typing-extensions>=4.6.0 in /usr/local/lib/python3.10/site-packages (from exceptiongroup>=1->pytest->-r /requirements_pipreqs.txt (line 2)) (4.16.0)\n#11 1.569 Installing collected packages: urllib3, oauthlib, markupsafe, itsdangerous, idna, click, charset_normalizer, certifi, blinker, werkzeug, Requests, jinja2, requests_oauthlib, Flask\n#11 2.113 Successfully installed Flask-3.1.3 Requests-2.34.2 blinker-1.9.0 certifi-2026.7.22 charset_normalizer-3.5.1 click-8.5.0 idna-3.19 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.3 oauthlib-3.3.1 requests_oauthlib-2.0.0 urllib3-2.7.0 werkzeug-3.1.8\n#11 2.113 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 2.120 \n#11 2.120 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 2.120 [notice] To update, run: pip install --upgrade pip\n#11 DONE 2.3s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 0.6s done\n#12 exporting manifest sha256:7c543a6f88ae79c45d659caf2fa6605be7b15a0694ad88bb17c90e46f53aac0b\n#12 exporting manifest sha256:7c543a6f88ae79c45d659caf2fa6605be7b15a0694ad88bb17c90e46f53aac0b 0.0s done\n#12 exporting config sha256:4ad263f55ac8dc4aefe75d342905cbf4b635c438fc5cf708e9cda44f04dea736 done\n#12 exporting attestation manifest sha256:9d3364b0a070d3ca3bb61de1f8bc8d7413143a58b01ce3f3bc8b972d53aa9ff6 0.0s done\n#12 exporting manifest list sha256:f40b7b379e962955b5c7866bbb31774f2c903d01e7e58cdd38bda88d30397424 done\n#12 naming to docker.io/library/bench-pipreqs-mollie-mollie-api-python:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-mollie-mollie-api-python:latest\n#12 unpacking to docker.io/library/bench-pipreqs-mollie-mollie-api-python:latest 0.5s done\n#12 DONE 1.2s\n",
   "status": "collect_error",
   "py_test_files": 38,
   "collect_rc": 4,
   "collect_clean": false,
-  "collect_errors": [],
+  "collect_errors": [
+    "E   ModuleNotFoundError: No module named 'responses'"
+  ],
   "collect_error_count": 0,
   "collected_node_ids": [],
   "executed": false,
@@ -24,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 401.9,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-mollie-mollie-api-python@sha256:216e2b68e0803892e9a1014bd2e4671f34486ca565d5731648e2797df1784464",
+  "image_size_mb": 401.8,
+  "image_delta_mb": 14.2,
+  "image_digest": "bench-pipreqs-mollie-mollie-api-python@sha256:f40b7b379e962955b5c7866bbb31774f2c903d01e7e58cdd38bda88d30397424",
   "installed_pkg_count": 28,
   "tokens_in": null,
   "tokens_out": null,
@@ -34,8 +36,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 5.79,
-  "build_s": 6.52,
-  "test_s": 0.21,
+  "build_s": 6.81,
+  "test_s": 0.32,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -62,19 +64,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=957b44fddb9d4d833508120022c7f291f5ca8d06 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=957b44fddb9d4d833508120022c7f291f5ca8d06 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

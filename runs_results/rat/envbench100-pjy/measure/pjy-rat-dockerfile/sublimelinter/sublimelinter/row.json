@@ -1,10 +1,10 @@
 {
-  "agent": "rat__envbench100-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "sublimelinter/sublimelinter",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "tion: httpx2 2.13.0\n#16 5.464     Uninstalling httpx2-2.13.0:\n#16 5.481       Successfully uninstalled httpx2-2.13.0\n#16 5.547   Attempting uninstall: httpcore2\n#16 5.551     Found existing installation: httpcore2 2.13.0\n#16 5.557     Uninstalling httpcore2-2.13.0:\n#16 5.572       Successfully uninstalled httpcore2-2.13.0\n#16 5.671 Successfully installed attrs-26.1.0 httpcore2-2.12.0 httpx2-2.12.0 idna-3.19 jiter-0.16.0 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 openai-3.11.0 referencing-0.37.0 rpds-py-2026.6.3\n#16 5.671 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#16 5.799 \n#16 5.799 [notice] A new release of pip is available: 25.0.1 -> 26.2.1\n#16 5.799 [notice] To update, run: pip install --upgrade pip\n#16 DONE 6.0s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.4s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.0s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 5.7s done\n#19 exporting manifest sha256:c2113897acac7db603ac73aaf2989cb16c7a0dc0b4fa02108a4441f22436dd62 0.0s done\n#19 exporting config sha256:8a3c1316dafcd42520095884a4d043e03b40ae935bf77493d376c4371f12626f 0.0s done\n#19 exporting attestation manifest sha256:4bc39da75a88aa6fd3caa741234dfd40afaa8798395a420231640b0bfddc942b 0.0s done\n#19 exporting manifest list sha256:bc83ebb88874c8aa541e1c7957e105b3cbcf305af4ed6eac95f3ea89cb073cb8 done\n#19 naming to docker.io/library/bench-rat__envbench100-pjy-sublimelinter-sublimelinter:latest done\n#19 unpacking to docker.io/library/bench-rat__envbench100-pjy-sublimelinter-sublimelinter:latest\n#19 unpacking to docker.io/library/bench-rat__envbench100-pjy-sublimelinter-sublimelinter:latest 3.5s done\n#19 DONE 9.3s\n",
+  "build_log_tail": "tion: httpx2 2.13.0\n#16 6.686     Uninstalling httpx2-2.13.0:\n#16 6.705       Successfully uninstalled httpx2-2.13.0\n#16 6.795   Attempting uninstall: httpcore2\n#16 6.800     Found existing installation: httpcore2 2.13.0\n#16 6.806     Uninstalling httpcore2-2.13.0:\n#16 6.821       Successfully uninstalled httpcore2-2.13.0\n#16 6.926 Successfully installed attrs-26.1.0 httpcore2-2.12.0 httpx2-2.12.0 idna-3.19 jiter-0.16.0 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 openai-3.11.0 referencing-0.37.0 rpds-py-2026.6.3\n#16 6.926 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#16 7.065 \n#16 7.065 [notice] A new release of pip is available: 25.0.1 -> 26.2.1\n#16 7.065 [notice] To update, run: pip install --upgrade pip\n#16 DONE 7.3s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.3s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.0s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 7.0s done\n#19 exporting manifest sha256:5e9a9ed179db637eb1e7bef1620a414e60fccf1b31c36d07cbf4daff091896ed 0.0s done\n#19 exporting config sha256:edf93af5830b7dd55e1148ac8f1ee53edddd0dae63ff3530a987752ee5966562 0.0s done\n#19 exporting attestation manifest sha256:68fa0dfee316d89e58071fb70add8f9681db8f22e542b344ee1c618e653e53cd 0.0s done\n#19 exporting manifest list sha256:4820f5f894aa58cc5f3dcf6c1932124f8b2f4085daa2fa082c720ff51c3bdda9 0.0s done\n#19 naming to docker.io/library/bench-pjy-rat-dockerfile-sublimelinter-sublimelinter:latest done\n#19 unpacking to docker.io/library/bench-pjy-rat-dockerfile-sublimelinter-sublimelinter:latest\n#19 unpacking to docker.io/library/bench-pjy-rat-dockerfile-sublimelinter-sublimelinter:latest 3.4s done\n#19 DONE 10.6s\n",
   "status": "collect_error",
   "py_test_files": 17,
   "collect_rc": 2,
@@ -60,9 +60,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 104.8,
+  "image_size_mb": 449.2,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__envbench100-pjy-sublimelinter-sublimelinter@sha256:bc83ebb88874c8aa541e1c7957e105b3cbcf305af4ed6eac95f3ea89cb073cb8",
+  "image_digest": "bench-pjy-rat-dockerfile-sublimelinter-sublimelinter@sha256:4820f5f894aa58cc5f3dcf6c1932124f8b2f4085daa2fa082c720ff51c3bdda9",
   "installed_pkg_count": 26,
   "tokens_in": 3531774,
   "tokens_out": 93255,
@@ -70,27 +70,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 43.43,
-  "test_s": 0.56,
+  "build_s": 56.01,
+  "test_s": 0.74,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 3531774,
     "tokens_out": 93255,
-    "llm_calls": 101,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 101
   },
   "error_surface": "",
   "error_surface_reason": "",

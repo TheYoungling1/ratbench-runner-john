@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__ratbench50_run-20260904-173735",
+  "agent": "setupx",
   "repo": "rq/rq",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "_consecutive_shutdown_signals\n#10 16.73 tests/test_worker_pool.py::TestWorkerPool::test_queues\n#10 16.73 tests/test_worker_pool.py::TestWorkerPool::test_reap_workers\n#10 16.73 tests/test_worker_pool.py::TestWorkerPool::test_run_worker\n#10 16.73 tests/test_worker_pool.py::TestWorkerPool::test_start\n#10 16.73 tests/test_worker_pool.py::TestWorkerPool::test_worker_pool_arguments\n#10 16.73 tests/test_worker_registration.py::TestWorkerRegistry::test_clean_large_registry\n#10 16.73 tests/test_worker_registration.py::TestWorkerRegistry::test_clean_registry\n#10 16.73 tests/test_worker_registration.py::TestWorkerRegistry::test_get_keys_by_queue\n#10 16.73 tests/test_worker_registration.py::TestWorkerRegistry::test_worker_registration\n#10 16.73 \n#10 16.73 690 tests collected in 0.58s\n#10 17.28 ............................................................             [100%]\n#10 17.28 60 passed in 0.36s\n#10 DONE 17.6s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.4s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 5.4s done\n#14 exporting manifest sha256:6830d0b56b4e4390acba6443cc1161d9b09b35345ce116a712b71255d2ec889d 0.0s done\n#14 exporting config sha256:237c428ebd4d6283c476f54f78963056a178b5a0f30af46d53ac4d72a7fb0b67 done\n#14 exporting attestation manifest sha256:90e2a1a2126104fe7ef59aab73714a5fe60910522f69f26e9c493e8fbd9e479b 0.0s done\n#14 exporting manifest list sha256:33ea61da7672efe925381306e268a45f47ef943b86404b69940c2b5d3f16b9df 0.0s done\n#14 naming to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-rq-rq:latest done\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-rq-rq:latest\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-rq-rq:latest 1.7s done\n#14 DONE 7.2s\n",
+  "build_log_tail": "st_exception_handlers_propagated_to_workers\ntests/test_worker_pool.py::TestWorkerPool::test_exception_handlers_with_none\ntests/test_worker_pool.py::TestWorkerPool::test_pool_ignores_consecutive_shutdown_signals\ntests/test_worker_pool.py::TestWorkerPool::test_queues\ntests/test_worker_pool.py::TestWorkerPool::test_reap_workers\ntests/test_worker_pool.py::TestWorkerPool::test_run_worker\ntests/test_worker_pool.py::TestWorkerPool::test_start\ntests/test_worker_pool.py::TestWorkerPool::test_worker_pool_arguments\ntests/test_worker_registration.py::TestWorkerRegistry::test_clean_large_registry\ntests/test_worker_registration.py::TestWorkerRegistry::test_clean_registry\ntests/test_worker_registration.py::TestWorkerRegistry::test_get_keys_by_queue\ntests/test_worker_registration.py::TestWorkerRegistry::test_worker_registration\n\n690 tests collected in 0.51s\n............................................................             [100%]\n60 passed in 0.28s\n ---> Removed intermediate container 1a7ef47326d2\n ---> 7662a9cba16d\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in efd8343fbe2a\n ---> Removed intermediate container efd8343fbe2a\n ---> 4fa461041f78\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in e49697fccfdc\n ---> Removed intermediate container e49697fccfdc\n ---> 268a4b6cc388\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in b2e583b2b52f\n ---> Removed intermediate container b2e583b2b52f\n ---> d68036148706\nStep 10/10 : WORKDIR /testbed\n ---> Running in 96d95aa6b04e\n ---> Removed intermediate container 96d95aa6b04e\n ---> b51377fc2058\nSuccessfully built b51377fc2058\nSuccessfully tagged bench-setupx-rq-rq:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 34,
   "collect_rc": 2,
@@ -962,9 +962,9 @@
   "ebsr": true,
   "pass_rate": 0.0022,
   "timed_out": false,
-  "image_size_mb": 451.7,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__ratbench50_run-20260904-173735-rq-rq@sha256:33ea61da7672efe925381306e268a45f47ef943b86404b69940c2b5d3f16b9df",
+  "image_size_mb": 451.4,
+  "image_delta_mb": 63.8,
+  "image_digest": "bench-setupx-rq-rq@sha256:b51377fc2058427d74c57768d494b48fce8df4340d5186b66086a8853425a737",
   "installed_pkg_count": 33,
   "tokens_in": 1913070,
   "tokens_out": 87328,
@@ -972,8 +972,8 @@
   "turns_used": 25,
   "cost_usd": null,
   "produce_s": 2322.02,
-  "build_s": 31.64,
-  "test_s": 375.95,
+  "build_s": 41.33,
+  "test_s": 400.92,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -1004,19 +1004,7 @@
     "turns_used": 25,
     "produce_s": 2322.02,
     "total_tokens": 2000398,
-    "cost_usd": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=eacec8ff910994bd472e7cc0279ca041803b86e9 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=eacec8ff910994bd472e7cc0279ca041803b86e9 (pinned)\n"
-      }
-    ]
+    "cost_usd": null
   },
   "error_surface": "",
   "error_surface_reason": "",

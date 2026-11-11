@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "timbrel/gitsavvy",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ion\n#16 0.136 Python 3.10.21\n#16 DONE 0.2s\n\n#17 [14/17] RUN cd /repo && pip list 2>/dev/null | head -100\n#17 0.685 Package           Version\n#17 0.685 ----------------- -------\n#17 0.685 build             1.6.1\n#17 0.685 exceptiongroup    1.3.1\n#17 0.685 execnet           2.1.2\n#17 0.685 iniconfig         2.3.0\n#17 0.685 installer         1.0.1\n#17 0.685 nab               0.0.18\n#17 0.685 nab-index         0.0.18\n#17 0.685 nab-markersets    0.0.18\n#17 0.685 nab-project       0.0.18\n#17 0.685 nab-provider      0.0.18\n#17 0.685 nab-resolver      0.0.18\n#17 0.685 packaging         26.3\n#17 0.685 pip               23.0.1\n#17 0.685 pipdeptree        4.2.5\n#17 0.685 pluggy            1.6.0\n#17 0.685 Pygments          2.21.0\n#17 0.685 pyproject_hooks   1.3.3\n#17 0.685 pytest            9.1.1\n#17 0.685 pytest-xdist      3.8.0\n#17 0.685 setuptools        79.0.1\n#17 0.685 tomli             2.4.1\n#17 0.685 tomli_w           1.2.0\n#17 0.685 truststore        0.10.4\n#17 0.685 typing_extensions 4.16.0\n#17 0.685 urllib3           2.8.0\n#17 0.685 wheel             0.46.3\n#17 DONE 0.7s\n\n#18 [15/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#18 DONE 0.3s\n\n#19 [16/17] WORKDIR /testbed\n#19 DONE 0.1s\n\n#20 exporting to image\n#20 exporting layers\n#20 exporting layers 0.5s done\n#20 exporting manifest sha256:2d7f965618cb7aad018745397e9e58a524f237e9592dc6d8543c60f965f4de05 done\n#20 exporting config sha256:d31cd8d147e4834fa5647f6e60bf66fc5dee79038ea61fd25213b19b549abbb3 done\n#20 exporting attestation manifest sha256:44ed8debf05d2611662e0af79b4aeb0e3ad2ccaf73969d54ff2ef5b7cb7d4a32 0.0s done\n#20 exporting manifest list sha256:1922edab551d76e677684456ac0f0f5ffb0546186aa01f4b64fd130ceee0d063 done\n#20 naming to docker.io/library/bench-repo2run__envbench100-pjy-timbrel-gitsavvy:latest done\n#20 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-timbrel-gitsavvy:latest\n#20 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-timbrel-gitsavvy:latest 0.4s done\n#20 DONE 1.0s\n",
+  "build_log_tail": "d /repo && python --version\n#16 0.209 Python 3.10.21\n#16 DONE 0.2s\n\n#17 [14/17] RUN cd /repo && pip list 2>/dev/null | head -100\n#17 0.911 Package           Version\n#17 0.911 ----------------- -------\n#17 0.911 build             1.6.1\n#17 0.911 exceptiongroup    1.3.1\n#17 0.911 execnet           2.1.2\n#17 0.911 iniconfig         2.3.0\n#17 0.911 installer         1.0.1\n#17 0.911 nab               0.0.18\n#17 0.911 nab-index         0.0.18\n#17 0.911 nab-markersets    0.0.18\n#17 0.911 nab-project       0.0.18\n#17 0.911 nab-provider      0.0.18\n#17 0.911 nab-resolver      0.0.18\n#17 0.911 packaging         26.3\n#17 0.911 pip               23.0.1\n#17 0.911 pipdeptree        4.2.5\n#17 0.911 pluggy            1.6.0\n#17 0.911 Pygments          2.21.0\n#17 0.911 pyproject_hooks   1.3.3\n#17 0.911 pytest            9.1.1\n#17 0.911 pytest-xdist      3.8.0\n#17 0.911 setuptools        79.0.1\n#17 0.911 tomli             2.4.1\n#17 0.911 tomli_w           1.2.0\n#17 0.911 truststore        0.10.4\n#17 0.911 typing_extensions 4.16.0\n#17 0.911 urllib3           2.8.0\n#17 0.911 wheel             0.46.3\n#17 DONE 0.9s\n\n#18 [15/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#18 DONE 0.3s\n\n#19 [16/17] WORKDIR /testbed\n#19 DONE 0.0s\n\n#20 exporting to image\n#20 exporting layers\n#20 exporting layers 0.7s done\n#20 exporting manifest sha256:5231c73561904af27ed0a83900a6fac140b386a83c39e03b166e1d3d20bcb83c 0.0s done\n#20 exporting config sha256:bbfbfde5f438aa1d84df38323bb7afc142374fe5333beaf7eb13019b01540c0e 0.0s done\n#20 exporting attestation manifest sha256:d8064d30f7cdc115903e0c1aae760e7b70f6a7f8e13b4de7bb4404f46185fb96 0.0s done\n#20 exporting manifest list sha256:a8091ad4286bb79c0b4ccfbe31e4dd465cb2ae5babb92cb08308902966d7351f 0.0s done\n#20 naming to docker.io/library/bench-pjy-repo2run-timbrel-gitsavvy:latest done\n#20 unpacking to docker.io/library/bench-pjy-repo2run-timbrel-gitsavvy:latest\n#20 unpacking to docker.io/library/bench-pjy-repo2run-timbrel-gitsavvy:latest 0.4s done\n#20 DONE 1.1s\n",
   "status": "collect_error",
   "py_test_files": 22,
   "collect_rc": 2,
@@ -74,7 +74,7 @@
   "timed_out": false,
   "image_size_mb": 1824.8,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-timbrel-gitsavvy@sha256:1922edab551d76e677684456ac0f0f5ffb0546186aa01f4b64fd130ceee0d063",
+  "image_digest": "bench-pjy-repo2run-timbrel-gitsavvy@sha256:a8091ad4286bb79c0b4ccfbe31e4dd465cb2ae5babb92cb08308902966d7351f",
   "installed_pkg_count": 27,
   "tokens_in": 3608133,
   "tokens_out": 81911,
@@ -82,8 +82,8 @@
   "turns_used": 100,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 6.14,
-  "test_s": 0.47,
+  "build_s": 6.74,
+  "test_s": 0.65,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -91,19 +91,7 @@
     "tokens_in": 3608133,
     "tokens_out": 81911,
     "llm_calls": null,
-    "turns_used": 100,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 100
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50-20260915-043144",
+  "agent": "pipreqs",
   "repo": "anthropics/anthropic-sdk-python",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": ".8.0 anyio-4.15.1 asttokens-3.0.2 async-timeout-5.0.1 attrs-26.1.0 backports-asyncio-runner-1.2.0 boto3-1.43.103 botocore-1.43.103 certifi-2026.7.22 colorama-0.4.6 dirty_equals-0.11 distro-1.9.0 docstring_parser-0.18.0 executing-2.2.1 frozenlist-1.8.0 griffe-2.3.0 griffecli-2.3.0 griffelib-2.3.0 h11-0.16.0 http_snapshot-0.1.9 httpcore-1.0.9 httpx-0.28.1 httpx_aiohttp-0.2.0 idna-3.20 inline_snapshot-0.35.4 jiter-0.17.0 jmespath-1.1.0 markdown-it-py-4.2.0 mdurl-0.1.2 multidict-6.9.1 propcache-0.5.4 protobuf-7.36.2 pydantic-2.13.5 pydantic_core-2.46.5 pytest_asyncio-1.4.0 python-dateutil-2.9.0.post0 respx-0.23.1 rich-15.0.0 s3transfer-0.19.2 six-1.17.0 sniffio-1.3.1 standardwebhooks-1.1.0 typing-inspection-0.4.4 urllib3-2.8.0 yarl-1.25.1\n#11 11.72 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 11.73 \n#11 11.73 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 11.73 [notice] To update, run: pip install --upgrade pip\n#11 DONE 12.7s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 4.5s done\n#12 exporting manifest sha256:f7c10dbefc7cffd9606755439cd9e0ad0977e73215266d2a56184c6374ab01fc 0.0s done\n#12 exporting config sha256:ac8eb2a02e9b23bbda5cf83bfcc74b679207aa2e847f0e0335d1804a2c17a9bb done\n#12 exporting attestation manifest sha256:7dd767d86b9a088af2e47159991386ea4f1a53085062cc0a18b5415da95a52d2 0.0s done\n#12 exporting manifest list sha256:8457da48a2a131be567a8cf7bedf5b353ebdb353fac866abaacc0fe2b6e66d95 0.0s done\n#12 naming to docker.io/library/bench-pipreqs__rat50-20260915-043144-anthropics-anthropic-sdk-python:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-anthropics-anthropic-sdk-python:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-anthropics-anthropic-sdk-python:latest 2.1s done\n#12 DONE 6.7s\n",
+  "build_log_tail": "ully installed aiohappyeyeballs-2.7.1 aiohttp-3.14.3 aiosignal-1.4.0 annotated-types-0.8.0 anyio-4.15.1 asttokens-3.0.2 async-timeout-5.0.1 attrs-26.1.0 backports-asyncio-runner-1.2.0 boto3-1.43.94 botocore-1.43.94 certifi-2026.7.22 colorama-0.4.6 dirty_equals-0.11 distro-1.9.0 docstring_parser-0.18.0 executing-2.2.1 frozenlist-1.8.0 griffe-2.3.0 griffecli-2.3.0 griffelib-2.3.0 h11-0.16.0 http_snapshot-0.1.9 httpcore-1.0.9 httpx-0.28.1 httpx_aiohttp-0.2.0 idna-3.19 inline_snapshot-0.35.4 jiter-0.17.0 jmespath-1.1.0 markdown-it-py-4.2.0 mdurl-0.1.2 multidict-6.8.0 propcache-0.5.2 protobuf-7.36.1 pydantic-2.13.5 pydantic_core-2.46.5 pytest_asyncio-1.4.0 python-dateutil-2.9.0.post0 respx-0.23.1 rich-15.0.0 s3transfer-0.19.2 six-1.17.0 sniffio-1.3.1 standardwebhooks-1.1.0 typing-inspection-0.4.4 urllib3-2.7.0 yarl-1.24.5\n#11 10.09 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 10.09 \n#11 10.09 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 10.09 [notice] To update, run: pip install --upgrade pip\n#11 DONE 11.5s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 2.9s done\n#12 exporting manifest sha256:9ff67712582a285a8851139320036c72791b7789017d5b670ce25526ee9a73ac done\n#12 exporting config sha256:29e723f99842f4e189d2e522061bb8a505ed84faa12175bd164ff25c3b35716d done\n#12 exporting attestation manifest sha256:c27c2f7c57bbdbdc5cbf7f48f3503795d5f35bba69febf978d512d7a66d6ff59 done\n#12 exporting manifest list sha256:1d084c4808e5a5719c2cffa156e46820f1ca6026964a4483ca71422731984445 done\n#12 naming to docker.io/library/bench-pipreqs-anthropics-anthropic-sdk-python:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-anthropics-anthropic-sdk-python:latest\n#12 unpacking to docker.io/library/bench-pipreqs-anthropics-anthropic-sdk-python:latest 1.3s done\n#12 DONE 4.3s\n",
   "status": "collect_error",
   "py_test_files": 76,
   "collect_rc": 4,
@@ -26,18 +26,18 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 469.4,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50-20260915-043144-anthropics-anthropic-sdk-python@sha256:8457da48a2a131be567a8cf7bedf5b353ebdb353fac866abaacc0fe2b6e66d95",
-  "installed_pkg_count": 61,
+  "image_size_mb": 464.1,
+  "image_delta_mb": 76.5,
+  "image_digest": "bench-pipreqs-anthropics-anthropic-sdk-python@sha256:1d084c4808e5a5719c2cffa156e46820f1ca6026964a4483ca71422731984445",
+  "installed_pkg_count": 62,
   "tokens_in": null,
   "tokens_out": null,
   "llm_calls": null,
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 10.28,
-  "build_s": 25.44,
-  "test_s": 0.46,
+  "build_s": 19.13,
+  "test_s": 0.56,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -64,19 +64,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=d2f6543ee7995adcae74666a5d37b3d9743debfe (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=d2f6543ee7995adcae74666a5d37b3d9743debfe (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

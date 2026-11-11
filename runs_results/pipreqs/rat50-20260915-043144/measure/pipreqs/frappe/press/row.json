@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50-20260915-043144",
+  "agent": "pipreqs",
   "repo": "frappe/press",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ic-core-2.33.2 pydo-0.41.0 pyee-13.0.1 pyngrok-8.1.2 pyotp-2.10.0 pyparsing-3.3.3 pypika-0.51.1 pysocks-1.7.1 python_dateutil-2.9.0.post0 pytz-2026.4 razorpay-2.0.1 redis-8.1.0 referencing-0.37.0 regex-2026.9.10 requests-file-3.0.1 requests-oauthlib-2.0.0 requests_toolbelt-1.0.0 resolvelib-1.0.1 responses-0.26.3 rich-15.0.0 rpds-py-0.30.0 rq-2.12.0 s3transfer-0.19.2 selenium-4.49.0 semantic_version-2.10.0 sentry_sdk-2.70.0 shellingham-1.5.4 six-1.17.0 sniffio-1.3.1 sortedcontainers-2.4.0 soupsieve-2.10 sqlparse-0.6.0 tenacity-9.1.4 tldextract-5.3.2 tqdm-4.70.1 trio-0.34.0 trio-websocket-0.12.2 twilio-9.11.1 typer-0.27.2 typing-inspection-0.4.4 tzlocal-5.4.4 uritemplate-4.2.0 urllib3-2.8.0 websocket-client-1.9.2 wrapt-2.4.1 wsproto-1.3.2 xmltodict-1.0.4 yarl-1.25.1 zope.event-6.2 zope.interface-8.6\n#11 60.18 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 60.19 \n#11 60.19 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 60.19 [notice] To update, run: pip install --upgrade pip\n#11 DONE 62.5s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 64.9s done\n#12 exporting manifest sha256:740e05229de44044190842be9787e86b7ef13ea314f1d4881bb97c181f798394 done\n#12 exporting config sha256:7aed61bc75c3821bc27133923b96aab187709aa7b55e96ef5bb349c6991ed24b done\n#12 exporting attestation manifest sha256:96b8123e2b5c95d5e5c8c595f25d896cd727fdcd768dfd75d82195cc2c0da449 0.0s done\n#12 exporting manifest list sha256:37fce270832a7cf93774e69bab94f4ce7964ba865d2ed628ea2cda8fe59a65d6 done\n#12 naming to docker.io/library/bench-pipreqs__rat50-20260915-043144-frappe-press:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-frappe-press:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-frappe-press:latest 15.3s done\n#12 DONE 80.3s\n",
+  "build_log_tail": "n1-0.6.4 pyasn1-modules-0.4.2 pycparser-3.0 pydantic-2.11.10 pydantic-core-2.33.2 pydo-0.40.0 pyee-13.0.1 pyngrok-8.1.2 pyotp-2.10.0 pyparsing-3.3.2 pypika-0.51.1 pysocks-1.7.1 python_dateutil-2.9.0.post0 pytz-2026.3.post1 razorpay-2.0.1 redis-8.1.0 referencing-0.37.0 regex-2026.9.10 requests-file-3.0.1 requests-oauthlib-2.0.0 requests_toolbelt-1.0.0 resolvelib-1.0.1 responses-0.26.3 rich-15.0.0 rpds-py-0.30.0 rq-2.12.0 s3transfer-0.19.2 selenium-4.49.0 semantic_version-2.10.0 sentry_sdk-2.69.1 shellingham-1.5.4 six-1.17.0 sniffio-1.3.1 sortedcontainers-2.4.0 soupsieve-2.9.2 sqlparse-0.6.0 tenacity-9.1.4 tldextract-5.3.2 tqdm-4.70.1 trio-0.34.0 trio-websocket-0.12.2 twilio-9.11.1 typer-0.27.2 typing-inspection-0.4.4 tzlocal-5.4.4 uritemplate-4.2.0 urllib3-2.7.0 websocket-client-1.9.2 wrapt-2.4.1 wsproto-1.3.2 xmltodict-1.0.4 yarl-1.24.5 zope.event-6.2 zope.interface-8.6\n#11 54.97 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 54.98 \n#11 54.98 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 54.98 [notice] To update, run: pip install --upgrade pip\n#11 DONE 57.5s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 40.7s done\n#12 exporting manifest sha256:ac766b105dce2bba1dbdfb7349a86ce877e2e19d700f49c7f023bda70ebeaca1 done\n#12 exporting config sha256:98677ccb3da9bc12e80cd5253e23c4ba447b26ffe9be9f7421d50d8185e9d3fe done\n#12 exporting attestation manifest sha256:89e9d73057c169df3c92fa052bfaaeaeb8be5bec4c6efbbc714db2bd36068561 done\n#12 exporting manifest list sha256:7cfbd97c7f274bda6e23aacc47bae95cbcbc1130e23d52e76d2481268681d1ee done\n#12 naming to docker.io/library/bench-pipreqs-frappe-press:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-frappe-press:latest\n#12 unpacking to docker.io/library/bench-pipreqs-frappe-press:latest 12.7s done\n#12 DONE 53.5s\n",
   "status": "collect_error",
   "py_test_files": 291,
   "collect_rc": 2,
@@ -608,9 +608,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 979.5,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50-20260915-043144-frappe-press@sha256:37fce270832a7cf93774e69bab94f4ce7964ba865d2ed628ea2cda8fe59a65d6",
+  "image_size_mb": 975.4,
+  "image_delta_mb": 587.8,
+  "image_digest": "bench-pipreqs-frappe-press@sha256:7cfbd97c7f274bda6e23aacc47bae95cbcbc1130e23d52e76d2481268681d1ee",
   "installed_pkg_count": 156,
   "tokens_in": null,
   "tokens_out": null,
@@ -618,8 +618,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 13.81,
-  "build_s": 151.35,
-  "test_s": 2.43,
+  "build_s": 118.52,
+  "test_s": 2.62,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -646,19 +646,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=73a2a4117e16ec70eb18ee360c1f7db4ceb19508 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=73a2a4117e16ec70eb18ee360c1f7db4ceb19508 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

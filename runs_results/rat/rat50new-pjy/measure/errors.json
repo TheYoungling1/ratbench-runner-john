@@ -1,0 +1,149 @@
+{
+  "pjy-rat-dockerfile": {
+    "collect": {
+      "agent": "pjy-rat-dockerfile",
+      "n_repos": 43,
+      "source": "collect",
+      "n_admissible": 20,
+      "n_masked": 11,
+      "n_unobserved": 12,
+      "n_status_derived": 0,
+      "buckets": {
+        "collect_error": 21,
+        "build_fail": 10,
+        "missing": 2,
+        "success": 6,
+        "partial": 1,
+        "timed_out": 2,
+        "zero_pass": 1
+      },
+      "surfaces": {
+        "masked": 11,
+        "unobserved": 12,
+        "full": 20
+      },
+      "token_repos": {
+        "ModuleNotFoundError": 9,
+        "ImportError": 4,
+        "AssertionError": 1,
+        "ValueError": 1
+      },
+      "token_events": {
+        "ModuleNotFoundError": 70,
+        "ImportError": 4,
+        "AssertionError": 1,
+        "ValueError": 1
+      },
+      "category_repos": {
+        "module_not_found": 9,
+        "partial_import": 4,
+        "uncategorized": 2
+      },
+      "category_events": {
+        "module_not_found": 70,
+        "partial_import": 4,
+        "uncategorized": 2
+      },
+      "crosstab": {
+        "collect_error|module_not_found": 8,
+        "collect_error|partial_import": 3,
+        "timed_out|module_not_found": 1,
+        "timed_out|partial_import": 1,
+        "collect_error|uncategorized": 2
+      },
+      "top_groups": {
+        "module_not_found": [
+          [
+            "settings",
+            1
+          ],
+          [
+            "backend",
+            1
+          ],
+          [
+            "apigateway.apps.esb.bkcore.models",
+            1
+          ],
+          [
+            "utils.model",
+            1
+          ],
+          [
+            "tests.unit.test_data_utils",
+            1
+          ],
+          [
+            "tests.test_install_update",
+            1
+          ],
+          [
+            "tests.test_tui_wallet_info",
+            1
+          ],
+          [
+            "tests.test_diagnose_maker",
+            1
+          ],
+          [
+            "tests.test_install_source",
+            1
+          ],
+          [
+            "tests.test_check_signet_orderbook",
+            1
+          ]
+        ],
+        "partial_import": [
+          [
+            "force_text",
+            1
+          ],
+          [
+            "MCPConnection",
+            1
+          ],
+          [
+            "flash_attn_fwd_cuda",
+            1
+          ],
+          [
+            "detect_user_opinion",
+            1
+          ]
+        ]
+      },
+      "uncategorized_rate": 0.0263
+    },
+    "run": {
+      "agent": "pjy-rat-dockerfile",
+      "n_repos": 43,
+      "source": "run",
+      "n_admissible": 20,
+      "n_masked": 11,
+      "n_unobserved": 12,
+      "n_status_derived": 0,
+      "buckets": {
+        "collect_error": 21,
+        "build_fail": 10,
+        "missing": 2,
+        "success": 6,
+        "partial": 1,
+        "timed_out": 2,
+        "zero_pass": 1
+      },
+      "surfaces": {
+        "masked": 11,
+        "unobserved": 12,
+        "full": 20
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    }
+  }
+}

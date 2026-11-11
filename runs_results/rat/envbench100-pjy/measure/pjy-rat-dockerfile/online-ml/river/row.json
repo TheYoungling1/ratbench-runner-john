@@ -1,10 +1,10 @@
 {
-  "agent": "rat__envbench100-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "online-ml/river",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ninstalled jiter-0.17.0\n#20 5.960   Attempting uninstall: idna\n#20 5.962     Found existing installation: idna 3.20\n#20 5.971     Uninstalling idna-3.20:\n#20 5.990       Successfully uninstalled idna-3.20\n#20 6.029   Attempting uninstall: httpx2\n#20 6.030     Found existing installation: httpx2 2.13.0\n#20 6.054     Uninstalling httpx2-2.13.0:\n#20 6.088       Successfully uninstalled httpx2-2.13.0\n#20 6.145   Attempting uninstall: httpcore2\n#20 6.147     Found existing installation: httpcore2 2.13.0\n#20 6.168     Uninstalling httpcore2-2.13.0:\n#20 6.223       Successfully uninstalled httpcore2-2.13.0\n#20 6.276 Successfully installed httpcore2-2.12.0 httpx2-2.12.0 idna-3.19 jiter-0.16.0 openai-3.11.0\n#20 6.276 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#20 6.404 \n#20 6.404 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#20 6.404 [notice] To update, run: pip install --upgrade pip\n#20 DONE 6.6s\n\n#21 [17/18] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#21 DONE 0.7s\n\n#22 [18/18] WORKDIR /testbed\n#22 DONE 0.0s\n\n#23 exporting to image\n#23 exporting layers\n#23 exporting layers 27.3s done\n#23 exporting manifest sha256:92dc5b8fbb523e4268bab9d26d14ca505b155201db6c24abdd13de150c3313ba 0.0s done\n#23 exporting config sha256:33ce81afa4eca7ac0e25dda260c6aa7bdb981aef5a443ddc1a610138c12cf462 done\n#23 exporting attestation manifest sha256:25fb9498df5f1a4027f3f7c42fee95c7c2cd2d8f575f750438d34a304fe5efd0 0.0s done\n#23 exporting manifest list sha256:4723ab4540197e3d9f35d3a6be3447e3fe3be4c8926d0faefefd485715e1b5a7 done\n#23 naming to docker.io/library/bench-rat__envbench100-pjy-online-ml-river:latest done\n#23 unpacking to docker.io/library/bench-rat__envbench100-pjy-online-ml-river:latest\n#23 unpacking to docker.io/library/bench-rat__envbench100-pjy-online-ml-river:latest 9.7s done\n#23 DONE 37.1s\n",
+  "build_log_tail": "talled jiter-0.17.0\n#20 8.778   Attempting uninstall: idna\n#20 8.779     Found existing installation: idna 3.20\n#20 8.784     Uninstalling idna-3.20:\n#20 8.801       Successfully uninstalled idna-3.20\n#20 8.843   Attempting uninstall: httpx2\n#20 8.845     Found existing installation: httpx2 2.13.0\n#20 8.868     Uninstalling httpx2-2.13.0:\n#20 8.910       Successfully uninstalled httpx2-2.13.0\n#20 8.979   Attempting uninstall: httpcore2\n#20 8.980     Found existing installation: httpcore2 2.13.0\n#20 8.993     Uninstalling httpcore2-2.13.0:\n#20 9.027       Successfully uninstalled httpcore2-2.13.0\n#20 9.096 Successfully installed httpcore2-2.12.0 httpx2-2.12.0 idna-3.19 jiter-0.16.0 openai-3.11.0\n#20 9.096 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#20 9.250 \n#20 9.250 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#20 9.250 [notice] To update, run: pip install --upgrade pip\n#20 DONE 9.5s\n\n#21 [17/18] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#21 DONE 0.4s\n\n#22 [18/18] WORKDIR /testbed\n#22 DONE 0.0s\n\n#23 exporting to image\n#23 exporting layers\n#23 exporting layers 27.6s done\n#23 exporting manifest sha256:99c277aad567280be932b88c07824d0e6c3a1e3ec3edcaa5b51160e395a8b008 0.0s done\n#23 exporting config sha256:73a6273d84affa68f8f49575c8ce7aff5129f3f0c55e4c9867a669ecc6816466 0.0s done\n#23 exporting attestation manifest sha256:1a7894771cb21d7ffc93ffcd48265d6f0b1ed533fbe10ef5efe02037a10da19f 0.0s done\n#23 exporting manifest list sha256:b8b0e2d9493af037acc40f28e0bfea9cb149d9994b936204419ede8889203ce8 0.0s done\n#23 naming to docker.io/library/bench-pjy-rat-dockerfile-online-ml-river:latest done\n#23 unpacking to docker.io/library/bench-pjy-rat-dockerfile-online-ml-river:latest\n#23 unpacking to docker.io/library/bench-pjy-rat-dockerfile-online-ml-river:latest 9.7s done\n#23 DONE 37.4s\n",
   "status": "collect_error",
   "py_test_files": 51,
   "collect_rc": 2,
@@ -939,9 +939,9 @@
   "ebsr": true,
   "pass_rate": 0.0021,
   "timed_out": false,
-  "image_size_mb": 481.3,
+  "image_size_mb": 1843.5,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__envbench100-pjy-online-ml-river@sha256:4723ab4540197e3d9f35d3a6be3447e3fe3be4c8926d0faefefd485715e1b5a7",
+  "image_digest": "bench-pjy-rat-dockerfile-online-ml-river@sha256:b8b0e2d9493af037acc40f28e0bfea9cb149d9994b936204419ede8889203ce8",
   "installed_pkg_count": 25,
   "tokens_in": 85744,
   "tokens_out": 6061,
@@ -949,27 +949,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 92.5,
-  "test_s": 4.12,
+  "build_s": 105.65,
+  "test_s": 4.88,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 85744,
     "tokens_out": 6061,
-    "llm_calls": 13,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 13
   },
   "error_surface": "",
   "error_surface_reason": "",

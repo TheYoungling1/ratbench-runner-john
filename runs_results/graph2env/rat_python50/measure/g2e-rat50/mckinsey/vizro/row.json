@@ -1,10 +1,10 @@
 {
-  "agent": "graph2env__rat_python50",
+  "agent": "g2e-rat50",
   "repo": "mckinsey/vizro",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "   else         command -v uv >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#15 0.692 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (9.1.1)\n#15 0.699 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#15 0.700 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.11/site-packages (from pytest) (26.3)\n#15 0.700 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#15 0.701 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest) (2.21.0)\n#15 1.584 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#15 DONE 1.8s\n\n#16 [12/12] WORKDIR /testbed\n#16 DONE 0.1s\n\n#17 exporting to image\n#17 exporting layers\n#17 exporting layers 138.0s done\n#17 exporting manifest sha256:b389539a801ac0b9fc437edf6eac0e5fbd0dec129b0830338c83b2e91519fbdf 0.0s done\n#17 exporting config sha256:e1c72d48fa135f2f3febd0d47493f8ee81aa8be7da1a1ca90daf1774a55e9d6f 0.0s done\n#17 exporting attestation manifest sha256:5e57f06d59f6cc407bfe1df88b64b97bf14d83800d368008dbd0bf95e5600c32 0.0s done\n#17 exporting manifest list sha256:46a1b97b4c7ea508e3ce4da3af9787b8e78666ff1dde5461ff81f4f0a81c74ed done\n#17 naming to docker.io/library/bench-graph2env__rat_python50-mckinsey-vizro:latest done\n#17 unpacking to docker.io/library/bench-graph2env__rat_python50-mckinsey-vizro:latest\n#17 unpacking to docker.io/library/bench-graph2env__rat_python50-mckinsey-vizro:latest 45.8s done\n#17 DONE 183.9s\n",
+  "build_log_tail": "bed/.venv/bin/python -m pip install pytest;       else         command -v uv >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#15 1.135 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (9.1.1)\n#15 1.142 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#15 1.143 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.11/site-packages (from pytest) (26.3)\n#15 1.144 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#15 1.145 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest) (2.21.0)\n#15 2.216 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#15 DONE 2.4s\n\n#16 [12/12] WORKDIR /testbed\n#16 DONE 0.0s\n\n#17 exporting to image\n#17 exporting layers\n#17 exporting layers 124.5s done\n#17 exporting manifest sha256:3e2179a574313333fedbd1fac0f6b5fa332be3834e48e4453ac265aa5649d4d8 0.0s done\n#17 exporting config sha256:cac7333e33fb5a2cc18b7919390fb8e02fb6f29774bf1388ea846d0974c41698 0.0s done\n#17 exporting attestation manifest sha256:44511647b1bf7d6a30050edbe6f998697da6645c6b9d441944c298e70eb60da0 done\n#17 exporting manifest list sha256:c806488989d3a3320047d8858cdbef84326350d00638eff628f8fa973d62e61e done\n#17 naming to docker.io/library/bench-g2e-rat50-mckinsey-vizro:latest done\n#17 unpacking to docker.io/library/bench-g2e-rat50-mckinsey-vizro:latest\n#17 unpacking to docker.io/library/bench-g2e-rat50-mckinsey-vizro:latest 31.3s done\n#17 DONE 155.9s\n",
   "status": "collect_error",
   "py_test_files": 121,
   "collect_rc": 2,
@@ -350,9 +350,9 @@
   "ebsr": true,
   "pass_rate": 0.4,
   "timed_out": false,
-  "image_size_mb": 1811.4,
+  "image_size_mb": 5776.6,
   "image_delta_mb": null,
-  "image_digest": "bench-graph2env__rat_python50-mckinsey-vizro@sha256:46a1b97b4c7ea508e3ce4da3af9787b8e78666ff1dde5461ff81f4f0a81c74ed",
+  "image_digest": "bench-g2e-rat50-mckinsey-vizro@sha256:c806488989d3a3320047d8858cdbef84326350d00638eff628f8fa973d62e61e",
   "installed_pkg_count": 203,
   "tokens_in": 6318902,
   "tokens_out": 108758,
@@ -360,8 +360,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 400.13,
-  "test_s": 1443.06,
+  "build_s": 373.3,
+  "test_s": 1443.19,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -380,19 +380,7 @@
       ],
       "services": [],
       "services_rc": null
-    },
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=1926878ad5ec87fc70b175d7ed0ca2e31b1c99ed (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=1926878ad5ec87fc70b175d7ed0ca2e31b1c99ed (pinned)\n"
-      }
-    ]
+    }
   },
   "error_surface": "",
   "error_surface_reason": "",

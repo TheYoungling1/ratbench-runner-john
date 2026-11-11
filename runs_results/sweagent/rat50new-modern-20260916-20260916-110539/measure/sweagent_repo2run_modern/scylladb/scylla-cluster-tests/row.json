@@ -1,10 +1,10 @@
 {
-  "agent": "sweagent__rat50new-modern-20260916-20260916-110539",
+  "agent": "sweagent_repo2run_modern",
   "repo": "scylladb/scylla-cluster-tests",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "-inspection==0.4.2\n#13 41.85  + uritemplate==4.2.0\n#13 41.85  + urllib3==1.26.20\n#13 41.85  + uv-sort==0.7.0\n#13 41.85  + virtualenv==21.5.1\n#13 41.85  + voluptuous==0.16.0\n#13 41.85  + wcwidth==0.8.1\n#13 41.85  + webencodings==0.5.1\n#13 41.85  + websocket-client==1.9.0\n#13 41.85  + werkzeug==3.1.8\n#13 41.85  + wrapt==2.2.2\n#13 41.85  + xmltodict==1.0.4\n#13 41.85  + yarl==1.24.2\n#13 DONE 42.4s\n\n#14 [11/15] RUN sed -i '/^pytest_plugins = \\[\"pytester\"\\]$/d' unit_tests/conftest.py &&     sed -i '0,/^import pytest$/s//import pytest\\n\\npytest_plugins = [\"pytester\"]/' conftest.py\n#14 DONE 1.1s\n\n#15 [12/15] RUN ln -s /repo/.venv/bin/pytest /usr/local/bin/pytest\n#15 DONE 0.3s\n\n#16 [13/15] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#16 DONE 17.2s\n\n#17 [14/15] WORKDIR /testbed\n#17 DONE 0.4s\n\n#18 [15/15] RUN git config --global --add safe.directory /testbed\n#18 DONE 0.3s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 41.1s done\n#19 exporting manifest sha256:7760b8ef15de407628a06906918a3d69d1668ccf55a54c87c4ebed211cb19350\n#19 exporting manifest sha256:7760b8ef15de407628a06906918a3d69d1668ccf55a54c87c4ebed211cb19350 0.0s done\n#19 exporting config sha256:5e691cb5457133a79894b73d7715bb8ed61cbc8f31ecacd591cdaf207f317403 0.0s done\n#19 exporting attestation manifest sha256:e0e8bcbf3334407f062f7faed2e1432e63dd65fea3cd80a6ce14042c2dbea118 0.0s done\n#19 exporting manifest list sha256:1173c35a651cb2dc59127c5d4a749c10a3c61a1fc72a798a379df78dee61040a\n#19 exporting manifest list sha256:1173c35a651cb2dc59127c5d4a749c10a3c61a1fc72a798a379df78dee61040a 0.0s done\n#19 naming to docker.io/library/bench-sweagent__rat50new-modern-20260916-20260916-110539-scylladb-scylla-cluster-tests:latest done\n#19 unpacking to docker.io/library/bench-sweagent__rat50new-modern-20260916-20260916-110539-scylladb-scylla-cluster-tests:latest\n#19 unpacking to docker.io/library/bench-sweagent__rat50new-modern-20260916-20260916-110539-scylladb-scylla-cluster-tests:latest 49.9s done\n#19 DONE 91.2s\n",
+  "build_log_tail": "  + tabledata==1.3.5\n#13 38.15  + tcconfig==0.29.1\n#13 38.15  + tenacity==9.0.0\n#13 38.15  + tomlkit==0.15.0\n#13 38.15  + typepy==1.3.5\n#13 38.15  + typer==0.26.7\n#13 38.15  + types-awscrt==0.34.1\n#13 38.15  + types-s3transfer==0.16.0\n#13 38.15  + typing-extensions==4.15.0\n#13 38.15  + typing-inspection==0.4.2\n#13 38.15  + uritemplate==4.2.0\n#13 38.15  + urllib3==1.26.20\n#13 38.15  + uv-sort==0.7.0\n#13 38.15  + virtualenv==21.5.1\n#13 38.15  + voluptuous==0.16.0\n#13 38.15  + wcwidth==0.8.1\n#13 38.15  + webencodings==0.5.1\n#13 38.15  + websocket-client==1.9.0\n#13 38.15  + werkzeug==3.1.8\n#13 38.15  + wrapt==2.2.2\n#13 38.15  + xmltodict==1.0.4\n#13 38.15  + yarl==1.24.2\n#13 DONE 38.5s\n\n#14 [11/15] RUN sed -i '/^pytest_plugins = \\[\"pytester\"\\]$/d' unit_tests/conftest.py &&     sed -i '0,/^import pytest$/s//import pytest\\n\\npytest_plugins = [\"pytester\"]/' conftest.py\n#14 DONE 0.8s\n\n#15 [12/15] RUN ln -s /repo/.venv/bin/pytest /usr/local/bin/pytest\n#15 DONE 0.2s\n\n#16 [13/15] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#16 DONE 15.2s\n\n#17 [14/15] WORKDIR /testbed\n#17 DONE 0.3s\n\n#18 [15/15] RUN git config --global --add safe.directory /testbed\n#18 DONE 0.2s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 28.5s done\n#19 exporting manifest sha256:c764daba7665dd1d0c34ef4ecea46c888acab428c79e2e3a7f007c9ca9d3d640 done\n#19 exporting config sha256:64430b81ee92c207d8283263b3e35c939ae8029f11bc07c918a166bf803e8afe done\n#19 exporting attestation manifest sha256:06a544ed1ed73d77fa1d90ddcee412d01e8d55c4bfdd147b1cfae83b8ed2c410 done\n#19 exporting manifest list sha256:6023bf8930c97d263734d8f15f28b40be7ec9d78dbda934ae97581844acbc2b2 done\n#19 naming to docker.io/library/bench-sweagent_repo2run_modern-scylladb-scylla-cluster-tests:latest done\n#19 unpacking to docker.io/library/bench-sweagent_repo2run_modern-scylladb-scylla-cluster-tests:latest\n#19 unpacking to docker.io/library/bench-sweagent_repo2run_modern-scylladb-scylla-cluster-tests:latest 25.3s done\n#19 DONE 53.9s\n",
   "status": "collect_error",
   "py_test_files": 1624,
   "collect_rc": 2,
@@ -118,9 +118,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 997.8,
+  "image_size_mb": 994.7,
   "image_delta_mb": null,
-  "image_digest": "bench-sweagent__rat50new-modern-20260916-20260916-110539-scylladb-scylla-cluster-tests@sha256:1173c35a651cb2dc59127c5d4a749c10a3c61a1fc72a798a379df78dee61040a",
+  "image_digest": "bench-sweagent_repo2run_modern-scylladb-scylla-cluster-tests@sha256:6023bf8930c97d263734d8f15f28b40be7ec9d78dbda934ae97581844acbc2b2",
   "installed_pkg_count": 8,
   "tokens_in": 1746782.0,
   "tokens_out": 891.0,
@@ -128,8 +128,8 @@
   "turns_used": 101,
   "cost_usd": 0.04675303700000001,
   "produce_s": 1233.61,
-  "build_s": 172.11,
-  "test_s": 1.71,
+  "build_s": 121.49,
+  "test_s": 1.65,
   "meta": {
     "contract_version": 1,
     "producer": "sweagent_repo2run_modern",
@@ -163,19 +163,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=4def6789787c4c5372551d9f747f88bbbafef708 (pinned)\nrestored conftest.py\nrestored unit_tests/conftest.py\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=4def6789787c4c5372551d9f747f88bbbafef708 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

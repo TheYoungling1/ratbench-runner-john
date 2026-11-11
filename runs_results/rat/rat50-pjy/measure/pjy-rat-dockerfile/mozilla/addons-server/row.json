@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "mozilla/addons-server",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "er-3.1.1 sphinx_rtd_theme-3.1.0 sphinxcontrib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-httpdomain-2.0.0 sphinxcontrib-jquery-4.1 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 sqlparse-0.5.5 stack-data-0.6.3 statsd-4.0.1 time-machine-3.2.0 toml-0.10.2 tomli-2.4.1 traitlets-5.15.1 typing_extensions-4.15.0 tzlocal-5.4.3 uritemplate-4.2.0 urllib3-2.7.0 vine-5.1.0 watchdog-6.0.0 wcwidth-0.8.1 webencodings-0.5.1 wrapt-2.2.1 yara-python-4.5.4 yara-x-1.19.0\n#19 199.8 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable.It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#19 200.1 \n#19 200.1 [notice] A new release of pip is available: 24.3.1 -> 26.2.1\n#19 200.1 [notice] To update, run: python -m pip install --upgrade pip\n#19 DONE 202.2s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 2.2s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.1s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 27.8s done\n#22 exporting manifest sha256:2173708bab674b4ae5877ae21290e6e57117fb59dae997ae7bb7291ed05a7b99 0.0s done\n#22 exporting config sha256:b780150faec38de4980f67e229f72a0eb73046da46e39de2bf7190d8667045f2 0.0s done\n#22 exporting attestation manifest sha256:3590e9a19a2eebe1d99f073d9b9081515164ab5e77ac9c1b97cfd4e478bab7af 0.0s done\n#22 exporting manifest list sha256:b00985a9cba75e9a43b9500a957cf47de99fb58602c88880e9595cdbcb5e760e 0.0s done\n#22 naming to docker.io/library/bench-rat__rat50-pjy-mozilla-addons-server:latest done\n#22 unpacking to docker.io/library/bench-rat__rat50-pjy-mozilla-addons-server:latest\n#22 unpacking to docker.io/library/bench-rat__rat50-pjy-mozilla-addons-server:latest 14.4s done\n#22 DONE 42.3s\n",
+  "build_log_tail": "inx_rtd_theme-3.1.0 sphinxcontrib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-httpdomain-2.0.0 sphinxcontrib-jquery-4.1 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 sqlparse-0.5.5 stack-data-0.6.3 statsd-4.0.1 time-machine-3.2.0 toml-0.10.2 tomli-2.4.1 traitlets-5.15.1 typing_extensions-4.15.0 tzlocal-5.4.3 uritemplate-4.2.0 urllib3-2.7.0 vine-5.1.0 watchdog-6.0.0 wcwidth-0.8.1 webencodings-0.5.1 wrapt-2.2.1 yara-python-4.5.4 yara-x-1.19.0\n#19 808.9 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable.It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#19 809.0 \n#19 809.0 [notice] A new release of pip is available: 24.3.1 -> 26.2.1\n#19 809.0 [notice] To update, run: python -m pip install --upgrade pip\n#19 DONE 811.6s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 1.3s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.1s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 21.1s done\n#22 exporting manifest sha256:b71d81625221ac45f27f01103f370696886b38c84a1b1d9f0e5b451ee6dbecab 0.0s done\n#22 exporting config sha256:3b3c211493986b8b9e6dc11236a838387c3eb12475cda43ff34fa469a09f00a8 0.0s done\n#22 exporting attestation manifest sha256:2b843fc33656c6c3b2600589eca3b4561fa67cfb66997f12f1f4389359bbbf10 0.0s done\n#22 exporting manifest list sha256:fe303f8938ef4ebcc5950ed488fb8b33bcf31b6efa8f4d0b4190c56b1584877f 0.0s done\n#22 naming to docker.io/library/bench-pjy-rat-dockerfile-mozilla-addons-server:latest done\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-mozilla-addons-server:latest\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-mozilla-addons-server:latest 19.0s done\n#22 DONE 40.2s\n",
   "status": "collect_error",
   "py_test_files": 224,
   "collect_rc": 1,
@@ -26,37 +26,25 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 932.5,
+  "image_size_mb": 3579.9,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50-pjy-mozilla-addons-server@sha256:b00985a9cba75e9a43b9500a957cf47de99fb58602c88880e9595cdbcb5e760e",
-  "installed_pkg_count": 176,
+  "image_digest": "bench-pjy-rat-dockerfile-mozilla-addons-server@sha256:fe303f8938ef4ebcc5950ed488fb8b33bcf31b6efa8f4d0b4190c56b1584877f",
+  "installed_pkg_count": 177,
   "tokens_in": 4585000,
   "tokens_out": 47465,
   "llm_calls": 104,
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 289.61,
-  "test_s": 0.26,
+  "build_s": 1022.33,
+  "test_s": 0.45,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 4585000,
     "tokens_out": 47465,
-    "llm_calls": 104,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 104
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "mckinsey/vizro",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "-multipart-0.0.32 python-slugify-8.0.4 pytokens-0.4.1 pytz-2026.3.post1 pyxlsb-1.0.10 referencing-0.37.0 requests-2.34.2 retrying-1.4.2 rich-15.0.0 rpds-py-0.30.0 selenium-4.2.0 shellingham-1.5.4 six-1.17.0 smmap-5.0.3 sortedcontainers-2.4.0 soupsieve-2.9.2 sse-starlette-3.4.8 starlette-1.6.0 text-unidecode-1.3 tomli_w-1.2.0 tqdm-4.70.0 trio-0.34.0 trio-websocket-0.12.2 typer-0.27.1 typing-inspection-0.4.3 tzdata-2026.3 urllib3-1.26.20 urllib3-secure-extra-0.1.0 uvicorn-0.52.3 vizro-0.1.60.dev0 vizro-dash-components-0.1.1 vizro-experimental-0.1.1.dev0 vizro-mcp-0.1.5.dev0 vizro_ai-0.4.2.dev0 waitress-3.0.2 webencodings-0.6.1 websocket-client-1.9.0 wrapt-2.3.0 wsproto-1.3.2 xlrd-2.0.2 xlsxwriter-3.2.9 zipp-4.1.0\n#18 165.6 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 165.7 \n#18 165.7 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 165.7 [notice] To update, run: pip install --upgrade pip\n#18 DONE 168.3s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 1.4s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 36.1s done\n#21 exporting manifest sha256:66a09a4590adbd241c90d4917f37c52afc276c109c0d1c3277b089a5e3171c4b 0.0s done\n#21 exporting config sha256:c7a828f35da2d521054b294040aed53796cc3fd5bc6acd150a36727885199e7e done\n#21 exporting attestation manifest sha256:83cbc27ddb5da29be8b3e61f096a9d37e4ce21462601ea2b57a87d6730e2c091 0.0s done\n#21 exporting manifest list sha256:17e0f31154790a28bf693f6140a378d1aaf5ab165a47dc58a0fac11d6b6e713e 0.0s done\n#21 naming to docker.io/library/bench-rat__rat50-pjy-mckinsey-vizro:latest done\n#21 unpacking to docker.io/library/bench-rat__rat50-pjy-mckinsey-vizro:latest\n#21 unpacking to docker.io/library/bench-rat__rat50-pjy-mckinsey-vizro:latest 14.8s done\n#21 DONE 51.0s\n",
+  "build_log_tail": "on-slugify-8.0.4 pytokens-0.4.1 pytz-2026.3.post1 pyxlsb-1.0.10 referencing-0.37.0 requests-2.34.2 retrying-1.4.2 rich-15.0.0 rpds-py-0.30.0 selenium-4.2.0 shellingham-1.5.4 six-1.17.0 smmap-5.0.3 sortedcontainers-2.4.0 soupsieve-2.9.2 sse-starlette-3.4.8 starlette-1.6.0 text-unidecode-1.3 tomli_w-1.2.0 tqdm-4.70.0 trio-0.34.0 trio-websocket-0.12.2 typer-0.27.1 typing-inspection-0.4.3 tzdata-2026.3 urllib3-1.26.20 urllib3-secure-extra-0.1.0 uvicorn-0.52.3 vizro-0.1.60.dev0 vizro-dash-components-0.1.1 vizro-experimental-0.1.1.dev0 vizro-mcp-0.1.5.dev0 vizro_ai-0.4.2.dev0 waitress-3.0.2 webencodings-0.6.1 websocket-client-1.9.0 wrapt-2.3.0 wsproto-1.3.2 xlrd-2.0.2 xlsxwriter-3.2.9 zipp-4.1.0\n#18 1121.7 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 1121.8 \n#18 1121.8 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 1121.8 [notice] To update, run: pip install --upgrade pip\n#18 DONE 1123.9s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 1.3s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.1s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 36.9s done\n#21 exporting manifest sha256:8e7d61b0799d37342ce4431e5f6fd47d81233fe21c9e7328d745be4fc0b11521 0.0s done\n#21 exporting config sha256:24552b5ea872d8e90a7bf791ab4fd670f1c3e78db2a9d07c5575f387850133b0 0.0s done\n#21 exporting attestation manifest sha256:4120d8291c4ae7b7a3be09c613f87edc1808bd8bc7d10292baf810f2bb8b3222 0.0s done\n#21 exporting manifest list sha256:ef035cde0ac3dd875f4b045596a778ff8ca88616f4168f1c41a9681115482693 0.0s done\n#21 naming to docker.io/library/bench-pjy-rat-dockerfile-mckinsey-vizro:latest done\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-mckinsey-vizro:latest\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-mckinsey-vizro:latest 14.8s done\n#21 DONE 51.8s\n",
   "status": "collect_error",
   "py_test_files": 121,
   "collect_rc": 2,
@@ -1392,9 +1392,9 @@
   "ebsr": true,
   "pass_rate": 0.8988,
   "timed_out": false,
-  "image_size_mb": 1705.3,
+  "image_size_mb": 4277.4,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50-pjy-mckinsey-vizro@sha256:17e0f31154790a28bf693f6140a378d1aaf5ab165a47dc58a0fac11d6b6e713e",
+  "image_digest": "bench-pjy-rat-dockerfile-mckinsey-vizro@sha256:ef035cde0ac3dd875f4b045596a778ff8ca88616f4168f1c41a9681115482693",
   "installed_pkg_count": 175,
   "tokens_in": 4574459,
   "tokens_out": 74381,
@@ -1402,27 +1402,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 249.25,
-  "test_s": 23.45,
+  "build_s": 1184.76,
+  "test_s": 27.03,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 4574459,
     "tokens_out": 74381,
-    "llm_calls": 104,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 104
   },
   "error_surface": "",
   "error_surface_reason": "",

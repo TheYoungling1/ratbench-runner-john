@@ -1,43 +1,63 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "TencentBlueKing/blueking-dbm",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "t_proxy_redundant\n#10 271.3 backend/tests/ticket/redis/test_redis_version_update_serializer.py::test_validate_engine_family_allows_same_engine\n#10 271.3 backend/tests/ticket/redis/test_redis_version_update_serializer.py::test_validate_engine_family_allows_same_family_multiple_current_versions\n#10 271.3 backend/tests/ticket/redis/test_redis_version_update_serializer.py::test_validate_engine_family_rejects_empty_current_versions\n#10 271.3 backend/tests/ticket/redis/test_redis_version_update_serializer.py::test_validate_engine_family_skips_proxy\n#10 271.3 \n#10 271.3 3524 tests collected in 6.01s\n#10 DONE 271.5s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 12.0s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.4s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 80.8s done\n#14 exporting manifest sha256:ba75522b95d44a7d5424250a7542565bc1a0640afb4077c7ae2b25ba523e09bc 0.0s done\n#14 exporting config sha256:44901ff3443007c6067611c1005c0c1d62159aa7328a34cbdb22a2c768d32fc9 done\n#14 exporting attestation manifest sha256:9422a697729707c0d64e0808d4f2f876644240d9e8756305a75878963546fa5a 0.0s done\n#14 exporting manifest list sha256:3df601f95399e9f96de78990ce3bc5ff7c1b3972969015e4727d851557ed534b 0.0s done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-tencentblueking-blueking-dbm:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-tencentblueking-blueking-dbm:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-tencentblueking-blueking-dbm:latest 28.0s done\n#14 DONE 108.9s\n\n \u001b[33m1 warning found (use docker --debug to expand):\n\u001b[0m - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV \"APP_TOKEN\") (line 12)\n",
+  "build_log_tail": "heck_exporter.py::TestProxyErrorTypes::test_proxy_duplicate\n#10 209.4 backend/tests/db_periodic_task/local_tasks/redis_tasks/test_check_exporter.py::TestProxyErrorTypes::test_proxy_redundant\n#10 222.0 backend/tests/ticket/redis/test_redis_version_update_serializer.py::test_validate_engine_family_allows_same_engine\n#10 222.0 backend/tests/ticket/redis/test_redis_version_update_serializer.py::test_validate_engine_family_allows_same_family_multiple_current_versions\n#10 222.0 backend/tests/ticket/redis/test_redis_version_update_serializer.py::test_validate_engine_family_rejects_empty_current_versions\n#10 222.0 backend/tests/ticket/redis/test_redis_version_update_serializer.py::test_validate_engine_family_skips_proxy\n#10 222.0 \n#10 222.0 3524 tests collected in 6.46s\n#10 DONE 222.3s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 5.1s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 42.6s done\n#14 exporting manifest sha256:71e4a143b453c5444bcc54d37456bf6e233b38080c90b6eac1b9be74f7a68110 done\n#14 exporting config sha256:5843fbf6a79e2e987a7f78c3a2ee62453c23c49827f66bffdb7af635bb6b23ea done\n#14 exporting attestation manifest sha256:842c6ce2d6eb476ad86a828511c8cd7b11f51751b49b98fcadce5fae61178a96 done\n#14 exporting manifest list sha256:ce3f781972e342800cdb9a7ea3319ffd6c3d8f8db351b2c7790a0db92e448cf3 done\n#14 naming to docker.io/library/bench-setupx-tencentblueking-blueking-dbm:latest done\n#14 unpacking to docker.io/library/bench-setupx-tencentblueking-blueking-dbm:latest\n#14 unpacking to docker.io/library/bench-setupx-tencentblueking-blueking-dbm:latest 16.8s done\n#14 DONE 59.5s\n\n \u001b[33m1 warning found (use docker --debug to expand):\n\u001b[0m - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV \"APP_TOKEN\") (line 12)\n",
   "status": "collect_error",
   "py_test_files": 298,
   "collect_rc": 2,
   "collect_clean": false,
-  "collect_errors": [],
-  "collect_error_count": 1,
-  "collected_node_ids": [],
+  "collect_errors": [
+    "E   ModuleNotFoundError: No module named 'backend'",
+    "E   ModuleNotFoundError: No module named 'settings'",
+    "E   ModuleNotFoundError: No module named 'settings'",
+    "E   ModuleNotFoundError: No module named 'settings'",
+    "E   ModuleNotFoundError: No module named 'settings'",
+    "E   ModuleNotFoundError: No module named 'settings'",
+    "ERROR dbm-ui/backend/tests - ModuleNotFoundError: No module named 'settings'"
+  ],
+  "collect_error_count": 8,
+  "collected_node_ids": [
+    "dbm-services/common/dbha-v2/scripts/test_render_configs_detector.py::TestValidateProbeInstallDir::test_invalid_paths",
+    "dbm-services/common/dbha-v2/scripts/test_render_configs_detector.py::TestValidateProbeInstallDir::test_valid_paths"
+  ],
   "executed": true,
-  "total": 1,
+  "total": 10,
   "passed": 0,
   "failed": 0,
-  "errors": 1,
+  "errors": 10,
   "skipped": 0,
   "passed_node_ids": [],
   "failed_node_ids": [],
   "error_node_ids": [
-    ""
+    "dbm-ui.backend.flow.engine.bamboo.scene.spider.upgrade.test_filter_upgrade_instances",
+    "dbm-ui.backend.flow.plugins.components.collections.mysql.test_check_long_innodb_trx",
+    "dbm-ui.backend.flow.signal.test_mysql_rollback_exercise_handler",
+    "dbm-ui.backend.flow.utils.mysql.test_mysql_cross_major_version",
+    "dbm-ui.backend.flow.utils.mysql.test_mysql_semantic_start_configs",
+    "dbm-ui.backend.flow.utils.mysql.test_mysql_version_parse_batch",
+    "dbm-ui.backend.flow.utils.spider.test_spider_version_upgrade_checker",
+    "dbm-ui.backend.tests",
+    "dbm-services/common/dbha-v2/scripts/test_render_configs_detector.py::TestValidateProbeInstallDir::test_invalid_paths",
+    "dbm-services/common/dbha-v2/scripts/test_render_configs_detector.py::TestValidateProbeInstallDir::test_valid_paths"
   ],
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 1139.6,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-tencentblueking-blueking-dbm@sha256:3df601f95399e9f96de78990ce3bc5ff7c1b3972969015e4727d851557ed534b",
-  "installed_pkg_count": 300,
+  "image_size_mb": 1137.3,
+  "image_delta_mb": 749.7,
+  "image_digest": "bench-setupx-tencentblueking-blueking-dbm@sha256:ce3f781972e342800cdb9a7ea3319ffd6c3d8f8db351b2c7790a0db92e448cf3",
+  "installed_pkg_count": 301,
   "tokens_in": 707191,
   "tokens_out": 37947,
   "llm_calls": 101,
   "turns_used": 64,
   "cost_usd": null,
   "produce_s": 1697.77,
-  "build_s": 406.65,
-  "test_s": 1.68,
+  "build_s": 298.92,
+  "test_s": 2.94,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -72,19 +92,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=ab940a987ca216c6af59a4fdbe7506e74d0c0c2c (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=ab940a987ca216c6af59a4fdbe7506e74d0c0c2c (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

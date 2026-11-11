@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "mne-tools/mne-lsl",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ster-1.0.0 ast-serialize-0.11.2 babel-2.18.0 certifi-2026.7.22 charset_normalizer-3.5.1 contourpy-1.3.2 cycler-0.12.1 decorator-5.3.1 distro-1.9.0 docutils-0.21.2 fonttools-4.65.0 idna-3.20 imagesize-2.0.1 intersphinx_registry-0.2609.5 isort-9.0.1 jinja2-3.1.6 kiwisolver-1.5.1 lazy-loader-0.6 librt-0.15.0 matplotlib-3.10.9 mne-1.12.1 mypy-2.3.1 mypy-extensions-1.1.0 numpy-2.2.6 pathspec-1.1.1 pillow-12.3.0 platformdirs-4.11.15 pooch-1.9.0 psutil-7.2.2 pyparsing-3.3.3 python-dateutil-2.9.0.post0 qtpy-2.4.3 scipy-1.15.3 six-1.17.0 snowballstemmer-3.1.1 sphinx_gallery-0.22.1 sphinxcontrib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 tqdm-4.70.1 urllib3-2.8.0\n#11 18.27 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 18.28 \n#11 18.28 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 18.28 [notice] To update, run: pip install --upgrade pip\n#11 DONE 19.4s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 22.7s done\n#12 exporting manifest sha256:c3e0dc40932c232981c85b302c2cc5dcc8dbf47094da44e950f7e07d480a9abd done\n#12 exporting config sha256:c7188bef5091dfa8c346e20e1759eaada6faea68c5c77da8db8aad8d15d1ea75 done\n#12 exporting attestation manifest sha256:7fece19a2ca97c69f06b07b870dfb41ac09289cc4fe5d95d0d531ff7e1c6c1d2 done\n#12 exporting manifest list sha256:d13215a2df7e05af8f7cdd4eed55d76e8cfeae36fef3d29d9451ff8a66229df7 done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-mne-tools-mne-lsl:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-mne-tools-mne-lsl:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-mne-tools-mne-lsl:latest 4.0s done\n#12 DONE 26.7s\n",
+  "build_log_tail": "sfully installed MarkupSafe-3.0.3 Requests-2.34.2 Sphinx-8.1.3 alabaster-1.0.0 ast-serialize-0.11.2 babel-2.18.0 certifi-2026.7.22 charset_normalizer-3.5.1 contourpy-1.3.2 cycler-0.12.1 decorator-5.3.1 distro-1.9.0 docutils-0.21.2 fonttools-4.65.0 idna-3.19 imagesize-2.0.1 intersphinx_registry-0.2609.5 isort-9.0.1 jinja2-3.1.6 kiwisolver-1.5.1 lazy-loader-0.5 librt-0.15.0 matplotlib-3.10.9 mne-1.12.1 mypy-2.3.1 mypy-extensions-1.1.0 numpy-2.2.6 pathspec-1.1.1 pillow-12.3.0 platformdirs-4.11.8 pooch-1.9.0 psutil-7.2.2 pyparsing-3.3.2 python-dateutil-2.9.0.post0 qtpy-2.4.3 scipy-1.15.3 six-1.17.0 snowballstemmer-3.1.1 sphinx_gallery-0.21.0 sphinxcontrib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 tqdm-4.70.1 urllib3-2.7.0\n#11 17.97 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 17.98 \n#11 17.98 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 17.98 [notice] To update, run: pip install --upgrade pip\n#11 DONE 18.6s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 22.6s done\n#12 exporting manifest sha256:874bc7d5b20d8efb099bcdf0d521e1acfea7d6b3a046a8f0c4026363a2d16a36 0.0s done\n#12 exporting config sha256:397db9a1d6f6c0e8855a6a53f25390f7d9f5cb4bd0130e464901b52491484699 0.0s done\n#12 exporting attestation manifest sha256:102a0675a932c863162925cd37c27eb5bfef1ea4336936cd8814c2c7275debe2 0.0s done\n#12 exporting manifest list sha256:0ee2121029c874162f657f0fc459d3e3f974e690ccbe8e57b546621949131216 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-mne-tools-mne-lsl:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-mne-tools-mne-lsl:latest\n#12 unpacking to docker.io/library/bench-pipreqs-mne-tools-mne-lsl:latest 7.4s done\n#12 DONE 30.2s\n",
   "status": "collect_error",
   "py_test_files": 20,
   "collect_rc": 4,
@@ -24,9 +24,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 2408.0,
-  "image_delta_mb": 897.3,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-mne-tools-mne-lsl@sha256:d13215a2df7e05af8f7cdd4eed55d76e8cfeae36fef3d29d9451ff8a66229df7",
+  "image_size_mb": 665.8,
+  "image_delta_mb": 278.2,
+  "image_digest": "bench-pipreqs-mne-tools-mne-lsl@sha256:0ee2121029c874162f657f0fc459d3e3f974e690ccbe8e57b546621949131216",
   "installed_pkg_count": 61,
   "tokens_in": null,
   "tokens_out": null,
@@ -34,8 +34,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 6.82,
-  "build_s": 51.61,
-  "test_s": 0.25,
+  "build_s": 53.56,
+  "test_s": 0.35,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -62,19 +62,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=03d5988ea6d940840e418b91f0d756134515e193 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=03d5988ea6d940840e418b91f0d756134515e193 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

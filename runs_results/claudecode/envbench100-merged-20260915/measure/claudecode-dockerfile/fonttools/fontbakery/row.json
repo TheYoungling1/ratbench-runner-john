@@ -1,16 +1,18 @@
 {
-  "agent": "claudecode__envbench100-merged-20260915",
+  "agent": "claudecode-dockerfile",
   "repo": "fonttools/fontbakery",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ownloading openstep_plist-0.5.2-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (869 kB)\n#11 7.587    \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 869.9/869.9 kB 70.0 MB/s  0:00:00\n#11 7.596 Downloading ufolib2-0.18.1-py3-none-any.whl (53 kB)\n#11 7.609 Downloading attrs-26.1.0-py3-none-any.whl (67 kB)\n#11 7.622 Downloading unicodedata2-18.0.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (543 kB)\n#11 7.630    \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 543.7/543.7 kB 59.4 MB/s  0:00:00\n#11 7.671 Installing collected packages: unicodedata2, openstep-plist, attrs, ufoLib2, glyphsLib, defcon\n#11 7.974 \n#11 7.975 Successfully installed attrs-26.1.0 defcon-0.12.2 glyphsLib-6.15.0 openstep-plist-0.5.2 ufoLib2-0.18.1 unicodedata2-18.0.0\n#11 7.975 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#11 DONE 8.1s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 7.2s done\n#12 exporting manifest sha256:ed7e2a11dc5c68d941b06a945e352b1cf6620c1e3cb71bf69379c15e42ca5aa3 0.0s done\n#12 exporting config sha256:10a27f763f686d298ba52fe93740157a45b04ecf81ed52043658ae55c770b3f7 done\n#12 exporting attestation manifest sha256:5e1cc15f0ff5763b9fab0a811095fcbf427e81fbf4c9fa5fd687f2c43704bf45 0.0s done\n#12 exporting manifest list sha256:68cd83f6fe856a46528c434e2acfe5534001572b59c4c5997b3bf33d53813c9c done\n#12 naming to docker.io/library/bench-claudecode__envbench100-merged-20260915-fonttools-fontbakery:latest done\n#12 unpacking to docker.io/library/bench-claudecode__envbench100-merged-20260915-fonttools-fontbakery:latest\n#12 unpacking to docker.io/library/bench-claudecode__envbench100-merged-20260915-fonttools-fontbakery:latest 2.1s done\n#12 DONE 9.4s\n",
-  "status": "executed",
+  "build_log_tail": "311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (1.2 kB)\nCollecting unicodedata2>=17.0.0 (from fonttools[ufo,unicode]>=4.59.0->defcon)\n  Downloading unicodedata2-17.0.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (3.4 kB)\nCollecting attrs>=22.1.0 (from ufoLib2>=0.6.2->glyphsLib)\n  Downloading attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)\nDownloading defcon-0.12.2-py3-none-any.whl (232 kB)\nDownloading glyphslib-6.14.0-py3-none-any.whl (930 kB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 930.1/930.1 kB 73.7 MB/s  0:00:00\nDownloading openstep_plist-0.5.2-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (869 kB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 869.9/869.9 kB 136.5 MB/s  0:00:00\nDownloading ufolib2-0.18.1-py3-none-any.whl (53 kB)\nDownloading attrs-26.1.0-py3-none-any.whl (67 kB)\nDownloading unicodedata2-17.0.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (531 kB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 531.4/531.4 kB 78.8 MB/s  0:00:00\nInstalling collected packages: unicodedata2, openstep-plist, attrs, ufoLib2, defcon, glyphsLib\n\nSuccessfully installed attrs-26.1.0 defcon-0.12.2 glyphsLib-6.14.0 openstep-plist-0.5.2 ufoLib2-0.18.1 unicodedata2-17.0.1\n\u001b[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n\u001b[0m ---> Removed intermediate container 307ab975abe1\n ---> 6d8fe92d03fa\nSuccessfully built 6d8fe92d03fa\nSuccessfully tagged bench-claudecode-dockerfile-fonttools-fontbakery:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
+  "status": "collect_error",
   "py_test_files": 34,
-  "collect_rc": 0,
-  "collect_clean": true,
-  "collect_errors": [],
-  "collect_error_count": 0,
+  "collect_rc": 2,
+  "collect_clean": false,
+  "collect_errors": [
+    "E   ModuleNotFoundError: No module named 'fontbakery-nametable-from-filename'\u001b[0m"
+  ],
+  "collect_error_count": 1,
   "collected_node_ids": [],
   "executed": true,
   "total": 918,
@@ -941,9 +943,9 @@
   "ebsr": true,
   "pass_rate": 0.8217,
   "timed_out": false,
-  "image_size_mb": 571.7,
-  "image_delta_mb": null,
-  "image_digest": "bench-claudecode__envbench100-merged-20260915-fonttools-fontbakery@sha256:68cd83f6fe856a46528c434e2acfe5534001572b59c4c5997b3bf33d53813c9c",
+  "image_size_mb": 571.5,
+  "image_delta_mb": 191.7,
+  "image_digest": "bench-claudecode-dockerfile-fonttools-fontbakery@sha256:6d8fe92d03faea95e751112fd3e7138725dbd2980db70f46ba64a02ba72945b2",
   "installed_pkg_count": 41,
   "tokens_in": 1783693,
   "tokens_out": 13200,
@@ -951,8 +953,8 @@
   "turns_used": 38,
   "cost_usd": 0.032215276,
   "produce_s": 212.95,
-  "build_s": 35.28,
-  "test_s": 33.98,
+  "build_s": 43.62,
+  "test_s": 31.88,
   "meta": {
     "contract_version": 1,
     "producer": "claudecode-dockerfile",
@@ -979,19 +981,7 @@
     "usage_source": "computed",
     "dsml_text_blocks": 0,
     "turn_capped": false,
-    "agent_timed_out": false,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "agent_timed_out": false
   },
   "error_surface": "",
   "error_surface_reason": "",

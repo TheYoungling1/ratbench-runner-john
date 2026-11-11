@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50new-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "nutti/fake-bpy-module",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "   Successfully uninstalled Pygments-2.21.0\n#19 15.31   Attempting uninstall: openai\n#19 15.31     Found existing installation: openai 3.17.0\n#19 15.85     Uninstalling openai-3.17.0:\n#19 17.87       Successfully uninstalled openai-3.17.0\n#19 20.41   Attempting uninstall: idna\n#19 20.41     Found existing installation: idna 3.20\n#19 20.42     Uninstalling idna-3.20:\n#19 20.43       Successfully uninstalled idna-3.20\n#19 20.87 Successfully installed PyYAML-6.0.3 Pygments-2.20.0 astroid-3.2.4 dill-0.4.1 docutils-0.20.1 idna-3.19 importlib_metadata-9.0.1 isort-5.13.2 mccabe-0.7.0 numpy-2.2.6 openai-3.14.0 platformdirs-4.11.8 pylint-3.2.7 ruff-0.15.22 tomlkit-0.15.1 yapf-0.40.2 zipp-4.1.0\n#19 20.87 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#19 20.96 \n#19 20.96 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#19 20.96 [notice] To update, run: pip install --upgrade pip\n#19 DONE 21.5s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 0.4s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.0s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 6.8s done\n#22 exporting manifest sha256:d35cbc9ca33694974b855438e590fa017012225151424692694a70f999ee2102 0.0s done\n#22 exporting config sha256:b84da3cfcf641b2aad5ea1ebd74635da0400c30ea6312e7757627a7334ee9828 done\n#22 exporting attestation manifest sha256:5f79f1d97b238a93556f7d12e74a9665539f0d63db0bdae27004cd01abba697f 0.0s done\n#22 exporting manifest list sha256:baed7b30abba4e6aca125dadc24dbb4ebfbc4f24c5151414dfc53b23eb8307ac 0.0s done\n#22 naming to docker.io/library/bench-rat__rat50new-pjy-nutti-fake-bpy-module:latest done\n#22 unpacking to docker.io/library/bench-rat__rat50new-pjy-nutti-fake-bpy-module:latest\n#22 unpacking to docker.io/library/bench-rat__rat50new-pjy-nutti-fake-bpy-module:latest 4.4s done\n#22 DONE 11.4s\n",
+  "build_log_tail": "sfully uninstalled Pygments-2.21.0\n#19 122.9   Attempting uninstall: openai\n#19 122.9     Found existing installation: openai 3.17.0\n#19 123.4     Uninstalling openai-3.17.0:\n#19 125.7       Successfully uninstalled openai-3.17.0\n#19 128.7   Attempting uninstall: idna\n#19 128.7     Found existing installation: idna 3.20\n#19 128.7     Uninstalling idna-3.20:\n#19 128.7       Successfully uninstalled idna-3.20\n#19 129.2 Successfully installed PyYAML-6.0.3 Pygments-2.20.0 astroid-3.2.4 dill-0.4.1 docutils-0.20.1 idna-3.19 importlib_metadata-9.0.1 isort-5.13.2 mccabe-0.7.0 numpy-2.2.6 openai-3.14.0 platformdirs-4.11.8 pylint-3.2.7 ruff-0.15.22 tomlkit-0.15.1 yapf-0.40.2 zipp-4.1.0\n#19 129.2 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#19 129.3 \n#19 129.3 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#19 129.3 [notice] To update, run: pip install --upgrade pip\n#19 DONE 129.7s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 0.4s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.1s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 7.1s done\n#22 exporting manifest sha256:8878f462f3b4764a8afad5f038044395a870ae0914eff165b02d1ff7b198eba0 0.0s done\n#22 exporting config sha256:3b2ac1aabf7ff7d7373df9dc555cb622652b1de1c99855b513c35fc87b6fe29e 0.0s done\n#22 exporting attestation manifest sha256:06ffb95a48e324f0523994a1d62112ef6f6313a25b8fc01d532723a8f7543cb0 0.0s done\n#22 exporting manifest list sha256:f948f2768a587c9074474a419d651327efdd587f8005d9c990471d30e41f153c 0.0s done\n#22 naming to docker.io/library/bench-pjy-rat-dockerfile-nutti-fake-bpy-module:latest done\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-nutti-fake-bpy-module:latest\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-nutti-fake-bpy-module:latest 5.9s done\n#22 DONE 13.1s\n",
   "status": "collect_error",
   "py_test_files": 5,
   "collect_rc": 2,
@@ -36,9 +36,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 136.0,
+  "image_size_mb": 603.7,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50new-pjy-nutti-fake-bpy-module@sha256:baed7b30abba4e6aca125dadc24dbb4ebfbc4f24c5151414dfc53b23eb8307ac",
+  "image_digest": "bench-pjy-rat-dockerfile-nutti-fake-bpy-module@sha256:f948f2768a587c9074474a419d651327efdd587f8005d9c990471d30e41f153c",
   "installed_pkg_count": 39,
   "tokens_in": 1359022,
   "tokens_out": 7131,
@@ -46,27 +46,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 39.26,
-  "test_s": 0.46,
+  "build_s": 158.31,
+  "test_s": 0.62,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 1359022,
     "tokens_out": 7131,
-    "llm_calls": 54,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 54
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "Nikita-Filonov/ai-review",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "58 ai_review/tests/suites/services/vcs/test_factory.py::test_get_vcs_client_returns_azure_devops\n#10 16.58 ai_review/tests/suites/services/vcs/test_factory.py::test_get_vcs_client_returns_bitbucket_cloud\n#10 16.58 ai_review/tests/suites/services/vcs/test_factory.py::test_get_vcs_client_returns_bitbucket_server\n#10 16.58 ai_review/tests/suites/services/vcs/test_factory.py::test_get_vcs_client_unsupported_provider\n#10 16.58 \n#10 16.58 828 tests collected in 0.42s\n#10 17.35 ......................                                                   [100%]\n#10 17.35 22 passed in 0.08s\n#10 DONE 18.5s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.7s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.1s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 5.6s done\n#14 exporting manifest sha256:f82299e2e9947bb7da1a855bc6e2ed04df7d05dac69b140e2743d88b79351317\n#14 exporting manifest sha256:f82299e2e9947bb7da1a855bc6e2ed04df7d05dac69b140e2743d88b79351317 0.0s done\n#14 exporting config sha256:c463af9600579ace3cdcaae3c17ec0f9ba76b30a4846a4aa6c3dcc06b71e477e 0.0s done\n#14 exporting attestation manifest sha256:57f9ef7c893a5910c7fababef3a1f50ed211cddbb0183d9895cae53eff4b8231 0.0s done\n#14 exporting manifest list sha256:de0826fd49fca5b80940cedee3f3c7ef779e5bc91cd35156244a4c6538c780ce\n#14 exporting manifest list sha256:de0826fd49fca5b80940cedee3f3c7ef779e5bc91cd35156244a4c6538c780ce 0.0s done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-nikita-filonov-ai-review:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-nikita-filonov-ai-review:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-nikita-filonov-ai-review:latest 2.6s done\n#14 DONE 8.4s\n",
+  "build_log_tail": "ls.py::test_filter_ai_review_drafts_returns_empty_list_for_empty_input\n#10 14.70 ai_review/tests/suites/services/vcs/test_factory.py::test_get_vcs_client_returns_gitea\n#10 14.70 ai_review/tests/suites/services/vcs/test_factory.py::test_get_vcs_client_returns_github\n#10 14.70 ai_review/tests/suites/services/vcs/test_factory.py::test_get_vcs_client_returns_gitlab\n#10 14.70 ai_review/tests/suites/services/vcs/test_factory.py::test_get_vcs_client_returns_azure_devops\n#10 14.70 ai_review/tests/suites/services/vcs/test_factory.py::test_get_vcs_client_returns_bitbucket_cloud\n#10 14.70 ai_review/tests/suites/services/vcs/test_factory.py::test_get_vcs_client_returns_bitbucket_server\n#10 14.70 ai_review/tests/suites/services/vcs/test_factory.py::test_get_vcs_client_unsupported_provider\n#10 14.70 \n#10 14.70 828 tests collected in 0.47s\n#10 16.13 ......................                                                   [100%]\n#10 16.13 22 passed in 0.18s\n#10 DONE 16.3s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 1.1s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 3.2s done\n#14 exporting manifest sha256:80450f78dc431452be8fcea552f44de6b2061d0a700acf026a430f5a7b067613 done\n#14 exporting config sha256:e33f1ced28439c9379c3a87b00b0d48f29cb2a710974b7724566095c707062ce done\n#14 exporting attestation manifest sha256:5c693c5e073a7a648e39aff90e41103bbf41b7fd42c0c117a650aee836c18819 done\n#14 exporting manifest list sha256:03fd43067a71b11fbe5a512990a91ad154cff2a591926afd5d3c98b0e78b09cb done\n#14 naming to docker.io/library/bench-setupx-nikita-filonov-ai-review:latest done\n#14 unpacking to docker.io/library/bench-setupx-nikita-filonov-ai-review:latest\n#14 unpacking to docker.io/library/bench-setupx-nikita-filonov-ai-review:latest 1.3s done\n#14 DONE 4.5s\n",
   "status": "executed",
   "py_test_files": 106,
   "collect_rc": 0,
@@ -1682,9 +1682,9 @@
   "ebsr": true,
   "pass_rate": 1.0,
   "timed_out": false,
-  "image_size_mb": 1638.4,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-nikita-filonov-ai-review@sha256:de0826fd49fca5b80940cedee3f3c7ef779e5bc91cd35156244a4c6538c780ce",
+  "image_size_mb": 421.9,
+  "image_delta_mb": 34.3,
+  "image_digest": "bench-setupx-nikita-filonov-ai-review@sha256:03fd43067a71b11fbe5a512990a91ad154cff2a591926afd5d3c98b0e78b09cb",
   "installed_pkg_count": 31,
   "tokens_in": 344047,
   "tokens_out": 11211,
@@ -1692,8 +1692,8 @@
   "turns_used": 29,
   "cost_usd": null,
   "produce_s": 366.47,
-  "build_s": 31.53,
-  "test_s": 2.92,
+  "build_s": 24.45,
+  "test_s": 3.06,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -1728,19 +1728,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=e3e19d6d06c4ee6951c7a132d2a1090f8b04a947 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=e3e19d6d06c4ee6951c7a132d2a1090f8b04a947 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

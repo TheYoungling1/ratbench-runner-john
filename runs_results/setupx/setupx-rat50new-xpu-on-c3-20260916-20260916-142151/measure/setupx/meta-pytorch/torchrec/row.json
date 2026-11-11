@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "meta-pytorch/torchrec",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "_build.yml\n#10 244.6 unittest_ci.yml\n#10 244.6 unittest_ci_cpu.yml\n#10 244.6 validate-binaries.yml\n#10 244.6 validate-nightly-binaries.yml\n#10 244.6 .github/workflows/unittest_ci_cpu.yml:154:          pip install pytest\n#10 244.6 .github/workflows/unittest_ci_cpu.yml:156:          python -m pytest torchrec -v -s -W ignore::pytest.PytestCollectionWarning --continue-on-collection-errors \\\n#10 244.6 .github/workflows/benchmark-nightly.yml:86:        conda install -n benchmark -y pytest\n#10 244.6 .github/workflows/unittest_ci.yml:226:          pip install pytest\n#10 244.6 .github/workflows/unittest_ci.yml:228:          python -m pytest torchrec -v -s \\\n#10 244.6 .github/workflows/unittest_ci.yml:229:          -W ignore::pytest.PytestCollectionWarning \\\n#10 244.6 === check root conftest.py ===\n#10 DONE 244.9s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 1.3s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 67.2s done\n#14 exporting manifest sha256:a5e53bc5744b876be4e43216f05a93f56bcaa02fa57671b03d458ee4f42ca890 done\n#14 exporting config sha256:aa7edd08981375230f70bbf9c394b61b6872928cf236a46617f473137dcc7549 done\n#14 exporting attestation manifest sha256:7f3697aa0d24862c73abf7a3be5b83947243d59500889a95f64ffbe8cdcf6eff 0.0s done\n#14 exporting manifest list sha256:5b23f3be47940ed7180a4ed7f56d56b4595d442ca0a439164db260f107237b26 done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-meta-pytorch-torchrec:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-meta-pytorch-torchrec:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-meta-pytorch-torchrec:latest 13.4s done\n#14 DONE 80.7s\n",
+  "build_log_tail": "ng_wheels.yml\n#10 251.6 codeql.yml\n#10 251.6 cpp_unittest_ci_cpu.yml\n#10 251.6 docs.yml\n#10 251.6 pre-commit.yaml\n#10 251.6 pyre.yml\n#10 251.6 release_build.yml\n#10 251.6 unittest_ci.yml\n#10 251.6 unittest_ci_cpu.yml\n#10 251.6 validate-binaries.yml\n#10 251.6 validate-nightly-binaries.yml\n#10 251.6 .github/workflows/unittest_ci_cpu.yml:154:          pip install pytest\n#10 251.6 .github/workflows/unittest_ci_cpu.yml:156:          python -m pytest torchrec -v -s -W ignore::pytest.PytestCollectionWarning --continue-on-collection-errors \\\n#10 251.6 .github/workflows/benchmark-nightly.yml:86:        conda install -n benchmark -y pytest\n#10 251.6 .github/workflows/unittest_ci.yml:226:          pip install pytest\n#10 251.6 .github/workflows/unittest_ci.yml:228:          python -m pytest torchrec -v -s \\\n#10 251.6 .github/workflows/unittest_ci.yml:229:          -W ignore::pytest.PytestCollectionWarning \\\n#10 251.6 === check root conftest.py ===\n#10 DONE 251.9s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 1.5s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 92.8s done\n#14 exporting manifest sha256:ce7c9fa3311a20c4e64fac6f43f7858f0ed31641818896432a53f5843365506f 0.0s done\n#14 exporting config sha256:63f16f25975f995ddb50e30b1463010dbbbfe4fe9b422ddb72b22b16b2b8eb63 done\n#14 exporting attestation manifest sha256:b74c64107194a020b694f1d04e2adfe995fb53d97ffe522c97c65573458eb39c done\n#14 exporting manifest list sha256:2782e25c4a2e85b02644abd35ff1bb2ca86e14a61ebb9688c42ee39832be39e1 0.0s done\n#14 naming to docker.io/library/bench-setupx-meta-pytorch-torchrec:latest done\n#14 unpacking to docker.io/library/bench-setupx-meta-pytorch-torchrec:latest\n#14 unpacking to docker.io/library/bench-setupx-meta-pytorch-torchrec:latest 15.7s done\n#14 DONE 108.6s\n",
   "status": "collect_error",
   "py_test_files": 253,
   "collect_rc": 2,
@@ -5247,9 +5247,9 @@
   "ebsr": true,
   "pass_rate": 0.9225,
   "timed_out": false,
-  "image_size_mb": 1279.5,
+  "image_size_mb": 4303.1,
   "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-meta-pytorch-torchrec@sha256:5b23f3be47940ed7180a4ed7f56d56b4595d442ca0a439164db260f107237b26",
+  "image_digest": "bench-setupx-meta-pytorch-torchrec@sha256:2782e25c4a2e85b02644abd35ff1bb2ca86e14a61ebb9688c42ee39832be39e1",
   "installed_pkg_count": 73,
   "tokens_in": 1056648,
   "tokens_out": 67265,
@@ -5257,8 +5257,8 @@
   "turns_used": 78,
   "cost_usd": null,
   "produce_s": 1991.17,
-  "build_s": 334.84,
-  "test_s": 1094.46,
+  "build_s": 370.6,
+  "test_s": 1162.49,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -5293,19 +5293,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=b30d3af09c9bcd9e103fdd8e5c486d8f71f09ee9 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=b30d3af09c9bcd9e103fdd8e5c486d8f71f09ee9 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

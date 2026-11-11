@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "uriyyo/fastapi-pagination",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "utils/dist.py:318: BuildBackendWarning: Unknown distribution option: 'tests_require'\n#17 7.924   warnings.warn(msg)\n#17 8.185 <string>:3: BuildBackendWarning: The test command is disabled and references to it are deprecated.\n#17 8.185 !!\n#17 8.185 \n#17 8.185         ********************************************************************************\n#17 8.185         Please remove any references to `setuptools.command.test` in all supported versions of the affected package.\n#17 8.185 \n#17 8.185         This deprecation is overdue, please update your project and remove deprecated\n#17 8.185         calls to avoid build errors in the future.\n#17 8.185         ********************************************************************************\n#17 8.185 \n#17 8.185 !!\n#17 8.185 /tmp/tmpq48v7ra6/.venv/lib/python3.10/site-packages/setuptools/_distutils/dist.py:318: BuildBackendWarning: Unknown distribution option: 'tests_require'\n#17 8.185   warnings.warn(msg)\n#17 12.56 \n#17 12.56 Installing the current project: fastapi-pagination (0.12.26)\n#17 DONE 13.3s\n\n#18 [15/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#18 DONE 0.7s\n\n#19 [16/17] WORKDIR /testbed\n#19 DONE 0.0s\n\n#20 exporting to image\n#20 exporting layers\n#20 exporting layers 36.1s done\n#20 exporting manifest sha256:e73693481ead85b26521ed5e06c2eaf5febace39c2a069acd512cf7343a5d931 done\n#20 exporting config sha256:0ad52c91141392c395b74d6f89074611440fa44a21082e904eec8d7f0622f838 done\n#20 exporting attestation manifest sha256:85c6b23c3d985047f89fa567b2ba27150e46237ddac1470b2f9c1fb5c6f7d6b4 0.0s done\n#20 exporting manifest list sha256:9efcc38133780296359a2ba0cafc8aec2d9977d23621cdd55e1fac4cc0f1ea34 done\n#20 naming to docker.io/library/bench-repo2run__envbench100-pjy-uriyyo-fastapi-pagination:latest done\n#20 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-uriyyo-fastapi-pagination:latest\n#20 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-uriyyo-fastapi-pagination:latest 9.5s done\n#20 DONE 45.7s\n",
+  "build_log_tail": "10/site-packages/setuptools/_distutils/dist.py:318: BuildBackendWarning: Unknown distribution option: 'tests_require'\n#17 10.01   warnings.warn(msg)\n#17 10.36 <string>:3: BuildBackendWarning: The test command is disabled and references to it are deprecated.\n#17 10.36 !!\n#17 10.36 \n#17 10.36         ********************************************************************************\n#17 10.36         Please remove any references to `setuptools.command.test` in all supported versions of the affected package.\n#17 10.36 \n#17 10.36         This deprecation is overdue, please update your project and remove deprecated\n#17 10.36         calls to avoid build errors in the future.\n#17 10.36         ********************************************************************************\n#17 10.36 \n#17 10.36 !!\n#17 10.36 /tmp/tmps_ml0afg/.venv/lib/python3.10/site-packages/setuptools/_distutils/dist.py:318: BuildBackendWarning: Unknown distribution option: 'tests_require'\n#17 10.36   warnings.warn(msg)\n#17 16.06 \n#17 16.06 Installing the current project: fastapi-pagination (0.12.26)\n#17 DONE 16.6s\n\n#18 [15/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#18 DONE 0.7s\n\n#19 [16/17] WORKDIR /testbed\n#19 DONE 0.1s\n\n#20 exporting to image\n#20 exporting layers\n#20 exporting layers 32.7s done\n#20 exporting manifest sha256:422f437596df5a9fce7977b1ec9a39e975af4905358e1d7e710db95002713e9d done\n#20 exporting config sha256:94858133b20880bdf0c210ad5027b41654fe895afa3a9e08945e93c020e3ad1b done\n#20 exporting attestation manifest sha256:58f42795e1fba93d28146ff954e37cf4dc24400d854009c12f692b1597d9e671 0.0s done\n#20 exporting manifest list sha256:43a4a7f0308f9c68f083bfd2026fa793e100800e7d6a5eff94ac2f531f4bf867 0.0s done\n#20 naming to docker.io/library/bench-pjy-repo2run-uriyyo-fastapi-pagination:latest done\n#20 unpacking to docker.io/library/bench-pjy-repo2run-uriyyo-fastapi-pagination:latest\n#20 unpacking to docker.io/library/bench-pjy-repo2run-uriyyo-fastapi-pagination:latest 10.3s done\n#20 DONE 43.1s\n",
   "status": "collect_error",
   "py_test_files": 36,
   "collect_rc": 4,
@@ -26,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 757.7,
+  "image_size_mb": 2638.1,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-uriyyo-fastapi-pagination@sha256:9efcc38133780296359a2ba0cafc8aec2d9977d23621cdd55e1fac4cc0f1ea34",
+  "image_digest": "bench-pjy-repo2run-uriyyo-fastapi-pagination@sha256:43a4a7f0308f9c68f083bfd2026fa793e100800e7d6a5eff94ac2f531f4bf867",
   "installed_pkg_count": 27,
   "tokens_in": 103430,
   "tokens_out": 4953,
@@ -36,8 +36,8 @@
   "turns_used": 10,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 66.14,
-  "test_s": 0.29,
+  "build_s": 66.65,
+  "test_s": 0.42,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -45,19 +45,7 @@
     "tokens_in": 103430,
     "tokens_out": 4953,
     "llm_calls": null,
-    "turns_used": 10,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 10
   },
   "error_surface": "",
   "error_surface_reason": "",

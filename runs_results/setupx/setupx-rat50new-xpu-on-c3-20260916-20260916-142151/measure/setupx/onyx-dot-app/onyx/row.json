@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "onyx-dot-app/onyx",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "rning: cannot collect test class 'TestCategory' because it has a __init__ constructor (from: tests/unit/onyx/tools/tool_implementations/open_url/test_snippet_matcher.py)\n#10 302.3     class TestCategory(BaseModel):\n#10 302.3 \n#10 302.3 tests/unit/onyx/tools/tool_implementations/open_url/test_snippet_matcher.py:90\n#10 302.3   /workspace/repo/backend/tests/unit/onyx/tools/tool_implementations/open_url/test_snippet_matcher.py:90: PytestCollectionWarning: cannot collect test class 'TestDataFile' because it has a __init__ constructor (from: tests/unit/onyx/tools/tool_implementations/open_url/test_snippet_matcher.py)\n#10 302.3     class TestDataFile(BaseModel):\n#10 302.3 \n#10 302.3 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n#10 302.3 43 passed, 4 warnings in 0.12s\n#10 DONE 302.6s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 72.4s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 1.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.3s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 384.9s done\n#14 exporting manifest sha256:f52773c64ada022477842cb9d5e797a85b5c29b0a47a67198de004c7a2461a5e 0.0s done\n#14 exporting config sha256:5a302e1bc20b9c4e05e9da7251ccf85fcde73df29ebb6f846191323824a62c99 0.0s done\n#14 exporting attestation manifest sha256:ec1e37cd8bf43fafefa5235558bb3b3b34ccc38ac02552632e87892a59ff5730 0.0s done\n#14 exporting manifest list sha256:78bd41032939491681709351d9b98c91a1479f7dd3b98076badcbd6b5999629e done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-onyx-dot-app-onyx:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-onyx-dot-app-onyx:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-onyx-dot-app-onyx:latest 138.9s done\n#14 DONE 523.9s\n",
+  "build_log_tail": "/open_url/test_snippet_matcher.py:81\n#10 360.8   /workspace/repo/backend/tests/unit/onyx/tools/tool_implementations/open_url/test_snippet_matcher.py:81: PytestCollectionWarning: cannot collect test class 'TestCategory' because it has a __init__ constructor (from: tests/unit/onyx/tools/tool_implementations/open_url/test_snippet_matcher.py)\n#10 360.8     class TestCategory(BaseModel):\n#10 360.8 \n#10 360.8 tests/unit/onyx/tools/tool_implementations/open_url/test_snippet_matcher.py:90\n#10 360.8   /workspace/repo/backend/tests/unit/onyx/tools/tool_implementations/open_url/test_snippet_matcher.py:90: PytestCollectionWarning: cannot collect test class 'TestDataFile' because it has a __init__ constructor (from: tests/unit/onyx/tools/tool_implementations/open_url/test_snippet_matcher.py)\n#10 360.8     class TestDataFile(BaseModel):\n#10 360.8 \n#10 360.8 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n#10 360.8 43 passed, 4 warnings in 0.18s\n#10 DONE 361.1s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 87.8s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 7.9s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.1s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 460.2s done\n#14 exporting manifest sha256:c698215ff2612795fb5438c9435b43154ab5a352da88c61e21f3fad98226b343 done\n#14 exporting config sha256:7a80a108151cd7f18328c06e7aa3d3da34a6f961767eca3547b4fdc706133779 done\n#14 exporting attestation manifest sha256:e37cb02dbc556067a1a071416f4ca6b47aeca985474066a57a48361d05fb4aba done\n#14 exporting manifest list sha256:477d44081b0b46b3c08ba44786522aa04730234c8c5e547b6821c4e8d825b4ee done\n#14 naming to docker.io/library/bench-setupx-onyx-dot-app-onyx:latest done\n#14 unpacking to docker.io/library/bench-setupx-onyx-dot-app-onyx:latest\n#14 unpacking to docker.io/library/bench-setupx-onyx-dot-app-onyx:latest 163.6s done\n#14 DONE 623.8s\n",
   "status": "collect_error",
   "py_test_files": 5150,
   "collect_rc": 2,
@@ -13947,8 +13947,8 @@
   ],
   "executed": true,
   "total": 13946,
-  "passed": 9399,
-  "failed": 1570,
+  "passed": 9397,
+  "failed": 1572,
   "errors": 2076,
   "skipped": 1013,
   "passed_node_ids": [
@@ -19538,8 +19538,6 @@
     "backend/tests/unit/onyx/llm/test_reasoning_capabilities.py::test_models_rejecting_reasoning_effort_support_no_levels[o1-mini]",
     "backend/tests/unit/onyx/llm/test_reasoning_capabilities.py::test_models_rejecting_reasoning_effort_support_no_levels[o1-preview]",
     "backend/tests/unit/onyx/llm/test_reasoning_capabilities.py::test_models_rejecting_reasoning_effort_support_no_levels[o1-mini-2024-09-12]",
-    "backend/tests/unit/onyx/llm/test_reasoning_capabilities.py::test_chat_variants_support_no_levels[gpt-5-chat-latest]",
-    "backend/tests/unit/onyx/llm/test_reasoning_capabilities.py::test_chat_variants_support_no_levels[gpt-5.1-chat-latest]",
     "backend/tests/unit/onyx/llm/test_reasoning_capabilities.py::test_model_identity_taken_from_any_name",
     "backend/tests/unit/onyx/llm/test_reasoning_effort_mapping.py::test_openai_reasoning_effort_mapping_has_valid_values",
     "backend/tests/unit/onyx/llm/test_reasoning_effort_mapping.py::test_openai_reasoning_effort_mapping_covers_all_effort_levels",
@@ -24592,6 +24590,8 @@
     "backend/tests/unit/onyx/db/engine/test_engine_disposal.py::test_lifespan_shutdown_disposes_all_three_engines",
     "backend/tests/unit/onyx/llm/test_cost.py::TestComputeCostCents::test_bedrock_model_priced_via_provider",
     "backend/tests/unit/onyx/llm/test_model_is_reasoning.py::test_model_is_reasoning_model",
+    "backend/tests/unit/onyx/llm/test_reasoning_capabilities.py::test_chat_variants_support_no_levels[gpt-5-chat-latest]",
+    "backend/tests/unit/onyx/llm/test_reasoning_capabilities.py::test_chat_variants_support_no_levels[gpt-5.1-chat-latest]",
     "backend/tests/unit/onyx/natural_language_processing/test_search_nlp_models.py::test_cloud_embedding_context_manager",
     "backend/tests/unit/onyx/natural_language_processing/test_search_nlp_models.py::test_cloud_embedding_explicit_close",
     "backend/tests/unit/onyx/natural_language_processing/test_search_nlp_models.py::test_vertex_embed_keeps_task_type_for_existing_models",
@@ -27003,11 +27003,11 @@
     "backend/tests/unit/onyx/natural_language_processing/test_search_nlp_models.py::test_openai_embedding"
   ],
   "ebsr": true,
-  "pass_rate": 0.7267,
+  "pass_rate": 0.7266,
   "timed_out": false,
-  "image_size_mb": 9789.9,
+  "image_size_mb": 28810.8,
   "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-onyx-dot-app-onyx@sha256:78bd41032939491681709351d9b98c91a1479f7dd3b98076badcbd6b5999629e",
+  "image_digest": "bench-setupx-onyx-dot-app-onyx@sha256:477d44081b0b46b3c08ba44786522aa04730234c8c5e547b6821c4e8d825b4ee",
   "installed_pkg_count": 0,
   "tokens_in": 1273823,
   "tokens_out": 20420,
@@ -27015,8 +27015,8 @@
   "turns_used": 25,
   "cost_usd": null,
   "produce_s": 1741.68,
-  "build_s": 919.88,
-  "test_s": 1273.72,
+  "build_s": 1100.28,
+  "test_s": 1496.04,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -27051,19 +27051,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=f4b2f659adf7b496df0e3a8e2ac0a703e405ba19 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=f4b2f659adf7b496df0e3a8e2ac0a703e405ba19 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

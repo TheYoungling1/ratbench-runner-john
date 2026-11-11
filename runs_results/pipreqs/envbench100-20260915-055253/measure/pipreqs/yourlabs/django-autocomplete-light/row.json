@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "yourlabs/django-autocomplete-light",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "sts, outcome, Django, cffi, trio, pytest-django, pytest-cov, pynacl, django_taggit, cryptography, trio-websocket, djhacker, selenium, PyGithub\n#11 9.763 Successfully installed Django-5.2.17 PyGithub-2.10.0 Requests-2.34.2 asgiref-3.12.1 attrs-26.1.0 backports.statistics-0.1.0 certifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.1 coverage-7.16.1 cryptography-50.0.1 django_taggit-6.1.0 djhacker-0.2.3 h11-0.16.0 idna-3.20 mock-5.2.0 outcome-1.3.0.post0 pycparser-3.0 pyjwt-2.15.0 pynacl-1.6.2 pysocks-1.7.1 pytest-cov-7.1.0 pytest-django-4.14.0 selenium-4.49.0 sniffio-1.3.1 sortedcontainers-2.4.0 sqlparse-0.6.0 tagging-0.2.1 tenacity-9.1.4 trio-0.34.0 trio-websocket-0.12.2 urllib3-2.8.0 websocket-client-1.9.2 wsproto-1.3.2\n#11 9.763 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 9.769 \n#11 9.769 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 9.769 [notice] To update, run: pip install --upgrade pip\n#11 DONE 10.5s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 4.5s done\n#12 exporting manifest sha256:cd51796d4832b55c38cbc6908421ef03f959e574da4ccc6afbcf82ec6cfb3ea3 0.0s done\n#12 exporting config sha256:584bd20cc1bc68bf315ca5c52ecc1b48ac58f527eb90aa3e4ec3bb431ccad73f done\n#12 exporting attestation manifest sha256:228a989f4b337011035f51afcb475ff535f5d0a73324f37d68edd95373714b30 done\n#12 exporting manifest list sha256:9dc0e8bc48b16c206785d57ea614fb99308f104338a13757804bbe0dfc339456 done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-yourlabs-django-autocomplete-light:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-yourlabs-django-autocomplete-light:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-yourlabs-django-autocomplete-light:latest 2.3s done\n#12 DONE 6.9s\n",
+  "build_log_tail": "arser, mock, idna, h11, coverage, charset_normalizer, certifi, attrs, asgiref, wsproto, Requests, outcome, Django, cffi, trio, pytest-django, pytest-cov, pynacl, django_taggit, cryptography, trio-websocket, djhacker, selenium, PyGithub\n#11 9.164 Successfully installed Django-5.2.17 PyGithub-2.10.0 Requests-2.34.2 asgiref-3.12.1 attrs-26.1.0 backports.statistics-0.1.0 certifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.1 coverage-7.16.1 cryptography-50.0.1 django_taggit-6.1.0 djhacker-0.2.3 h11-0.16.0 idna-3.19 mock-5.2.0 outcome-1.3.0.post0 pycparser-3.0 pyjwt-2.14.0 pynacl-1.6.2 pysocks-1.7.1 pytest-cov-7.1.0 pytest-django-4.14.0 selenium-4.49.0 sniffio-1.3.1 sortedcontainers-2.4.0 sqlparse-0.6.0 tagging-0.2.1 tenacity-9.1.4 trio-0.34.0 trio-websocket-0.12.2 urllib3-2.7.0 websocket-client-1.9.2 wsproto-1.3.2\n#11 9.164 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 9.169 \n#11 9.169 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 9.169 [notice] To update, run: pip install --upgrade pip\n#11 DONE 9.5s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 6.1s done\n#12 exporting manifest sha256:01d934f885ee59aa0586d0b86c5b466b2af5564a3b3f10098747cabfbc9225ce done\n#12 exporting config sha256:2fbae4668a167ceae4d6505cc3c441da148ff40d9b57b398e1cb191ea7d43999 done\n#12 exporting attestation manifest sha256:911b8e7723b6e30fbf007601b9471d4e51492dcfa60690627ff6d75c617a8559 done\n#12 exporting manifest list sha256:40421b22db3ba8d6310ee7d20508032b40bba6aaaa448bca4b043d9020edb166 done\n#12 naming to docker.io/library/bench-pipreqs-yourlabs-django-autocomplete-light:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-yourlabs-django-autocomplete-light:latest\n#12 unpacking to docker.io/library/bench-pipreqs-yourlabs-django-autocomplete-light:latest 2.4s done\n#12 DONE 8.6s\n",
   "status": "collect_error",
   "py_test_files": 28,
   "collect_rc": 1,
@@ -26,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 1787.9,
-  "image_delta_mb": 277.2,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-yourlabs-django-autocomplete-light@sha256:9dc0e8bc48b16c206785d57ea614fb99308f104338a13757804bbe0dfc339456",
+  "image_size_mb": 470.0,
+  "image_delta_mb": 82.4,
+  "image_digest": "bench-pipreqs-yourlabs-django-autocomplete-light@sha256:40421b22db3ba8d6310ee7d20508032b40bba6aaaa448bca4b043d9020edb166",
   "installed_pkg_count": 48,
   "tokens_in": null,
   "tokens_out": null,
@@ -36,8 +36,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 7.64,
-  "build_s": 20.81,
-  "test_s": 0.25,
+  "build_s": 21.94,
+  "test_s": 0.35,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -64,19 +64,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=45a9ff6e95e58348b90b3c1f01f01cb6ca10b4d3 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=45a9ff6e95e58348b90b3c1f01f01cb6ca10b4d3 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

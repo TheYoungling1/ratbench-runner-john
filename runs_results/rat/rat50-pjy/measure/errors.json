@@ -1,0 +1,182 @@
+{
+  "pjy-rat-dockerfile": {
+    "collect": {
+      "agent": "pjy-rat-dockerfile",
+      "n_repos": 50,
+      "source": "collect",
+      "n_admissible": 36,
+      "n_masked": 9,
+      "n_unobserved": 5,
+      "n_status_derived": 0,
+      "buckets": {
+        "collect_error": 22,
+        "success": 15,
+        "partial": 6,
+        "timed_out": 2,
+        "build_fail": 3,
+        "missing": 2
+      },
+      "surfaces": {
+        "masked": 9,
+        "full": 36,
+        "unobserved": 5
+      },
+      "token_repos": {
+        "ImportError": 2,
+        "ModuleNotFoundError": 10,
+        "RuntimeError": 1,
+        "redis.exceptions.ConnectionError": 1,
+        "ConnectionRefusedError": 1,
+        "_pytest.pathlib.ImportPathMismatchError": 2,
+        "patchright._impl._errors.Error": 1,
+        "playwright._impl._errors.Error": 1,
+        "ValueError": 2,
+        "pydantic_ai.exceptions.UserError": 1,
+        "dash.exceptions.PageError": 1,
+        "subprocess.CalledProcessError": 2,
+        "OSError": 1,
+        "Error": 1
+      },
+      "token_events": {
+        "ImportError": 5,
+        "ModuleNotFoundError": 91,
+        "RuntimeError": 1,
+        "ConnectionRefusedError": 1,
+        "redis.exceptions.ConnectionError": 1,
+        "_pytest.pathlib.ImportPathMismatchError": 2,
+        "playwright._impl._errors.Error": 1,
+        "patchright._impl._errors.Error": 1,
+        "pydantic_ai.exceptions.UserError": 1,
+        "dash.exceptions.PageError": 1,
+        "ValueError": 2,
+        "subprocess.CalledProcessError": 2,
+        "OSError": 1,
+        "Error": 1
+      },
+      "category_repos": {
+        "partial_import": 2,
+        "module_not_found": 10,
+        "import_failed": 1,
+        "uncategorized": 6,
+        "service_unavailable": 1,
+        "harness_error": 2
+      },
+      "category_events": {
+        "partial_import": 4,
+        "module_not_found": 91,
+        "uncategorized": 11,
+        "import_failed": 1,
+        "service_unavailable": 2,
+        "harness_error": 2
+      },
+      "crosstab": {
+        "collect_error|partial_import": 2,
+        "collect_error|module_not_found": 9,
+        "collect_error|import_failed": 1,
+        "collect_error|uncategorized": 5,
+        "collect_error|service_unavailable": 1,
+        "collect_error|harness_error": 2,
+        "timed_out|uncategorized": 1,
+        "timed_out|module_not_found": 1
+      },
+      "top_groups": {
+        "module_not_found": [
+          [
+            "tests.test_client",
+            2
+          ],
+          [
+            "tensorflow",
+            1
+          ],
+          [
+            "dragos",
+            1
+          ],
+          [
+            "aiohttp",
+            1
+          ],
+          [
+            "OTXv2",
+            1
+          ],
+          [
+            "google",
+            1
+          ],
+          [
+            "pytest_mock",
+            1
+          ],
+          [
+            "pandas",
+            1
+          ],
+          [
+            "vt",
+            1
+          ],
+          [
+            "tests_connector.test_connector",
+            1
+          ]
+        ],
+        "partial_import": [
+          [
+            "bigquery",
+            1
+          ],
+          [
+            "KasperskyConnector",
+            1
+          ],
+          [
+            "ConnectorSettings",
+            1
+          ],
+          [
+            "IsMaliciousConnector",
+            1
+          ]
+        ],
+        "uncategorized": [
+          [
+            "libcudart.so.12",
+            1
+          ]
+        ]
+      },
+      "uncategorized_rate": 0.0991
+    },
+    "run": {
+      "agent": "pjy-rat-dockerfile",
+      "n_repos": 50,
+      "source": "run",
+      "n_admissible": 36,
+      "n_masked": 9,
+      "n_unobserved": 5,
+      "n_status_derived": 0,
+      "buckets": {
+        "collect_error": 22,
+        "success": 15,
+        "partial": 6,
+        "timed_out": 2,
+        "build_fail": 3,
+        "missing": 2
+      },
+      "surfaces": {
+        "masked": 9,
+        "full": 36,
+        "unobserved": 5
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    }
+  }
+}

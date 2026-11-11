@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__envbench100-merged-20260915",
+  "agent": "setupx",
   "repo": "ecds/readux",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "cs\n#10 303.0 cgroup.stat\n#10 303.0 cgroup.stat.local\n#10 303.0 0::/\n#10 303.0 #subsys_name\thierarchy\tnum_cgroups\tenabled\n#10 303.0 cpu\t0\t219\t1\n#10 303.0 cpuacct\t0\t219\t1\n#10 303.0 blkio\t0\t219\t1\n#10 303.0 devices\t0\t219\t1\n#10 303.0 freezer\t0\t219\t1\n#10 303.0 net_cls\t0\t219\t1\n#10 303.0 perf_event\t0\t219\t1\n#10 303.0 net_prio\t0\t219\t1\n#10 303.0 hugetlb\t0\t219\t1\n#10 303.0 ### java available ###\n#10 303.1 openjdk version \"21.0.12.1\" 2026-08-18\n#10 303.1 OpenJDK Runtime Environment (build 21.0.12.1+1-1-deb13u1-Debian)\n#10 303.1 -rwxr-xr-x 1 esuser esuser 12368 Jun 23  2022 /opt/elasticsearch-7.17.5/jdk/bin/java\n#10 303.1 openjdk version \"18.0.1.1\" 2022-04-22\n#10 303.1 OpenJDK Runtime Environment (build 18.0.1.1+2-6)\n#10 303.1 ### restarting ES with container support disabled ###\n#10 303.1 Terminated\n#10 DONE 303.6s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 1.8s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 118.4s done\n#14 exporting manifest sha256:fe3730aca265e2fad6d8b65af33ac7ea52a4b1e505d4275ad4e3ee214fb5f1af\n#14 exporting manifest sha256:fe3730aca265e2fad6d8b65af33ac7ea52a4b1e505d4275ad4e3ee214fb5f1af 0.0s done\n#14 exporting config sha256:7eda39379b6de6a4ca5b9361c9c4cd5a0a2c416236c289397dbcd13086a215be done\n#14 exporting attestation manifest sha256:8ed333e4719ea6d71a3fbbb1e54c336650cd7c852aecf51d0a582a1d8c3e1d61 0.0s done\n#14 exporting manifest list sha256:6af600a083f7e2e8b6673f4937bb6fe8206dbf5d2e3db7cd3a46de43bd040565 done\n#14 naming to docker.io/library/bench-setupx__envbench100-merged-20260915-ecds-readux:latest done\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-ecds-readux:latest\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-ecds-readux:latest 28.4s done\n#14 DONE 146.9s\n",
+  "build_log_tail": ":29)\n\u001b[0m\u001b[91m\tat org.elasticsearch.tools.launchers.JvmOptionsParser.jvmOptions(JvmOptionsParser.java:125)\n\tat org.elasticsearch.tools.launchers.JvmOptionsParser.main(JvmOptionsParser.java:86)\n\u001b[0m### /sys/fs/cgroup state ###\ncgroup.controllers\ncgroup.events\ncgroup.freeze\ncgroup.kill\ncgroup.max.depth\ncgroup.max.descendants\ncgroup.pressure\ncgroup.procs\ncgroup.stat\ncgroup.stat.local\n0::/\n#subsys_name\thierarchy\tnum_cgroups\tenabled\ncpu\t0\t165\t1\ncpuacct\t0\t165\t1\nblkio\t0\t165\t1\ndevices\t0\t165\t1\nfreezer\t0\t165\t1\nnet_cls\t0\t165\t1\nperf_event\t0\t165\t1\nnet_prio\t0\t165\t1\nhugetlb\t0\t165\t1\n### java available ###\nopenjdk version \"21.0.12.1\" 2026-08-18\nOpenJDK Runtime Environment (build 21.0.12.1+1-1-deb13u1-Debian)\n-rwxr-xr-x 1 esuser esuser 12368 Jun 23  2022 /opt/elasticsearch-7.17.5/jdk/bin/java\nopenjdk version \"18.0.1.1\" 2022-04-22\nOpenJDK Runtime Environment (build 18.0.1.1+2-6)\n### restarting ES with container support disabled ###\n\u001b[91mTerminated\n\u001b[0m ---> Removed intermediate container fb412a6d0ebf\n ---> 423810c32751\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in 78b1adeb03ba\n ---> Removed intermediate container 78b1adeb03ba\n ---> 54446e250bf2\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in 6720d7c2fdd6\n ---> Removed intermediate container 6720d7c2fdd6\n ---> 933d38e7556e\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in 205d29e71dfd\n ---> Removed intermediate container 205d29e71dfd\n ---> dcb23af08f72\nStep 10/10 : WORKDIR /testbed\n ---> Running in 6ba4c537d33d\n ---> Removed intermediate container 6ba4c537d33d\n ---> b3848985bf6d\nSuccessfully built b3848985bf6d\nSuccessfully tagged bench-setupx-ecds-readux:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 33,
   "collect_rc": 1,
@@ -26,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 1782.1,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__envbench100-merged-20260915-ecds-readux@sha256:6af600a083f7e2e8b6673f4937bb6fe8206dbf5d2e3db7cd3a46de43bd040565",
+  "image_size_mb": 1789.3,
+  "image_delta_mb": 1401.7,
+  "image_digest": "bench-setupx-ecds-readux@sha256:b3848985bf6da607d9a6e22fe6ab032311eceb6d040f82d0411ab6f9c454f7cd",
   "installed_pkg_count": 174,
   "tokens_in": 867156,
   "tokens_out": 107371,
@@ -36,8 +36,8 @@
   "turns_used": 88,
   "cost_usd": null,
   "produce_s": 1303.86,
-  "build_s": 460.07,
-  "test_s": 1.22,
+  "build_s": 403.64,
+  "test_s": 1.47,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -72,19 +72,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=3eaf18edb9bcb0858507dcdb9295bc367e1ff8fb (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=3eaf18edb9bcb0858507dcdb9295bc367e1ff8fb (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

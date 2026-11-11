@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "jackdewinter/pymarkdown",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "rom pytest>=7.0.0->pytest-timeout==2.4.0) (1.3.1)\n#23 0.466 Requirement already satisfied: tomli>=1 in /usr/local/lib/python3.10/site-packages (from pytest>=7.0.0->pytest-timeout==2.4.0) (2.4.1)\n#23 0.466 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.10/site-packages (from pytest>=7.0.0->pytest-timeout==2.4.0) (1.6.0)\n#23 0.466 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.10/site-packages (from pytest>=7.0.0->pytest-timeout==2.4.0) (26.3)\n#23 0.469 Requirement already satisfied: typing-extensions>=4.6.0 in /usr/local/lib/python3.10/site-packages (from exceptiongroup>=1->pytest>=7.0.0->pytest-timeout==2.4.0) (4.16.0)\n#23 0.531 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#23 0.534 \n#23 0.534 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#23 0.534 [notice] To update, run: pip install --upgrade pip\n#23 DONE 0.6s\n\n#24 [21/23] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#24 DONE 0.4s\n\n#25 [22/23] WORKDIR /testbed\n#25 DONE 0.0s\n\n#26 exporting to image\n#26 exporting layers\n#26 exporting layers 1.0s done\n#26 exporting manifest sha256:44c4a792f8b5fa03b54eae0f25b7b19ba2e7d609e9b28d84b6c9c4d1b9e4191f done\n#26 exporting config sha256:ac9fa44ed119c2989d7d84aad3d73964bcc3a5ff595ebabaeb171c1e39c9c4c6 done\n#26 exporting attestation manifest sha256:86216f557db971f70a149e5d1b17dec220353120230f05fab74458a88cdecd40 0.0s done\n#26 exporting manifest list sha256:057efdc064c377ad3d1b21e19aca74ffef1327781cc40ed18e2517c24d5198a1 done\n#26 naming to docker.io/library/bench-repo2run__envbench100-pjy-jackdewinter-pymarkdown:latest done\n#26 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-jackdewinter-pymarkdown:latest\n#26 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-jackdewinter-pymarkdown:latest 0.9s done\n#26 DONE 2.0s\n",
+  "build_log_tail": "n3.10/site-packages (from pytest>=7.0.0->pytest-timeout==2.4.0) (1.6.0)\n#23 0.534 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.10/site-packages (from pytest>=7.0.0->pytest-timeout==2.4.0) (2.3.0)\n#23 0.534 Requirement already satisfied: tomli>=1 in /usr/local/lib/python3.10/site-packages (from pytest>=7.0.0->pytest-timeout==2.4.0) (2.4.1)\n#23 0.535 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.10/site-packages (from pytest>=7.0.0->pytest-timeout==2.4.0) (26.3)\n#23 0.538 Requirement already satisfied: typing-extensions>=4.6.0 in /usr/local/lib/python3.10/site-packages (from exceptiongroup>=1->pytest>=7.0.0->pytest-timeout==2.4.0) (4.16.0)\n#23 0.603 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#23 0.605 \n#23 0.605 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#23 0.605 [notice] To update, run: pip install --upgrade pip\n#23 DONE 0.7s\n\n#24 [21/23] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#24 DONE 0.5s\n\n#25 [22/23] WORKDIR /testbed\n#25 DONE 0.0s\n\n#26 exporting to image\n#26 exporting layers\n#26 exporting layers 1.2s done\n#26 exporting manifest sha256:9fde7801e2631dfcb6b0407b506d14855dc5c997a0223596c2dabb045b916a71 0.0s done\n#26 exporting config sha256:1b44178ac1971e9afd4b5e1ea3656b2a1364ccef6eb5ff9478bdfd2995e11118 0.0s done\n#26 exporting attestation manifest sha256:77e8b460431da2b383548e8a2df815f1db4901b15b28ccad3b4611841d976b03 0.0s done\n#26 exporting manifest list sha256:1d86973e2aa0de2a724f71031ffb8bbcf3bcb3dbe0122d9bedd0047b42d36ab5 0.0s done\n#26 naming to docker.io/library/bench-pjy-repo2run-jackdewinter-pymarkdown:latest done\n#26 unpacking to docker.io/library/bench-pjy-repo2run-jackdewinter-pymarkdown:latest\n#26 unpacking to docker.io/library/bench-pjy-repo2run-jackdewinter-pymarkdown:latest 1.5s done\n#26 DONE 2.8s\n",
   "status": "collect_error",
   "py_test_files": 221,
   "collect_rc": 2,
@@ -466,9 +466,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 520.3,
+  "image_size_mb": 1924.7,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-jackdewinter-pymarkdown@sha256:057efdc064c377ad3d1b21e19aca74ffef1327781cc40ed18e2517c24d5198a1",
+  "image_digest": "bench-pjy-repo2run-jackdewinter-pymarkdown@sha256:1d86973e2aa0de2a724f71031ffb8bbcf3bcb3dbe0122d9bedd0047b42d36ab5",
   "installed_pkg_count": 27,
   "tokens_in": 3291771,
   "tokens_out": 78773,
@@ -476,8 +476,8 @@
   "turns_used": 100,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 11.47,
-  "test_s": 2.85,
+  "build_s": 15.2,
+  "test_s": 3.59,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -485,19 +485,7 @@
     "tokens_in": 3291771,
     "tokens_out": 78773,
     "llm_calls": null,
-    "turns_used": 100,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 100
   },
   "error_surface": "",
   "error_surface_reason": "",

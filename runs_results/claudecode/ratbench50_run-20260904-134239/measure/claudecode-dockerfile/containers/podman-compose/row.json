@@ -1,10 +1,10 @@
 {
-  "agent": "claudecode__ratbench50_run-20260904-134239",
+  "agent": "claudecode-dockerfile",
   "repo": "containers/podman-compose",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ncompatible.\n#9 10.63 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#9 10.63 Successfully installed APScheduler-3.11.2 astroid-3.1.0 cachetools-5.3.3 certifi-2025.11.12 cffi-2.0.0 chardet-5.2.0 charset-normalizer-3.4.4 colorama-0.4.6 coverage-7.4.3 cryptography-48.0.1 dill-0.3.8 distlib-0.3.8 filelock-3.13.1 idna-3.15 iniconfig-2.0.0 isort-5.13.2 mccabe-0.7.0 mypy-1.15.0 mypy_extensions-1.1.0 packaging-23.2 parameterized-0.9.0 platformdirs-4.2.0 pluggy-1.4.0 podman-compose-1.6.0 pycparser-2.23 pylint-3.1.0 pyproject-api-1.6.1 pytest-8.0.2 python-dotenv-1.0.1 pyyaml-6.0.1 requests-2.32.5 ruff-0.14.8 tomlkit-0.12.4 tox-4.13.0 types-PyYAML-6.0.12.20250402 types-requests-2.32.0.20250328 types-setuptools-80.7.0.20250516 typing_extensions-4.13.2 tzlocal-5.3.1 urllib3-2.6.3 virtualenv-20.26.6\n#9 10.64 \n#9 10.64 [notice] A new release of pip is available: 24.0 -> 26.2.1\n#9 10.64 [notice] To update, run: pip install --upgrade pip\n#9 DONE 11.2s\n\n#10 exporting to image\n#10 exporting layers\n#10 exporting layers 10.1s done\n#10 exporting manifest sha256:71fb7ef08cc9450980ddeb960c18072e06127a140499626f4999980166ed4151 done\n#10 exporting config sha256:a060f2838bee345a6a5f7180d5ef76bb714102b014b763d724b30e7990395694 done\n#10 exporting attestation manifest sha256:889039d92c18ef83db4771e82717d5727c699c02b66e798bd7dbf6dfa2d92355 0.0s done\n#10 exporting manifest list sha256:395bd905ef8935b8d5fb75190055e2d649f17b90fd65db0edd34fc84a342396e done\n#10 naming to docker.io/library/bench-claudecode__ratbench50_run-20260904-134239-containers-podman-compose:latest done\n#10 unpacking to docker.io/library/bench-claudecode__ratbench50_run-20260904-134239-containers-podman-compose:latest\n#10 unpacking to docker.io/library/bench-claudecode__ratbench50_run-20260904-134239-containers-podman-compose:latest 2.1s done\n#10 DONE 12.3s\n",
+  "build_log_tail": "ests, requests, pytest, pyproject-api, pylint, podman-compose, mypy, cffi, APScheduler, tox, cryptography\n  Attempting uninstall: packaging\n    Found existing installation: packaging 26.3\n    Uninstalling packaging-26.3:\n      Successfully uninstalled packaging-26.3\n\u001b[91mERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\nwheel 0.46.3 requires packaging>=24.0, but you have packaging 23.2 which is incompatible.\n\u001b[0mSuccessfully installed APScheduler-3.11.2 astroid-3.1.0 cachetools-5.3.3 certifi-2025.11.12 cffi-2.0.0 chardet-5.2.0 charset-normalizer-3.4.4 colorama-0.4.6 coverage-7.4.3 cryptography-48.0.1 dill-0.3.8 distlib-0.3.8 filelock-3.13.1 idna-3.15 iniconfig-2.0.0 isort-5.13.2 mccabe-0.7.0 mypy-1.15.0 mypy_extensions-1.1.0 packaging-23.2 parameterized-0.9.0 platformdirs-4.2.0 pluggy-1.4.0 podman-compose-1.6.0 pycparser-2.23 pylint-3.1.0 pyproject-api-1.6.1 pytest-8.0.2 python-dotenv-1.0.1 pyyaml-6.0.1 requests-2.32.5 ruff-0.14.8 tomlkit-0.12.4 tox-4.13.0 types-PyYAML-6.0.12.20250402 types-requests-2.32.0.20250328 types-setuptools-80.7.0.20250516 typing_extensions-4.13.2 tzlocal-5.3.1 urllib3-2.6.3 virtualenv-20.26.6\n\u001b[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n\u001b[0m\u001b[91m\n[notice] A new release of pip is available: 24.0 -> 26.2.1\n[notice] To update, run: pip install --upgrade pip\n\u001b[0m ---> Removed intermediate container fbcc695991d5\n ---> e54d17affd8a\nSuccessfully built e54d17affd8a\nSuccessfully tagged bench-claudecode-dockerfile-containers-podman-compose:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 97,
   "collect_rc": 2,
@@ -1125,9 +1125,9 @@
   "ebsr": true,
   "pass_rate": 0.8594,
   "timed_out": false,
-  "image_size_mb": 493.2,
-  "image_delta_mb": null,
-  "image_digest": "bench-claudecode__ratbench50_run-20260904-134239-containers-podman-compose@sha256:395bd905ef8935b8d5fb75190055e2d649f17b90fd65db0edd34fc84a342396e",
+  "image_size_mb": 493.1,
+  "image_delta_mb": 113.3,
+  "image_digest": "bench-claudecode-dockerfile-containers-podman-compose@sha256:e54d17affd8a019bd71a21b5c57d0c5312da9729c44f154260a477b7a11de998",
   "installed_pkg_count": 45,
   "tokens_in": 2287923,
   "tokens_out": 17967,
@@ -1135,8 +1135,8 @@
   "turns_used": 47,
   "cost_usd": 0.039226368000000005,
   "produce_s": 238.36,
-  "build_s": 43.34,
-  "test_s": 6.75,
+  "build_s": 48.21,
+  "test_s": 5.21,
   "meta": {
     "contract_version": 1,
     "producer": "claudecode-dockerfile",
@@ -1163,19 +1163,7 @@
     "usage_source": "computed",
     "dsml_text_blocks": 0,
     "turn_capped": false,
-    "agent_timed_out": false,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "agent_timed_out": false
   },
   "error_surface": "",
   "error_surface_reason": "",

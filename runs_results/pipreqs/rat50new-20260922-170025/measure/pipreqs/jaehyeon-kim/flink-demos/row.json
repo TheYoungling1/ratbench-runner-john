@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50new-20260922-170025",
+  "agent": "pipreqs",
   "repo": "jaehyeon-kim/flink-demos",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": " already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.10/site-packages (from pytest->-r /requirements_pipreqs.txt (line 3)) (1.6.0)\n#11 1.079 Requirement already satisfied: tomli>=1 in /usr/local/lib/python3.10/site-packages (from pytest->-r /requirements_pipreqs.txt (line 3)) (2.4.1)\n#11 1.079 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.10/site-packages (from pytest->-r /requirements_pipreqs.txt (line 3)) (2.21.0)\n#11 1.082 Requirement already satisfied: typing-extensions>=4.6.0 in /usr/local/lib/python3.10/site-packages (from exceptiongroup>=1->pytest->-r /requirements_pipreqs.txt (line 3)) (4.16.0)\n#11 1.124 Installing collected packages: pyflink, kafka\n#11 1.252 Successfully installed kafka-1.3.5 pyflink-1.0\n#11 1.252 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 1.257 \n#11 1.257 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 1.257 [notice] To update, run: pip install --upgrade pip\n#11 DONE 1.3s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 0.6s done\n#12 exporting manifest sha256:d2918029508ee7da2eaf6b4a77a06633359761d3ac83a8e1d3e305e800adf79a done\n#12 exporting config sha256:785f4cea0d42388f35974eaf54a2efaa028b0ae40c5418c421b0f5592dd1b17e 0.0s done\n#12 exporting attestation manifest sha256:87feeb518f617d416236c97f56c208522c46a795c287a73c3c7d569035346c27 0.0s done\n#12 exporting manifest list sha256:c6d68301c5215385b6f240fd70e3998889b86e7cbb58d5233bf48c9166177bd9 0.0s done\n#12 naming to docker.io/library/bench-pipreqs__rat50new-20260922-170025-jaehyeon-kim-flink-demos:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-jaehyeon-kim-flink-demos:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-jaehyeon-kim-flink-demos:latest 0.6s done\n#12 DONE 1.3s\n",
+  "build_log_tail": "t->-r /requirements_pipreqs.txt (line 3)) (2.21.0)\n#11 0.936 Requirement already satisfied: exceptiongroup>=1 in /usr/local/lib/python3.10/site-packages (from pytest->-r /requirements_pipreqs.txt (line 3)) (1.3.1)\n#11 0.937 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.10/site-packages (from pytest->-r /requirements_pipreqs.txt (line 3)) (1.6.0)\n#11 0.938 Requirement already satisfied: tomli>=1 in /usr/local/lib/python3.10/site-packages (from pytest->-r /requirements_pipreqs.txt (line 3)) (2.4.1)\n#11 0.942 Requirement already satisfied: typing-extensions>=4.6.0 in /usr/local/lib/python3.10/site-packages (from exceptiongroup>=1->pytest->-r /requirements_pipreqs.txt (line 3)) (4.16.0)\n#11 0.992 Installing collected packages: pyflink, kafka\n#11 1.132 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 1.132 Successfully installed kafka-1.3.5 pyflink-1.0\n#11 1.137 \n#11 1.137 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 1.137 [notice] To update, run: pip install --upgrade pip\n#11 DONE 1.3s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 0.6s done\n#12 exporting manifest sha256:86d71d003ed0c37cdf0e692f2c74f4a2be9e50291ee3d1c82b7eb8e12e49807a 0.0s done\n#12 exporting config sha256:616833f2b95695cb795cfc968be9f1de8e9f91bdeb976f16f8bb35a9e4326768 0.0s done\n#12 exporting attestation manifest sha256:3a03228a7f53b0cd03ca02ce98939c165c0c97fdfaec20f0a9d0e2e0b30ee8bc 0.0s done\n#12 exporting manifest list sha256:e454c1e7d5ece3ee4e5e2ac8bac2842a4be98b23f7f0679e39a767417bbb9412 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-jaehyeon-kim-flink-demos:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-jaehyeon-kim-flink-demos:latest\n#12 unpacking to docker.io/library/bench-pipreqs-jaehyeon-kim-flink-demos:latest 0.7s done\n#12 DONE 1.4s\n",
   "status": "collect_error",
   "py_test_files": 13,
   "collect_rc": 2,
@@ -52,9 +52,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 401.8,
+  "image_size_mb": 1562.3,
   "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50new-20260922-170025-jaehyeon-kim-flink-demos@sha256:c6d68301c5215385b6f240fd70e3998889b86e7cbb58d5233bf48c9166177bd9",
+  "image_digest": "bench-pipreqs-jaehyeon-kim-flink-demos@sha256:e454c1e7d5ece3ee4e5e2ac8bac2842a4be98b23f7f0679e39a767417bbb9412",
   "installed_pkg_count": 16,
   "tokens_in": null,
   "tokens_out": null,
@@ -62,8 +62,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 2.93,
-  "build_s": 5.27,
-  "test_s": 0.37,
+  "build_s": 6.3,
+  "test_s": 0.59,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -90,19 +90,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=fe228c3cfe15dcc1248d9b828e49e201c5297187 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=fe228c3cfe15dcc1248d9b828e49e201c5297187 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

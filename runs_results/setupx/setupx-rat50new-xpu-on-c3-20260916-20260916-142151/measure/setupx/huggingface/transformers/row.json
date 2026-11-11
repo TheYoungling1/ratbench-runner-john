@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "huggingface/transformers",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "_init__ constructor (from: tests/utils/test_modeling_utils.py)\n#10 470.9     class TestGammaBetaNorm(torch.nn.Module):\n#10 470.9 \n#10 470.9 tests/utils/test_modeling_utils.py:389\n#10 470.9   /workspace/repo/tests/utils/test_modeling_utils.py:389: PytestCollectionWarning: cannot collect test class 'TestModelGammaBeta' because it has a __init__ constructor (from: tests/utils/test_modeling_utils.py)\n#10 470.9     class TestModelGammaBeta(PreTrainedModel):\n#10 470.9 \n#10 470.9 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n#10 470.9 ================== CI READ-ONLY CACHE FALLBACK: not triggered ==================\n#10 470.9 167927 tests collected in 34.67s\n#10 DONE 471.1s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 4.8s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 120.3s done\n#14 exporting manifest sha256:e324c6cf11e6983d7e4cb8d67068902052121381fd00a9024c3e752157ea1651\n#14 exporting manifest sha256:e324c6cf11e6983d7e4cb8d67068902052121381fd00a9024c3e752157ea1651 0.0s done\n#14 exporting config sha256:91adfd705465a2bf962806a15b45e5c7ec1ec055e34f40084f60beab00271464 0.0s done\n#14 exporting attestation manifest sha256:e10ea6d3678414e9e82e204f2f011ea60ce29cce986158a31594b96323ee1ec6 0.0s done\n#14 exporting manifest list sha256:e39772ef1e27bd6d02781694d3ed1cbb7097745d77e8a4c9e272db1ace01e05c done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-huggingface-transformers:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-huggingface-transformers:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-huggingface-transformers:latest 26.1s done\n#14 DONE 146.5s\n",
+  "build_log_tail": "le: True\n#10 446.2 OK import\n#10 503.8 \n#10 503.8 tests/utils/test_modeling_utils.py:379\n#10 503.8   /workspace/repo/tests/utils/test_modeling_utils.py:379: PytestCollectionWarning: cannot collect test class 'TestGammaBetaNorm' because it has a __init__ constructor (from: tests/utils/test_modeling_utils.py)\n#10 503.8     class TestGammaBetaNorm(torch.nn.Module):\n#10 503.8 \n#10 503.8 tests/utils/test_modeling_utils.py:389\n#10 503.8   /workspace/repo/tests/utils/test_modeling_utils.py:389: PytestCollectionWarning: cannot collect test class 'TestModelGammaBeta' because it has a __init__ constructor (from: tests/utils/test_modeling_utils.py)\n#10 503.8     class TestModelGammaBeta(PreTrainedModel):\n#10 503.8 \n#10 503.8 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n#10 503.8 ================== CI READ-ONLY CACHE FALLBACK: not triggered ==================\n#10 503.8 167927 tests collected in 38.14s\n#10 DONE 503.9s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 5.7s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 131.6s done\n#14 exporting manifest sha256:4158168db127d677ab8359c38394bb1936ead3e661ab0b3e25345faf4f3605af 0.0s done\n#14 exporting config sha256:2b98e7c643d58c73ed1b7bafe32f4fd16f3958f1e13210c56a5a1110898d5b21 0.0s done\n#14 exporting attestation manifest sha256:1f147032d3e4c5177cea6b21f6285aa23e1f848b0e2379f9a1e42ac839055d78 0.0s done\n#14 exporting manifest list sha256:2660c2e4b0ebca53f59467a3bfc750e5aaf06fed0b0b05982f69cb53cd4cec2c 0.0s done\n#14 naming to docker.io/library/bench-setupx-huggingface-transformers:latest done\n#14 unpacking to docker.io/library/bench-setupx-huggingface-transformers:latest\n#14 unpacking to docker.io/library/bench-setupx-huggingface-transformers:latest 34.6s done\n#14 DONE 166.3s\n",
   "status": "timed_out",
   "py_test_files": 1091,
   "collect_rc": 0,
@@ -167952,9 +167952,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": true,
-  "image_size_mb": 2595.3,
+  "image_size_mb": 7662.5,
   "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-huggingface-transformers@sha256:e39772ef1e27bd6d02781694d3ed1cbb7097745d77e8a4c9e272db1ace01e05c",
+  "image_digest": "bench-setupx-huggingface-transformers@sha256:2660c2e4b0ebca53f59467a3bfc750e5aaf06fed0b0b05982f69cb53cd4cec2c",
   "installed_pkg_count": 143,
   "tokens_in": 804602,
   "tokens_out": 26830,
@@ -167962,8 +167962,8 @@
   "turns_used": 41,
   "cost_usd": null,
   "produce_s": 1841.91,
-  "build_s": 655.53,
-  "test_s": 1800.02,
+  "build_s": 713.82,
+  "test_s": 1800.13,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -167998,19 +167998,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=031cfc589b66af52d7c14a5d141deb0ca6a0e6f1 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=031cfc589b66af52d7c14a5d141deb0ca6a0e6f1 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

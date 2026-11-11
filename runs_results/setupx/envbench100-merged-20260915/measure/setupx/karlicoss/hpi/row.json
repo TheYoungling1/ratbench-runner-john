@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__envbench100-merged-20260915",
+  "agent": "setupx",
   "repo": "karlicoss/hpi",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ot 2029 Sep 26 06:41 shared_config.py\n#10 46.37 -rw-r--r-- 1 root root  389 Sep 26 06:41 smscalls.py\n#10 46.37 -rw-r--r-- 1 root root 2427 Sep 26 06:41 takeout.py\n#10 46.37 -rwxr-xr-x 1 root root 1979 Sep 26 06:41 test_import_warnings.sh\n#10 46.37 -rw-r--r-- 1 root root 1491 Sep 26 06:41 tweets.py\n#10 46.37 -rw-r--r-- 1 root root 2425 Sep 26 06:41 tz.py\n#10 46.37 -rw-r--r-- 1 root root 1427 Sep 26 06:41 youtube.py\n#10 46.37 CONFIG_DIRS\n#10 46.37 ls: cannot access '/root/.config': No such file or directory\n#10 46.37 ls: cannot access '/root/.config/my': No such file or directory\n#10 46.37 /tmp/HPI:\n#10 46.37 total 8\n#10 46.37 drwxr-xr-x 2 root root 4096 Sep 26 06:41 .\n#10 46.37 drwxrwxrwt 1 root root 4096 Sep 26 06:41 ..\n#10 46.37 \n#10 46.37 /tmp/hpi_temp_dir:\n#10 46.37 total 8\n#10 46.37 drwxr-xr-x 2 root root 4096 Sep 26 06:41 .\n#10 46.37 drwxrwxrwt 1 root root 4096 Sep 26 06:41 ..\n#10 DONE 46.9s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.5s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.5s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.1s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 17.0s done\n#14 exporting manifest sha256:026f7459cda1c55db225d762bce268b52f74bf6e59564c340f606bcd1e1207d5 done\n#14 exporting config sha256:ef39793a5301a35f14c16e4ec5f27aca9850a14a50c815ae5b8a484ceb2a463d done\n#14 exporting attestation manifest sha256:885df14f3a28b350d20a82b65d61cd26bb3baaae45d74a281339d72c9ec3b05c 0.0s done\n#14 exporting manifest list sha256:8cef37c8d8dce3b85db4adfff03f295146eece57def12a3b923c4b97b3c3c000 done\n#14 naming to docker.io/library/bench-setupx__envbench100-merged-20260915-karlicoss-hpi:latest done\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-karlicoss-hpi:latest\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-karlicoss-hpi:latest 3.6s done\n#14 DONE 20.7s\n",
+  "build_log_tail": "-r-- 1 root root 3063 Sep  8 19:02 pdfs.py\n-rw-r--r-- 1 root root  205 Sep  8 19:02 rtm.py\n-rw-r--r-- 1 root root   37 Sep  8 19:02 serialize.py\n-rw-r--r-- 1 root root  509 Sep  8 19:02 serialize_simplejson.py\n-rw-r--r-- 1 root root 2029 Sep  8 19:02 shared_config.py\n-rw-r--r-- 1 root root  389 Sep  8 19:02 smscalls.py\n-rw-r--r-- 1 root root 2427 Sep  8 19:02 takeout.py\n-rwxr-xr-x 1 root root 1979 Sep  8 19:02 test_import_warnings.sh\n-rw-r--r-- 1 root root 1491 Sep  8 19:02 tweets.py\n-rw-r--r-- 1 root root 2425 Sep  8 19:02 tz.py\n-rw-r--r-- 1 root root 1427 Sep  8 19:02 youtube.py\nCONFIG_DIRS\nls: cannot access '/root/.config': No such file or directory\nls: cannot access '/root/.config/my': No such file or directory\n/tmp/HPI:\ntotal 8\ndrwxr-xr-x 2 root root 4096 Sep  8 19:02 .\ndrwxrwxrwt 1 root root 4096 Sep  8 19:02 ..\n\n/tmp/hpi_temp_dir:\ntotal 8\ndrwxr-xr-x 2 root root 4096 Sep  8 19:02 .\ndrwxrwxrwt 1 root root 4096 Sep  8 19:02 ..\n ---> Removed intermediate container d7b864e5cfaa\n ---> b467baa26e07\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in 1ab70cf23979\n ---> Removed intermediate container 1ab70cf23979\n ---> 203b4f1379d4\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in 1d7b3516e057\n ---> Removed intermediate container 1d7b3516e057\n ---> f836e493c6c3\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in c952d299fc9d\n ---> Removed intermediate container c952d299fc9d\n ---> a91253f867e9\nStep 10/10 : WORKDIR /testbed\n ---> Running in cfec95785503\n ---> Removed intermediate container cfec95785503\n ---> ae0a7d6c3584\nSuccessfully built ae0a7d6c3584\nSuccessfully tagged bench-setupx-karlicoss-hpi:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 4,
   "collect_rc": 1,
@@ -410,9 +410,9 @@
   "ebsr": true,
   "pass_rate": 0.0653,
   "timed_out": false,
-  "image_size_mb": 549.2,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__envbench100-merged-20260915-karlicoss-hpi@sha256:8cef37c8d8dce3b85db4adfff03f295146eece57def12a3b923c4b97b3c3c000",
+  "image_size_mb": 547.9,
+  "image_delta_mb": 160.3,
+  "image_digest": "bench-setupx-karlicoss-hpi@sha256:ae0a7d6c3584d52591fb02fb49ab73b94b3225c1cfeb2b34499f88c850d7f65c",
   "installed_pkg_count": 42,
   "tokens_in": 836247,
   "tokens_out": 103019,
@@ -420,8 +420,8 @@
   "turns_used": 97,
   "cost_usd": null,
   "produce_s": 968.73,
-  "build_s": 71.78,
-  "test_s": 4.02,
+  "build_s": 78.39,
+  "test_s": 3.64,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -452,19 +452,7 @@
     "turns_used": 97,
     "produce_s": 968.73,
     "total_tokens": 939266,
-    "cost_usd": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=35dd5d82a0e399f684fb3d09763bab44146927fc (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=35dd5d82a0e399f684fb3d09763bab44146927fc (pinned)\n"
-      }
-    ]
+    "cost_usd": null
   },
   "error_surface": "",
   "error_surface_reason": "",

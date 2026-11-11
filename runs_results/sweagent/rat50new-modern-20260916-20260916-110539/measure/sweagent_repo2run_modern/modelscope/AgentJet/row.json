@@ -1,20 +1,16 @@
 {
-  "agent": "sweagent__rat50new-modern-20260916-20260916-110539",
+  "agent": "sweagent_repo2run_modern",
   "repo": "modelscope/AgentJet",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": ".1\n#16 13.80 [notice] To update, run: pip install --upgrade pip\n#16 DONE 14.3s\n\n#17 [14/17] RUN pip install pyyaml pylatexenc\n#17 0.689 Requirement already satisfied: pyyaml in /usr/local/lib/python3.10/site-packages (6.0.3)\n#17 0.756 Collecting pylatexenc\n#17 0.784   Downloading pylatexenc-2.11-py2.py3-none-any.whl (137 kB)\n#17 0.799      \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 137.5/137.5 kB 10.1 MB/s eta 0:00:00\n#17 2.133 Installing collected packages: pylatexenc\n#17 2.221 Successfully installed pylatexenc-2.11\n#17 2.222 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#17 2.225 \n#17 2.225 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#17 2.225 [notice] To update, run: pip install --upgrade pip\n#17 DONE 2.4s\n\n#18 [15/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#18 DONE 0.5s\n\n#19 [16/17] WORKDIR /testbed\n#19 DONE 0.7s\n\n#20 [17/17] RUN git config --global --add safe.directory /testbed\n#20 DONE 0.3s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 56.7s done\n#21 exporting manifest sha256:b4fdd8282e85838cfd4a9f95b0f2087dced0eb63ac96683b36f0edf4b38b32c3 0.0s done\n#21 exporting config sha256:dd3ba0106871b1ea98cdb53bdf2325e6a28d8865716eb2963042ca3808af4738 0.0s done\n#21 exporting attestation manifest sha256:f2a669a77aaa92485575fda5b38e5165cda3853140819097c74c847278aa0348 0.0s done\n#21 exporting manifest list sha256:1a81471ce3bed927d5a4baf1a61d02d010d34901cf1781c701428be57b63d7e3 done\n#21 naming to docker.io/library/bench-sweagent__rat50new-modern-20260916-20260916-110539-modelscope-agentjet:latest done\n#21 unpacking to docker.io/library/bench-sweagent__rat50new-modern-20260916-20260916-110539-modelscope-agentjet:latest\n#21 unpacking to docker.io/library/bench-sweagent__rat50new-modern-20260916-20260916-110539-modelscope-agentjet:latest 14.1s done\n#21 DONE 71.0s\n",
-  "status": "collect_error",
+  "build_log_tail": "warnings/venv\n#16 11.19 \n#16 11.19 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#16 11.19 [notice] To update, run: pip install --upgrade pip\n#16 DONE 11.7s\n\n#17 [14/17] RUN pip install pyyaml pylatexenc\n#17 0.463 Requirement already satisfied: pyyaml in /usr/local/lib/python3.10/site-packages (6.0.3)\n#17 0.510 Collecting pylatexenc\n#17 0.540   Downloading pylatexenc-2.11-py2.py3-none-any.whl (137 kB)\n#17 0.553      \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 137.5/137.5 kB 9.8 MB/s eta 0:00:00\n#17 1.580 Installing collected packages: pylatexenc\n#17 1.650 Successfully installed pylatexenc-2.11\n#17 1.651 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#17 1.653 \n#17 1.653 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#17 1.653 [notice] To update, run: pip install --upgrade pip\n#17 DONE 1.8s\n\n#18 [15/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#18 DONE 0.4s\n\n#19 [16/17] WORKDIR /testbed\n#19 DONE 0.0s\n\n#20 [17/17] RUN git config --global --add safe.directory /testbed\n#20 DONE 0.1s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 36.6s done\n#21 exporting manifest sha256:d18709807ed4b07ade3c19203eeac22fee61f9c86f11dc79866038f8ece45c6e done\n#21 exporting config sha256:46c825fd5e4b3b185e9f394e7b697b1902b0f78255844273b0fd1b79bc816a39 done\n#21 exporting attestation manifest sha256:30267bcc071d4490b0e437b18b0303994ac76d9314827bcf6ae1fec0cd02b410 done\n#21 exporting manifest list sha256:eb37e6380119d8de3b2f2bc283eb9b42d227bcca5389e642a9bc5c11ebd07e1b done\n#21 naming to docker.io/library/bench-sweagent_repo2run_modern-modelscope-agentjet:latest done\n#21 unpacking to docker.io/library/bench-sweagent_repo2run_modern-modelscope-agentjet:latest\n#21 unpacking to docker.io/library/bench-sweagent_repo2run_modern-modelscope-agentjet:latest 11.2s done\n#21 DONE 47.8s\n",
+  "status": "executed",
   "py_test_files": 12,
-  "collect_rc": 2,
-  "collect_clean": false,
-  "collect_errors": [
-    "E   ModuleNotFoundError: No module named 'transformers'",
-    "E   ModuleNotFoundError: No module named 'verl_reward_fn'",
-    "E   ImportError: cannot import name 'detect_user_opinion' from 'on_compute_relative_reward' (/testbed/tutorial/opencode_build_openclaw_interactive_train/on_compute_relative_reward.py)"
-  ],
-  "collect_error_count": 3,
+  "collect_rc": 0,
+  "collect_clean": true,
+  "collect_errors": [],
+  "collect_error_count": 0,
   "collected_node_ids": [
     "scripts/test_dashscope_api.py::test_dashscope_api",
     "tests/config_test.py::TestConfigUtils::test_config_alignment_trinity",
@@ -48,19 +44,13 @@
     "tests/test_dynamic_import.py::TestDynamicImport::test_successful_import4",
     "tests/test_dynamic_import.py::TestDynamicImport::test_successful_import5",
     "tests/test_tracing_reader.py::test_get_training_tasks_new_file",
-    "tests/test_tracing_reader.py::test_get_training_tasks_dedup_and_missing_hash_ignored",
-    "tutorial/opencode_build_openclaw_agent/test_reward.py::test_pointwise_composite",
-    "tutorial/opencode_build_openclaw_agent/test_reward.py::test_relevance_penalty",
-    "tutorial/opencode_build_openclaw_agent/test_reward.py::test_diversity_penalty",
-    "tutorial/opencode_build_openclaw_agent/test_reward.py::test_cross_request_diversity",
-    "tutorial/opencode_build_openclaw_agent/test_reward.py::test_repetition_penalty",
-    "tutorial/opencode_build_openclaw_agent/test_reward.py::test_listwise_composite"
+    "tests/test_tracing_reader.py::test_get_training_tasks_dedup_and_missing_hash_ignored"
   ],
   "executed": true,
-  "total": 42,
+  "total": 33,
   "passed": 24,
-  "failed": 15,
-  "errors": 3,
+  "failed": 9,
+  "errors": 0,
   "skipped": 0,
   "passed_node_ids": [
     "tests/test_agent_run_v3.py::TestAgentLoopSchemaInstanceSplit::test_api_receives_schema_list_not_instances",
@@ -97,34 +87,24 @@
     "tests/test_dynamic_import.py::TestDynamicImport::test_successful_import2",
     "tests/test_dynamic_import.py::TestDynamicImport::test_successful_import3",
     "tests/test_tracing_reader.py::test_get_training_tasks_new_file",
-    "tests/test_tracing_reader.py::test_get_training_tasks_dedup_and_missing_hash_ignored",
-    "tutorial/opencode_build_openclaw_agent/test_reward.py::test_pointwise_composite",
-    "tutorial/opencode_build_openclaw_agent/test_reward.py::test_relevance_penalty",
-    "tutorial/opencode_build_openclaw_agent/test_reward.py::test_diversity_penalty",
-    "tutorial/opencode_build_openclaw_agent/test_reward.py::test_cross_request_diversity",
-    "tutorial/opencode_build_openclaw_agent/test_reward.py::test_repetition_penalty",
-    "tutorial/opencode_build_openclaw_agent/test_reward.py::test_listwise_composite"
+    "tests/test_tracing_reader.py::test_get_training_tasks_dedup_and_missing_hash_ignored"
   ],
-  "error_node_ids": [
-    "docs.mini_test",
-    "tutorial.opencode_build_aime.test_verl_reward_fn",
-    "tutorial.opencode_build_openclaw_interactive_train.test_interactive"
-  ],
+  "error_node_ids": [],
   "ebsr": true,
-  "pass_rate": 0.5714,
+  "pass_rate": 0.7273,
   "timed_out": false,
-  "image_size_mb": 3895.0,
-  "image_delta_mb": 2384.3,
-  "image_digest": "bench-sweagent__rat50new-modern-20260916-20260916-110539-modelscope-agentjet@sha256:1a81471ce3bed927d5a4baf1a61d02d010d34901cf1781c701428be57b63d7e3",
-  "installed_pkg_count": 193,
+  "image_size_mb": 1089.4,
+  "image_delta_mb": 701.8,
+  "image_digest": "bench-sweagent_repo2run_modern-modelscope-agentjet@sha256:eb37e6380119d8de3b2f2bc283eb9b42d227bcca5389e642a9bc5c11ebd07e1b",
+  "installed_pkg_count": 191,
   "tokens_in": 1083406.0,
   "tokens_out": 208.0,
   "llm_calls": 53.0,
   "turns_used": 53,
   "cost_usd": 0.02916044200000001,
   "produce_s": 661.2,
-  "build_s": 161.18,
-  "test_s": 4.61,
+  "build_s": 124.5,
+  "test_s": 3.35,
   "meta": {
     "contract_version": 1,
     "producer": "sweagent_repo2run_modern",
@@ -158,19 +138,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=25118bbcb314e0da898bbc0043a1bf4ab74eade7 (pinned)\nremoved pytest.ini\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=25118bbcb314e0da898bbc0043a1bf4ab74eade7 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

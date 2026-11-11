@@ -1,16 +1,18 @@
 {
-  "agent": "graph2env__envbench_python100",
+  "agent": "g2e-envbench100",
   "repo": "fonttools/fontbakery",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "v >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#14 0.611 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (9.1.1)\n#14 0.618 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#14 0.619 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.11/site-packages (from pytest) (26.3)\n#14 0.620 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#14 0.620 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest) (2.21.0)\n#14 0.876 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#14 DONE 1.0s\n\n#15 [11/11] WORKDIR /testbed\n#15 DONE 0.0s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 25.7s done\n#16 exporting manifest sha256:ea4729945b93ae6fd39f39a53a92b5ef73a835ab427df42c444ce7bc226deb2d 0.0s done\n#16 exporting config sha256:4102c9002404a12d7bdb1df620876a708acb79796711432a0da0fab13048b6f0 done\n#16 exporting attestation manifest sha256:a05f2c7dfecd5166df8478cdc725cc62aedcf7fd7445dad013797d96c6c04646 0.0s done\n#16 exporting manifest list sha256:d65dd05cd970ec94d8564216dfd9672bd0a959cdffea3baecc637578c6a4509e done\n#16 naming to docker.io/library/bench-graph2env__envbench_python100-fonttools-fontbakery:latest done\n#16 unpacking to docker.io/library/bench-graph2env__envbench_python100-fonttools-fontbakery:latest\n#16 unpacking to docker.io/library/bench-graph2env__envbench_python100-fonttools-fontbakery:latest 6.9s done\n#16 DONE 32.6s\n",
-  "status": "executed",
+  "build_log_tail": " pip install pytest;       else         command -v uv >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#14 0.602 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (9.1.1)\n#14 0.608 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#14 0.609 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.11/site-packages (from pytest) (26.3)\n#14 0.610 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#14 0.610 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest) (2.21.0)\n#14 0.868 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#14 DONE 1.0s\n\n#15 [11/11] WORKDIR /testbed\n#15 DONE 0.0s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 22.4s done\n#16 exporting manifest sha256:04a3c49ab63b85e4d92d098c18e205386677e558fbc4c043c0b2cbf1896cf359 done\n#16 exporting config sha256:1167184b12a319e643536b6fe3a2c15c58d4b940c4fa00e872481563f40143fa done\n#16 exporting attestation manifest sha256:fec76cfc1841661baf1e121fb816041c8f6e3c3f759de91ab8d341b624812542 done\n#16 exporting manifest list sha256:2c2d0a10556fb2e81da99cb45f7a0d897887c92d45b2d617a115c36878544ea7 done\n#16 naming to docker.io/library/bench-g2e-envbench100-fonttools-fontbakery:latest done\n#16 unpacking to docker.io/library/bench-g2e-envbench100-fonttools-fontbakery:latest\n#16 unpacking to docker.io/library/bench-g2e-envbench100-fonttools-fontbakery:latest 6.1s done\n#16 DONE 28.6s\n",
+  "status": "collect_error",
   "py_test_files": 34,
-  "collect_rc": 0,
-  "collect_clean": true,
-  "collect_errors": [],
-  "collect_error_count": 0,
+  "collect_rc": 2,
+  "collect_clean": false,
+  "collect_errors": [
+    "E   ModuleNotFoundError: No module named 'fontbakery-nametable-from-filename'\u001b[0m"
+  ],
+  "collect_error_count": 1,
   "collected_node_ids": [],
   "executed": true,
   "total": 918,
@@ -940,9 +942,9 @@
   "ebsr": true,
   "pass_rate": 0.9956,
   "timed_out": false,
-  "image_size_mb": 413.0,
+  "image_size_mb": 1421.6,
   "image_delta_mb": null,
-  "image_digest": "bench-graph2env__envbench_python100-fonttools-fontbakery@sha256:d65dd05cd970ec94d8564216dfd9672bd0a959cdffea3baecc637578c6a4509e",
+  "image_digest": "bench-g2e-envbench100-fonttools-fontbakery@sha256:2c2d0a10556fb2e81da99cb45f7a0d897887c92d45b2d617a115c36878544ea7",
   "installed_pkg_count": 114,
   "tokens_in": 714088,
   "tokens_out": 26020,
@@ -950,8 +952,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 86.69,
-  "test_s": 33.18,
+  "build_s": 87.4,
+  "test_s": 90.97,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -967,19 +969,7 @@
       ],
       "services": [],
       "services_rc": null
-    },
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=a5177215f7c8e168416771637af17ae8935f273f (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=a5177215f7c8e168416771637af17ae8935f273f (pinned)\n"
-      }
-    ]
+    }
   },
   "error_surface": "",
   "error_surface_reason": "",

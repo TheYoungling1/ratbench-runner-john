@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50-20260915-043144",
+  "agent": "pipreqs",
   "repo": "django-oauth/django-oauth-toolkit",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "7c6dad281b8a537ca2e8d6117f70219e03cfca4\n#11 3.348   Stored in directory: /root/.cache/pip/wheels/31/8e/6f/7d72939f5b7243335bdd13ba421923eb9456590ad69a2918ae\n#11 3.350 Successfully built environ\n#11 3.474 Installing collected packages: pytz, environ, urllib3, sqlparse, pymysql, pycparser, oauthlib, mock, idna, docutils, charset_normalizer, certifi, asgiref, Requests, Django, cffi, pytest_django, cryptography, jwcrypto\n#11 5.899 Successfully installed Django-5.2.17 Requests-2.34.2 asgiref-3.12.1 certifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.1 cryptography-50.0.1 docutils-0.23 environ-1.0 idna-3.20 jwcrypto-1.6.1 mock-5.2.0 oauthlib-3.3.1 pycparser-3.0 pymysql-1.2.3 pytest_django-4.14.0 pytz-2026.4 sqlparse-0.6.0 urllib3-2.8.0\n#11 5.900 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 5.905 \n#11 5.905 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 5.905 [notice] To update, run: pip install --upgrade pip\n#11 DONE 6.4s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 3.6s done\n#12 exporting manifest sha256:747bb66c0c5bfd155b0dae7c9e65fa784373a732da6e18a540f796f06cc3f608 done\n#12 exporting config sha256:7a173c4829638a47837ddb5ac6a9331c7a3b98985486b51ccdba06a693fafdd7 0.0s done\n#12 exporting attestation manifest sha256:dc43cdd25026577da2a2e3d64e083c2e5d0480f9f7989f18f19476a19230d722 0.0s done\n#12 exporting manifest list sha256:7093479d41ed0fa368634b4dc97cbee2b334309a39a9667b3003ae2628bfd00a 0.0s done\n#12 naming to docker.io/library/bench-pipreqs__rat50-20260915-043144-django-oauth-django-oauth-toolkit:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-django-oauth-django-oauth-toolkit:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-django-oauth-django-oauth-toolkit:latest 2.5s done\n#12 DONE 6.2s\n",
+  "build_log_tail": "iron-1.0-py3-none-any.whl size=3241 sha256=aa2e0b23bda79156e52c284fdb6d7ed8b09c1649aa7e4ce5bcb9b11745bc8a4c\n#11 2.684   Stored in directory: /root/.cache/pip/wheels/31/8e/6f/7d72939f5b7243335bdd13ba421923eb9456590ad69a2918ae\n#11 2.685 Successfully built environ\n#11 2.801 Installing collected packages: pytz, environ, urllib3, sqlparse, pymysql, pycparser, oauthlib, mock, idna, docutils, charset_normalizer, certifi, asgiref, Requests, Django, cffi, pytest_django, cryptography, jwcrypto\n#11 4.906 Successfully installed Django-5.2.17 Requests-2.34.2 asgiref-3.12.1 certifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.1 cryptography-50.0.1 docutils-0.23 environ-1.0 idna-3.19 jwcrypto-1.6.0 mock-5.2.0 oauthlib-3.3.1 pycparser-3.0 pymysql-1.2.0 pytest_django-4.14.0 pytz-2026.3.post1 sqlparse-0.6.0 urllib3-2.7.0\n#11 4.906 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 4.912 \n#11 4.912 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 4.912 [notice] To update, run: pip install --upgrade pip\n#11 DONE 5.3s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 3.9s done\n#12 exporting manifest sha256:b9f638a6199dc85a607f22d82729fd938b7d9cb37c41f1b27812270f385af2b1 done\n#12 exporting config sha256:fd516140ac2bdd94b71202194325ea298ce7584425a6c686f5ead5bf56658e7e done\n#12 exporting attestation manifest sha256:2ee7423affd685cac5cf40314dbb1786c9f7a406562d04d1a090df780fc5411b 0.0s done\n#12 exporting manifest list sha256:326e3fe59d282b9eacdebe3108581cc10bbb4d9afd283c4ceb4ad0ac6cef11f7 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-django-oauth-django-oauth-toolkit:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-django-oauth-django-oauth-toolkit:latest\n#12 unpacking to docker.io/library/bench-pipreqs-django-oauth-django-oauth-toolkit:latest 2.1s done\n#12 DONE 6.2s\n",
   "status": "collect_error",
   "py_test_files": 33,
   "collect_rc": 4,
@@ -24,9 +24,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 433.8,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50-20260915-043144-django-oauth-django-oauth-toolkit@sha256:7093479d41ed0fa368634b4dc97cbee2b334309a39a9667b3003ae2628bfd00a",
+  "image_size_mb": 433.7,
+  "image_delta_mb": 46.1,
+  "image_digest": "bench-pipreqs-django-oauth-django-oauth-toolkit@sha256:326e3fe59d282b9eacdebe3108581cc10bbb4d9afd283c4ceb4ad0ac6cef11f7",
   "installed_pkg_count": 33,
   "tokens_in": null,
   "tokens_out": null,
@@ -34,8 +34,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 8.76,
-  "build_s": 16.03,
-  "test_s": 0.45,
+  "build_s": 14.01,
+  "test_s": 0.55,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -62,19 +62,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=74b10062939ba9edc8f6414c887fff7630372d26 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=74b10062939ba9edc8f6414c887fff7630372d26 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

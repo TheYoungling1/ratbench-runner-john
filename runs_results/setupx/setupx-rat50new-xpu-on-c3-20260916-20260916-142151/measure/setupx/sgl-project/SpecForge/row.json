@@ -1,19 +1,16 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "sgl-project/SpecForge",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "antization/awq/awq.py:52\n#10 388.4   /usr/local/lib/python3.10/site-packages/sglang/srt/layers/quantization/awq/awq.py:52: UserWarning: Only CUDA, HIP and XPU support AWQ currently.\n#10 388.4     warnings.warn(f\"Only CUDA, HIP and XPU support AWQ currently.\")\n#10 388.4 \n#10 388.4 ../../usr/local/lib/python3.10/site-packages/sglang/srt/layers/quantization/gguf.py:69\n#10 388.4   /usr/local/lib/python3.10/site-packages/sglang/srt/layers/quantization/gguf.py:69: UserWarning: Only CUDA, MUSA and NPU support GGUF quantization currently.\n#10 388.4     warnings.warn(f\"Only CUDA, MUSA and NPU support GGUF quantization currently.\")\n#10 388.4 \n#10 388.4 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n#10 388.4 1257 tests collected in 10.32s\n#10 388.4 EXIT CODE: 0\n#10 DONE 389.3s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 6.0s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 622.3s done\n#14 exporting manifest sha256:51defe191eff4ac9b1a906f535a2253c0d827a8e9743ff585827b4506ceb31f5 0.0s done\n#14 exporting config sha256:38a2a3f13cd4535d0b3961ed00fd8372853a5974817dccc105b6bad9e17bfa8c 0.0s done\n#14 exporting attestation manifest sha256:1434983919a34a6a419d6933167501f183b44a21c8de3c040227fef79f9b235b 0.0s done\n#14 exporting manifest list sha256:cc7c4815d5fea26d9e5f23fd85e9f083920eaeaad29126b0efef63bd96ccbd1f done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-sgl-project-specforge:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-sgl-project-specforge:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-sgl-project-specforge:latest 135.3s done\n#14 DONE 758.2s\n",
-  "status": "collect_error",
+  "build_log_tail": "se switch to `torch.compile` or `torch.export`.\n#10 298.4     warnings.warn(\n#10 298.4 \n#10 298.4 ../../usr/local/lib/python3.10/site-packages/sglang/srt/layers/quantization/awq/awq.py:52\n#10 298.4   /usr/local/lib/python3.10/site-packages/sglang/srt/layers/quantization/awq/awq.py:52: UserWarning: Only CUDA, HIP and XPU support AWQ currently.\n#10 298.4     warnings.warn(f\"Only CUDA, HIP and XPU support AWQ currently.\")\n#10 298.4 \n#10 298.4 ../../usr/local/lib/python3.10/site-packages/sglang/srt/layers/quantization/gguf.py:69\n#10 298.4   /usr/local/lib/python3.10/site-packages/sglang/srt/layers/quantization/gguf.py:69: UserWarning: Only CUDA, MUSA and NPU support GGUF quantization currently.\n#10 298.4     warnings.warn(f\"Only CUDA, MUSA and NPU support GGUF quantization currently.\")\n#10 298.4 \n#10 298.4 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n#10 298.4 1257 tests collected in 9.49s\n#10 298.4 EXIT CODE: 0\n#10 DONE 298.6s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 3.0s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 616.9s done\n#14 exporting manifest sha256:ffc6b36385e7105ab998bf60090d16439248abae41a99dd7f0f02427d7c4b839 0.0s done\n#14 exporting config sha256:9e1a6fdbd7d6059701d6a0786354905bb8d948261e3e6ce1371f8d24b59ad409 done\n#14 exporting attestation manifest sha256:804a8bf73b4f6258a1ccc95ca73e38c029e1bccebc12881911fece75e035e3f7 0.0s done\n#14 exporting manifest list sha256:f854e8e0b7b71e324c3944d5cc168d6221a1b3b67a98abafe10c1e02ed853694 done\n#14 naming to docker.io/library/bench-setupx-sgl-project-specforge:latest done\n#14 unpacking to docker.io/library/bench-setupx-sgl-project-specforge:latest\n#14 unpacking to docker.io/library/bench-setupx-sgl-project-specforge:latest 74.1s done\n#14 DONE 691.2s\n",
+  "status": "executed",
   "py_test_files": 143,
-  "collect_rc": 2,
-  "collect_clean": false,
-  "collect_errors": [
-    "E   RuntimeError: Found no NVIDIA driver on your system. Please check that you have an NVIDIA GPU and installed a driver from http://www.nvidia.com/Download/index.aspx",
-    "ERROR tests/test_layers/test_decoder.py - RuntimeError: Found no NVIDIA drive..."
-  ],
-  "collect_error_count": 1,
+  "collect_rc": 0,
+  "collect_clean": true,
+  "collect_errors": [],
+  "collect_error_count": 0,
   "collected_node_ids": [
     "tests/test_algorithms/test_builtin_parity.py::BuiltinProviderParityTest::test_builtin_contract_matrix_preserves_pr678_capabilities",
     "tests/test_algorithms/test_builtin_parity.py::BuiltinProviderParityTest::test_dflash_collator_preserves_optional_teacher_hidden_states",
@@ -193,6 +190,7 @@
     "tests/test_data/test_template_registry.py::TemplateRegistryTest::test_deepseek_v2_uses_its_plain_text_tokenizer_headers",
     "tests/test_data/test_template_registry.py::TemplateRegistryTest::test_kimi_k3_template_matches_target_xtml_contract",
     "tests/test_data/test_template_registry.py::TemplateRegistryTest::test_qwen2_vl_is_not_a_builtin_template",
+    "tests/test_layers/test_decoder.py::TestDecoderParity::test_two_gpu_usp_decoder_matches_flash_attention",
     "tests/test_layers/test_embedding.py::TestEmbedding::test_embedding",
     "tests/test_layers/test_linear.py::TestLinear::test_column_parallel_linear",
     "tests/test_layers/test_lm_head.py::TestLMHead::test_lm_head",
@@ -1274,10 +1272,10 @@
   ],
   "executed": true,
   "total": 2129,
-  "passed": 1195,
-  "failed": 26,
-  "errors": 1,
-  "skipped": 52,
+  "passed": 1196,
+  "failed": 25,
+  "errors": 0,
+  "skipped": 53,
   "passed_node_ids": [
     "tests/test_algorithms/test_builtin_parity.py::BuiltinProviderParityTest::test_builtin_contract_matrix_preserves_pr678_capabilities",
     "tests/test_algorithms/test_builtin_parity.py::BuiltinProviderParityTest::test_dflash_collator_preserves_optional_teacher_hidden_states",
@@ -1705,6 +1703,7 @@
     "tests/test_runtime/test_domain_trainer.py::DomainTrainerWiringTest::test_fit_owns_terminal_failure_and_cleanup",
     "tests/test_runtime/test_domain_trainer.py::DomainTrainerWiringTest::test_fit_owns_terminal_success_and_cleanup_after_checkpoint",
     "tests/test_runtime/test_domain_trainer.py::DomainTrainerWiringTest::test_fixed_refs_reject_partial_accumulation_during_assembly",
+    "tests/test_runtime/test_domain_trainer.py::DomainTrainerWiringTest::test_loader_cleanup_failure_does_not_mask_primary_fit_error",
     "tests/test_runtime/test_domain_trainer.py::DomainTrainerWiringTest::test_loader_close_failure_signals_failure_before_final_cleanup",
     "tests/test_runtime/test_domain_trainer.py::DomainTrainerWiringTest::test_offline_loader_rebuilds_the_ref_plan_on_set_epoch",
     "tests/test_runtime/test_domain_trainer.py::DomainTrainerWiringTest::test_offline_wiring_matches_assemble_trainer",
@@ -2481,7 +2480,6 @@
     "tests/test_layers/test_lm_head.py::TestLMHead::test_lm_head",
     "tests/test_offline_capture/test_sglang_backend.py::TestOfflineSGLangCapture::test_sglang_backend_with_dense",
     "tests/test_offline_capture/test_sglang_backend.py::TestOfflineSGLangCapture::test_sglang_backend_with_moe",
-    "tests/test_runtime/test_domain_trainer.py::DomainTrainerWiringTest::test_loader_cleanup_failure_does_not_mask_primary_fit_error",
     "tests/test_scripts/test_regenerate_train_data.py::TestRegenerateTrainData::test_regenerate_sharegpt",
     "tests/test_utils/test_flex_attention.py::TestFlexAttention::test_backward_pass_gradient_comparison",
     "tests/test_utils/test_flex_attention.py::TestFlexAttention::test_forward_pass_comparison",
@@ -2489,24 +2487,22 @@
     "tests/test_utils/test_loss.py::TestLogSoftmaxLoss::test_loss",
     "tests/test_utils/test_loss.py::TestLogSoftmaxLoss::test_ttt_loss_accumulation"
   ],
-  "error_node_ids": [
-    "tests.test_layers.test_decoder"
-  ],
+  "error_node_ids": [],
   "ebsr": true,
-  "pass_rate": 0.5753,
+  "pass_rate": 0.5761,
   "timed_out": false,
-  "image_size_mb": 22709.8,
+  "image_size_mb": 22685.3,
   "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-sgl-project-specforge@sha256:cc7c4815d5fea26d9e5f23fd85e9f083920eaeaad29126b0efef63bd96ccbd1f",
-  "installed_pkg_count": 235,
+  "image_digest": "bench-setupx-sgl-project-specforge@sha256:f854e8e0b7b71e324c3944d5cc168d6221a1b3b67a98abafe10c1e02ed853694",
+  "installed_pkg_count": 233,
   "tokens_in": 912300,
   "tokens_out": 51480,
   "llm_calls": 101,
   "turns_used": 44,
   "cost_usd": null,
   "produce_s": 3068.54,
-  "build_s": 1158.62,
-  "test_s": 352.51,
+  "build_s": 997.35,
+  "test_s": 371.92,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -2541,19 +2537,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=ed64d275bac8a48e126adb2827368603566a3029 (pinned)\nremoved conftest.py\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=ed64d275bac8a48e126adb2827368603566a3029 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "stan-dev/cmdstanpy",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "help, sphinxcontrib-devhelp, sphinxcontrib-applehelp, snowballstemmer, six, numpy, MarkupSafe, imagesize, idna, docutils, charset_normalizer, certifi, babel, alabaster, Requests, python-dateutil, Jinja2, Sphinx, pandas, xarray\n#11 10.78 Successfully installed Jinja2-3.1.6 MarkupSafe-3.0.3 Requests-2.34.2 Sphinx-8.1.3 alabaster-1.0.0 babel-2.18.0 certifi-2026.7.22 charset_normalizer-3.5.1 docutils-0.21.2 idna-3.20 imagesize-2.0.1 numpy-2.2.6 pandas-2.3.3 python-dateutil-2.9.0.post0 pytz-2026.4 six-1.17.0 snowballstemmer-3.1.1 sphinxcontrib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 tqdm-4.70.1 tzdata-2026.4 urllib3-2.8.0 xarray-2025.6.1\n#11 10.78 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 10.79 \n#11 10.79 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 10.79 [notice] To update, run: pip install --upgrade pip\n#11 DONE 11.4s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 13.9s done\n#12 exporting manifest sha256:ca25f5b8edf78018873b4fe011e4d7075ed72dc7b55693281b7f676a94615699 0.0s done\n#12 exporting config sha256:02084548baf8bebbc8f53d88cfdac6def31de120ff1793aab23d080ec29901fa 0.0s done\n#12 exporting attestation manifest sha256:63c009403c55f882a2ffa3d3146b1e7859e9e9fc73ba86a26db9994ca40ecdfa 0.0s done\n#12 exporting manifest list sha256:17fb31ed3e4bd52b782d5a04c46a05041e5f79a181904697c1bef81963c1f47e done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-stan-dev-cmdstanpy:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-stan-dev-cmdstanpy:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-stan-dev-cmdstanpy:latest 3.2s done\n#12 DONE 17.2s\n",
+  "build_log_tail": "arset_normalizer, certifi, babel, alabaster, Requests, python-dateutil, Jinja2, Sphinx, pandas, xarray\n#11 10.18 Successfully installed Jinja2-3.1.6 MarkupSafe-3.0.3 Requests-2.34.2 Sphinx-8.1.3 alabaster-1.0.0 babel-2.18.0 certifi-2026.7.22 charset_normalizer-3.5.1 docutils-0.21.2 idna-3.19 imagesize-2.0.1 numpy-2.2.6 pandas-2.3.3 python-dateutil-2.9.0.post0 pytz-2026.3.post1 six-1.17.0 snowballstemmer-3.1.1 sphinxcontrib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 tqdm-4.70.1 tzdata-2026.4 urllib3-2.7.0 xarray-2025.6.1\n#11 10.18 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 10.19 \n#11 10.19 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 10.19 [notice] To update, run: pip install --upgrade pip\n#11 DONE 10.6s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 13.6s done\n#12 exporting manifest sha256:9d3fd844e005e4a94a2e2f5d26e1178ed8a446175855f11b4a1e99be7bd411b0\n#12 exporting manifest sha256:9d3fd844e005e4a94a2e2f5d26e1178ed8a446175855f11b4a1e99be7bd411b0 0.0s done\n#12 exporting config sha256:a1583459a4f7548ab04cc8a7f3fa824b012fc4c919936c5cef66bec268edef1b 0.0s done\n#12 exporting attestation manifest sha256:b6ed332a79d0e7677d5ee98a363d37453419e7cd56bfa5f322389f54eda4d7a6 0.1s done\n#12 exporting manifest list sha256:e2e36f81b06304d78e1063710b09c1b2b19f0bd3e7dac1a95fba357f685e2dd9\n#12 exporting manifest list sha256:e2e36f81b06304d78e1063710b09c1b2b19f0bd3e7dac1a95fba357f685e2dd9 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-stan-dev-cmdstanpy:latest 0.0s done\n#12 unpacking to docker.io/library/bench-pipreqs-stan-dev-cmdstanpy:latest\n#12 unpacking to docker.io/library/bench-pipreqs-stan-dev-cmdstanpy:latest 5.2s done\n#12 DONE 19.0s\n",
   "status": "collect_error",
   "py_test_files": 17,
   "collect_rc": 2,
@@ -58,9 +58,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 551.4,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-stan-dev-cmdstanpy@sha256:17fb31ed3e4bd52b782d5a04c46a05041e5f79a181904697c1bef81963c1f47e",
+  "image_size_mb": 550.6,
+  "image_delta_mb": 163.0,
+  "image_digest": "bench-pipreqs-stan-dev-cmdstanpy@sha256:e2e36f81b06304d78e1063710b09c1b2b19f0bd3e7dac1a95fba357f685e2dd9",
   "installed_pkg_count": 41,
   "tokens_in": null,
   "tokens_out": null,
@@ -68,8 +68,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 6.96,
-  "build_s": 33.49,
-  "test_s": 0.94,
+  "build_s": 33.95,
+  "test_s": 1.12,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -96,19 +96,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=aa7555b7f90408cec429ed1370f4abd488532feb (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=aa7555b7f90408cec429ed1370f4abd488532feb (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

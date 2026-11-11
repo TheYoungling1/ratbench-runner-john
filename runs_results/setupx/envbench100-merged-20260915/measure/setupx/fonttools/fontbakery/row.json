@@ -1,16 +1,18 @@
 {
-  "agent": "setupx__envbench100-merged-20260915",
+  "agent": "setupx",
   "repo": "fonttools/fontbakery",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "est_pretty_print_list_shorten[values35-1-item 1 and 12 more.\\n\\nUse -F or --full-lists to disable shortening of long lists.]>\n#10 29.02       <Function test_pretty_print_list_shorten[values36-6-item 1, item 2, item 3, item 4, item 5, item 6 and 7 more.\\n\\nUse -F or --full-lists to disable shortening of long lists.]>\n#10 29.02       <Function test_bullet_list[values0-\\t- item 1]>\n#10 29.02       <Function test_bullet_list[values1-\\t- item 1\\n\\n\\t- item 2]>\n#10 29.02       <Function test_bullet_list[values2-\\t- item 1\\n\\n\\t- item 2\\n\\n\\t- item 3]>\n#10 29.02       <Function test_bullet_list[values3-\\t- item 1\\n\\n\\t- item 2\\n\\n\\t- item 3\\n\\n\\t- item 4]>\n#10 29.02       <Function test_iterate_lookup_list_with_extensions_doesnt_change_font>\n#10 29.02 \n#10 29.02 \u001b[32m========================= \u001b[32m918 tests collected\u001b[0m\u001b[32m in 0.55s\u001b[0m\u001b[32m =========================\u001b[0m\n#10 DONE 29.5s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.7s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 13.4s done\n#14 exporting manifest sha256:086bce04fbdc2744a147f588a423aa0c243f69853b69a88a4acd96066a6ac55d done\n#14 exporting config sha256:111ffd9fc190f20c996f9269437d9916c8ca4057a77882a1d8a4ebac205a2c47 done\n#14 exporting attestation manifest sha256:7ebd2e3558f034fa445557f1cd1bd6e0b1683f3b876571218c432cd9448c9dbb done\n#14 exporting manifest list sha256:4db4cd587eb0d3ee945cf58dbc49bbb5a16262cc1df09a5442264bcbaa99cdb3 done\n#14 naming to docker.io/library/bench-setupx__envbench100-merged-20260915-fonttools-fontbakery:latest done\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-fonttools-fontbakery:latest\n#14 unpacking to docker.io/library/bench-setupx__envbench100-merged-20260915-fonttools-fontbakery:latest 5.5s done\n#14 DONE 19.0s\n",
-  "status": "executed",
+  "build_log_tail": "alues34-0-item 1, item 2, item 3, item 4, item 5, item 6, item 7, item 8, item 9, item 10, item 11, item 12 and item 13]>\n      <Function test_pretty_print_list_shorten[values35-1-item 1 and 12 more.\\n\\nUse -F or --full-lists to disable shortening of long lists.]>\n      <Function test_pretty_print_list_shorten[values36-6-item 1, item 2, item 3, item 4, item 5, item 6 and 7 more.\\n\\nUse -F or --full-lists to disable shortening of long lists.]>\n      <Function test_bullet_list[values0-\\t- item 1]>\n      <Function test_bullet_list[values1-\\t- item 1\\n\\n\\t- item 2]>\n      <Function test_bullet_list[values2-\\t- item 1\\n\\n\\t- item 2\\n\\n\\t- item 3]>\n      <Function test_bullet_list[values3-\\t- item 1\\n\\n\\t- item 2\\n\\n\\t- item 3\\n\\n\\t- item 4]>\n      <Function test_iterate_lookup_list_with_extensions_doesnt_change_font>\n\n\u001b[32m========================= \u001b[32m918 tests collected\u001b[0m\u001b[32m in 0.51s\u001b[0m\u001b[32m =========================\u001b[0m\n ---> Removed intermediate container f58fc56589df\n ---> 645248f8a5c2\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in e9561d72d37a\n ---> Removed intermediate container e9561d72d37a\n ---> 967ebfc8735d\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in 18bfddeb2948\n ---> Removed intermediate container 18bfddeb2948\n ---> 6b67c46afa14\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in 41ff4ef09f10\n ---> Removed intermediate container 41ff4ef09f10\n ---> 2d1f6b8a95cf\nStep 10/10 : WORKDIR /testbed\n ---> Running in 0a25cc466715\n ---> Removed intermediate container 0a25cc466715\n ---> b341075f16f5\nSuccessfully built b341075f16f5\nSuccessfully tagged bench-setupx-fonttools-fontbakery:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
+  "status": "collect_error",
   "py_test_files": 34,
-  "collect_rc": 0,
-  "collect_clean": true,
-  "collect_errors": [],
-  "collect_error_count": 0,
+  "collect_rc": 2,
+  "collect_clean": false,
+  "collect_errors": [
+    "E   ModuleNotFoundError: No module named 'fontbakery-nametable-from-filename'\u001b[0m"
+  ],
+  "collect_error_count": 1,
   "collected_node_ids": [],
   "executed": true,
   "total": 918,
@@ -940,9 +942,9 @@
   "ebsr": true,
   "pass_rate": 0.9956,
   "timed_out": false,
-  "image_size_mb": 2547.6,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__envbench100-merged-20260915-fonttools-fontbakery@sha256:4db4cd587eb0d3ee945cf58dbc49bbb5a16262cc1df09a5442264bcbaa99cdb3",
+  "image_size_mb": 768.8,
+  "image_delta_mb": 381.2,
+  "image_digest": "bench-setupx-fonttools-fontbakery@sha256:b341075f16f5618705d74b97f6d747104a58af04c4c4b3bc17774fcdf06ea9a2",
   "installed_pkg_count": 113,
   "tokens_in": 2458880,
   "tokens_out": 90992,
@@ -950,8 +952,8 @@
   "turns_used": 16,
   "cost_usd": null,
   "produce_s": 938.92,
-  "build_s": 56.9,
-  "test_s": 41.17,
+  "build_s": 70.72,
+  "test_s": 38.98,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -982,19 +984,7 @@
     "turns_used": 16,
     "produce_s": 938.92,
     "total_tokens": 2549872,
-    "cost_usd": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=a5177215f7c8e168416771637af17ae8935f273f (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=a5177215f7c8e168416771637af17ae8935f273f (pinned)\n"
-      }
-    ]
+    "cost_usd": null
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,15 +1,17 @@
 {
-  "agent": "rat__rat50new-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "chopratejas/headroom",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "on3.10/site-packages (from -r /tmp/rat-pip-freeze.txt (line 17)) (0.4.4)\n#21 1.860 Requirement already satisfied: wheel==0.46.3 in /usr/local/lib/python3.10/site-packages (from -r /tmp/rat-pip-freeze.txt (line 18)) (0.46.3)\n#21 1.866 Installing collected packages: openai, idna\n#21 1.866   Attempting uninstall: openai\n#21 1.867     Found existing installation: openai 3.17.0\n#21 2.464     Uninstalling openai-3.17.0:\n#21 4.099       Successfully uninstalled openai-3.17.0\n#21 5.332   Attempting uninstall: idna\n#21 5.333     Found existing installation: idna 3.20\n#21 5.338     Uninstalling idna-3.20:\n#21 5.365       Successfully uninstalled idna-3.20\n#21 5.410 Successfully installed idna-3.19 openai-3.14.1\n#21 5.410 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#21 6.037 \n#21 6.037 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#21 6.037 [notice] To update, run: pip install --upgrade pip\n#21 DONE 7.0s\n\n#22 [18/19] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#22 DONE 0.8s\n\n#23 [19/19] WORKDIR /testbed\n#23 DONE 0.1s\n\n#24 exporting to image\n#24 exporting layers\n#24 exporting layers 20.4s done\n#24 exporting manifest sha256:c0f4d9c6faf23afb5a6ca9e3ad9113b86e39f8b46fa10f75f677a085ec5b15c8 done\n#24 exporting config sha256:a536e428af0d51c0dc15103cbe1c42a53d3ef1836a0cb66c15ed79df35dbf39a done\n#24 exporting attestation manifest sha256:d170e6fafbbfa05bac90900c1508ffbe75be381f2a99ca199a84c66bdfb9eaf8 done\n#24 exporting manifest list sha256:591814440b3f3b2632978bee29810badd69b31de5a816bf77bf05a961f8cca93 done\n#24 naming to docker.io/library/bench-rat__rat50new-pjy-chopratejas-headroom:latest done\n#24 unpacking to docker.io/library/bench-rat__rat50new-pjy-chopratejas-headroom:latest\n#24 unpacking to docker.io/library/bench-rat__rat50new-pjy-chopratejas-headroom:latest 10.1s done\n#24 DONE 30.6s\n",
+  "build_log_tail": "s (from -r /tmp/rat-pip-freeze.txt (line 17)) (0.4.4)\n#21 8.696 Requirement already satisfied: wheel==0.46.3 in /usr/local/lib/python3.10/site-packages (from -r /tmp/rat-pip-freeze.txt (line 18)) (0.46.3)\n#21 8.702 Installing collected packages: openai, idna\n#21 8.703   Attempting uninstall: openai\n#21 8.704     Found existing installation: openai 3.17.0\n#21 9.415     Uninstalling openai-3.17.0:\n#21 11.63       Successfully uninstalled openai-3.17.0\n#21 13.08   Attempting uninstall: idna\n#21 13.08     Found existing installation: idna 3.20\n#21 13.10     Uninstalling idna-3.20:\n#21 13.13       Successfully uninstalled idna-3.20\n#21 13.18 Successfully installed idna-3.19 openai-3.14.1\n#21 13.18 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#21 14.06 \n#21 14.06 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#21 14.06 [notice] To update, run: pip install --upgrade pip\n#21 DONE 14.3s\n\n#22 [18/19] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#22 DONE 1.7s\n\n#23 [19/19] WORKDIR /testbed\n#23 DONE 0.1s\n\n#24 exporting to image\n#24 exporting layers\n#24 exporting layers 28.2s done\n#24 exporting manifest sha256:09165bcddcfe089e8ee376fbd20272471a400ef48a4641591b26b2988b75257a 0.0s done\n#24 exporting config sha256:bb8e2902f1503ca76223edd69292ba26369ce5aa6e92b5d1081aca71de9488be 0.0s done\n#24 exporting attestation manifest sha256:8fdea8c1949fdb44bc786913f10778cc110dbaf2c1d9d8fa0f62a9baf8db38c2 0.0s done\n#24 exporting manifest list sha256:c9251e29887afb0e71916b6007d2cc86d849d44cda963f64ca23244416d0baa1 done\n#24 naming to docker.io/library/bench-pjy-rat-dockerfile-chopratejas-headroom:latest done\n#24 unpacking to docker.io/library/bench-pjy-rat-dockerfile-chopratejas-headroom:latest\n#24 unpacking to docker.io/library/bench-pjy-rat-dockerfile-chopratejas-headroom:latest 11.8s done\n#24 DONE 40.2s\n",
   "status": "collect_error",
   "py_test_files": 849,
   "collect_rc": 2,
   "collect_clean": false,
   "collect_errors": [
+    "E   ModuleNotFoundError: No module named 'opentelemetry'",
+    "E   ModuleNotFoundError: No module named 'headroom_oauth2'",
     "E   ModuleNotFoundError: No module named 'click'",
     "E   ModuleNotFoundError: No module named 'click'",
     "E   ModuleNotFoundError: No module named 'opentelemetry'",
@@ -685,7 +687,7 @@
     "E   ModuleNotFoundError: No module named 'opentelemetry'",
     "E   ModuleNotFoundError: No module named 'opentelemetry'"
   ],
-  "collect_error_count": 674,
+  "collect_error_count": 676,
   "collected_node_ids": [],
   "executed": true,
   "total": 1483,
@@ -1641,9 +1643,9 @@
   "ebsr": true,
   "pass_rate": 0.0714,
   "timed_out": false,
-  "image_size_mb": 2161.7,
+  "image_size_mb": 2096.4,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50new-pjy-chopratejas-headroom@sha256:591814440b3f3b2632978bee29810badd69b31de5a816bf77bf05a961f8cca93",
+  "image_digest": "bench-pjy-rat-dockerfile-chopratejas-headroom@sha256:c9251e29887afb0e71916b6007d2cc86d849d44cda963f64ca23244416d0baa1",
   "installed_pkg_count": 25,
   "tokens_in": 152225,
   "tokens_out": 1551,
@@ -1651,27 +1653,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 102.23,
-  "test_s": 39.92,
+  "build_s": 194.98,
+  "test_s": 41.2,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 152225,
     "tokens_out": 1551,
-    "llm_calls": 13,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 13
   },
   "error_surface": "",
   "error_surface_reason": "",

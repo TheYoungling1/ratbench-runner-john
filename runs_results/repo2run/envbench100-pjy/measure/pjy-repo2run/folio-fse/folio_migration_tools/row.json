@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "folio-fse/folio_migration_tools",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "g flake8-bandit (4.1.1)\n#18 16.08   - Installing flake8-black (0.3.7)\n#18 16.08   - Installing flake8-bugbear (22.12.6)\n#18 16.08   - Installing flake8-docstrings (1.7.0)\n#18 16.08   - Installing flake8-isort (5.0.3)\n#18 16.08   - Installing folio-uuid (0.2.10)\n#18 16.08   - Installing folioclient (0.60.5)\n#18 16.09   - Installing lxml (4.9.4)\n#18 16.17   - Installing mypy (0.982)\n#18 16.18   - Installing myst-parser (0.18.1)\n#18 16.20   - Installing pandas (1.5.3)\n#18 16.20   - Installing pyaml (21.10.1)\n#18 16.20   - Installing pydantic (1.10.26)\n#18 16.21   - Installing pyhumps (3.8.0)\n#18 16.22   - Installing pymarc (5.4.0)\n#18 16.23   - Installing pytest-cov (4.1.0)\n#18 16.27   - Installing python-i18n (0.3.9)\n#18 16.31   - Installing sphinx-autodoc-typehints (1.23.0)\n#18 16.33   - Installing types-python-dateutil (2.9.0.20260807)\n#18 16.34   - Installing types-requests (2.33.0.20260906)\n#18 18.02 \n#18 18.02 Writing lock file\n#18 18.03 \n#18 18.03 Installing the current project: folio_migration_tools (1.8.10)\n#18 DONE 19.0s\n\n#19 [16/18] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.5s\n\n#20 [17/18] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 18.6s done\n#21 exporting manifest sha256:040bc40da007e60d733d4731fc8a6d8ba1ea871efc485bffa69d85a92b01f1ef done\n#21 exporting config sha256:ac94a19fb50b833a1f47dc3180d55d767162b3617b73ce5642e454b0fb13be22 done\n#21 exporting attestation manifest sha256:6c1c73be7e41c5868dfd129710bdacf8d09fffd480bbd2aa6255d4e886ebe3bd done\n#21 exporting manifest list sha256:cdb0f2ce67408378597fa4f089d838ad12c51357970234d9bc0990247b1b611a done\n#21 naming to docker.io/library/bench-repo2run__envbench100-pjy-folio-fse-folio_migration_tools:latest done\n#21 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-folio-fse-folio_migration_tools:latest\n#21 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-folio-fse-folio_migration_tools:latest 6.2s done\n#21 DONE 24.8s\n",
+  "build_log_tail": "ml (0.7.1)\n#18 18.45   - Installing flake8-bandit (4.1.1)\n#18 18.45   - Installing flake8-black (0.3.7)\n#18 18.45   - Installing flake8-bugbear (22.12.6)\n#18 18.45   - Installing flake8-docstrings (1.7.0)\n#18 18.46   - Installing flake8-isort (5.0.3)\n#18 18.46   - Installing folio-uuid (0.2.10)\n#18 18.46   - Installing folioclient (0.60.5)\n#18 18.47   - Installing lxml (4.9.4)\n#18 18.55   - Installing mypy (0.982)\n#18 18.58   - Installing myst-parser (0.18.1)\n#18 18.61   - Installing pandas (1.5.3)\n#18 18.63   - Installing pyaml (21.10.1)\n#18 18.65   - Installing pydantic (1.10.26)\n#18 18.65   - Installing pyhumps (3.8.0)\n#18 18.68   - Installing pymarc (5.4.0)\n#18 18.75   - Installing pytest-cov (4.1.0)\n#18 18.78   - Installing python-i18n (0.3.9)\n#18 18.81   - Installing sphinx-autodoc-typehints (1.23.0)\n#18 18.85   - Installing types-python-dateutil (2.9.0.20260807)\n#18 18.87   - Installing types-requests (2.33.0.20260906)\n#18 21.15 \n#18 21.15 Writing lock file\n#18 21.15 \n#18 21.15 Installing the current project: folio_migration_tools (1.8.10)\n#18 DONE 21.7s\n\n#19 [16/18] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.5s\n\n#20 [17/18] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 19.4s done\n#21 exporting manifest sha256:8c596ea67f9bbc5a4ad5aad6a7f705be9801cca34dc5794b1707ad4ae3328af8 done\n#21 exporting config sha256:1f31407844308d672f861ad86957fff4c82c3f79884372c340b7ce4c6bedf59b done\n#21 exporting attestation manifest sha256:2d0d8b9b377c3e359eda89d70962afb20b71a2763f116a24d80e71cec398d906 0.0s done\n#21 exporting manifest list sha256:184c471ff2976024e81e73e9b8f18f935ba2ba95a3051289e7a408db5cda1523 done\n#21 naming to docker.io/library/bench-pjy-repo2run-folio-fse-folio_migration_tools:latest done\n#21 unpacking to docker.io/library/bench-pjy-repo2run-folio-fse-folio_migration_tools:latest\n#21 unpacking to docker.io/library/bench-pjy-repo2run-folio-fse-folio_migration_tools:latest 5.6s done\n#21 DONE 25.0s\n",
   "status": "collect_error",
   "py_test_files": 46,
   "collect_rc": 2,
@@ -137,9 +137,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 2525.5,
+  "image_size_mb": 2525.2,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-folio-fse-folio_migration_tools@sha256:cdb0f2ce67408378597fa4f089d838ad12c51357970234d9bc0990247b1b611a",
+  "image_digest": "bench-pjy-repo2run-folio-fse-folio_migration_tools@sha256:184c471ff2976024e81e73e9b8f18f935ba2ba95a3051289e7a408db5cda1523",
   "installed_pkg_count": 27,
   "tokens_in": 270667,
   "tokens_out": 10765,
@@ -147,8 +147,8 @@
   "turns_used": 17,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 48.73,
-  "test_s": 0.69,
+  "build_s": 52.24,
+  "test_s": 0.92,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -156,19 +156,7 @@
     "tokens_in": 270667,
     "tokens_out": 10765,
     "llm_calls": null,
-    "turns_used": 17,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 17
   },
   "error_surface": "",
   "error_surface_reason": "",

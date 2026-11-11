@@ -1,10 +1,10 @@
 {
-  "agent": "claudecode__envbench100-merged-20260915",
+  "agent": "claudecode-dockerfile",
   "repo": "neurogym/neurogym",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "4.1-py3-none-any.whl size=793233 sha256=e8fe3a9742a6dc1d178faa328af5cb6779e59b1c9f2eefe4b9ada04979d4f46c\n#8 4.764   Stored in directory: /root/.cache/pip/wheels/cc/a4/4e/8ab10272b8b22bdd089814e2338071d71f7a9dbe3d9d79db3d\n#8 4.767 Successfully built gym\n#8 4.880 Installing collected packages: gym_notices, six, pyparsing, pillow, numpy, kiwisolver, fonttools, cycler, cloudpickle, python-dateutil, gym, contourpy, matplotlib, neurogym\n#8 8.908   Running setup.py develop for neurogym\n#8 9.299 Successfully installed cloudpickle-3.1.2 contourpy-1.3.3 cycler-0.12.1 fonttools-4.66.0 gym-0.24.1 gym_notices-0.1.0 kiwisolver-1.5.1 matplotlib-3.11.2 neurogym-0.0.2 numpy-2.4.6 pillow-12.3.0 pyparsing-3.3.3 python-dateutil-2.9.0.post0 six-1.17.0\n#8 9.299 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#8 9.305 \n#8 9.305 [notice] A new release of pip is available: 24.0 -> 26.2.1\n#8 9.305 [notice] To update, run: pip install --upgrade pip\n#8 DONE 10.2s\n\n#9 [6/6] WORKDIR /testbed\n#9 DONE 0.1s\n\n#10 exporting to image\n#10 exporting layers\n#10 exporting layers 8.5s done\n#10 exporting manifest sha256:9598f65982af9c9d1ba36e050c4fb5e177104ecd71d6bbb3d7557adc1c177412 done\n#10 exporting config sha256:3876f54891cdb6cebb51b56af729f9669238a34ae04579843634fcbd89fae83e done\n#10 exporting attestation manifest sha256:805a37226083311945a2d296132851b5c108b840048d414607cd2632d569902b done\n#10 exporting manifest list sha256:9df4ca50bfb3d22c9248079c52598ea92999e930fde5a59fc12357686a8f11ba done\n#10 naming to docker.io/library/bench-claudecode__envbench100-merged-20260915-neurogym-neurogym:latest done\n#10 unpacking to docker.io/library/bench-claudecode__envbench100-merged-20260915-neurogym-neurogym:latest\n#10 unpacking to docker.io/library/bench-claudecode__envbench100-merged-20260915-neurogym-neurogym:latest 1.6s done\n#10 DONE 10.2s\n",
+  "build_log_tail": "22.8/122.8 kB 38.3 MB/s eta 0:00:00\nDownloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 229.9/229.9 kB 72.2 MB/s eta 0:00:00\nDownloading six-1.17.0-py2.py3-none-any.whl (11 kB)\nBuilding wheels for collected packages: gym\n  Building wheel for gym (pyproject.toml): started\n  Building wheel for gym (pyproject.toml): finished with status 'done'\n  Created wheel for gym: filename=gym-0.24.1-py3-none-any.whl size=793230 sha256=188a22aa83f6ee0f43aa69ecc4aeccb3662d97805813f905528d49b134f906e3\n  Stored in directory: /root/.cache/pip/wheels/cc/a4/4e/8ab10272b8b22bdd089814e2338071d71f7a9dbe3d9d79db3d\nSuccessfully built gym\nInstalling collected packages: gym_notices, six, pyparsing, pillow, numpy, kiwisolver, fonttools, cycler, cloudpickle, python-dateutil, gym, contourpy, matplotlib, neurogym\n  Running setup.py develop for neurogym\nSuccessfully installed cloudpickle-3.1.2 contourpy-1.3.3 cycler-0.12.1 fonttools-4.64.0 gym-0.24.1 gym_notices-0.1.0 kiwisolver-1.5.1 matplotlib-3.11.1 neurogym-0.0.2 numpy-2.4.6 pillow-12.3.0 pyparsing-3.3.2 python-dateutil-2.9.0.post0 six-1.17.0\n\u001b[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n\u001b[0m\u001b[91m\n[notice] A new release of pip is available: 24.0 -> 26.2.1\n[notice] To update, run: pip install --upgrade pip\n\u001b[0m ---> Removed intermediate container d7e4426c7c2a\n ---> 7594318d8f55\nStep 6/6 : WORKDIR /testbed\n ---> Running in 007253be094b\n ---> Removed intermediate container 007253be094b\n ---> 997219308945\nSuccessfully built 997219308945\nSuccessfully tagged bench-claudecode-dockerfile-neurogym-neurogym:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 8,
   "collect_rc": 2,
@@ -86,9 +86,9 @@
   "ebsr": true,
   "pass_rate": 0.8621,
   "timed_out": false,
-  "image_size_mb": 1937.2,
-  "image_delta_mb": null,
-  "image_digest": "bench-claudecode__envbench100-merged-20260915-neurogym-neurogym@sha256:9df4ca50bfb3d22c9248079c52598ea92999e930fde5a59fc12357686a8f11ba",
+  "image_size_mb": 526.8,
+  "image_delta_mb": 147.0,
+  "image_digest": "bench-claudecode-dockerfile-neurogym-neurogym@sha256:99721930894588793d7b2cf3a027e13d4288da2cedbe2598eb6d6f95f752ec70",
   "installed_pkg_count": 23,
   "tokens_in": 1730688,
   "tokens_out": 27093,
@@ -96,8 +96,8 @@
   "turns_used": 36,
   "cost_usd": 0.08136736800000001,
   "produce_s": 318.03,
-  "build_s": 28.42,
-  "test_s": 40.45,
+  "build_s": 33.11,
+  "test_s": 32.17,
   "meta": {
     "contract_version": 1,
     "producer": "claudecode-dockerfile",
@@ -124,19 +124,7 @@
     "usage_source": "computed",
     "dsml_text_blocks": 0,
     "turn_capped": false,
-    "agent_timed_out": false,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "agent_timed_out": false
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__ratbench50_run-20260904-173735",
+  "agent": "setupx",
   "repo": "Checkmk/checkmk",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": " is not set, so the dialog frontend is not usable.)\n#10 175.1 debconf: falling back to frontend: Readline\n#10 175.1 debconf: unable to initialize frontend: Readline\n#10 175.1 debconf: (This frontend requires a controlling tty.)\n#10 175.1 debconf: falling back to frontend: Teletype\n#10 175.1 debconf: unable to initialize frontend: Teletype\n#10 175.1 debconf: (This frontend requires a controlling tty.)\n#10 175.1 debconf: falling back to frontend: Noninteractive\n#10 238.6 bash: line 1: command: -a: invalid option\n#10 238.6 command: usage: command [-pVv] command [arg ...]\n#10 244.0 fatal: cannot change to '/mirror': No such file or directory\n#10 244.0 fatal: cannot change to '/mirror': No such file or directory\n#10 244.0 fatal: cannot change to '/mirror': No such file or directory\n#10 250.0 fatal: cannot change to '/mirror': No such file or directory\n#10 DONE 259.1s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 47.8s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 1.8s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.1s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 271.6s done\n#14 exporting manifest sha256:427ae2e83f81856676abe30626ee079e40abd8976d6ff4ad42ec6c88a6f3fbed 0.0s done\n#14 exporting config sha256:efd80621991a5c8799060f83f00e0b334374a34c670fc2e11945eb6c49c6c997 0.0s done\n#14 exporting attestation manifest sha256:6859f0ef62d5a21c1e8bd61dc97ae970841fbf09e6b44cd1c6b240fd29bf2f33 0.0s done\n#14 exporting manifest list sha256:b4114e1fba3c997bfb4dce5db7ed1fe551b72aaa2dd885b29a63cb30a8fa4a0c 0.0s done\n#14 naming to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-checkmk-checkmk:latest done\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-checkmk-checkmk:latest\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-checkmk-checkmk:latest 105.6s done\n#14 DONE 377.3s\n",
+  "build_log_tail": "kages/cmk-plugin-apis/tests/cmk/rulesets/test_localization.py::TestLocalizable::test_add[Help]\npackages/cmk-plugin-apis/tests/cmk/rulesets/test_localization.py::TestLocalizable::test_eq[equal]\npackages/cmk-plugin-apis/tests/cmk/rulesets/test_localization.py::TestLocalizable::test_eq[not equal]\npackages/cmk-plugin-apis/tests/cmk/rulesets/test_localization.py::TestLocalizable::test_eq[localized equal]\npackages/cmk-plugin-apis/tests/cmk/rulesets/test_localization.py::TestLocalizable::test_eq[localized unequal]\npackages/cmk-plugin-apis/tests/cmk/rulesets/test_localization.py::TestLocalizable::test_repr[Title]\npackages/cmk-plugin-apis/tests/cmk/rulesets/test_localization.py::TestLocalizable::test_repr[Message]\npackages/cmk-plugin-apis/tests/cmk/rulesets/test_localization.py::TestLocalizable::test_repr[Label]\npackages/cmk-plugin-apis/tests/cmk/rulesets/test_localization.py::TestLocalizable::test_repr[Help]\n\n24 tests collected in 0.05s\n ---> Removed intermediate container 733f8b6df81b\n ---> f48c231be148\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in 380aebaa5dcf\n ---> Removed intermediate container 380aebaa5dcf\n ---> 0a09e04cbb04\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in f6067010b292\n ---> Removed intermediate container f6067010b292\n ---> ccb9ea932883\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in 258faadddf1b\n ---> Removed intermediate container 258faadddf1b\n ---> 80a086028616\nStep 10/10 : WORKDIR /testbed\n ---> Running in 85883c3968b0\n ---> Removed intermediate container 85883c3968b0\n ---> cb78f47e9e99\nSuccessfully built cb78f47e9e99\nSuccessfully tagged bench-setupx-checkmk-checkmk:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 2764,
   "collect_rc": 4,
@@ -26,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 31196.4,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__ratbench50_run-20260904-173735-checkmk-checkmk@sha256:b4114e1fba3c997bfb4dce5db7ed1fe551b72aaa2dd885b29a63cb30a8fa4a0c",
+  "image_size_mb": 14306.6,
+  "image_delta_mb": 13919.0,
+  "image_digest": "bench-setupx-checkmk-checkmk@sha256:cb78f47e9e997b0f4305aa3f7cdaab5cf42fc2840941a7498e4f559860f6030e",
   "installed_pkg_count": 12,
   "tokens_in": 1104254,
   "tokens_out": 136803,
@@ -36,7 +36,7 @@
   "turns_used": 89,
   "cost_usd": null,
   "produce_s": 1836.37,
-  "build_s": 1030.29,
+  "build_s": 974.91,
   "test_s": 0.34,
   "meta": {
     "contract_version": 1,
@@ -68,19 +68,7 @@
     "turns_used": 89,
     "produce_s": 1836.37,
     "total_tokens": 1241057,
-    "cost_usd": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=a92883fd5653abb36e0866777777ce3a98c79ff1 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=a92883fd5653abb36e0866777777ce3a98c79ff1 (pinned)\n"
-      }
-    ]
+    "cost_usd": null
   },
   "error_surface": "",
   "error_surface_reason": "",

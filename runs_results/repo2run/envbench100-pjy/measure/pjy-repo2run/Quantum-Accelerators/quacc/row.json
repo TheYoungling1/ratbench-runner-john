@@ -1,15 +1,17 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "Quantum-Accelerators/quacc",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "10.0 kB)\n#28 1.529 Installing collected packages: shellingham, mdurl, click, markdown-it-py, rich, typer\n#28 1.875 Successfully installed click-8.5.0 markdown-it-py-4.2.0 mdurl-0.1.2 rich-15.0.0 shellingham-1.5.4 typer-0.12.3\n#28 1.876 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#28 1.882 \n#28 1.882 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#28 1.882 [notice] To update, run: pip install --upgrade pip\n#28 DONE 2.0s\n\n#29 [26/29] RUN cd /repo && pip install -q -e .\n#29 3.583 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#29 3.586 \n#29 3.586 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#29 3.586 [notice] To update, run: pip install --upgrade pip\n#29 DONE 3.8s\n\n#30 [27/29] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#30 DONE 0.8s\n\n#31 [28/29] WORKDIR /testbed\n#31 DONE 0.1s\n\n#32 exporting to image\n#32 exporting layers\n#32 exporting layers 18.3s done\n#32 exporting manifest sha256:350c7bc83c86d5114f1c2ec7173369b0dc9d1c9cba3eb9131fc5f63e5f393234 done\n#32 exporting config sha256:68c0385a82d3a8fe617b6bfaf2da83ab6b92d2a7b0321767de6b79d9487f016b done\n#32 exporting attestation manifest sha256:e0142e95e322bd1aa0bf821fb5c81fa4da07f51c03f77acf243c253bbedb4bed 0.0s done\n#32 exporting manifest list sha256:f98bea7e6e1fdfd82918c2cafdd31f7bcaf1c67937a9bb39531d7f3e02a97ec5 done\n#32 naming to docker.io/library/bench-repo2run__envbench100-pjy-quantum-accelerators-quacc:latest done\n#32 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-quantum-accelerators-quacc:latest\n#32 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-quantum-accelerators-quacc:latest 11.1s done\n#32 DONE 29.5s\n",
-  "status": "executed",
+  "build_log_tail": "url-0.1.2 rich-15.0.0 shellingham-1.5.4 typer-0.12.3\n#28 1.872 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#28 1.878 \n#28 1.878 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#28 1.878 [notice] To update, run: pip install --upgrade pip\n#28 DONE 2.2s\n\n#29 [26/29] RUN cd /repo && pip install -q -e .\n#29 3.700 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#29 3.703 \n#29 3.703 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#29 3.703 [notice] To update, run: pip install --upgrade pip\n#29 DONE 4.1s\n\n#30 [27/29] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#30 DONE 1.0s\n\n#31 [28/29] WORKDIR /testbed\n#31 DONE 0.0s\n\n#32 exporting to image\n#32 exporting layers\n#32 exporting layers 21.2s done\n#32 exporting manifest sha256:a927a6102346ba4e004f03cf96385f5f6c4751d007510b9c23b6bcc5522954e1 0.0s done\n#32 exporting config sha256:2fdc762722c863165f05d891fb21175fc480065206a8e020d017b74a0c723403 0.0s done\n#32 exporting attestation manifest sha256:bc60ca8ba402bafeaaffb98d73300cd3e66fe51ea1b1982ea95124b5bca34fa1\n#32 exporting attestation manifest sha256:bc60ca8ba402bafeaaffb98d73300cd3e66fe51ea1b1982ea95124b5bca34fa1 0.1s done\n#32 exporting manifest list sha256:22ec421ccea5e56594928cad65b46141ab02c83082509a3a2996b49b8d04db66 0.1s done\n#32 naming to docker.io/library/bench-pjy-repo2run-quantum-accelerators-quacc:latest\n#32 naming to docker.io/library/bench-pjy-repo2run-quantum-accelerators-quacc:latest 0.0s done\n#32 unpacking to docker.io/library/bench-pjy-repo2run-quantum-accelerators-quacc:latest\n#32 unpacking to docker.io/library/bench-pjy-repo2run-quantum-accelerators-quacc:latest 12.6s done\n#32 DONE 34.2s\n",
+  "status": "collect_error",
   "py_test_files": 89,
-  "collect_rc": 0,
-  "collect_clean": true,
-  "collect_errors": [],
+  "collect_rc": 1,
+  "collect_clean": false,
+  "collect_errors": [
+    "NameError: name 'parsl' is not defined. Did you mean: 'vars'?"
+  ],
   "collect_error_count": 0,
   "collected_node_ids": [
     "tests/core/atoms/test_atoms_core.py::test_init",
@@ -536,9 +538,9 @@
   "ebsr": true,
   "pass_rate": 0.6909,
   "timed_out": false,
-  "image_size_mb": 1245.1,
+  "image_size_mb": 3914.5,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-quantum-accelerators-quacc@sha256:f98bea7e6e1fdfd82918c2cafdd31f7bcaf1c67937a9bb39531d7f3e02a97ec5",
+  "image_digest": "bench-pjy-repo2run-quantum-accelerators-quacc@sha256:22ec421ccea5e56594928cad65b46141ab02c83082509a3a2996b49b8d04db66",
   "installed_pkg_count": 113,
   "tokens_in": 821912,
   "tokens_out": 20039,
@@ -546,8 +548,8 @@
   "turns_used": 33,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 111.68,
-  "test_s": 71.99,
+  "build_s": 127.6,
+  "test_s": 81.87,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -555,19 +557,7 @@
     "tokens_in": 821912,
     "tokens_out": 20039,
     "llm_calls": null,
-    "turns_used": 33,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 33
   },
   "error_surface": "",
   "error_surface_reason": "",

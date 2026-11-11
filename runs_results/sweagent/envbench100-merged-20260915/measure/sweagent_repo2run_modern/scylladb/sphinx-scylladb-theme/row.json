@@ -1,10 +1,10 @@
 {
-  "agent": "sweagent__envbench100-merged-20260915",
+  "agent": "sweagent_repo2run_modern",
   "repo": "scylladb/sphinx-scylladb-theme",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "atisfied: idna<4,>=2.5 in /usr/local/lib/python3.10/site-packages (from requests>=2.30.0->sphinx>=2.1->sphinx-multiversion-scylla==0.3.1) (3.20)\n#14 1.110 Requirement already satisfied: certifi>=2023.5.7 in /usr/local/lib/python3.10/site-packages (from requests>=2.30.0->sphinx>=2.1->sphinx-multiversion-scylla==0.3.1) (2026.7.22)\n#14 1.361 Installing collected packages: sphinx-multiversion-scylla\n#14 1.362   Running setup.py develop for sphinx-multiversion-scylla\n#14 1.795 Successfully installed sphinx-multiversion-scylla-0.3.1\n#14 1.795 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#14 1.798 \n#14 1.798 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#14 1.798 [notice] To update, run: pip install --upgrade pip\n#14 DONE 2.1s\n\n#15 [12/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#15 DONE 0.6s\n\n#16 [13/14] WORKDIR /testbed\n#16 DONE 1.1s\n\n#17 [14/14] RUN git config --global --add safe.directory /testbed\n#17 DONE 0.2s\n\n#18 exporting to image\n#18 exporting layers\n#18 exporting layers 5.5s done\n#18 exporting manifest sha256:37d1f7bae5c3b71689efc6274ddf36243d8651bee3dd46819e737f7bf389911d done\n#18 exporting config sha256:2c8bd2b4cc9379f5e3144de4ff0212ba097a2cfe5042edb725287b482b037d3c done\n#18 exporting attestation manifest sha256:8c7f4b77e8bb10c93faefb66f1e6f3d6a7dbb4e1d12db646ab941176f4f8af9c 0.0s done\n#18 exporting manifest list sha256:6a94eabb526a0a166aacfd547c0dd42eec0a48c4131e40cd62c36d31515e37b1 0.0s done\n#18 naming to docker.io/library/bench-sweagent__envbench100-merged-20260915-scylladb-sphinx-scylladb-theme:latest done\n#18 unpacking to docker.io/library/bench-sweagent__envbench100-merged-20260915-scylladb-sphinx-scylladb-theme:latest\n#18 unpacking to docker.io/library/bench-sweagent__envbench100-merged-20260915-scylladb-sphinx-scylladb-theme:latest 3.4s done\n#18 DONE 8.9s\n",
+  "build_log_tail": "thon3.10/site-packages (from requests>=2.30.0->sphinx>=2.1->sphinx-multiversion-scylla==0.3.1) (2.7.0)\nRequirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.10/site-packages (from requests>=2.30.0->sphinx>=2.1->sphinx-multiversion-scylla==0.3.1) (3.19)\nRequirement already satisfied: certifi>=2023.5.7 in /usr/local/lib/python3.10/site-packages (from requests>=2.30.0->sphinx>=2.1->sphinx-multiversion-scylla==0.3.1) (2026.7.22)\nRequirement already satisfied: charset_normalizer<4,>=2 in /usr/local/lib/python3.10/site-packages (from requests>=2.30.0->sphinx>=2.1->sphinx-multiversion-scylla==0.3.1) (3.5.1)\nInstalling collected packages: sphinx-multiversion-scylla\n  Running setup.py develop for sphinx-multiversion-scylla\nSuccessfully installed sphinx-multiversion-scylla-0.3.1\n\u001b[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n\u001b[0m\u001b[91m\n[notice] A new release of pip is available: 23.0.1 -> 26.2.1\n[notice] To update, run: pip install --upgrade pip\n\u001b[0m ---> Removed intermediate container bf17a3502386\n ---> 2b253bef86fa\nStep 12/14 : RUN mv /repo /testbed && ln -sfn /testbed /repo\n ---> Running in 6d72bff6ab07\n ---> Removed intermediate container 6d72bff6ab07\n ---> 828cc5b08277\nStep 13/14 : WORKDIR /testbed\n ---> Running in aea6f440a886\n ---> Removed intermediate container aea6f440a886\n ---> 737fe5939280\nStep 14/14 : RUN git config --global --add safe.directory /testbed\n ---> Running in ccd21f3cb030\n ---> Removed intermediate container ccd21f3cb030\n ---> 3c59c402fbfb\nSuccessfully built 3c59c402fbfb\nSuccessfully tagged bench-sweagent_repo2run_modern-scylladb-sphinx-scylladb-theme:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "executed",
   "py_test_files": 9,
   "collect_rc": 0,
@@ -96,9 +96,9 @@
   "ebsr": true,
   "pass_rate": 1.0,
   "timed_out": false,
-  "image_size_mb": 2086.7,
-  "image_delta_mb": 576.0,
-  "image_digest": "bench-sweagent__envbench100-merged-20260915-scylladb-sphinx-scylladb-theme@sha256:6a94eabb526a0a166aacfd547c0dd42eec0a48c4131e40cd62c36d31515e37b1",
+  "image_size_mb": 626.7,
+  "image_delta_mb": 239.1,
+  "image_digest": "bench-sweagent_repo2run_modern-scylladb-sphinx-scylladb-theme@sha256:3c59c402fbfb8f1f7deb09c7a273ccaabc46d1f51ab6d0f3411f58b2f599d5e5",
   "installed_pkg_count": 48,
   "tokens_in": 3033622.0,
   "tokens_out": 15986.0,
@@ -106,8 +106,8 @@
   "turns_used": 101,
   "cost_usd": 0.049811936000000015,
   "produce_s": 348.56,
-  "build_s": 39.66,
-  "test_s": 0.6,
+  "build_s": 65.19,
+  "test_s": 0.81,
   "meta": {
     "contract_version": 1,
     "producer": "sweagent_repo2run_modern",
@@ -141,19 +141,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=4e3917945c5c194a7119cf10629f35664b451d61 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=4e3917945c5c194a7119cf10629f35664b451d61 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

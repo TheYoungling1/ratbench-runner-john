@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "adamchainz/django-mysql",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "4)) (2.4.1)\n#11 1.296 Requirement already satisfied: exceptiongroup>=1 in /usr/local/lib/python3.10/site-packages (from pytest->-r /requirements_pipreqs.txt (line 4)) (1.3.1)\n#11 1.297 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.10/site-packages (from pytest->-r /requirements_pipreqs.txt (line 4)) (26.3)\n#11 1.297 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.10/site-packages (from pytest->-r /requirements_pipreqs.txt (line 4)) (2.3.0)\n#11 1.379 Installing collected packages: sqlparse, parameterized, mariadb_dyncol, asgiref, Django, pytest_django\n#11 2.897 Successfully installed Django-5.2.17 asgiref-3.12.1 mariadb_dyncol-3.6.1 parameterized-0.9.0 pytest_django-4.14.0 sqlparse-0.6.0\n#11 2.897 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 2.903 \n#11 2.903 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 2.903 [notice] To update, run: pip install --upgrade pip\n#11 DONE 3.2s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 2.2s done\n#12 exporting manifest sha256:a242457a2a822d5670d42871d10b57d00c112ba505cb64a51463db9b8368b43a 0.0s done\n#12 exporting config sha256:c48612f5d930a6a80b5b04bc19fa61da0d277d0de52667bf01a23526dd5362f8 0.0s done\n#12 exporting attestation manifest sha256:f215870b12b98ab7e6c2635470da7b745460ea3c79364ce9be19cba44bf1bfd8 0.0s done\n#12 exporting manifest list sha256:cac41ed626dc49e47a13e1ee61d564b81fe11b5fae35ddea012c12192da5fffd 0.0s done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-adamchainz-django-mysql:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-adamchainz-django-mysql:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-adamchainz-django-mysql:latest 2.3s done\n#12 DONE 4.6s\n",
+  "build_log_tail": "tisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.10/site-packages (from pytest->-r /requirements_pipreqs.txt (line 4)) (1.6.0)\n#11 1.102 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.10/site-packages (from pytest->-r /requirements_pipreqs.txt (line 4)) (2.3.0)\n#11 1.102 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.10/site-packages (from pytest->-r /requirements_pipreqs.txt (line 4)) (26.3)\n#11 1.103 Requirement already satisfied: tomli>=1 in /usr/local/lib/python3.10/site-packages (from pytest->-r /requirements_pipreqs.txt (line 4)) (2.4.1)\n#11 1.175 Installing collected packages: sqlparse, parameterized, mariadb_dyncol, asgiref, Django, pytest_django\n#11 2.719 Successfully installed Django-5.2.17 asgiref-3.12.1 mariadb_dyncol-3.6.1 parameterized-0.9.0 pytest_django-4.14.0 sqlparse-0.6.0\n#11 2.719 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 2.724 \n#11 2.724 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 2.724 [notice] To update, run: pip install --upgrade pip\n#11 DONE 2.9s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 2.0s done\n#12 exporting manifest sha256:d8134fa111d7c0f9a6931b979fa917a1c6f85e40e4788f66836d8e3927111eb3 done\n#12 exporting config sha256:ad288bad7944e9eea37124d406da42155f09ab01e873aabfd49cb36ee78fa3c8 done\n#12 exporting attestation manifest sha256:a5c928c6ddeee8e995e14ce21625f1b86b472bb358e0222123caca660cb4c9a7 done\n#12 exporting manifest list sha256:bb4f5cf85420346668a31f6c7fbc73311ab438e66f4101a104343244f90c7b85 done\n#12 naming to docker.io/library/bench-pipreqs-adamchainz-django-mysql:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-adamchainz-django-mysql:latest\n#12 unpacking to docker.io/library/bench-pipreqs-adamchainz-django-mysql:latest 1.7s done\n#12 DONE 3.8s\n",
   "status": "collect_error",
   "py_test_files": 24,
   "collect_rc": 1,
@@ -26,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 415.6,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-adamchainz-django-mysql@sha256:cac41ed626dc49e47a13e1ee61d564b81fe11b5fae35ddea012c12192da5fffd",
+  "image_size_mb": 415.5,
+  "image_delta_mb": 27.9,
+  "image_digest": "bench-pipreqs-adamchainz-django-mysql@sha256:bb4f5cf85420346668a31f6c7fbc73311ab438e66f4101a104343244f90c7b85",
   "installed_pkg_count": 20,
   "tokens_in": null,
   "tokens_out": null,
@@ -36,8 +36,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 6.27,
-  "build_s": 11.05,
-  "test_s": 0.41,
+  "build_s": 12.52,
+  "test_s": 0.55,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -64,19 +64,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=d6f0500565b1e4bc94044ca061e745cada955c11 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=d6f0500565b1e4bc94044ca061e745cada955c11 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

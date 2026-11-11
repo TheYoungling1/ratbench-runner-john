@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "thenewboston-developers/thenewboston-Backend",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ckages/pypeg2/__init__.py:641\n#10 35.45   /workspace/repo/.venv/lib/python3.13/site-packages/pypeg2/__init__.py:641: SyntaxWarning: invalid escape sequence '\\s'\n#10 35.45     default: regex \"(?m)\\s+\"\n#10 35.45 \n#10 35.45 .venv/lib/python3.13/site-packages/pypeg2/__init__.py:715\n#10 35.45   /workspace/repo/.venv/lib/python3.13/site-packages/pypeg2/__init__.py:715: SyntaxWarning: invalid escape sequence '\\s'\n#10 35.45     default: \"(?m)\\s+\"\n#10 35.45 \n#10 35.45 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n#10 35.45 90 tests collected in 0.30s\n#10 DONE 36.2s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 9.3s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.4s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 24.5s done\n#14 exporting manifest sha256:1c98cd3ea5226f47148770ae39cadf3a9701fdb631caf679846b99cb34026f4c 0.0s done\n#14 exporting config sha256:dc8f6ad3658b5f0b007f6ec14e686b46f216eb7437df51c17fa7f134a9c85f63 done\n#14 exporting attestation manifest sha256:2d61497d21026873c44eed5d8dcc8a3f838102031f20d2195f6477a692141971 0.1s done\n#14 exporting manifest list sha256:618d82f4fd6e2467300e011b9268c73f984ecf4cf26e06fffff63d533c9cca69 0.0s done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-thenewboston-developers-thenewboston-backend:latest\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-thenewboston-developers-thenewboston-backend:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-thenewboston-developers-thenewboston-backend:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-thenewboston-developers-thenewboston-backend:latest 9.4s done\n#14 DONE 34.1s\n",
+  "build_log_tail": "v/lib/python3.13/site-packages/pypeg2/__init__.py:459\n#10 35.02   /workspace/repo/.venv/lib/python3.13/site-packages/pypeg2/__init__.py:459: SyntaxWarning: invalid escape sequence '\\w'\n#10 35.02     regex   regular expression to scan, default r\"\\w+\"\n#10 35.02 \n#10 35.02 .venv/lib/python3.13/site-packages/pypeg2/__init__.py:641\n#10 35.02   /workspace/repo/.venv/lib/python3.13/site-packages/pypeg2/__init__.py:641: SyntaxWarning: invalid escape sequence '\\s'\n#10 35.02     default: regex \"(?m)\\s+\"\n#10 35.02 \n#10 35.02 .venv/lib/python3.13/site-packages/pypeg2/__init__.py:715\n#10 35.02   /workspace/repo/.venv/lib/python3.13/site-packages/pypeg2/__init__.py:715: SyntaxWarning: invalid escape sequence '\\s'\n#10 35.02     default: \"(?m)\\s+\"\n#10 35.02 \n#10 35.02 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n#10 35.02 90 tests collected in 0.32s\n#10 DONE 35.7s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 4.0s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.4s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 20.7s done\n#14 exporting manifest sha256:0cc5021568ae8d6f25ae4009e599a89d33bcf0b72383faafbb7de937894a320b 0.0s done\n#14 exporting config sha256:c1f76039b9c367b030a373734b4f262b35248830b7b4a9e9ba6ff135e1ee2bed 0.0s done\n#14 exporting attestation manifest sha256:dbe7d605014e439fb4c779ee08fadd5a57962a79629273135fce3eeae2f72f65 0.0s done\n#14 exporting manifest list sha256:74fa5c57386bd8e6f536cd32a8e51c50d4add502cb02352db949f875f67ac384 0.0s done\n#14 naming to docker.io/library/bench-setupx-thenewboston-developers-thenewboston-backend:latest done\n#14 unpacking to docker.io/library/bench-setupx-thenewboston-developers-thenewboston-backend:latest\n#14 unpacking to docker.io/library/bench-setupx-thenewboston-developers-thenewboston-backend:latest 10.1s done\n#14 DONE 30.9s\n",
   "status": "executed",
   "py_test_files": 535,
   "collect_rc": 0,
@@ -206,9 +206,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 699.0,
+  "image_size_mb": 2558.6,
   "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-thenewboston-developers-thenewboston-backend@sha256:618d82f4fd6e2467300e011b9268c73f984ecf4cf26e06fffff63d533c9cca69",
+  "image_digest": "bench-setupx-thenewboston-developers-thenewboston-backend@sha256:74fa5c57386bd8e6f536cd32a8e51c50d4add502cb02352db949f875f67ac384",
   "installed_pkg_count": 132,
   "tokens_in": 444722,
   "tokens_out": 12374,
@@ -216,8 +216,8 @@
   "turns_used": 14,
   "cost_usd": null,
   "produce_s": 438.66,
-  "build_s": 85.18,
-  "test_s": 7.73,
+  "build_s": 74.27,
+  "test_s": 9.29,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -252,19 +252,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=9ff7311bb043951a6cb7ffd3419bfde2b20cc1db (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=9ff7311bb043951a6cb7ffd3419bfde2b20cc1db (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

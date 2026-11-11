@@ -178,12 +178,15 @@ LLM calls per repo (`num_turn` in `varieties.toml`), the same as SetupX and SWE-
 
 ## Benchmark results (`runs_results/`)
 
-The final per-repo scores for each baseline on the three datasets. Use these, not the `measure/`
-folders under `runs/`: some rows were rebuilt and re-scored after the original runs.
+The original per-repo measurements behind the paper's tables, for each baseline on the three
+datasets. `runs_results/PROVENANCE.md` records where each run came from, and
+`python3 tools/reproduce_paper_table.py` checks every file against `runs_results/SHA256SUMS` and
+recomputes Table 1 against `datasets/gold_manifests_combined_test_steps.json`.
 
 ```
 runs_results/<arm>/<run>/_run_manifest.json                     dataset, source run, notes
 runs_results/<arm>/<run>/measure/<variety>/<owner>/<repo>/row.json   one repo's score
+runs_results/<arm>/<run>/measure/metrics.json, errors.json      the run's own summary, as written
 runs_results/<arm>/<arm>.zip                                    the arm's Dockerfiles, trajectories, logs
 ```
 
@@ -191,7 +194,8 @@ Arms: `claudecode` (variety `claudecode-dockerfile`), `setupx`, `sweagent`
 (`sweagent_repo2run_modern`), `pipreqs`, `rat`, `repo2run`, `graph2env`. Each `row.json` holds
 `build_ok`, `status`, `collect_clean`, the pytest counts (`total`, `passed`, `failed`, `skipped`),
 `pass_rate`, and the agent's cost (`tokens_in`, `tokens_out`, `cost_usd`). Unzip a zip at the repo
-root; its paths start with `runs_rescore/`, the folder's old name.
+root. Its `runs/` or `results_pjy/` part holds the agent outputs and Dockerfiles; its
+`runs_rescore/` part is a later re-measurement (2026-09-26) that the paper did not use.
 
 ## Scoring with `unified_bench`
 

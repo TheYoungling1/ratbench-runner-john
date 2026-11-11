@@ -1,10 +1,10 @@
 {
-  "agent": "rat__envbench100-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "timbrel/gitsavvy",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "   Attempting uninstall: idna\n#18 7.240     Found existing installation: idna 3.20\n#18 7.244     Uninstalling idna-3.20:\n#18 7.251       Successfully uninstalled idna-3.20\n#18 7.288   Attempting uninstall: httpx2\n#18 7.288     Found existing installation: httpx2 2.13.0\n#18 7.298     Uninstalling httpx2-2.13.0:\n#18 7.311       Successfully uninstalled httpx2-2.13.0\n#18 7.366   Attempting uninstall: httpcore2\n#18 7.367     Found existing installation: httpcore2 2.13.0\n#18 7.389     Uninstalling httpcore2-2.13.0:\n#18 7.404       Successfully uninstalled httpcore2-2.13.0\n#18 7.451 Successfully installed PyYAML-6.0.3 httpcore2-2.12.0 httpx2-2.12.0 idna-3.19 jiter-0.16.0 mockito-2.0.4 openai-3.11.0\n#18 7.451 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 7.536 \n#18 7.536 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 7.536 [notice] To update, run: pip install --upgrade pip\n#18 DONE 7.8s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.4s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 1.1s done\n#21 exporting manifest sha256:75d28ccd01e534be14c7fc01f9e826f97656a0535da4ec6aa9c98aaa964043cc 0.0s done\n#21 exporting config sha256:5fab9bcbf6471f786b51ed2092a364f42ae871a7e5496aae20b8afdcb63d47b0 done\n#21 exporting attestation manifest sha256:fff135d5e7e845c6adb16dcde04619f280ca203d9073211935d822c0c1bc006c 0.0s done\n#21 exporting manifest list sha256:e7dd5ee13bcdfe3c59b229656377b2095d85ef71024721f05df8703cb6d47e01 0.0s done\n#21 naming to docker.io/library/bench-rat__envbench100-pjy-timbrel-gitsavvy:latest done\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-timbrel-gitsavvy:latest\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-timbrel-gitsavvy:latest 2.6s done\n#21 DONE 3.7s\n",
+  "build_log_tail": "9.469   Attempting uninstall: idna\n#18 9.470     Found existing installation: idna 3.20\n#18 9.475     Uninstalling idna-3.20:\n#18 9.486       Successfully uninstalled idna-3.20\n#18 9.530   Attempting uninstall: httpx2\n#18 9.531     Found existing installation: httpx2 2.13.0\n#18 9.543     Uninstalling httpx2-2.13.0:\n#18 9.561       Successfully uninstalled httpx2-2.13.0\n#18 9.624   Attempting uninstall: httpcore2\n#18 9.624     Found existing installation: httpcore2 2.13.0\n#18 9.635     Uninstalling httpcore2-2.13.0:\n#18 9.648       Successfully uninstalled httpcore2-2.13.0\n#18 9.713 Successfully installed PyYAML-6.0.3 httpcore2-2.12.0 httpx2-2.12.0 idna-3.19 jiter-0.16.0 mockito-2.0.4 openai-3.11.0\n#18 9.713 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 9.997 \n#18 9.997 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 9.997 [notice] To update, run: pip install --upgrade pip\n#18 DONE 10.2s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.3s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 1.3s done\n#21 exporting manifest sha256:4f26322dd83483c1541bdb106fcddca3983e0bb8f357531b17d8977c631e87fd done\n#21 exporting config sha256:4be859f84ca0096c9610f96e095d6b8cde01745a26e9ca2aea08eda8ca98ad77 0.0s done\n#21 exporting attestation manifest sha256:ffb0cea4c95222bd95380f94283127e5ef0dde043697e8d3161243d693c2c295 0.0s done\n#21 exporting manifest list sha256:f8a8ae3b1cf15e69366003926d5c2e508170175cd640ff6b5c1d065b08aebfa1 0.0s done\n#21 naming to docker.io/library/bench-pjy-rat-dockerfile-timbrel-gitsavvy:latest done\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-timbrel-gitsavvy:latest\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-timbrel-gitsavvy:latest 3.6s done\n#21 DONE 5.0s\n",
   "status": "collect_error",
   "py_test_files": 22,
   "collect_rc": 2,
@@ -74,7 +74,7 @@
   "timed_out": false,
   "image_size_mb": 447.4,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__envbench100-pjy-timbrel-gitsavvy@sha256:e7dd5ee13bcdfe3c59b229656377b2095d85ef71024721f05df8703cb6d47e01",
+  "image_digest": "bench-pjy-rat-dockerfile-timbrel-gitsavvy@sha256:f8a8ae3b1cf15e69366003926d5c2e508170175cd640ff6b5c1d065b08aebfa1",
   "installed_pkg_count": 27,
   "tokens_in": 3683257,
   "tokens_out": 124221,
@@ -82,27 +82,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 15.61,
-  "test_s": 0.49,
+  "build_s": 20.57,
+  "test_s": 0.74,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 3683257,
     "tokens_out": 124221,
-    "llm_calls": 101,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 101
   },
   "error_surface": "",
   "error_surface_reason": "",

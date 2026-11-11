@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__rat50new-pjy",
+  "agent": "pjy-repo2run",
   "repo": "Nitrokey/pynitrokey",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": " oath (1.4.4)\n#21 1.223   - Installing packaging (26.2)\n#21 1.227   - Installing parso (0.8.7)\n#21 1.230   - Installing pexpect (4.9.0)\n#21 1.262   - Installing pluggy (1.6.0)\n#21 1.282   - Installing prompt-toolkit (3.0.52)\n#21 1.284   - Installing ptyprocess (0.7.0)\n#21 1.317   - Installing pure-eval (0.2.3)\n#21 1.367   - Installing pygments (2.20.0)\n#21 1.367   - Installing pytest (8.4.2)\n#21 1.376   - Installing pytest-reporter (0.5.3)\n#21 1.403   - Installing pytest-reporter-html1 (0.9.5)\n#21 1.408   - Installing ruff (0.14.14)\n#21 1.409   - Installing stack-data (0.6.3)\n#21 1.437   - Installing traitlets (5.15.1)\n#21 1.490   - Installing types-cffi (2.0.0.20260518)\n#21 1.553   - Installing types-requests (2.33.0.20260518)\n#21 1.570   - Installing types-setuptools (82.0.0.20260518)\n#21 1.588   - Installing types-tqdm (4.68.0.20260608)\n#21 1.648   - Installing wcwidth (0.8.1)\n#21 3.643 \n#21 3.643 Installing the current project: pynitrokey (0.13.0)\n#21 DONE 4.3s\n\n#22 [18/20] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#22 DONE 0.6s\n\n#23 [19/20] WORKDIR /testbed\n#23 DONE 0.1s\n\n#24 exporting to image\n#24 exporting layers\n#24 exporting layers 11.8s done\n#24 exporting manifest sha256:f93b83c177e62aa33f0bb49c20e030d5018472f1b2ba20c2b86f93c8c82d0b6b 0.0s done\n#24 exporting config sha256:0b9b451b9d3bef6014ee2cfbb3839c22dd8cd2161357823469edd732ea60f0cc 0.0s done\n#24 exporting attestation manifest sha256:66ab847158adfea15f73c3c36645ac0b530a0e739f6669e50c4f8e06a14b1d26 0.0s done\n#24 exporting manifest list sha256:418165a27c370597d5c7b86519365d6fed0227bccfe90e2c11a391c3f7c2848a 0.0s done\n#24 naming to docker.io/library/bench-repo2run__rat50new-pjy-nitrokey-pynitrokey:latest\n#24 naming to docker.io/library/bench-repo2run__rat50new-pjy-nitrokey-pynitrokey:latest done\n#24 unpacking to docker.io/library/bench-repo2run__rat50new-pjy-nitrokey-pynitrokey:latest\n#24 unpacking to docker.io/library/bench-repo2run__rat50new-pjy-nitrokey-pynitrokey:latest 11.5s done\n#24 DONE 23.6s\n",
+  "build_log_tail": "nline (0.2.2)\n#21 1.177   - Installing mypy (1.4.1)\n#21 1.197   - Installing mypy-extensions (1.1.0)\n#21 1.286   - Installing oath (1.4.4)\n#21 1.298   - Installing packaging (26.2)\n#21 1.303   - Installing parso (0.8.7)\n#21 1.318   - Installing pexpect (4.9.0)\n#21 1.323   - Installing pluggy (1.6.0)\n#21 1.353   - Installing prompt-toolkit (3.0.52)\n#21 1.366   - Installing ptyprocess (0.7.0)\n#21 1.440   - Installing pure-eval (0.2.3)\n#21 1.506   - Installing pygments (2.20.0)\n#21 1.526   - Installing pytest (8.4.2)\n#21 1.541   - Installing pytest-reporter (0.5.3)\n#21 1.564   - Installing pytest-reporter-html1 (0.9.5)\n#21 1.573   - Installing ruff (0.14.14)\n#21 1.624   - Installing stack-data (0.6.3)\n#21 1.635   - Installing traitlets (5.15.1)\n#21 1.769   - Installing types-cffi (2.0.0.20260518)\n#21 1.817   - Installing types-requests (2.33.0.20260518)\n#21 1.867   - Installing types-setuptools (82.0.0.20260518)\n#21 1.959   - Installing types-tqdm (4.68.0.20260608)\n#21 2.026   - Installing wcwidth (0.8.1)\n#21 4.954 \n#21 4.954 Installing the current project: pynitrokey (0.13.0)\n#21 DONE 5.5s\n\n#22 [18/20] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#22 DONE 0.4s\n\n#23 [19/20] WORKDIR /testbed\n#23 DONE 0.0s\n\n#24 exporting to image\n#24 exporting layers\n#24 exporting layers 7.7s done\n#24 exporting manifest sha256:fbcbeb7d97e3358df61870b39e8f9ebf7c6d99445ba12c24e6742ee8af36f579 0.0s done\n#24 exporting config sha256:c90a9ab7f955566dd98dad5d3dbb75ab524b5100ae77fa0507bb4e13dbd703f4 done\n#24 exporting attestation manifest sha256:c33b04eb3f74d529f6bac0d8e9a5e7987d773d2e7dd4e73debb2b3f5d09b8d64 0.0s done\n#24 exporting manifest list sha256:e845a7a6b16e22688c29628936d656fd441e1181e0ed3fb4102aa04347a14fe2 0.0s done\n#24 naming to docker.io/library/bench-pjy-repo2run-nitrokey-pynitrokey:latest done\n#24 unpacking to docker.io/library/bench-pjy-repo2run-nitrokey-pynitrokey:latest\n#24 unpacking to docker.io/library/bench-pjy-repo2run-nitrokey-pynitrokey:latest 6.9s done\n#24 DONE 14.7s\n",
   "status": "collect_error",
   "py_test_files": 2,
   "collect_rc": 2,
@@ -29,9 +29,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 611.0,
+  "image_size_mb": 2219.3,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__rat50new-pjy-nitrokey-pynitrokey@sha256:418165a27c370597d5c7b86519365d6fed0227bccfe90e2c11a391c3f7c2848a",
+  "image_digest": "bench-pjy-repo2run-nitrokey-pynitrokey@sha256:e845a7a6b16e22688c29628936d656fd441e1181e0ed3fb4102aa04347a14fe2",
   "installed_pkg_count": 26,
   "tokens_in": 531460,
   "tokens_out": 2028,
@@ -39,8 +39,8 @@
   "turns_used": 27,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 60.38,
-  "test_s": 0.27,
+  "build_s": 54.44,
+  "test_s": 0.46,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -48,19 +48,7 @@
     "tokens_in": 531460,
     "tokens_out": 2028,
     "llm_calls": null,
-    "turns_used": 27,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 27
   },
   "error_surface": "",
   "error_surface_reason": "",

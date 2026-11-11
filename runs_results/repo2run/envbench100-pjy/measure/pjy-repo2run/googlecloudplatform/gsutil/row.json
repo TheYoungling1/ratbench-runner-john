@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "googlecloudplatform/gsutil",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "36 DONE 0.3s\n\n#37 [34/41] RUN cd /tmp && curl -sL https://github.com/gsutil-mirrors/boto/archive/0f12ca7068d85b052938c8fffd7a42d5d1850563.tar.gz -o boto_exact.tar.gz\n#37 DONE 0.9s\n\n#38 [35/41] RUN cd /tmp && tar tzf boto_exact.tar.gz 2>/dev/null | grep -E \"boto/manage/test_manage|sdb/db/test_db|compat.py\" | head\n#38 0.233 boto-0f12ca7068d85b052938c8fffd7a42d5d1850563/boto/compat.py\n#38 0.233 boto-0f12ca7068d85b052938c8fffd7a42d5d1850563/boto/manage/test_manage.py\n#38 0.233 boto-0f12ca7068d85b052938c8fffd7a42d5d1850563/boto/sdb/db/test_db.py\n#38 0.233 boto-0f12ca7068d85b052938c8fffd7a42d5d1850563/tests/compat.py\n#38 DONE 0.3s\n\n#39 [36/41] RUN cd /repo && runtest 2>&1 | tail -40\n#39 0.159 /bin/sh: 1: runtest: not found\n#39 DONE 0.2s\n\n#40 [37/41] RUN cd /repo && runtest 2>&1 | tail -50\n#40 0.155 /bin/sh: 1: runtest: not found\n#40 DONE 0.2s\n\n#41 [38/41] RUN runtest 2>&1 | tail -50\n#41 0.208 /bin/sh: 1: runtest: not found\n#41 DONE 0.2s\n\n#42 [39/41] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#42 DONE 0.6s\n\n#43 [40/41] WORKDIR /testbed\n#43 DONE 0.0s\n\n#44 exporting to image\n#44 exporting layers\n#44 exporting layers 8.9s done\n#44 exporting manifest sha256:7568d364c290d1f0864a64b5215060c1c996f0153609f290a93199038b118f34\n#44 exporting manifest sha256:7568d364c290d1f0864a64b5215060c1c996f0153609f290a93199038b118f34 0.0s done\n#44 exporting config sha256:10127d72ec4f08a162c27c0feda10b1bb1096da6231caa581ae3835dbf68f112 0.0s done\n#44 exporting attestation manifest sha256:a69b14d7e2bd42520d072bc0361650371776a87b27acb97817ed6ce3eb5b29cf 0.0s done\n#44 exporting manifest list sha256:e1ac19b11445d9b8a222115640c7c430fbf5df9a6ee73faaa199520ba52f5d5c 0.0s done\n#44 naming to docker.io/library/bench-repo2run__envbench100-pjy-googlecloudplatform-gsutil:latest done\n#44 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-googlecloudplatform-gsutil:latest\n#44 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-googlecloudplatform-gsutil:latest 4.6s done\n#44 DONE 13.7s\n",
+  "build_log_tail": "s://github.com/GoogleCloudPlatform/gcs-oauth2-boto-plugin.git\n#36 0.207 submodule.gslib/vendored/boto.url https://github.com/gsutil-mirrors/boto.git\n#36 DONE 0.2s\n\n#37 [34/41] RUN cd /tmp && curl -sL https://github.com/gsutil-mirrors/boto/archive/0f12ca7068d85b052938c8fffd7a42d5d1850563.tar.gz -o boto_exact.tar.gz\n#37 DONE 1.0s\n\n#38 [35/41] RUN cd /tmp && tar tzf boto_exact.tar.gz 2>/dev/null | grep -E \"boto/manage/test_manage|sdb/db/test_db|compat.py\" | head\n#38 0.227 boto-0f12ca7068d85b052938c8fffd7a42d5d1850563/boto/compat.py\n#38 0.227 boto-0f12ca7068d85b052938c8fffd7a42d5d1850563/boto/manage/test_manage.py\n#38 0.227 boto-0f12ca7068d85b052938c8fffd7a42d5d1850563/boto/sdb/db/test_db.py\n#38 0.227 boto-0f12ca7068d85b052938c8fffd7a42d5d1850563/tests/compat.py\n#38 DONE 0.3s\n\n#39 [36/41] RUN cd /repo && runtest 2>&1 | tail -40\n#39 0.229 /bin/sh: 1: runtest: not found\n#39 DONE 0.3s\n\n#40 [37/41] RUN cd /repo && runtest 2>&1 | tail -50\n#40 0.185 /bin/sh: 1: runtest: not found\n#40 DONE 0.2s\n\n#41 [38/41] RUN runtest 2>&1 | tail -50\n#41 0.227 /bin/sh: 1: runtest: not found\n#41 DONE 0.3s\n\n#42 [39/41] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#42 DONE 0.4s\n\n#43 [40/41] WORKDIR /testbed\n#43 DONE 0.0s\n\n#44 exporting to image\n#44 exporting layers\n#44 exporting layers 3.4s done\n#44 exporting manifest sha256:12a80ccea2140db1f5193fb8df92fa7ff3341758cf3ef84018a5c9c64bae92b0 0.0s done\n#44 exporting config sha256:da2ef27bd77f8be9c2a11a36f1e8050e09408b007c1941df1992c70e56598f7f done\n#44 exporting attestation manifest sha256:f42322ec70b9c40ea3df3a58106483290a4de7c0d3acf98c24c5341280c0ab19 done\n#44 exporting manifest list sha256:82d7d95eaf26a4fb9f2bb6505e06331c39805dea92559734d1f0226be91751b5 done\n#44 naming to docker.io/library/bench-pjy-repo2run-googlecloudplatform-gsutil:latest done\n#44 unpacking to docker.io/library/bench-pjy-repo2run-googlecloudplatform-gsutil:latest\n#44 unpacking to docker.io/library/bench-pjy-repo2run-googlecloudplatform-gsutil:latest 4.0s done\n#44 DONE 7.4s\n",
   "status": "timed_out",
   "py_test_files": 85,
   "collect_rc": 2,
@@ -1598,9 +1598,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": true,
-  "image_size_mb": 569.7,
+  "image_size_mb": 2061.6,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-googlecloudplatform-gsutil@sha256:e1ac19b11445d9b8a222115640c7c430fbf5df9a6ee73faaa199520ba52f5d5c",
+  "image_digest": "bench-pjy-repo2run-googlecloudplatform-gsutil@sha256:82d7d95eaf26a4fb9f2bb6505e06331c39805dea92559734d1f0226be91751b5",
   "installed_pkg_count": 65,
   "tokens_in": 4052284,
   "tokens_out": 75428,
@@ -1608,7 +1608,7 @@
   "turns_used": 100,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 59.31,
+  "build_s": 36.03,
   "test_s": 1800.02,
   "meta": {
     "status": "produced",
@@ -1617,19 +1617,7 @@
     "tokens_in": 4052284,
     "tokens_out": 75428,
     "llm_calls": null,
-    "turns_used": 100,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 100
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "graph2env__envbench_python100",
+  "agent": "g2e-envbench100",
   "repo": "facebookresearch/hydra",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": " -m pip --version >/dev/null 2>&1; then         /testbed/.venv/bin/python -m pip install pytest;       else         command -v uv >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#14 0.474 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (8.3.5)\n#14 0.479 Requirement already satisfied: iniconfig in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#14 0.480 Requirement already satisfied: packaging in /usr/local/lib/python3.11/site-packages (from pytest) (26.3)\n#14 0.481 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#14 0.524 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#14 DONE 0.7s\n\n#15 [11/11] WORKDIR /testbed\n#15 DONE 0.0s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 33.6s done\n#16 exporting manifest sha256:bc5c2ea298a64eee3103e5aadeb8a865bde4659e440df4319c520c89c8241a57 0.0s done\n#16 exporting config sha256:d9cd1fb2523a584befb52ff155b8f4e63a353aeb0b8fe0450072d19245d1f86b done\n#16 exporting attestation manifest sha256:18a9e06e925cc96b959a9e77f9bc8f49db3d12e4ccf9663bca656f02a8a80930 0.0s done\n#16 exporting manifest list sha256:f50e047803c5c5a8c919f1037231a6aa34aeb79b357877bb1560b361975ad3ae done\n#16 naming to docker.io/library/bench-graph2env__envbench_python100-facebookresearch-hydra:latest done\n#16 unpacking to docker.io/library/bench-graph2env__envbench_python100-facebookresearch-hydra:latest\n#16 unpacking to docker.io/library/bench-graph2env__envbench_python100-facebookresearch-hydra:latest 5.8s done\n#16 DONE 39.5s\n",
+  "build_log_tail": "in/python ]; then       if /testbed/.venv/bin/python -m pip --version >/dev/null 2>&1; then         /testbed/.venv/bin/python -m pip install pytest;       else         command -v uv >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#14 0.505 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (8.3.5)\n#14 0.511 Requirement already satisfied: iniconfig in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#14 0.511 Requirement already satisfied: packaging in /usr/local/lib/python3.11/site-packages (from pytest) (26.3)\n#14 0.512 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#14 0.553 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#14 DONE 0.7s\n\n#15 [11/11] WORKDIR /testbed\n#15 DONE 0.0s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 30.4s done\n#16 exporting manifest sha256:bc8a904cd829e5971a3d6cfd611f8fc239a36ccd86e4bb058ddbd3d78aeb9a97 done\n#16 exporting config sha256:bdd95716165c35dccc4c28771e97ecdd26f3a4cbbd00036ab270749cd9d87e06 done\n#16 exporting attestation manifest sha256:8bb361567c2f25d9aea0f4325213014158ffbaf6ed2ffb0d2b206e35ecd70830 done\n#16 exporting manifest list sha256:917d247a345692fd00014ec7488fa782e1a5358fde6de310e70af221577fbc2d done\n#16 naming to docker.io/library/bench-g2e-envbench100-facebookresearch-hydra:latest done\n#16 unpacking to docker.io/library/bench-g2e-envbench100-facebookresearch-hydra:latest\n#16 unpacking to docker.io/library/bench-g2e-envbench100-facebookresearch-hydra:latest 5.9s done\n#16 DONE 36.4s\n",
   "status": "executed",
   "py_test_files": 59,
   "collect_rc": 0,
@@ -5038,9 +5038,9 @@
   "ebsr": true,
   "pass_rate": 0.8706,
   "timed_out": false,
-  "image_size_mb": 371.9,
+  "image_size_mb": 1464.3,
   "image_delta_mb": null,
-  "image_digest": "bench-graph2env__envbench_python100-facebookresearch-hydra@sha256:f50e047803c5c5a8c919f1037231a6aa34aeb79b357877bb1560b361975ad3ae",
+  "image_digest": "bench-g2e-envbench100-facebookresearch-hydra@sha256:917d247a345692fd00014ec7488fa782e1a5358fde6de310e70af221577fbc2d",
   "installed_pkg_count": 11,
   "tokens_in": 952817,
   "tokens_out": 26263,
@@ -5048,8 +5048,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 86.88,
-  "test_s": 59.43,
+  "build_s": 81.99,
+  "test_s": 59.91,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -5066,19 +5066,7 @@
       ],
       "services": [],
       "services_rc": null
-    },
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=2e682d84e789d82dd11ab1f329f2dd1966fa6b54 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=2e682d84e789d82dd11ab1f329f2dd1966fa6b54 (pinned)\n"
-      }
-    ]
+    }
   },
   "error_surface": "",
   "error_surface_reason": "",

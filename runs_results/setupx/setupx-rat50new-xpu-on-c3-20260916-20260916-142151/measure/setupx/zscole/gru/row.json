@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "zscole/gru",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ckages/google/api_core/_python_version_support.py:254: FutureWarning: You are using a Python version (3.10.21) which Google will stop supporting in new releases of google.api_core once it reaches its end of life (2026-10-04). Please upgrade to the latest Python version, or at least Python 3.11, to continue receiving updates for google.api_core past that date.\n#10 59.91     warnings.warn(message, FutureWarning)\n#10 59.91 \n#10 59.91 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n#10 59.91 773 tests collected in 3.46s\n#10 60.83 Name: pytest-asyncio\n#10 60.83 Version: 1.4.0\n#10 60.83 Name: pytest-cov\n#10 60.83 Version: 7.1.0\n#10 60.83 Name: ruff\n#10 60.83 Version: 0.16.9\n#10 60.83 Name: mypy\n#10 60.83 Version: 2.3.1\n#10 60.83 ---\n#10 60.85 67c9b6f feat: add multimodel support with Ollama\n#10 DONE 61.0s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.5s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 45.5s done\n#14 exporting manifest sha256:465c460cf391230cf1aad793d205657815cf33fad3477d7b06d305a917e893d2 0.0s done\n#14 exporting config sha256:fba2def596d29c07eb93c7271feddd575b7bf0ae632f62c587878141f26543f9 0.0s done\n#14 exporting attestation manifest sha256:53147ad6bfe55357c934e6057be051b2a4c95bf780b6c6ce4702f49536309d83 0.0s done\n#14 exporting manifest list sha256:5c484730aa6c2bb1e3a5b3ec4886ff19062ccfd51e31c5c4175382c3f6732947 0.0s done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-zscole-gru:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-zscole-gru:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-zscole-gru:latest 9.6s done\n#14 DONE 55.2s\n",
+  "build_log_tail": "========\n#10 55.01 ../../usr/local/lib/python3.10/site-packages/google/api_core/_python_version_support.py:254\n#10 55.01   /usr/local/lib/python3.10/site-packages/google/api_core/_python_version_support.py:254: FutureWarning: You are using a Python version (3.10.21) which Google will stop supporting in new releases of google.api_core once it reaches its end of life (2026-10-04). Please upgrade to the latest Python version, or at least Python 3.11, to continue receiving updates for google.api_core past that date.\n#10 55.01     warnings.warn(message, FutureWarning)\n#10 55.01 \n#10 55.01 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n#10 55.01 773 tests collected in 3.20s\n#10 55.85 Name: pytest-asyncio\n#10 55.85 Version: 1.4.0\n#10 55.85 Name: pytest-cov\n#10 55.85 Version: 7.1.0\n#10 55.85 Name: ruff\n#10 55.85 Version: 0.16.8\n#10 55.85 Name: mypy\n#10 55.85 Version: 2.3.1\n#10 55.85 ---\n#10 55.86 67c9b6f feat: add multimodel support with Ollama\n#10 DONE 56.4s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.5s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 46.2s done\n#14 exporting manifest sha256:55716919912e82e592b333d0ecb685316c8db9a4012e9773694b9f7347cabcb7 0.0s done\n#14 exporting config sha256:7931283643cad2cec03dfabf7e581fca6a0dd3c0796839d0af217a4cb651fa88 0.0s done\n#14 exporting attestation manifest sha256:9dc49edbdf4a224683b9f956a5b7dc20f4dd2313ae849bd953b5bc9a15375533 0.0s done\n#14 exporting manifest list sha256:e3c6f3755287b8eec1c632b62c4f69b08029efa8138d27f42b61dd914645289f 0.0s done\n#14 naming to docker.io/library/bench-setupx-zscole-gru:latest done\n#14 unpacking to docker.io/library/bench-setupx-zscole-gru:latest\n#14 unpacking to docker.io/library/bench-setupx-zscole-gru:latest 8.8s done\n#14 DONE 55.1s\n",
   "status": "executed",
   "py_test_files": 24,
   "collect_rc": 0,
@@ -1572,18 +1572,18 @@
   "ebsr": true,
   "pass_rate": 1.0,
   "timed_out": false,
-  "image_size_mb": 3030.4,
+  "image_size_mb": 3029.4,
   "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-zscole-gru@sha256:5c484730aa6c2bb1e3a5b3ec4886ff19062ccfd51e31c5c4175382c3f6732947",
-  "installed_pkg_count": 134,
+  "image_digest": "bench-setupx-zscole-gru@sha256:e3c6f3755287b8eec1c632b62c4f69b08029efa8138d27f42b61dd914645289f",
+  "installed_pkg_count": 133,
   "tokens_in": 137722,
   "tokens_out": 6567,
   "llm_calls": 27,
   "turns_used": 9,
   "cost_usd": null,
   "produce_s": 486.68,
-  "build_s": 120.84,
-  "test_s": 125.36,
+  "build_s": 115.04,
+  "test_s": 119.96,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -1618,19 +1618,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=67c9b6fff71ccbca275686dd955923ef00da8f1d (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=67c9b6fff71ccbca275686dd955923ef00da8f1d (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

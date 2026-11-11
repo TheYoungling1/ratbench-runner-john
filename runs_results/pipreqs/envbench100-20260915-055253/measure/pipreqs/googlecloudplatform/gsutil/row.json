@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "googlecloudplatform/gsutil",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "s_oauth2_boto_plugin retry_decorator pyu2f\n#11 5.269 Installing collected packages: retry_decorator, boto, six, pyparsing, pycryptodome, pycparser, pyasn1, protobuf, coverage, cachetools, rsa, pyu2f, pyasn1-modules, httplib2, cffi, oauth2client, google_reauth, google-auth, cryptography, pyOpenSSL, google_auth_httplib2, gcs_oauth2_boto_plugin\n#11 6.963 Successfully installed boto-2.49.0 cachetools-5.5.2 cffi-2.1.1 coverage-7.16.1 cryptography-50.0.1 gcs_oauth2_boto_plugin-3.3 google-auth-2.39.0 google_auth_httplib2-0.4.2 google_reauth-0.1.1 httplib2-0.32.0 oauth2client-4.1.3 protobuf-7.36.2 pyOpenSSL-26.4.0 pyasn1-0.6.4 pyasn1-modules-0.4.2 pycparser-3.0 pycryptodome-3.23.0 pyparsing-3.3.3 pyu2f-0.1.5 retry_decorator-1.1.1 rsa-4.7.2 six-1.17.0\n#11 6.964 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 6.968 \n#11 6.968 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 6.968 [notice] To update, run: pip install --upgrade pip\n#11 DONE 7.6s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 2.6s done\n#12 exporting manifest sha256:c29788a03385ec81dd9ef221032f067841ada340ffd8bb77035cb0b4708a99eb done\n#12 exporting config sha256:64b347a62cebe016104bcc5a2af5cb88c5ee9ade0a02ab86f388c4de5ec27187 done\n#12 exporting attestation manifest sha256:075eb46dcf40bb3c97fae1701fc1f9c61682c41d49b66884533c05394fe1f3ed 0.0s done\n#12 exporting manifest list sha256:f73a7cbaf5e71631605248e2a9951b40509f6742bddb7f18f42ba0bf9f6b336e done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-googlecloudplatform-gsutil:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-googlecloudplatform-gsutil:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-googlecloudplatform-gsutil:latest 1.1s done\n#12 DONE 3.8s\n",
+  "build_log_tail": "_boto_plugin retry_decorator pyu2f\n#11 4.465 Installing collected packages: retry_decorator, boto, six, pyparsing, pycryptodome, pycparser, pyasn1, protobuf, coverage, cachetools, rsa, pyu2f, pyasn1-modules, httplib2, cffi, oauth2client, google_reauth, google-auth, cryptography, pyOpenSSL, google_auth_httplib2, gcs_oauth2_boto_plugin\n#11 5.989 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 5.989 Successfully installed boto-2.49.0 cachetools-5.5.2 cffi-2.1.1 coverage-7.16.1 cryptography-50.0.1 gcs_oauth2_boto_plugin-3.3 google-auth-2.39.0 google_auth_httplib2-0.4.2 google_reauth-0.1.1 httplib2-0.32.0 oauth2client-4.1.3 protobuf-7.36.1 pyOpenSSL-26.4.0 pyasn1-0.6.4 pyasn1-modules-0.4.2 pycparser-3.0 pycryptodome-3.23.0 pyparsing-3.3.2 pyu2f-0.1.5 retry_decorator-1.1.1 rsa-4.7.2 six-1.17.0\n#11 5.997 \n#11 5.997 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 5.997 [notice] To update, run: pip install --upgrade pip\n#11 DONE 6.5s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 2.5s done\n#12 exporting manifest sha256:b55e392aacfb6bb795440a4e3b95e097b0e0ecddd535d81069dde07393b7fb1e\n#12 exporting manifest sha256:b55e392aacfb6bb795440a4e3b95e097b0e0ecddd535d81069dde07393b7fb1e done\n#12 exporting config sha256:581d2518e1f4d621489d5046d811162bc7a57f5c422c3a7d409476e1acd7bb50 0.0s done\n#12 exporting attestation manifest sha256:9cf670466100a142a5f31da3926b0c75530ebab963e0f522398a379fb6223ae4 done\n#12 exporting manifest list sha256:d5c1cc471a5afd2bf9466e495906d06776515eb182001c6c00a18abcfd494cb4 done\n#12 naming to docker.io/library/bench-pipreqs-googlecloudplatform-gsutil:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-googlecloudplatform-gsutil:latest\n#12 unpacking to docker.io/library/bench-pipreqs-googlecloudplatform-gsutil:latest 1.0s done\n#12 DONE 3.6s\n",
   "status": "collect_error",
   "py_test_files": 83,
   "collect_rc": 2,
@@ -192,9 +192,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 441.1,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-googlecloudplatform-gsutil@sha256:f73a7cbaf5e71631605248e2a9951b40509f6742bddb7f18f42ba0bf9f6b336e",
+  "image_size_mb": 440.9,
+  "image_delta_mb": 53.3,
+  "image_digest": "bench-pipreqs-googlecloudplatform-gsutil@sha256:d5c1cc471a5afd2bf9466e495906d06776515eb182001c6c00a18abcfd494cb4",
   "installed_pkg_count": 36,
   "tokens_in": null,
   "tokens_out": null,
@@ -202,8 +202,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 8.06,
-  "build_s": 15.27,
-  "test_s": 4.65,
+  "build_s": 14.9,
+  "test_s": 4.67,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -230,19 +230,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=767984ddf846c5216a0f8f00a580ce72c15c978e (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=767984ddf846c5216a0f8f00a580ce72c15c978e (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

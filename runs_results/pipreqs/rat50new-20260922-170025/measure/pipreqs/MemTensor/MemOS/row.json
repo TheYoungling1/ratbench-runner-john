@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50new-20260922-170025",
+  "agent": "pipreqs",
   "repo": "MemTensor/MemOS",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "re-2.46.5 pydantic-settings-2.15.0 pyjwt-2.15.0 pymilvus-3.0.2 pyparsing-3.3.3 pyperclip-1.11.0 pysdl2-0.9.17 pysdl2-dll-2.32.10 python-dotenv-1.2.3 python-multipart-0.0.32 python_dateutil-2.9.0.post0 pytz-2026.4 qdrant_client-1.19.1 rank_bm25-0.2.2 redis-8.1.0 referencing-0.37.0 regex-2026.9.10 requests-toolbelt-1.0.0 rich-15.0.0 rich-rst-2.1.0 rouge_score-0.1.2 rpds-py-0.30.0 safetensors-0.8.0 schedule-1.2.2 scikit_learn-1.7.2 scipy-1.15.3 sentence_transformers-6.1.0 shellingham-1.5.4 six-1.17.0 sniffio-1.3.1 sse-starlette-3.4.11 starlette-1.7.0 supermemory-3.62.0 sympy-1.14.0 tavily-1.1.0 tenacity-9.1.4 threadpoolctl-3.7.0 tiktoken-0.14.0 tokenizers-0.23.2 tokie-0.1.4 torch-2.14.0 tqdm-4.70.1 transformers-5.17.0 triton-3.8.0 truststore-0.10.4 typer-0.27.2 typing-inspection-0.4.4 tzdata-2026.4 tzlocal-5.4.4 uncalled-for-0.4.0 urllib3-2.8.0 uuid-utils-0.17.1 uvicorn-0.54.0 watchfiles-1.3.0 websocket-client-1.9.2 websockets-16.1.1 xxhash-4.0.1 yarl-1.25.1 zep_cloud-3.30.0 zipp-4.1.0 zstandard-0.25.0\n#11 134.9 \n#11 134.9 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 134.9 [notice] To update, run: pip install --upgrade pip\n#11 DONE 137.8s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 354.8s done\n#12 exporting manifest sha256:330b8b960bd9ea6ab657b901646dc7e098b944f2c96dc4dff40d0acb52e6af88 0.0s done\n#12 exporting config sha256:6cc69152e1acb2e793900ba1862bbfe1db7499c7750d701091f72ef0344b5e98 done\n#12 exporting attestation manifest sha256:14dc5d788044b4a5763b485a8c6564803759955f4f304cbea3a1d4140de412f8 0.0s done\n#12 exporting manifest list sha256:0514a5e122323c80fd262f6e0d2f6f178fa1f79378bdbcf5bfe93051021434a5 done\n#12 naming to docker.io/library/bench-pipreqs__rat50new-20260922-170025-memtensor-memos:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-memtensor-memos:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-memtensor-memos:latest 46.8s done\n#12 DONE 401.8s\n",
+  "build_log_tail": "antic-settings-2.15.0 pyjwt-2.14.0 pymilvus-3.0.2 pyparsing-3.3.3 pyperclip-1.11.0 pysdl2-0.9.17 pysdl2-dll-2.32.10 python-dotenv-1.2.3 python-multipart-0.0.32 python_dateutil-2.9.0.post0 pytz-2026.3.post1 qdrant_client-1.19.1 rank_bm25-0.2.2 redis-8.1.0 referencing-0.37.0 regex-2026.9.10 requests-toolbelt-1.0.0 rich-15.0.0 rich-rst-2.1.0 rouge_score-0.1.2 rpds-py-0.30.0 safetensors-0.8.0 schedule-1.2.2 scikit_learn-1.7.2 scipy-1.15.3 sentence_transformers-6.1.0 shellingham-1.5.4 six-1.17.0 sniffio-1.3.1 sse-starlette-3.4.11 starlette-1.6.0 supermemory-3.62.0 sympy-1.14.0 tavily-1.1.0 tenacity-9.1.4 threadpoolctl-3.7.0 tiktoken-0.14.0 tokenizers-0.23.2 tokie-0.1.4 torch-2.14.0 tqdm-4.70.1 transformers-5.17.0 triton-3.8.0 truststore-0.10.4 typer-0.27.2 typing-inspection-0.4.4 tzdata-2026.4 tzlocal-5.4.4 uncalled-for-0.4.0 urllib3-2.8.0 uuid-utils-0.17.1 uvicorn-0.53.0 watchfiles-1.3.0 websocket-client-1.9.2 websockets-16.1.1 xxhash-4.0.1 yarl-1.25.1 zep_cloud-3.28.0 zipp-4.1.0 zstandard-0.25.0\n#11 170.6 \n#11 170.6 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 170.6 [notice] To update, run: pip install --upgrade pip\n#11 DONE 173.8s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 423.6s done\n#12 exporting manifest sha256:f789be022aeff6207979276b3989bb6148899a430e716aecb9d59c0c546bbdab\n#12 exporting manifest sha256:f789be022aeff6207979276b3989bb6148899a430e716aecb9d59c0c546bbdab done\n#12 exporting config sha256:ae45282d8015d62ea10b47e9795a81bb399800400061e9ccb0ac6ba3c16adce0 done\n#12 exporting attestation manifest sha256:9633e6390f5a58dfb3e09a49cfca53002b2c3909fed3646eefb667ff2b5e5acc done\n#12 exporting manifest list sha256:1f853d3ef4f4539b8e0c215ffbb8863ea5e9bf92721e7370061e4598afcb8c4a done\n#12 naming to docker.io/library/bench-pipreqs-memtensor-memos:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-memtensor-memos:latest\n#12 unpacking to docker.io/library/bench-pipreqs-memtensor-memos:latest 90.9s done\n#12 DONE 514.6s\n",
   "status": "collect_error",
   "py_test_files": 124,
   "collect_rc": 2,
@@ -1000,9 +1000,9 @@
   "ebsr": true,
   "pass_rate": 0.4196,
   "timed_out": false,
-  "image_size_mb": 6831.5,
+  "image_size_mb": 17715.7,
   "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50new-20260922-170025-memtensor-memos@sha256:0514a5e122323c80fd262f6e0d2f6f178fa1f79378bdbcf5bfe93051021434a5",
+  "image_digest": "bench-pipreqs-memtensor-memos@sha256:1f853d3ef4f4539b8e0c215ffbb8863ea5e9bf92721e7370061e4598afcb8c4a",
   "installed_pkg_count": 235,
   "tokens_in": null,
   "tokens_out": null,
@@ -1010,8 +1010,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 10.46,
-  "build_s": 548.65,
-  "test_s": 20.91,
+  "build_s": 696.1,
+  "test_s": 25.77,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -1038,19 +1038,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=de8069428a9247bfa7a3d35f59a9b39fa8f231d2 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=de8069428a9247bfa7a3d35f59a9b39fa8f231d2 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

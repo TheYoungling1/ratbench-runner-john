@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "sublimelinter/sublimelinter",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "0.380 nab-project       0.0.18\n#15 0.380 nab-provider      0.0.18\n#15 0.380 nab-resolver      0.0.18\n#15 0.380 packaging         26.3\n#15 0.380 pip               23.0.1\n#15 0.380 pipdeptree        4.2.5\n#15 0.380 pluggy            1.6.0\n#15 0.380 Pygments          2.21.0\n#15 0.381 pyproject_hooks   1.3.3\n#15 0.381 pytest            9.1.1\n#15 0.381 pytest-xdist      3.8.0\n#15 0.381 setuptools        79.0.1\n#15 0.381 tomli             2.4.1\n#15 0.381 tomli_w           1.2.0\n#15 0.381 truststore        0.10.4\n#15 0.381 typing_extensions 4.16.0\n#15 0.381 urllib3           2.8.0\n#15 0.381 wheel             0.46.3\n#15 0.400 \n#15 0.400 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#15 0.400 [notice] To update, run: pip install --upgrade pip\n#15 DONE 0.5s\n\n#16 [13/17] RUN cd /repo && git status --short\n#16 DONE 0.2s\n\n#17 [14/17] RUN cd /repo && git log --oneline -3\n#17 0.150 621ba9b Fix spelling\n#17 0.150 4f5aba2 Merge pull request #1949 from SublimeLinter/prepare-4.25.0\n#17 0.150 4f855d0 Prepare 4.25.0 message\n#17 DONE 0.2s\n\n#18 [15/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#18 DONE 0.2s\n\n#19 [16/17] WORKDIR /testbed\n#19 DONE 0.0s\n\n#20 exporting to image\n#20 exporting layers\n#20 exporting layers 0.5s done\n#20 exporting manifest sha256:d1b16466810b8a22c81b3b1f45861270ba16ac6512791be10cbd36e556efe13e done\n#20 exporting config sha256:63cd90661f17cae3a79ccfce39c17c5758cff162ac90877f32554cf3ab9f6c87 done\n#20 exporting attestation manifest sha256:d7177483434293b641238b6061651ce29e4525a5db2bcef70787f44893f5a2dc 0.0s done\n#20 exporting manifest list sha256:33f24d7154e7ea8ebd744b099e92422eef5cdcbc5c44d5ec794105e501756be3 0.0s done\n#20 naming to docker.io/library/bench-repo2run__envbench100-pjy-sublimelinter-sublimelinter:latest done\n#20 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-sublimelinter-sublimelinter:latest\n#20 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-sublimelinter-sublimelinter:latest 0.4s done\n#20 DONE 0.9s\n",
+  "build_log_tail": "0.18\n#15 0.827 nab-markersets    0.0.18\n#15 0.828 nab-project       0.0.18\n#15 0.828 nab-provider      0.0.18\n#15 0.828 nab-resolver      0.0.18\n#15 0.828 packaging         26.3\n#15 0.828 pip               23.0.1\n#15 0.828 pipdeptree        4.2.5\n#15 0.829 pluggy            1.6.0\n#15 0.829 Pygments          2.21.0\n#15 0.829 pyproject_hooks   1.3.3\n#15 0.829 pytest            9.1.1\n#15 0.829 pytest-xdist      3.8.0\n#15 0.829 setuptools        79.0.1\n#15 0.829 tomli             2.4.1\n#15 0.830 tomli_w           1.2.0\n#15 0.830 truststore        0.10.4\n#15 0.830 typing_extensions 4.16.0\n#15 0.830 urllib3           2.8.0\n#15 0.830 wheel             0.46.3\n#15 0.857 \n#15 0.857 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#15 0.857 [notice] To update, run: pip install --upgrade pip\n#15 DONE 1.0s\n\n#16 [13/17] RUN cd /repo && git status --short\n#16 DONE 0.2s\n\n#17 [14/17] RUN cd /repo && git log --oneline -3\n#17 0.161 621ba9b Fix spelling\n#17 0.161 4f5aba2 Merge pull request #1949 from SublimeLinter/prepare-4.25.0\n#17 0.161 4f855d0 Prepare 4.25.0 message\n#17 DONE 0.2s\n\n#18 [15/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#18 DONE 0.4s\n\n#19 [16/17] WORKDIR /testbed\n#19 DONE 0.0s\n\n#20 exporting to image\n#20 exporting layers\n#20 exporting layers 0.5s done\n#20 exporting manifest sha256:19bfbb2658fd205b532511bfeee1aa8302f9f60e289f3b56f45f0792f0ace0cb done\n#20 exporting config sha256:3baefdad0e042a33935f055ef61e2337246e2cee86825cb49c42496876949d09 done\n#20 exporting attestation manifest sha256:8b4ceb37e7f1173b759dfa502873ac8848b483da78ca2297978230dcaacfbb4f 0.0s done\n#20 exporting manifest list sha256:e76e9a08b807d48653f702e54b0eed1d7802db286d137c858aca0cce7227267a done\n#20 naming to docker.io/library/bench-pjy-repo2run-sublimelinter-sublimelinter:latest done\n#20 unpacking to docker.io/library/bench-pjy-repo2run-sublimelinter-sublimelinter:latest\n#20 unpacking to docker.io/library/bench-pjy-repo2run-sublimelinter-sublimelinter:latest 0.4s done\n#20 DONE 0.9s\n",
   "status": "collect_error",
   "py_test_files": 17,
   "collect_rc": 2,
@@ -60,9 +60,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 492.2,
+  "image_size_mb": 1823.3,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-sublimelinter-sublimelinter@sha256:33f24d7154e7ea8ebd744b099e92422eef5cdcbc5c44d5ec794105e501756be3",
+  "image_digest": "bench-pjy-repo2run-sublimelinter-sublimelinter@sha256:e76e9a08b807d48653f702e54b0eed1d7802db286d137c858aca0cce7227267a",
   "installed_pkg_count": 27,
   "tokens_in": 3371251,
   "tokens_out": 88852,
@@ -70,8 +70,8 @@
   "turns_used": 100,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 4.9,
-  "test_s": 0.45,
+  "build_s": 6.88,
+  "test_s": 0.63,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -79,19 +79,7 @@
     "tokens_in": 3371251,
     "tokens_out": 88852,
     "llm_calls": null,
-    "turns_used": 100,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 100
   },
   "error_surface": "",
   "error_surface_reason": "",

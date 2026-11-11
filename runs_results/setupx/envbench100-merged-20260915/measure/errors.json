@@ -1,0 +1,173 @@
+{
+  "setupx": {
+    "collect": {
+      "agent": "setupx",
+      "n_repos": 100,
+      "source": "collect",
+      "n_admissible": 66,
+      "n_masked": 12,
+      "n_unobserved": 22,
+      "n_status_derived": 0,
+      "buckets": {
+        "collect_error": 18,
+        "success": 47,
+        "error": 14,
+        "non_conforming": 1,
+        "build_fail": 8,
+        "partial": 5,
+        "no_tests_collected": 3,
+        "timed_out": 2,
+        "zero_pass": 2
+      },
+      "surfaces": {
+        "full": 66,
+        "unobserved": 22,
+        "masked": 12
+      },
+      "token_repos": {
+        "ModuleNotFoundError": 5,
+        "NameError": 1,
+        "ImportError": 2,
+        "AttributeError": 1,
+        "biothings.utils.configuration.ConfigurationError": 1,
+        "urllib3.exceptions.NewConnectionError": 1,
+        "ConnectionRefusedError": 1,
+        "elastic_transport.ConnectionError": 1,
+        "urllib.error.URLError": 1,
+        "ssl.SSLCertVerificationError": 1,
+        "UnboundLocalError": 1,
+        "distutils.errors.DistutilsArgError": 1,
+        "getopt.GetoptError": 1
+      },
+      "token_events": {
+        "ModuleNotFoundError": 33,
+        "NameError": 1,
+        "ImportError": 4,
+        "AttributeError": 1,
+        "ConnectionRefusedError": 1,
+        "urllib3.exceptions.NewConnectionError": 1,
+        "elastic_transport.ConnectionError": 1,
+        "biothings.utils.configuration.ConfigurationError": 1,
+        "ssl.SSLCertVerificationError": 1,
+        "urllib.error.URLError": 1,
+        "UnboundLocalError": 1,
+        "getopt.GetoptError": 1,
+        "distutils.errors.DistutilsArgError": 1
+      },
+      "category_repos": {
+        "module_not_found": 5,
+        "uncategorized": 5,
+        "partial_import": 2,
+        "service_unavailable": 1
+      },
+      "category_events": {
+        "module_not_found": 33,
+        "uncategorized": 8,
+        "partial_import": 4,
+        "service_unavailable": 3
+      },
+      "crosstab": {
+        "collect_error|module_not_found": 4,
+        "collect_error|uncategorized": 5,
+        "collect_error|partial_import": 2,
+        "collect_error|service_unavailable": 1,
+        "timed_out|module_not_found": 1
+      },
+      "top_groups": {
+        "module_not_found": [
+          [
+            "sublime",
+            1
+          ],
+          [
+            "GitSavvy",
+            1
+          ],
+          [
+            "unittesting",
+            1
+          ],
+          [
+            "test",
+            1
+          ],
+          [
+            "usgs_pop_driver",
+            1
+          ],
+          [
+            "openml",
+            1
+          ],
+          [
+            "github_link",
+            1
+          ],
+          [
+            "matplotlib",
+            1
+          ],
+          [
+            "tqdm",
+            1
+          ],
+          [
+            "backend.keypoints_test",
+            1
+          ]
+        ],
+        "partial_import": [
+          [
+            "requires_zlib",
+            1
+          ],
+          [
+            "check_warnings",
+            1
+          ],
+          [
+            "EnvironmentVarGuard",
+            1
+          ],
+          [
+            "TrialHistory",
+            1
+          ]
+        ]
+      },
+      "uncategorized_rate": 0.1667
+    },
+    "run": {
+      "agent": "setupx",
+      "n_repos": 100,
+      "source": "run",
+      "n_admissible": 66,
+      "n_masked": 12,
+      "n_unobserved": 22,
+      "n_status_derived": 0,
+      "buckets": {
+        "collect_error": 18,
+        "success": 47,
+        "error": 14,
+        "non_conforming": 1,
+        "build_fail": 8,
+        "partial": 5,
+        "no_tests_collected": 3,
+        "timed_out": 2,
+        "zero_pass": 2
+      },
+      "surfaces": {
+        "full": 66,
+        "unobserved": 22,
+        "masked": 12
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    }
+  }
+}

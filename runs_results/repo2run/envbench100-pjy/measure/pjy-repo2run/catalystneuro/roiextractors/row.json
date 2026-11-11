@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "catalystneuro/roiextractors",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "tensions>=4.6.0 in /usr/local/lib/python3.10/site-packages (from exceptiongroup>=1->pytest>=7.0.0->pytest-xdist==3.8.0) (4.16.0)\n#33 0.929 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#33 0.932 \n#33 0.932 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#33 0.932 [notice] To update, run: pip install --upgrade pip\n#33 DONE 1.0s\n\n#34 [31/35] RUN cd /repo && pip install -e . -q || true\n#34 3.237 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#34 3.240 \n#34 3.240 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#34 3.240 [notice] To update, run: pip install --upgrade pip\n#34 DONE 3.4s\n\n#35 [32/35] RUN cd /repo && mkdir -p /shared/catalystneuro/ophys_testing_data\n#35 DONE 0.2s\n\n#36 [33/35] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#36 DONE 0.3s\n\n#37 [34/35] WORKDIR /testbed\n#37 DONE 0.0s\n\n#38 exporting to image\n#38 exporting layers\n#38 exporting layers 8.7s done\n#38 exporting manifest sha256:02a29c51a4f4c8279ff172102df9c3b43ff40fb837a5392ed812297af828c800 done\n#38 exporting config sha256:fc10e76bc8830d915c565ffb8f06df069116e9e9999ce5f2df8d6bf0704a4beb done\n#38 exporting attestation manifest sha256:03b0dfed6fe7b5ee2d7821216ebf187566fc96bf4734452ac9632146b910f16d done\n#38 exporting manifest list sha256:e8df742d292769c8ad9677d5fcae59e345e9d96f0ac7162c931816461acbc2c1 done\n#38 naming to docker.io/library/bench-repo2run__envbench100-pjy-catalystneuro-roiextractors:latest done\n#38 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-catalystneuro-roiextractors:latest\n#38 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-catalystneuro-roiextractors:latest 6.3s done\n#38 DONE 15.1s\n",
+  "build_log_tail": " already satisfied: typing-extensions>=4.6.0 in /usr/local/lib/python3.10/site-packages (from exceptiongroup>=1->pytest>=7.0.0->pytest-xdist==3.8.0) (4.16.0)\n#33 1.027 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#33 1.030 \n#33 1.030 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#33 1.030 [notice] To update, run: pip install --upgrade pip\n#33 DONE 1.2s\n\n#34 [31/35] RUN cd /repo && pip install -e . -q || true\n#34 3.666 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#34 3.669 \n#34 3.669 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#34 3.669 [notice] To update, run: pip install --upgrade pip\n#34 DONE 3.9s\n\n#35 [32/35] RUN cd /repo && mkdir -p /shared/catalystneuro/ophys_testing_data\n#35 DONE 0.2s\n\n#36 [33/35] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#36 DONE 0.4s\n\n#37 [34/35] WORKDIR /testbed\n#37 DONE 0.0s\n\n#38 exporting to image\n#38 exporting layers\n#38 exporting layers 9.3s done\n#38 exporting manifest sha256:7355fa8f5f71467294666c6adf3f3d4fe3e420d083b702c5321e1cce6700e864 done\n#38 exporting config sha256:55b1997c6584c49e0701be19e5d5403fea25ad8ef0e50f8124c5af53eff4dfaf done\n#38 exporting attestation manifest sha256:c57f57c1d2d936f5765ebd4b718e5f25dfee15181b40a80ddca43fa287a97dc1 0.0s done\n#38 exporting manifest list sha256:3398b146786f2540aece0e3de1c540e61ebb145d667398fcb512dc224a10ff1f 0.0s done\n#38 naming to docker.io/library/bench-pjy-repo2run-catalystneuro-roiextractors:latest done\n#38 unpacking to docker.io/library/bench-pjy-repo2run-catalystneuro-roiextractors:latest\n#38 unpacking to docker.io/library/bench-pjy-repo2run-catalystneuro-roiextractors:latest 8.8s done\n#38 DONE 18.2s\n",
   "status": "collect_error",
   "py_test_files": 20,
   "collect_rc": 2,
@@ -957,7 +957,7 @@
   "timed_out": false,
   "image_size_mb": 2900.0,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-catalystneuro-roiextractors@sha256:e8df742d292769c8ad9677d5fcae59e345e9d96f0ac7162c931816461acbc2c1",
+  "image_digest": "bench-pjy-repo2run-catalystneuro-roiextractors@sha256:3398b146786f2540aece0e3de1c540e61ebb145d667398fcb512dc224a10ff1f",
   "installed_pkg_count": 78,
   "tokens_in": 453535,
   "tokens_out": 13252,
@@ -965,8 +965,8 @@
   "turns_used": 24,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 88.1,
-  "test_s": 8.76,
+  "build_s": 82.6,
+  "test_s": 10.4,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -974,19 +974,7 @@
     "tokens_in": 453535,
     "tokens_out": 13252,
     "llm_calls": null,
-    "turns_used": 24,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 24
   },
   "error_surface": "",
   "error_surface_reason": "",

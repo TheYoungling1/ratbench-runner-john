@@ -1,0 +1,165 @@
+{
+  "pipreqs": {
+    "collect": {
+      "agent": "pipreqs",
+      "n_repos": 50,
+      "source": "collect",
+      "n_admissible": 17,
+      "n_masked": 14,
+      "n_unobserved": 19,
+      "n_status_derived": 0,
+      "buckets": {
+        "success": 4,
+        "collect_error": 25,
+        "build_fail": 16,
+        "partial": 2,
+        "error": 3
+      },
+      "surfaces": {
+        "full": 17,
+        "masked": 14,
+        "unobserved": 19
+      },
+      "token_repos": {
+        "ImportError": 3,
+        "RuntimeError": 2,
+        "FileNotFoundError": 2,
+        "ModuleNotFoundError": 5,
+        "SyntaxError": 2,
+        "ValueError": 1,
+        "redis.exceptions.ConnectionError": 1,
+        "ConnectionRefusedError": 1
+      },
+      "token_events": {
+        "RuntimeError": 2,
+        "ImportError": 3,
+        "FileNotFoundError": 4,
+        "ModuleNotFoundError": 79,
+        "SyntaxError": 2,
+        "ValueError": 1,
+        "ConnectionRefusedError": 1,
+        "redis.exceptions.ConnectionError": 1
+      },
+      "category_repos": {
+        "uncategorized": 3,
+        "partial_import": 2,
+        "file_missing": 2,
+        "module_not_found": 5,
+        "syntax_error": 2,
+        "import_failed": 1,
+        "service_unavailable": 1
+      },
+      "category_events": {
+        "uncategorized": 3,
+        "partial_import": 2,
+        "file_missing": 4,
+        "module_not_found": 79,
+        "syntax_error": 2,
+        "import_failed": 1,
+        "service_unavailable": 2
+      },
+      "crosstab": {
+        "collect_error|uncategorized": 3,
+        "collect_error|partial_import": 2,
+        "collect_error|file_missing": 2,
+        "collect_error|module_not_found": 5,
+        "collect_error|syntax_error": 2,
+        "collect_error|import_failed": 1,
+        "collect_error|service_unavailable": 1
+      },
+      "top_groups": {
+        "partial_import": [
+          [
+            "Self",
+            1
+          ],
+          [
+            "ATZipCodeField",
+            1
+          ]
+        ],
+        "file_missing": [
+          [
+            "vyper",
+            1
+          ],
+          [
+            "podman",
+            1
+          ]
+        ],
+        "module_not_found": [
+          [
+            "oauth2_provider",
+            1
+          ],
+          [
+            "reportlab",
+            1
+          ],
+          [
+            "celery",
+            1
+          ],
+          [
+            "hierarkey",
+            1
+          ],
+          [
+            "stripe",
+            1
+          ],
+          [
+            "rest_framework",
+            1
+          ],
+          [
+            "i18nfield",
+            1
+          ],
+          [
+            "tests.test_truncation_detection",
+            1
+          ],
+          [
+            "tests.test_openai_reasoning",
+            1
+          ],
+          [
+            "tests.test_summary_compactor",
+            1
+          ]
+        ]
+      },
+      "uncategorized_rate": 0.0323
+    },
+    "run": {
+      "agent": "pipreqs",
+      "n_repos": 50,
+      "source": "run",
+      "n_admissible": 17,
+      "n_masked": 14,
+      "n_unobserved": 19,
+      "n_status_derived": 0,
+      "buckets": {
+        "success": 4,
+        "collect_error": 25,
+        "build_fail": 16,
+        "partial": 2,
+        "error": 3
+      },
+      "surfaces": {
+        "full": 17,
+        "masked": 14,
+        "unobserved": 19
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    }
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "pjy-repo2run": {
+    "collect": {
+      "agent": "pjy-repo2run",
+      "n_repos": 50,
+      "source": "collect",
+      "n_admissible": 33,
+      "n_masked": 4,
+      "n_unobserved": 13,
+      "n_status_derived": 0,
+      "buckets": {
+        "partial": 7,
+        "success": 11,
+        "build_fail": 9,
+        "measure_error": 1,
+        "collect_error": 13,
+        "missing": 3,
+        "zero_pass": 2,
+        "timed_out": 4
+      },
+      "surfaces": {
+        "full": 33,
+        "unobserved": 13,
+        "masked": 4
+      },
+      "token_repos": {
+        "ModuleNotFoundError": 10,
+        "SyntaxError": 2,
+        "ImportError": 3,
+        "patchright._impl._errors.Error": 1,
+        "playwright._impl._errors.Error": 1,
+        "FileNotFoundError": 3,
+        "ValueError": 1,
+        "docker.errors.DockerException": 1,
+        "urllib3.exceptions.ProtocolError": 1,
+        "requests.exceptions.ConnectionError": 1,
+        "_pytest.pathlib.ImportPathMismatchError": 1
+      },
+      "token_events": {
+        "ModuleNotFoundError": 124,
+        "SyntaxError": 2,
+        "ImportError": 3,
+        "playwright._impl._errors.Error": 1,
+        "patchright._impl._errors.Error": 1,
+        "FileNotFoundError": 8,
+        "ValueError": 1,
+        "_pytest.pathlib.ImportPathMismatchError": 1,
+        "urllib3.exceptions.ProtocolError": 1,
+        "requests.exceptions.ConnectionError": 1,
+        "docker.errors.DockerException": 1
+      },
+      "category_repos": {
+        "syntax_error": 2,
+        "module_not_found": 10,
+        "partial_import": 2,
+        "uncategorized": 3,
+        "file_missing": 3,
+        "import_failed": 1,
+        "service_unavailable": 1,
+        "harness_error": 1
+      },
+      "category_events": {
+        "module_not_found": 124,
+        "syntax_error": 2,
+        "partial_import": 2,
+        "uncategorized": 4,
+        "file_missing": 8,
+        "import_failed": 1,
+        "harness_error": 1,
+        "service_unavailable": 2
+      },
+      "crosstab": {
+        "collect_error|syntax_error": 2,
+        "collect_error|module_not_found": 7,
+        "collect_error|partial_import": 1,
+        "timed_out|module_not_found": 3,
+        "collect_error|uncategorized": 1,
+        "timed_out|file_missing": 2,
+        "timed_out|uncategorized": 2,
+        "collect_error|import_failed": 1,
+        "timed_out|partial_import": 1,
+        "timed_out|service_unavailable": 1,
+        "timed_out|harness_error": 1,
+        "collect_error|file_missing": 1
+      },
+      "top_groups": {
+        "module_not_found": [
+          [
+            "tensorflow_io",
+            1
+          ],
+          [
+            "import_export",
+            1
+          ],
+          [
+            "syrupy",
+            1
+          ],
+          [
+            "fastapi",
+            1
+          ],
+          [
+            "autoscraper",
+            1
+          ],
+          [
+            "azdev",
+            1
+          ],
+          [
+            "examples.mlperf.models.llama",
+            1
+          ],
+          [
+            "tests.test_new_messages_from_state",
+            1
+          ],
+          [
+            "exceptions",
+            1
+          ],
+          [
+            "tests.test_guard_composition",
+            1
+          ]
+        ],
+        "partial_import": [
+          [
+            "six",
+            1
+          ],
+          [
+            "genai",
+            1
+          ]
+        ],
+        "file_missing": [
+          [
+            "C:\\\\Program Files (x86)\\\\Microsoft SDKs\\\\Azure\\\\CLI2\\\\Lib\\\\site-packages\\\\azure\\\\cli\\\\command_modules",
+            1
+          ],
+          [
+            "/opt/az/lib/python3.10/site-packages/azure/cli/command_modules",
+            1
+          ],
+          [
+            "--collect-only/lib/-q/site-packages/azure/cli/command_modules",
+            1
+          ],
+          [
+            "/usr/lib64/az/lib/",
+            1
+          ],
+          [
+            "vyper",
+            1
+          ]
+        ]
+      },
+      "uncategorized_rate": 0.0278
+    },
+    "run": {
+      "agent": "pjy-repo2run",
+      "n_repos": 50,
+      "source": "run",
+      "n_admissible": 33,
+      "n_masked": 4,
+      "n_unobserved": 13,
+      "n_status_derived": 0,
+      "buckets": {
+        "partial": 7,
+        "success": 11,
+        "build_fail": 9,
+        "measure_error": 1,
+        "collect_error": 13,
+        "missing": 3,
+        "zero_pass": 2,
+        "timed_out": 4
+      },
+      "surfaces": {
+        "full": 33,
+        "unobserved": 13,
+        "masked": 4
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    }
+  }
+}

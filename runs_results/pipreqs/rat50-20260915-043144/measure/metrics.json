@@ -1,0 +1,87 @@
+{
+  "pipreqs": {
+    "n": 50,
+    "n_exec": 23,
+    "n_collect_clean": 6,
+    "n_real_success": 8,
+    "n_unmeasurable": 0,
+    "n_legacy_missing": 0,
+    "EBSR": 0.12,
+    "n_ebsr": 6,
+    "EBSR_repo2run_raw": 0.12,
+    "n_raw": 6,
+    "false_green_removed": 0.0,
+    "status_census": {
+      "executed": 6,
+      "collect_error": 25,
+      "build_fail": 16,
+      "error": 3
+    },
+    "n_ebsr_zero_collected": 2,
+    "total_collected": 22168,
+    "mean_collected": 443.36,
+    "total_collect_errors": 1505,
+    "mean_collect_errors": 30.1,
+    "real_success": 0.16,
+    "micro": 0.8553,
+    "full_pass_repos": 2,
+    "coverage": 0.46,
+    "ESSR": 0.2004,
+    "ESSR_median": 0.0,
+    "n_gold_scored": 48,
+    "n_gold_zero": 32,
+    "n_gold_no_row": 0,
+    "gold_no_row": [],
+    "n_gold_capped": 0,
+    "gold_capped": [],
+    "n_gold_excluded": 2,
+    "gold_excluded": [
+      [
+        "checkmk/checkmk",
+        "gold_missing"
+      ],
+      [
+        "mlflow/mlflow",
+        "gold_missing"
+      ]
+    ],
+    "n_gold_sha_mismatch": 0,
+    "gold_sha_mismatch": [],
+    "mean_collection_coverage": 0.6657,
+    "median_collection_coverage": 0.9971,
+    "n_gold_hollow": 2,
+    "gold_hollow": [
+      [
+        "newfuture/ddns",
+        0,
+        912,
+        0.0
+      ],
+      [
+        "pycontribs/jira",
+        0,
+        311,
+        0.0
+      ]
+    ],
+    "mean_image_delta_mb": 756.2097,
+    "mean_installed_pkgs": 82.5806,
+    "mean_tokens": null,
+    "mean_tokens_out": null,
+    "tokens_per_ebsr": null,
+    "tokens_per_real_success": null,
+    "mean_turns": null,
+    "total_cost_usd": null,
+    "mean_cost_usd": null,
+    "cost_per_ebsr": null,
+    "cost_per_real_success": null,
+    "n_cost_reporting": 0,
+    "mean_produce_s": 16.8002,
+    "wall_s_per_real_success": 698.5938,
+    "n_token_reporting": 0,
+    "rebuild_ok_rate": 0.62,
+    "setup_compile_rate": 0.62,
+    "n_setup_compile": 31,
+    "unreplayed_rate": 0.0
+  }
+}

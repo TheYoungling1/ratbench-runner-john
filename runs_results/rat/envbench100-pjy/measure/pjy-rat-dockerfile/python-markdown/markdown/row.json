@@ -1,10 +1,10 @@
 {
-  "agent": "rat__envbench100-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "python-markdown/markdown",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ng installation: httpx2 2.13.0\n#18 8.609     Uninstalling httpx2-2.13.0:\n#18 8.641       Successfully uninstalled httpx2-2.13.0\n#18 8.698   Attempting uninstall: httpcore2\n#18 8.699     Found existing installation: httpcore2 2.13.0\n#18 8.708     Uninstalling httpcore2-2.13.0:\n#18 8.742       Successfully uninstalled httpcore2-2.13.0\n#18 8.993 Successfully installed Markdown-3.6 PyYAML-6.0.3 coverage-7.16.0 httpcore2-2.12.0 httpx2-2.12.0 idna-3.19 jiter-0.16.0 openai-3.11.0\n#18 8.994 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 9.082 \n#18 9.082 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 9.082 [notice] To update, run: pip install --upgrade pip\n#18 DONE 9.5s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.3s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.1s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 1.1s done\n#21 exporting manifest sha256:cbddfde9733697bd481413061009449612db3d7fda0f71f5022c13da64b60b2f\n#21 exporting manifest sha256:cbddfde9733697bd481413061009449612db3d7fda0f71f5022c13da64b60b2f done\n#21 exporting config sha256:54ab9a889d2cf830a0fa24de445b009924801d8399cc1f912ca6b8bcfe6ea5ed 0.0s done\n#21 exporting attestation manifest sha256:da7fc1ad3e4e5c1411b3bce08bac61c306f16800ead1fe053301702a29ea3be7 0.1s done\n#21 exporting manifest list sha256:6cd2c53cc68f8e3f7d7fe16f3be26eb0fef078060e52b9b97edec0cb3734a9d1\n#21 exporting manifest list sha256:6cd2c53cc68f8e3f7d7fe16f3be26eb0fef078060e52b9b97edec0cb3734a9d1 0.1s done\n#21 naming to docker.io/library/bench-rat__envbench100-pjy-python-markdown-markdown:latest 0.0s done\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-python-markdown-markdown:latest\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-python-markdown-markdown:latest 0.8s done\n#21 DONE 2.1s\n",
+  "build_log_tail": "13.47     Found existing installation: idna 3.20\n#18 13.48     Uninstalling idna-3.20:\n#18 13.48       Successfully uninstalled idna-3.20\n#18 13.53   Attempting uninstall: httpx2\n#18 13.53     Found existing installation: httpx2 2.13.0\n#18 13.55     Uninstalling httpx2-2.13.0:\n#18 13.57       Successfully uninstalled httpx2-2.13.0\n#18 13.63   Attempting uninstall: httpcore2\n#18 13.63     Found existing installation: httpcore2 2.13.0\n#18 13.64     Uninstalling httpcore2-2.13.0:\n#18 13.66       Successfully uninstalled httpcore2-2.13.0\n#18 13.79 Successfully installed Markdown-3.6 PyYAML-6.0.3 coverage-7.16.0 httpcore2-2.12.0 httpx2-2.12.0 idna-3.19 jiter-0.16.0 openai-3.11.0\n#18 13.79 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 13.88 \n#18 13.88 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 13.88 [notice] To update, run: pip install --upgrade pip\n#18 DONE 14.3s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 0.4s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 1.4s done\n#21 exporting manifest sha256:fb5e217aa02fb08d8df2bb474330155e8b94133ae8c67625d9c06cb215853b27 done\n#21 exporting config sha256:d81f36ca062e960101c86d62ffce9a2b4c9ed587a6e891634046c7def95efc0f 0.0s done\n#21 exporting attestation manifest sha256:9f13129ab15269a3e6fa8a6c78efac8b1991c8b917906956bd72a774fd14bf8c 0.0s done\n#21 exporting manifest list sha256:894a744577e265dc3be2f02b66f94d9cb0690dda4e7db9f6221716f52a6fe703 0.0s done\n#21 naming to docker.io/library/bench-pjy-rat-dockerfile-python-markdown-markdown:latest done\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-python-markdown-markdown:latest\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-python-markdown-markdown:latest 1.0s done\n#21 DONE 2.6s\n",
   "status": "collect_error",
   "py_test_files": 31,
   "collect_rc": 2,
@@ -2198,9 +2198,9 @@
   "ebsr": true,
   "pass_rate": 0.9872,
   "timed_out": false,
-  "image_size_mb": 101.5,
+  "image_size_mb": 446.6,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__envbench100-pjy-python-markdown-markdown@sha256:6cd2c53cc68f8e3f7d7fe16f3be26eb0fef078060e52b9b97edec0cb3734a9d1",
+  "image_digest": "bench-pjy-rat-dockerfile-python-markdown-markdown@sha256:894a744577e265dc3be2f02b66f94d9cb0690dda4e7db9f6221716f52a6fe703",
   "installed_pkg_count": 28,
   "tokens_in": 1768293,
   "tokens_out": 51623,
@@ -2208,27 +2208,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 15.71,
-  "test_s": 2.18,
+  "build_s": 22.22,
+  "test_s": 2.65,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 1768293,
     "tokens_out": 51623,
-    "llm_calls": 57,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 57
   },
   "error_surface": "",
   "error_surface_reason": "",

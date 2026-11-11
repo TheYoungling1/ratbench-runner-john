@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__rat50-pjy",
+  "agent": "pjy-repo2run",
   "repo": "mlflow/mlflow",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ecting //' | sed 's/:.*//' | sort -u > /tmp/failing_files.txt; echo \"Count: $(wc -l < /tmp/failing_files.txt)\"; cat /tmp/failing_files.txt\n#66 0.391 Count: 0\n#66 DONE 0.4s\n\n#67 [63/71] RUN cd /repo && python /home/tools/runtest.py > /tmp/runtest2.txt 2>&1; true; grep -E \"^ERROR collecting\" /tmp/runtest2.txt | sed 's/^ERROR collecting //' | sed 's/:.*//' | sort -u > /tmp/failing_files.txt; echo \"Count: $(wc -l < /tmp/failing_files.txt)\"; cat /tmp/failing_files.txt\n#67 0.205 Count: 0\n#67 DONE 0.2s\n\n#68 [64/71] RUN cd /repo && python /home/tools/runtest.py > /tmp/runtest3.txt 2>&1; true; echo \"Exit: $?\"; tail -500 /tmp/runtest3.txt\n#68 0.256 Exit: 0\n#68 0.257 python: can't open file '/home/tools/runtest.py': [Errno 2] No such file or directory\n#68 DONE 0.3s\n\n#69 [65/71] RUN cd /repo && git apply --reject /patch/patch_1.diff --allow-empty\n#69 DONE 0.2s\n\n#70 [66/71] RUN cd /repo && git apply -R --reject /patch/patch_1.diff --allow-empty\n#70 DONE 0.3s\n\n#71 [67/71] RUN cd /repo && git apply --reject /patch/patch_2.diff --allow-empty\n#71 DONE 0.2s\n\n#72 [68/71] RUN cd /repo && python -c \"...\"\n#72 DONE 0.2s\n\n#73 [69/71] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#73 DONE 2.4s\n\n#74 [70/71] WORKDIR /testbed\n#74 DONE 0.1s\n\n#75 exporting to image\n#75 exporting layers\n#75 exporting layers 54.7s done\n#75 exporting manifest sha256:0d29c428d2d578499ea849ef263bba31b1921bf40393c7bc0944125c977ff38f done\n#75 exporting config sha256:83181509c3a3e39989d627affc55df807562e4f08e7c595523c21a87e69cc012 done\n#75 exporting attestation manifest sha256:9a38cd73e00eb247828d6e3391f8c3d7ea981fcbb008da704855445ef88c9a69 done\n#75 exporting manifest list sha256:e63d132fc8456796391780f9db5c77348f164d5ec69fc3bbc65e15de098430cb done\n#75 naming to docker.io/library/bench-repo2run__rat50-pjy-mlflow-mlflow:latest done\n#75 unpacking to docker.io/library/bench-repo2run__rat50-pjy-mlflow-mlflow:latest\n#75 unpacking to docker.io/library/bench-repo2run__rat50-pjy-mlflow-mlflow:latest 29.7s done\n#75 DONE 84.6s\n",
+  "build_log_tail": "R collecting //' | sed 's/:.*//' | sort -u > /tmp/failing_files.txt; echo \"Count: $(wc -l < /tmp/failing_files.txt)\"; cat /tmp/failing_files.txt\n#66 0.227 Count: 0\n#66 DONE 0.3s\n\n#67 [63/71] RUN cd /repo && python /home/tools/runtest.py > /tmp/runtest2.txt 2>&1; true; grep -E \"^ERROR collecting\" /tmp/runtest2.txt | sed 's/^ERROR collecting //' | sed 's/:.*//' | sort -u > /tmp/failing_files.txt; echo \"Count: $(wc -l < /tmp/failing_files.txt)\"; cat /tmp/failing_files.txt\n#67 0.283 Count: 0\n#67 DONE 0.3s\n\n#68 [64/71] RUN cd /repo && python /home/tools/runtest.py > /tmp/runtest3.txt 2>&1; true; echo \"Exit: $?\"; tail -500 /tmp/runtest3.txt\n#68 0.274 Exit: 0\n#68 0.276 python: can't open file '/home/tools/runtest.py': [Errno 2] No such file or directory\n#68 DONE 0.3s\n\n#69 [65/71] RUN cd /repo && git apply --reject /patch/patch_1.diff --allow-empty\n#69 DONE 0.2s\n\n#70 [66/71] RUN cd /repo && git apply -R --reject /patch/patch_1.diff --allow-empty\n#70 DONE 0.2s\n\n#71 [67/71] RUN cd /repo && git apply --reject /patch/patch_2.diff --allow-empty\n#71 DONE 0.2s\n\n#72 [68/71] RUN cd /repo && python -c \"...\"\n#72 DONE 0.3s\n\n#73 [69/71] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#73 DONE 6.4s\n\n#74 [70/71] WORKDIR /testbed\n#74 DONE 0.1s\n\n#75 exporting to image\n#75 exporting layers\n#75 exporting layers 49.2s done\n#75 exporting manifest sha256:fa3eddb4fbdbc8ecc4e49efe8f209e79ce14adcdd3232acaddc4ec6b26950c7e 0.0s done\n#75 exporting config sha256:3eb08eb5fad5f3a1b75851776c59793d5f2b3d6f92a48d49c95566f678838885 0.0s done\n#75 exporting attestation manifest sha256:dd1ef4f052755be96424780257b4225d03bbca6c9465f6a8d5fa0d45b7d04671 0.0s done\n#75 exporting manifest list sha256:663632dbeb6f23b721c56cfc4b60350848c92c186051098b1c02524c18272731 done\n#75 naming to docker.io/library/bench-pjy-repo2run-mlflow-mlflow:latest done\n#75 unpacking to docker.io/library/bench-pjy-repo2run-mlflow-mlflow:latest\n#75 unpacking to docker.io/library/bench-pjy-repo2run-mlflow-mlflow:latest 38.6s done\n#75 DONE 88.0s\n",
   "status": "timed_out",
   "py_test_files": 854,
   "collect_rc": 2,
@@ -165,9 +165,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": true,
-  "image_size_mb": 10261.4,
+  "image_size_mb": 10251.0,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__rat50-pjy-mlflow-mlflow@sha256:e63d132fc8456796391780f9db5c77348f164d5ec69fc3bbc65e15de098430cb",
+  "image_digest": "bench-pjy-repo2run-mlflow-mlflow@sha256:663632dbeb6f23b721c56cfc4b60350848c92c186051098b1c02524c18272731",
   "installed_pkg_count": 189,
   "tokens_in": 3526449,
   "tokens_out": 69971,
@@ -175,7 +175,7 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 268.86,
+  "build_s": 273.77,
   "test_s": 1800.01,
   "meta": {
     "status": "produced",
@@ -183,19 +183,7 @@
     "source": "results_pjy",
     "tokens_in": 3526449,
     "tokens_out": 69971,
-    "llm_calls": 100,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 100
   },
   "error_surface": "",
   "error_surface_reason": "",

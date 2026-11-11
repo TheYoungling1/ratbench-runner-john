@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50-20260915-043144",
+  "agent": "pipreqs",
   "repo": "crystaldba/postgres-mcp",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "zenlist-1.8.0 h11-0.16.0 httpcore2-2.13.1 httpx2-2.13.1 humanize-4.16.0 idna-3.20 instructor-1.17.0 jinja2-3.1.6 jiter-0.14.0 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 markdown-it-py-4.2.0 mcp-2.2.0 mcp-types-2.2.0 mdurl-0.1.2 multidict-6.9.1 openai-3.3.0 opentelemetry-api-1.45.0 pglast-8.4 propcache-0.5.4 psycopg-3.3.6 psycopg_pool-3.3.3 pycparser-3.0 pydantic-2.13.5 pydantic-core-2.46.5 pyjwt-2.15.0 pytest_asyncio-1.4.0 python-dotenv-1.2.3 python-multipart-0.0.32 referencing-0.37.0 regex-2026.9.10 requests-2.34.2 rich-14.3.4 rpds-py-0.30.0 shellingham-1.5.4 six-1.17.0 sniffio-1.3.1 sse-starlette-3.4.11 starlette-1.7.0 tenacity-9.1.4 truststore-0.10.4 typer-0.27.2 typing-inspection-0.4.4 urllib3-2.8.0 uvicorn-0.54.0 websocket-client-1.9.2 yarl-1.25.1\n#11 16.93 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 16.93 \n#11 16.93 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 16.93 [notice] To update, run: pip install --upgrade pip\n#11 DONE 18.2s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 8.4s done\n#12 exporting manifest sha256:ccce11bc35ac9c12eb707073b11c53f620217f18b68f08e557ae5a39e9b01d62 0.0s done\n#12 exporting config sha256:bbb1f85634a069ac95257d7c2621244656e380a36e4fdcb9e767bd6972349a70 done\n#12 exporting attestation manifest sha256:8c75e763d2ced9a57089fd2b36b9b49529898c0857b71cf810d82c3a51dca174 0.0s done\n#12 exporting manifest list sha256:703463bbb45ab6afdd9272aebdd396a34b42df2a04b9351bfd35099814e4572a done\n#12 naming to docker.io/library/bench-pipreqs__rat50-20260915-043144-crystaldba-postgres-mcp:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-crystaldba-postgres-mcp:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-crystaldba-postgres-mcp:latest 1.9s done\n#12 DONE 10.4s\n",
+  "build_log_tail": "1 distro-1.9.0 docker-pycreds-0.4.0 docker_py-1.10.6 docstring-parser-0.18.0 frozenlist-1.8.0 h11-0.16.0 httpcore2-2.13.0 httpx2-2.13.0 humanize-4.16.0 idna-3.19 instructor-1.17.0 jinja2-3.1.6 jiter-0.14.0 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 markdown-it-py-4.2.0 mcp-2.2.0 mcp-types-2.2.0 mdurl-0.1.2 multidict-6.8.0 openai-3.3.0 opentelemetry-api-1.44.0 pglast-8.4 propcache-0.5.2 psycopg-3.3.5 psycopg_pool-3.3.1 pycparser-3.0 pydantic-2.13.5 pydantic-core-2.46.5 pyjwt-2.14.0 pytest_asyncio-1.4.0 python-dotenv-1.2.3 python-multipart-0.0.32 referencing-0.37.0 regex-2026.9.10 requests-2.34.2 rich-14.3.4 rpds-py-0.30.0 shellingham-1.5.4 six-1.17.0 sniffio-1.3.1 sse-starlette-3.4.11 starlette-1.6.0 tenacity-9.1.4 truststore-0.10.4 typer-0.27.2 typing-inspection-0.4.4 urllib3-2.7.0 uvicorn-0.53.0 websocket-client-1.9.2 yarl-1.24.5\n#11 13.71 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 13.71 \n#11 13.71 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 13.71 [notice] To update, run: pip install --upgrade pip\n#11 DONE 15.0s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 4.5s done\n#12 exporting manifest sha256:26643efa0785da1bc2b45d0328ec1177f715071fd8314e7ded0ce318862b46bb done\n#12 exporting config sha256:cdb1e856b22411d077039547250a481b6efdcb6efb30950e85a9c50b59235ada done\n#12 exporting attestation manifest sha256:e9fd205dfe1f8bdf212746e41d22314c9c81d506e2136bc02e02a66d24213072 done\n#12 exporting manifest list sha256:6406d4a51d5d6739f86a0f238fa9ce08257ac4e3750124a1b02eb0a3aff7e63f done\n#12 naming to docker.io/library/bench-pipreqs-crystaldba-postgres-mcp:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-crystaldba-postgres-mcp:latest\n#12 unpacking to docker.io/library/bench-pipreqs-crystaldba-postgres-mcp:latest 1.8s done\n#12 DONE 6.3s\n",
   "status": "collect_error",
   "py_test_files": 18,
   "collect_rc": 4,
@@ -26,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 1829.4,
-  "image_delta_mb": 318.7,
-  "image_digest": "bench-pipreqs__rat50-20260915-043144-crystaldba-postgres-mcp@sha256:703463bbb45ab6afdd9272aebdd396a34b42df2a04b9351bfd35099814e4572a",
+  "image_size_mb": 471.9,
+  "image_delta_mb": 84.3,
+  "image_digest": "bench-pipreqs-crystaldba-postgres-mcp@sha256:6406d4a51d5d6739f86a0f238fa9ce08257ac4e3750124a1b02eb0a3aff7e63f",
   "installed_pkg_count": 80,
   "tokens_in": null,
   "tokens_out": null,
@@ -36,8 +36,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 8.44,
-  "build_s": 30.83,
-  "test_s": 1.05,
+  "build_s": 23.23,
+  "test_s": 1.1,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -64,19 +64,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=07eb329c8c48e49640e0d1b5b35465d4d024c3ee (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=07eb329c8c48e49640e0d1b5b35465d4d024c3ee (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

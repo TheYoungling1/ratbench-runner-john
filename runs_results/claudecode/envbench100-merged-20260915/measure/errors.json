@@ -1,0 +1,150 @@
+{
+  "claudecode-dockerfile": {
+    "collect": {
+      "agent": "claudecode-dockerfile",
+      "n_repos": 100,
+      "source": "collect",
+      "n_admissible": 78,
+      "n_masked": 9,
+      "n_unobserved": 13,
+      "n_status_derived": 0,
+      "buckets": {
+        "collect_error": 13,
+        "success": 41,
+        "build_fail": 13,
+        "zero_pass": 4,
+        "partial": 19,
+        "timed_out": 4,
+        "no_tests_collected": 5,
+        "non_conforming": 1
+      },
+      "surfaces": {
+        "full": 78,
+        "unobserved": 13,
+        "masked": 9
+      },
+      "token_repos": {
+        "ModuleNotFoundError": 6,
+        "ImportError": 3,
+        "ssl.SSLCertVerificationError": 1,
+        "urllib.error.URLError": 1,
+        "UnboundLocalError": 1,
+        "RuntimeError": 1,
+        "TypeError": 1
+      },
+      "token_events": {
+        "ModuleNotFoundError": 14,
+        "ImportError": 4,
+        "ssl.SSLCertVerificationError": 1,
+        "urllib.error.URLError": 1,
+        "UnboundLocalError": 1,
+        "TypeError": 1,
+        "RuntimeError": 1
+      },
+      "category_repos": {
+        "module_not_found": 6,
+        "partial_import": 2,
+        "import_failed": 2,
+        "uncategorized": 2
+      },
+      "category_events": {
+        "module_not_found": 14,
+        "partial_import": 2,
+        "import_failed": 2,
+        "uncategorized": 5
+      },
+      "crosstab": {
+        "collect_error|module_not_found": 6,
+        "collect_error|partial_import": 2,
+        "collect_error|import_failed": 2,
+        "collect_error|uncategorized": 2
+      },
+      "top_groups": {
+        "module_not_found": [
+          [
+            "GitSavvy",
+            1
+          ],
+          [
+            "unittesting",
+            1
+          ],
+          [
+            "sublime",
+            1
+          ],
+          [
+            "dask",
+            1
+          ],
+          [
+            "selective_scan_cuda",
+            1
+          ],
+          [
+            "flash_attn",
+            1
+          ],
+          [
+            "aqt.version",
+            1
+          ],
+          [
+            "yaml",
+            1
+          ],
+          [
+            "pyarrow",
+            1
+          ],
+          [
+            "github_link",
+            1
+          ]
+        ],
+        "partial_import": [
+          [
+            "TrialHistory",
+            1
+          ],
+          [
+            "scope2index",
+            1
+          ]
+        ]
+      },
+      "uncategorized_rate": 0.2174
+    },
+    "run": {
+      "agent": "claudecode-dockerfile",
+      "n_repos": 100,
+      "source": "run",
+      "n_admissible": 78,
+      "n_masked": 9,
+      "n_unobserved": 13,
+      "n_status_derived": 0,
+      "buckets": {
+        "collect_error": 13,
+        "success": 41,
+        "build_fail": 13,
+        "zero_pass": 4,
+        "partial": 19,
+        "timed_out": 4,
+        "no_tests_collected": 5,
+        "non_conforming": 1
+      },
+      "surfaces": {
+        "full": 78,
+        "unobserved": 13,
+        "masked": 9
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    }
+  }
+}

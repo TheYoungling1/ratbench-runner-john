@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__ratbench50_run-20260904-173735",
+  "agent": "setupx",
   "repo": "polarsource/polar",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "py:9:from sqlalchemy.dialects.postgresql import JSONB, TSVECTOR\n#10 88.01 server/polar/models/benefit.py:106:            postgresql_using=\"gin\",\n#10 88.01 server/polar/models/wallet_transaction.py:6:from sqlalchemy.dialects.postgresql import JSONB\n#10 88.01 server/polar/models/organization_sso_connection.py:6:from sqlalchemy.dialects.postgresql import JSONB\n#10 88.01 server/polar/models/user.py:22:from sqlalchemy.dialects.postgresql import JSONB\n#10 88.01 server/polar/models/merchant_migration_record.py:6:from sqlalchemy.dialects.postgresql import JSONB\n#10 88.01 server/polar/models/merchant_migration_record.py:48:            postgresql_where=text(\"deleted_at IS NULL\"),\n#10 88.01 server/polar/models/feedback.py:6:from sqlalchemy.dialects.postgresql import JSONB\n#10 88.01 server/polar/models/benefit_grant.py:17:from sqlalchemy.dialects.postgresql import JSONB\n#10 DONE 88.4s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 33.0s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.8s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.4s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 97.2s done\n#14 exporting manifest sha256:2f7a00d8390a819fea537a525aec0caba8fa5f3af2af8bc72d2a24c7a178cab8 done\n#14 exporting config sha256:01caa34cddd14a76842ecf245e68bc16588180fa89034640fd29d0a4ac53af84 done\n#14 exporting attestation manifest sha256:cebad2d3719ec9bdeb4527ae9da43448f70d67ccd5c5fb5ee93792c2d01d5da9 0.0s done\n#14 exporting manifest list sha256:ac01c17d40816161c0f5dee697de7f33376e3fbc263fe115d4fd781d76b2586e done\n#14 naming to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-polarsource-polar:latest done\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-polarsource-polar:latest\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-polarsource-polar:latest 51.0s done\n#14 DONE 148.3s\n",
+  "build_log_tail": "dialects.postgresql import JSONB\nserver/polar/models/payout_account.py:5:from sqlalchemy.dialects.postgresql import JSONB\nserver/polar/models/benefit.py:9:from sqlalchemy.dialects.postgresql import JSONB, TSVECTOR\nserver/polar/models/benefit.py:106:            postgresql_using=\"gin\",\nserver/polar/models/wallet_transaction.py:6:from sqlalchemy.dialects.postgresql import JSONB\nserver/polar/models/organization_sso_connection.py:6:from sqlalchemy.dialects.postgresql import JSONB\nserver/polar/models/user.py:22:from sqlalchemy.dialects.postgresql import JSONB\nserver/polar/models/merchant_migration_record.py:6:from sqlalchemy.dialects.postgresql import JSONB\nserver/polar/models/merchant_migration_record.py:48:            postgresql_where=text(\"deleted_at IS NULL\"),\nserver/polar/models/feedback.py:6:from sqlalchemy.dialects.postgresql import JSONB\nserver/polar/models/benefit_grant.py:17:from sqlalchemy.dialects.postgresql import JSONB\n ---> Removed intermediate container c80845709f59\n ---> f8ae87cea98a\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in 8a22b5c0fcd6\n ---> Removed intermediate container 8a22b5c0fcd6\n ---> 2da401ac7d5d\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in 321a76c89834\n ---> Removed intermediate container 321a76c89834\n ---> 64bf1dda57aa\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in 20cc1c6bbcfc\n ---> Removed intermediate container 20cc1c6bbcfc\n ---> 4ca01b6f4f3b\nStep 10/10 : WORKDIR /testbed\n ---> Running in 251433cc8dff\n ---> Removed intermediate container 251433cc8dff\n ---> 677a7ae08129\nSuccessfully built 677a7ae08129\nSuccessfully tagged bench-setupx-polarsource-polar:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 849,
   "collect_rc": 2,
@@ -39,9 +39,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 8270.1,
-  "image_delta_mb": 6759.4,
-  "image_digest": "bench-setupx__ratbench50_run-20260904-173735-polarsource-polar@sha256:ac01c17d40816161c0f5dee697de7f33376e3fbc263fe115d4fd781d76b2586e",
+  "image_size_mb": 2428.6,
+  "image_delta_mb": 2041.0,
+  "image_digest": "bench-setupx-polarsource-polar@sha256:677a7ae081293e6e64d10961aae9f4c3a46fb9af0d6aa8f6f05c21deab837db9",
   "installed_pkg_count": 13,
   "tokens_in": 799510,
   "tokens_out": 91942,
@@ -49,8 +49,8 @@
   "turns_used": 86,
   "cost_usd": null,
   "produce_s": 898.62,
-  "build_s": 296.99,
-  "test_s": 0.71,
+  "build_s": 407.13,
+  "test_s": 0.77,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -81,19 +81,7 @@
     "turns_used": 86,
     "produce_s": 898.62,
     "total_tokens": 891452,
-    "cost_usd": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=97e9430901a4197876318672cdd4fae99fc49a2b (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=97e9430901a4197876318672cdd4fae99fc49a2b (pinned)\n"
-      }
-    ]
+    "cost_usd": null
   },
   "error_surface": "",
   "error_surface_reason": "",

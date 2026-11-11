@@ -1,10 +1,10 @@
 {
-  "agent": "rat__envbench100-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "johnsnowlabs/nlu",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ricks-api-0.9.0 databricks-cli-0.18.0 dataclasses-0.6 decorator-5.3.1 executing-2.2.1 httpcore2-2.12.0 httpx2-2.12.0 idna-3.19 ipython-8.39.0 jedi-0.20.0 jiter-0.16.0 jmespath-1.1.0 joblib-1.6.0 johnsnowlabs-6.4.1 matplotlib-inline-0.2.2 nlu-5.4.1 numpy-2.2.6 oauthlib-3.3.1 openai-3.11.0 pandas-2.3.3 parso-0.8.7 pexpect-4.9.0 prompt_toolkit-3.0.53 ptyprocess-0.7.0 pure_eval-0.2.3 py4j-0.10.9.7 pyarrow-25.0.1 pyspark-3.4.0 python-dateutil-2.9.0.post0 pytz-2026.3.post1 requests-2.34.2 s3transfer-0.19.2 scikit-learn-1.7.2 scipy-1.15.3 six-1.17.0 spark-nlp-6.4.2 spark-nlp-display-5.0 stack-data-0.6.3 svgwrite-1.4 tabulate-0.10.0 threadpoolctl-3.6.0 traitlets-5.16.1 tzdata-2026.3 urllib3-2.7.0 wcwidth-0.8.3\n#18 286.1 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 286.4 \n#18 286.4 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 286.4 [notice] To update, run: pip install --upgrade pip\n#18 DONE 287.7s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 3.3s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.0s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 38.4s done\n#21 exporting manifest sha256:0f7b42c885c5bff774e7293c68a4ca6cc4fa15d6fd6ed941b8228141adc46cef done\n#21 exporting config sha256:9f9459d8d056d1048f0d4f989a0f8a429287b7a224ee47db8c689be9540e8de0 done\n#21 exporting attestation manifest sha256:8d11f08fdb67151a431ba8bd19d471bb663d76bed47dd6bc23787c5c06f1008e done\n#21 exporting manifest list sha256:256cddb52c2e06f0d48aac65125df45a20f15ae275008dabba98c34c8a4efcbb done\n#21 naming to docker.io/library/bench-rat__envbench100-pjy-johnsnowlabs-nlu:latest done\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-johnsnowlabs-nlu:latest\n#21 unpacking to docker.io/library/bench-rat__envbench100-pjy-johnsnowlabs-nlu:latest 20.3s done\n#21 DONE 58.8s\n",
+  "build_log_tail": "0 databricks-cli-0.18.0 dataclasses-0.6 decorator-5.3.1 executing-2.2.1 httpcore2-2.12.0 httpx2-2.12.0 idna-3.19 ipython-8.39.0 jedi-0.20.0 jiter-0.16.0 jmespath-1.1.0 joblib-1.6.0 johnsnowlabs-6.4.1 matplotlib-inline-0.2.2 nlu-5.4.1 numpy-2.2.6 oauthlib-3.3.1 openai-3.11.0 pandas-2.3.3 parso-0.8.7 pexpect-4.9.0 prompt_toolkit-3.0.53 ptyprocess-0.7.0 pure_eval-0.2.3 py4j-0.10.9.7 pyarrow-25.0.1 pyspark-3.4.0 python-dateutil-2.9.0.post0 pytz-2026.3.post1 requests-2.34.2 s3transfer-0.19.2 scikit-learn-1.7.2 scipy-1.15.3 six-1.17.0 spark-nlp-6.4.2 spark-nlp-display-5.0 stack-data-0.6.3 svgwrite-1.4 tabulate-0.10.0 threadpoolctl-3.6.0 traitlets-5.16.1 tzdata-2026.3 urllib3-2.7.0 wcwidth-0.8.3\n#18 936.3 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#18 936.8 \n#18 936.8 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#18 936.8 [notice] To update, run: pip install --upgrade pip\n#18 DONE 938.2s\n\n#19 [15/16] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#19 DONE 1.5s\n\n#20 [16/16] WORKDIR /testbed\n#20 DONE 0.1s\n\n#21 exporting to image\n#21 exporting layers\n#21 exporting layers 36.3s done\n#21 exporting manifest sha256:e039fa966057b5beb1bc8366c15420977d1622539475adc297e53055967898f3 0.0s done\n#21 exporting config sha256:951cf92d83036a78f2fc997e29d5fe66cb74f4e00a65e93ddfaf722138d83f15 0.0s done\n#21 exporting attestation manifest sha256:fdceed6dda5af980e7d5a945b9b6be23ec01265f3aa88d30ac6cf84b1615f9fb 0.0s done\n#21 exporting manifest list sha256:419fa7b75d000c7e09bc3dd02548ed57514e51175291468c468a734ab9a09108 0.0s done\n#21 naming to docker.io/library/bench-pjy-rat-dockerfile-johnsnowlabs-nlu:latest done\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-johnsnowlabs-nlu:latest\n#21 unpacking to docker.io/library/bench-pjy-rat-dockerfile-johnsnowlabs-nlu:latest 20.8s done\n#21 DONE 57.2s\n",
   "status": "collect_error",
   "py_test_files": 3,
   "collect_rc": 2,
@@ -34,7 +34,7 @@
   "timed_out": false,
   "image_size_mb": 5655.1,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__envbench100-pjy-johnsnowlabs-nlu@sha256:256cddb52c2e06f0d48aac65125df45a20f15ae275008dabba98c34c8a4efcbb",
+  "image_digest": "bench-pjy-rat-dockerfile-johnsnowlabs-nlu@sha256:419fa7b75d000c7e09bc3dd02548ed57514e51175291468c468a734ab9a09108",
   "installed_pkg_count": 74,
   "tokens_in": 1532145,
   "tokens_out": 19183,
@@ -42,27 +42,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 388.4,
-  "test_s": 1.56,
+  "build_s": 1029.06,
+  "test_s": 1.7,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 1532145,
     "tokens_out": 19183,
-    "llm_calls": 52,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 52
   },
   "error_surface": "",
   "error_surface_reason": "",

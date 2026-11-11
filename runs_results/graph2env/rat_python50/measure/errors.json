@@ -1,0 +1,134 @@
+{
+  "g2e-rat50": {
+    "collect": {
+      "agent": "g2e-rat50",
+      "n_repos": 50,
+      "source": "collect",
+      "n_admissible": 47,
+      "n_masked": 0,
+      "n_unobserved": 3,
+      "n_status_derived": 0,
+      "buckets": {
+        "success": 21,
+        "partial": 14,
+        "timed_out": 5,
+        "missing": 3,
+        "collect_error": 5,
+        "zero_pass": 2
+      },
+      "surfaces": {
+        "full": 47,
+        "unobserved": 3
+      },
+      "token_repos": {
+        "_pytest.pathlib.ImportPathMismatchError": 1,
+        "ModuleNotFoundError": 4,
+        "ValueError": 1,
+        "ImportError": 1
+      },
+      "token_events": {
+        "_pytest.pathlib.ImportPathMismatchError": 1,
+        "ModuleNotFoundError": 101,
+        "ValueError": 1,
+        "ImportError": 1
+      },
+      "category_repos": {
+        "harness_error": 1,
+        "module_not_found": 4,
+        "uncategorized": 1,
+        "partial_import": 1
+      },
+      "category_events": {
+        "harness_error": 1,
+        "module_not_found": 101,
+        "uncategorized": 1,
+        "partial_import": 1
+      },
+      "crosstab": {
+        "collect_error|harness_error": 1,
+        "collect_error|module_not_found": 4,
+        "collect_error|uncategorized": 1,
+        "collect_error|partial_import": 1
+      },
+      "top_groups": {
+        "module_not_found": [
+          [
+            "vizro",
+            1
+          ],
+          [
+            "examples.mlperf.models.llama",
+            1
+          ],
+          [
+            "tests.test_metrics",
+            1
+          ],
+          [
+            "tests.test_llm_logging",
+            1
+          ],
+          [
+            "knowledge_engine.ingestion",
+            1
+          ],
+          [
+            "tests.test_compression",
+            1
+          ],
+          [
+            "tests.test_dockerfile",
+            1
+          ],
+          [
+            "tests.test_knowledge_base_call_limits",
+            1
+          ],
+          [
+            "tests.test_mcp_client_variable_substitution",
+            1
+          ],
+          [
+            "knowledge_engine.conversion",
+            1
+          ]
+        ],
+        "partial_import": [
+          [
+            "check_ups_test",
+            1
+          ]
+        ]
+      },
+      "uncategorized_rate": 0.0096
+    },
+    "run": {
+      "agent": "g2e-rat50",
+      "n_repos": 50,
+      "source": "run",
+      "n_admissible": 47,
+      "n_masked": 0,
+      "n_unobserved": 3,
+      "n_status_derived": 0,
+      "buckets": {
+        "success": 21,
+        "partial": 14,
+        "timed_out": 5,
+        "missing": 3,
+        "collect_error": 5,
+        "zero_pass": 2
+      },
+      "surfaces": {
+        "full": 47,
+        "unobserved": 3
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    }
+  }
+}

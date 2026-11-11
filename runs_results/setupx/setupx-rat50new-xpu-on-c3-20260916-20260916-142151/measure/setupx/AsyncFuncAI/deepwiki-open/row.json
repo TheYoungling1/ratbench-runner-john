@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "AsyncFuncAI/deepwiki-open",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "12.14\n#10 30.37 pytest 9.1.1\n#10 30.38 ---IMPORT---\n#10 32.25 \n#10 32.25   return _bootstrap._gcd_import(name[level:], package, level)\n#10 32.25 ok\n#10 32.28 /workspace/repo/api/.venv/bin/python: No module named pip\n#10 32.28 ---\n#10 32.30 Traceback (most recent call last):\n#10 32.30   File \"<string>\", line 1, in <module>\n#10 32.30 ModuleNotFoundError: No module named 'pytest_mock'\n#10 33.07 Using Python 3.12.14 environment at: api/.venv\n#10 33.07 Resolved 6 packages in 726ms\n#10 33.07 Prepared 1 package in 11ms\n#10 33.07 Installed 1 package in 3ms\n#10 33.07  + pytest-mock==3.15.1\n#10 33.07 ---\n#10 33.21 Traceback (most recent call last):\n#10 33.21   File \"<string>\", line 1, in <module>\n#10 33.21 AttributeError: module 'pytest_mock' has no attribute '__version__'\n#10 DONE 33.9s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 7.4s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 39.6s done\n#14 exporting manifest sha256:2c904600f2008ff18b4890e5e0a715b9a52367983c7e718bd9aeeb0232a4fe14 0.0s done\n#14 exporting config sha256:78b7ad705f263d28cd623e1d5abf2380ac5eadc8cea6f4e05c595403fc1e41d3 0.0s done\n#14 exporting attestation manifest sha256:f34a5013dac1eb153822f473e41389357d6d7996316c16ea8fc3a5ccd7f8123a 0.0s done\n#14 exporting manifest list sha256:cac9e592be4b3a4535d7e993ddd7e59f852ee243b7f7ee3c28f6de1cbaa134f1 0.0s done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-asyncfuncai-deepwiki-open:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-asyncfuncai-deepwiki-open:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-asyncfuncai-deepwiki-open:latest 12.3s done\n#14 DONE 52.1s\n",
+  "build_log_tail": "/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n#10 26.28 ---\n#10 26.28 /workspace/repo/api/.venv/bin/python\n#10 26.28 /workspace/repo/api/.venv/bin/pytest\n#10 26.28 Python 3.12.14\n#10 26.35 pytest 9.1.1\n#10 26.36 ---IMPORT---\n#10 28.68 \n#10 28.68   return _bootstrap._gcd_import(name[level:], package, level)\n#10 28.68 ok\n#10 28.70 /workspace/repo/api/.venv/bin/python: No module named pip\n#10 28.70 ---\n#10 28.71 Traceback (most recent call last):\n#10 28.71   File \"<string>\", line 1, in <module>\n#10 28.71 ModuleNotFoundError: No module named 'pytest_mock'\n#10 28.85 Using Python 3.12.14 environment at: api/.venv\n#10 28.85 Resolved 6 packages in 104ms\n#10 28.85 Prepared 1 package in 9ms\n#10 28.85 Installed 1 package in 1ms\n#10 28.85  + pytest-mock==3.15.1\n#10 28.85 ---\n#10 29.00 Traceback (most recent call last):\n#10 29.00   File \"<string>\", line 1, in <module>\n#10 29.00 AttributeError: module 'pytest_mock' has no attribute '__version__'\n#10 DONE 29.2s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 2.9s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 23.5s done\n#14 exporting manifest sha256:a72c394aa094e36427ce0c57071a87dc2aeea40a7c8c8214f59d4a06d1bdd97c done\n#14 exporting config sha256:c04d255422a7512bf3563b0780d40839a7523fbae8fe1a6400d2fb6533bd881e done\n#14 exporting attestation manifest sha256:dbfbd97b2387730d700d7f05c18cb0367ccf8d147bca3e3e938011061ff07290 done\n#14 exporting manifest list sha256:80fde7fc0a729e305bbf8bbcaba8784c246e94915f5a37390dcdbd734eae0091 done\n#14 naming to docker.io/library/bench-setupx-asyncfuncai-deepwiki-open:latest done\n#14 unpacking to docker.io/library/bench-setupx-asyncfuncai-deepwiki-open:latest\n#14 unpacking to docker.io/library/bench-setupx-asyncfuncai-deepwiki-open:latest 7.9s done\n#14 DONE 31.5s\n",
   "status": "executed",
   "py_test_files": 215,
   "collect_rc": 0,
@@ -246,9 +246,9 @@
   "ebsr": true,
   "pass_rate": 0.9633,
   "timed_out": false,
-  "image_size_mb": 904.1,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-asyncfuncai-deepwiki-open@sha256:cac9e592be4b3a4535d7e993ddd7e59f852ee243b7f7ee3c28f6de1cbaa134f1",
+  "image_size_mb": 903.9,
+  "image_delta_mb": 516.3,
+  "image_digest": "bench-setupx-asyncfuncai-deepwiki-open@sha256:80fde7fc0a729e305bbf8bbcaba8784c246e94915f5a37390dcdbd734eae0091",
   "installed_pkg_count": 0,
   "tokens_in": 731220,
   "tokens_out": 27414,
@@ -256,8 +256,8 @@
   "turns_used": 27,
   "cost_usd": null,
   "produce_s": 999.76,
-  "build_s": 97.49,
-  "test_s": 6.14,
+  "build_s": 68.01,
+  "test_s": 5.84,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -292,19 +292,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=d92819a9c9f3b99416e3580ff235fc9d3adf8b89 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=d92819a9c9f3b99416e3580ff235fc9d3adf8b89 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

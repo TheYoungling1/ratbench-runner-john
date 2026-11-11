@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "guardrails-ai/guardrails",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "lling coloredlogs (15.0.1)\n#15 7.502   - Installing docformatter (1.7.5)\n#15 7.503   - Installing griffe (0.36.9)\n#15 7.504   - Installing guardrails-api-client (0.2.1)\n#15 7.506   - Installing jwt (1.3.1)\n#15 7.506   - Installing langchain-core (0.1.52)\n#15 7.507   - Installing lxml-stubs (0.4.0)\n#15 7.508   - Installing nltk (3.8.1)\n#15 7.509   - Installing opentelemetry-exporter-otlp-proto-grpc (1.24.0)\n#15 7.511   - Installing opentelemetry-exporter-otlp-proto-http (1.24.0)\n#15 7.513   - Installing pre-commit (3.5.0)\n#15 7.514   - Installing pydash (7.0.7)\n#15 7.550   - Installing pydoc-markdown (4.8.2)\n#15 7.555   - Installing pypdfium2 (4.30.0)\n#15 7.584   - Installing pyright (1.1.334)\n#15 7.759   - Installing pytest-asyncio (0.21.2)\n#15 7.783   - Installing pytest-cov (5.0.0)\n#15 7.798   - Installing pytest-mock (3.14.0)\n#15 7.829   - Installing rstr (3.2.2)\n#15 7.863   - Installing ruff (0.4.4)\n#15 7.885   - Installing twine (4.0.2)\n#15 8.348 \n#15 8.349 Installing the current project: guardrails-ai (0.4.5)\n#15 DONE 8.8s\n\n#16 [13/15] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#16 DONE 0.8s\n\n#17 [14/15] WORKDIR /testbed\n#17 DONE 0.0s\n\n#18 exporting to image\n#18 exporting layers\n#18 exporting layers 16.8s done\n#18 exporting manifest sha256:42f9dd76c9a2a11107c8099a5f4888b6853b0f52fe5f260b5b43e208facd8e05 0.0s done\n#18 exporting config sha256:f412e512a3b0a4a0b1cbbfe6c82b70e26894b8ddb908fc3203874369cfae85bd 0.0s done\n#18 exporting attestation manifest sha256:58597f0656787603720d64fba4acb7051fd6e360237f2d21d3fdc5242ab46c4d 0.0s done\n#18 exporting manifest list sha256:5f3e4a0897f2d1efd306f03f14a725728d34c0749eb499daa386ad4406a4f0a3 0.0s done\n#18 naming to docker.io/library/bench-repo2run__envbench100-pjy-guardrails-ai-guardrails:latest done\n#18 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-guardrails-ai-guardrails:latest\n#18 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-guardrails-ai-guardrails:latest 5.2s done\n#18 DONE 22.1s\n",
+  "build_log_tail": "elf._finalize_license_expression()\n#15 8.302   - Installing coloredlogs (15.0.1)\n#15 8.303   - Installing docformatter (1.7.5)\n#15 8.303   - Installing griffe (0.36.9)\n#15 8.304   - Installing guardrails-api-client (0.2.1)\n#15 8.304   - Installing jwt (1.3.1)\n#15 8.306   - Installing langchain-core (0.1.52)\n#15 8.306   - Installing nltk (3.8.1)\n#15 8.307   - Installing lxml-stubs (0.4.0)\n#15 8.308   - Installing pre-commit (3.5.0)\n#15 8.309   - Installing pydash (7.0.7)\n#15 8.309   - Installing opentelemetry-exporter-otlp-proto-grpc (1.24.0)\n#15 8.310   - Installing opentelemetry-exporter-otlp-proto-http (1.24.0)\n#15 8.386   - Installing pydoc-markdown (4.8.2)\n#15 8.398   - Installing pypdfium2 (4.30.0)\n#15 8.563   - Installing pyright (1.1.334)\n#15 8.572   - Installing pytest-asyncio (0.21.2)\n#15 8.574   - Installing pytest-cov (5.0.0)\n#15 8.587   - Installing pytest-mock (3.14.0)\n#15 8.592   - Installing rstr (3.2.2)\n#15 8.754   - Installing ruff (0.4.4)\n#15 8.791   - Installing twine (4.0.2)\n#15 9.385 \n#15 9.385 Installing the current project: guardrails-ai (0.4.5)\n#15 DONE 9.8s\n\n#16 [13/15] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#16 DONE 0.9s\n\n#17 [14/15] WORKDIR /testbed\n#17 DONE 0.0s\n\n#18 exporting to image\n#18 exporting layers\n#18 exporting layers 14.7s done\n#18 exporting manifest sha256:dabccfc82738740e1a41cfb91750cc6527799861ed293b1596b92678fe525dd5 done\n#18 exporting config sha256:ba04b999fcfd66ea034111c309ca394f45a13cbfd62a5a1eaf72903ac951a13e done\n#18 exporting attestation manifest sha256:fb4a48eaece393fb79817cfb8bee503a081c6852e70c77c6db0e929cbaebd5e4 0.0s done\n#18 exporting manifest list sha256:2c69106bd052aa5aa7977d7c1c77983a9e4e6936a97057d087aba3894bad371b done\n#18 naming to docker.io/library/bench-pjy-repo2run-guardrails-ai-guardrails:latest done\n#18 unpacking to docker.io/library/bench-pjy-repo2run-guardrails-ai-guardrails:latest\n#18 unpacking to docker.io/library/bench-pjy-repo2run-guardrails-ai-guardrails:latest 3.8s done\n#18 DONE 18.6s\n",
   "status": "collect_error",
   "py_test_files": 66,
   "collect_rc": 4,
@@ -26,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 824.1,
+  "image_size_mb": 2639.9,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-guardrails-ai-guardrails@sha256:5f3e4a0897f2d1efd306f03f14a725728d34c0749eb499daa386ad4406a4f0a3",
+  "image_digest": "bench-pjy-repo2run-guardrails-ai-guardrails@sha256:2c69106bd052aa5aa7977d7c1c77983a9e4e6936a97057d087aba3894bad371b",
   "installed_pkg_count": 27,
   "tokens_in": 96564,
   "tokens_out": 3055,
@@ -36,8 +36,8 @@
   "turns_used": 9,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 36.96,
-  "test_s": 0.22,
+  "build_s": 34.86,
+  "test_s": 0.42,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -45,19 +45,7 @@
     "tokens_in": 96564,
     "tokens_out": 3055,
     "llm_calls": null,
-    "turns_used": 9,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 9
   },
   "error_surface": "",
   "error_surface_reason": "",

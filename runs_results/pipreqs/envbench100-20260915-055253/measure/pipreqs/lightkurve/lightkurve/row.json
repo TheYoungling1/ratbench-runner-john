@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "lightkurve/lightkurve",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": ".39.0 jaraco.classes-3.4.0 jaraco.context-6.1.2 jaraco.functools-4.6.0 jedi-0.20.0 jeepney-0.9.0 joblib-1.6.0 keyring-25.7.0 kiwisolver-1.5.1 matplotlib-3.10.9 matplotlib-inline-0.2.2 memoization-0.4.0 more-itertools-11.1.0 narwhals-2.26.0 numpy-2.2.6 oktopus-0.1.2 openpyxl-3.1.5 pandas-2.3.3 parso-0.8.7 patsy-1.0.3 pexpect-4.9.0 pillow-12.3.0 prompt_toolkit-3.0.53 ptyprocess-0.7.0 pure-eval-0.2.4 pycparser-3.0 pyerfa-2.0.1.5 pyparsing-3.3.3 python-dateutil-2.9.0.post0 pytz-2026.4 pyvo-1.9.1 scikit_learn-1.7.2 scipy-1.15.3 six-1.17.0 soupsieve-2.10 stack_data-0.6.3 stingray-2.3.2 threadpoolctl-3.7.0 tornado-6.5.10 tqdm-4.70.1 traitlets-5.16.1 tzdata-2026.4 uncertainties-3.2.3 urllib3-2.8.0 wcwidth-0.9.1 webencodings-0.6.1 xyzservices-2026.9.1 zipp-4.1.0\n#11 32.34 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 32.35 \n#11 32.35 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 32.35 [notice] To update, run: pip install --upgrade pip\n#11 DONE 33.4s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 47.9s done\n#12 exporting manifest sha256:1c0851eea52240155ea8af1f619b46a1de59d3203a1734dc635498aabcc22953 done\n#12 exporting config sha256:e27c8129519a6dc285de5e463379ad767037810a5c55d10a9c62465da33dc23f done\n#12 exporting attestation manifest sha256:40485962c5560febf2d11a903f411eae7aabf7e99b8fd1bc32e08a00f00f5911 0.0s done\n#12 exporting manifest list sha256:636f6433118ddbf3ee323b5c5556ce8751a1a19d96769ddb6416a0f39895203d done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-lightkurve-lightkurve:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-lightkurve-lightkurve:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-lightkurve-lightkurve:latest 10.4s done\n#12 DONE 58.4s\n",
+  "build_log_tail": "ttools-4.65.0 html5lib-1.1 idna-3.19 importlib_metadata-9.0.1 ipython-8.39.0 jaraco.classes-3.4.0 jaraco.context-6.1.2 jaraco.functools-4.6.0 jedi-0.20.0 jeepney-0.9.0 joblib-1.6.0 keyring-25.7.0 kiwisolver-1.5.1 matplotlib-3.10.9 matplotlib-inline-0.2.2 memoization-0.4.0 more-itertools-11.1.0 narwhals-2.26.0 numpy-2.2.6 oktopus-0.1.2 openpyxl-3.1.5 pandas-2.3.3 parso-0.8.7 patsy-1.0.3 pexpect-4.9.0 pillow-12.3.0 prompt_toolkit-3.0.53 ptyprocess-0.7.0 pure-eval-0.2.4 pycparser-3.0 pyerfa-2.0.1.5 pyparsing-3.3.2 python-dateutil-2.9.0.post0 pytz-2026.3.post1 pyvo-1.9.1 scikit_learn-1.7.2 scipy-1.15.3 six-1.17.0 soupsieve-2.9.2 stack_data-0.6.3 stingray-2.3.2 threadpoolctl-3.6.0 tornado-6.5.9 tqdm-4.70.1 traitlets-5.16.1 tzdata-2026.4 uncertainties-3.2.3 urllib3-2.7.0 wcwidth-0.8.3 webencodings-0.6.1 xyzservices-2026.9.1 zipp-4.1.0\n#11 31.46 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 31.47 \n#11 31.47 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 31.47 [notice] To update, run: pip install --upgrade pip\n#11 DONE 32.4s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 40.3s done\n#12 exporting manifest sha256:11066fe4e1418efc28e2e2eaa41ab9f46cf83f0ce865a90f1eeb66fde15a39e8 done\n#12 exporting config sha256:9fa99155fca6b59cb4becf5b596b51d84a564a153fc1823d44b5a5c7dae2bfd8 done\n#12 exporting attestation manifest sha256:d55e131c2bc7c2848810e7b2a98b2fa5649cc1292c7a4d78199cdca9ad0a0c37 0.0s done\n#12 exporting manifest list sha256:506e1511688f9f332393019ffa42a338c9a54acae8d8d96c8a0170dedbaa5142 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-lightkurve-lightkurve:latest 0.0s done\n#12 unpacking to docker.io/library/bench-pipreqs-lightkurve-lightkurve:latest\n#12 unpacking to docker.io/library/bench-pipreqs-lightkurve-lightkurve:latest 14.6s done\n#12 DONE 55.0s\n",
   "status": "collect_error",
   "py_test_files": 37,
   "collect_rc": 2,
@@ -102,9 +102,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 1410.9,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-lightkurve-lightkurve@sha256:636f6433118ddbf3ee323b5c5556ce8751a1a19d96769ddb6416a0f39895203d",
+  "image_size_mb": 1411.8,
+  "image_delta_mb": 1024.2,
+  "image_digest": "bench-pipreqs-lightkurve-lightkurve@sha256:506e1511688f9f332393019ffa42a338c9a54acae8d8d96c8a0170dedbaa5142",
   "installed_pkg_count": 90,
   "tokens_in": null,
   "tokens_out": null,
@@ -112,8 +112,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 14.83,
-  "build_s": 116.18,
-  "test_s": 2.26,
+  "build_s": 112.6,
+  "test_s": 2.61,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -140,19 +140,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=a8f26dfa8196e99d9bf93f71d51ad02cbcd826ea (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=a8f26dfa8196e99d9bf93f71d51ad02cbcd826ea (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "GoogleCloudPlatform/gcpdiag",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ag/utils_test.py::test_is_full_res_name\n#10 57.33 gcpdiag/utils_test.py::test_is_rel_res_name\n#10 57.33 gcpdiag/utils_test.py::test_is_valid_res_name\n#10 57.33 gcpdiag/utils_test.py::test_get_region_by_res_name\n#10 57.33 gcpdiag/utils_test.py::test_get_zone_by_res_name\n#10 57.33 gcpdiag/utils_test.py::test_get_project_by_res_name\n#10 57.33 gcpdiag/utils_test.py::test_extract_value_from_res_name\n#10 57.33 gcpdiag/utils_test.py::test_iter_dictlist\n#10 57.33 gcpdiag/utils_test.py::TestVersionComponentsParser::test_extract_base_version\n#10 57.33 gcpdiag/utils_test.py::test_get_path\n#10 57.33 \n#10 57.33 1418 tests collected in 0.99s\n#10 DONE 57.8s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 2.2s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 22.5s done\n#14 exporting manifest sha256:00324ecab1d513deeb995a3f975d587eabf501d28f37ba77cd72cb027d8bfc30 0.0s done\n#14 exporting config sha256:87cc001e0ad7d56de994fcfe1293d465f736a7a9d4a917938d9137b54b33271f 0.0s done\n#14 exporting attestation manifest sha256:0bc49956ce5fa7342198919aa227aa5d1fbdfa9c3142b8110194385088b01278 0.0s done\n#14 exporting manifest list sha256:7383027eddae7d809058f93e0244ebbb3f7b289f257488a0d18daf004c44a3b6 0.0s done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-googlecloudplatform-gcpdiag:latest\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-googlecloudplatform-gcpdiag:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-googlecloudplatform-gcpdiag:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-googlecloudplatform-gcpdiag:latest 22.9s done\n#14 DONE 45.6s\n",
+  "build_log_tail": "ccount_domains\n#10 40.09 gcpdiag/types_test.py::TestServiceAccountDomains::test_regular_email\n#10 40.09 gcpdiag/types_test.py::TestServiceAccountDomains::test_service_agent_domains\n#10 40.09 gcpdiag/utils_test.py::TestGcpApiError::test_exception\n#10 40.09 gcpdiag/utils_test.py::test_is_region\n#10 40.09 gcpdiag/utils_test.py::test_is_full_res_name\n#10 40.09 gcpdiag/utils_test.py::test_is_rel_res_name\n#10 40.09 gcpdiag/utils_test.py::test_is_valid_res_name\n#10 40.09 gcpdiag/utils_test.py::test_get_region_by_res_name\n#10 40.09 gcpdiag/utils_test.py::test_get_zone_by_res_name\n#10 40.09 gcpdiag/utils_test.py::test_get_project_by_res_name\n#10 40.09 gcpdiag/utils_test.py::test_extract_value_from_res_name\n#10 40.09 gcpdiag/utils_test.py::test_iter_dictlist\n#10 40.09 gcpdiag/utils_test.py::TestVersionComponentsParser::test_extract_base_version\n#10 40.09 gcpdiag/utils_test.py::test_get_path\n#10 40.09 \n#10 40.09 1418 tests collected in 0.88s\n#10 DONE 40.3s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 2.1s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 16.5s done\n#14 exporting manifest sha256:b316f95281c3eb885e5234bcb774f1da4906389514c19e496a78fe72bc0d181f done\n#14 exporting config sha256:5db08a48e0515aac7ffe20a26855de2816879e8b4483a74be17ad250684029c5 done\n#14 exporting attestation manifest sha256:fe328b5e48f1774b24ed7dd3f9b2d4d7cc653628d513f5e3ba5e54d2681cf102 done\n#14 exporting manifest list sha256:3f34d115011b21a79a7f4402ce7751f50da034593f6c39f55983c9e1dc625e19 done\n#14 naming to docker.io/library/bench-setupx-googlecloudplatform-gcpdiag:latest done\n#14 unpacking to docker.io/library/bench-setupx-googlecloudplatform-gcpdiag:latest\n#14 unpacking to docker.io/library/bench-setupx-googlecloudplatform-gcpdiag:latest 5.3s done\n#14 DONE 21.8s\n",
   "status": "executed",
   "py_test_files": 148,
   "collect_rc": 0,
@@ -2863,9 +2863,9 @@
   "ebsr": true,
   "pass_rate": 0.9422,
   "timed_out": false,
-  "image_size_mb": 2783.7,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-googlecloudplatform-gcpdiag@sha256:7383027eddae7d809058f93e0244ebbb3f7b289f257488a0d18daf004c44a3b6",
+  "image_size_mb": 700.5,
+  "image_delta_mb": 312.9,
+  "image_digest": "bench-setupx-googlecloudplatform-gcpdiag@sha256:3f34d115011b21a79a7f4402ce7751f50da034593f6c39f55983c9e1dc625e19",
   "installed_pkg_count": 55,
   "tokens_in": 856679,
   "tokens_out": 27730,
@@ -2873,8 +2873,8 @@
   "turns_used": 38,
   "cost_usd": null,
   "produce_s": 984.34,
-  "build_s": 110.17,
-  "test_s": 243.04,
+  "build_s": 67.46,
+  "test_s": 242.99,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -2909,19 +2909,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=21d367499fe30cac251ca5d6dcc549c1dc7eab03 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=21d367499fe30cac251ca5d6dcc549c1dc7eab03 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

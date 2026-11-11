@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "containers/podman-compose",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": ".6 coverage-7.4.3 cryptography-48.0.1 dill-0.3.8 distlib-0.3.8 distro-1.9.0 filelock-3.13.1 httpcore2-2.10.0 httpx2-2.10.0 idna-3.15 iniconfig-2.0.0 isort-5.13.2 jiter-0.16.0 mccabe-0.7.0 mypy-1.15.0 mypy_extensions-1.1.0 openai-3.0.0 packaging-23.2 parameterized-0.9.0 platformdirs-4.2.0 pluggy-1.4.0 podman-compose-1.6.0 pycparser-2.23 pydantic-2.13.4 pydantic_core-2.46.4 pylint-3.1.0 pyproject-api-1.6.1 pytest-8.0.2 python-dotenv-1.0.1 requests-2.32.5 ruff-0.14.8 tomlkit-0.12.4 tox-4.13.0 tqdm-4.70.0 types-PyYAML-6.0.12.20250402 types-requests-2.32.0.20250328 types-setuptools-80.7.0.20250516 typing-inspection-0.4.3 typing_extensions-4.13.2 tzlocal-5.3.1 urllib3-2.6.3 virtualenv-20.26.6\n#16 72.67 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#16 72.75 \n#16 72.75 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#16 72.75 [notice] To update, run: pip install --upgrade pip\n#16 DONE 73.8s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.3s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.0s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 8.3s done\n#19 exporting manifest sha256:a40beef37ee22e7cdb0822d7702d618fa214b6d2c17359d3d7f38235b552d7e3 done\n#19 exporting config sha256:ccd3f2cdabb1a5685b04ee796ef10d2e5723f891348386bf0f13244170fc8d01 done\n#19 exporting attestation manifest sha256:3739d2d55fa8dbc97e7c4c7484f0a1ff033daa33bb481f3403f02ff981fab710 0.0s done\n#19 exporting manifest list sha256:cea117174c4145eb82a5424a25dda351731258be83777f218ed2064673049d01 0.0s done\n#19 naming to docker.io/library/bench-rat__rat50-pjy-containers-podman-compose:latest done\n#19 unpacking to docker.io/library/bench-rat__rat50-pjy-containers-podman-compose:latest\n#19 unpacking to docker.io/library/bench-rat__rat50-pjy-containers-podman-compose:latest 5.6s done\n#19 DONE 14.0s\n",
+  "build_log_tail": "2-2.10.0 idna-3.15 iniconfig-2.0.0 isort-5.13.2 jiter-0.16.0 mccabe-0.7.0 mypy-1.15.0 mypy_extensions-1.1.0 openai-3.0.0 packaging-23.2 parameterized-0.9.0 platformdirs-4.2.0 pluggy-1.4.0 podman-compose-1.6.0 pycparser-2.23 pydantic-2.13.4 pydantic_core-2.46.4 pylint-3.1.0 pyproject-api-1.6.1 pytest-8.0.2 python-dotenv-1.0.1 requests-2.32.5 ruff-0.14.8 tomlkit-0.12.4 tox-4.13.0 tqdm-4.70.0 types-PyYAML-6.0.12.20250402 types-requests-2.32.0.20250328 types-setuptools-80.7.0.20250516 typing-inspection-0.4.3 typing_extensions-4.13.2 tzlocal-5.3.1 urllib3-2.6.3 virtualenv-20.26.6\n#16 304.2 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#16 304.5 \n#16 304.5 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#16 304.5 [notice] To update, run: pip install --upgrade pip\n#16 DONE 305.7s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.5s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.0s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 10.3s done\n#19 exporting manifest sha256:5162107de00abfe564ebbea1502e426e21aeadcb990d59e69282cdc2278d495b 0.0s done\n#19 exporting config sha256:e6e901ef520b3b1473ea8045f2a526812546404180448a49ae71b762ef2d4ef4 0.0s done\n#19 exporting attestation manifest sha256:e62494253ed1e61f5a122ea4ca3d887041ddc7c858ccf553a448251ec83aedf3 0.0s done\n#19 exporting manifest list sha256:43801268e27aa06ad6bacb1bf055528c9a878b75b0ee4d5f99434f2894b54a94 0.0s done\n#19 naming to docker.io/library/bench-pjy-rat-dockerfile-containers-podman-compose:latest\n#19 naming to docker.io/library/bench-pjy-rat-dockerfile-containers-podman-compose:latest done\n#19 unpacking to docker.io/library/bench-pjy-rat-dockerfile-containers-podman-compose:latest\n#19 unpacking to docker.io/library/bench-pjy-rat-dockerfile-containers-podman-compose:latest 8.6s done\n#19 DONE 19.1s\n",
   "status": "collect_error",
   "py_test_files": 97,
   "collect_rc": 2,
@@ -1125,9 +1125,9 @@
   "ebsr": true,
   "pass_rate": 0.8594,
   "timed_out": false,
-  "image_size_mb": 223.0,
+  "image_size_mb": 914.4,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50-pjy-containers-podman-compose@sha256:cea117174c4145eb82a5424a25dda351731258be83777f218ed2064673049d01",
+  "image_digest": "bench-pjy-rat-dockerfile-containers-podman-compose@sha256:43801268e27aa06ad6bacb1bf055528c9a878b75b0ee4d5f99434f2894b54a94",
   "installed_pkg_count": 62,
   "tokens_in": 4121734,
   "tokens_out": 45847,
@@ -1135,27 +1135,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 98.86,
-  "test_s": 5.57,
+  "build_s": 337.66,
+  "test_s": 7.85,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 4121734,
     "tokens_out": 45847,
-    "llm_calls": 102,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 102
   },
   "error_surface": "",
   "error_surface_reason": "",

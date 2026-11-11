@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "kittinan/spotify-github-profile",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "_core past that date.\n#10 16.41     warnings.warn(message, FutureWarning)\n#10 16.41 \n#10 16.41 ../../usr/local/lib/python3.10/site-packages/google/api_core/_python_version_support.py:254\n#10 16.41   /usr/local/lib/python3.10/site-packages/google/api_core/_python_version_support.py:254: FutureWarning: You are using a Python version (3.10.21) which Google will stop supporting in new releases of google.cloud.firestore_v1 once it reaches its end of life (2026-10-04). Please upgrade to the latest Python version, or at least Python 3.11, to continue receiving updates for google.cloud.firestore_v1 past that date.\n#10 16.41     warnings.warn(message, FutureWarning)\n#10 16.41 \n#10 16.41 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n#10 DONE 17.0s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.3s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 7.2s done\n#14 exporting manifest sha256:c338b935eecabfb1ee2093093905161f57f2c359299282408a5afba4ba0165e5 0.0s done\n#14 exporting config sha256:1f3273d4a3172fac9227bb39cff127204f3982340d9d3067cfb191219d891d9e 0.0s done\n#14 exporting attestation manifest sha256:61f2dc2b698282e83e3c0859c93a32a125f37b05a72bccc51f8795321be6cf19 0.0s done\n#14 exporting manifest list sha256:40123b025101b458083c732c88b59fac5270fc7b9fbb1a38b67254aa7ad1cfe9 0.0s done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-kittinan-spotify-github-profile:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-kittinan-spotify-github-profile:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-kittinan-spotify-github-profile:latest 1.6s done\n#14 DONE 9.0s\n",
+  "build_log_tail": "google.api_core once it reaches its end of life (2026-10-04). Please upgrade to the latest Python version, or at least Python 3.11, to continue receiving updates for google.api_core past that date.\n#10 14.44     warnings.warn(message, FutureWarning)\n#10 14.44 \n#10 14.44 ../../usr/local/lib/python3.10/site-packages/google/api_core/_python_version_support.py:254\n#10 14.44   /usr/local/lib/python3.10/site-packages/google/api_core/_python_version_support.py:254: FutureWarning: You are using a Python version (3.10.21) which Google will stop supporting in new releases of google.cloud.firestore_v1 once it reaches its end of life (2026-10-04). Please upgrade to the latest Python version, or at least Python 3.11, to continue receiving updates for google.cloud.firestore_v1 past that date.\n#10 14.44     warnings.warn(message, FutureWarning)\n#10 14.44 \n#10 14.44 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n#10 DONE 14.6s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.2s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 4.4s done\n#14 exporting manifest sha256:f69871c5b2333a9aba20915d85d5f8c56ce3ac7f26c01ec96ccd442cf0e76531 done\n#14 exporting config sha256:6499c748c4fe10608727cfa83a679387fc29d7c758b1e572bb2d63e30e8217f2 done\n#14 exporting attestation manifest sha256:d121eabccdd8471731c540f8fe1193a4e7492a78764ed2beff849e4152800e56 done\n#14 exporting manifest list sha256:1d4df61fcc699b3113585c58ad7f163de6f58a146d2844782395ff846d25d46f done\n#14 naming to docker.io/library/bench-setupx-kittinan-spotify-github-profile:latest done\n#14 unpacking to docker.io/library/bench-setupx-kittinan-spotify-github-profile:latest\n#14 unpacking to docker.io/library/bench-setupx-kittinan-spotify-github-profile:latest 1.1s done\n#14 DONE 5.6s\n",
   "status": "executed",
   "py_test_files": 6,
   "collect_rc": 0,
@@ -159,9 +159,9 @@
   "ebsr": true,
   "pass_rate": 1.0,
   "timed_out": false,
-  "image_size_mb": 450.3,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-kittinan-spotify-github-profile@sha256:40123b025101b458083c732c88b59fac5270fc7b9fbb1a38b67254aa7ad1cfe9",
+  "image_size_mb": 450.1,
+  "image_delta_mb": 62.5,
+  "image_digest": "bench-setupx-kittinan-spotify-github-profile@sha256:1d4df61fcc699b3113585c58ad7f163de6f58a146d2844782395ff846d25d46f",
   "installed_pkg_count": 59,
   "tokens_in": 242375,
   "tokens_out": 8945,
@@ -169,8 +169,8 @@
   "turns_used": 10,
   "cost_usd": null,
   "produce_s": 313.45,
-  "build_s": 29.87,
-  "test_s": 0.93,
+  "build_s": 22.42,
+  "test_s": 1.12,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -205,19 +205,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=0f605fac8dbaac17000b40c6bb8df7c3b89839db (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=0f605fac8dbaac17000b40c6bb8df7c3b89839db (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

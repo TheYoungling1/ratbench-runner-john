@@ -1,0 +1,162 @@
+{
+  "g2e-envbench100": {
+    "n": 100,
+    "n_exec": 85,
+    "n_collect_clean": 86,
+    "n_real_success": 56,
+    "n_unmeasurable": 0,
+    "n_legacy_missing": 0,
+    "EBSR": 0.85,
+    "n_ebsr": 85,
+    "EBSR_repo2run_raw": 0.86,
+    "n_raw": 86,
+    "false_green_removed": 0.01,
+    "status_census": {
+      "executed": 78,
+      "missing": 8,
+      "timed_out": 4,
+      "collect_error": 5,
+      "no_tests_collected": 4,
+      "build_fail": 1
+    },
+    "n_ebsr_zero_collected": 8,
+    "total_collected": 55580,
+    "mean_collected": 555.8,
+    "total_collect_errors": 61,
+    "mean_collect_errors": 0.61,
+    "real_success": 0.56,
+    "micro": 0.9308,
+    "full_pass_repos": 22,
+    "coverage": 0.85,
+    "ESSR": 0.6484,
+    "ESSR_median": 0.7959,
+    "n_gold_scored": 98,
+    "n_gold_zero": 19,
+    "n_gold_no_row": 0,
+    "gold_no_row": [],
+    "n_gold_capped": 1,
+    "gold_capped": [
+      [
+        "valory-xyz/trader",
+        74.444,
+        1340,
+        18
+      ]
+    ],
+    "n_gold_excluded": 2,
+    "gold_excluded": [
+      [
+        "neurogym/neurogym",
+        "gold_missing"
+      ],
+      [
+        "pypa/distutils",
+        "gold_missing"
+      ]
+    ],
+    "n_gold_sha_mismatch": 0,
+    "gold_sha_mismatch": [],
+    "mean_collection_coverage": 0.8364,
+    "median_collection_coverage": 1.0,
+    "n_gold_hollow": 13,
+    "gold_hollow": [
+      [
+        "iss-mimic/mimic",
+        0,
+        3,
+        0.0
+      ],
+      [
+        "the-openroad-project/openlane",
+        0,
+        79,
+        0.0
+      ],
+      [
+        "revoxhere/duino-coin",
+        0,
+        130,
+        0.0
+      ],
+      [
+        "datamol-io/datamol",
+        0,
+        282,
+        0.0
+      ],
+      [
+        "jageo/lobsterpy",
+        0,
+        135,
+        0.0
+      ],
+      [
+        "online-ml/river",
+        0,
+        3432,
+        0.0
+      ],
+      [
+        "brightway-lca/brightway2-io",
+        0,
+        199,
+        0.0
+      ],
+      [
+        "scitools/iris-grib",
+        0,
+        581,
+        0.0
+      ],
+      [
+        "mne-tools/mne-lsl",
+        1,
+        168,
+        0.006
+      ],
+      [
+        "convexengineering/gpkit",
+        2,
+        286,
+        0.007
+      ],
+      [
+        "johnsnowlabs/nlu",
+        2,
+        252,
+        0.0079
+      ],
+      [
+        "diefenbach/django-lfs",
+        14,
+        484,
+        0.0289
+      ],
+      [
+        "dtmilano/androidviewclient",
+        22,
+        320,
+        0.0688
+      ]
+    ],
+    "mean_image_delta_mb": null,
+    "mean_installed_pkgs": 71.8571,
+    "mean_tokens": 949066.13,
+    "mean_tokens_out": 51849.97,
+    "tokens_per_ebsr": 1116548.3882,
+    "tokens_per_real_success": 1694760.9464,
+    "mean_turns": null,
+    "total_cost_usd": null,
+    "mean_cost_usd": null,
+    "cost_per_ebsr": null,
+    "cost_per_real_success": null,
+    "n_cost_reporting": 0,
+    "mean_produce_s": null,
+    "wall_s_per_real_success": 433.2868,
+    "n_token_reporting": 100,
+    "rebuild_ok_rate": 0.91,
+    "setup_compile_rate": 0.91,
+    "n_setup_compile": 91,
+    "unreplayed_rate": 0.0
+  }
+}

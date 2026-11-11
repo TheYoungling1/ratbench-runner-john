@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50new-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "insistence/RuoYi-Vue3-FastAPI",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "it-3.0.53 propcache-0.5.4 psutil-7.2.2 pyasn1-0.6.4 pyasn1_modules-0.4.2 pycparser-3.0 pydantic-extra-types-2.11.1 pydantic-settings-2.15.0 pydantic-validation-decorator-0.1.5 pytest-asyncio-1.4.0 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 python-multipart-0.0.32 pytz-2026.3.post1 questionary-2.1.1 redis-8.1.0 referencing-0.37.0 regex-2026.9.10 requests-2.34.2 rich-15.0.0 rich-toolkit-0.20.5 rignore-0.8.1 rpds-py-0.30.0 ruff-0.16.1 ruoyi-fastapi-backend-cli-1.10.0 sentry-sdk-2.69.2 shellingham-1.5.4 six-1.17.0 sqlglot-30.14.0 sqlglotc-30.14.0 sqlglotrs-0.13.0 starlette-1.6.0 tenacity-9.1.4 textual-8.2.8 tiktoken-0.14.0 tokenizers-0.23.2 tqdm-4.70.1 typer-0.27.2 types-requests-2.33.0.20260906 tzdata-2026.3 tzlocal-5.4.4 ua-parser-1.0.2 ua-parser-builtins-202606 urllib3-2.8.0 user-agents-2.2.0 uvicorn-0.53.0 uvloop-0.22.1 watchfiles-1.2.0 wcwidth-0.8.3 websockets-16.1.1 yarl-1.25.1 zipp-4.1.0\n#19 120.7 \n#19 120.7 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#19 120.7 [notice] To update, run: pip install --upgrade pip\n#19 DONE 123.1s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 1.4s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.2s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 39.4s done\n#22 exporting manifest sha256:20b980b1ea4838b5a98b84db0b02bcf52065108373b0893ac3c61bd062f41752 done\n#22 exporting config sha256:9cd5f9d3c123a4d63af19f351d894fc98492765bd0f8cba21cf8b49c36e7ecf8 done\n#22 exporting attestation manifest sha256:dee75dc3797e81a5fd9393ba373ab902fbd8126d81f7a302b2827e2da15384c4 0.0s done\n#22 exporting manifest list sha256:400175f0d12bdcbbf54296706719575df5b2dc59fadfb2aa1244065d8cd56ca3 done\n#22 naming to docker.io/library/bench-rat__rat50new-pjy-insistence-ruoyi-vue3-fastapi:latest done\n#22 unpacking to docker.io/library/bench-rat__rat50new-pjy-insistence-ruoyi-vue3-fastapi:latest\n#22 unpacking to docker.io/library/bench-rat__rat50new-pjy-insistence-ruoyi-vue3-fastapi:latest 13.5s done\n#22 DONE 53.0s\n",
+  "build_log_tail": "n-multipart-0.0.32 pytz-2026.3.post1 questionary-2.1.1 redis-8.1.0 referencing-0.37.0 regex-2026.9.10 requests-2.34.2 rich-15.0.0 rich-toolkit-0.20.5 rignore-0.8.1 rpds-py-0.30.0 ruff-0.16.1 ruoyi-fastapi-backend-cli-1.10.0 sentry-sdk-2.69.2 shellingham-1.5.4 six-1.17.0 sqlglot-30.14.0 sqlglotc-30.14.0 sqlglotrs-0.13.0 starlette-1.6.0 tenacity-9.1.4 textual-8.2.8 tiktoken-0.14.0 tokenizers-0.23.2 tqdm-4.70.1 typer-0.27.2 types-requests-2.33.0.20260906 tzdata-2026.3 tzlocal-5.4.4 ua-parser-1.0.2 ua-parser-builtins-202606 urllib3-2.8.0 user-agents-2.2.0 uvicorn-0.53.0 uvloop-0.22.1 watchfiles-1.2.0 wcwidth-0.8.3 websockets-16.1.1 yarl-1.25.1 zipp-4.1.0\n#19 751.2 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#19 751.7 \n#19 751.7 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#19 751.7 [notice] To update, run: pip install --upgrade pip\n#19 DONE 754.7s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 0.8s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.1s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 33.9s done\n#22 exporting manifest sha256:d97521baa028f2e30f3c5ac071f3104be1efc101e7483e45da6331eddcc03311 0.0s done\n#22 exporting config sha256:34528e1080db071ae9955f1f61988937bfa81692294577f088b1cba9d2898341 0.0s done\n#22 exporting attestation manifest sha256:e36eb61b69eee24ab59154b8292ef38544cf36ba501a6e90aba99e92354213d1 0.0s done\n#22 exporting manifest list sha256:087f6ddbaefac9d7efd4fe26a5afa48267278f9f20168df0254ec90b94eeeae2 0.0s done\n#22 naming to docker.io/library/bench-pjy-rat-dockerfile-insistence-ruoyi-vue3-fastapi:latest done\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-insistence-ruoyi-vue3-fastapi:latest\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-insistence-ruoyi-vue3-fastapi:latest 13.8s done\n#22 DONE 47.8s\n",
   "status": "collect_error",
   "py_test_files": 177,
   "collect_rc": 2,
@@ -70,9 +70,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 283.3,
+  "image_size_mb": 1334.1,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50new-pjy-insistence-ruoyi-vue3-fastapi@sha256:400175f0d12bdcbbf54296706719575df5b2dc59fadfb2aa1244065d8cd56ca3",
+  "image_digest": "bench-pjy-rat-dockerfile-insistence-ruoyi-vue3-fastapi@sha256:087f6ddbaefac9d7efd4fe26a5afa48267278f9f20168df0254ec90b94eeeae2",
   "installed_pkg_count": 161,
   "tokens_in": 133469,
   "tokens_out": 1141,
@@ -80,27 +80,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 182.94,
-  "test_s": 0.9,
+  "build_s": 811.35,
+  "test_s": 1.19,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 133469,
     "tokens_out": 1141,
-    "llm_calls": 13,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 13
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "fhempy/fhempy",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "https://github.com/pypa/setuptools/discussions/5011 for details.\n#23 4.319         ********************************************************************************\n#23 4.319 \n#23 4.319 !!\n#23 4.319   opt = self._enforce_underscore(opt, section)\n#23 4.319 /tmp/tmpr_413ck8/.venv/lib/python3.10/site-packages/setuptools/dist.py:765: BuildBackendWarning: License classifiers are deprecated.\n#23 4.319 !!\n#23 4.319 \n#23 4.319         ********************************************************************************\n#23 4.319         Please consider removing the following classifiers in favor of a SPDX license expression:\n#23 4.319 \n#23 4.319         License :: OSI Approved :: Apache Software License\n#23 4.319 \n#23 4.319         See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.\n#23 4.319         ********************************************************************************\n#23 4.319 \n#23 4.319 !!\n#23 4.319   self._finalize_license_expression()\n#23 DONE 4.9s\n\n#24 [21/24] RUN cd /repo && poetry run pip install -q cryptography\n#24 DONE 2.6s\n\n#25 [22/24] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#25 DONE 0.5s\n\n#26 [23/24] WORKDIR /testbed\n#26 DONE 0.1s\n\n#27 exporting to image\n#27 exporting layers\n#27 exporting layers 7.0s done\n#27 exporting manifest sha256:f068f8b9c0699ea04d8a0233953eea639d94690384b3206c2c097a8d8146a7cb 0.0s done\n#27 exporting config sha256:a9c6ecb1186a185630b01a7658c2064125d2ae70d1872ade44ddcb89357d78d9 done\n#27 exporting attestation manifest sha256:b25e20f38fe4cc3b30bdf21eb67299a602b2c2a0c9fad79210cac6aedd2fc8d6 0.0s done\n#27 exporting manifest list sha256:5702586e7e88fbe5737ebde83ab24793860d2099870cb8806ba380cabebf3e0e done\n#27 naming to docker.io/library/bench-repo2run__envbench100-pjy-fhempy-fhempy:latest done\n#27 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-fhempy-fhempy:latest\n#27 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-fhempy-fhempy:latest 2.8s done\n#27 DONE 9.8s\n",
+  "build_log_tail": "5.173 \n#23 5.173         See https://github.com/pypa/setuptools/discussions/5011 for details.\n#23 5.173         ********************************************************************************\n#23 5.173 \n#23 5.173 !!\n#23 5.173   opt = self._enforce_underscore(opt, section)\n#23 5.173 /tmp/tmpicqfob8z/.venv/lib/python3.10/site-packages/setuptools/dist.py:765: BuildBackendWarning: License classifiers are deprecated.\n#23 5.173 !!\n#23 5.173 \n#23 5.173         ********************************************************************************\n#23 5.173         Please consider removing the following classifiers in favor of a SPDX license expression:\n#23 5.173 \n#23 5.173         License :: OSI Approved :: Apache Software License\n#23 5.173 \n#23 5.173         See https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#license for details.\n#23 5.173         ********************************************************************************\n#23 5.173 \n#23 5.173 !!\n#23 5.173   self._finalize_license_expression()\n#23 DONE 5.7s\n\n#24 [21/24] RUN cd /repo && poetry run pip install -q cryptography\n#24 DONE 2.5s\n\n#25 [22/24] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#25 DONE 0.4s\n\n#26 [23/24] WORKDIR /testbed\n#26 DONE 0.0s\n\n#27 exporting to image\n#27 exporting layers\n#27 exporting layers 5.9s done\n#27 exporting manifest sha256:0d56ca0bfa0588b35b60e0e59ab45f19e62ba1c7a2741c318424c6682f5a8902 0.0s done\n#27 exporting config sha256:82ab4ce4cfe4fcd5b57549253272aa858eeebea628fe135d12a265e4c84de969 0.0s done\n#27 exporting attestation manifest sha256:48ac960808da77efc7fa40a50c72b20309e24def523e589400f11502394c9e86 0.0s done\n#27 exporting manifest list sha256:2bef5ff15e5a9639baa32d02d7ac5c1c1c0ae13dd61af3ded13177c5d2c20b18 0.0s done\n#27 naming to docker.io/library/bench-pjy-repo2run-fhempy-fhempy:latest done\n#27 unpacking to docker.io/library/bench-pjy-repo2run-fhempy-fhempy:latest\n#27 unpacking to docker.io/library/bench-pjy-repo2run-fhempy-fhempy:latest 2.6s done\n#27 DONE 8.6s\n",
   "status": "collect_error",
   "py_test_files": 9,
   "collect_rc": 2,
@@ -44,9 +44,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 595.9,
+  "image_size_mb": 2131.6,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-fhempy-fhempy@sha256:5702586e7e88fbe5737ebde83ab24793860d2099870cb8806ba380cabebf3e0e",
+  "image_digest": "bench-pjy-repo2run-fhempy-fhempy@sha256:2bef5ff15e5a9639baa32d02d7ac5c1c1c0ae13dd61af3ded13177c5d2c20b18",
   "installed_pkg_count": 27,
   "tokens_in": 988271,
   "tokens_out": 29088,
@@ -54,8 +54,8 @@
   "turns_used": 37,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 28.38,
-  "test_s": 0.39,
+  "build_s": 26.2,
+  "test_s": 0.7,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -63,19 +63,7 @@
     "tokens_in": 988271,
     "tokens_out": 29088,
     "llm_calls": null,
-    "turns_used": 37,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 37
   },
   "error_surface": "",
   "error_surface_reason": "",

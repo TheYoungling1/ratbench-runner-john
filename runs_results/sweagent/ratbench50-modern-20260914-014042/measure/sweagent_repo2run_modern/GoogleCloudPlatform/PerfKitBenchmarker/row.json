@@ -1,18 +1,16 @@
 {
-  "agent": "sweagent__ratbench50-modern-20260914-014042",
+  "agent": "sweagent_repo2run_modern",
   "repo": "GoogleCloudPlatform/PerfKitBenchmarker",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "-it-py, astunparse, rich, keras, tensorflow\n#12 21.91 Successfully installed astunparse-1.6.3 flatbuffers-25.12.19 gast-0.7.0 google_pasta-0.2.0 h5py-3.14.0 keras-3.15.1 libclang-18.1.1 markdown-it-py-4.2.0 mdurl-0.1.2 ml_dtypes-0.6.0 namex-0.1.0 opt_einsum-3.4.0 optree-0.20.0 rich-15.0.0 tensorflow-2.21.0 termcolor-3.3.0 wheel-0.48.0 wrapt-2.4.1\n#12 21.91 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#12 21.93 \n#12 21.93 [notice] A new release of pip is available: 25.0.1 -> 26.2.1\n#12 21.93 [notice] To update, run: pip install --upgrade pip\n#12 DONE 22.7s\n\n#13 [10/12] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#13 DONE 1.4s\n\n#14 [11/12] WORKDIR /testbed\n#14 DONE 0.0s\n\n#15 [12/12] RUN git config --global --add safe.directory /testbed\n#15 DONE 0.2s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 88.9s done\n#16 exporting manifest sha256:746e169c64879e6b2c39cfb91e76587ab84fe61b1376d40160c9b4a6bfe34b9e done\n#16 exporting config sha256:43ef9c9c4b37ff1bce88fe383de3ecc9b46cac7991ad7d9043e73c071881b466 done\n#16 exporting attestation manifest sha256:2dcaa4669e12d41552e2103cc2ecf6021e1a2a1e34850c81727e3fe92672a85e done\n#16 exporting manifest list sha256:5809c9e4a9c230e0840ac7babb894a3f0d8984a666cf679a58c8446871b9d1f6 0.0s done\n#16 naming to docker.io/library/bench-sweagent__ratbench50-modern-20260914-014042-googlecloudplatform-perfkitbenchmarker:latest done\n#16 unpacking to docker.io/library/bench-sweagent__ratbench50-modern-20260914-014042-googlecloudplatform-perfkitbenchmarker:latest\n#16 unpacking to docker.io/library/bench-sweagent__ratbench50-modern-20260914-014042-googlecloudplatform-perfkitbenchmarker:latest 36.8s done\n#16 DONE 125.7s\n",
-  "status": "collect_error",
+  "build_log_tail": "pt_einsum, ml_dtypes, mdurl, h5py, google_pasta, gast, markdown-it-py, astunparse, rich, keras, tensorflow\n#12 19.58 Successfully installed astunparse-1.6.3 flatbuffers-25.12.19 gast-0.7.0 google_pasta-0.2.0 h5py-3.14.0 keras-3.15.1 libclang-18.1.1 markdown-it-py-4.2.0 mdurl-0.1.2 ml_dtypes-0.6.0 namex-0.1.0 opt_einsum-3.4.0 optree-0.20.0 rich-15.0.0 tensorflow-2.21.0 termcolor-3.3.0 wheel-0.48.0 wrapt-2.4.1\n#12 19.58 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#12 19.59 \n#12 19.59 [notice] A new release of pip is available: 25.0.1 -> 26.2.1\n#12 19.59 [notice] To update, run: pip install --upgrade pip\n#12 DONE 20.0s\n\n#13 [10/12] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#13 DONE 1.1s\n\n#14 [11/12] WORKDIR /testbed\n#14 DONE 0.0s\n\n#15 [12/12] RUN git config --global --add safe.directory /testbed\n#15 DONE 0.2s\n\n#16 exporting to image\n#16 exporting layers\n#16 exporting layers 70.9s done\n#16 exporting manifest sha256:baae25d25ed9d7c3a328ab3ef94cf218d395c156e72f31c500bda44b877deaa0 done\n#16 exporting config sha256:1d8229ac04d0d734c09795514fdc5a474e8167c5d5de281209519e45d0fd0d4b done\n#16 exporting attestation manifest sha256:9b2dad05701a43aa572aee16003705af2f639709d275fc8d30bee7a85362e85e done\n#16 exporting manifest list sha256:f7f67ce3b0937d78f45c7c4edf17f5c8090be9d87f4e33ebfc1cbd821c645ecc done\n#16 naming to docker.io/library/bench-sweagent_repo2run_modern-googlecloudplatform-perfkitbenchmarker:latest done\n#16 unpacking to docker.io/library/bench-sweagent_repo2run_modern-googlecloudplatform-perfkitbenchmarker:latest\n#16 unpacking to docker.io/library/bench-sweagent_repo2run_modern-googlecloudplatform-perfkitbenchmarker:latest 16.6s done\n#16 DONE 87.5s\n",
+  "status": "timed_out",
   "py_test_files": 291,
-  "collect_rc": 2,
-  "collect_clean": false,
-  "collect_errors": [
-    "E   ImportError: cannot import name 'bigquery' from 'google.cloud' (unknown location)"
-  ],
-  "collect_error_count": 1,
+  "collect_rc": 0,
+  "collect_clean": true,
+  "collect_errors": [],
+  "collect_error_count": 0,
   "collected_node_ids": [
     "perfkitbenchmarker/data/agents/data_science/validator/data_science_validator_test.py::DataScienceValidatorTest::test_evaluate_fail_empty_file",
     "perfkitbenchmarker/data/agents/data_science/validator/data_science_validator_test.py::DataScienceValidatorTest::test_evaluate_fail_missing_product",
@@ -2579,10 +2577,10 @@
     "tests/windows_packages/psping_test.py::PspingBenchmarkTestCase::testPspingParsing"
   ],
   "executed": true,
-  "total": 2768,
+  "total": 2767,
   "passed": 2510,
   "failed": 42,
-  "errors": 1,
+  "errors": 0,
   "skipped": 11,
   "passed_node_ids": [
     "perfkitbenchmarker/data/agents/data_science/validator/data_science_validator_test.py::DataScienceValidatorTest::test_evaluate_fail_empty_file",
@@ -5140,15 +5138,13 @@
     "tests/vm_util_test.py::IssueCommandTestCase::testTimeoutReached",
     "tests/vm_util_test.py::IssueCommandTestCase::testTimeoutReachedThrows"
   ],
-  "error_node_ids": [
-    "perfkitbenchmarker.scripts.bigquery_tensorflow_connector_test_scripts.test_runner"
-  ],
+  "error_node_ids": [],
   "ebsr": true,
-  "pass_rate": 0.9104,
-  "timed_out": false,
-  "image_size_mb": 6510.0,
+  "pass_rate": 0.9107,
+  "timed_out": true,
+  "image_size_mb": 1934.6,
   "image_delta_mb": null,
-  "image_digest": "bench-sweagent__ratbench50-modern-20260914-014042-googlecloudplatform-perfkitbenchmarker@sha256:5809c9e4a9c230e0840ac7babb894a3f0d8984a666cf679a58c8446871b9d1f6",
+  "image_digest": "bench-sweagent_repo2run_modern-googlecloudplatform-perfkitbenchmarker@sha256:f7f67ce3b0937d78f45c7c4edf17f5c8090be9d87f4e33ebfc1cbd821c645ecc",
   "installed_pkg_count": 127,
   "tokens_in": 2206024.0,
   "tokens_out": 2566.0,
@@ -5156,8 +5152,8 @@
   "turns_used": 100,
   "cost_usd": 0.09620440800000003,
   "produce_s": 1347.3,
-  "build_s": 197.96,
-  "test_s": 635.2,
+  "build_s": 151.74,
+  "test_s": 1800.1,
   "meta": {
     "contract_version": 1,
     "producer": "sweagent_repo2run_modern",
@@ -5191,19 +5187,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=bd08f2d554778bd908182b5d59069bb9f764306a (pinned)\nremoved conftest.py\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=bd08f2d554778bd908182b5d59069bb9f764306a (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

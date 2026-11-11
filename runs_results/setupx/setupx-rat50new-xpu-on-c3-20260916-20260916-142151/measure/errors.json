@@ -1,0 +1,200 @@
+{
+  "setupx": {
+    "collect": {
+      "agent": "setupx",
+      "n_repos": 50,
+      "source": "collect",
+      "n_admissible": 42,
+      "n_masked": 3,
+      "n_unobserved": 5,
+      "n_status_derived": 0,
+      "buckets": {
+        "partial": 4,
+        "build_fail": 3,
+        "collect_error": 16,
+        "success": 19,
+        "zero_pass": 3,
+        "measure_error": 2,
+        "no_tests_collected": 2,
+        "timed_out": 1
+      },
+      "surfaces": {
+        "full": 42,
+        "unobserved": 5,
+        "masked": 3
+      },
+      "token_repos": {
+        "litellm.exceptions.AuthenticationError": 1,
+        "litellm.llms.openai.common_utils.OpenAIError": 1,
+        "openai.APIConnectionError": 1,
+        "ModuleNotFoundError": 11,
+        "FileNotFoundError": 1,
+        "httpcore.ConnectError": 1,
+        "ImportError": 3,
+        "openai.OpenAIError": 1,
+        "SyntaxError": 2,
+        "httpx.ConnectError": 1,
+        "Exception": 1,
+        "pydantic_core._pydantic_core.ValidationError": 1,
+        "Error": 1
+      },
+      "token_events": {
+        "openai.OpenAIError": 1,
+        "litellm.llms.openai.common_utils.OpenAIError": 1,
+        "litellm.exceptions.AuthenticationError": 1,
+        "httpcore.ConnectError": 1,
+        "httpx.ConnectError": 1,
+        "openai.APIConnectionError": 1,
+        "ImportError": 4,
+        "ModuleNotFoundError": 145,
+        "FileNotFoundError": 3,
+        "Exception": 4,
+        "SyntaxError": 2,
+        "pydantic_core._pydantic_core.ValidationError": 1,
+        "Error": 1
+      },
+      "category_repos": {
+        "partial_import": 2,
+        "module_not_found": 11,
+        "service_unavailable": 1,
+        "uncategorized": 3,
+        "syntax_error": 2,
+        "import_failed": 2,
+        "file_missing": 1
+      },
+      "category_events": {
+        "uncategorized": 11,
+        "service_unavailable": 1,
+        "partial_import": 2,
+        "module_not_found": 145,
+        "file_missing": 3,
+        "syntax_error": 2,
+        "import_failed": 2
+      },
+      "crosstab": {
+        "collect_error|partial_import": 2,
+        "collect_error|module_not_found": 11,
+        "collect_error|service_unavailable": 1,
+        "collect_error|uncategorized": 2,
+        "collect_error|syntax_error": 2,
+        "collect_error|import_failed": 2,
+        "collect_error|file_missing": 1,
+        "success|uncategorized": 1
+      },
+      "top_groups": {
+        "module_not_found": [
+          [
+            "tests.test_anthropic_compaction_usage",
+            1
+          ],
+          [
+            "tests.test_budget_management",
+            1
+          ],
+          [
+            "tests.test_end_users",
+            1
+          ],
+          [
+            "tests.test_otel_thread_leak",
+            1
+          ],
+          [
+            "tests.test_models",
+            1
+          ],
+          [
+            "tests.test_litellm_rust",
+            1
+          ],
+          [
+            "tests.test_resource_cleanup",
+            1
+          ],
+          [
+            "tests.search_tests",
+            1
+          ],
+          [
+            "tests.proxy_behavior",
+            1
+          ],
+          [
+            "tests.vector_store_tests",
+            1
+          ]
+        ],
+        "partial_import": [
+          [
+            "MessageSendParams",
+            1
+          ],
+          [
+            "UTC",
+            1
+          ]
+        ],
+        "uncategorized": [
+          [
+            "/testbed/docs/my-website/docs/proxy/config_settings.md",
+            1
+          ],
+          [
+            "../..//docs/my-website/docs/exception_mapping.md",
+            1
+          ],
+          [
+            "./docs/my-website/docs/proxy/config_settings.md",
+            1
+          ]
+        ],
+        "file_missing": [
+          [
+            "/testbed/docs/my-website/docs/proxy/config_settings.md",
+            1
+          ],
+          [
+            "../..//docs/my-website/docs/exception_mapping.md",
+            1
+          ],
+          [
+            "./docs/my-website/docs/proxy/config_settings.md",
+            1
+          ]
+        ]
+      },
+      "uncategorized_rate": 0.0663
+    },
+    "run": {
+      "agent": "setupx",
+      "n_repos": 50,
+      "source": "run",
+      "n_admissible": 42,
+      "n_masked": 3,
+      "n_unobserved": 5,
+      "n_status_derived": 0,
+      "buckets": {
+        "partial": 4,
+        "build_fail": 3,
+        "collect_error": 16,
+        "success": 19,
+        "zero_pass": 3,
+        "measure_error": 2,
+        "no_tests_collected": 2,
+        "timed_out": 1
+      },
+      "surfaces": {
+        "full": 42,
+        "unobserved": 5,
+        "masked": 3
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    }
+  }
+}

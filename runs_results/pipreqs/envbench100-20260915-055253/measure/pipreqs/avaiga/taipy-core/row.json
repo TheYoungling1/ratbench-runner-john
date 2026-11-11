@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "avaiga/taipy-core",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "_64.manylinux_2_28_x86_64.whl (622 kB)\n#11 4.255      \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 622.8/622.8 kB 133.9 MB/s eta 0:00:00\n#11 4.409 Collecting six>=1.5\n#11 4.416   Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)\n#11 4.736 Installing collected packages: pytz, tzdata, six, sentinels, psutil, numpy, networkx, greenlet, fsspec, et-xmlfile, dnspython, colorama, SQLAlchemy, python-dateutil, pymongo, openpyxl, mongomock, pandas, modin\n#11 12.70 Successfully installed SQLAlchemy-2.0.54 colorama-0.4.6 dnspython-2.8.0 et-xmlfile-2.0.0 fsspec-2026.9.0 greenlet-3.5.6 modin-0.37.1 mongomock-4.3.0 networkx-3.4.2 numpy-2.2.6 openpyxl-3.1.5 pandas-2.3.3 psutil-7.2.2 pymongo-4.18.2 python-dateutil-2.9.0.post0 pytz-2026.4 sentinels-1.1.1 six-1.17.0 tzdata-2026.4\n#11 12.70 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 12.71 \n#11 12.71 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 12.71 [notice] To update, run: pip install --upgrade pip\n#11 DONE 13.4s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 11.0s done\n#12 exporting manifest sha256:4e277c4ad4ede98faf779b45ba475687d2ad8f8dbde8c895a4db2fdf2b2486b0 0.0s done\n#12 exporting config sha256:8342f82aee47be15b777498437edc860e6610ce6954ae32b473dc2502cfa6f4d done\n#12 exporting attestation manifest sha256:61f847bb169e1eac03c4abe2d43548533f0eec15c50a14a22ff942a62d05b228 0.0s done\n#12 exporting manifest list sha256:2f249c85cf1b5f1f53edfc085de77a5dbda99da401c9734323a9690737331896 0.0s done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-avaiga-taipy-core:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-avaiga-taipy-core:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-avaiga-taipy-core:latest 3.1s done\n#12 DONE 14.2s\n",
+  "build_log_tail": "_64.manylinux_2_28_x86_64.whl (622 kB)\n#11 3.956      \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 622.8/622.8 kB 82.1 MB/s eta 0:00:00\n#11 4.080 Collecting six>=1.5\n#11 4.089   Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)\n#11 4.374 Installing collected packages: pytz, tzdata, six, sentinels, psutil, numpy, networkx, greenlet, fsspec, et-xmlfile, dnspython, colorama, SQLAlchemy, python-dateutil, pymongo, openpyxl, mongomock, pandas, modin\n#11 12.18 Successfully installed SQLAlchemy-2.0.53 colorama-0.4.6 dnspython-2.8.0 et-xmlfile-2.0.0 fsspec-2026.7.0 greenlet-3.5.6 modin-0.37.1 mongomock-4.3.0 networkx-3.4.2 numpy-2.2.6 openpyxl-3.1.5 pandas-2.3.3 psutil-7.2.2 pymongo-4.18.1 python-dateutil-2.9.0.post0 pytz-2026.3.post1 sentinels-1.1.1 six-1.17.0 tzdata-2026.4\n#11 12.18 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 12.18 \n#11 12.18 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 12.18 [notice] To update, run: pip install --upgrade pip\n#11 DONE 12.7s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 11.2s done\n#12 exporting manifest sha256:b34136d3a22fb07865e10e53dd6efc95e0952c403e0995bed2a81ebb69eb1bd3 0.0s done\n#12 exporting config sha256:7858edc543aad56cfc312f4dade0bdba7ba37e2a190a7c60ff7cb5a0d9af4122 0.0s done\n#12 exporting attestation manifest sha256:0e176497728927f12a19924fd1dcf80e6d7491d6f0d705ddcf3a119f36e3e719 0.0s done\n#12 exporting manifest list sha256:d3c4ba22321fc34c6db03ebeb6a24678c91bd92cfd59004d34714f98437437ef 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-avaiga-taipy-core:latest\n#12 naming to docker.io/library/bench-pipreqs-avaiga-taipy-core:latest 0.0s done\n#12 unpacking to docker.io/library/bench-pipreqs-avaiga-taipy-core:latest\n#12 unpacking to docker.io/library/bench-pipreqs-avaiga-taipy-core:latest 3.1s done\n#12 DONE 14.5s\n",
   "status": "collect_error",
   "py_test_files": 92,
   "collect_rc": 4,
@@ -26,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 1901.8,
-  "image_delta_mb": 391.1,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-avaiga-taipy-core@sha256:2f249c85cf1b5f1f53edfc085de77a5dbda99da401c9734323a9690737331896",
+  "image_size_mb": 497.2,
+  "image_delta_mb": 109.6,
+  "image_digest": "bench-pipreqs-avaiga-taipy-core@sha256:d3c4ba22321fc34c6db03ebeb6a24678c91bd92cfd59004d34714f98437437ef",
   "installed_pkg_count": 33,
   "tokens_in": null,
   "tokens_out": null,
@@ -36,8 +36,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 6.38,
-  "build_s": 34.24,
-  "test_s": 0.63,
+  "build_s": 33.35,
+  "test_s": 0.73,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -64,19 +64,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=62f0d8521cbb80ae13654c53620ddc856ba86d33 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=62f0d8521cbb80ae13654c53620ddc856ba86d33 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

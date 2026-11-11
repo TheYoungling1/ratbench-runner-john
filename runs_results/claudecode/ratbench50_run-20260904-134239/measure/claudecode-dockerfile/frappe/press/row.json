@@ -1,10 +1,10 @@
 {
-  "agent": "claudecode__ratbench50_run-20260904-134239",
+  "agent": "claudecode-dockerfile",
   "repo": "frappe/press",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": " is incompatible.\n#12 13.53 semgrep 1.159.0 requires tomli~=2.0.1, but you have tomli 2.2.1 which is incompatible.\n#12 13.53 Successfully installed Faker-23.2.0 antlr4-python3-runtime-4.13.2 aws-xray-sdk-2.15.0 cfn-lint-1.57.0 freezegun-1.2.2 graphql-core-3.2.12 hypothesis-6.168.1 joserfc-1.7.5 jsonpatch-1.33 jsonpath_ng-1.8.0 jsonpointer-3.1.1 jsonschema-4.26.0 jsonschema-path-0.5.0 lazy-object-proxy-1.12.0 moto-5.2.3 mpmath-1.3.0 networkx-3.6.1 openapi-schema-validator-0.9.0 openapi-spec-validator-0.9.0 pathable-0.6.0 py-partiql-parser-0.6.3 rfc3339-validator-0.1.4 sympy-1.14.0 xmltodict-1.0.4\n#12 13.53 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#12 13.63 \n#12 13.63 [notice] A new release of pip is available: 24.0 -> 26.2.1\n#12 13.63 [notice] To update, run: pip install --upgrade pip\n#12 DONE 14.5s\n\n#13 [10/10] RUN mkdir -p /logs && chmod 777 /logs\n#13 DONE 0.3s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 102.4s done\n#14 exporting manifest sha256:069fc95bd38a1da9199f89848339c84386774f072d529e55b58287ea4146ec3f done\n#14 exporting config sha256:39c1f99e49d4146f1d078978f2dd7b1f6b69fba60ade50bfb37a8a6b063582dd done\n#14 exporting attestation manifest sha256:c20ea6ee9e8fcc8bdb7f3fa8ba17da20f62f4dd55960985fc42d9412f02db658 0.1s done\n#14 exporting manifest list sha256:840941f783c8672ae75d651f7ce722ada09f9104a57a5371c0355099b7bd6955\n#14 exporting manifest list sha256:840941f783c8672ae75d651f7ce722ada09f9104a57a5371c0355099b7bd6955 0.1s done\n#14 naming to docker.io/library/bench-claudecode__ratbench50_run-20260904-134239-frappe-press:latest done\n#14 unpacking to docker.io/library/bench-claudecode__ratbench50_run-20260904-134239-frappe-press:latest\n#14 unpacking to docker.io/library/bench-claudecode__ratbench50_run-20260904-134239-frappe-press:latest 28.6s done\n#14 DONE 131.2s\n",
+  "build_log_tail": "es not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\npress 0.7.0 requires posthog==3.0.1, but you have posthog 5.0.0 which is incompatible.\npress 0.7.0 requires pyOpenSSL~=23.2.0, but you have pyopenssl 25.1.0 which is incompatible.\npress 0.7.0 requires requests<2.32, but you have requests 2.32.5 which is incompatible.\npress 0.7.0 requires sql_metadata==2.10.0, but you have sql-metadata 2.17.0 which is incompatible.\npress 0.7.0 requires tomli==2.0.1, but you have tomli 2.2.1 which is incompatible.\nsemgrep 1.159.0 requires click~=8.1.8, but you have click 8.2.1 which is incompatible.\nsemgrep 1.159.0 requires jsonschema~=4.25.1, but you have jsonschema 4.26.0 which is incompatible.\nsemgrep 1.159.0 requires pyjwt[crypto]~=2.12.0, but you have pyjwt 2.10.1 which is incompatible.\nsemgrep 1.159.0 requires tomli~=2.0.1, but you have tomli 2.2.1 which is incompatible.\nWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n\u001b[0m\u001b[91m\n[notice] A new release of pip is available: 24.0 -> 26.2.1\n[notice] To update, run: pip install --upgrade pip\n\u001b[0m ---> Removed intermediate container 4381da3ec88f\n ---> 00d4afb4e2ec\nStep 10/11 : RUN mkdir -p /logs && chmod 777 /logs\n ---> Running in 57dff34f9c7d\n ---> Removed intermediate container 57dff34f9c7d\n ---> a0bced236379\nStep 11/11 : CMD [\"python\", \"-m\", \"pytest\", \"/testbed\", \"--co\", \"-q\"]\n ---> Running in 269e636d1276\n ---> Removed intermediate container 269e636d1276\n ---> fa65a29856be\nSuccessfully built fa65a29856be\nSuccessfully tagged bench-claudecode-dockerfile-frappe-press:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 291,
   "collect_rc": 2,
@@ -1734,9 +1734,9 @@
   "ebsr": true,
   "pass_rate": 0.0116,
   "timed_out": false,
-  "image_size_mb": 1075.3,
-  "image_delta_mb": null,
-  "image_digest": "bench-claudecode__ratbench50_run-20260904-134239-frappe-press@sha256:840941f783c8672ae75d651f7ce722ada09f9104a57a5371c0355099b7bd6955",
+  "image_size_mb": 1080.8,
+  "image_delta_mb": 701.0,
+  "image_digest": "bench-claudecode-dockerfile-frappe-press@sha256:fa65a29856be1e3ccb5abaa4da1e52cad0e4ec26f158034be8b7241bede81abf",
   "installed_pkg_count": 335,
   "tokens_in": 4518631,
   "tokens_out": 35405,
@@ -1744,8 +1744,8 @@
   "turns_used": 65,
   "cost_usd": 0.071078152,
   "produce_s": 684.22,
-  "build_s": 369.38,
-  "test_s": 24.87,
+  "build_s": 510.65,
+  "test_s": 32.44,
   "meta": {
     "contract_version": 1,
     "producer": "claudecode-dockerfile",
@@ -1772,19 +1772,7 @@
     "usage_source": "computed",
     "dsml_text_blocks": 0,
     "turn_capped": false,
-    "agent_timed_out": false,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "agent_timed_out": false
   },
   "error_surface": "",
   "error_surface_reason": "",

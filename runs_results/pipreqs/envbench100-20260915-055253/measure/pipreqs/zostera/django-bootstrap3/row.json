@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "zostera/django-bootstrap3",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ng django-5.2.17-py3-none-any.whl (8.3 MB)\n#11 0.891      \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 8.3/8.3 MB 94.8 MB/s eta 0:00:00\n#11 0.946 Collecting sqlparse>=0.3.1\n#11 0.953   Downloading sqlparse-0.6.0-py3-none-any.whl (50 kB)\n#11 0.958      \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 50.1/50.1 kB 15.8 MB/s eta 0:00:00\n#11 0.990 Collecting asgiref>=3.8.1\n#11 0.998   Downloading asgiref-3.12.1-py3-none-any.whl (25 kB)\n#11 1.007 Requirement already satisfied: typing_extensions>=4 in /usr/local/lib/python3.10/site-packages (from asgiref>=3.8.1->Django->-r /requirements_pipreqs.txt (line 1)) (4.16.0)\n#11 1.095 Installing collected packages: sqlparse, asgiref, Django\n#11 2.532 Successfully installed Django-5.2.17 asgiref-3.12.1 sqlparse-0.6.0\n#11 2.532 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 2.538 \n#11 2.538 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 2.538 [notice] To update, run: pip install --upgrade pip\n#11 DONE 2.7s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 2.7s done\n#12 exporting manifest sha256:565b98dee97c45ac420b3c3ac29ae75b5d658562055c57da85acd77ee2b41220 done\n#12 exporting config sha256:0307ba48daa142091bc1aa3f2c25bb3fb88bb327398cae68890cc5556b0e84d9 done\n#12 exporting attestation manifest sha256:a3f4386e82179aa70c77c02a4b0dfaf893c2f5dea0e555e8bf49bef1699606d8 0.0s done\n#12 exporting manifest list sha256:b8eec4c9f0ef11c511c1e897f4fb8e55fc50e8392bdce184a8b099fa884c38fe 0.0s done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-zostera-django-bootstrap3:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-zostera-django-bootstrap3:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-zostera-django-bootstrap3:latest 1.3s done\n#12 DONE 4.1s\n",
+  "build_log_tail": "8] RUN pip install -r /requirements_pipreqs.txt\n#11 0.605 Collecting Django\n#11 0.632   Downloading django-5.2.17-py3-none-any.whl (8.3 MB)\n#11 0.740      \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 8.3/8.3 MB 78.7 MB/s eta 0:00:00\n#11 0.799 Collecting asgiref>=3.8.1\n#11 0.806   Downloading asgiref-3.12.1-py3-none-any.whl (25 kB)\n#11 0.831 Collecting sqlparse>=0.3.1\n#11 0.841   Downloading sqlparse-0.6.0-py3-none-any.whl (50 kB)\n#11 0.845      \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 50.1/50.1 kB 14.0 MB/s eta 0:00:00\n#11 0.851 Requirement already satisfied: typing_extensions>=4 in /usr/local/lib/python3.10/site-packages (from asgiref>=3.8.1->Django->-r /requirements_pipreqs.txt (line 1)) (4.16.0)\n#11 0.914 Installing collected packages: sqlparse, asgiref, Django\n#11 2.332 Successfully installed Django-5.2.17 asgiref-3.12.1 sqlparse-0.6.0\n#11 2.333 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 2.338 \n#11 2.338 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 2.338 [notice] To update, run: pip install --upgrade pip\n#11 DONE 2.8s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 2.8s done\n#12 exporting manifest sha256:cbf7a58c31d9fa201a78dc164daca0be1893fa8aa051b4a55b35971b57d2ee2c done\n#12 exporting config sha256:e24f58e52b98c17737a0f1a0e0d587fb504c4e0de790655bffe66af9a11a2177 done\n#12 exporting attestation manifest sha256:ead9b07bc86a4cc1765cce6666dce5d9c2b3f982ece881f32cbf4b51b3fcb4e1 done\n#12 exporting manifest list sha256:3a65d115951dea1c3da1bc622cea3c43021064424be5b7b68c6a43f528edb3b6 done\n#12 naming to docker.io/library/bench-pipreqs-zostera-django-bootstrap3:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-zostera-django-bootstrap3:latest\n#12 unpacking to docker.io/library/bench-pipreqs-zostera-django-bootstrap3:latest 1.4s done\n#12 DONE 4.3s\n",
   "status": "collect_error",
   "py_test_files": 4,
   "collect_rc": 2,
@@ -34,9 +34,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 412.4,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-zostera-django-bootstrap3@sha256:b8eec4c9f0ef11c511c1e897f4fb8e55fc50e8392bdce184a8b099fa884c38fe",
+  "image_size_mb": 412.3,
+  "image_delta_mb": 24.7,
+  "image_digest": "bench-pipreqs-zostera-django-bootstrap3@sha256:3a65d115951dea1c3da1bc622cea3c43021064424be5b7b68c6a43f528edb3b6",
   "installed_pkg_count": 17,
   "tokens_in": null,
   "tokens_out": null,
@@ -44,8 +44,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 5.78,
-  "build_s": 9.7,
-  "test_s": 0.47,
+  "build_s": 9.96,
+  "test_s": 0.67,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -72,19 +72,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=a6565be14ed0edff98b84d2874dc709cbecb1118 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=a6565be14ed0edff98b84d2874dc709cbecb1118 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

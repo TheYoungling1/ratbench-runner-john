@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "google/nsscache",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "15 ../../usr/local/lib/python3.10/site-packages/google/api_core/_python_version_support.py:254\n#10 29.15   /usr/local/lib/python3.10/site-packages/google/api_core/_python_version_support.py:254: FutureWarning: You are using a Python version (3.10.21) which Google will stop supporting in new releases of google.api_core once it reaches its end of life (2026-10-04). Please upgrade to the latest Python version, or at least Python 3.11, to continue receiving updates for google.api_core past that date.\n#10 29.15     warnings.warn(message, FutureWarning)\n#10 29.15 \n#10 29.15 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n#10 29.15 306 tests collected in 0.54s\n#10 DONE 29.5s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.4s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.3s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 5.3s done\n#14 exporting manifest sha256:a3a5f0c2783f827013337163f6df484a7de3978240fc00d5e4623249799761ef 0.0s done\n#14 exporting config sha256:0bdda43fc26c71e3db402531649d3da063b6c14dd0211c2a4293830c6a10b9aa 0.0s done\n#14 exporting attestation manifest sha256:d819f2f652bff962aed5fb117fc2bd279a5e683cab633a66128dc20af508a4e1 0.0s done\n#14 exporting manifest list sha256:4b145b161213bddc300aa26a37f510deb482173fe5315d5dd65303ef60e70392 0.0s done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-google-nsscache:latest\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-google-nsscache:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-google-nsscache:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-google-nsscache:latest 7.2s done\n#14 DONE 12.6s\n",
+  "build_log_tail": "tReadTimestampInFuture\n#10 22.94 nss_cache/util/timestamps_test.py::TestTimestamps::testTimestampToDateTime\n#10 22.94 nss_cache/util/timestamps_test.py::TestTimestamps::testWriteTimestamp\n#10 22.94 \n#10 22.94 =============================== warnings summary ===============================\n#10 22.94 ../../usr/local/lib/python3.10/site-packages/google/api_core/_python_version_support.py:254\n#10 22.94   /usr/local/lib/python3.10/site-packages/google/api_core/_python_version_support.py:254: FutureWarning: You are using a Python version (3.10.21) which Google will stop supporting in new releases of google.api_core once it reaches its end of life (2026-10-04). Please upgrade to the latest Python version, or at least Python 3.11, to continue receiving updates for google.api_core past that date.\n#10 22.94     warnings.warn(message, FutureWarning)\n#10 22.94 \n#10 22.94 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n#10 22.94 306 tests collected in 0.51s\n#10 DONE 23.1s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.3s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.1s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 5.2s done\n#14 exporting manifest sha256:7c8f97ffdeab5146b8efe140ba40d3ac139ec467a34ef7910848eabde0293683 done\n#14 exporting config sha256:c3346593f8ebd02cd2af456fc6c54e8fbcdcb85bcff5e7599a9086d8a328ad93 done\n#14 exporting attestation manifest sha256:084182b2d48c8505f3d1f9877e11c4df82e801b2dadc81d9c6c5b50958c36a58 done\n#14 exporting manifest list sha256:66a2b24f4c2c7f4b3b67ae5e2bafcd290e234b80b958bc0a22c6fc0ead80c32f done\n#14 naming to docker.io/library/bench-setupx-google-nsscache:latest done\n#14 unpacking to docker.io/library/bench-setupx-google-nsscache:latest\n#14 unpacking to docker.io/library/bench-setupx-google-nsscache:latest 1.4s done\n#14 DONE 6.7s\n",
   "status": "executed",
   "py_test_files": 27,
   "collect_rc": 0,
@@ -633,9 +633,9 @@
   "ebsr": true,
   "pass_rate": 0.9967,
   "timed_out": false,
-  "image_size_mb": 1771.5,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-google-nsscache@sha256:4b145b161213bddc300aa26a37f510deb482173fe5315d5dd65303ef60e70392",
+  "image_size_mb": 488.1,
+  "image_delta_mb": 100.5,
+  "image_digest": "bench-setupx-google-nsscache@sha256:66a2b24f4c2c7f4b3b67ae5e2bafcd290e234b80b958bc0a22c6fc0ead80c32f",
   "installed_pkg_count": 40,
   "tokens_in": 255560,
   "tokens_out": 12097,
@@ -643,8 +643,8 @@
   "turns_used": 9,
   "cost_usd": null,
   "produce_s": 352.88,
-  "build_s": 46.0,
-  "test_s": 3.55,
+  "build_s": 32.41,
+  "test_s": 2.81,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -679,19 +679,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=e0f2701a92bcec248e8c27a982120f8a983a6873 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=e0f2701a92bcec248e8c27a982120f8a983a6873 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

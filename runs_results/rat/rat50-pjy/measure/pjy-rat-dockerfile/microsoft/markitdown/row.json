@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "microsoft/markitdown",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": ".19 httpcore2-2.10.0 httpx2-2.10.0 humanfriendly-10.0 idna-3.18 isodate-0.7.2 jiter-0.16.0 lxml-6.1.1 magika-0.6.3 mammoth-1.11.0 markdownify-1.2.3 markitdown-0.1.6 mpmath-1.3.0 msal-1.37.0 msal-extensions-1.3.1 numpy-2.2.6 olefile-0.47 onnxruntime-1.23.2 openai-3.0.0 openpyxl-3.1.5 pandas-2.3.3 pdfminer.six-20260107 pdfplumber-0.11.10 pillow-12.3.0 protobuf-7.35.1 pycparser-3.0 pydantic-2.13.4 pydantic_core-2.46.4 pydub-0.25.1 pypdfium2-5.13.0 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 python-pptx-1.0.2 pytz-2026.3.post1 requests-2.34.2 six-1.17.0 soupsieve-2.9.2 sympy-1.14.0 tqdm-4.70.0 typing-inspection-0.4.3 tzdata-2026.3 urllib3-2.7.0 xlrd-2.0.2 xlsxwriter-3.2.9 youtube-transcript-api-1.0.3\n#16 76.87 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#16 77.12 \n#16 77.12 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#16 77.12 [notice] To update, run: pip install --upgrade pip\n#16 DONE 78.0s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.3s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.0s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 17.5s done\n#19 exporting manifest sha256:da47279108ff6c9340395314d8e473760b4bbb986b5f1e9d2e5d610c46ec4d22 0.0s done\n#19 exporting config sha256:e4c1f7069ba5dc6b5559a7bdb6638998d3dd74b0333f2e5e0100ca56da66b027 done\n#19 exporting attestation manifest sha256:c86e2b1f91c932ba99180ee74f8d0e1c9923837adec12951f10ac761f535bc9b 0.0s done\n#19 exporting manifest list sha256:dd9e4f1e499f5c6df86aab85286040735132e7369e410266ff0d9afd23ce0c81 done\n#19 naming to docker.io/library/bench-rat__rat50-pjy-microsoft-markitdown:latest done\n#19 unpacking to docker.io/library/bench-rat__rat50-pjy-microsoft-markitdown:latest\n#19 unpacking to docker.io/library/bench-rat__rat50-pjy-microsoft-markitdown:latest 6.7s done\n#19 DONE 24.3s\n",
+  "build_log_tail": "-2.10.0 httpx2-2.10.0 humanfriendly-10.0 idna-3.18 isodate-0.7.2 jiter-0.16.0 lxml-6.1.1 magika-0.6.3 mammoth-1.11.0 markdownify-1.2.3 markitdown-0.1.6 mpmath-1.3.0 msal-1.37.0 msal-extensions-1.3.1 numpy-2.2.6 olefile-0.47 onnxruntime-1.23.2 openai-3.0.0 openpyxl-3.1.5 pandas-2.3.3 pdfminer.six-20260107 pdfplumber-0.11.10 pillow-12.3.0 protobuf-7.35.1 pycparser-3.0 pydantic-2.13.4 pydantic_core-2.46.4 pydub-0.25.1 pypdfium2-5.13.0 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 python-pptx-1.0.2 pytz-2026.3.post1 requests-2.34.2 six-1.17.0 soupsieve-2.9.2 sympy-1.14.0 tqdm-4.70.0 typing-inspection-0.4.3 tzdata-2026.3 urllib3-2.7.0 xlrd-2.0.2 xlsxwriter-3.2.9 youtube-transcript-api-1.0.3\n#16 690.2 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#16 690.6 \n#16 690.6 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#16 690.6 [notice] To update, run: pip install --upgrade pip\n#16 DONE 692.2s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.4s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.0s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 24.1s done\n#19 exporting manifest sha256:56b4f5fb79775ebad7c4a8701b4a841722e73d525c9df5645b2cd611a620a8b8 done\n#19 exporting config sha256:100be869042987191d164369144aafddee3af18b56f2c3d7eae3feb877974cb4 done\n#19 exporting attestation manifest sha256:013905e077e9ee179d3a729ec9dd66d2e38f4bfc45447db2e0289c8c96ca4725 0.0s done\n#19 exporting manifest list sha256:783128068f9a27530d7033da37e9d86656846d8580d6e9ed1680f719e309e5ba 0.0s done\n#19 naming to docker.io/library/bench-pjy-rat-dockerfile-microsoft-markitdown:latest done\n#19 unpacking to docker.io/library/bench-pjy-rat-dockerfile-microsoft-markitdown:latest\n#19 unpacking to docker.io/library/bench-pjy-rat-dockerfile-microsoft-markitdown:latest 8.8s done\n#19 DONE 33.0s\n",
   "status": "collect_error",
   "py_test_files": 14,
   "collect_rc": 2,
@@ -707,9 +707,9 @@
   "ebsr": true,
   "pass_rate": 0.9822,
   "timed_out": false,
-  "image_size_mb": 268.8,
+  "image_size_mb": 1101.8,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50-pjy-microsoft-markitdown@sha256:dd9e4f1e499f5c6df86aab85286040735132e7369e410266ff0d9afd23ce0c81",
+  "image_digest": "bench-pjy-rat-dockerfile-microsoft-markitdown@sha256:783128068f9a27530d7033da37e9d86656846d8580d6e9ed1680f719e309e5ba",
   "installed_pkg_count": 79,
   "tokens_in": 322810,
   "tokens_out": 144014,
@@ -717,27 +717,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 106.0,
-  "test_s": 110.93,
+  "build_s": 729.92,
+  "test_s": 113.37,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 322810,
     "tokens_out": 144014,
-    "llm_calls": 10,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 10
   },
   "error_surface": "",
   "error_surface_reason": "",

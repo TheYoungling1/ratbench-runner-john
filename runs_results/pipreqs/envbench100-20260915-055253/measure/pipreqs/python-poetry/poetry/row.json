@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "python-poetry/poetry",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "httpcore-1.0.9 httpretty-1.1.4 httpx-0.28.1 idna-3.20 importlib_metadata-9.0.1 installer-1.0.1 jaraco.classes-3.4.0 jaraco.context-6.1.2 jaraco.functools-4.6.0 jaraco.util-15.0.0 jeepney-0.9.0 keyring-25.7.0 more-itertools-11.1.0 msgpack-1.2.2 orderly-set-5.5.0 pbs-installer-2026.9.24 pexpect-4.9.0 pkginfo-1.13 platformdirs-4.11.15 poetry-2.5.1 poetry-core-2.5.0 poetry_plugin_export-1.10.1 ptyprocess-0.7.0 pycparser-3.0 pyproject_hooks-1.3.3 pytest_mock-3.15.1 python-discovery-1.6.1 rapidfuzz-3.14.5 requests-2.34.2 requests_toolbelt-1.0.0 shellingham-1.5.4 tomlkit-0.15.1 trove_classifiers-2026.9.21.13 urllib3-2.8.0 virtualenv-21.12.1 zipp-4.1.0\n#11 11.00 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 11.00 \n#11 11.00 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 11.00 [notice] To update, run: pip install --upgrade pip\n#11 DONE 11.8s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 5.1s done\n#12 exporting manifest sha256:6282cb5d0756b24290683225ee1e37bb7bac7cbbf338900571cfa1401dbd4bba 0.0s done\n#12 exporting config sha256:654acfc13ee014d01b444cc756e37b1d7950e649515ca4b35a315bcc9c1c9fb4 0.0s done\n#12 exporting attestation manifest sha256:74afc97f63589dfe2d84dbf3df9f35ef2a80832032aecbafd11e774ee9b01a33\n#12 exporting attestation manifest sha256:74afc97f63589dfe2d84dbf3df9f35ef2a80832032aecbafd11e774ee9b01a33 0.0s done\n#12 exporting manifest list sha256:b4bd648023dc0a6f4da87497143b1053ab75ced96685cbfbe8c2e8347b5ef36a done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-python-poetry-poetry:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-python-poetry-poetry:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-python-poetry-poetry:latest 1.8s done\n#12 DONE 7.5s\n",
+  "build_log_tail": "tifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.1 cleo-2.1.0 crashtest-0.4.1 cryptography-50.0.1 deepdiff-9.1.0 distlib-0.4.3 dulwich-1.2.15 fastjsonschema-2.22.2 filelock-3.32.6 findpython-0.8.0 h11-0.16.0 httpcore-1.0.9 httpretty-1.1.4 httpx-0.28.1 idna-3.19 importlib_metadata-9.0.1 installer-1.0.1 jaraco.classes-3.4.0 jaraco.context-6.1.2 jaraco.functools-4.6.0 jaraco.util-15.0.0 jeepney-0.9.0 keyring-25.7.0 more-itertools-11.1.0 msgpack-1.2.2 orderly-set-5.5.0 pbs-installer-2026.9.1 pexpect-4.9.0 pkginfo-1.13 platformdirs-4.11.8 poetry-2.4.3 poetry-core-2.4.0 poetry_plugin_export-1.10.0 ptyprocess-0.7.0 pycparser-3.0 pyproject_hooks-1.2.0 pytest_mock-3.15.1 python-discovery-1.6.0 rapidfuzz-3.14.5 requests-2.34.2 requests_toolbelt-1.0.0 shellingham-1.5.4 tomlkit-0.15.1 trove_classifiers-2026.6.1.19 urllib3-2.7.0 virtualenv-21.7.9 zipp-4.1.0\n#11 10.53 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 10.53 \n#11 10.53 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 10.53 [notice] To update, run: pip install --upgrade pip\n#11 DONE 11.5s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 4.7s done\n#12 exporting manifest sha256:327d5ee9b44a3383c697ac433851b88866d81eb21b40092ed79c4a7002631caa done\n#12 exporting config sha256:15108ac765ecf1fc3ea49a428e473d434c12f99595c6dc00bcf6121f3d58efe0 done\n#12 exporting attestation manifest sha256:c7c6e97732e01f1a06d8ef9e870a9905a45d8dc10a0abd09263975e55ba34900 0.0s done\n#12 exporting manifest list sha256:7ad4ac4b5865c7d86f425c0670cbb22a79eca89c560ccbc534a9ad972989de8d done\n#12 naming to docker.io/library/bench-pipreqs-python-poetry-poetry:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-python-poetry-poetry:latest\n#12 unpacking to docker.io/library/bench-pipreqs-python-poetry-poetry:latest 1.9s done\n#12 DONE 6.7s\n",
   "status": "collect_error",
   "py_test_files": 111,
   "collect_rc": 4,
@@ -26,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 482.5,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-python-poetry-poetry@sha256:b4bd648023dc0a6f4da87497143b1053ab75ced96685cbfbe8c2e8347b5ef36a",
+  "image_size_mb": 482.3,
+  "image_delta_mb": 94.7,
+  "image_digest": "bench-pipreqs-python-poetry-poetry@sha256:7ad4ac4b5865c7d86f425c0670cbb22a79eca89c560ccbc534a9ad972989de8d",
   "installed_pkg_count": 71,
   "tokens_in": null,
   "tokens_out": null,
@@ -36,8 +36,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 8.92,
-  "build_s": 24.67,
-  "test_s": 0.58,
+  "build_s": 23.29,
+  "test_s": 0.75,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -64,19 +64,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=5bab98c9500f1050c6bb6adfb55580a23173f18d (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=5bab98c9500f1050c6bb6adfb55580a23173f18d (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

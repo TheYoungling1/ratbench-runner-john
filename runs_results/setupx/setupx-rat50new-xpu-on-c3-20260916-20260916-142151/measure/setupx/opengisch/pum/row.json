@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "opengisch/pum",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "e=pum_test_2\n#10 44.20 user=postgres\n#10 44.20 password=postgres\n#10 44.20 \n#10 44.20 ---VERIFY DBS---\n#10 44.24     Name    |  Owner   | Encoding | Locale Provider | Collate |  Ctype  | Locale | ICU Rules |   Access privileges   \n#10 44.24  pum_test   | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |        |           | \n#10 44.24  pum_test_2 | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |        |           | \n#10 44.57 pum_test OK\n#10 44.57 pum_test_2 OK\n#10 44.69 pum import OK /workspace/repo/pum/__init__.py\n#10 44.70 ---INITDB TEST---\n#10 50.13 ............                                                             [100%]\n#10 50.13 12 passed in 5.22s\n#10 57.11 ............                                                             [100%]\n#10 57.11 12 passed in 6.64s\n#10 DONE 57.3s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.7s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 24.5s done\n#14 exporting manifest sha256:80592c6a434ee545e413481de6250383b0cf744b121fe729dd68888f1dbce1c3 0.0s done\n#14 exporting config sha256:1f8b772267d00cda7ad4819c558483446ba3914274bbf3534c146b0594106baa 0.0s done\n#14 exporting attestation manifest sha256:bcba9881c34d3f8be80db12a5c08b9b3f83d6c0240e509bc2c58143043411d91 0.0s done\n#14 exporting manifest list sha256:2732db7f177a1a940607d6f56467cac1bf30885705e1157d6ce1112f3045a4a5 0.0s done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-opengisch-pum:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-opengisch-pum:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-opengisch-pum:latest 4.6s done\n#14 DONE 29.2s\n",
+  "build_log_tail": "72 password=postgres\n#10 44.72 \n#10 44.72 [pum_test_2]\n#10 44.72 host=localhost\n#10 44.72 dbname=pum_test_2\n#10 44.72 user=postgres\n#10 44.72 password=postgres\n#10 44.72 \n#10 44.72 ---VERIFY DBS---\n#10 44.78     Name    |  Owner   | Encoding | Locale Provider | Collate |  Ctype  | Locale | ICU Rules |   Access privileges   \n#10 44.78  pum_test   | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |        |           | \n#10 44.78  pum_test_2 | postgres | UTF8     | libc            | C.UTF-8 | C.UTF-8 |        |           | \n#10 45.17 pum_test OK\n#10 45.17 pum_test_2 OK\n#10 45.27 pum import OK /workspace/repo/pum/__init__.py\n#10 45.28 ---INITDB TEST---\n#10 50.71 ............                                                             [100%]\n#10 50.71 12 passed in 5.16s\n#10 56.55 ............                                                             [100%]\n#10 56.55 12 passed in 5.63s\n#10 DONE 57.1s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.8s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.1s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 26.2s done\n#14 exporting manifest sha256:82ee05fa0f41680f22b164527cb1dd35a42003747273342d8b69cb0b3d820396 0.0s done\n#14 exporting config sha256:551c07e4c8b27c69b56efb6371b9c8bc52dbd5cbee82bfc197a6abe63bec6eee 0.0s done\n#14 exporting attestation manifest sha256:d78ed0628db7f7312eac2f69dc9eaa0bc4d86b055cbb531db9b3626d7e0c7aa9 0.0s done\n#14 exporting manifest list sha256:963bb6cf91c881b31c1e8591e8d982b65d989061c29534338175e957ff24c513 done\n#14 naming to docker.io/library/bench-setupx-opengisch-pum:latest\n#14 naming to docker.io/library/bench-setupx-opengisch-pum:latest done\n#14 unpacking to docker.io/library/bench-setupx-opengisch-pum:latest\n#14 unpacking to docker.io/library/bench-setupx-opengisch-pum:latest 9.3s done\n#14 DONE 35.6s\n",
   "status": "executed",
   "py_test_files": 13,
   "collect_rc": 0,
@@ -417,9 +417,9 @@
   "ebsr": true,
   "pass_rate": 0.2769,
   "timed_out": false,
-  "image_size_mb": 2209.4,
+  "image_size_mb": 2209.3,
   "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-opengisch-pum@sha256:2732db7f177a1a940607d6f56467cac1bf30885705e1157d6ce1112f3045a4a5",
+  "image_digest": "bench-setupx-opengisch-pum@sha256:963bb6cf91c881b31c1e8591e8d982b65d989061c29534338175e957ff24c513",
   "installed_pkg_count": 45,
   "tokens_in": 278568,
   "tokens_out": 12328,
@@ -427,8 +427,8 @@
   "turns_used": 21,
   "cost_usd": null,
   "produce_s": 485.63,
-  "build_s": 90.87,
-  "test_s": 4.05,
+  "build_s": 98.75,
+  "test_s": 4.41,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -463,19 +463,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=5b458a54044ba9a8781246fa06aa1c7ffe7b8d2b (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=5b458a54044ba9a8781246fa06aa1c7ffe7b8d2b (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

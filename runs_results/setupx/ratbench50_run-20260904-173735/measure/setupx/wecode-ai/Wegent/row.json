@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__ratbench50_run-20260904-173735",
+  "agent": "setupx",
   "repo": "wecode-ai/Wegent",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "9.75 \n#10 99.75       - name: Set up Node.js\n#10 99.75         uses: actions/setup-node@v4\n#10 99.75         with:\n#10 99.75           node-version: '24'\n#10 99.75           cache: 'pnpm'\n#10 99.75           cache-dependency-path: ./pnpm-lock.yaml\n#10 99.75 \n#10 99.75       - name: Install dependencies\n#10 99.75         run: pnpm install --frozen-lockfile\n#10 99.75 \n#10 99.75       - name: Run wework tests\n#10 99.75         env:\n#10 99.75           TZ: Asia/Shanghai\n#10 99.75         run: pnpm --filter wework exec vitest run --coverage --passWithNoTests\n#10 99.75 \n#10 99.75       - name: Upload coverage to Codecov\n#10 99.75         uses: codecov/codecov-action@v3\n#10 99.75         with:\n#10 99.75           files: ./wework/coverage/coverage-final.json\n#10 99.75           flags: wework\n#10 99.75           name: wework-coverage\n#10 99.75 \n#10 99.75   test-wegent-cli:\n#10 DONE 100.2s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 50.4s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 1.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 113.0s done\n#14 exporting manifest sha256:91e937fa2b31fd10ca1023f15a339165b5e170138429a666a5a740d3a305da3e done\n#14 exporting config sha256:97d21133eaa7e7a73babae28b28593e9acd407b523038edb6f2dab0ff9e54899 done\n#14 exporting attestation manifest sha256:95b06113c8f0afa7ddd6fb5f714c17ad4f7de6d278fea73fcbbaa4c11a1fcb74 done\n#14 exporting manifest list sha256:eaf5c304ece9c2efc19f5ece1defdd79a3ca95f99e39a0df176d075fce1452dc done\n#14 naming to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-wecode-ai-wegent:latest done\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-wecode-ai-wegent:latest\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-wecode-ai-wegent:latest 70.5s done\n#14 DONE 183.6s\n",
+  "build_log_tail": "\n          flags: frontend\n          name: frontend-coverage\n\n  test-wework:\n    name: Test Wework\n    runs-on: ubuntu-latest\n\n    steps:\n      - name: Checkout code\n        uses: actions/checkout@v4\n\n      - name: Set up pnpm\n        uses: pnpm/action-setup@0e279bb959325dab635dd2c09392533439d90093\n\n      - name: Set up Node.js\n        uses: actions/setup-node@v4\n        with:\n          node-version: '24'\n          cache: 'pnpm'\n          cache-dependency-path: ./pnpm-lock.yaml\n\n      - name: Install dependencies\n        run: pnpm install --frozen-lockfile\n\n      - name: Run wework tests\n        env:\n          TZ: Asia/Shanghai\n        run: pnpm --filter wework exec vitest run --coverage --passWithNoTests\n\n      - name: Upload coverage to Codecov\n        uses: codecov/codecov-action@v3\n        with:\n          files: ./wework/coverage/coverage-final.json\n          flags: wework\n          name: wework-coverage\n\n  test-wegent-cli:\n ---> Removed intermediate container 193c09579a5a\n ---> 17037d75c137\nStep 7/10 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in 9a785203b645\n ---> Removed intermediate container 9a785203b645\n ---> 37b7314bf174\nStep 8/10 : RUN git config --global --add safe.directory /testbed\n ---> Running in 0a61a60d89c8\n ---> Removed intermediate container 0a61a60d89c8\n ---> edc4fc21b378\nStep 9/10 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in b523d1f85e75\n ---> Removed intermediate container b523d1f85e75\n ---> 35a9ce328ce9\nStep 10/10 : WORKDIR /testbed\n ---> Running in eb0baa8c4571\n ---> Removed intermediate container eb0baa8c4571\n ---> 50e0de05e16a\nSuccessfully built 50e0de05e16a\nSuccessfully tagged bench-setupx-wecode-ai-wegent:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 8687,
   "collect_rc": 2,
@@ -461,9 +461,9 @@
   "ebsr": true,
   "pass_rate": 0.5421,
   "timed_out": false,
-  "image_size_mb": 7757.1,
-  "image_delta_mb": 6246.4,
-  "image_digest": "bench-setupx__ratbench50_run-20260904-173735-wecode-ai-wegent@sha256:eaf5c304ece9c2efc19f5ece1defdd79a3ca95f99e39a0df176d075fce1452dc",
+  "image_size_mb": 1898.8,
+  "image_delta_mb": 1511.2,
+  "image_digest": "bench-setupx-wecode-ai-wegent@sha256:50e0de05e16a7bdadff9f723a444ccc2d22f5869db88326149f987fe78ce032a",
   "installed_pkg_count": 13,
   "tokens_in": 891022,
   "tokens_out": 122425,
@@ -471,8 +471,8 @@
   "turns_used": 86,
   "cost_usd": null,
   "produce_s": 1118.18,
-  "build_s": 347.2,
-  "test_s": 1.31,
+  "build_s": 438.69,
+  "test_s": 1.22,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -503,19 +503,7 @@
     "turns_used": 86,
     "produce_s": 1118.18,
     "total_tokens": 1013447,
-    "cost_usd": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=f296d38818500b5250032c5dd3fea7472022da0e (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=f296d38818500b5250032c5dd3fea7472022da0e (pinned)\n"
-      }
-    ]
+    "cost_usd": null
   },
   "error_surface": "",
   "error_surface_reason": "",

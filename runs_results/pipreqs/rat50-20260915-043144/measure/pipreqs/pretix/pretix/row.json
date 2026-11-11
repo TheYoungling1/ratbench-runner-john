@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50-20260915-043144",
+  "agent": "pipreqs",
   "repo": "pretix/pretix",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "1 propcache-0.5.4 protobuf-7.36.2 pyasn1-0.6.4 pyasn1-modules-0.4.2 pycountry-26.2.16 pycparser-3.0 pycryptodome-3.23.0 pyee-13.0.1 pyenchant-3.3.0 pyopenssl-26.4.0 pypdf-6.19.0 pytest_asyncio-1.4.0 pytest_mock-3.15.1 python_dateutil-2.9.0.post0 pytz-2026.4 pytz_deprecation_shim-0.1.0.post0 pyyaml-6.0.3 qrcode-8.2 rcssmin-1.2.2 redis-8.1.0 referencing-0.37.0 requests-file-3.0.1 requests-toolbelt-1.0.0 responses-0.26.3 rjsmin-1.2.5 rpds-py-0.30.0 sentry_sdk-2.70.0 sepaxml-2.7.0 six-1.17.0 sortedcontainers-2.4.0 soupsieve-2.10 sqlparse-0.6.0 text_unidecode-1.3 tlds-2026072401 tqdm-4.70.1 tzdata-2026.4 ua-parser-builtins-202606 ua_parser-1.0.2 ujson-6.0.0 urllib3-2.8.0 vine-5.1.0 vobject-0.9.9 wallet-py3k-0.0.4 webauthn-3.0.1 webencodings-0.6.1 xmlschema-4.3.2 yarl-1.25.1 zeep-4.3.3 zipp-4.1.0\n#11 31.29 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 31.30 \n#11 31.30 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 31.30 [notice] To update, run: pip install --upgrade pip\n#11 DONE 32.8s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 30.3s done\n#12 exporting manifest sha256:5c3834eb64a1e05e0d4cf1f9e3c92009d20d07840691bba5773bc5ec2aaf8266 done\n#12 exporting config sha256:f89cc87dd458a69550a8ee9eff19434bfb13147b4fa7b27f140153d756970c9f done\n#12 exporting attestation manifest sha256:c109ec33cef111814e6ed3a96e961c11d36e7aa57c47690a6b106bf022f14850 0.0s done\n#12 exporting manifest list sha256:2e454567b5a79bf09856f2a6701cbab238e8ebae2dd6a19c901c646ea2687895 0.0s done\n#12 naming to docker.io/library/bench-pipreqs__rat50-20260915-043144-pretix-pretix:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-pretix-pretix:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-pretix-pretix:latest 9.6s done\n#12 DONE 39.9s\n",
+  "build_log_tail": "mbers-9.0.39 platformdirs-4.11.8 playwright-1.62.0 pretix_passbook-1.14.1 propcache-0.5.2 protobuf-7.36.1 pyasn1-0.6.4 pyasn1-modules-0.4.2 pycountry-26.2.16 pycparser-3.0 pycryptodome-3.23.0 pyee-13.0.1 pyenchant-3.3.0 pyopenssl-26.4.0 pypdf-6.18.1 pytest_asyncio-1.4.0 pytest_mock-3.15.1 python_dateutil-2.9.0.post0 pytz-2026.3.post1 pytz_deprecation_shim-0.1.0.post0 pyyaml-6.0.3 qrcode-8.2 rcssmin-1.2.2 redis-8.1.0 referencing-0.37.0 requests-file-3.0.1 requests-toolbelt-1.0.0 responses-0.26.3 rjsmin-1.2.5 rpds-py-0.30.0 sentry_sdk-2.69.1 sepaxml-2.7.0 six-1.17.0 sortedcontainers-2.4.0 soupsieve-2.9.2 sqlparse-0.6.0 text_unidecode-1.3 tlds-2026072401 tqdm-4.70.1 tzdata-2026.4 ua-parser-builtins-202606 ua_parser-1.0.2 ujson-6.0.0 urllib3-2.7.0 vine-5.1.0 vobject-0.9.9 wallet-py3k-0.0.4 webauthn-3.0.0 webencodings-0.6.1 xmlschema-4.3.2 yarl-1.24.5 zeep-4.3.3 zipp-4.1.0\n#11 28.38 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 28.39 \n#11 28.39 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 28.39 [notice] To update, run: pip install --upgrade pip\n#11 DONE 30.1s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 24.5s done\n#12 exporting manifest sha256:8669cc9e54185767722fab1b42914018cd8bdc4576025ab632016902d412a254 done\n#12 exporting config sha256:d47aadff6fe964ad46cd85a57087d21d1a3d6612a885c094ebf434d5772668b9 done\n#12 exporting attestation manifest sha256:4a64bc998fe7e465d4a92c8655a39cf2770c5619c5bdd97fa2a304e42411bb00 done\n#12 exporting manifest list sha256:0596d45764a0d02547ac14b565cc68279b0c8e671fa1a77cf9da8bb5cdee5ea0 done\n#12 naming to docker.io/library/bench-pipreqs-pretix-pretix:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-pretix-pretix:latest\n#12 unpacking to docker.io/library/bench-pipreqs-pretix-pretix:latest 7.6s done\n#12 DONE 32.2s\n",
   "status": "collect_error",
   "py_test_files": 187,
   "collect_rc": 2,
@@ -917,9 +917,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 1591.3,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50-20260915-043144-pretix-pretix@sha256:2e454567b5a79bf09856f2a6701cbab238e8ebae2dd6a19c901c646ea2687895",
+  "image_size_mb": 1588.2,
+  "image_delta_mb": 1200.6,
+  "image_digest": "bench-pipreqs-pretix-pretix@sha256:0596d45764a0d02547ac14b565cc68279b0c8e671fa1a77cf9da8bb5cdee5ea0",
   "installed_pkg_count": 127,
   "tokens_in": null,
   "tokens_out": null,
@@ -927,8 +927,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 21.08,
-  "build_s": 123.71,
-  "test_s": 16.26,
+  "build_s": 113.1,
+  "test_s": 15.63,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -955,19 +955,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=943b319557c1ebcd6af0c192b1a12260f8ca7e1a (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=943b319557c1ebcd6af0c192b1a12260f8ca7e1a (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__envbench100-pjy",
+  "agent": "pjy-repo2run",
   "repo": "qiboteam/qibocal",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ecurity risk. __pycache__ directories should not be included in wheels. This is probably an issue in the build process of 'hyperopt'.\n#18 5.086   install(\n#18 5.626   - Installing dash-core-components (2.0.0)\n#18 5.627   - Installing dash-html-components (2.0.0)\n#18 5.629   - Installing dash-table (5.0.0)\n#18 5.630   - Installing flask (3.0.3)\n#18 5.632   - Installing huggingface-hub (0.23.1)\n#18 5.633   - Installing importlib-metadata (7.1.0)\n#18 5.635   - Installing more-itertools (9.1.0)\n#18 5.636   - Installing nest-asyncio (1.6.0)\n#18 5.638   - Installing pandas (1.5.3)\n#18 5.640   - Installing plotly (5.22.0)\n#18 5.641   - Installing qibo (0.2.8)\n#18 5.643   - Installing retrying (1.3.4)\n#18 5.765   - Installing scikit-learn (1.5.0)\n#18 9.936   - Installing dash (2.17.0)\n#18 9.937   - Installing pydantic (1.10.15)\n#18 9.939   - Installing qibolab (0.1.7)\n#18 9.940   - Installing skops (0.6.0)\n#18 10.39 \n#18 10.39 Installing the current project: qibocal (0.0.10)\n#18 DONE 11.0s\n\n#19 [16/19] RUN cd /repo && poetry install --with test --all-extras -q\n#19 DONE 5.4s\n\n#20 [17/19] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 0.6s\n\n#21 [18/19] WORKDIR /testbed\n#21 DONE 0.0s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 28.1s done\n#22 exporting manifest sha256:3af490fbdc76bd8e0e6a8ac8f98f7bc76d0e81ce34cccb7ca84a7b6bbc26a92e done\n#22 exporting config sha256:b4084539e475818dc00f65da55ce36e93b8563d7f5f61f0df51384378f9177d7 done\n#22 exporting attestation manifest sha256:b19a5ee2714644781f4c4ced52a565a00ca68f56c1da6cda73546c792a065dc3 0.0s done\n#22 exporting manifest list sha256:9eaa49137ad880fb44b171f21ee589059c6618201cc49a40cb63782cd65d4078 done\n#22 naming to docker.io/library/bench-repo2run__envbench100-pjy-qiboteam-qibocal:latest done\n#22 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-qiboteam-qibocal:latest\n#22 unpacking to docker.io/library/bench-repo2run__envbench100-pjy-qiboteam-qibocal:latest 10.6s done\n#22 DONE 38.8s\n",
+  "build_log_tail": " a __pycache__ directory poses a security risk. __pycache__ directories should not be included in wheels. This is probably an issue in the build process of 'hyperopt'.\n#18 6.136   install(\n#18 6.740   - Installing dash-core-components (2.0.0)\n#18 6.741   - Installing dash-html-components (2.0.0)\n#18 6.742   - Installing dash-table (5.0.0)\n#18 6.743   - Installing flask (3.0.3)\n#18 6.745   - Installing importlib-metadata (7.1.0)\n#18 6.746   - Installing more-itertools (9.1.0)\n#18 6.748   - Installing huggingface-hub (0.23.1)\n#18 6.748   - Installing plotly (5.22.0)\n#18 6.749   - Installing retrying (1.3.4)\n#18 6.749   - Installing pandas (1.5.3)\n#18 6.753   - Installing nest-asyncio (1.6.0)\n#18 6.754   - Installing qibo (0.2.8)\n#18 6.809   - Installing scikit-learn (1.5.0)\n#18 11.92   - Installing dash (2.17.0)\n#18 11.92   - Installing pydantic (1.10.15)\n#18 11.93   - Installing qibolab (0.1.7)\n#18 11.93   - Installing skops (0.6.0)\n#18 12.47 \n#18 12.47 Installing the current project: qibocal (0.0.10)\n#18 DONE 12.7s\n\n#19 [16/19] RUN cd /repo && poetry install --with test --all-extras -q\n#19 DONE 7.6s\n\n#20 [17/19] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 0.7s\n\n#21 [18/19] WORKDIR /testbed\n#21 DONE 0.0s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 38.4s done\n#22 exporting manifest sha256:4ba9bf56c84a5b711aba3a43a05041656239a1c0c1aceb951afb107e9da81ab8 done\n#22 exporting config sha256:a9fbf26c573077a1bca248d433067a11042011368f9479b0dd1dd7731d22e335 0.0s done\n#22 exporting attestation manifest sha256:72096006d43bafc38bb1226809c76be9d9b4f3c50cc973668dfafc2b6e43b13f 0.0s done\n#22 exporting manifest list sha256:ccedfb282a305d12f979a1db86a36a2d4db32a7829400cf0a5338fddf179cf1e done\n#22 naming to docker.io/library/bench-pjy-repo2run-qiboteam-qibocal:latest done\n#22 unpacking to docker.io/library/bench-pjy-repo2run-qiboteam-qibocal:latest\n#22 unpacking to docker.io/library/bench-pjy-repo2run-qiboteam-qibocal:latest 14.5s done\n#22 DONE 53.0s\n",
   "status": "collect_error",
   "py_test_files": 10,
   "collect_rc": 4,
@@ -24,9 +24,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 1228.1,
+  "image_size_mb": 3842.4,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__envbench100-pjy-qiboteam-qibocal@sha256:9eaa49137ad880fb44b171f21ee589059c6618201cc49a40cb63782cd65d4078",
+  "image_digest": "bench-pjy-repo2run-qiboteam-qibocal@sha256:ccedfb282a305d12f979a1db86a36a2d4db32a7829400cf0a5338fddf179cf1e",
   "installed_pkg_count": 27,
   "tokens_in": 467254,
   "tokens_out": 16036,
@@ -34,8 +34,8 @@
   "turns_used": 23,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 64.95,
-  "test_s": 0.23,
+  "build_s": 84.71,
+  "test_s": 0.42,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -43,19 +43,7 @@
     "tokens_in": 467254,
     "tokens_out": 16036,
     "llm_calls": null,
-    "turns_used": 23,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 23
   },
   "error_surface": "",
   "error_surface_reason": "",

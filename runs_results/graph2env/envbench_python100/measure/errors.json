@@ -1,0 +1,95 @@
+{
+  "g2e-envbench100": {
+    "collect": {
+      "agent": "g2e-envbench100",
+      "n_repos": 100,
+      "source": "collect",
+      "n_admissible": 87,
+      "n_masked": 4,
+      "n_unobserved": 9,
+      "n_status_derived": 0,
+      "buckets": {
+        "success": 51,
+        "partial": 24,
+        "missing": 8,
+        "timed_out": 4,
+        "zero_pass": 3,
+        "collect_error": 5,
+        "no_tests_collected": 4,
+        "build_fail": 1
+      },
+      "surfaces": {
+        "full": 87,
+        "unobserved": 9,
+        "masked": 4
+      },
+      "token_repos": {
+        "distutils.errors.DistutilsArgError": 1,
+        "getopt.GetoptError": 1,
+        "ImportError": 1,
+        "NameError": 1
+      },
+      "token_events": {
+        "getopt.GetoptError": 1,
+        "distutils.errors.DistutilsArgError": 1,
+        "ImportError": 2,
+        "NameError": 1
+      },
+      "category_repos": {
+        "uncategorized": 2,
+        "partial_import": 1,
+        "import_failed": 1
+      },
+      "category_events": {
+        "uncategorized": 3,
+        "partial_import": 1,
+        "import_failed": 1
+      },
+      "crosstab": {
+        "collect_error|uncategorized": 2,
+        "collect_error|partial_import": 1,
+        "collect_error|import_failed": 1
+      },
+      "top_groups": {
+        "partial_import": [
+          [
+            "scope2index",
+            1
+          ]
+        ]
+      },
+      "uncategorized_rate": 0.6
+    },
+    "run": {
+      "agent": "g2e-envbench100",
+      "n_repos": 100,
+      "source": "run",
+      "n_admissible": 87,
+      "n_masked": 4,
+      "n_unobserved": 9,
+      "n_status_derived": 0,
+      "buckets": {
+        "success": 51,
+        "partial": 24,
+        "missing": 8,
+        "timed_out": 4,
+        "zero_pass": 3,
+        "collect_error": 5,
+        "no_tests_collected": 4,
+        "build_fail": 1
+      },
+      "surfaces": {
+        "full": 87,
+        "unobserved": 9,
+        "masked": 4
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    }
+  }
+}

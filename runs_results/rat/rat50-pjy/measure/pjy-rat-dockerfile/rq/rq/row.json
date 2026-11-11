@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "rq/rq",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "und existing installation: httpcore2 2.13.0\n#16 24.69     Uninstalling httpcore2-2.13.0:\n#16 24.73       Successfully uninstalled httpcore2-2.13.0\n#16 24.97   Attempting uninstall: anyio\n#16 24.97     Found existing installation: anyio 4.15.1\n#16 25.00     Uninstalling anyio-4.15.1:\n#16 25.04       Successfully uninstalled anyio-4.15.1\n#16 25.12 Successfully installed Pygments-2.20.0 anyio-4.14.2 async-timeout-5.0.1 click-8.4.2 coverage-7.15.4 croniter-6.2.4 distro-1.9.0 execnet-2.1.2 httpcore2-2.10.0 httpx2-2.10.0 idna-3.18 jiter-0.16.0 openai-3.0.0 psutil-7.2.2 pydantic-2.13.4 pydantic_core-2.46.4 pytest-cov-7.1.0 pytest-timeout-2.4.0 pytest-xdist-3.8.0 python-dateutil-2.9.0.post0 redis-8.1.0 rq-2.10.0 six-1.17.0 tqdm-4.70.0 typing-inspection-0.4.3\n#16 25.12 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#16 25.21 \n#16 25.21 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#16 25.21 [notice] To update, run: pip install --upgrade pip\n#16 DONE 25.8s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.3s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.0s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 6.8s done\n#19 exporting manifest sha256:cc831975318b3296c00d69514220411ae54ac25892f6f663d289125a19645529 done\n#19 exporting config sha256:caa18319c92bade0f2ac171591894f1ffd8c9174e9ed47169dafff083b393196 done\n#19 exporting attestation manifest sha256:b155637b331a14a391837de76b8558118c248fc239f4c9f65083053b356da8dd 0.0s done\n#19 exporting manifest list sha256:2d074ccb5432019685f894e1688dc971278eb4d78e805026256601ed3b002d17 done\n#19 naming to docker.io/library/bench-rat__rat50-pjy-rq-rq:latest done\n#19 unpacking to docker.io/library/bench-rat__rat50-pjy-rq-rq:latest\n#19 unpacking to docker.io/library/bench-rat__rat50-pjy-rq-rq:latest 4.4s done\n#19 DONE 11.3s\n",
+  "build_log_tail": "g installation: httpcore2 2.13.0\n#16 63.61     Uninstalling httpcore2-2.13.0:\n#16 63.62       Successfully uninstalled httpcore2-2.13.0\n#16 63.89   Attempting uninstall: anyio\n#16 63.89     Found existing installation: anyio 4.15.1\n#16 63.91     Uninstalling anyio-4.15.1:\n#16 63.93       Successfully uninstalled anyio-4.15.1\n#16 64.04 Successfully installed Pygments-2.20.0 anyio-4.14.2 async-timeout-5.0.1 click-8.4.2 coverage-7.15.4 croniter-6.2.4 distro-1.9.0 execnet-2.1.2 httpcore2-2.10.0 httpx2-2.10.0 idna-3.18 jiter-0.16.0 openai-3.0.0 psutil-7.2.2 pydantic-2.13.4 pydantic_core-2.46.4 pytest-cov-7.1.0 pytest-timeout-2.4.0 pytest-xdist-3.8.0 python-dateutil-2.9.0.post0 redis-8.1.0 rq-2.10.0 six-1.17.0 tqdm-4.70.0 typing-inspection-0.4.3\n#16 64.04 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#16 64.18 \n#16 64.18 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#16 64.18 [notice] To update, run: pip install --upgrade pip\n#16 DONE 64.9s\n\n#17 [13/14] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#17 DONE 0.3s\n\n#18 [14/14] WORKDIR /testbed\n#18 DONE 0.0s\n\n#19 exporting to image\n#19 exporting layers\n#19 exporting layers 2.9s done\n#19 exporting manifest sha256:f89e953084162c503c78e812d1eb62611a6b8a9b50dcfec9cf54cca08c24713f done\n#19 exporting config sha256:591ddcaa5ee68691a5a92062cef475c1a039d12b93daf2c9950a30bc8015fa70 done\n#19 exporting attestation manifest sha256:bb1f0850bb4b53987ea20915661b94765e6a7898976d117d561928561a44aa1e 0.0s done\n#19 exporting manifest list sha256:049ef8dc2891a8d079bb2bcacaaaf40ae181599da44d8f8f5f976f959f0a6669 done\n#19 naming to docker.io/library/bench-pjy-rat-dockerfile-rq-rq:latest done\n#19 unpacking to docker.io/library/bench-pjy-rat-dockerfile-rq-rq:latest\n#19 unpacking to docker.io/library/bench-pjy-rat-dockerfile-rq-rq:latest 4.2s done\n#19 DONE 7.2s\n",
   "status": "collect_error",
   "py_test_files": 34,
   "collect_rc": 2,
@@ -962,9 +962,9 @@
   "ebsr": true,
   "pass_rate": 0.0022,
   "timed_out": false,
-  "image_size_mb": 113.5,
+  "image_size_mb": 491.3,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50-pjy-rq-rq@sha256:2d074ccb5432019685f894e1688dc971278eb4d78e805026256601ed3b002d17",
+  "image_digest": "bench-pjy-rat-dockerfile-rq-rq@sha256:049ef8dc2891a8d079bb2bcacaaaf40ae181599da44d8f8f5f976f959f0a6669",
   "installed_pkg_count": 39,
   "tokens_in": 1835380,
   "tokens_out": 32745,
@@ -972,27 +972,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 68.12,
-  "test_s": 387.59,
+  "build_s": 77.75,
+  "test_s": 399.23,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 1835380,
     "tokens_out": 32745,
-    "llm_calls": 60,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 60
   },
   "error_surface": "",
   "error_surface_reason": "",

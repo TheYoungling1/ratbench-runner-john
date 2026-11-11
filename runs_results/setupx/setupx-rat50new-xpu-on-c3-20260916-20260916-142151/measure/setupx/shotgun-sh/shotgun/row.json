@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151",
+  "agent": "setupx",
   "repo": "shotgun-sh/shotgun",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "egration/sdk/test_sdk_models.py::test_query_command_result_failed\n#10 33.13 test/integration/sdk/test_sdk_models.py::test_error_result_str\n#10 33.13 test/integration/sdk/test_sdk_models.py::test_error_result_no_details\n#10 33.13 test/integration/test_attachment_flow.py::test_attachment_size_limit_error\n#10 33.13 test/unit/agents/autopilot/test_dependency_graph.py::test_validate_multiple_errors\n#10 34.78 === Test collection count ===\n#10 45.85 TOTAL                                                                             20373  14626   5810     22  22.05%\n#10 45.85 Coverage HTML written to dir htmlcov\n#10 45.85 2531 tests collected in 5.54s\n#10 45.85 === Check for real collection errors (not test names) ===\n#10 56.86 === Exit code of collection ===\n#10 67.91 Collection exit code: 0\n#10 DONE 68.0s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 6.6s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.4s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 41.3s done\n#14 exporting manifest sha256:501e2c43dd36284437a3fe67f45e5d30ca391c1f669c6ab85bbb4e4a37325ba7 0.0s done\n#14 exporting config sha256:053b19a224ea968f95d6b494129c085c04deaeb1d3fe639c3935ec45c91c409b 0.0s done\n#14 exporting attestation manifest sha256:906e193f506e8ea10db84bedb8b2bad4f6ca662482c4a8504278270db5879577 0.0s done\n#14 exporting manifest list sha256:12a6b9bd3983d0840f73e5fed0946cce38c29ca2fbb4b87d9fa619ef1f0f7942 0.0s done\n#14 naming to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-shotgun-sh-shotgun:latest done\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-shotgun-sh-shotgun:latest\n#14 unpacking to docker.io/library/bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-shotgun-sh-shotgun:latest 16.9s done\n#14 DONE 58.3s\n",
+  "build_log_tail": "est/integration/sdk/test_sdk_models.py::test_delete_result_failed\n#10 38.86 test/integration/sdk/test_sdk_models.py::test_query_command_result_failed\n#10 38.86 test/integration/sdk/test_sdk_models.py::test_error_result_str\n#10 38.86 test/integration/sdk/test_sdk_models.py::test_error_result_no_details\n#10 38.86 test/integration/test_attachment_flow.py::test_attachment_size_limit_error\n#10 38.86 test/unit/agents/autopilot/test_dependency_graph.py::test_validate_multiple_errors\n#10 40.71 === Test collection count ===\n#10 53.85 TOTAL                                                                             20373  14626   5810     22  22.05%\n#10 53.85 Coverage HTML written to dir htmlcov\n#10 53.85 2531 tests collected in 6.67s\n#10 53.85 === Check for real collection errors (not test names) ===\n#10 69.21 === Exit code of collection ===\n#10 84.22 Collection exit code: 0\n#10 DONE 84.4s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 19.5s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 1.6s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 49.4s done\n#14 exporting manifest sha256:9f6abcc95e60cf8c4ea18869a2c4ebc765151d2be3a04e7381f485317f157b9e 0.0s done\n#14 exporting config sha256:d46bf1a93105fa4a0d3b40b8f05ff56e4021f7eb47e21e9556fc42163d1e957e 0.0s done\n#14 exporting attestation manifest sha256:df888408240e055ea3bb35a31010467b6909c30eeb0707b179736ccaf00343c6 0.0s done\n#14 exporting manifest list sha256:071505769a9ea87b1b75bf30894fa0bd39706ba18ad3c1ed6fbeeee61cc3d05c 0.0s done\n#14 naming to docker.io/library/bench-setupx-shotgun-sh-shotgun:latest\n#14 naming to docker.io/library/bench-setupx-shotgun-sh-shotgun:latest done\n#14 unpacking to docker.io/library/bench-setupx-shotgun-sh-shotgun:latest\n#14 unpacking to docker.io/library/bench-setupx-shotgun-sh-shotgun:latest 18.6s done\n#14 DONE 68.2s\n",
   "status": "executed",
   "py_test_files": 453,
   "collect_rc": 0,
@@ -2046,9 +2046,9 @@
     "test/unit/test_marketing.py::test_should_show_github_star_message_already_shown",
     "test/unit/test_marketing.py::test_should_show_github_star_message_no_spec_files",
     "test/unit/test_marketing.py::test_should_show_github_star_message_empty_operations",
-    "test/unit/test_marketing.py::test_should_show_github_star_message_all_spec_files[plan.md]",
     "test/unit/test_marketing.py::test_should_show_github_star_message_all_spec_files[specification.md]",
     "test/unit/test_marketing.py::test_should_show_github_star_message_all_spec_files[research.md]",
+    "test/unit/test_marketing.py::test_should_show_github_star_message_all_spec_files[plan.md]",
     "test/unit/test_marketing.py::test_should_show_github_star_message_all_spec_files[tasks.md]",
     "test/unit/test_marketing.py::test_should_show_github_star_message_mixed_files",
     "test/unit/test_marketing.py::test_mark_message_shown",
@@ -4380,10 +4380,10 @@
     "test/unit/test_marketing.py::test_should_show_github_star_message_already_shown",
     "test/unit/test_marketing.py::test_should_show_github_star_message_no_spec_files",
     "test/unit/test_marketing.py::test_should_show_github_star_message_empty_operations",
-    "test/unit/test_marketing.py::test_should_show_github_star_message_all_spec_files[tasks.md]",
-    "test/unit/test_marketing.py::test_should_show_github_star_message_all_spec_files[specification.md]",
     "test/unit/test_marketing.py::test_should_show_github_star_message_all_spec_files[research.md]",
     "test/unit/test_marketing.py::test_should_show_github_star_message_all_spec_files[plan.md]",
+    "test/unit/test_marketing.py::test_should_show_github_star_message_all_spec_files[tasks.md]",
+    "test/unit/test_marketing.py::test_should_show_github_star_message_all_spec_files[specification.md]",
     "test/unit/test_marketing.py::test_should_show_github_star_message_mixed_files",
     "test/unit/test_marketing.py::test_mark_message_shown",
     "test/unit/test_marketing.py::test_mark_message_shown_custom_id",
@@ -4889,9 +4889,9 @@
   "ebsr": true,
   "pass_rate": 0.9979,
   "timed_out": false,
-  "image_size_mb": 851.9,
+  "image_size_mb": 3508.5,
   "image_delta_mb": null,
-  "image_digest": "bench-setupx__setupx-rat50new-xpu-on-c3-20260916-20260916-142151-shotgun-sh-shotgun@sha256:12a6b9bd3983d0840f73e5fed0946cce38c29ca2fbb4b87d9fa619ef1f0f7942",
+  "image_digest": "bench-setupx-shotgun-sh-shotgun@sha256:071505769a9ea87b1b75bf30894fa0bd39706ba18ad3c1ed6fbeeee61cc3d05c",
   "installed_pkg_count": 0,
   "tokens_in": 1494767,
   "tokens_out": 11596,
@@ -4899,8 +4899,8 @@
   "turns_used": 10,
   "cost_usd": null,
   "produce_s": 1805.76,
-  "build_s": 136.84,
-  "test_s": 628.16,
+  "build_s": 178.32,
+  "test_s": 676.85,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -4935,19 +4935,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=4d344d5a46aafc815de441ff670d4131187f33e6 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=4d344d5a46aafc815de441ff670d4131187f33e6 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

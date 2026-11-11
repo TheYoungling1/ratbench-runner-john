@@ -1,10 +1,10 @@
 {
-  "agent": "sweagent__envbench100-merged-20260915",
+  "agent": "sweagent_repo2run_modern",
   "repo": "beeware/briefcase",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": ".1.dev1+g448b58b build-1.6.1 cachetools-7.2.0 certifi-2026.7.22 cfgv-3.5.0 chardet-7.6.0 charset_normalizer-3.5.1 click-8.5.0 colorama-0.4.6 cookiecutter-2.7.1 coverage-7.5.3 coverage-conditional-plugin-0.9.0 distlib-0.4.3 execnet-2.1.2 filelock-4.0.3 gitdb-4.0.12 identify-2.6.19 idna-3.20 markdown-it-py-4.2.0 mdurl-0.1.2 nodeenv-1.10.0 pip-26.2.1 platformdirs-4.11.15 pre-commit-3.7.1 psutil-5.9.8 pyproject-api-1.11.2 pyproject_hooks-1.3.3 pytest-8.2.2 pytest-xdist-3.6.1 python-dateutil-2.9.0.post0 python-discovery-1.6.1 python-slugify-9.1.1 pyyaml-6.0.3 requests-2.34.2 rich-13.9.4 setuptools-scm-8.1.0 six-1.17.0 smmap-5.0.3 text-unidecode-1.3 tomli-w-1.2.0 tox-4.15.1 tzdata-2026.4 urllib3-2.8.0 virtualenv-21.12.1\n#13 13.00 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#13 DONE 13.5s\n\n#14 [11/13] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#14 DONE 0.5s\n\n#15 [12/13] WORKDIR /testbed\n#15 DONE 0.0s\n\n#16 [13/13] RUN git config --global --add safe.directory /testbed\n#16 DONE 0.2s\n\n#17 exporting to image\n#17 exporting layers\n#17 exporting layers 4.3s done\n#17 exporting manifest sha256:5acf86ec332e6460e4494d2d7b21f1c8b6092e46b0ef67b9afd0fe9754364fc7 done\n#17 exporting config sha256:af0ae54eb7ec90f6dfaaf53e93d34acf20432e2393c4e2aa43311cf17bab1313 done\n#17 exporting attestation manifest sha256:f4c163669d318b474a657609a51268ec3710383bf8ada34cd83322fcab414da1 done\n#17 exporting manifest list sha256:262e9e867eedd443b3869503196e8c770c015ae11188c57c3ba7e518229a647b done\n#17 naming to docker.io/library/bench-sweagent__envbench100-merged-20260915-beeware-briefcase:latest done\n#17 unpacking to docker.io/library/bench-sweagent__envbench100-merged-20260915-beeware-briefcase:latest\n#17 unpacking to docker.io/library/bench-sweagent__envbench100-merged-20260915-beeware-briefcase:latest 1.6s done\n#17 DONE 6.0s\n",
+  "build_log_tail": "llation: pytest 9.1.1\n    Uninstalling pytest-9.1.1:\n      Successfully uninstalled pytest-9.1.1\nSuccessfully installed GitPython-3.1.62 Jinja2-3.1.6 MarkupSafe-3.0.3 arrow-1.4.0 binaryornot-0.6.0 briefcase-0.1.dev1+g448b58b build-1.6.0 cachetools-7.1.8 certifi-2026.7.22 cfgv-3.5.0 chardet-7.6.0 charset_normalizer-3.5.1 click-8.5.0 colorama-0.4.6 cookiecutter-2.7.1 coverage-7.5.3 coverage-conditional-plugin-0.9.0 distlib-0.4.3 execnet-2.1.2 filelock-3.32.6 gitdb-4.0.12 identify-2.6.19 idna-3.19 markdown-it-py-4.2.0 mdurl-0.1.2 nodeenv-1.10.0 pip-26.2.1 platformdirs-4.11.8 pre-commit-3.7.1 psutil-5.9.8 pyproject-api-1.11.0 pyproject_hooks-1.2.0 pytest-8.2.2 pytest-xdist-3.6.1 python-dateutil-2.9.0.post0 python-discovery-1.6.0 python-slugify-9.0.0 pyyaml-6.0.3 requests-2.34.2 rich-13.9.4 setuptools-scm-8.1.0 six-1.17.0 smmap-5.0.3 text-unidecode-1.3 tomli-w-1.2.0 tox-4.15.1 tzdata-2026.3 urllib3-2.7.0 virtualenv-21.7.9\n\u001b[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n\u001b[0m ---> Removed intermediate container 2012f1eea60c\n ---> fb16c0a84aa2\nStep 11/13 : RUN mv /repo /testbed && ln -sfn /testbed /repo\n ---> Running in e30d09793423\n ---> Removed intermediate container e30d09793423\n ---> 61f42cb91927\nStep 12/13 : WORKDIR /testbed\n ---> Running in e438dcfe5907\n ---> Removed intermediate container e438dcfe5907\n ---> 802b974c4feb\nStep 13/13 : RUN git config --global --add safe.directory /testbed\n ---> Running in 0905852f3ba8\n ---> Removed intermediate container 0905852f3ba8\n ---> 7baf4fa0815c\nSuccessfully built 7baf4fa0815c\nSuccessfully tagged bench-sweagent_repo2run_modern-beeware-briefcase:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 365,
   "collect_rc": 4,
@@ -26,18 +26,18 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 1789.1,
-  "image_delta_mb": 278.4,
-  "image_digest": "bench-sweagent__envbench100-merged-20260915-beeware-briefcase@sha256:262e9e867eedd443b3869503196e8c770c015ae11188c57c3ba7e518229a647b",
-  "installed_pkg_count": 58,
+  "image_size_mb": 487.0,
+  "image_delta_mb": 99.4,
+  "image_digest": "bench-sweagent_repo2run_modern-beeware-briefcase@sha256:7baf4fa0815c28f274e1ff7209b140a003581a31408fe5cd87162969ea25a167",
+  "installed_pkg_count": 59,
   "tokens_in": 2322489.0,
   "tokens_out": 19189.0,
   "llm_calls": 90.0,
   "turns_used": 90,
   "cost_usd": 0.041395928000000005,
   "produce_s": 355.19,
-  "build_s": 25.83,
-  "test_s": 0.4,
+  "build_s": 51.95,
+  "test_s": 0.5,
   "meta": {
     "contract_version": 1,
     "producer": "sweagent_repo2run_modern",
@@ -71,19 +71,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=448b58bcf928ae4e933fa342795785fb3211cd17 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=448b58bcf928ae4e933fa342795785fb3211cd17 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

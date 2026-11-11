@@ -1,0 +1,186 @@
+{
+  "claudecode-dockerfile": {
+    "collect": {
+      "agent": "claudecode-dockerfile",
+      "n_repos": 50,
+      "source": "collect",
+      "n_admissible": 39,
+      "n_masked": 3,
+      "n_unobserved": 8,
+      "n_status_derived": 0,
+      "buckets": {
+        "partial": 10,
+        "success": 18,
+        "timed_out": 4,
+        "collect_error": 9,
+        "build_fail": 7,
+        "error": 1,
+        "zero_pass": 1
+      },
+      "surfaces": {
+        "full": 39,
+        "masked": 3,
+        "unobserved": 8
+      },
+      "token_repos": {
+        "ModuleNotFoundError": 6,
+        "ImportError": 2,
+        "RuntimeError": 2,
+        "_pytest.pathlib.ImportPathMismatchError": 2,
+        "dash.exceptions.PageError": 1,
+        "ValueError": 1,
+        "subprocess.CalledProcessError": 1,
+        "Error": 1
+      },
+      "token_events": {
+        "ModuleNotFoundError": 58,
+        "_pytest.pathlib.ImportPathMismatchError": 2,
+        "ImportError": 13,
+        "RuntimeError": 2,
+        "dash.exceptions.PageError": 1,
+        "ValueError": 1,
+        "subprocess.CalledProcessError": 1,
+        "Error": 1
+      },
+      "category_repos": {
+        "module_not_found": 6,
+        "partial_import": 1,
+        "harness_error": 2,
+        "uncategorized": 4,
+        "import_failed": 2
+      },
+      "category_events": {
+        "module_not_found": 58,
+        "harness_error": 2,
+        "partial_import": 11,
+        "uncategorized": 6,
+        "import_failed": 2
+      },
+      "crosstab": {
+        "timed_out|module_not_found": 2,
+        "collect_error|partial_import": 1,
+        "collect_error|harness_error": 2,
+        "collect_error|uncategorized": 4,
+        "collect_error|import_failed": 2,
+        "collect_error|module_not_found": 4
+      },
+      "top_groups": {
+        "module_not_found": [
+          [
+            "tests.test_client",
+            2
+          ],
+          [
+            "api.test_dag_api",
+            1
+          ],
+          [
+            "api.test_node_api",
+            1
+          ],
+          [
+            "api.conftest",
+            1
+          ],
+          [
+            "dragos",
+            1
+          ],
+          [
+            "chapsvision",
+            1
+          ],
+          [
+            "tests.test_connector",
+            1
+          ],
+          [
+            "lib.helpers",
+            1
+          ],
+          [
+            "connector.converter_to_stix",
+            1
+          ],
+          [
+            "connector.hive_observable_transform",
+            1
+          ]
+        ],
+        "partial_import": [
+          [
+            "MicrosoftDefenderIncidentsConnector",
+            1
+          ],
+          [
+            "MontysecurityC2TrackerConnector",
+            1
+          ],
+          [
+            "SafeBrowsing",
+            1
+          ],
+          [
+            "YaraConnector",
+            1
+          ],
+          [
+            "ConnectorVulnCheck",
+            1
+          ],
+          [
+            "CorelightInvestigatorConnector",
+            1
+          ],
+          [
+            "Phishunt",
+            1
+          ],
+          [
+            "SigmaHQConnector",
+            1
+          ],
+          [
+            "KasperskyConnector",
+            1
+          ],
+          [
+            "VisionHeightConnector",
+            1
+          ]
+        ]
+      },
+      "uncategorized_rate": 0.0759
+    },
+    "run": {
+      "agent": "claudecode-dockerfile",
+      "n_repos": 50,
+      "source": "run",
+      "n_admissible": 39,
+      "n_masked": 3,
+      "n_unobserved": 8,
+      "n_status_derived": 0,
+      "buckets": {
+        "partial": 10,
+        "success": 18,
+        "timed_out": 4,
+        "collect_error": 9,
+        "build_fail": 7,
+        "error": 1,
+        "zero_pass": 1
+      },
+      "surfaces": {
+        "full": 39,
+        "masked": 3,
+        "unobserved": 8
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    }
+  }
+}

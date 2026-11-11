@@ -1,10 +1,10 @@
 {
-  "agent": "claudecode__rat50new-full-openrouter-20260918-035416",
+  "agent": "claudecode-dockerfile",
   "repo": "BerriAI/litellm",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "3.62\n#11 84.09  + types-boto3-kms==1.43.12\n#11 84.09  + types-boto3-s3==1.43.93\n#11 84.09  + types-boto3-sagemaker-runtime==1.43.68\n#11 84.09  + types-boto3-sts==1.43.94\n#11 84.09  + types-cffi==2.1.0.20260827\n#11 84.09  + types-pyopenssl==24.1.0.20240722\n#11 84.09  + types-pyyaml==6.0.12.20250915\n#11 84.09  + types-redis==4.6.0.20241004\n#11 84.09  + types-requests==2.32.4.20260107\n#11 84.09  + types-s3transfer==0.16.0\n#11 84.09  + types-setuptools==75.8.0.20250225\n#11 84.09  + typing-extensions==4.16.0\n#11 84.09  + typing-inspection==0.4.4\n#11 84.09  + tzlocal==5.4.4\n#11 84.09  + uritemplate==4.2.0\n#11 84.09  + urllib3==2.8.0\n#11 84.09  + uuid-utils==0.17.1\n#11 84.09  + uvicorn==0.53.0\n#11 84.09  + uvloop==0.22.1\n#11 84.09  + vcrpy==8.2.1\n#11 84.09  + wcwidth==0.8.4\n#11 84.09  + websocket-client==1.9.2\n#11 84.09  + websockets==15.0.1\n#11 84.09  + werkzeug==3.1.8\n#11 84.09  + wrapt==1.17.3\n#11 84.09  + wsproto==1.3.2\n#11 84.09  + xxhash==4.0.1\n#11 84.09  + yarl==1.25.1\n#11 84.09  + zipp==4.1.0\n#11 84.09  + zope-event==6.2\n#11 84.09  + zope-interface==8.6\n#11 84.09  + zstandard==0.25.0\n#11 DONE 84.7s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 287.3s done\n#12 exporting manifest sha256:9bf634966e8b136625e1cf768eac8907dce9ab47d6cd011fb8dd998e144b4293 0.0s done\n#12 exporting config sha256:c69f34117f20ca2bcd9ae22b6a944a79f8b22589a521e37d524b4b89e4c9620b done\n#12 exporting attestation manifest sha256:a3890514e6683ad162a608c2fa9d06185f5933a5fa70ffe6efe46fb0c9bb3936 0.0s done\n#12 exporting manifest list sha256:269e39d1988d3a077bec576d704732dc4a539e8f73bf34166a7cc00ede20e5e2 done\n#12 naming to docker.io/library/bench-claudecode__rat50new-full-openrouter-20260918-035416-berriai-litellm:latest done\n#12 unpacking to docker.io/library/bench-claudecode__rat50new-full-openrouter-20260918-035416-berriai-litellm:latest\n#12 unpacking to docker.io/library/bench-claudecode__rat50new-full-openrouter-20260918-035416-berriai-litellm:latest 55.2s done\n#12 DONE 342.6s\n",
+  "build_log_tail": "==1.43.89\n#11 76.75  + types-boto3-bedrock-agent==1.43.92\n#11 76.75  + types-boto3-bedrock-runtime==1.43.62\n#11 76.75  + types-boto3-kms==1.43.12\n#11 76.75  + types-boto3-s3==1.43.93\n#11 76.75  + types-boto3-sagemaker-runtime==1.43.68\n#11 76.75  + types-boto3-sts==1.43.94\n#11 76.75  + types-cffi==2.1.0.20260827\n#11 76.75  + types-pyopenssl==24.1.0.20240722\n#11 76.75  + types-pyyaml==6.0.12.20250915\n#11 76.75  + types-redis==4.6.0.20241004\n#11 76.75  + types-requests==2.32.4.20260107\n#11 76.75  + types-s3transfer==0.16.0\n#11 76.75  + types-setuptools==75.8.0.20250225\n#11 76.75  + typing-extensions==4.16.0\n#11 76.75  + typing-inspection==0.4.4\n#11 76.75  + tzlocal==5.4.4\n#11 76.75  + uritemplate==4.2.0\n#11 76.75  + urllib3==2.7.0\n#11 76.75  + uuid-utils==0.17.1\n#11 76.75  + uvicorn==0.53.0\n#11 76.75  + uvloop==0.22.1\n#11 76.75  + vcrpy==8.2.1\n#11 76.75  + wcwidth==0.8.3\n#11 76.75  + websocket-client==1.9.2\n#11 76.75  + websockets==15.0.1\n#11 76.75  + werkzeug==3.1.8\n#11 76.75  + wrapt==1.17.3\n#11 76.75  + wsproto==1.3.2\n#11 76.75  + xxhash==4.0.1\n#11 76.75  + yarl==1.24.5\n#11 76.75  + zipp==4.1.0\n#11 76.75  + zope-event==6.2\n#11 76.75  + zope-interface==8.6\n#11 76.75  + zstandard==0.25.0\n#11 DONE 77.2s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 175.0s done\n#12 exporting manifest sha256:c1536b1a2f5779a3cc4081812dd5f6660e5bd1cdd9252dff4fed2c5b0b2ff1f3 done\n#12 exporting config sha256:ebcf62c18db4b8fd5be17bbf9fc18935e15b60d62eea5a4bb4a274cac3644f51 done\n#12 exporting attestation manifest sha256:35986d5c0e99872b789f0bfef2006ff0abd8640a246a21db36c06d2c6ac25eb5 done\n#12 exporting manifest list sha256:cb96bf4ca2f2e0f914c8034f6cfcc177076b8cb38317eb23ecb13175071799ab done\n#12 naming to docker.io/library/bench-claudecode-dockerfile-berriai-litellm:latest done\n#12 unpacking to docker.io/library/bench-claudecode-dockerfile-berriai-litellm:latest\n#12 unpacking to docker.io/library/bench-claudecode-dockerfile-berriai-litellm:latest 39.2s done\n#12 DONE 214.2s\n",
   "status": "collect_error",
   "py_test_files": 2817,
   "collect_rc": 2,
@@ -14,9 +14,9 @@
     "E   openai.OpenAIError: Missing credentials. Please pass an `api_key`, `workload_identity`, `admin_api_key`, or set the `OPENAI_API_KEY` or `OPENAI_ADMIN_KEY` environment variable.",
     "E   litellm.llms.openai.common_utils.OpenAIError: Missing credentials. Please pass an `api_key`, `workload_identity`, `admin_api_key`, or set the `OPENAI_API_KEY` or `OPENAI_ADMIN_KEY` environment var",
     "E   litellm.exceptions.InternalServerError: litellm.InternalServerError: InternalServerError: OpenAIException - Missing credentials. Please pass an `api_key`, `workload_identity`, `admin_api_key`, or ",
-    "E   openai.OpenAIError: Missing credentials. Please pass an `api_key`, `workload_identity`, `admin_api_key`, or set the `OPENAI_API_KEY` or `OPENAI_ADMIN_KEY` environment variable.",
-    "E   litellm.llms.openai.common_utils.OpenAIError: Missing credentials. Please pass an `api_key`, `workload_identity`, `admin_api_key`, or set the `OPENAI_API_KEY` or `OPENAI_ADMIN_KEY` environment var",
-    "E   litellm.exceptions.InternalServerError: litellm.InternalServerError: InternalServerError: OpenAIException - Missing credentials. Please pass an `api_key`, `workload_identity`, `admin_api_key`, or ",
+    "E   openai.OpenAIError: Missing credentials. Please pass one of `api_key`, `azure_ad_token`, `azure_ad_token_provider`, or the `AZURE_OPENAI_API_KEY` or `AZURE_OPENAI_AD_TOKEN` environment variables.",
+    "E   litellm.llms.azure.common_utils.AzureOpenAIError: Missing credentials. Please pass one of `api_key`, `azure_ad_token`, `azure_ad_token_provider`, or the `AZURE_OPENAI_API_KEY` or `AZURE_OPENAI_AD_",
+    "E   litellm.exceptions.APIError: litellm.APIError: AzureException APIError - Missing credentials. Please pass one of `api_key`, `azure_ad_token`, `azure_ad_token_provider`, or the `AZURE_OPENAI_API_KE",
     "E   httpcore.ConnectError: [Errno 111] Connection refused",
     "E   httpx.ConnectError: [Errno 111] Connection refused",
     "E   openai.APIConnectionError: Connection error.",
@@ -4481,9 +4481,9 @@
   "ebsr": true,
   "pass_rate": 0.7838,
   "timed_out": false,
-  "image_size_mb": 3946.5,
-  "image_delta_mb": null,
-  "image_digest": "bench-claudecode__rat50new-full-openrouter-20260918-035416-berriai-litellm@sha256:269e39d1988d3a077bec576d704732dc4a539e8f73bf34166a7cc00ede20e5e2",
+  "image_size_mb": 3824.9,
+  "image_delta_mb": 3436.8,
+  "image_digest": "bench-claudecode-dockerfile-berriai-litellm@sha256:cb96bf4ca2f2e0f914c8034f6cfcc177076b8cb38317eb23ecb13175071799ab",
   "installed_pkg_count": 373,
   "tokens_in": 3629474,
   "tokens_out": 31613,
@@ -4491,8 +4491,8 @@
   "turns_used": 67,
   "cost_usd": 0.07656726,
   "produce_s": 1685.65,
-  "build_s": 519.83,
-  "test_s": 1202.71,
+  "build_s": 370.35,
+  "test_s": 1209.87,
   "meta": {
     "contract_version": 1,
     "producer": "claudecode-dockerfile",
@@ -4519,19 +4519,7 @@
     "usage_source": "computed",
     "dsml_text_blocks": 0,
     "turn_capped": false,
-    "agent_timed_out": false,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "agent_timed_out": false
   },
   "error_surface": "",
   "error_surface_reason": "",

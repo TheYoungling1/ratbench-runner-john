@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "columnflow/columnflow",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "0 pillow-12.3.0 prompt_toolkit-3.0.53 propcache-0.5.4 ptyprocess-0.7.0 pure-eval-0.2.4 pyarrow-25.0.1 pydantic-2.13.5 pydantic-core-2.46.5 pyparsing-3.3.3 python-daemon-3.1.2 python-dateutil-2.9.0.post0 pytz-2026.4 requests-2.34.2 rich-15.0.0 scinum-2.2.2 scipy-1.15.3 six-1.17.0 snowballstemmer-3.1.1 sphinxcontrib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 stack_data-0.6.3 tabulate-0.10.0 tenacity-9.1.4 toml-0.10.2 tornado-6.5.10 tqdm-4.70.1 traitlets-5.16.1 typing-inspection-0.4.4 tzdata-2026.4 uhi-1.2.0 uproot-5.7.6 urllib3-2.8.0 vector-1.9.0 wcwidth-0.9.1 widgetsnbextension-4.0.16 xxhash-4.0.1 yarl-1.25.1 zipp-4.1.0\n#11 79.48 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 79.48 \n#11 79.48 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 79.48 [notice] To update, run: pip install --upgrade pip\n#11 DONE 81.8s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 105.6s done\n#12 exporting manifest sha256:c5f83b970e193d17e3afb9fed693e998881e0be6ea6555aa0c30df32542a5291 0.0s done\n#12 exporting config sha256:3f16fce5ca239a8c1632fe4df63a4e182df1f7c82ef2cc01501089d88a2c89a2 0.0s done\n#12 exporting attestation manifest sha256:c390c79faec41ebdb73e5aba7963a318d847b93864ce35c752c1872e16d5d2c4 0.0s done\n#12 exporting manifest list sha256:bd4534214e2c3b63678c733b88d8a98182211814abc9b7a3619a62bc92ac2760 0.0s done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-columnflow-columnflow:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-columnflow-columnflow:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-columnflow-columnflow:latest 16.5s done\n#12 DONE 122.2s\n",
+  "build_log_tail": "hep-data-0.1.0 multidict-6.8.0 numba-0.67.0 numpy-2.2.6 pandas-2.3.3 parso-0.8.7 pexpect-4.9.0 pillow-12.3.0 prompt_toolkit-3.0.53 propcache-0.5.2 ptyprocess-0.7.0 pure-eval-0.2.4 pyarrow-25.0.1 pydantic-2.13.5 pydantic-core-2.46.5 pyparsing-3.3.2 python-daemon-3.1.2 python-dateutil-2.9.0.post0 pytz-2026.3.post1 requests-2.34.2 rich-15.0.0 scinum-2.2.2 scipy-1.15.3 six-1.17.0 snowballstemmer-3.1.1 sphinxcontrib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 stack_data-0.6.3 tabulate-0.10.0 tenacity-9.1.4 toml-0.10.2 tornado-6.5.9 tqdm-4.70.1 traitlets-5.16.1 typing-inspection-0.4.4 tzdata-2026.4 uhi-1.1.1 uproot-5.7.6 urllib3-2.7.0 vector-1.8.1 wcwidth-0.8.3 widgetsnbextension-4.0.16 xxhash-4.0.1 yarl-1.24.5 zipp-4.1.0\n#11 51.87 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 51.88 \n#11 51.88 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 51.88 [notice] To update, run: pip install --upgrade pip\n#11 DONE 53.5s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 80.8s done\n#12 exporting manifest sha256:ec1177083d97f28e51969fe33d51fbf3e7e4421d71dc505163985a29c998e1b5 done\n#12 exporting config sha256:091b6be1caa97dcec8f9bc0856b358f320a22ea570bec54bfe29eafb6641e589 done\n#12 exporting attestation manifest sha256:c2499d1a0c771bf630c4e1512e885532854b92bbc8a0b2c013e1b4c7e0eb9210 0.0s done\n#12 exporting manifest list sha256:a7aafaa6c72b454b4877d94d64b2b8f65c491ac4bb1b84a3601402096589f9a6 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-columnflow-columnflow:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-columnflow-columnflow:latest\n#12 unpacking to docker.io/library/bench-pipreqs-columnflow-columnflow:latest 22.7s done\n#12 DONE 103.6s\n",
   "status": "collect_error",
   "py_test_files": 5,
   "collect_rc": 2,
@@ -36,9 +36,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 1402.2,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-columnflow-columnflow@sha256:bd4534214e2c3b63678c733b88d8a98182211814abc9b7a3619a62bc92ac2760",
+  "image_size_mb": 1400.7,
+  "image_delta_mb": 1013.1,
+  "image_digest": "bench-pipreqs-columnflow-columnflow@sha256:a7aafaa6c72b454b4877d94d64b2b8f65c491ac4bb1b84a3601402096589f9a6",
   "installed_pkg_count": 117,
   "tokens_in": null,
   "tokens_out": null,
@@ -46,8 +46,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 7.82,
-  "build_s": 208.87,
-  "test_s": 0.42,
+  "build_s": 161.18,
+  "test_s": 0.58,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -74,19 +74,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=ad04770a757f5031229ea1b47314cef6de5c9edf (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=ad04770a757f5031229ea1b47314cef6de5c9edf (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

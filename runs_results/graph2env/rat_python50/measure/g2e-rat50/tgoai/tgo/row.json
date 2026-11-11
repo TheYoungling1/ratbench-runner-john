@@ -1,10 +1,10 @@
 {
-  "agent": "graph2env__rat_python50",
+  "agent": "g2e-rat50",
   "repo": "tgoai/tgo",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "tall pytest;       else         command -v uv >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#15 0.565 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (9.1.1)\n#15 0.573 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#15 0.574 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.11/site-packages (from pytest) (25.0)\n#15 0.574 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#15 0.575 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest) (2.20.0)\n#15 1.644 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#15 DONE 1.7s\n\n#16 [12/12] WORKDIR /testbed\n#16 DONE 0.0s\n\n#17 exporting to image\n#17 exporting layers\n#17 exporting layers 88.6s done\n#17 exporting manifest sha256:6f41c49c21a2598326da6fa6e38aab05e42dff833c71cda36b176d6aaee85c22 0.0s done\n#17 exporting config sha256:fb25cbf0740df3495dcc61991f5b536953f18ddb7dcea96a88dcf082db63fef8 done\n#17 exporting attestation manifest sha256:8a136a3794e3fd49223ef57cee58579fea888ae92e5f28caed4b06d4aba0b347 0.0s done\n#17 exporting manifest list sha256:dd1948a236e041af2dd42132788cf13cb85f7d496706413ef0e33476b9dda5ab 0.0s done\n#17 naming to docker.io/library/bench-graph2env__rat_python50-tgoai-tgo:latest done\n#17 unpacking to docker.io/library/bench-graph2env__rat_python50-tgoai-tgo:latest\n#17 unpacking to docker.io/library/bench-graph2env__rat_python50-tgoai-tgo:latest 17.3s done\n#17 DONE 106.0s\n",
+  "build_log_tail": "1; then         /testbed/.venv/bin/python -m pip install pytest;       else         command -v uv >/dev/null 2>&1 ||           (python3 -m pip install --break-system-packages uv || python3 -m pip install uv);         uv pip install --python /testbed/.venv/bin/python pytest;       fi;     else       python3 -m pip install --break-system-packages pytest || python3 -m pip install pytest;     fi\n#15 0.841 Requirement already satisfied: pytest in /usr/local/lib/python3.11/site-packages (9.1.1)\n#15 0.849 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.11/site-packages (from pytest) (2.3.0)\n#15 0.849 Requirement already satisfied: packaging>=22 in /usr/local/lib/python3.11/site-packages (from pytest) (25.0)\n#15 0.850 Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest) (1.6.0)\n#15 0.851 Requirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest) (2.20.0)\n#15 1.849 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#15 DONE 1.9s\n\n#16 [12/12] WORKDIR /testbed\n#16 DONE 0.0s\n\n#17 exporting to image\n#17 exporting layers\n#17 exporting layers 96.0s done\n#17 exporting manifest sha256:038ce7f529eaf45f28d3564ea7432bb44eff9c9c6805856246b3476e68a0560a done\n#17 exporting config sha256:2629da9deb1f2b4fbd242a9ef71f7d57b76557254840cacc972d223108ef59e1 done\n#17 exporting attestation manifest sha256:c30de514b863e8c69411e5207dcdd11a65b798fb10b5e03692d93c197bc4b5bf done\n#17 exporting manifest list sha256:3f39a63b2cc8c21205b78e450a06f0ec5b33c959b08e95c7a98afe206e679a88 0.0s done\n#17 naming to docker.io/library/bench-g2e-rat50-tgoai-tgo:latest done\n#17 unpacking to docker.io/library/bench-g2e-rat50-tgoai-tgo:latest\n#17 unpacking to docker.io/library/bench-g2e-rat50-tgoai-tgo:latest 19.3s done\n#17 DONE 115.4s\n",
   "status": "collect_error",
   "py_test_files": 39,
   "collect_rc": 2,
@@ -135,9 +135,9 @@
   "ebsr": true,
   "pass_rate": 0.7647,
   "timed_out": false,
-  "image_size_mb": 3902.7,
-  "image_delta_mb": 3724.4,
-  "image_digest": "bench-graph2env__rat_python50-tgoai-tgo@sha256:dd1948a236e041af2dd42132788cf13cb85f7d496706413ef0e33476b9dda5ab",
+  "image_size_mb": 3902.6,
+  "image_delta_mb": null,
+  "image_digest": "bench-g2e-rat50-tgoai-tgo@sha256:3f39a63b2cc8c21205b78e450a06f0ec5b33c959b08e95c7a98afe206e679a88",
   "installed_pkg_count": 269,
   "tokens_in": 1287763,
   "tokens_out": 114120,
@@ -145,8 +145,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 295.26,
-  "test_s": 7.55,
+  "build_s": 316.24,
+  "test_s": 6.81,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -163,19 +163,7 @@
       ],
       "services": [],
       "services_rc": null
-    },
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=995da4577f6f91edb87d0f56fc9ea4c129f1a4eb (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=995da4577f6f91edb87d0f56fc9ea4c129f1a4eb (pinned)\n"
-      }
-    ]
+    }
   },
   "error_surface": "",
   "error_surface_reason": "",

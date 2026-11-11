@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "python-markdown/markdown",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ilt pytidylib\n#11 2.703 Installing collected packages: pytidylib, zipp, watchdog, six, PyYAML, platformdirs, pathspec, mergedeep, markupsafe, markdown, griffelib, colorama, click, pyyaml-env-tag, python-dateutil, mkdocs-get-deps, jinja2, importlib_metadata, griffecli, griffe, ghp-import, properdocs, mkdocs, mkdocs_gen_files\n#11 3.338 Successfully installed PyYAML-6.0.3 click-8.5.0 colorama-0.4.6 ghp-import-2.1.0 griffe-2.3.0 griffecli-2.3.0 griffelib-2.3.0 importlib_metadata-9.0.1 jinja2-3.1.6 markdown-3.10.3 markupsafe-3.0.3 mergedeep-1.3.4 mkdocs-1.6.1 mkdocs-get-deps-0.2.2 mkdocs_gen_files-0.6.1 pathspec-1.1.1 platformdirs-4.11.15 properdocs-1.6.7 python-dateutil-2.9.0.post0 pytidylib-0.3.2 pyyaml-env-tag-1.1 six-1.17.0 watchdog-6.0.0 zipp-4.1.0\n#11 3.339 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 3.343 \n#11 3.343 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 3.343 [notice] To update, run: pip install --upgrade pip\n#11 DONE 3.5s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 1.0s done\n#12 exporting manifest sha256:6d9aed8a25f0030b5fc52c50dce2989b115bb197899799aa1b23adc8f9e56ecd done\n#12 exporting config sha256:67400a1c393928a0dee13b29595092d88a91355abb45faa5f2cd115b34e53fee done\n#12 exporting attestation manifest sha256:0251d48c3849f410abae8f47ae1555188caa33820fb930e96107f03f76ad5134 0.0s done\n#12 exporting manifest list sha256:87d7a512abc60078db82af270151f2bed0eeab0420811942a28d2e9444d4402b done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-python-markdown-markdown:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-python-markdown-markdown:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-python-markdown-markdown:latest 0.7s done\n#12 DONE 1.7s\n",
+  "build_log_tail": "b/5092b448901c93e5a2525affde592424575fa289d983bb13e6\n#11 2.385 Successfully built pytidylib\n#11 2.484 Installing collected packages: pytidylib, zipp, watchdog, six, PyYAML, platformdirs, pathspec, mergedeep, markupsafe, markdown, griffelib, colorama, click, pyyaml-env-tag, python-dateutil, mkdocs-get-deps, jinja2, importlib_metadata, griffecli, griffe, ghp-import, properdocs, mkdocs, mkdocs_gen_files\n#11 3.191 Successfully installed PyYAML-6.0.3 click-8.5.0 colorama-0.4.6 ghp-import-2.1.0 griffe-2.3.0 griffecli-2.3.0 griffelib-2.3.0 importlib_metadata-9.0.1 jinja2-3.1.6 markdown-3.10.3 markupsafe-3.0.3 mergedeep-1.3.4 mkdocs-1.6.1 mkdocs-get-deps-0.2.2 mkdocs_gen_files-0.6.1 pathspec-1.1.1 platformdirs-4.11.8 properdocs-1.6.7 python-dateutil-2.9.0.post0 pytidylib-0.3.2 pyyaml-env-tag-1.1 six-1.17.0 watchdog-6.0.0 zipp-4.1.0\n#11 3.192 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 3.198 \n#11 3.198 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 3.198 [notice] To update, run: pip install --upgrade pip\n#11 DONE 3.5s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 1.5s done\n#12 exporting manifest sha256:6f08cacbe08cff2e1e18c6aefbed21597c3c7799941c8166837189690b948d2f 0.0s done\n#12 exporting config sha256:f86157891dba3768438df1e380f9fba3672e1c78fc7d7be190a3e6af401d34da 0.0s done\n#12 exporting attestation manifest sha256:27d27143190f9df9f377aedca331ac77bc4a6608cbe0d8d7d6219ca2d1f1ee68 0.0s done\n#12 exporting manifest list sha256:17fe42ed4a861e1ad3946ec6f84d41bbc24e63994a466ee34ba250ed621d5332 done\n#12 naming to docker.io/library/bench-pipreqs-python-markdown-markdown:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-python-markdown-markdown:latest\n#12 unpacking to docker.io/library/bench-pipreqs-python-markdown-markdown:latest 0.6s done\n#12 DONE 2.3s\n",
   "status": "collect_error",
   "py_test_files": 31,
   "collect_rc": 2,
@@ -2198,9 +2198,9 @@
   "ebsr": true,
   "pass_rate": 0.9872,
   "timed_out": false,
-  "image_size_mb": 413.9,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-python-markdown-markdown@sha256:87d7a512abc60078db82af270151f2bed0eeab0420811942a28d2e9444d4402b",
+  "image_size_mb": 413.7,
+  "image_delta_mb": 26.1,
+  "image_digest": "bench-pipreqs-python-markdown-markdown@sha256:17fe42ed4a861e1ad3946ec6f84d41bbc24e63994a466ee34ba250ed621d5332",
   "installed_pkg_count": 38,
   "tokens_in": null,
   "tokens_out": null,
@@ -2208,8 +2208,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 6.37,
-  "build_s": 8.05,
-  "test_s": 2.67,
+  "build_s": 8.64,
+  "test_s": 3.08,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -2236,19 +2236,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=33359faa385f59b84cd87df5f4b0996055a482e2 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=33359faa385f59b84cd87df5f4b0996055a482e2 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

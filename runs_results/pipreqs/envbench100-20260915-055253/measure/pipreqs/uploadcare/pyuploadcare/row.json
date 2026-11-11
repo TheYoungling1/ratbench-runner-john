@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "uploadcare/pyuploadcare",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "=south-1.0.2-py2.py3-none-any.whl size=135250 sha256=f03dfe670ad2c5738b55dc02756b29395115b6a2195496779196559ffb1a1d72\n#11 3.586   Stored in directory: /root/.cache/pip/wheels/33/85/00/d5df11234282e377c7b244f49df065cb3cb17430c8115b086c\n#11 3.588 Successfully built South\n#11 3.671 Installing collected packages: South, typing-inspection, sqlparse, six, pydantic-core, idna, h11, certifi, asgiref, annotated-types, python_dateutil, pydantic, httpcore, Django, anyio, httpx\n#11 5.841 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 5.841 Successfully installed Django-5.2.17 South-1.0.2 annotated-types-0.8.0 anyio-4.15.1 asgiref-3.12.1 certifi-2026.7.22 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 pydantic-2.13.5 pydantic-core-2.46.5 python_dateutil-2.9.0.post0 six-1.17.0 sqlparse-0.6.0 typing-inspection-0.4.4\n#11 5.847 \n#11 5.847 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 5.847 [notice] To update, run: pip install --upgrade pip\n#11 DONE 6.7s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 3.7s done\n#12 exporting manifest sha256:8ad0c2ab17738cbfaaa2d65e18d44bb2a67bb40108c30b565fe678e2279fb9a0 done\n#12 exporting config sha256:4d7d54cc6847be6476a2ae1ae5c21753eb5c074558c8317f0b73c922595d8605 done\n#12 exporting attestation manifest sha256:f46b974617ce46714507c6ac24df651752f5a2df08ac91f913a99eb8aaddac4e 0.0s done\n#12 exporting manifest list sha256:96302c83336bc978d41a9650122d983dd7ee2dcaabdad3816490c9c1cfe6118c done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-uploadcare-pyuploadcare:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-uploadcare-pyuploadcare:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-uploadcare-pyuploadcare:latest 1.3s done\n#12 DONE 5.1s\n",
+  "build_log_tail": "tup.py): finished with status 'done'\n#11 3.513   Created wheel for South: filename=south-1.0.2-py2.py3-none-any.whl size=135250 sha256=cd875881dd6551436225ec65ddaddd0664e834f9ad2ef44f5a778e6e5b4e3da0\n#11 3.513   Stored in directory: /root/.cache/pip/wheels/33/85/00/d5df11234282e377c7b244f49df065cb3cb17430c8115b086c\n#11 3.516 Successfully built South\n#11 3.641 Installing collected packages: South, typing-inspection, sqlparse, six, pydantic-core, idna, h11, certifi, asgiref, annotated-types, python_dateutil, pydantic, httpcore, Django, anyio, httpx\n#11 5.541 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 5.541 Successfully installed Django-5.2.17 South-1.0.2 annotated-types-0.8.0 anyio-4.15.1 asgiref-3.12.1 certifi-2026.7.22 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.19 pydantic-2.13.5 pydantic-core-2.46.5 python_dateutil-2.9.0.post0 six-1.17.0 sqlparse-0.6.0 typing-inspection-0.4.4\n#11 5.545 \n#11 5.545 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 5.545 [notice] To update, run: pip install --upgrade pip\n#11 DONE 5.8s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 3.4s done\n#12 exporting manifest sha256:3ed05d3737c93395bd30cc6cf5de436803fb18727d98fbc2eae44170803b9848 done\n#12 exporting config sha256:172c3af794c4fb81e548ec9c72506a3cedf9bea65d79b78d61039324384b0d90 done\n#12 exporting attestation manifest sha256:fbbd45c69814c6fc04dd59d6c9e6ae223fdbd2f9e6ebca909af4a5ed88478199 0.0s done\n#12 exporting manifest list sha256:5ceb55620a8d86e8be6a316dfa100daf27b665296b6427209b011259b2bbd2a8 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-uploadcare-pyuploadcare:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-uploadcare-pyuploadcare:latest\n#12 unpacking to docker.io/library/bench-pipreqs-uploadcare-pyuploadcare:latest 1.8s done\n#12 DONE 5.3s\n",
   "status": "collect_error",
   "py_test_files": 38,
   "collect_rc": 4,
@@ -26,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 425.4,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-uploadcare-pyuploadcare@sha256:96302c83336bc978d41a9650122d983dd7ee2dcaabdad3816490c9c1cfe6118c",
+  "image_size_mb": 425.0,
+  "image_delta_mb": 37.4,
+  "image_digest": "bench-pipreqs-uploadcare-pyuploadcare@sha256:5ceb55620a8d86e8be6a316dfa100daf27b665296b6427209b011259b2bbd2a8",
   "installed_pkg_count": 30,
   "tokens_in": null,
   "tokens_out": null,
@@ -36,8 +36,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 6.81,
-  "build_s": 14.71,
-  "test_s": 0.61,
+  "build_s": 14.14,
+  "test_s": 0.7,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -64,19 +64,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=114d177d479c55251c2cce9c401011903fe9a66b (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=114d177d479c55251c2cce9c401011903fe9a66b (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

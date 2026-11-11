@@ -1,10 +1,10 @@
 {
-  "agent": "claudecode__ratbench50_run-20260904-134239",
+  "agent": "claudecode-dockerfile",
   "repo": "xuwei95/ezdata",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 48.2/48.2 MB 314.3 MB/s eta 0:00:00\n#11 1.551 Downloading pytest_playwright-0.9.0-py3-none-any.whl (17 kB)\n#11 1.557 Downloading pyee-13.0.1-py3-none-any.whl (15 kB)\n#11 1.564 Downloading pytest_base_url-2.1.0-py3-none-any.whl (5.3 kB)\n#11 1.570 Downloading python_slugify-8.0.4-py2.py3-none-any.whl (10 kB)\n#11 1.576 Downloading text_unidecode-1.3-py2.py3-none-any.whl (78 kB)\n#11 1.578    \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 78.2/78.2 kB 454.8 MB/s eta 0:00:00\n#11 2.578 Installing collected packages: text-unidecode, python-slugify, pyee, pytest-base-url, playwright, pytest-playwright\n#11 3.359 Successfully installed playwright-1.63.0 pyee-13.0.1 pytest-base-url-2.1.0 pytest-playwright-0.9.0 python-slugify-8.0.4 text-unidecode-1.3\n#11 3.359 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 3.428 \n#11 3.428 [notice] A new release of pip is available: 24.0 -> 26.2.1\n#11 3.428 [notice] To update, run: pip install --upgrade pip\n#11 DONE 3.6s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 49.0s done\n#12 exporting manifest sha256:993c93e5c61c776f34424a4cd1272cc8e1b1f890372ae04553e3c51d40108fcf done\n#12 exporting config sha256:71722214de515d4985b99cce9fcf8cbfafcfb5067bc8dbe6ba3b4161b0874dc3 done\n#12 exporting attestation manifest sha256:4f2b1b9dbac56af13c27c763b743cc02d9e00fd45bdbb2251ab0691209af5dae 0.0s done\n#12 exporting manifest list sha256:ecb51299226bdfcd538f0562c00e70cd5597d96b5cc3f682b7e45bace044e310 done\n#12 naming to docker.io/library/bench-claudecode__ratbench50_run-20260904-134239-xuwei95-ezdata:latest done\n#12 unpacking to docker.io/library/bench-claudecode__ratbench50_run-20260904-134239-xuwei95-ezdata:latest\n#12 unpacking to docker.io/library/bench-claudecode__ratbench50_run-20260904-134239-xuwei95-ezdata:latest 11.6s done\n#12 DONE 60.7s\n",
+  "build_log_tail": "t<10.0.0,>=6.2.4->pytest-playwright) (26.3)\nRequirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.11/site-packages (from pytest<10.0.0,>=6.2.4->pytest-playwright) (1.6.0)\nRequirement already satisfied: pygments>=2.7.2 in /usr/local/lib/python3.11/site-packages (from pytest<10.0.0,>=6.2.4->pytest-playwright) (2.21.0)\nCollecting text-unidecode>=1.3 (from python-slugify<9.0.0,>=6.0.0->pytest-playwright)\n  Downloading text_unidecode-1.3-py2.py3-none-any.whl.metadata (2.4 kB)\nDownloading playwright-1.62.0-py3-none-manylinux1_x86_64.whl (47.7 MB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 47.7/47.7 MB 242.5 MB/s eta 0:00:00\nDownloading pytest_playwright-0.9.0-py3-none-any.whl (17 kB)\nDownloading pyee-13.0.1-py3-none-any.whl (15 kB)\nDownloading pytest_base_url-2.1.0-py3-none-any.whl (5.3 kB)\nDownloading python_slugify-8.0.4-py2.py3-none-any.whl (10 kB)\nDownloading text_unidecode-1.3-py2.py3-none-any.whl (78 kB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 78.2/78.2 kB 299.0 MB/s eta 0:00:00\nInstalling collected packages: text-unidecode, python-slugify, pyee, pytest-base-url, playwright, pytest-playwright\nSuccessfully installed playwright-1.62.0 pyee-13.0.1 pytest-base-url-2.1.0 pytest-playwright-0.9.0 python-slugify-8.0.4 text-unidecode-1.3\n\u001b[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n\u001b[0m\u001b[91m\n[notice] A new release of pip is available: 24.0 -> 26.2.1\n[notice] To update, run: pip install --upgrade pip\n\u001b[0m ---> Removed intermediate container 26a253562d56\n ---> f8fce1bc2cfb\nSuccessfully built f8fce1bc2cfb\nSuccessfully tagged bench-claudecode-dockerfile-xuwei95-ezdata:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 69,
   "collect_rc": 2,
@@ -599,9 +599,9 @@
   "ebsr": true,
   "pass_rate": 0.9123,
   "timed_out": false,
-  "image_size_mb": 780.4,
-  "image_delta_mb": null,
-  "image_digest": "bench-claudecode__ratbench50_run-20260904-134239-xuwei95-ezdata@sha256:ecb51299226bdfcd538f0562c00e70cd5597d96b5cc3f682b7e45bace044e310",
+  "image_size_mb": 778.7,
+  "image_delta_mb": 398.9,
+  "image_digest": "bench-claudecode-dockerfile-xuwei95-ezdata@sha256:f8fce1bc2cfb725fe7a67035d469d89f755d9f989f33d25ba5d5aca92b4f1501",
   "installed_pkg_count": 227,
   "tokens_in": 4696909,
   "tokens_out": 46499,
@@ -609,8 +609,8 @@
   "turns_used": 73,
   "cost_usd": 0.076752616,
   "produce_s": 657.24,
-  "build_s": 141.99,
-  "test_s": 66.52,
+  "build_s": 138.59,
+  "test_s": 80.73,
   "meta": {
     "contract_version": 1,
     "producer": "claudecode-dockerfile",
@@ -637,19 +637,7 @@
     "usage_source": "computed",
     "dsml_text_blocks": 0,
     "turn_capped": false,
-    "agent_timed_out": false,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "agent_timed_out": false
   },
   "error_surface": "",
   "error_surface_reason": "",

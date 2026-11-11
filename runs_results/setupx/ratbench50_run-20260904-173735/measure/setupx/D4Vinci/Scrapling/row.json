@@ -1,10 +1,10 @@
 {
-  "agent": "setupx__ratbench50_run-20260904-173735",
+  "agent": "setupx",
   "repo": "D4Vinci/Scrapling",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "min mypy pyright\n#10 151.8           pip install -e \".[all]\"\n#10 151.8           pip install lxml-stubs\n#10 151.8 \n#10 151.8       - name: Run Bandit (Security Linter)\n#10 151.8         id: bandit\n#10 151.8         continue-on-error: true\n#10 151.8         run: |\n#10 151.8           echo \"::group::Bandit - Security Linter\"\n#10 151.8           bandit -r -c .bandit.yml scrapling/ -f json -o bandit-report.json\n#10 151.8           bandit -r -c .bandit.yml scrapling/\n#10 151.8           echo \"::endgroup::\"\n#10 151.8 \n#10 151.8       - name: Run Ruff Linter\n#10 151.8         id: ruff-lint\n#10 151.8         continue-on-error: true\n#10 151.8         run: |\n#10 151.8           echo \"::group::Ruff - Linter\"\n#10 151.8           ruff check scrapling/ --output-format=github\n#10 151.8           echo \"::endgroup::\"\n#10 151.8 \n#10 151.8       - name: Run Ruff Formatter Check\n#10 DONE 151.9s\n\n#11 [7/9] RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n#11 DONE 0.6s\n\n#12 [8/9] RUN git config --global --add safe.directory /testbed\n#12 DONE 0.2s\n\n#13 [9/9] WORKDIR /testbed\n#13 DONE 0.0s\n\n#14 exporting to image\n#14 exporting layers\n#14 exporting layers 65.6s done\n#14 exporting manifest sha256:cad3884804663fe5bc63907fb4d4eaf3880ce17bbbda75f3639432e6bdf83988 done\n#14 exporting config sha256:8714eb82aba710e6e8d1c947ef752ec4a58bfa8bd447f3d01f8efa771b629d19 done\n#14 exporting attestation manifest sha256:0849bc2372abbf9fea89de9218b242a649786409c58658c0ed925ab6e41b5e5d 0.0s done\n#14 exporting manifest list sha256:5462e8d135f33efe61b5aa91a98aa5541bbde045b734316f9924e4c1dfed8ca9 done\n#14 naming to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-d4vinci-scrapling:latest done\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-d4vinci-scrapling:latest\n#14 unpacking to docker.io/library/bench-setupx__ratbench50_run-20260904-173735-d4vinci-scrapling:latest 11.4s done\n#14 DONE 77.1s\n",
+  "build_log_tail": "\n\n      - name: Set up Python\n        uses: actions/setup-python@v6\n        with:\n          python-version: '3.10'\n          cache: 'pip'\n\n      - name: Install dependencies\n        run: |\n          python -m pip install --upgrade pip\n          pip install bandit[toml] ruff vermin mypy pyright\n          pip install -e \".[all]\"\n          pip install lxml-stubs\n\n      - name: Run Bandit (Security Linter)\n        id: bandit\n        continue-on-error: true\n        run: |\n          echo \"::group::Bandit - Security Linter\"\n          bandit -r -c .bandit.yml scrapling/ -f json -o bandit-report.json\n          bandit -r -c .bandit.yml scrapling/\n          echo \"::endgroup::\"\n\n      - name: Run Ruff Linter\n        id: ruff-lint\n        continue-on-error: true\n        run: |\n          echo \"::group::Ruff - Linter\"\n          ruff check scrapling/ --output-format=github\n          echo \"::endgroup::\"\n\n      - name: Run Ruff Formatter Check\n ---> Removed intermediate container c23a7723785d\n ---> aba3838dabd0\nStep 8/11 : RUN set -e;     if [ -d /testbed/.git ]; then exit 0; fi;     mv /workspace/repo /testbed && ln -sfn /testbed /workspace/repo\n ---> Running in 3526c960d2c1\n ---> Removed intermediate container 3526c960d2c1\n ---> 576f204fe9a0\nStep 9/11 : RUN git config --global --add safe.directory /testbed\n ---> Running in fa23c879c84b\n ---> Removed intermediate container fa23c879c84b\n ---> cada1ecc2501\nStep 10/11 : ENV PATH=/testbed/.venv/bin:/testbed/venv/bin:$PATH\n ---> Running in fb61dae6f426\n ---> Removed intermediate container fb61dae6f426\n ---> 00128fe83fb1\nStep 11/11 : WORKDIR /testbed\n ---> Running in f9c7c76bf0ed\n ---> Removed intermediate container f9c7c76bf0ed\n ---> 685fe8c73702\nSuccessfully built 685fe8c73702\nSuccessfully tagged bench-setupx-d4vinci-scrapling:latest\nDEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            Install the buildx component to build images with BuildKit:\n            https://docs.docker.com/go/buildx/\n\n",
   "status": "collect_error",
   "py_test_files": 45,
   "collect_rc": 2,
@@ -804,18 +804,18 @@
   "ebsr": true,
   "pass_rate": 0.9909,
   "timed_out": false,
-  "image_size_mb": 1118.7,
-  "image_delta_mb": null,
-  "image_digest": "bench-setupx__ratbench50_run-20260904-173735-d4vinci-scrapling@sha256:5462e8d135f33efe61b5aa91a98aa5541bbde045b734316f9924e4c1dfed8ca9",
-  "installed_pkg_count": 136,
+  "image_size_mb": 1108.8,
+  "image_delta_mb": 721.2,
+  "image_digest": "bench-setupx-d4vinci-scrapling@sha256:685fe8c73702a7b1243fdb232781866bb10e3b257219e4ceb0e9094829ad05be",
+  "installed_pkg_count": 127,
   "tokens_in": 1145028,
   "tokens_out": 92108,
   "llm_calls": 101,
   "turns_used": 40,
   "cost_usd": null,
   "produce_s": 1025.22,
-  "build_s": 232.95,
-  "test_s": 60.34,
+  "build_s": 214.91,
+  "test_s": 46.04,
   "meta": {
     "contract_version": 1,
     "producer": "setupx",
@@ -846,19 +846,7 @@
     "turns_used": 40,
     "produce_s": 1025.22,
     "total_tokens": 1237136,
-    "cost_usd": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=8e7bc99ebc05f0e38f7c1426ca6ff861da6cad36 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=8e7bc99ebc05f0e38f7c1426ca6ff861da6cad36 (pinned)\n"
-      }
-    ]
+    "cost_usd": null
   },
   "error_surface": "",
   "error_surface_reason": "",

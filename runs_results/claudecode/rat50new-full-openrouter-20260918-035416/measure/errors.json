@@ -1,0 +1,198 @@
+{
+  "claudecode-dockerfile": {
+    "collect": {
+      "agent": "claudecode-dockerfile",
+      "n_repos": 50,
+      "source": "collect",
+      "n_admissible": 41,
+      "n_masked": 1,
+      "n_unobserved": 8,
+      "n_status_derived": 0,
+      "buckets": {
+        "partial": 7,
+        "success": 21,
+        "collect_error": 3,
+        "timed_out": 3,
+        "no_tests_collected": 5,
+        "zero_pass": 3,
+        "error": 6,
+        "build_fail": 2
+      },
+      "surfaces": {
+        "full": 41,
+        "unobserved": 8,
+        "masked": 1
+      },
+      "token_repos": {
+        "litellm.llms.azure.common_utils.AzureOpenAIError": 1,
+        "ModuleNotFoundError": 2,
+        "litellm.exceptions.APIError": 1,
+        "litellm.llms.openai.common_utils.OpenAIError": 1,
+        "httpx.ConnectError": 1,
+        "openai.OpenAIError": 1,
+        "ImportError": 1,
+        "SyntaxError": 1,
+        "litellm.exceptions.InternalServerError": 1,
+        "Exception": 1,
+        "httpcore.ConnectError": 1,
+        "FileNotFoundError": 1,
+        "openai.APIConnectionError": 1,
+        "RemoteError": 1
+      },
+      "token_events": {
+        "openai.OpenAIError": 1,
+        "litellm.llms.openai.common_utils.OpenAIError": 1,
+        "litellm.exceptions.InternalServerError": 1,
+        "litellm.llms.azure.common_utils.AzureOpenAIError": 1,
+        "litellm.exceptions.APIError": 1,
+        "httpcore.ConnectError": 1,
+        "httpx.ConnectError": 1,
+        "openai.APIConnectionError": 1,
+        "ImportError": 2,
+        "ModuleNotFoundError": 41,
+        "FileNotFoundError": 3,
+        "Exception": 4,
+        "SyntaxError": 1,
+        "RemoteError": 1
+      },
+      "category_repos": {
+        "syntax_error": 1,
+        "import_failed": 1,
+        "uncategorized": 2,
+        "service_unavailable": 1,
+        "file_missing": 1,
+        "partial_import": 1,
+        "module_not_found": 2
+      },
+      "category_events": {
+        "uncategorized": 12,
+        "service_unavailable": 1,
+        "partial_import": 1,
+        "module_not_found": 41,
+        "file_missing": 3,
+        "syntax_error": 1,
+        "import_failed": 1
+      },
+      "crosstab": {
+        "collect_error|syntax_error": 1,
+        "collect_error|import_failed": 1,
+        "collect_error|uncategorized": 1,
+        "collect_error|service_unavailable": 1,
+        "collect_error|file_missing": 1,
+        "collect_error|partial_import": 1,
+        "collect_error|module_not_found": 2,
+        "timed_out|uncategorized": 1
+      },
+      "top_groups": {
+        "file_missing": [
+          [
+            "../..//docs/my-website/docs/exception_mapping.md",
+            1
+          ],
+          [
+            "/testbed/docs/my-website/docs/proxy/config_settings.md",
+            1
+          ],
+          [
+            "./docs/my-website/docs/proxy/config_settings.md",
+            1
+          ]
+        ],
+        "module_not_found": [
+          [
+            "tests.test_new_vector_store_endpoints",
+            1
+          ],
+          [
+            "tests.test_team",
+            1
+          ],
+          [
+            "tests.proxy_behavior",
+            1
+          ],
+          [
+            "fixture_bundle",
+            1
+          ],
+          [
+            "tests.test_otel_thread_leak",
+            1
+          ],
+          [
+            "tests.test_resource_cleanup",
+            1
+          ],
+          [
+            "tests.benchmarks",
+            1
+          ],
+          [
+            "tests.integration",
+            1
+          ],
+          [
+            "tests.test_default_encoding_non_root",
+            1
+          ],
+          [
+            "tests.test_debug_warning",
+            1
+          ]
+        ],
+        "partial_import": [
+          [
+            "MessageSendParams",
+            1
+          ]
+        ],
+        "uncategorized": [
+          [
+            "../..//docs/my-website/docs/exception_mapping.md",
+            1
+          ],
+          [
+            "/testbed/docs/my-website/docs/proxy/config_settings.md",
+            1
+          ],
+          [
+            "./docs/my-website/docs/proxy/config_settings.md",
+            1
+          ]
+        ]
+      },
+      "uncategorized_rate": 0.2
+    },
+    "run": {
+      "agent": "claudecode-dockerfile",
+      "n_repos": 50,
+      "source": "run",
+      "n_admissible": 41,
+      "n_masked": 1,
+      "n_unobserved": 8,
+      "n_status_derived": 0,
+      "buckets": {
+        "partial": 7,
+        "success": 21,
+        "collect_error": 3,
+        "timed_out": 3,
+        "no_tests_collected": 5,
+        "zero_pass": 3,
+        "error": 6,
+        "build_fail": 2
+      },
+      "surfaces": {
+        "full": 41,
+        "unobserved": 8,
+        "masked": 1
+      },
+      "token_repos": {},
+      "token_events": {},
+      "category_repos": {},
+      "category_events": {},
+      "crosstab": {},
+      "top_groups": {},
+      "uncategorized_rate": 0.0
+    }
+  }
+}

@@ -1,20 +1,16 @@
 {
-  "agent": "claudecode__rat50new-full-openrouter-20260918-035416",
+  "agent": "claudecode-dockerfile",
   "repo": "modelscope/AgentJet",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "-socketio-5.17.0 pyyaml-6.0.3 referencing-0.37.0 regex-2026.9.10 requests-2.34.2 rich-15.0.0 rpds-py-2026.6.3 shellingham-1.5.4 shortuuid-1.0.13 simple-websocket-1.1.0 simplejson-4.1.2 six-1.17.0 sniffio-1.3.1 sounddevice-0.5.6 sse-starlette-3.4.11 starlette-1.7.0 swanlab-0.10.1 tenacity-9.1.4 tiktoken-0.14.0 tqdm-4.70.1 truststore-0.10.4 typer-0.27.2 typing-extensions-4.16.0 typing-inspection-0.4.4 urllib3-2.8.0 uvicorn-0.54.0 watchdog-6.0.0 wcwidth-0.9.1 websocket-client-1.9.2 wrapt-2.4.1 wsproto-1.3.2 xxhash-4.0.1 yarl-1.25.1\n#9 38.44 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#9 38.45 \n#9 38.45 [notice] A new release of pip is available: 24.0 -> 26.2.1\n#9 38.45 [notice] To update, run: pip install --upgrade pip\n#9 DONE 41.4s\n\n#10 [7/7] RUN printf '[pytest]\\nnorecursedirs = .git .* build dist __pycache__ docs tutorial/opencode_build_aime tutorial/opencode_build_openclaw_interactive_train\\n' > pytest.ini\n#10 DONE 0.4s\n\n#11 exporting to image\n#11 exporting layers\n#11 exporting layers 35.7s done\n#11 exporting manifest sha256:a67b1b346f9d87392ae2863dc4bfe98e9deca71314d7874bf02a090c32dacc83 done\n#11 exporting config sha256:75ab3512f722af34a82a0ceb05430001f4806ab0f42aad02aa02e16da75b18fd done\n#11 exporting attestation manifest sha256:04628fb63a1a1b2be8751d4000f6bcd91fefb1a563f967c4d137d8ce06e90a0c 0.0s done\n#11 exporting manifest list sha256:678fd55b69423d281a211aa42e04b10514375a28fe5fdd27765f7822a9e7ee42 done\n#11 naming to docker.io/library/bench-claudecode__rat50new-full-openrouter-20260918-035416-modelscope-agentjet:latest done\n#11 unpacking to docker.io/library/bench-claudecode__rat50new-full-openrouter-20260918-035416-modelscope-agentjet:latest\n#11 unpacking to docker.io/library/bench-claudecode__rat50new-full-openrouter-20260918-035416-modelscope-agentjet:latest 7.9s done\n#11 DONE 43.7s\n",
-  "status": "collect_error",
+  "build_log_tail": "hon-dateutil-2.9.0.post0 python-dotenv-1.2.3 python-engineio-4.14.0 python-multipart-0.0.32 python-socketio-5.17.0 pyyaml-6.0.3 referencing-0.37.0 regex-2026.9.10 requests-2.34.2 rich-15.0.0 rpds-py-2026.6.3 shellingham-1.5.4 shortuuid-1.0.13 simple-websocket-1.1.0 simplejson-4.1.2 six-1.17.0 sniffio-1.3.1 sounddevice-0.5.6 sse-starlette-3.4.11 starlette-1.6.0 swanlab-0.10.0 tenacity-9.1.4 tiktoken-0.14.0 tqdm-4.70.1 truststore-0.10.4 typer-0.27.2 typing-extensions-4.16.0 typing-inspection-0.4.4 urllib3-2.8.0 uvicorn-0.53.0 watchdog-6.0.0 wcwidth-0.8.4 websocket-client-1.9.2 wrapt-2.4.1 wsproto-1.3.2 xxhash-4.0.1 yarl-1.25.1\n#9 36.51 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#9 36.52 \n#9 36.52 [notice] A new release of pip is available: 24.0 -> 26.2.1\n#9 36.52 [notice] To update, run: pip install --upgrade pip\n#9 DONE 39.6s\n\n#10 [7/7] RUN printf '[pytest]\\nnorecursedirs = .git .* build dist __pycache__ docs tutorial/opencode_build_aime tutorial/opencode_build_openclaw_interactive_train\\n' > pytest.ini\n#10 DONE 0.3s\n\n#11 exporting to image\n#11 exporting layers\n#11 exporting layers 23.7s done\n#11 exporting manifest sha256:75773e6e62944241878f6077ae66a8bcd75d7df036e09f309959b62ba9778270 done\n#11 exporting config sha256:b6ab8c8fc0689cb2002dbb25f8eea74cfeacce5b751b8ed181fd61857487edef done\n#11 exporting attestation manifest sha256:3f8cab4d388756800fd9a91feb393bdb007027003c741a884c8af5a1cef14b23 done\n#11 exporting manifest list sha256:8d7d1127d31fcd61fe29a159d9e1af57f1787fd0611f0853dffd81108b2564c4 done\n#11 naming to docker.io/library/bench-claudecode-dockerfile-modelscope-agentjet:latest done\n#11 unpacking to docker.io/library/bench-claudecode-dockerfile-modelscope-agentjet:latest\n#11 unpacking to docker.io/library/bench-claudecode-dockerfile-modelscope-agentjet:latest 5.4s done\n#11 DONE 29.1s\n",
+  "status": "executed",
   "py_test_files": 12,
-  "collect_rc": 2,
-  "collect_clean": false,
-  "collect_errors": [
-    "E   ModuleNotFoundError: No module named 'transformers'",
-    "E   ModuleNotFoundError: No module named 'verl_reward_fn'",
-    "E   ModuleNotFoundError: No module named 'openjudge'"
-  ],
-  "collect_error_count": 3,
+  "collect_rc": 0,
+  "collect_clean": true,
+  "collect_errors": [],
+  "collect_error_count": 0,
   "collected_node_ids": [
     "scripts/test_dashscope_api.py::test_dashscope_api",
     "tests/config_test.py::TestConfigUtils::test_config_alignment_trinity",
@@ -57,10 +53,10 @@
     "tutorial/opencode_build_openclaw_agent/test_reward.py::test_listwise_composite"
   ],
   "executed": true,
-  "total": 42,
+  "total": 39,
   "passed": 24,
   "failed": 15,
-  "errors": 3,
+  "errors": 0,
   "skipped": 0,
   "passed_node_ids": [
     "tests/test_agent_run_v3.py::TestAgentLoopSchemaInstanceSplit::test_api_receives_schema_list_not_instances",
@@ -105,26 +101,22 @@
     "tutorial/opencode_build_openclaw_agent/test_reward.py::test_repetition_penalty",
     "tutorial/opencode_build_openclaw_agent/test_reward.py::test_listwise_composite"
   ],
-  "error_node_ids": [
-    "docs.mini_test",
-    "tutorial.opencode_build_aime.test_verl_reward_fn",
-    "tutorial.opencode_build_openclaw_interactive_train.test_interactive"
-  ],
+  "error_node_ids": [],
   "ebsr": true,
-  "pass_rate": 0.5714,
+  "pass_rate": 0.6154,
   "timed_out": false,
-  "image_size_mb": 799.6,
-  "image_delta_mb": null,
-  "image_digest": "bench-claudecode__rat50new-full-openrouter-20260918-035416-modelscope-agentjet@sha256:678fd55b69423d281a211aa42e04b10514375a28fe5fdd27765f7822a9e7ee42",
-  "installed_pkg_count": 136,
+  "image_size_mb": 798.0,
+  "image_delta_mb": 409.9,
+  "image_digest": "bench-claudecode-dockerfile-modelscope-agentjet@sha256:8d7d1127d31fcd61fe29a159d9e1af57f1787fd0611f0853dffd81108b2564c4",
+  "installed_pkg_count": 134,
   "tokens_in": 2796338,
   "tokens_out": 25210,
   "llm_calls": 58,
   "turns_used": 58,
   "cost_usd": 0.05980224,
   "produce_s": 514.76,
-  "build_s": 92.16,
-  "test_s": 4.2,
+  "build_s": 73.11,
+  "test_s": 5.59,
   "meta": {
     "contract_version": 1,
     "producer": "claudecode-dockerfile",
@@ -151,19 +143,7 @@
     "usage_source": "computed",
     "dsml_text_blocks": 0,
     "turn_capped": false,
-    "agent_timed_out": false,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\nremoved pytest.ini\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "agent_timed_out": false
   },
   "error_surface": "",
   "error_surface_reason": "",

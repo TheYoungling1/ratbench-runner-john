@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50-20260915-043144",
+  "agent": "pipreqs",
   "repo": "pre-commit/pre-commit",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "xt (line 3)) (26.3)\n#11 0.975 Requirement already satisfied: iniconfig>=1.0.1 in /usr/local/lib/python3.10/site-packages (from pytest->-r /requirements_pipreqs.txt (line 3)) (2.3.0)\n#11 1.793 Collecting regex\n#11 1.802   Downloading regex-2026.9.10-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (796 kB)\n#11 1.824      \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 796.3/796.3 kB 39.5 MB/s eta 0:00:00\n#11 1.830 Requirement already satisfied: typing-extensions>=4.6.0 in /usr/local/lib/python3.10/site-packages (from exceptiongroup>=1->pytest->-r /requirements_pipreqs.txt (line 3)) (4.16.0)\n#11 1.880 Installing collected packages: regex, identify, cfgv, re_assert\n#11 1.978 Successfully installed cfgv-3.5.0 identify-2.6.19 re_assert-1.1.0 regex-2026.9.10\n#11 1.978 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 1.984 \n#11 1.984 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 1.984 [notice] To update, run: pip install --upgrade pip\n#11 DONE 2.2s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 0.5s done\n#12 exporting manifest sha256:4705249e5f59fc0a6a50302a9818f955de69e4f76c5b4302315d8e846c3a7059 done\n#12 exporting config sha256:21adbe4bd6eefc589ff9234cf02562b27e6ecde4a8097f79a6334ea356c56bb4 done\n#12 exporting attestation manifest sha256:3079a7226c5d161c01ba3a218bfb482b6991a72bb65bf396caf9d444fe593747 0.0s done\n#12 exporting manifest list sha256:9a10e705274227511908c7311519783bc6239eceda004989d3f88957bf830774 done\n#12 naming to docker.io/library/bench-pipreqs__rat50-20260915-043144-pre-commit-pre-commit:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-pre-commit-pre-commit:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-pre-commit-pre-commit:latest 0.5s done\n#12 DONE 1.1s\n",
+  "build_log_tail": "al/lib/python3.10/site-packages (from pytest->-r /requirements_pipreqs.txt (line 3)) (2.4.1)\n#11 0.699 Requirement already satisfied: exceptiongroup>=1 in /usr/local/lib/python3.10/site-packages (from pytest->-r /requirements_pipreqs.txt (line 3)) (1.3.1)\n#11 1.398 Collecting regex\n#11 1.405   Downloading regex-2026.9.10-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (796 kB)\n#11 1.424      \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 796.3/796.3 kB 46.6 MB/s eta 0:00:00\n#11 1.430 Requirement already satisfied: typing-extensions>=4.6.0 in /usr/local/lib/python3.10/site-packages (from exceptiongroup>=1->pytest->-r /requirements_pipreqs.txt (line 3)) (4.16.0)\n#11 1.472 Installing collected packages: regex, identify, cfgv, re_assert\n#11 1.555 Successfully installed cfgv-3.5.0 identify-2.6.19 re_assert-1.1.0 regex-2026.9.10\n#11 1.556 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 1.560 \n#11 1.560 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 1.560 [notice] To update, run: pip install --upgrade pip\n#11 DONE 1.7s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 0.2s done\n#12 exporting manifest sha256:00088fdc5248edc6e084543bd9fedfec819d75efb88ae0c258e07c6bbae81f06 done\n#12 exporting config sha256:5c41d5d4661975b629e573d03e0974b2ca98d43aa77d737b841b7ab507f27e56 done\n#12 exporting attestation manifest sha256:328ac892a10865b49399bf07ff2b8940cedbebf177fc444efece0cb309582b9d done\n#12 exporting manifest list sha256:a796b58456c2383a5e0f8ed9e54cf7cc1522a02ecbf2d68d18e21790dbb304a8 done\n#12 naming to docker.io/library/bench-pipreqs-pre-commit-pre-commit:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-pre-commit-pre-commit:latest\n#12 unpacking to docker.io/library/bench-pipreqs-pre-commit-pre-commit:latest 0.4s done\n#12 DONE 0.6s\n",
   "status": "collect_error",
   "py_test_files": 55,
   "collect_rc": 4,
@@ -26,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 403.7,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50-20260915-043144-pre-commit-pre-commit@sha256:9a10e705274227511908c7311519783bc6239eceda004989d3f88957bf830774",
+  "image_size_mb": 403.6,
+  "image_delta_mb": 16.0,
+  "image_digest": "bench-pipreqs-pre-commit-pre-commit@sha256:a796b58456c2383a5e0f8ed9e54cf7cc1522a02ecbf2d68d18e21790dbb304a8",
   "installed_pkg_count": 18,
   "tokens_in": null,
   "tokens_out": null,
@@ -36,8 +36,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 8.1,
-  "build_s": 6.55,
-  "test_s": 0.27,
+  "build_s": 4.84,
+  "test_s": 0.35,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -64,19 +64,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=1553b465fd7ea42321ae0d04d1b41e706b89ae45 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=1553b465fd7ea42321ae0d04d1b41e706b89ae45 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

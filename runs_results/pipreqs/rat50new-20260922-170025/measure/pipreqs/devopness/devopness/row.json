@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50new-20260922-170025",
+  "agent": "pipreqs",
   "repo": "devopness/devopness",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "2   Downloading pydantic_core-2.46.5-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)\n#11 3.597      \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 2.1/2.1 MB 100.2 MB/s eta 0:00:00\n#11 3.622 Requirement already satisfied: exceptiongroup>=1.0.2 in /usr/local/lib/python3.10/site-packages (from anyio->httpx->-r /requirements_pipreqs.txt (line 1)) (1.3.1)\n#11 3.716 Installing collected packages: typing-inspection, pydantic_core, Pillow, openapi_generator_cli, idna, h11, certifi, annotated-types, pydantic, httpcore, anyio, httpx\n#11 4.832 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 4.832 Successfully installed Pillow-12.3.0 annotated-types-0.8.0 anyio-4.15.1 certifi-2026.7.22 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 openapi_generator_cli-7.25.0 pydantic-2.13.5 pydantic_core-2.46.5 typing-inspection-0.4.4\n#11 4.839 \n#11 4.839 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 4.839 [notice] To update, run: pip install --upgrade pip\n#11 DONE 5.1s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 4.5s done\n#12 exporting manifest sha256:61cc9accd2154f1ba929d2d651e0c5bdf29f0fad4eb4646902bb3b740f9c1e92 done\n#12 exporting config sha256:df1175d56368bd06491e7cc62a990034c524509a9a0fecdbd88ec756193e006f done\n#12 exporting attestation manifest sha256:80b5cce267122a0fd39d2d1896bf15fb09e0c09185fb8adcd8531a28f1e38b25 0.0s done\n#12 exporting manifest list sha256:d4fabc482a2e077a75fd8b52984b8d19e9ea090716ab1119cc81d1a4e9671722 done\n#12 naming to docker.io/library/bench-pipreqs__rat50new-20260922-170025-devopness-devopness:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-devopness-devopness:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-devopness-devopness:latest 1.2s done\n#12 DONE 5.8s\n",
+  "build_log_tail": "nux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)\n#11 4.000      \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 2.1/2.1 MB 86.3 MB/s eta 0:00:00\n#11 4.032 Collecting typing-inspection>=0.4.2\n#11 4.044   Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)\n#11 4.072 Requirement already satisfied: exceptiongroup>=1.0.2 in /usr/local/lib/python3.10/site-packages (from anyio->httpx->-r /requirements_pipreqs.txt (line 1)) (1.3.1)\n#11 4.208 Installing collected packages: typing-inspection, pydantic_core, Pillow, openapi_generator_cli, idna, h11, certifi, annotated-types, pydantic, httpcore, anyio, httpx\n#11 5.168 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 5.168 Successfully installed Pillow-12.3.0 annotated-types-0.8.0 anyio-4.15.1 certifi-2026.7.22 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 openapi_generator_cli-7.25.0 pydantic-2.13.5 pydantic_core-2.46.5 typing-inspection-0.4.4\n#11 5.175 \n#11 5.175 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 5.175 [notice] To update, run: pip install --upgrade pip\n#11 DONE 6.3s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 6.4s done\n#12 exporting manifest sha256:c73dca01e19f82fa015db1021cfee9d261d2731e0c86356797faab9051b3f676 0.0s done\n#12 exporting config sha256:97684a1b6b8ef495c70745e3232b07d16f77803f676d0fbf7be37907eedbdd61 0.0s done\n#12 exporting attestation manifest sha256:51a27b1b40a6ee828a01a4a21b8dccb0d0ae60a120f8f43a793553ff692e9c27 0.0s done\n#12 exporting manifest list sha256:537fd4096e281fd29b767bccdb92d4f6b8f72e821c5913e113d78e839a3cea97 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-devopness-devopness:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-devopness-devopness:latest\n#12 unpacking to docker.io/library/bench-pipreqs-devopness-devopness:latest 2.1s done\n#12 DONE 8.7s\n",
   "status": "collect_error",
   "py_test_files": 8,
   "collect_rc": 2,
@@ -42,9 +42,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 505.9,
+  "image_size_mb": 1807.6,
   "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50new-20260922-170025-devopness-devopness@sha256:d4fabc482a2e077a75fd8b52984b8d19e9ea090716ab1119cc81d1a4e9671722",
+  "image_digest": "bench-pipreqs-devopness-devopness@sha256:537fd4096e281fd29b767bccdb92d4f6b8f72e821c5913e113d78e839a3cea97",
   "installed_pkg_count": 26,
   "tokens_in": null,
   "tokens_out": null,
@@ -52,8 +52,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 3.71,
-  "build_s": 16.78,
-  "test_s": 0.59,
+  "build_s": 23.22,
+  "test_s": 0.78,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -80,19 +80,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=ea00b955177d41a1bad00b0617519caca4f675bd (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=ea00b955177d41a1bad00b0617519caca4f675bd (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

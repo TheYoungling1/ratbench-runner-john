@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "basxsoftwareassociation/basxconnect",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "0 asgiref-3.12.1 babel-2.18.0 billiard-4.3.0 celery-5.6.3 celery_haystack-0.10 certifi-2026.7.22 chardet-7.6.0 charset_normalizer-3.5.1 click-8.5.0 click-didyoumean-0.3.1 click-plugins-1.1.1.2 click-repl-0.4.0 dateparser-1.4.3 django-appconf-1.2.0 django_countries-9.1.0 django_formtools-2.7 django_haystack-3.4.0 htmlgenerator-1.2.33 hypothesis-6.168.1 idna-3.20 kombu-5.6.2 mailchimp_marketing-3.0.80 prompt_toolkit-3.0.53 py_moneyed-3.0 python-dateutil-2.9.0.post0 pytz-2026.4 regex-2026.9.10 requests-2.34.2 six-1.17.0 sortedcontainers-2.4.0 sqlparse-0.6.0 tzdata-2026.4 tzlocal-5.4.4 urllib3-2.8.0 vine-5.1.0 wcwidth-0.9.1\n#11 12.39 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 12.39 \n#11 12.39 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 12.39 [notice] To update, run: pip install --upgrade pip\n#11 DONE 13.0s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 10.4s done\n#12 exporting manifest sha256:9e969bc244e6f644fd7f8f0fc9e4527f68eef7131f71de5cad1eb747dd4bebbc\n#12 exporting manifest sha256:9e969bc244e6f644fd7f8f0fc9e4527f68eef7131f71de5cad1eb747dd4bebbc done\n#12 exporting config sha256:38f049cccbf38b52d53d05d9087bd7fd00c6baaa2763ee6a88f642d540dca929 done\n#12 exporting attestation manifest sha256:f3b84ac3bc3ed3b8748d5499764346742df576fd8c956b8e9066d12246faafac 0.0s done\n#12 exporting manifest list sha256:fab0248d5408ff0254082dbc607b5ea7367e8bb2afe4764ef3d8893884f3ef5f done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-basxsoftwareassociation-basxconnect:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-basxsoftwareassociation-basxconnect:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-basxsoftwareassociation-basxconnect:latest 2.6s done\n#12 DONE 13.1s\n",
+  "build_log_tail": "arketing, kombu, django_haystack, django_formtools, django-appconf, dateparser, click-repl, celery_haystack, celery\n#11 12.05 Successfully installed Django-5.2.17 amqp-5.3.1 asgiref-3.12.1 babel-2.18.0 billiard-4.2.4 celery-5.6.3 celery_haystack-0.10 certifi-2026.7.22 chardet-7.6.0 charset_normalizer-3.5.1 click-8.5.0 click-didyoumean-0.3.1 click-plugins-1.1.1.2 click-repl-0.3.0 dateparser-1.4.3 django-appconf-1.2.0 django_countries-9.1.0 django_formtools-2.7 django_haystack-3.4.0 htmlgenerator-1.2.33 hypothesis-6.168.0 idna-3.19 kombu-5.6.2 mailchimp_marketing-3.0.80 prompt-toolkit-3.0.53 py_moneyed-3.0 python-dateutil-2.9.0.post0 pytz-2026.3.post1 regex-2026.9.10 requests-2.34.2 six-1.17.0 sortedcontainers-2.4.0 sqlparse-0.6.0 tzdata-2026.4 tzlocal-5.4.4 urllib3-2.7.0 vine-5.1.0 wcwidth-0.8.3\n#11 12.05 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 12.05 \n#11 12.05 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 12.05 [notice] To update, run: pip install --upgrade pip\n#11 DONE 12.9s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 9.0s done\n#12 exporting manifest sha256:818fe5d65d93e89b6d216121d7c813f39d371dddcec099114cce57622c017f53 0.0s done\n#12 exporting config sha256:684c7b196997e13a57bb30cb2c0dda752aa3d0cf7b8127eca2ab85182a1fe29d done\n#12 exporting attestation manifest sha256:5ab36af8679f34872e67eed688f487529d3b9717fcaa201c45709949eadb4acf 0.0s done\n#12 exporting manifest list sha256:d680caec3cbdb102ffd5d0e81b49ef4eed3d81f4a2ac6c797dce1b80e54faf40 done\n#12 naming to docker.io/library/bench-pipreqs-basxsoftwareassociation-basxconnect:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-basxsoftwareassociation-basxconnect:latest\n#12 unpacking to docker.io/library/bench-pipreqs-basxsoftwareassociation-basxconnect:latest 2.9s done\n#12 DONE 12.0s\n",
   "status": "collect_error",
   "py_test_files": 1,
   "collect_rc": 2,
@@ -28,9 +28,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 457.2,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-basxsoftwareassociation-basxconnect@sha256:fab0248d5408ff0254082dbc607b5ea7367e8bb2afe4764ef3d8893884f3ef5f",
+  "image_size_mb": 456.3,
+  "image_delta_mb": 68.7,
+  "image_digest": "bench-pipreqs-basxsoftwareassociation-basxconnect@sha256:d680caec3cbdb102ffd5d0e81b49ef4eed3d81f4a2ac6c797dce1b80e54faf40",
   "installed_pkg_count": 52,
   "tokens_in": null,
   "tokens_out": null,
@@ -38,8 +38,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 8.61,
-  "build_s": 28.7,
-  "test_s": 0.41,
+  "build_s": 30.48,
+  "test_s": 0.51,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -66,19 +66,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=a616dd61bb6012de1668ba0e3c289924e69cff68 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=a616dd61bb6012de1668ba0e3c289924e69cff68 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

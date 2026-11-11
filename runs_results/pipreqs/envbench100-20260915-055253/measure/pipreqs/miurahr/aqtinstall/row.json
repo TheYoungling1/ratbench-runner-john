@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "miurahr/aqtinstall",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "soupsieve, semantic_version, pyppmd, pyinstaller-hooks-contrib, pycryptodomex, pybcj, psutil, multivolumefile, jsoncomparison, inflate64, idna, humanize, defusedxml, charset_normalizer, certifi, backports.zstd, Requests, PyInstaller, py7zr, beautifulsoup4, pytest_socket\n#11 5.897 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 5.897 Successfully installed PyInstaller-6.22.3 Requests-2.34.2 altgraph-0.17.5 backports.zstd-1.7.0 beautifulsoup4-4.15.0 brotli-1.2.0 certifi-2026.7.22 charset_normalizer-3.5.1 defusedxml-0.7.1 humanize-4.16.0 idna-3.20 inflate64-1.0.4 jsoncomparison-1.1.0 multivolumefile-0.2.3 patch-1.16 psutil-7.2.2 py7zr-1.1.3 pybcj-1.0.8 pycryptodomex-3.23.0 pyinstaller-hooks-contrib-2026.7 pyppmd-1.3.1 pytest_socket-0.8.1 semantic_version-2.10.0 soupsieve-2.10 texttable-1.7.0 tqdm-4.70.1 urllib3-2.8.0\n#11 5.902 \n#11 5.902 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 5.902 [notice] To update, run: pip install --upgrade pip\n#11 DONE 6.5s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 2.4s done\n#12 exporting manifest sha256:b21647e35fbd89f5bcee225d21fbf8cd67d9b60c426ec5eb53329b5a6f1808e1 0.0s done\n#12 exporting config sha256:9b6ccdf49da79f8b90d16e99ce60a57927e1697a704ad1046b4a46eaced56c3d done\n#12 exporting attestation manifest sha256:522c6c6fca5cdfeb773307f8eec116acd69bf9aa69a37fa2aafabc3abf243ddc 0.0s done\n#12 exporting manifest list sha256:8dafce3ddac3ccbfd5bc245ba9e50fd81376bcdc779e78f132552e7dd496783a done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-miurahr-aqtinstall:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-miurahr-aqtinstall:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-miurahr-aqtinstall:latest 1.4s done\n#12 DONE 3.9s\n",
+  "build_log_tail": "tch\n#11 3.768 Installing collected packages: texttable, patch, brotli, altgraph, urllib3, tqdm, soupsieve, semantic_version, pyppmd, pyinstaller-hooks-contrib, pycryptodomex, pybcj, psutil, multivolumefile, jsoncomparison, inflate64, idna, humanize, defusedxml, charset_normalizer, certifi, backports.zstd, Requests, PyInstaller, py7zr, beautifulsoup4, pytest_socket\n#11 5.364 Successfully installed PyInstaller-6.22.3 Requests-2.34.2 altgraph-0.17.5 backports.zstd-1.7.0 beautifulsoup4-4.15.0 brotli-1.2.0 certifi-2026.7.22 charset_normalizer-3.5.1 defusedxml-0.7.1 humanize-4.16.0 idna-3.19 inflate64-1.0.4 jsoncomparison-1.1.0 multivolumefile-0.2.3 patch-1.16 psutil-7.2.2 py7zr-1.1.3 pybcj-1.0.8 pycryptodomex-3.23.0 pyinstaller-hooks-contrib-2026.7 pyppmd-1.3.1 pytest_socket-0.8.1 semantic_version-2.10.0 soupsieve-2.9.2 texttable-1.7.0 tqdm-4.70.1 urllib3-2.7.0\n#11 5.364 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 5.370 \n#11 5.370 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 5.370 [notice] To update, run: pip install --upgrade pip\n#11 DONE 5.9s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 1.9s done\n#12 exporting manifest sha256:e063d332745d945662727a2507432b53c8f0aaa3a735f5f70e2ff93191d054d3 done\n#12 exporting config sha256:bcf75ce6cb3b2f7b39a63d241b1686d7977b20ac6da716fd3b91829cfae515ec done\n#12 exporting attestation manifest sha256:cd5b710860aa9b60bd67a84b50c78223979bf93407017c9b86c13b1e5a670c91 done\n#12 exporting manifest list sha256:1e5d6ebbc09aa318c1acbc3df728706c33ded1652b62bb999d9d9632d36c5ac0 done\n#12 naming to docker.io/library/bench-pipreqs-miurahr-aqtinstall:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-miurahr-aqtinstall:latest\n#12 unpacking to docker.io/library/bench-pipreqs-miurahr-aqtinstall:latest 1.6s done\n#12 DONE 3.6s\n",
   "status": "collect_error",
   "py_test_files": 9,
   "collect_rc": 2,
@@ -635,9 +635,9 @@
   "ebsr": true,
   "pass_rate": 0.7228,
   "timed_out": false,
-  "image_size_mb": 450.8,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-miurahr-aqtinstall@sha256:8dafce3ddac3ccbfd5bc245ba9e50fd81376bcdc779e78f132552e7dd496783a",
+  "image_size_mb": 450.6,
+  "image_delta_mb": 63.0,
+  "image_digest": "bench-pipreqs-miurahr-aqtinstall@sha256:1e5d6ebbc09aa318c1acbc3df728706c33ded1652b62bb999d9d9632d36c5ac0",
   "installed_pkg_count": 41,
   "tokens_in": null,
   "tokens_out": null,
@@ -645,8 +645,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 7.31,
-  "build_s": 14.33,
-  "test_s": 9.6,
+  "build_s": 13.09,
+  "test_s": 9.87,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -673,19 +673,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=ac7da38299fc56ae4818ff1c19b96e4e2d6f36c8 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=ac7da38299fc56ae4818ff1c19b96e4e2d6f36c8 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

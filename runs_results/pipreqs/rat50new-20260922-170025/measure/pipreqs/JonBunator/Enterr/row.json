@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50new-20260922-170025",
+  "agent": "pipreqs",
   "repo": "JonBunator/Enterr",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "own-it-py-4.2.0 mdurl-0.1.2 mouseinfo-0.1.3 mycdp-1.4.0 oauthlib-3.3.1 outcome-1.3.0.post0 parameterized-0.9.0 parse-1.22.2 parse-type-0.6.6 pdbp-1.8.3 pip-26.2.1 psutil-7.2.2 pydantic-2.13.5 pydantic-core-2.46.5 pygetwindow-0.0.9 pymsgbox-2.0.1 pynose-1.5.5 pyotp-2.10.0 pyperclip-1.11.0 pyrect-0.2.0 pyscreeze-1.0.1 pysocks-1.7.1 pytest-8.4.2 pytest-html-4.0.2 pytest-metadata-3.1.1 pytest-ordering-0.6 pytest-rerunfailures-16.3 python-dotenv-1.2.3 python-xlib-0.33 python3-Xlib-0.15 pytweening-1.2.0 pytz-2026.4 requests-2.34.2 requests-oauthlib-2.0.0 rich-15.0.0 sbvirtualdisplay-1.4.0 selenium-4.49.0 seleniumbase-4.54.12 setuptools-84.0.0 six-1.17.0 sniffio-1.3.1 sortedcontainers-2.4.0 soupsieve-2.10 sqlcipher3-0.6.2 starlette-1.7.0 tabcompleter-1.4.1 trio-0.34.0 trio-websocket-0.12.2 typing-inspection-0.4.4 tzlocal-5.4.4 urllib3-2.8.0 uvicorn-0.54.0 websocket-client-1.9.2 websockets-16.1.1 wheel-0.48.0 wsproto-1.3.2\n#11 26.85 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 DONE 29.4s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 15.1s done\n#12 exporting manifest sha256:dfbb7f3ae66983dabced16192c7091200d4bf9beb0731281f63dafa8672fdcf9 done\n#12 exporting config sha256:9d7e90101db30fd31ca003d15ef91f390f8f8e6cdcb7b8c93d836bf02aec9657 done\n#12 exporting attestation manifest sha256:28b657079e57bd3907a2caf35cb26f2e7e5b5fbc7957b47200d3ae703d565ffe 0.0s done\n#12 exporting manifest list sha256:5c4ceb7088a6c44e8b81730f30aa14e22367111fb1ce69799e61c26adfaabc05 done\n#12 naming to docker.io/library/bench-pipreqs__rat50new-20260922-170025-jonbunator-enterr:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-jonbunator-enterr:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50new-20260922-170025-jonbunator-enterr:latest 3.1s done\n#12 DONE 18.3s\n",
+  "build_log_tail": "3.3.1 outcome-1.3.0.post0 parameterized-0.9.0 parse-1.22.2 parse-type-0.6.6 pdbp-1.8.3 pip-26.2.1 platformdirs-4.11.12 psutil-7.2.2 pydantic-2.13.5 pydantic-core-2.46.5 pygetwindow-0.0.9 pymsgbox-2.0.1 pynose-1.5.5 pyotp-2.10.0 pyperclip-1.11.0 pyrect-0.2.0 pyscreeze-1.0.1 pysocks-1.7.1 pytest-8.4.2 pytest-html-4.0.2 pytest-metadata-3.1.1 pytest-ordering-0.6 pytest-rerunfailures-16.3 python-dotenv-1.2.3 python-xlib-0.33 python3-Xlib-0.15 pytweening-1.2.0 pytz-2026.3.post1 requests-2.34.2 requests-oauthlib-2.0.0 rich-15.0.0 sbvirtualdisplay-1.4.0 selenium-4.49.0 seleniumbase-4.54.11 setuptools-84.0.0 six-1.17.0 sniffio-1.3.1 sortedcontainers-2.4.0 soupsieve-2.9.2 sqlcipher3-0.6.2 starlette-1.6.0 tabcompleter-1.4.1 trio-0.34.0 trio-websocket-0.12.2 typing-inspection-0.4.4 tzlocal-5.4.4 urllib3-2.8.0 uvicorn-0.53.0 websocket-client-1.9.2 websockets-16.1.1 wheel-0.48.0 wsproto-1.3.2\n#11 34.04 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 DONE 35.4s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 16.4s done\n#12 exporting manifest sha256:e221d389e50fe302d800756ac67e04ec16caee37595bcdd0251e79cd39731ef9 0.0s done\n#12 exporting config sha256:e392ce75ef61ecfa713afffef7d278bf0c2d26e8e36f18be98b29c81435a4268 0.0s done\n#12 exporting attestation manifest sha256:c5b5b133eb7b6e13e3ab842c9fb494c15cf520ea4507701382aabbb3855b351e 0.0s done\n#12 exporting manifest list sha256:6cf0c225b3b3f4bbf52b3eb043e4d73aaaca375283e0bc10fe9c1b0b8fda2ddd\n#12 exporting manifest list sha256:6cf0c225b3b3f4bbf52b3eb043e4d73aaaca375283e0bc10fe9c1b0b8fda2ddd 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-jonbunator-enterr:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-jonbunator-enterr:latest\n#12 unpacking to docker.io/library/bench-pipreqs-jonbunator-enterr:latest 4.6s done\n#12 DONE 21.2s\n",
   "status": "collect_error",
   "py_test_files": 3,
   "collect_rc": 2,
@@ -16,34 +16,30 @@
   ],
   "collect_error_count": 3,
   "collected_node_ids": [],
-  "executed": true,
-  "total": 3,
+  "executed": false,
+  "total": 0,
   "passed": 0,
   "failed": 0,
-  "errors": 3,
+  "errors": 0,
   "skipped": 0,
   "passed_node_ids": [],
   "failed_node_ids": [],
-  "error_node_ids": [
-    "src.backend.tests.database.test_add_entries",
-    "src.backend.tests.endpoints.test_find_form_automatically",
-    "src.backend.tests.execution.login.test_parser.test_parser"
-  ],
-  "ebsr": true,
+  "error_node_ids": [],
+  "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 511.7,
+  "image_size_mb": 1920.3,
   "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50new-20260922-170025-jonbunator-enterr@sha256:5c4ceb7088a6c44e8b81730f30aa14e22367111fb1ce69799e61c26adfaabc05",
-  "installed_pkg_count": 99,
+  "image_digest": "bench-pipreqs-jonbunator-enterr@sha256:6cf0c225b3b3f4bbf52b3eb043e4d73aaaca375283e0bc10fe9c1b0b8fda2ddd",
+  "installed_pkg_count": 101,
   "tokens_in": null,
   "tokens_out": null,
   "llm_calls": null,
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 4.73,
-  "build_s": 50.86,
-  "test_s": 1.0,
+  "build_s": 60.34,
+  "test_s": 1.07,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -70,19 +66,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=3fa9bee69157e7ec97c7f8c460890e9b398bce88 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=3fa9bee69157e7ec97c7f8c460890e9b398bce88 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

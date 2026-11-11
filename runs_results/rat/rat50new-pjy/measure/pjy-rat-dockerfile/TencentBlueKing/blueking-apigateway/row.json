@@ -1,10 +1,10 @@
 {
-  "agent": "rat__rat50new-pjy",
+  "agent": "pjy-rat-dockerfile",
   "repo": "TencentBlueKing/blueking-apigateway",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "hon-crontab-3.4.0 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 python-editor-1.0.4 python-json-logger-4.2.0 python-redis-lock-4.0.1 raven-6.10.0 readme_renderer-46.0 redis-8.1.0 referencing-0.37.0 requests-2.34.2 requests-toolbelt-1.0.0 responses-0.26.3 rfc3339-validator-0.1.4 rfc3986-2.0.0 rich-15.0.0 rpds-py-0.30.0 ruamel.yaml-0.19.1 six-1.17.0 sortedcontainers-2.4.0 soupsieve-2.9.2 sqlparse-0.6.0 tenacity-9.1.4 toml-0.10.2 tongsuopy-crayon-1.0.2b6 twine-7.0.0 tzdata-2026.4 tzlocal-5.4.4 uritemplate-4.2.0 urllib3-2.8.0 vine-5.1.0 watchdog-6.0.0 wcwidth-0.8.3 whitenoise-6.12.0 wrapt-2.4.1 zipp-4.1.0 zope.event-6.2 zope.interface-8.6\n#19 125.7 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#19 126.0 \n#19 126.0 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#19 126.0 [notice] To update, run: pip install --upgrade pip\n#19 DONE 127.5s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 2.0s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.1s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 16.9s done\n#22 exporting manifest sha256:83ecba2505c7c49ad6bab63f9b233b4dc4cfddd3b203ea17acf15d134ece5673 0.0s done\n#22 exporting config sha256:28fcb098c093881ab62a820fadbf1ced4a0b4d66cfec48bfd13132b76aea6c2f 0.0s done\n#22 exporting attestation manifest sha256:6521f3ffa467a9c6cad2dad56f1dbf7c24654ee78521bf6ee7ea85d2ea8e8a3c 0.0s done\n#22 exporting manifest list sha256:c3f6b9e412554b3027506da6d0102f46e8b3788773072acfe765902f1870445f 0.0s done\n#22 naming to docker.io/library/bench-rat__rat50new-pjy-tencentblueking-blueking-apigateway:latest done\n#22 unpacking to docker.io/library/bench-rat__rat50new-pjy-tencentblueking-blueking-apigateway:latest\n#22 unpacking to docker.io/library/bench-rat__rat50new-pjy-tencentblueking-blueking-apigateway:latest 8.0s done\n#22 DONE 25.1s\n",
+  "build_log_tail": "crontab-3.4.0 python-dateutil-2.9.0.post0 python-dotenv-1.2.3 python-editor-1.0.4 python-json-logger-4.2.0 python-redis-lock-4.0.1 raven-6.10.0 readme_renderer-46.0 redis-8.1.0 referencing-0.37.0 requests-2.34.2 requests-toolbelt-1.0.0 responses-0.26.3 rfc3339-validator-0.1.4 rfc3986-2.0.0 rich-15.0.0 rpds-py-0.30.0 ruamel.yaml-0.19.1 six-1.17.0 sortedcontainers-2.4.0 soupsieve-2.9.2 sqlparse-0.6.0 tenacity-9.1.4 toml-0.10.2 tongsuopy-crayon-1.0.2b6 twine-7.0.0 tzdata-2026.4 tzlocal-5.4.4 uritemplate-4.2.0 urllib3-2.8.0 vine-5.1.0 watchdog-6.0.0 wcwidth-0.8.3 whitenoise-6.12.0 wrapt-2.4.1 zipp-4.1.0 zope.event-6.2 zope.interface-8.6\n#19 285.1 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#19 285.7 \n#19 285.7 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#19 285.7 [notice] To update, run: pip install --upgrade pip\n#19 DONE 287.9s\n\n#20 [16/17] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#20 DONE 2.6s\n\n#21 [17/17] WORKDIR /testbed\n#21 DONE 0.1s\n\n#22 exporting to image\n#22 exporting layers\n#22 exporting layers 12.5s done\n#22 exporting manifest sha256:89473d0df0bb72cb4ac67b13890a990c96e301aa064ff6ad10cbd979ad4eb06d 0.0s done\n#22 exporting config sha256:1cbbc251fed0a6574b83559a267c52cd1c17758d3e4296f96f552af0fe84f4b2 0.0s done\n#22 exporting attestation manifest sha256:cf18ccd36fd2564c9204bb0b587945ada3781c5041ddeadad8638cd1f980f2be 0.0s done\n#22 exporting manifest list sha256:3f775c9ed597e54d86f46f29cb050fb9645cb90f241b5e17f44332f6c8193b99 0.0s done\n#22 naming to docker.io/library/bench-pjy-rat-dockerfile-tencentblueking-blueking-apigateway:latest done\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-tencentblueking-blueking-apigateway:latest\n#22 unpacking to docker.io/library/bench-pjy-rat-dockerfile-tencentblueking-blueking-apigateway:latest 10.3s done\n#22 DONE 22.9s\n",
   "status": "collect_error",
   "py_test_files": 387,
   "collect_rc": 2,
@@ -82,9 +82,9 @@
   "ebsr": true,
   "pass_rate": 0.1842,
   "timed_out": false,
-  "image_size_mb": 209.3,
+  "image_size_mb": 894.3,
   "image_delta_mb": null,
-  "image_digest": "bench-rat__rat50new-pjy-tencentblueking-blueking-apigateway@sha256:c3f6b9e412554b3027506da6d0102f46e8b3788773072acfe765902f1870445f",
+  "image_digest": "bench-pjy-rat-dockerfile-tencentblueking-blueking-apigateway@sha256:3f775c9ed597e54d86f46f29cb050fb9645cb90f241b5e17f44332f6c8193b99",
   "installed_pkg_count": 188,
   "tokens_in": 3936124,
   "tokens_out": 25325,
@@ -92,27 +92,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 166.06,
-  "test_s": 1.93,
+  "build_s": 377.85,
+  "test_s": 2.35,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 3936124,
     "tokens_out": 25325,
-    "llm_calls": 101,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 101
   },
   "error_surface": "",
   "error_surface_reason": "",

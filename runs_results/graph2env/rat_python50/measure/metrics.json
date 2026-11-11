@@ -1,0 +1,129 @@
+{
+  "g2e-rat50": {
+    "n": 50,
+    "n_exec": 42,
+    "n_collect_clean": 42,
+    "n_real_success": 21,
+    "n_unmeasurable": 0,
+    "n_legacy_missing": 0,
+    "EBSR": 0.84,
+    "n_ebsr": 42,
+    "EBSR_repo2run_raw": 0.84,
+    "n_raw": 42,
+    "false_green_removed": 0.0,
+    "status_census": {
+      "executed": 37,
+      "timed_out": 5,
+      "missing": 3,
+      "collect_error": 5
+    },
+    "n_ebsr_zero_collected": 6,
+    "total_collected": 242520,
+    "mean_collected": 4850.4,
+    "total_collect_errors": 829,
+    "mean_collect_errors": 16.58,
+    "real_success": 0.42,
+    "micro": 0.1394,
+    "full_pass_repos": 9,
+    "coverage": 0.84,
+    "ESSR": 0.5489,
+    "ESSR_median": 0.6716,
+    "n_gold_scored": 48,
+    "n_gold_zero": 9,
+    "n_gold_no_row": 0,
+    "gold_no_row": [],
+    "n_gold_capped": 0,
+    "gold_capped": [],
+    "n_gold_excluded": 2,
+    "gold_excluded": [
+      [
+        "checkmk/checkmk",
+        "gold_missing"
+      ],
+      [
+        "mlflow/mlflow",
+        "gold_missing"
+      ]
+    ],
+    "n_gold_sha_mismatch": 0,
+    "gold_sha_mismatch": [],
+    "mean_collection_coverage": 0.7899,
+    "median_collection_coverage": 1.0,
+    "n_gold_hollow": 9,
+    "gold_hollow": [
+      [
+        "beehiveinnovations/pal-mcp-server",
+        0,
+        886,
+        0.0
+      ],
+      [
+        "newfuture/ddns",
+        0,
+        912,
+        0.0
+      ],
+      [
+        "karlicoss/promnesia",
+        0,
+        168,
+        0.0
+      ],
+      [
+        "mvt-project/mvt",
+        0,
+        165,
+        0.0
+      ],
+      [
+        "pycontribs/jira",
+        0,
+        311,
+        0.0
+      ],
+      [
+        "trailofbits/algo",
+        0,
+        129,
+        0.0
+      ],
+      [
+        "mozilla/addons-server",
+        1,
+        9098,
+        0.0001
+      ],
+      [
+        "d4vinci/scrapling",
+        3,
+        768,
+        0.0039
+      ],
+      [
+        "archipelagomw/archipelago",
+        4310,
+        20943,
+        0.2058
+      ]
+    ],
+    "mean_image_delta_mb": null,
+    "mean_installed_pkgs": 82.0,
+    "mean_tokens": 1094925.7872,
+    "mean_tokens_out": 43323.5106,
+    "tokens_per_ebsr": 1225274.0952,
+    "tokens_per_real_success": 2450548.1905,
+    "mean_turns": null,
+    "total_cost_usd": null,
+    "mean_cost_usd": null,
+    "cost_per_ebsr": null,
+    "cost_per_real_success": null,
+    "n_cost_reporting": 0,
+    "mean_produce_s": null,
+    "wall_s_per_real_success": 1299.7814,
+    "n_token_reporting": 47,
+    "rebuild_ok_rate": 0.94,
+    "setup_compile_rate": 0.94,
+    "n_setup_compile": 47,
+    "unreplayed_rate": 0.0
+  }
+}

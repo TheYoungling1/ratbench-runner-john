@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "facebookresearch/hydra",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "py-1.11.0 py-postgresql-1.2.1 pyasn1-0.6.4 pyjwt-2.15.0 pyparsing-3.3.3 pyperclip-1.11.0 pytest-8.4.2 pytest-runner-6.0.1 python-dateutil-2.8.1 python-discovery-1.6.1 python-editor-1.0.4 pytz-2026.4 pyyaml-5.1.2 ray-2.52.1 read_version-0.3.2 redis-8.1.0 referencing-0.37.0 rfc3986-1.5.0 rich-15.0.0 rich-argparse-1.8.0 rpds-py-0.30.0 rq-2.12.0 rsa-4.0 ruamel.yaml-0.16.7 rx-1.6.3 s3transfer-0.19.2 sanic-19.12.2 sanic-compress-0.1.1 sanic-jwt-1.4.0 sanic-plugins-framework-0.9.5 scikit-learn-1.7.2 scipy-1.8.1 singledispatch-3.7.0 six-1.17.0 sniffio-1.3.1 sortedcontainers-2.4.0 sqlalchemy-utils-0.36.1 stevedore-5.8.0 stripe-2.42.0 submitit-1.5.4 sympy-1.14.0 threadpoolctl-3.7.0 torch-2.14.0 tqdm-4.70.1 triton-3.8.0 tzlocal-5.4.4 ujson-6.0.0 urllib3-2.8.0 uvloop-0.22.1 virtualenv-21.12.1 wcwidth-0.9.1 websockets-8.1 yarl-1.25.1\n#11 194.6 \n#11 194.6 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 194.6 [notice] To update, run: pip install --upgrade pip\n#11 DONE 198.3s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 323.9s done\n#12 exporting manifest sha256:c35f53eeb6fc1c96cf3c6b6a2b350577f87746b7809e859e9d5b6b286cb9a30e done\n#12 exporting config sha256:255264aa139ed39d59caa8beef5f62c23143f85cf9bdb42c41e7d0627f1adf09 done\n#12 exporting attestation manifest sha256:7c56862f481078bb224f65f34f3e56b901a0a4f78b73b7c5c2fc298baf0fbd61 done\n#12 exporting manifest list sha256:8e46db981fbcaffeebf61c91931e8cba8efd0488ffb3472be9ec726679ca24d0 done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-facebookresearch-hydra:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-facebookresearch-hydra:latest\n#12 ...\n\n#4 [1/8] FROM docker.io/library/python:3.10@sha256:4379c343a93c87429e0ac3e8e09d073a4ee26084d710ac38b686fa34eed12270\n#4 DONE 0.1s\n\n#12 exporting to image\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-facebookresearch-hydra:latest 48.0s done\n#12 DONE 372.0s\n",
+  "build_log_tail": "0 py-postgresql-1.2.1 pyasn1-0.6.4 pyjwt-2.14.0 pyparsing-3.3.2 pyperclip-1.11.0 pytest-8.4.2 pytest-runner-6.0.1 python-dateutil-2.8.1 python-discovery-1.6.0 python-editor-1.0.4 pytz-2026.3.post1 pyyaml-5.1.2 ray-2.52.1 read_version-0.3.2 redis-8.1.0 referencing-0.37.0 rfc3986-1.5.0 rich-15.0.0 rich-argparse-1.8.0 rpds-py-0.30.0 rq-2.12.0 rsa-4.0 ruamel.yaml-0.16.7 rx-1.6.3 s3transfer-0.19.2 sanic-19.12.2 sanic-compress-0.1.1 sanic-jwt-1.4.0 sanic-plugins-framework-0.9.5 scikit-learn-1.7.2 scipy-1.8.1 singledispatch-3.7.0 six-1.17.0 sniffio-1.3.1 sortedcontainers-2.4.0 sqlalchemy-utils-0.36.1 stevedore-5.8.0 stripe-2.42.0 submitit-1.5.4 sympy-1.14.0 threadpoolctl-3.6.0 torch-2.14.0 tqdm-4.70.1 triton-3.8.0 tzlocal-5.4.4 ujson-6.0.0 urllib3-2.7.0 uvloop-0.22.1 virtualenv-21.7.9 wcwidth-0.8.3 websockets-8.1 yarl-1.24.5\n#11 178.4 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 178.4 \n#11 178.4 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 178.4 [notice] To update, run: pip install --upgrade pip\n#11 DONE 182.1s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 342.9s done\n#12 exporting manifest sha256:d3b763bd001e84980fafba6c85cac2d362a10d91a5ad3e7a21bce47bdc7410ff 0.0s done\n#12 exporting config sha256:dadcfc0229ddf5f383ece082aebaa4150e311e3b4b47c783c54a1428e218c8fe 0.0s done\n#12 exporting attestation manifest sha256:255f5020a62f6f866375e258bdc84dd7197b4da2e0c917ecefbfdfa5d0c69c79 0.0s done\n#12 exporting manifest list sha256:6636afaebb519a5427ec022b53e6f4189252f8d5684d4d379d474467c6c63dd2 0.0s done\n#12 naming to docker.io/library/bench-pipreqs-facebookresearch-hydra:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-facebookresearch-hydra:latest\n#12 unpacking to docker.io/library/bench-pipreqs-facebookresearch-hydra:latest 94.3s done\n#12 DONE 437.3s\n",
   "status": "collect_error",
   "py_test_files": 59,
   "collect_rc": 2,
@@ -245,9 +245,9 @@
   "ebsr": true,
   "pass_rate": 0.6667,
   "timed_out": false,
-  "image_size_mb": 19581.3,
-  "image_delta_mb": 18070.6,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-facebookresearch-hydra@sha256:8e46db981fbcaffeebf61c91931e8cba8efd0488ffb3472be9ec726679ca24d0",
+  "image_size_mb": 7903.4,
+  "image_delta_mb": 7515.8,
+  "image_digest": "bench-pipreqs-facebookresearch-hydra@sha256:6636afaebb519a5427ec022b53e6f4189252f8d5684d4d379d474467c6c63dd2",
   "installed_pkg_count": 170,
   "tokens_in": null,
   "tokens_out": null,
@@ -255,8 +255,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 8.03,
-  "build_s": 593.62,
-  "test_s": 1.76,
+  "build_s": 649.62,
+  "test_s": 1.47,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -283,19 +283,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=2e682d84e789d82dd11ab1f329f2dd1966fa6b54 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=2e682d84e789d82dd11ab1f329f2dd1966fa6b54 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

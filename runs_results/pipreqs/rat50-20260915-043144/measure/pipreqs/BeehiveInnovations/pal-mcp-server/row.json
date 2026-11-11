@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__rat50-20260915-043144",
+  "agent": "pipreqs",
   "repo": "BeehiveInnovations/pal-mcp-server",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "-0.8.0 anyio-4.15.1 attrs-26.1.0 certifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.1 click-8.5.0 cryptography-50.0.1 h11-0.16.0 httpcore-1.0.9 httpcore2-2.13.1 httpx-0.28.1 httpx2-2.13.1 idna-3.20 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 mcp-2.2.0 mcp-types-2.2.0 opentelemetry-api-1.45.0 protobuf-7.36.2 pycparser-3.0 pydantic-2.13.5 pydantic-core-2.46.5 pyjwt-2.15.0 python-dotenv-1.2.3 python-multipart-0.0.32 referencing-0.37.0 regex-2026.9.10 requests-2.34.2 rpds-py-0.30.0 sse-starlette-3.4.11 starlette-1.7.0 tiktoken-0.14.0 toml-0.10.2 truststore-0.10.4 typing-inspection-0.4.4 urllib3-2.8.0 uvicorn-0.54.0\n#11 9.417 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 9.423 \n#11 9.423 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 9.423 [notice] To update, run: pip install --upgrade pip\n#11 DONE 10.2s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 3.0s done\n#12 exporting manifest sha256:64d2efe4411553c240336398bd239fb0fb20d25c233e2fee642a49e13b37d3e5 0.0s done\n#12 exporting config sha256:58e261bfa7a516ec156723140b6ff82d2b384175f8e0cf5d84f76d43c56bb1d1 0.0s done\n#12 exporting attestation manifest sha256:54e28a455fcc61b1ea48ed23506a3752c55251e0ab16a03dfc0510dc3d1edf15 0.0s done\n#12 exporting manifest list sha256:9035828ee153e78515b12e32a86fb9ceabc480485e800d77d43d579f797d68d2 done\n#12 naming to docker.io/library/bench-pipreqs__rat50-20260915-043144-beehiveinnovations-pal-mcp-server:latest\n#12 naming to docker.io/library/bench-pipreqs__rat50-20260915-043144-beehiveinnovations-pal-mcp-server:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-beehiveinnovations-pal-mcp-server:latest\n#12 unpacking to docker.io/library/bench-pipreqs__rat50-20260915-043144-beehiveinnovations-pal-mcp-server:latest 1.2s done\n#12 DONE 4.4s\n",
+  "build_log_tail": "re2, httpcore, cffi, anyio, tiktoken, starlette, mcp-types, jsonschema-specifications, httpx2, httpx, cryptography, sse-starlette, jsonschema, mcp\n#11 7.300 Successfully installed annotated-types-0.8.0 anyio-4.15.1 attrs-26.1.0 certifi-2026.7.22 cffi-2.1.1 charset_normalizer-3.5.1 click-8.5.0 cryptography-50.0.1 h11-0.16.0 httpcore-1.0.9 httpcore2-2.13.0 httpx-0.28.1 httpx2-2.13.0 idna-3.19 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 mcp-2.2.0 mcp-types-2.2.0 opentelemetry-api-1.44.0 protobuf-7.36.1 pycparser-3.0 pydantic-2.13.5 pydantic-core-2.46.5 pyjwt-2.14.0 python-dotenv-1.2.3 python-multipart-0.0.32 referencing-0.37.0 regex-2026.9.10 requests-2.34.2 rpds-py-0.30.0 sse-starlette-3.4.11 starlette-1.6.0 tiktoken-0.14.0 toml-0.10.2 truststore-0.10.4 typing-inspection-0.4.4 urllib3-2.7.0 uvicorn-0.53.0\n#11 7.301 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 7.305 \n#11 7.305 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 7.305 [notice] To update, run: pip install --upgrade pip\n#11 DONE 8.0s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 2.0s done\n#12 exporting manifest sha256:0dcb095c441458e5ee90d16b9ae554e1f068e645023df24b9cda6e29529f7ded done\n#12 exporting config sha256:ddfd589576082188d4c7a9dbbc9a1621ae9877215be5dc555564ec82bdf6b220 done\n#12 exporting attestation manifest sha256:7bc8ca82e3ba28d1968ecd31e25771a0d7d7d4762cf9bd1ef51860fb62eaf2c4 done\n#12 exporting manifest list sha256:9024f3c5adfcdbb29eb7b1d4441491844448357e24c1f066703ede059e4da52d done\n#12 naming to docker.io/library/bench-pipreqs-beehiveinnovations-pal-mcp-server:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-beehiveinnovations-pal-mcp-server:latest\n#12 unpacking to docker.io/library/bench-pipreqs-beehiveinnovations-pal-mcp-server:latest 0.8s done\n#12 DONE 2.8s\n",
   "status": "collect_error",
   "py_test_files": 138,
   "collect_rc": 4,
@@ -26,9 +26,9 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 1660.3,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__rat50-20260915-043144-beehiveinnovations-pal-mcp-server@sha256:9035828ee153e78515b12e32a86fb9ceabc480485e800d77d43d579f797d68d2",
+  "image_size_mb": 432.5,
+  "image_delta_mb": 44.9,
+  "image_digest": "bench-pipreqs-beehiveinnovations-pal-mcp-server@sha256:9024f3c5adfcdbb29eb7b1d4441491844448357e24c1f066703ede059e4da52d",
   "installed_pkg_count": 52,
   "tokens_in": null,
   "tokens_out": null,
@@ -36,8 +36,8 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 8.65,
-  "build_s": 21.95,
-  "test_s": 0.35,
+  "build_s": 15.62,
+  "test_s": 0.41,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -64,19 +64,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=7afc7c1cc96e23992c8f105f960132c657883bb1 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=7afc7c1cc96e23992c8f105f960132c657883bb1 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

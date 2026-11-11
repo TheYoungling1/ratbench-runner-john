@@ -1,10 +1,10 @@
 {
-  "agent": "pipreqs__envbench100-20260915-055253",
+  "agent": "pipreqs",
   "repo": "beeware/briefcase",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "ols_scm->-r /requirements_pipreqs.txt (line 10)) (4.16.0)\n#11 2.172 Collecting mdurl~=0.1\n#11 2.180   Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)\n#11 2.361 Installing collected packages: zipp, vcs-versioning, urllib3, tomli_w, psutil, platformdirs, mdurl, MarkupSafe, mac_alias, idna, charset_normalizer, certifi, setuptools_scm, Requests, markdown-it-py, Jinja2, importlib_metadata, ds_store, rich, dmgbuild\n#11 3.068 Successfully installed Jinja2-3.1.6 MarkupSafe-3.0.3 Requests-2.34.2 certifi-2026.7.22 charset_normalizer-3.5.1 dmgbuild-1.6.7 ds_store-1.3.3 idna-3.20 importlib_metadata-9.0.1 mac_alias-2.2.3 markdown-it-py-4.2.0 mdurl-0.1.2 platformdirs-4.11.15 psutil-7.2.2 rich-15.0.0 setuptools_scm-10.3.4 tomli_w-1.2.0 urllib3-2.8.0 vcs-versioning-2.5.0 zipp-4.1.0\n#11 3.068 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 3.077 \n#11 3.077 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 3.077 [notice] To update, run: pip install --upgrade pip\n#11 DONE 3.2s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 0.9s done\n#12 exporting manifest sha256:80f632dd5cc69bc07b8ca9537fcd0c6979150f8772a4dcec85a97a4b74ff0999 done\n#12 exporting config sha256:f5e9bb5b4468e1e8d9224ecaaff40d77d7e46730d4fe1d1c10830d630e93cc53 done\n#12 exporting attestation manifest sha256:e381dfb73558058e691ea91b7eef79430ef8f642289e4228a9638b7ab1cc4475 0.0s done\n#12 exporting manifest list sha256:01a2542c771284e2b3650b3f38b00d68ab2ef8d68124e6a98d9f5b28ac75d4e3 done\n#12 naming to docker.io/library/bench-pipreqs__envbench100-20260915-055253-beeware-briefcase:latest done\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-beeware-briefcase:latest\n#12 unpacking to docker.io/library/bench-pipreqs__envbench100-20260915-055253-beeware-briefcase:latest 0.9s done\n#12 DONE 2.0s\n",
+  "build_log_tail": "s_scm->-r /requirements_pipreqs.txt (line 10)) (79.0.1)\n#11 2.228 Collecting mdurl~=0.1\n#11 2.234   Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)\n#11 2.410 Installing collected packages: zipp, vcs-versioning, urllib3, tomli_w, psutil, platformdirs, mdurl, MarkupSafe, mac_alias, idna, charset_normalizer, certifi, setuptools_scm, Requests, markdown-it-py, Jinja2, importlib_metadata, ds_store, rich, dmgbuild\n#11 3.111 Successfully installed Jinja2-3.1.6 MarkupSafe-3.0.3 Requests-2.34.2 certifi-2026.7.22 charset_normalizer-3.5.1 dmgbuild-1.6.7 ds_store-1.3.3 idna-3.19 importlib_metadata-9.0.1 mac_alias-2.2.3 markdown-it-py-4.2.0 mdurl-0.1.2 platformdirs-4.11.8 psutil-7.2.2 rich-15.0.0 setuptools_scm-10.3.2 tomli_w-1.2.0 urllib3-2.7.0 vcs-versioning-2.4.0 zipp-4.1.0\n#11 3.111 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv\n#11 3.116 \n#11 3.116 [notice] A new release of pip is available: 23.0.1 -> 26.2.1\n#11 3.116 [notice] To update, run: pip install --upgrade pip\n#11 DONE 3.3s\n\n#12 exporting to image\n#12 exporting layers\n#12 exporting layers 1.0s done\n#12 exporting manifest sha256:1cfb4e94bdf79e1bc7c41174f273db305716a4c38e75d3e9c85df8a62b011b2e\n#12 exporting manifest sha256:1cfb4e94bdf79e1bc7c41174f273db305716a4c38e75d3e9c85df8a62b011b2e done\n#12 exporting config sha256:a405784a53625c5e6f2b029c7ff61a4b41e3f8a36940a0a7b8d8ac30b3e95340 done\n#12 exporting attestation manifest sha256:aa300421bea36ca25a41edb5a4255f2ab18d8c071d3e883f7485563c411a68b9 done\n#12 exporting manifest list sha256:d8129784efa63892bd795f5e1c13300f83d222c3282391491d2d9e7f5d3e4434 done\n#12 naming to docker.io/library/bench-pipreqs-beeware-briefcase:latest done\n#12 unpacking to docker.io/library/bench-pipreqs-beeware-briefcase:latest\n#12 unpacking to docker.io/library/bench-pipreqs-beeware-briefcase:latest 0.7s done\n#12 DONE 1.7s\n",
   "status": "collect_error",
   "py_test_files": 365,
   "collect_rc": 4,
@@ -26,18 +26,18 @@
   "ebsr": false,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 421.6,
-  "image_delta_mb": null,
-  "image_digest": "bench-pipreqs__envbench100-20260915-055253-beeware-briefcase@sha256:01a2542c771284e2b3650b3f38b00d68ab2ef8d68124e6a98d9f5b28ac75d4e3",
-  "installed_pkg_count": 33,
+  "image_size_mb": 421.3,
+  "image_delta_mb": 33.7,
+  "image_digest": "bench-pipreqs-beeware-briefcase@sha256:d8129784efa63892bd795f5e1c13300f83d222c3282391491d2d9e7f5d3e4434",
+  "installed_pkg_count": 34,
   "tokens_in": null,
   "tokens_out": null,
   "llm_calls": null,
   "turns_used": null,
   "cost_usd": null,
   "produce_s": 7.85,
-  "build_s": 9.07,
-  "test_s": 0.28,
+  "build_s": 9.08,
+  "test_s": 0.38,
   "meta": {
     "contract_version": 1,
     "producer": "pipreqs",
@@ -64,19 +64,7 @@
     "usage_source": null,
     "dsml_text_blocks": null,
     "turn_capped": null,
-    "agent_timed_out": null,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=448b58bcf928ae4e933fa342795785fb3211cd17 (pinned)\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=448b58bcf928ae4e933fa342795785fb3211cd17 (pinned)\n"
-      }
-    ]
+    "agent_timed_out": null
   },
   "error_surface": "",
   "error_surface_reason": "",

@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__rat50-pjy",
+  "agent": "pjy-repo2run",
   "repo": "D4Vinci/Scrapling",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "es of LF Projects, LLC.\n#29 0.580 Author-email: \n#29 0.580 License: MIT\n#29 0.580 Location: /usr/local/lib/python3.10/site-packages\n#29 0.580 Requires: anyio, httpx2, jsonschema, mcp-types, opentelemetry-api, pydantic, pyjwt, python-multipart, sse-starlette, starlette, typing-extensions, typing-inspection, uvicorn\n#29 0.580 Required-by: \n#29 DONE 0.7s\n\n#30 [26/30] RUN cd /repo && pip install -q 'mcp>=1.27.0,<2.0.0' 2>&1 | tail -20\n#30 1.469 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable.It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n#30 1.469 \n#30 1.469 [notice] A new release of pip is available: 24.2 -> 26.2.1\n#30 1.469 [notice] To update, run: pip install --upgrade pip\n#30 DONE 1.5s\n\n#31 [27/30] RUN cd /repo && python -c \"from mcp.server.fastmcp import FastMCP; print('fastmcp OK')\"\n#31 0.595 fastmcp OK\n#31 DONE 0.8s\n\n#32 [28/30] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#32 DONE 0.4s\n\n#33 [29/30] WORKDIR /testbed\n#33 DONE 0.0s\n\n#34 exporting to image\n#34 exporting layers\n#34 exporting layers 14.3s done\n#34 exporting manifest sha256:75e6b5c15c459907cc3f0afb8ca4abe7d83c032220097174684c79ad4a6c59c7 done\n#34 exporting config sha256:2f716379aa9231ad1539f5b92266c22761441ee9c734e5e754a3568036d99a65 done\n#34 exporting attestation manifest sha256:cd414d121f313c0e6ff617a21f8761b362fefbee4cae2f53b8bfc65b8704ec29 0.0s done\n#34 exporting manifest list sha256:92f3495649f101ba2a283a6eeefa3340a2edfd2d3f64928215f35a6db6863f0e done\n#34 naming to docker.io/library/bench-repo2run__rat50-pjy-d4vinci-scrapling:latest done\n#34 unpacking to docker.io/library/bench-repo2run__rat50-pjy-d4vinci-scrapling:latest\n#34 unpacking to docker.io/library/bench-repo2run__rat50-pjy-d4vinci-scrapling:latest 6.3s done\n#34 DONE 20.7s\n",
+  "build_log_tail": "ll pytest-xdist==3.8.0\n#20 CACHED\n\n#21 [ 3/30] RUN apt-get update && apt-get install -y curl\n#21 CACHED\n\n#22 [24/30] RUN cd /repo && python -c \"import mcp; print(mcp.__file__)\"\n#22 CACHED\n\n#23 [12/30] RUN cd /repo && f=py; cat /repo/$f\"test.ini\"\n#23 CACHED\n\n#24 [ 4/30] RUN curl -sSL https://install.python-poetry.org | python -\n#24 CACHED\n\n#25 [ 9/30] RUN git config --global --add safe.directory /repo\n#25 CACHED\n\n#26 [ 6/30] RUN python -m pip install --only-binary=:all: pip==24.2\n#26 CACHED\n\n#27 [21/30] RUN pip install scrapy==2.17.0\n#27 CACHED\n\n#28 [26/30] RUN cd /repo && pip install -q 'mcp>=1.27.0,<2.0.0' 2>&1 | tail -20\n#28 CACHED\n\n#29 [ 2/30] COPY patch /patch\n#29 CACHED\n\n#30 [10/30] RUN cd /repo && for attempt in 1 2 3; do git -c http.version=HTTP/1.1 fetch --depth=1 --filter=blob:none origin 8e7bc99ebc05f0e38f7c1426ca6ff861da6cad36 && git checkout --detach FETCH_HEAD && break; git reset --hard; git clean -fdx; [ \"$attempt\" = 3 ] && exit 1; sleep $((attempt * 5)); done\n#30 CACHED\n\n#31 [27/30] RUN cd /repo && python -c \"from mcp.server.fastmcp import FastMCP; print('fastmcp OK')\"\n#31 CACHED\n\n#32 [28/30] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#32 DONE 0.5s\n\n#33 [29/30] WORKDIR /testbed\n#33 DONE 0.0s\n\n#34 exporting to image\n#34 exporting layers\n#34 exporting layers 0.3s done\n#34 exporting manifest sha256:bed9352eef1755e8e470e5509ed405ab85c83886bcf91f76ee0bbf7211c243b7 0.0s done\n#34 exporting config sha256:2919d7b81e1a22ffb5538b8372142bb7ba222cd3e6ce03af4ae596a5e3520d17 done\n#34 exporting attestation manifest sha256:b68f254bc8f514ec6554cb611332500780ed98ff0f651c1fe0789b08bb087c85 0.0s done\n#34 exporting manifest list sha256:76f7debd65466473bead0d89d551915240a4a1b490566157c6d4cf07c2c5c8c6 0.0s done\n#34 naming to docker.io/library/bench-pjy-repo2run-d4vinci-scrapling:latest done\n#34 unpacking to docker.io/library/bench-pjy-repo2run-d4vinci-scrapling:latest\n#34 unpacking to docker.io/library/bench-pjy-repo2run-d4vinci-scrapling:latest 8.6s done\n#34 DONE 9.1s\n",
   "status": "collect_error",
   "py_test_files": 45,
   "collect_rc": 2,
@@ -21,10 +21,10 @@
     "<Function test_proxy_errors_detected[net::err_tunnel_connection_failed]>"
   ],
   "executed": true,
-  "total": 771,
+  "total": 768,
   "passed": 719,
   "failed": 49,
-  "errors": 3,
+  "errors": 0,
   "skipped": 0,
   "passed_node_ids": [
     "tests.ai.test_ai_mcp.TestMCPServer::test_get_tool",
@@ -798,17 +798,13 @@
     "tests.fetchers.sync.test_dynamic.TestDynamicFetcher::test_properties[kwargs3]",
     "tests.fetchers.sync.test_stealth_session.TestStealthySession::test_session_creation"
   ],
-  "error_node_ids": [
-    "agent-skill.Scrapling-Skill.examples.02_dynamic_session",
-    "agent-skill.Scrapling-Skill.examples.03_stealthy_session",
-    "benchmarks"
-  ],
+  "error_node_ids": [],
   "ebsr": true,
-  "pass_rate": 0.9326,
+  "pass_rate": 0.9362,
   "timed_out": false,
-  "image_size_mb": 760.7,
+  "image_size_mb": 2702.8,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__rat50-pjy-d4vinci-scrapling@sha256:92f3495649f101ba2a283a6eeefa3340a2edfd2d3f64928215f35a6db6863f0e",
+  "image_digest": "bench-pjy-repo2run-d4vinci-scrapling@sha256:76f7debd65466473bead0d89d551915240a4a1b490566157c6d4cf07c2c5c8c6",
   "installed_pkg_count": 116,
   "tokens_in": 543716,
   "tokens_out": 14008,
@@ -816,27 +812,15 @@
   "turns_used": null,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 76.51,
-  "test_s": 35.67,
+  "build_s": 10.51,
+  "test_s": 36.64,
   "meta": {
     "status": "produced",
     "language": "python",
     "source": "results_pjy",
     "tokens_in": 543716,
     "tokens_out": 14008,
-    "llm_calls": 25,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\nrestored pytest.ini\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "llm_calls": 25
   },
   "error_surface": "",
   "error_surface_reason": "",

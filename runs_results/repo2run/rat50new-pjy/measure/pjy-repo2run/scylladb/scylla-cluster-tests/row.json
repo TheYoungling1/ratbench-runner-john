@@ -1,10 +1,10 @@
 {
-  "agent": "repo2run__rat50new-pjy",
+  "agent": "pjy-repo2run",
   "repo": "scylladb/scylla-cluster-tests",
   "env_status": "produced",
   "build_ok": true,
   "setup_compile_ok": true,
-  "build_log_tail": "3J0LndoZW4sIHJlcG9ydCkKCkBweXRlc3QuaG9va2ltcGwodHJ5Zmlyc3Q9VHJ1ZSkKZGVmIHB5dGVzdF9ydW50ZXN0X2xvZ3JlcG9ydChyZXBvcnQ6IHB5dGVzdC5UZXN0UmVwb3J0KToKICAgICIiIiIKICAgIEhvb2sgdG8gbG9nIHN1YnRlc3QgZmFpbHVyZXMgYW5kIHRoZWlyIHJlcG9ydHMsCiAgICBzbyBpdCBjYW4gYmUgYWNjZXNzZWQgbGF0ZXIgZHVyaW5nIHRlYXJkb3duIG9yIGluIGZpeHR1cmVzLgogICAgIiIiCiAgICBpZiByZXBvcnQud2hlbiA9PSAiY2FsbCIgYW5kIGdldGF0dHIocmVwb3J0LCAiY29udGV4dCIsIE5vbmUpOgogICAgICAgIGlmIHJlcG9ydC5mYWlsZWQ6CiAgICAgICAgICAgIFNVQlRFU1RTX0ZBSUxVUkVTLnJlcG9ydC5ub2RlaWQuYXBwZW5kKHJlcG9ydCkK' | base64 -d > /repo/conftest.py\n#58 DONE 0.3s\n\n#59 [55/59] RUN perl -i -pe 's/except OSError, KeyError, ValueError, TypeError, yaml\\.YAMLError:/except (OSError, KeyError, ValueError, TypeError, yaml.YAMLError):/' /repo/utils/build_system/create_test_release_jobs.py\n#59 DONE 0.3s\n\n#60 [56/59] RUN perl -i -pe 's/except OSError, KeyError, ValueError, TypeError, ET\\.ParseError:/except (OSError, KeyError, ValueError, TypeError, ET.ParseError):/' /repo/utils/build_system/create_test_release_jobs.py\n#60 DONE 0.3s\n\n#61 [57/59] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#61 DONE 1.5s\n\n#62 [58/59] WORKDIR /testbed\n#62 DONE 0.2s\n\n#63 exporting to image\n#63 exporting layers\n#63 exporting layers 57.6s done\n#63 exporting manifest sha256:69fadf270dbee17c257d5eb465d3864430dc6b247c51ca0eb094962c9f1ec2f5 0.0s done\n#63 exporting config sha256:60605b2c144d7a6e619ee4ba828688e5af55aed9d2e64e2424d3b0fc3d29ac2a 0.0s done\n#63 exporting attestation manifest sha256:6d84cb1cedc38036cee409841d516c13fc8d5ed182f158908082d2611ded7d3d 0.0s done\n#63 exporting manifest list sha256:3e62118c33ff33f41f9af06736561d9f194f1af51626efdc4cc2116a9a77b9ec 0.0s done\n#63 naming to docker.io/library/bench-repo2run__rat50new-pjy-scylladb-scylla-cluster-tests:latest done\n#63 unpacking to docker.io/library/bench-repo2run__rat50new-pjy-scylladb-scylla-cluster-tests:latest\n#63 unpacking to docker.io/library/bench-repo2run__rat50new-pjy-scylladb-scylla-cluster-tests:latest 48.1s done\n#63 DONE 105.9s\n",
+  "build_log_tail": "ICAgIHNldGF0dHIoaXRlbSwgInJlcF8iICsgcmVwb3J0LndoZW4sIHJlcG9ydCkKCkBweXRlc3QuaG9va2ltcGwodHJ5Zmlyc3Q9VHJ1ZSkKZGVmIHB5dGVzdF9ydW50ZXN0X2xvZ3JlcG9ydChyZXBvcnQ6IHB5dGVzdC5UZXN0UmVwb3J0KToKICAgICIiIiIKICAgIEhvb2sgdG8gbG9nIHN1YnRlc3QgZmFpbHVyZXMgYW5kIHRoZWlyIHJlcG9ydHMsCiAgICBzbyBpdCBjYW4gYmUgYWNjZXNzZWQgbGF0ZXIgZHVyaW5nIHRlYXJkb3duIG9yIGluIGZpeHR1cmVzLgogICAgIiIiCiAgICBpZiByZXBvcnQud2hlbiA9PSAiY2FsbCIgYW5kIGdldGF0dHIocmVwb3J0LCAiY29udGV4dCIsIE5vbmUpOgogICAgICAgIGlmIHJlcG9ydC5mYWlsZWQ6CiAgICAgICAgICAgIFNVQlRFU1RTX0ZBSUxVUkVTLnJlcG9ydC5ub2RlaWQuYXBwZW5kKHJlcG9ydCkK' | base64 -d > /repo/conftest.py\n#58 DONE 0.2s\n\n#59 [55/59] RUN perl -i -pe 's/except OSError, KeyError, ValueError, TypeError, yaml\\.YAMLError:/except (OSError, KeyError, ValueError, TypeError, yaml.YAMLError):/' /repo/utils/build_system/create_test_release_jobs.py\n#59 DONE 0.3s\n\n#60 [56/59] RUN perl -i -pe 's/except OSError, KeyError, ValueError, TypeError, ET\\.ParseError:/except (OSError, KeyError, ValueError, TypeError, ET.ParseError):/' /repo/utils/build_system/create_test_release_jobs.py\n#60 DONE 0.2s\n\n#61 [57/59] RUN mv /repo /testbed && ln -sfn /testbed /repo\n#61 DONE 2.1s\n\n#62 [58/59] WORKDIR /testbed\n#62 DONE 0.1s\n\n#63 exporting to image\n#63 exporting layers\n#63 exporting layers 52.6s done\n#63 exporting manifest sha256:0b22122589c304990c052d24ef3c1c1fafeaf624ca2fe161f6a72714e01330fe done\n#63 exporting config sha256:12e65061d0f8182bc2b951858b800085031d92d224feecb8f83ce24342600f57 done\n#63 exporting attestation manifest sha256:c024d0fa88a3db7da83ca65fe1d7e3d21434f6af2abb786b8b2577c87bbfcaee 0.0s done\n#63 exporting manifest list sha256:5296adc66a77840cca04743084b05173288676b6cfefc9ea6a4497d66e3922d8 0.0s done\n#63 naming to docker.io/library/bench-pjy-repo2run-scylladb-scylla-cluster-tests:latest done\n#63 unpacking to docker.io/library/bench-pjy-repo2run-scylladb-scylla-cluster-tests:latest\n#63 unpacking to docker.io/library/bench-pjy-repo2run-scylladb-scylla-cluster-tests:latest 24.1s done\n#63 DONE 76.8s\n",
   "status": "collect_error",
   "py_test_files": 344,
   "collect_rc": 2,
@@ -122,9 +122,9 @@
   "ebsr": true,
   "pass_rate": 0.0,
   "timed_out": false,
-  "image_size_mb": 1283.8,
+  "image_size_mb": 4286.3,
   "image_delta_mb": null,
-  "image_digest": "bench-repo2run__rat50new-pjy-scylladb-scylla-cluster-tests@sha256:3e62118c33ff33f41f9af06736561d9f194f1af51626efdc4cc2116a9a77b9ec",
+  "image_digest": "bench-pjy-repo2run-scylladb-scylla-cluster-tests@sha256:5296adc66a77840cca04743084b05173288676b6cfefc9ea6a4497d66e3922d8",
   "installed_pkg_count": 26,
   "tokens_in": 2391069,
   "tokens_out": 11521,
@@ -132,8 +132,8 @@
   "turns_used": 71,
   "cost_usd": null,
   "produce_s": null,
-  "build_s": 212.58,
-  "test_s": 1.32,
+  "build_s": 188.69,
+  "test_s": 1.66,
   "meta": {
     "status": "produced",
     "language": "python",
@@ -141,19 +141,7 @@
     "tokens_in": 2391069,
     "tokens_out": 11521,
     "llm_calls": null,
-    "turns_used": 71,
-    "pytest_config_restore": [
-      {
-        "stage": "collect",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\nrestored conftest.py\nrestored unit_tests/conftest.py\n"
-      },
-      {
-        "stage": "run",
-        "rc": 0,
-        "log": "REF=HEAD (no_pinned_sha)\n"
-      }
-    ]
+    "turns_used": 71
   },
   "error_surface": "",
   "error_surface_reason": "",
