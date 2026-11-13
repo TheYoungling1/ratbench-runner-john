@@ -1,0 +1,201 @@
+arm,repo,run,status,built_ebsr,gold_tests,passed,failing_tests,labels,label_source,matched,Local service unavailable,Missing configuration or data,External network access,"Missing package, tool, or library",Incompatible package version,Test assertion,Other,OperationalError,RuntimeError
+claudecode,Mirascope/mirascope,envbench100-merged-20260915,executed,True,326,326,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,Modalities/modalities,envbench100-merged-20260915,collect_error,False,118,67,13,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,Quantum-Accelerators/quacc,envbench100-merged-20260915,collect_error,False,335,152,68,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,The-OpenROAD-Project/OpenLane,envbench100-merged-20260915,no_tests_collected,True,79,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,adamchainz/django-mysql,envbench100-merged-20260915,executed,True,739,731,1,labelled,rerun (d7d7fb3 evaluator),1,0,0,0,0,0,0,1,0,0
+claudecode,apiflask/apiflask,envbench100-merged-20260915,executed,True,376,360,16,labelled,rerun (d7d7fb3 evaluator),16,0,0,0,0,12,3,1,0,0
+claudecode,avaiga/taipy-core,envbench100-merged-20260915,executed,True,1241,1095,8,labelled,rerun (d7d7fb3 evaluator),8,0,0,0,0,0,0,8,0,0
+claudecode,basxsoftwareassociation/basxconnect,envbench100-merged-20260915,executed,True,18,15,3,labelled,rerun (d7d7fb3 evaluator),3,0,0,0,0,0,0,3,0,0
+claudecode,beeware/briefcase,envbench100-merged-20260915,executed,True,3062,3021,2,labelled,rerun (d7d7fb3 evaluator),2,0,0,0,0,0,1,1,0,0
+claudecode,benadida/helios-server,envbench100-merged-20260915,executed,True,51,1,50,labelled,rerun (d7d7fb3 evaluator),50,45,5,0,0,0,0,0,45,5
+claudecode,benthayer/git-gud,envbench100-merged-20260915,executed,True,172,157,14,labelled,rerun (d7d7fb3 evaluator),14,0,0,0,0,0,12,2,0,0
+claudecode,biothings/biothings.api,envbench100-merged-20260915,executed,True,313,129,86,labelled,rerun (d7d7fb3 evaluator),86,86,0,0,0,0,0,0,0,0
+claudecode,brightway-lca/brightway2-io,envbench100-merged-20260915,executed,True,199,190,6,labelled,rerun (d7d7fb3 evaluator),6,1,0,0,0,2,3,0,1,0
+claudecode,catalystneuro/roiextractors,envbench100-merged-20260915,executed,True,475,174,301,labelled,rerun (d7d7fb3 evaluator),301,0,0,0,0,47,73,181,0,0
+claudecode,censys/censys-python,envbench100-merged-20260915,executed,True,450,436,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,centre-for-humanities-computing/dacy,envbench100-merged-20260915,executed,True,16,14,2,labelled,rerun (d7d7fb3 evaluator),2,0,0,0,0,0,0,2,0,0
+claudecode,cityofzion/neo3-boa,envbench100-merged-20260915,executed,True,2102,2086,16,labelled,rerun (d7d7fb3 evaluator),16,0,0,0,16,0,0,0,0,0
+claudecode,columnflow/columnflow,envbench100-merged-20260915,executed,True,72,57,15,labelled,rerun (d7d7fb3 evaluator),15,0,0,0,15,0,0,0,0,0
+claudecode,conan-io/conan-package-tools,envbench100-merged-20260915,executed,True,127,116,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,convexengineering/gpkit,envbench100-merged-20260915,executed,True,286,0,2,labelled,rerun (d7d7fb3 evaluator),2,0,0,0,0,0,0,2,0,0
+claudecode,datactive/bigbang,envbench100-merged-20260915,executed,True,73,55,16,labelled,rerun (d7d7fb3 evaluator),16,0,0,3,0,6,1,6,0,0
+claudecode,datamol-io/datamol,envbench100-merged-20260915,executed,True,282,255,26,labelled,rerun (d7d7fb3 evaluator),26,0,0,0,17,1,8,0,0,0
+claudecode,diefenbach/django-lfs,envbench100-merged-20260915,collect_error,False,484,0,4,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,dtmilano/androidviewclient,envbench100-merged-20260915,build_fail,False,320,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,eastsidepreparatoryschool/epschedule,envbench100-merged-20260915,executed,True,13,11,2,labelled,rerun (d7d7fb3 evaluator),2,0,2,0,0,0,0,0,0,0
+claudecode,ecds/readux,envbench100-merged-20260915,build_fail,False,320,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,ellmetha/django-machina,envbench100-merged-20260915,non_conforming,False,462,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,facebookresearch/hydra,envbench100-merged-20260915,executed,True,2615,2089,307,labelled,rerun (d7d7fb3 evaluator),307,0,0,0,0,0,36,271,0,0
+claudecode,fhempy/fhempy,envbench100-merged-20260915,executed,True,81,73,8,labelled,rerun (d7d7fb3 evaluator),8,0,0,0,5,0,0,3,0,0
+claudecode,folio-fse/folio_migration_tools,envbench100-merged-20260915,executed,True,450,322,122,unavailable: rerun did not reproduce the paper failures,,0,0,0,0,0,0,0,0,0,0
+claudecode,fonttools/fontbakery,envbench100-merged-20260915,collect_error,False,918,751,163,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,google/trax,envbench100-merged-20260915,build_fail,False,3492,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,googlecloudplatform/gsutil,envbench100-merged-20260915,timed_out,True,1575,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,guardrails-ai/guardrails,envbench100-merged-20260915,timed_out,True,568,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,gymrek-lab/TRTools,envbench100-merged-20260915,executed,True,233,231,2,labelled,rerun (d7d7fb3 evaluator),2,0,0,0,2,0,0,0,0,0
+claudecode,hhursev/recipe-scrapers,envbench100-merged-20260915,executed,True,184,184,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,ibm/ibmi-bob,envbench100-merged-20260915,executed,True,17,17,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,idaholab/civet,envbench100-merged-20260915,executed,True,462,59,348,labelled,rerun (d7d7fb3 evaluator),348,0,285,0,0,0,7,56,285,0
+claudecode,intake/intake,envbench100-merged-20260915,executed,True,688,525,145,labelled,rerun (d7d7fb3 evaluator),145,0,2,0,87,3,7,46,0,0
+claudecode,iss-mimic/mimic,envbench100-merged-20260915,no_tests_collected,True,3,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,jacebrowning/memegen,envbench100-merged-20260915,build_fail,False,254,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,jackdewinter/pymarkdown,envbench100-merged-20260915,executed,True,6930,6910,14,labelled,rerun (d7d7fb3 evaluator),14,0,0,0,0,0,14,0,0,0
+claudecode,jageo/lobsterpy,envbench100-merged-20260915,executed,True,135,0,1,labelled,rerun (d7d7fb3 evaluator),1,0,0,0,0,0,0,1,0,0
+claudecode,jaraco/keyring,envbench100-merged-20260915,executed,True,242,143,17,labelled,rerun (d7d7fb3 evaluator),17,0,2,0,0,0,14,1,0,0
+claudecode,jazzband/tablib,envbench100-merged-20260915,executed,True,157,157,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,johnsnowlabs/nlu,envbench100-merged-20260915,build_fail,False,252,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,karlicoss/hpi,envbench100-merged-20260915,executed,True,147,96,23,labelled,rerun (d7d7fb3 evaluator),23,0,1,0,0,1,10,11,0,8
+claudecode,lhotse-speech/lhotse,envbench100-merged-20260915,executed,True,1974,1373,368,labelled,rerun (d7d7fb3 evaluator),368,0,0,0,112,0,1,255,0,0
+claudecode,librephotos/librephotos,envbench100-merged-20260915,executed,True,125,10,115,labelled,rerun (d7d7fb3 evaluator),115,113,0,0,0,0,1,1,113,0
+claudecode,lightkurve/lightkurve,envbench100-merged-20260915,build_fail,False,429,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,mad-lab-fau/biopsykit,envbench100-merged-20260915,executed,True,1434,1331,103,labelled,rerun (d7d7fb3 evaluator),103,0,0,0,0,0,2,101,0,0
+claudecode,marimo-team/marimo,envbench100-merged-20260915,executed,True,1087,875,54,labelled,rerun (d7d7fb3 evaluator),54,0,0,1,0,0,45,8,0,0
+claudecode,markqvist/reticulum,envbench100-merged-20260915,no_tests_collected,True,68,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,materialsvirtuallab/monty,envbench100-merged-20260915,executed,True,127,114,5,labelled,rerun (d7d7fb3 evaluator),5,0,0,0,1,0,0,4,0,1
+claudecode,mdolab/openaerostruct,envbench100-merged-20260915,executed,True,182,110,54,labelled,rerun (d7d7fb3 evaluator),54,0,0,0,0,54,0,0,0,0
+claudecode,menpo/menpo,envbench100-merged-20260915,executed,True,819,817,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,microsoft/torchgeo,envbench100-merged-20260915,build_fail,False,2578,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,microsoftgraph/msgraph-sdk-python-core,envbench100-merged-20260915,executed,True,26,25,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,miurahr/aqtinstall,envbench100-merged-20260915,collect_error,False,367,219,84,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,mne-tools/mne-lsl,envbench100-merged-20260915,executed,True,168,114,44,unavailable: rerun did not reproduce the paper failures,,0,0,0,0,0,0,0,0,0,0
+claudecode,mollie/mollie-api-python,envbench100-merged-20260915,executed,True,264,211,106,labelled,rerun (d7d7fb3 evaluator),106,0,0,0,0,0,106,0,0,0
+claudecode,mpmath/mpmath,envbench100-merged-20260915,executed,True,2318,2310,5,labelled,rerun (d7d7fb3 evaluator),5,0,0,0,0,1,1,3,0,0
+claudecode,neurogym/neurogym,envbench100-merged-20260915,collect_error,False,28,25,4,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,nixtla/neuralforecast,envbench100-merged-20260915,build_fail,False,1226,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,numba/llvmlite,envbench100-merged-20260915,build_fail,False,380,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,oarriaga/paz,envbench100-merged-20260915,executed,True,591,385,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,online-ml/river,envbench100-merged-20260915,no_tests_collected,True,3432,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,open-cas/open-cas-linux,envbench100-merged-20260915,collect_error,False,6197,0,61,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,pajbot/pajbot,envbench100-merged-20260915,executed,True,89,89,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,pastas/pastas,envbench100-merged-20260915,executed,True,173,50,123,unavailable: rerun did not reproduce the paper failures,,0,0,0,0,0,0,0,0,0,0
+claudecode,peering-manager/peering-manager,envbench100-merged-20260915,executed,True,882,0,882,labelled,rerun (d7d7fb3 evaluator),882,882,0,0,0,0,0,0,882,0
+claudecode,piccolo-orm/piccolo,envbench100-merged-20260915,executed,True,823,627,5,labelled,rerun (d7d7fb3 evaluator),5,0,0,0,0,0,1,4,0,0
+claudecode,pretalx/pretalx,envbench100-merged-20260915,collect_error,False,1391,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,pypa/distutils,envbench100-merged-20260915,build_fail,False,478,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,pytest-dev/pytest-xdist,envbench100-merged-20260915,executed,True,257,189,2,labelled,rerun (d7d7fb3 evaluator),2,0,0,0,0,0,2,0,0,0
+claudecode,python-control/python-control,envbench100-merged-20260915,executed,True,3625,3173,13,labelled,rerun (d7d7fb3 evaluator),13,0,0,0,0,0,13,0,0,0
+claudecode,python-markdown/markdown,envbench100-merged-20260915,collect_error,False,1149,917,13,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,python-poetry/poetry,envbench100-merged-20260915,executed,True,1695,1383,279,labelled,rerun (d7d7fb3 evaluator),279,0,0,0,0,0,33,246,0,0
+claudecode,qiboteam/qibocal,envbench100-merged-20260915,executed,True,1134,1097,37,labelled,rerun (d7d7fb3 evaluator),37,0,0,0,37,0,0,0,0,0
+claudecode,revoxhere/duino-coin,envbench100-merged-20260915,no_tests_collected,True,130,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,rstcheck/rstcheck,envbench100-merged-20260915,executed,True,62,7,49,labelled,rerun (d7d7fb3 evaluator),49,0,0,0,0,49,0,0,0,0
+claudecode,sassoftware/python-sasctl,envbench100-merged-20260915,executed,True,610,456,32,labelled,rerun (d7d7fb3 evaluator),32,0,0,10,0,7,3,12,0,1
+claudecode,scitools/iris-grib,envbench100-merged-20260915,executed,True,581,446,79,labelled,rerun (d7d7fb3 evaluator),79,0,0,0,0,0,34,45,0,0
+claudecode,scylladb/sphinx-scylladb-theme,envbench100-merged-20260915,executed,True,35,35,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,simplistix/testfixtures,envbench100-merged-20260915,collect_error,False,1467,1462,29,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,skrub-data/skrub,envbench100-merged-20260915,collect_error,False,1571,1007,23,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,spacetelescope/pysiaf,envbench100-merged-20260915,executed,True,32,25,7,labelled,rerun (d7d7fb3 evaluator),7,0,0,0,0,5,0,2,0,0
+claudecode,stan-dev/cmdstanpy,envbench100-merged-20260915,executed,True,286,121,158,labelled,rerun (d7d7fb3 evaluator),158,0,0,0,152,0,2,4,0,1
+claudecode,sublimelinter/sublimelinter,envbench100-merged-20260915,build_fail,False,1642,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,theislab/cellrank,envbench100-merged-20260915,timed_out,True,1151,1026,8,labelled,rerun (d7d7fb3 evaluator),8,0,0,0,0,0,1,7,0,5
+claudecode,timbrel/gitsavvy,envbench100-merged-20260915,collect_error,False,383,1,21,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,ucoproject/uco,envbench100-merged-20260915,executed,True,46,0,43,labelled,rerun (d7d7fb3 evaluator),43,0,5,0,0,0,0,38,0,0
+claudecode,uploadcare/pyuploadcare,envbench100-merged-20260915,executed,True,267,246,21,labelled,rerun (d7d7fb3 evaluator),21,0,0,21,0,0,0,0,0,0
+claudecode,uriyyo/fastapi-pagination,envbench100-merged-20260915,timed_out,True,1732,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,valory-xyz/trader,envbench100-merged-20260915,build_fail,False,18,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,wilcoxjay/mypyvy,envbench100-merged-20260915,executed,True,8,8,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,wireless-innovation-forum/spectrum-access-system,envbench100-merged-20260915,executed,True,369,119,36,labelled,rerun (d7d7fb3 evaluator),36,0,0,0,0,10,4,22,0,0
+claudecode,wpi-lnl/lnldb,envbench100-merged-20260915,build_fail,False,317,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,yourlabs/django-autocomplete-light,envbench100-merged-20260915,collect_error,False,84,36,43,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,zostera/django-bootstrap3,envbench100-merged-20260915,executed,True,64,64,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,AsyncFuncAI/deepwiki-open,rat50new-full-openrouter-20260918-035416,executed,True,109,103,6,labelled,rerun (d7d7fb3 evaluator),6,0,3,0,0,0,0,3,0,0
+claudecode,Azure/azure-iot-ops-cli-extension,rat50new-full-openrouter-20260918-035416,executed,True,7021,6818,115,labelled,rerun (d7d7fb3 evaluator),115,0,0,0,0,0,16,99,0,0
+claudecode,BerriAI/litellm,rat50new-full-openrouter-20260918-035416,collect_error,False,65652,1646,454,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,GoogleCloudPlatform/gcpdiag,rat50new-full-openrouter-20260918-035416,executed,True,1418,1336,82,labelled,rerun (d7d7fb3 evaluator),82,0,0,0,0,0,62,20,0,0
+claudecode,GoogleCloudPlatform/ramble,rat50new-full-openrouter-20260918-035416,executed,True,2885,1895,976,unavailable: rerun did not reproduce the paper failures,,0,0,0,0,0,0,0,0,0,0
+claudecode,IFRCGo/go-api,rat50new-full-openrouter-20260918-035416,executed,True,333,1,332,labelled,rerun (d7d7fb3 evaluator),332,332,0,0,0,0,0,0,332,0
+claudecode,JonBunator/Enterr,rat50new-full-openrouter-20260918-035416,no_tests_collected,True,38,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,MemTensor/MemOS,rat50new-full-openrouter-20260918-035416,executed,True,946,936,6,labelled,rerun (d7d7fb3 evaluator),6,0,0,0,2,0,2,2,0,0
+claudecode,NVIDIA-NeMo/RL,rat50new-full-openrouter-20260918-035416,error,False,2601,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,Nikita-Filonov/ai-review,rat50new-full-openrouter-20260918-035416,executed,True,828,828,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,NikolasMarkou/dl_techniques,rat50new-full-openrouter-20260918-035416,error,False,34754,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,Nitrokey/pynitrokey,rat50new-full-openrouter-20260918-035416,executed,True,190,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,NovaSky-AI/SkyRL,rat50new-full-openrouter-20260918-035416,collect_error,False,2749,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,OpenDCAI/DataFlow,rat50new-full-openrouter-20260918-035416,executed,True,161,155,6,labelled,rerun (d7d7fb3 evaluator),6,0,1,0,0,0,1,4,0,1
+claudecode,TencentBlueKing/bk-lite,rat50new-full-openrouter-20260918-035416,timed_out,True,39652,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,TencentBlueKing/blueking-apigateway,rat50new-full-openrouter-20260918-035416,executed,True,4646,4289,103,labelled,rerun (d7d7fb3 evaluator),103,0,2,0,0,0,18,83,0,0
+claudecode,TencentBlueKing/blueking-dbm,rat50new-full-openrouter-20260918-035416,timed_out,True,3581,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,alliander-opensource/weather-provider-api,rat50new-full-openrouter-20260918-035416,executed,True,129,128,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,anthropics/claude-quickstarts,rat50new-full-openrouter-20260918-035416,no_tests_collected,True,280,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,chopratejas/headroom,rat50new-full-openrouter-20260918-035416,executed,True,13158,12475,2,labelled,rerun (d7d7fb3 evaluator),2,0,0,0,0,0,1,1,0,0
+claudecode,co-me-tokens/CoMe,rat50new-full-openrouter-20260918-035416,build_fail,False,223,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,devopness/devopness,rat50new-full-openrouter-20260918-035416,executed,True,84,84,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,gip-inclusion/les-emplois,rat50new-full-openrouter-20260918-035416,error,False,6099,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,google/nsscache,rat50new-full-openrouter-20260918-035416,error,False,306,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,grycap/im,rat50new-full-openrouter-20260918-035416,executed,True,330,330,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,huggingface/transformers,rat50new-full-openrouter-20260918-035416,timed_out,True,167927,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,insistence/RuoYi-Vue3-FastAPI,rat50new-full-openrouter-20260918-035416,executed,True,1479,1423,55,labelled,rerun (d7d7fb3 evaluator),55,24,0,0,4,0,3,24,0,0
+claudecode,jaehyeon-kim/flink-demos,rat50new-full-openrouter-20260918-035416,executed,True,33,7,26,labelled,rerun (d7d7fb3 evaluator),26,0,0,0,26,0,0,0,0,0
+claudecode,kittinan/spotify-github-profile,rat50new-full-openrouter-20260918-035416,executed,True,134,134,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,m0wer/joinmarket-ng,rat50new-full-openrouter-20260918-035416,collect_error,False,536,534,2,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,meta-pytorch/torchrec,rat50new-full-openrouter-20260918-035416,no_tests_collected,True,3222,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,modelscope/AgentJet,rat50new-full-openrouter-20260918-035416,executed,True,63,24,15,labelled,rerun (d7d7fb3 evaluator),15,0,0,0,3,2,7,3,0,0
+claudecode,netneurolab/netneurotools,rat50new-full-openrouter-20260918-035416,executed,True,205,199,1,labelled,rerun (d7d7fb3 evaluator),1,0,0,0,1,0,0,0,0,0
+claudecode,nomadkaraoke/karaoke-gen,rat50new-full-openrouter-20260918-035416,executed,True,6545,6116,128,labelled,rerun (d7d7fb3 evaluator),128,0,1,0,79,1,9,38,0,13
+claudecode,nutti/fake-bpy-module,rat50new-full-openrouter-20260918-035416,executed,True,126,97,29,labelled,rerun (d7d7fb3 evaluator),29,0,0,0,21,0,1,7,0,0
+claudecode,observatorycontrolsystem/observation-portal,rat50new-full-openrouter-20260918-035416,executed,True,883,0,593,labelled,rerun (d7d7fb3 evaluator),593,593,0,0,0,0,0,0,593,0
+claudecode,onyx-dot-app/onyx,rat50new-full-openrouter-20260918-035416,executed,True,14119,9442,3660,labelled,rerun (d7d7fb3 evaluator),3660,1790,220,3,2,0,102,1543,1560,1538
+claudecode,opengisch/pum,rat50new-full-openrouter-20260918-035416,executed,True,195,54,141,labelled,rerun (d7d7fb3 evaluator),141,141,0,0,0,0,0,0,141,0
+claudecode,pathintegral-institute/mcpm.sh,rat50new-full-openrouter-20260918-035416,executed,True,298,292,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,perplexityai/perplexity-py,rat50new-full-openrouter-20260918-035416,executed,True,806,506,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,resend/resend-python,rat50new-full-openrouter-20260918-035416,executed,True,695,695,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,rfsbraz/deleterr,rat50new-full-openrouter-20260918-035416,executed,True,880,880,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,scylladb/scylla-cluster-tests,rat50new-full-openrouter-20260918-035416,build_fail,False,7451,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,sgl-project/SpecForge,rat50new-full-openrouter-20260918-035416,no_tests_collected,True,1257,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,sgl-project/sglang-jax,rat50new-full-openrouter-20260918-035416,error,False,3557,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,shotgun-sh/shotgun,rat50new-full-openrouter-20260918-035416,executed,True,2503,2284,19,labelled,rerun (d7d7fb3 evaluator),19,0,0,0,0,0,18,1,0,0
+claudecode,tensorflow/model-optimization,rat50new-full-openrouter-20260918-035416,no_tests_collected,True,1725,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,thenewboston-developers/thenewboston-Backend,rat50new-full-openrouter-20260918-035416,executed,True,90,0,90,labelled,rerun (d7d7fb3 evaluator),90,90,0,0,0,0,0,0,90,0
+claudecode,yihong0618/bilingual_book_maker,rat50new-full-openrouter-20260918-035416,executed,True,2294,2255,3,unavailable: rerun did not reproduce the paper failures,,0,0,0,0,0,0,0,0,0,0
+claudecode,zscole/gru,rat50new-full-openrouter-20260918-035416,error,False,773,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,ArchipelagoMW/Archipelago,ratbench50_run-20260904-134239,executed,True,20943,4094,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,Azure/azure-cli,ratbench50_run-20260904-134239,error,False,5796,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,BeehiveInnovations/pal-mcp-server,ratbench50_run-20260904-134239,executed,True,886,870,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,Checkmk/checkmk,ratbench50_run-20260904-134239,build_fail,False,24391,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,Cloud-CV/EvalAI,ratbench50_run-20260904-134239,executed,True,1822,560,1262,unavailable: rerun did not reproduce the paper failures,,0,0,0,0,0,0,0,0,0,0
+claudecode,D4Vinci/Scrapling,ratbench50_run-20260904-134239,build_fail,False,768,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,Donkie/Spoolman,ratbench50_run-20260904-134239,executed,True,223,0,223,labelled,rerun (d7d7fb3 evaluator),223,222,1,0,0,0,0,0,0,1
+claudecode,GoogleCloudPlatform/PerfKitBenchmarker,ratbench50_run-20260904-134239,executed,True,2563,2508,44,unavailable: rerun did not reproduce the paper failures,,0,0,0,0,0,0,0,0,0,0
+claudecode,NewFuture/DDNS,ratbench50_run-20260904-134239,executed,True,912,888,4,labelled,rerun (d7d7fb3 evaluator),4,0,0,0,0,0,4,0,0,0
+claudecode,OpenCTI-Platform/connectors,ratbench50_run-20260904-134239,collect_error,False,9939,3003,305,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,PostHog/posthog,ratbench50_run-20260904-134239,timed_out,False,77642,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,Qiskit/qiskit,ratbench50_run-20260904-134239,timed_out,True,64558,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,aiidateam/aiida-core,ratbench50_run-20260904-134239,executed,True,3741,1617,2088,unavailable: rerun did not reproduce the paper failures,,0,0,0,0,0,0,0,0,0,0
+claudecode,anthropics/anthropic-sdk-python,ratbench50_run-20260904-134239,executed,True,4217,1789,1839,labelled,rerun (d7d7fb3 evaluator),1839,0,0,1448,0,0,0,391,0,0
+claudecode,baserow/baserow,ratbench50_run-20260904-134239,executed,True,11730,131,11270,labelled,rerun (d7d7fb3 evaluator),11265,11265,0,0,0,0,0,0,11265,0
+claudecode,bruin-data/ingestr,ratbench50_run-20260904-134239,executed,True,19,19,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,coderamp-labs/gitingest,ratbench50_run-20260904-134239,executed,True,160,155,5,unavailable: rerun did not reproduce the paper failures,,0,0,0,0,0,0,0,0,0,0
+claudecode,containers/podman-compose,ratbench50_run-20260904-134239,collect_error,False,736,440,72,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,copier-org/copier,ratbench50_run-20260904-134239,executed,True,1148,1136,2,labelled,rerun (d7d7fb3 evaluator),2,0,0,0,0,0,1,1,0,0
+claudecode,crystaldba/postgres-mcp,ratbench50_run-20260904-134239,executed,True,216,167,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,crytic/slither,ratbench50_run-20260904-134239,executed,True,7296,7273,2,labelled,rerun (d7d7fb3 evaluator),2,0,0,0,2,0,0,0,0,0
+claudecode,django-oauth/django-oauth-toolkit,ratbench50_run-20260904-134239,executed,True,557,149,407,labelled,rerun (d7d7fb3 evaluator),407,0,0,0,0,0,0,407,0,0
+claudecode,fastapi/typer,ratbench50_run-20260904-134239,executed,True,1379,938,411,labelled,rerun (d7d7fb3 evaluator),411,0,0,0,0,0,407,4,0,0
+claudecode,feast-dev/feast,ratbench50_run-20260904-134239,build_fail,False,2644,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,frappe/press,ratbench50_run-20260904-134239,collect_error,False,846,10,852,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,hitsz-ids/synthetic-data-generator,ratbench50_run-20260904-134239,executed,True,177,165,8,labelled,rerun (d7d7fb3 evaluator),8,0,0,0,0,0,8,0,0,0
+claudecode,idank/explainshell,ratbench50_run-20260904-134239,executed,True,559,557,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,jhao104/proxy_pool,ratbench50_run-20260904-134239,executed,True,248,248,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,karlicoss/promnesia,ratbench50_run-20260904-134239,collect_error,False,168,87,72,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,mckinsey/vizro,ratbench50_run-20260904-134239,collect_error,False,2500,449,223,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,microsoft/markitdown,ratbench50_run-20260904-134239,executed,True,374,368,2,labelled,rerun (d7d7fb3 evaluator),2,0,0,0,1,0,1,0,0,0
+claudecode,mlflow/mlflow,ratbench50_run-20260904-134239,collect_error,False,21221,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,mozilla/addons-server,ratbench50_run-20260904-134239,build_fail,False,9098,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,mvt-project/mvt,ratbench50_run-20260904-134239,executed,True,165,164,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,nginx-proxy/nginx-proxy,ratbench50_run-20260904-134239,collect_error,False,469,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,polarsource/polar,ratbench50_run-20260904-134239,build_fail,False,5749,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,pre-commit/pre-commit,ratbench50_run-20260904-134239,executed,True,820,760,56,labelled,rerun (d7d7fb3 evaluator),56,0,0,0,11,0,16,29,0,0
+claudecode,pretix/pretix,ratbench50_run-20260904-134239,build_fail,False,5995,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,pycontribs/jira,ratbench50_run-20260904-134239,executed,True,311,11,154,labelled,rerun (d7d7fb3 evaluator),154,0,0,0,0,0,154,0,0,0
+claudecode,python-websockets/websockets,ratbench50_run-20260904-134239,executed,True,2248,2172,1,labelled,rerun (d7d7fb3 evaluator),1,0,0,0,0,0,1,0,0,0
+claudecode,rq/rq,ratbench50_run-20260904-134239,timed_out,True,690,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,sooperset/mcp-atlassian,ratbench50_run-20260904-134239,executed,True,2741,2580,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,supabase/supabase-py,ratbench50_run-20260904-134239,collect_error,False,753,57,150,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,testcontainers/testcontainers-python,ratbench50_run-20260904-134239,executed,True,731,375,353,labelled,rerun (d7d7fb3 evaluator),352,322,0,0,29,0,1,0,0,0
+claudecode,tgoai/tgo,ratbench50_run-20260904-134239,executed,True,102,39,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+claudecode,tinygrad/tinygrad,ratbench50_run-20260904-134239,timed_out,False,5476,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,trailofbits/algo,ratbench50_run-20260904-134239,executed,True,129,115,4,labelled,rerun (d7d7fb3 evaluator),4,0,0,0,4,0,0,0,0,0
+claudecode,unit8co/darts,ratbench50_run-20260904-134239,executed,True,10915,8308,86,unavailable: rerun did not reproduce the paper failures,,0,0,0,0,0,0,0,0,0,0
+claudecode,wecode-ai/Wegent,ratbench50_run-20260904-134239,build_fail,False,5050,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+claudecode,xuwei95/ezdata,ratbench50_run-20260904-134239,collect_error,False,291,260,25,n/a: not built,,0,0,0,0,0,0,0,0,0,0

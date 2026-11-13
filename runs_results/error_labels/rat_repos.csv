@@ -1,0 +1,194 @@
+arm,repo,run,status,built_ebsr,gold_tests,passed,failing_tests,labels,label_source,matched,Local service unavailable,Missing configuration or data,External network access,"Missing package, tool, or library",Incompatible package version,Test assertion,Other,OperationalError,RuntimeError
+rat,Mirascope/mirascope,envbench100-pjy,executed,True,326,326,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,Modalities/modalities,envbench100-pjy,build_fail,False,118,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,Quantum-Accelerators/quacc,envbench100-pjy,collect_error,False,335,219,1,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,The-OpenROAD-Project/OpenLane,envbench100-pjy,no_tests_collected,True,79,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,adamchainz/django-mysql,envbench100-pjy,executed,True,739,0,735,labelled,rerun (Sep 24 evaluator),735,735,0,0,0,0,0,0,735,0
+rat,apiflask/apiflask,envbench100-pjy,executed,True,376,376,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,avaiga/taipy-core,envbench100-pjy,executed,True,1241,1103,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,basxsoftwareassociation/basxconnect,envbench100-pjy,collect_error,False,18,0,1,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,beeware/briefcase,envbench100-pjy,executed,True,3062,3021,2,labelled,method's own test run,2,0,0,0,0,0,1,1,0,0
+rat,benadida/helios-server,envbench100-pjy,no_tests_collected,True,51,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,benthayer/git-gud,envbench100-pjy,executed,True,172,157,14,labelled,method's own test run,14,0,0,0,0,0,12,2,0,0
+rat,biothings/biothings.api,envbench100-pjy,collect_error,False,313,119,88,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,brightway-lca/brightway2-io,envbench100-pjy,executed,True,199,196,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,catalystneuro/roiextractors,envbench100-pjy,build_fail,False,475,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,censys/censys-python,envbench100-pjy,executed,True,450,436,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,centre-for-humanities-computing/dacy,envbench100-pjy,executed,True,16,16,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,cityofzion/neo3-boa,envbench100-pjy,executed,True,2102,2086,16,labelled,method's own test run,16,0,0,0,16,0,0,0,0,0
+rat,columnflow/columnflow,envbench100-pjy,collect_error,False,72,0,5,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,conan-io/conan-package-tools,envbench100-pjy,executed,True,127,116,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,convexengineering/gpkit,envbench100-pjy,executed,True,286,0,2,labelled,method's own test run,2,0,0,0,0,0,0,2,0,0
+rat,datactive/bigbang,envbench100-pjy,executed,True,73,68,3,labelled,method's own test run,3,0,0,3,0,0,0,0,0,0
+rat,datamol-io/datamol,envbench100-pjy,executed,True,282,281,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,diefenbach/django-lfs,envbench100-pjy,collect_error,False,484,0,4,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,dtmilano/androidviewclient,envbench100-pjy,executed,True,320,0,22,labelled,method's own test run,22,0,21,0,0,0,0,1,0,0
+rat,eastsidepreparatoryschool/epschedule,envbench100-pjy,executed,True,13,11,2,labelled,method's own test run,2,0,2,0,0,0,0,0,0,0
+rat,ecds/readux,envbench100-pjy,build_fail,False,320,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,ellmetha/django-machina,envbench100-pjy,build_fail,False,462,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,facebookresearch/hydra,envbench100-pjy,build_fail,False,2615,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,fhempy/fhempy,envbench100-pjy,executed,True,81,76,5,labelled,method's own test run,5,0,0,0,1,0,1,3,0,0
+rat,folio-fse/folio_migration_tools,envbench100-pjy,executed,True,450,305,139,labelled,method's own test run,139,0,0,128,0,0,0,11,0,0
+rat,fonttools/fontbakery,envbench100-pjy,collect_error,False,918,911,3,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,google/trax,envbench100-pjy,missing,False,3492,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,googlecloudplatform/gsutil,envbench100-pjy,collect_error,False,1575,0,83,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,guardrails-ai/guardrails,envbench100-pjy,build_fail,False,568,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,gymrek-lab/TRTools,envbench100-pjy,executed,True,233,233,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,hhursev/recipe-scrapers,envbench100-pjy,executed,True,184,184,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,ibm/ibmi-bob,envbench100-pjy,executed,True,17,17,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,idaholab/civet,envbench100-pjy,collect_error,False,462,0,54,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,intake/intake,envbench100-pjy,executed,True,688,578,96,labelled,method's own test run,96,0,5,0,3,4,12,72,0,0
+rat,iss-mimic/mimic,envbench100-pjy,collect_error,False,3,0,3,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,jacebrowning/memegen,envbench100-pjy,executed,True,254,251,1,labelled,method's own test run,1,0,0,0,0,0,1,0,0,0
+rat,jackdewinter/pymarkdown,envbench100-pjy,executed,True,6930,6924,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,jageo/lobsterpy,envbench100-pjy,executed,True,135,134,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,jaraco/keyring,envbench100-pjy,executed,True,242,143,17,labelled,rerun (Sep 24 evaluator),17,0,4,0,0,0,12,1,0,0
+rat,jazzband/tablib,envbench100-pjy,executed,True,157,157,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,johnsnowlabs/nlu,envbench100-pjy,collect_error,False,252,0,2,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,karlicoss/hpi,envbench100-pjy,build_fail,False,147,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,lhotse-speech/lhotse,envbench100-pjy,build_fail,False,1974,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,librephotos/librephotos,envbench100-pjy,collect_error,False,125,4,27,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,lightkurve/lightkurve,envbench100-pjy,executed,True,429,262,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,mad-lab-fau/biopsykit,envbench100-pjy,executed,True,1434,1434,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,marimo-team/marimo,envbench100-pjy,collect_error,False,1087,0,1,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,markqvist/reticulum,envbench100-pjy,no_tests_collected,True,68,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,materialsvirtuallab/monty,envbench100-pjy,executed,True,127,126,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,mdolab/openaerostruct,envbench100-pjy,build_fail,False,182,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,menpo/menpo,envbench100-pjy,executed,True,819,798,19,labelled,rerun (Sep 24 evaluator),19,0,0,0,0,19,0,0,0,0
+rat,microsoft/torchgeo,envbench100-pjy,no_tests_collected,True,2578,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,microsoftgraph/msgraph-sdk-python-core,envbench100-pjy,executed,True,26,26,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,miurahr/aqtinstall,envbench100-pjy,executed,True,367,366,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,mne-tools/mne-lsl,envbench100-pjy,build_fail,False,168,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,mollie/mollie-api-python,envbench100-pjy,executed,True,264,211,106,labelled,method's own test run,106,0,0,0,0,0,106,0,0,0
+rat,mpmath/mpmath,envbench100-pjy,executed,True,2318,2315,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,neurogym/neurogym,envbench100-pjy,collect_error,False,28,25,4,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,nixtla/neuralforecast,envbench100-pjy,build_fail,False,1226,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,numba/llvmlite,envbench100-pjy,collect_error,False,380,0,1,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,oarriaga/paz,envbench100-pjy,timed_out,False,591,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,online-ml/river,envbench100-pjy,collect_error,False,3432,1,435,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,open-cas/open-cas-linux,envbench100-pjy,collect_error,False,6197,0,61,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,pajbot/pajbot,envbench100-pjy,executed,True,89,89,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,pastas/pastas,envbench100-pjy,executed,True,173,170,3,unavailable: rerun did not reproduce the paper failures,,0,0,0,0,0,0,0,0,0,0
+rat,peering-manager/peering-manager,envbench100-pjy,collect_error,False,882,0,50,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,piccolo-orm/piccolo,envbench100-pjy,collect_error,False,823,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,pretalx/pretalx,envbench100-pjy,collect_error,False,1391,0,1,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,pypa/distutils,envbench100-pjy,build_fail,False,478,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,pytest-dev/pytest-xdist,envbench100-pjy,executed,True,257,192,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,python-control/python-control,envbench100-pjy,executed,True,3625,3185,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,python-markdown/markdown,envbench100-pjy,collect_error,False,1149,1005,13,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,python-poetry/poetry,envbench100-pjy,executed,True,1695,1662,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,qiboteam/qibocal,envbench100-pjy,executed,True,1134,1134,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,revoxhere/duino-coin,envbench100-pjy,no_tests_collected,True,130,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,rstcheck/rstcheck,envbench100-pjy,executed,True,62,58,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,sassoftware/python-sasctl,envbench100-pjy,executed,True,610,561,2,labelled,method's own test run,2,0,0,0,0,1,1,0,0,0
+rat,scitools/iris-grib,envbench100-pjy,executed,True,581,482,43,labelled,method's own test run,43,0,0,0,0,0,1,42,0,0
+rat,scylladb/sphinx-scylladb-theme,envbench100-pjy,build_fail,False,35,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,simplistix/testfixtures,envbench100-pjy,executed,True,1467,1458,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,skrub-data/skrub,envbench100-pjy,collect_error,False,1571,0,9,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,spacetelescope/pysiaf,envbench100-pjy,executed,True,32,30,2,labelled,method's own test run,2,0,0,0,0,0,0,2,0,0
+rat,stan-dev/cmdstanpy,envbench100-pjy,executed,True,286,121,158,labelled,method's own test run,158,0,0,0,152,0,2,4,0,1
+rat,sublimelinter/sublimelinter,envbench100-pjy,collect_error,False,1642,0,17,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,theislab/cellrank,envbench100-pjy,collect_error,False,1151,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,timbrel/gitsavvy,envbench100-pjy,collect_error,False,383,1,21,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,ucoproject/uco,envbench100-pjy,executed,True,46,0,43,labelled,method's own test run,43,0,5,0,0,0,0,38,0,0
+rat,uploadcare/pyuploadcare,envbench100-pjy,executed,True,267,246,21,labelled,method's own test run,21,0,0,21,0,0,0,0,0,0
+rat,uriyyo/fastapi-pagination,envbench100-pjy,build_fail,False,1732,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,valory-xyz/trader,envbench100-pjy,collect_error,False,18,0,1,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,wilcoxjay/mypyvy,envbench100-pjy,no_tests_collected,True,8,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,wireless-innovation-forum/spectrum-access-system,envbench100-pjy,collect_error,False,369,3,32,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,wpi-lnl/lnldb,envbench100-pjy,build_fail,False,317,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,yourlabs/django-autocomplete-light,envbench100-pjy,build_fail,False,84,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,zostera/django-bootstrap3,envbench100-pjy,collect_error,False,64,0,4,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,ArchipelagoMW/Archipelago,rat50-pjy,executed,True,20943,4094,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,Azure/azure-cli,rat50-pjy,build_fail,False,5796,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,BeehiveInnovations/pal-mcp-server,rat50-pjy,executed,True,886,870,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,Checkmk/checkmk,rat50-pjy,collect_error,False,24391,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,Cloud-CV/EvalAI,rat50-pjy,collect_error,False,1822,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,D4Vinci/Scrapling,rat50-pjy,collect_error,False,768,719,52,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,Donkie/Spoolman,rat50-pjy,collect_error,False,223,0,1,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,GoogleCloudPlatform/PerfKitBenchmarker,rat50-pjy,collect_error,False,2563,2510,44,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,NewFuture/DDNS,rat50-pjy,executed,True,912,888,4,labelled,method's own test run,4,0,0,0,0,0,4,0,0,0
+rat,OpenCTI-Platform/connectors,rat50-pjy,collect_error,False,9939,1512,375,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,PostHog/posthog,rat50-pjy,collect_error,False,77642,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,Qiskit/qiskit,rat50-pjy,timed_out,False,64558,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,aiidateam/aiida-core,rat50-pjy,executed,True,3741,1656,2051,unavailable: rerun did not reproduce the paper failures,,0,0,0,0,0,0,0,0,0,0
+rat,anthropics/anthropic-sdk-python,rat50-pjy,executed,True,4217,1779,1810,labelled,method's own test run,1810,0,0,1448,0,0,0,362,0,0
+rat,baserow/baserow,rat50-pjy,collect_error,False,11730,0,6,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,bruin-data/ingestr,rat50-pjy,executed,True,19,19,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,coderamp-labs/gitingest,rat50-pjy,executed,True,160,157,3,labelled,method's own test run,3,0,0,2,0,0,0,1,0,0
+rat,containers/podman-compose,rat50-pjy,collect_error,False,736,440,72,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,copier-org/copier,rat50-pjy,executed,True,1148,1138,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,crystaldba/postgres-mcp,rat50-pjy,executed,True,216,167,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,crytic/slither,rat50-pjy,executed,True,7296,7273,2,labelled,method's own test run,2,0,0,0,2,0,0,0,0,0
+rat,django-oauth/django-oauth-toolkit,rat50-pjy,collect_error,False,557,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,fastapi/typer,rat50-pjy,executed,True,1379,1344,5,labelled,method's own test run,5,0,0,0,0,0,5,0,0,0
+rat,feast-dev/feast,rat50-pjy,build_fail,False,2644,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,frappe/press,rat50-pjy,missing,False,846,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,hitsz-ids/synthetic-data-generator,rat50-pjy,executed,True,177,125,49,labelled,method's own test run,49,0,0,0,0,0,3,46,0,0
+rat,idank/explainshell,rat50-pjy,executed,True,559,557,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,jhao104/proxy_pool,rat50-pjy,executed,True,248,248,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,karlicoss/promnesia,rat50-pjy,collect_error,False,168,87,72,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,mckinsey/vizro,rat50-pjy,collect_error,False,2500,604,68,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,microsoft/markitdown,rat50-pjy,collect_error,False,374,331,6,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,mlflow/mlflow,rat50-pjy,missing,False,21221,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,mozilla/addons-server,rat50-pjy,collect_error,False,9098,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,mvt-project/mvt,rat50-pjy,executed,True,165,164,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,nginx-proxy/nginx-proxy,rat50-pjy,collect_error,False,469,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,polarsource/polar,rat50-pjy,collect_error,False,5749,34,4,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,pre-commit/pre-commit,rat50-pjy,executed,True,820,753,63,labelled,method's own test run,63,0,0,0,11,0,15,37,0,0
+rat,pretix/pretix,rat50-pjy,collect_error,False,5995,0,461,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,pycontribs/jira,rat50-pjy,executed,True,311,11,154,labelled,method's own test run,154,0,0,0,0,0,154,0,0,0
+rat,python-websockets/websockets,rat50-pjy,timed_out,False,2248,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,rq/rq,rat50-pjy,collect_error,False,690,1,461,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,sooperset/mcp-atlassian,rat50-pjy,executed,True,2741,2580,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,supabase/supabase-py,rat50-pjy,collect_error,False,753,57,150,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,testcontainers/testcontainers-python,rat50-pjy,executed,True,731,375,353,labelled,method's own test run,352,322,0,0,29,0,1,0,0,0
+rat,tgoai/tgo,rat50-pjy,collect_error,False,102,44,7,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,tinygrad/tinygrad,rat50-pjy,collect_error,False,5476,3777,41,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,trailofbits/algo,rat50-pjy,executed,True,129,119,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,unit8co/darts,rat50-pjy,executed,True,10915,8390,4,labelled,method's own test run,4,0,0,0,0,0,1,3,0,0
+rat,wecode-ai/Wegent,rat50-pjy,build_fail,False,5050,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,xuwei95/ezdata,rat50-pjy,collect_error,False,291,150,46,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,AsyncFuncAI/deepwiki-open,rat50new-pjy,build_fail,False,109,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,Azure/azure-iot-ops-cli-extension,rat50new-pjy,executed,True,7021,6818,115,labelled,rerun (Sep 24 evaluator),115,0,0,0,0,0,16,99,0,0
+rat,BerriAI/litellm,rat50new-pjy,build_fail,False,65652,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,GoogleCloudPlatform/gcpdiag,rat50new-pjy,executed,True,1418,1336,82,labelled,rerun (Sep 24 evaluator),82,0,0,0,0,0,62,20,0,0
+rat,GoogleCloudPlatform/ramble,rat50new-pjy,collect_error,False,2885,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,IFRCGo/go-api,rat50new-pjy,collect_error,False,333,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,JonBunator/Enterr,rat50new-pjy,collect_error,False,38,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,MemTensor/MemOS,rat50new-pjy,executed,True,946,942,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,NVIDIA-NeMo/RL,rat50new-pjy,collect_error,False,2601,0,1,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,Nikita-Filonov/ai-review,rat50new-pjy,collect_error,False,828,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,NikolasMarkou/dl_techniques,rat50new-pjy,build_fail,False,34754,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,Nitrokey/pynitrokey,rat50new-pjy,executed,True,190,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,NovaSky-AI/SkyRL,rat50new-pjy,collect_error,False,2749,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,OpenDCAI/DataFlow,rat50new-pjy,build_fail,False,161,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,TencentBlueKing/bk-lite,rat50new-pjy,missing,False,39652,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,TencentBlueKing/blueking-apigateway,rat50new-pjy,collect_error,False,4646,7,31,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,TencentBlueKing/blueking-dbm,rat50new-pjy,collect_error,False,3581,0,10,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,alliander-opensource/weather-provider-api,rat50new-pjy,collect_error,False,129,111,3,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,anthropics/claude-quickstarts,rat50new-pjy,timed_out,False,280,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,chopratejas/headroom,rat50new-pjy,collect_error,False,13158,67,872,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,co-me-tokens/CoMe,rat50new-pjy,collect_error,False,223,43,7,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,devopness/devopness,rat50new-pjy,build_fail,False,84,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,gip-inclusion/les-emplois,rat50new-pjy,collect_error,False,6099,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,google/nsscache,rat50new-pjy,build_fail,False,306,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,grycap/im,rat50new-pjy,collect_error,False,330,330,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,huggingface/transformers,rat50new-pjy,timed_out,True,167927,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,insistence/RuoYi-Vue3-FastAPI,rat50new-pjy,collect_error,False,1479,0,22,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,jaehyeon-kim/flink-demos,rat50new-pjy,collect_error,False,33,3,19,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,kittinan/spotify-github-profile,rat50new-pjy,collect_error,False,134,65,33,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,m0wer/joinmarket-ng,rat50new-pjy,collect_error,False,536,532,8,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,meta-pytorch/torchrec,rat50new-pjy,build_fail,False,3222,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,modelscope/AgentJet,rat50new-pjy,collect_error,False,63,24,18,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,netneurolab/netneurotools,rat50new-pjy,executed,True,205,200,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,nomadkaraoke/karaoke-gen,rat50new-pjy,build_fail,False,6545,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,nutti/fake-bpy-module,rat50new-pjy,collect_error,False,126,0,5,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,observatorycontrolsystem/observation-portal,rat50new-pjy,collect_error,False,883,0,21,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,onyx-dot-app/onyx,rat50new-pjy,missing,False,14119,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,opengisch/pum,rat50new-pjy,executed,True,195,54,141,labelled,rerun (Sep 24 evaluator),141,141,0,0,0,0,0,0,141,0
+rat,pathintegral-institute/mcpm.sh,rat50new-pjy,build_fail,False,298,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,perplexityai/perplexity-py,rat50new-pjy,build_fail,False,806,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+rat,resend/resend-python,rat50new-pjy,executed,True,695,695,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,rfsbraz/deleterr,rat50new-pjy,executed,True,880,880,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+rat,scylladb/scylla-cluster-tests,rat50new-pjy,collect_error,False,7451,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0

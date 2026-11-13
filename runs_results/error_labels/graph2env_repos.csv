@@ -1,0 +1,201 @@
+arm,repo,run,status,built_ebsr,gold_tests,passed,failing_tests,labels,label_source,matched,Local service unavailable,Missing configuration or data,External network access,"Missing package, tool, or library",Incompatible package version,Test assertion,Other,OperationalError,RuntimeError
+graph2env,Mirascope/mirascope,envbench_python100,executed,True,326,326,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,Modalities/modalities,envbench_python100,executed,True,118,85,13,excluded: 1/13 failing tests not found in JUnit,method's own test run,12,0,0,0,0,0,3,9,0,0
+graph2env,Quantum-Accelerators/quacc,envbench_python100,collect_error,False,335,152,68,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,The-OpenROAD-Project/OpenLane,envbench_python100,no_tests_collected,True,79,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,adamchainz/django-mysql,envbench_python100,executed,True,739,732,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,apiflask/apiflask,envbench_python100,executed,True,376,373,3,labelled,method's own test run,3,0,0,0,0,0,3,0,0,0
+graph2env,avaiga/taipy-core,envbench_python100,executed,True,1241,1103,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,basxsoftwareassociation/basxconnect,envbench_python100,executed,True,18,15,3,excluded: 3/3 failing tests not found in JUnit,method's own test run,0,0,0,0,0,0,0,0,0,0
+graph2env,beeware/briefcase,envbench_python100,executed,True,3062,3022,1,labelled,method's own test run,1,0,0,0,0,0,1,0,0,0
+graph2env,benadida/helios-server,envbench_python100,executed,True,51,23,28,labelled,method's own test run,28,0,27,0,0,0,0,1,0,5
+graph2env,benthayer/git-gud,envbench_python100,executed,True,172,157,14,labelled,method's own test run,14,0,0,0,0,0,12,2,0,0
+graph2env,biothings/biothings.api,envbench_python100,executed,True,313,129,86,labelled,method's own test run,86,86,0,0,0,0,0,0,0,0
+graph2env,brightway-lca/brightway2-io,envbench_python100,executed,True,199,190,6,labelled,method's own test run,6,1,0,0,0,2,3,0,1,0
+graph2env,catalystneuro/roiextractors,envbench_python100,executed,True,475,463,12,labelled,method's own test run,12,0,0,0,0,0,2,10,0,0
+graph2env,censys/censys-python,envbench_python100,executed,True,450,436,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,centre-for-humanities-computing/dacy,envbench_python100,executed,True,16,16,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,cityofzion/neo3-boa,envbench_python100,executed,True,2102,2086,16,labelled,method's own test run,16,0,0,0,16,0,0,0,0,0
+graph2env,columnflow/columnflow,envbench_python100,executed,True,72,57,15,labelled,method's own test run,15,0,0,0,15,0,0,0,0,0
+graph2env,conan-io/conan-package-tools,envbench_python100,executed,True,127,111,5,labelled,method's own test run,5,0,0,0,0,0,0,5,0,0
+graph2env,convexengineering/gpkit,envbench_python100,executed,True,286,1,1,excluded: 1/1 failing tests not found in JUnit,method's own test run,0,0,0,0,0,0,0,0,0,0
+graph2env,datactive/bigbang,envbench_python100,executed,True,73,55,16,labelled,method's own test run,16,0,0,3,0,6,1,6,0,0
+graph2env,datamol-io/datamol,envbench_python100,executed,True,282,243,38,labelled,method's own test run,38,0,0,0,29,1,8,0,0,0
+graph2env,diefenbach/django-lfs,envbench_python100,executed,True,484,0,14,labelled,method's own test run,14,0,12,0,0,0,0,2,12,0
+graph2env,dtmilano/androidviewclient,envbench_python100,executed,True,320,0,22,labelled,method's own test run,22,0,21,0,0,0,0,1,0,0
+graph2env,eastsidepreparatoryschool/epschedule,envbench_python100,executed,True,13,11,2,labelled,method's own test run,2,0,2,0,0,0,0,0,0,0
+graph2env,ecds/readux,envbench_python100,executed,True,320,10,310,labelled,method's own test run,310,310,0,0,0,0,0,0,310,0
+graph2env,ellmetha/django-machina,envbench_python100,executed,True,462,462,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,facebookresearch/hydra,envbench_python100,executed,True,2615,2086,310,labelled,method's own test run,310,0,0,0,0,0,36,274,0,0
+graph2env,fhempy/fhempy,envbench_python100,executed,True,81,63,18,excluded: 1/18 failing tests not found in JUnit,method's own test run,17,0,0,0,12,0,2,3,0,0
+graph2env,folio-fse/folio_migration_tools,envbench_python100,executed,True,450,305,139,labelled,method's own test run,139,1,0,127,0,0,0,11,0,0
+graph2env,fonttools/fontbakery,envbench_python100,collect_error,False,918,910,4,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,google/trax,envbench_python100,missing,False,3492,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,googlecloudplatform/gsutil,envbench_python100,timed_out,True,1575,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,guardrails-ai/guardrails,envbench_python100,executed,True,568,469,31,labelled,method's own test run,31,0,0,0,29,0,0,2,0,0
+graph2env,gymrek-lab/TRTools,envbench_python100,executed,True,233,233,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,hhursev/recipe-scrapers,envbench_python100,executed,True,184,184,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,ibm/ibmi-bob,envbench_python100,executed,True,17,17,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,idaholab/civet,envbench_python100,executed,True,462,59,348,labelled,method's own test run,348,0,290,0,0,0,2,56,290,0
+graph2env,intake/intake,envbench_python100,executed,True,688,525,145,labelled,method's own test run,145,0,2,0,87,3,7,46,0,0
+graph2env,iss-mimic/mimic,envbench_python100,no_tests_collected,True,3,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,jacebrowning/memegen,envbench_python100,executed,True,254,251,1,labelled,method's own test run,1,0,0,0,0,0,1,0,0,0
+graph2env,jackdewinter/pymarkdown,envbench_python100,executed,True,6930,6910,14,labelled,method's own test run,14,0,0,0,0,0,14,0,0,0
+graph2env,jageo/lobsterpy,envbench_python100,executed,True,135,134,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,jaraco/keyring,envbench_python100,executed,True,242,143,17,excluded: 1/17 failing tests not found in JUnit,method's own test run,16,0,4,0,0,0,12,0,0,0
+graph2env,jazzband/tablib,envbench_python100,executed,True,157,157,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,johnsnowlabs/nlu,envbench_python100,executed,True,252,0,2,labelled,method's own test run,2,0,1,0,0,0,0,1,0,0
+graph2env,karlicoss/hpi,envbench_python100,missing,False,147,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,lhotse-speech/lhotse,envbench_python100,executed,True,1974,1356,385,labelled,method's own test run,385,0,0,0,299,82,0,4,0,0
+graph2env,librephotos/librephotos,envbench_python100,missing,False,125,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,lightkurve/lightkurve,envbench_python100,executed,True,429,336,49,unavailable: no JUnit in own test run,,0,0,0,0,0,0,0,0,0,0
+graph2env,mad-lab-fau/biopsykit,envbench_python100,executed,True,1434,1434,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,marimo-team/marimo,envbench_python100,timed_out,True,1087,990,72,unavailable: no JUnit in own test run,,0,0,0,0,0,0,0,0,0,0
+graph2env,markqvist/reticulum,envbench_python100,collect_error,False,68,54,12,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,materialsvirtuallab/monty,envbench_python100,executed,True,127,114,5,labelled,method's own test run,5,0,0,0,1,0,0,4,0,1
+graph2env,mdolab/openaerostruct,envbench_python100,executed,True,182,110,54,labelled,method's own test run,54,0,0,0,0,54,0,0,0,0
+graph2env,menpo/menpo,envbench_python100,build_fail,False,819,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,microsoft/torchgeo,envbench_python100,executed,True,2578,1898,20,labelled,method's own test run,20,0,0,0,0,20,0,0,0,0
+graph2env,microsoftgraph/msgraph-sdk-python-core,envbench_python100,executed,True,26,25,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,miurahr/aqtinstall,envbench_python100,executed,True,367,366,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,mne-tools/mne-lsl,envbench_python100,executed,True,168,114,44,labelled,method's own test run,44,0,0,43,0,0,0,1,0,1
+graph2env,mollie/mollie-api-python,envbench_python100,executed,True,264,211,106,labelled,method's own test run,106,0,0,0,0,0,106,0,0,0
+graph2env,mpmath/mpmath,envbench_python100,executed,True,2318,2310,5,labelled,method's own test run,5,0,0,0,0,1,1,3,0,0
+graph2env,neurogym/neurogym,envbench_python100,executed,True,28,25,19,labelled,method's own test run,19,0,0,0,0,1,2,16,0,0
+graph2env,nixtla/neuralforecast,envbench_python100,missing,False,1226,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,numba/llvmlite,envbench_python100,collect_error,False,380,378,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,oarriaga/paz,envbench_python100,executed,True,591,385,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,online-ml/river,envbench_python100,no_tests_collected,True,3432,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,open-cas/open-cas-linux,envbench_python100,collect_error,False,6197,0,61,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,pajbot/pajbot,envbench_python100,executed,True,89,89,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,pastas/pastas,envbench_python100,executed,True,173,52,121,labelled,method's own test run,119,0,0,0,0,78,1,40,0,0
+graph2env,peering-manager/peering-manager,envbench_python100,executed,True,882,875,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,piccolo-orm/piccolo,envbench_python100,executed,True,823,730,63,labelled,method's own test run,63,0,0,0,0,0,10,53,0,0
+graph2env,pretalx/pretalx,envbench_python100,executed,True,1391,1368,21,labelled,method's own test run,21,0,0,0,0,0,4,17,0,0
+graph2env,pypa/distutils,envbench_python100,executed,False,478,364,93,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,pytest-dev/pytest-xdist,envbench_python100,executed,True,257,193,2,labelled,method's own test run,2,0,0,0,0,0,2,0,0,0
+graph2env,python-control/python-control,envbench_python100,executed,True,3625,3173,13,labelled,method's own test run,13,0,0,0,0,0,13,0,0,0
+graph2env,python-markdown/markdown,envbench_python100,executed,True,1149,1005,12,labelled,method's own test run,12,0,0,0,0,0,12,0,0,0
+graph2env,python-poetry/poetry,envbench_python100,executed,True,1695,1661,1,labelled,method's own test run,1,0,0,0,1,0,0,0,0,0
+graph2env,qiboteam/qibocal,envbench_python100,executed,True,1134,1118,16,labelled,method's own test run,16,0,0,0,16,0,0,0,0,0
+graph2env,revoxhere/duino-coin,envbench_python100,no_tests_collected,True,130,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,rstcheck/rstcheck,envbench_python100,executed,True,62,7,50,labelled,method's own test run,50,0,0,0,0,50,0,0,0,0
+graph2env,sassoftware/python-sasctl,envbench_python100,executed,True,610,456,32,labelled,method's own test run,32,0,0,10,0,7,3,12,0,1
+graph2env,scitools/iris-grib,envbench_python100,executed,True,581,447,78,labelled,method's own test run,78,0,0,0,0,0,33,45,0,0
+graph2env,scylladb/sphinx-scylladb-theme,envbench_python100,executed,True,35,35,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,simplistix/testfixtures,envbench_python100,executed,True,1467,1462,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,skrub-data/skrub,envbench_python100,missing,False,1571,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,spacetelescope/pysiaf,envbench_python100,executed,True,32,25,7,labelled,method's own test run,7,0,0,0,0,5,0,2,0,0
+graph2env,stan-dev/cmdstanpy,envbench_python100,executed,True,286,119,160,labelled,method's own test run,158,0,0,0,152,0,2,4,0,1
+graph2env,sublimelinter/sublimelinter,envbench_python100,missing,False,1642,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,theislab/cellrank,envbench_python100,timed_out,True,1151,1027,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,timbrel/gitsavvy,envbench_python100,executed,True,383,271,112,labelled,method's own test run,112,0,0,0,0,0,31,81,0,0
+graph2env,ucoproject/uco,envbench_python100,executed,True,46,5,38,excluded: 38/38 failing tests not found in JUnit,method's own test run,0,0,0,0,0,0,0,0,0,0
+graph2env,uploadcare/pyuploadcare,envbench_python100,executed,True,267,246,21,labelled,method's own test run,21,0,0,21,0,0,0,0,0,0
+graph2env,uriyyo/fastapi-pagination,envbench_python100,timed_out,True,1732,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,valory-xyz/trader,envbench_python100,executed,True,18,1340,133,labelled,method's own test run,132,62,16,0,21,0,0,33,0,0
+graph2env,wilcoxjay/mypyvy,envbench_python100,executed,True,8,8,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,wireless-innovation-forum/spectrum-access-system,envbench_python100,missing,False,369,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,wpi-lnl/lnldb,envbench_python100,missing,False,317,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,yourlabs/django-autocomplete-light,envbench_python100,executed,True,84,42,42,labelled,method's own test run,42,36,0,0,0,0,1,5,0,0
+graph2env,zostera/django-bootstrap3,envbench_python100,executed,True,64,64,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,ArchipelagoMW/Archipelago,rat_python50,executed,True,20943,4094,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,Azure/azure-cli,rat_python50,missing,False,5796,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,BeehiveInnovations/pal-mcp-server,rat_python50,executed,True,886,870,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,Checkmk/checkmk,rat_python50,collect_error,False,24391,111,97,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,Cloud-CV/EvalAI,rat_python50,executed,True,1822,558,1264,labelled,method's own test run,1264,1253,0,0,0,0,2,9,1253,0
+graph2env,D4Vinci/Scrapling,rat_python50,executed,True,768,764,4,labelled,method's own test run,4,0,0,0,4,0,0,0,0,0
+graph2env,Donkie/Spoolman,rat_python50,executed,True,223,0,223,labelled,method's own test run,223,222,1,0,0,0,0,0,0,1
+graph2env,GoogleCloudPlatform/PerfKitBenchmarker,rat_python50,executed,True,2563,2500,57,labelled,method's own test run,57,0,0,0,0,0,20,37,0,0
+graph2env,NewFuture/DDNS,rat_python50,executed,True,912,888,4,labelled,method's own test run,4,0,0,0,0,0,4,0,0,0
+graph2env,OpenCTI-Platform/connectors,rat_python50,missing,False,9939,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,PostHog/posthog,rat_python50,timed_out,True,77642,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,Qiskit/qiskit,rat_python50,timed_out,True,64558,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,aiidateam/aiida-core,rat_python50,executed,True,3741,1656,2046,unavailable: no JUnit in own test run,,0,0,0,0,0,0,0,0,0,0
+graph2env,anthropics/anthropic-sdk-python,rat_python50,executed,True,4217,1781,1810,labelled,method's own test run,1810,0,0,1448,0,0,0,362,0,0
+graph2env,baserow/baserow,rat_python50,executed,True,11730,131,11270,labelled,method's own test run,11265,11265,0,0,0,0,0,0,11265,0
+graph2env,bruin-data/ingestr,rat_python50,executed,True,19,19,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,coderamp-labs/gitingest,rat_python50,executed,True,160,157,3,labelled,method's own test run,3,0,0,2,0,0,0,1,0,0
+graph2env,containers/podman-compose,rat_python50,executed,True,736,540,158,labelled,method's own test run,158,0,3,0,0,0,153,2,0,0
+graph2env,copier-org/copier,rat_python50,executed,True,1148,1138,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,crystaldba/postgres-mcp,rat_python50,executed,True,216,167,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,crytic/slither,rat_python50,executed,True,7296,7273,2,labelled,method's own test run,2,0,0,0,2,0,0,0,0,0
+graph2env,django-oauth/django-oauth-toolkit,rat_python50,executed,True,557,556,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,fastapi/typer,rat_python50,executed,True,1379,1344,5,labelled,method's own test run,5,0,0,0,0,0,5,0,0,0
+graph2env,feast-dev/feast,rat_python50,executed,True,2644,2397,20,labelled,method's own test run,20,0,0,0,12,0,4,4,0,0
+graph2env,frappe/press,rat_python50,executed,True,846,37,828,labelled,method's own test run,828,788,34,0,0,0,0,6,788,34
+graph2env,hitsz-ids/synthetic-data-generator,rat_python50,executed,True,177,125,49,labelled,method's own test run,49,0,0,0,0,0,3,46,0,0
+graph2env,idank/explainshell,rat_python50,executed,True,559,557,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,jhao104/proxy_pool,rat_python50,executed,True,248,248,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,karlicoss/promnesia,rat_python50,executed,True,168,107,51,labelled,method's own test run,51,0,0,0,0,0,48,3,0,3
+graph2env,mckinsey/vizro,rat_python50,collect_error,False,2500,64,96,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,microsoft/markitdown,rat_python50,executed,True,374,372,1,labelled,method's own test run,1,0,0,0,0,0,1,0,0,0
+graph2env,mlflow/mlflow,rat_python50,missing,False,21221,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,mozilla/addons-server,rat_python50,timed_out,True,9098,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,mvt-project/mvt,rat_python50,executed,True,165,164,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,nginx-proxy/nginx-proxy,rat_python50,executed,True,469,0,2,labelled,method's own test run,2,0,0,0,0,0,1,1,0,0
+graph2env,polarsource/polar,rat_python50,executed,True,5749,197,5424,labelled,method's own test run,5424,0,5420,0,0,0,0,4,0,5420
+graph2env,pre-commit/pre-commit,rat_python50,executed,True,820,759,57,labelled,method's own test run,57,0,0,0,11,0,13,33,0,0
+graph2env,pretix/pretix,rat_python50,executed,True,5995,5921,44,labelled,method's own test run,44,0,5,0,8,0,28,3,0,5
+graph2env,pycontribs/jira,rat_python50,executed,True,311,11,154,labelled,method's own test run,154,0,0,0,0,0,154,0,0,0
+graph2env,python-websockets/websockets,rat_python50,executed,True,2248,2242,1,excluded: 1/1 failing tests not found in JUnit,method's own test run,0,0,0,0,0,0,0,0,0,0
+graph2env,rq/rq,rat_python50,timed_out,True,690,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,sooperset/mcp-atlassian,rat_python50,executed,True,2741,2580,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,supabase/supabase-py,rat_python50,executed,True,753,444,296,labelled,method's own test run,296,214,0,0,0,0,50,32,0,0
+graph2env,testcontainers/testcontainers-python,rat_python50,executed,True,731,375,353,labelled,method's own test run,337,307,0,0,29,0,1,0,0,0
+graph2env,tgoai/tgo,rat_python50,collect_error,False,102,39,12,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,tinygrad/tinygrad,rat_python50,collect_error,False,5476,286,1151,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,trailofbits/algo,rat_python50,executed,True,129,118,1,labelled,method's own test run,1,0,0,0,1,0,0,0,0,0
+graph2env,unit8co/darts,rat_python50,timed_out,True,10915,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,wecode-ai/Wegent,rat_python50,collect_error,False,5050,116,98,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,xuwei95/ezdata,rat_python50,executed,True,291,260,31,labelled,method's own test run,31,25,0,0,4,0,2,0,0,0
+graph2env,AsyncFuncAI/deepwiki-open,rat_python50_new,executed,True,109,103,6,labelled,rerun (Sep 24 evaluator),6,0,3,0,0,0,0,3,0,0
+graph2env,Azure/azure-iot-ops-cli-extension,rat_python50_new,executed,True,7021,6818,115,labelled,rerun (Sep 24 evaluator),115,0,0,0,0,0,16,99,0,0
+graph2env,BerriAI/litellm,rat_python50_new,missing,False,65652,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,GoogleCloudPlatform/gcpdiag,rat_python50_new,executed,True,1418,1336,82,labelled,rerun (Sep 24 evaluator),82,0,0,0,0,0,62,20,0,0
+graph2env,GoogleCloudPlatform/ramble,rat_python50_new,collect_error,False,2885,1893,977,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,IFRCGo/go-api,rat_python50_new,executed,True,333,1,332,labelled,rerun (Sep 24 evaluator),332,332,0,0,0,0,0,0,332,0
+graph2env,JonBunator/Enterr,rat_python50_new,executed,True,38,38,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,MemTensor/MemOS,rat_python50_new,missing,False,946,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,NVIDIA-NeMo/RL,rat_python50_new,collect_error,False,2601,105,1,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,Nikita-Filonov/ai-review,rat_python50_new,executed,True,828,828,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,NikolasMarkou/dl_techniques,rat_python50_new,no_tests_collected,True,34754,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,Nitrokey/pynitrokey,rat_python50_new,executed,True,190,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,NovaSky-AI/SkyRL,rat_python50_new,no_tests_collected,True,2749,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,OpenDCAI/DataFlow,rat_python50_new,missing,False,161,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,TencentBlueKing/bk-lite,rat_python50_new,missing,False,39652,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,TencentBlueKing/blueking-apigateway,rat_python50_new,missing,False,4646,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,TencentBlueKing/blueking-dbm,rat_python50_new,timed_out,False,3581,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,alliander-opensource/weather-provider-api,rat_python50_new,executed,True,129,128,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,anthropics/claude-quickstarts,rat_python50_new,executed,True,280,241,27,labelled,rerun (Sep 24 evaluator),27,0,1,0,14,0,9,3,0,0
+graph2env,chopratejas/headroom,rat_python50_new,collect_error,False,13158,12456,21,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,co-me-tokens/CoMe,rat_python50_new,missing,False,223,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,devopness/devopness,rat_python50_new,executed,True,84,84,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,gip-inclusion/les-emplois,rat_python50_new,executed,True,6099,0,6097,labelled,rerun (Sep 24 evaluator),6096,0,0,0,0,0,0,6096,0,0
+graph2env,google/nsscache,rat_python50_new,executed,True,306,299,1,labelled,rerun (Sep 24 evaluator),1,0,0,0,0,0,1,0,0,0
+graph2env,grycap/im,rat_python50_new,collect_error,False,330,324,6,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,huggingface/transformers,rat_python50_new,timed_out,True,167927,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,insistence/RuoYi-Vue3-FastAPI,rat_python50_new,executed,True,1479,1316,162,unavailable: rerun did not reproduce the paper failures,,0,0,0,0,0,0,0,0,0,0
+graph2env,jaehyeon-kim/flink-demos,rat_python50_new,missing,False,33,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,kittinan/spotify-github-profile,rat_python50_new,executed,True,134,134,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,m0wer/joinmarket-ng,rat_python50_new,collect_error,False,536,466,46,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,meta-pytorch/torchrec,rat_python50_new,missing,False,3222,0,0,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,modelscope/AgentJet,rat_python50_new,executed,True,63,46,23,unavailable: rerun did not reproduce the paper failures,,0,0,0,0,0,0,0,0,0,0
+graph2env,netneurolab/netneurotools,rat_python50_new,executed,True,205,192,8,labelled,rerun (Sep 24 evaluator),8,0,0,0,1,0,0,7,0,0
+graph2env,nomadkaraoke/karaoke-gen,rat_python50_new,collect_error,False,6545,6254,32,n/a: not built,,0,0,0,0,0,0,0,0,0,0
+graph2env,nutti/fake-bpy-module,rat_python50_new,executed,True,126,118,8,labelled,rerun (Sep 24 evaluator),8,0,0,0,0,0,1,7,0,0
+graph2env,observatorycontrolsystem/observation-portal,rat_python50_new,executed,True,883,0,593,labelled,rerun (Sep 24 evaluator),593,593,0,0,0,0,0,0,593,0
+graph2env,onyx-dot-app/onyx,rat_python50_new,executed,True,14119,9465,3663,labelled,rerun (Sep 24 evaluator),3663,1790,220,3,2,0,105,1543,1560,1538
+graph2env,opengisch/pum,rat_python50_new,executed,True,195,54,141,labelled,rerun (Sep 24 evaluator),141,141,0,0,0,0,0,0,141,0
+graph2env,pathintegral-institute/mcpm.sh,rat_python50_new,executed,True,298,292,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,perplexityai/perplexity-py,rat_python50_new,executed,True,806,506,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,resend/resend-python,rat_python50_new,executed,True,695,432,263,labelled,rerun (Sep 24 evaluator),263,0,0,0,0,0,263,0,0,0
+graph2env,rfsbraz/deleterr,rat_python50_new,executed,True,880,880,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,scylladb/scylla-cluster-tests,rat_python50_new,executed,True,7451,6668,822,unavailable: rerun did not reproduce the paper failures,,0,0,0,0,0,0,0,0,0,0
+graph2env,sgl-project/SpecForge,rat_python50_new,executed,True,1257,1193,14,labelled,rerun (Sep 24 evaluator),14,0,0,0,0,0,0,14,0,6
+graph2env,sgl-project/sglang-jax,rat_python50_new,no_tests_collected,True,3557,0,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,shotgun-sh/shotgun,rat_python50_new,executed,True,2503,2328,3,labelled,rerun (Sep 24 evaluator),3,0,0,0,0,0,3,0,0,0
+graph2env,tensorflow/model-optimization,rat_python50_new,executed,True,1725,1249,352,labelled,rerun (Sep 24 evaluator),352,0,0,0,0,1,8,343,0,0
+graph2env,thenewboston-developers/thenewboston-Backend,rat_python50_new,executed,True,90,0,90,labelled,rerun (Sep 24 evaluator),90,90,0,0,0,0,0,0,90,0
+graph2env,yihong0618/bilingual_book_maker,rat_python50_new,executed,True,2294,2258,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
+graph2env,zscole/gru,rat_python50_new,executed,True,773,773,0,n/a: no failing tests,,0,0,0,0,0,0,0,0,0,0
